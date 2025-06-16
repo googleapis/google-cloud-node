@@ -5095,6 +5095,5178 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
             }
+
+            /** Namespace v1beta. */
+            namespace v1beta {
+
+                /** Represents a ModelArmor */
+                class ModelArmor extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new ModelArmor service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new ModelArmor service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): ModelArmor;
+
+                    /**
+                     * Calls ListTemplates.
+                     * @param request ListTemplatesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListTemplatesResponse
+                     */
+                    public listTemplates(request: google.cloud.modelarmor.v1beta.IListTemplatesRequest, callback: google.cloud.modelarmor.v1beta.ModelArmor.ListTemplatesCallback): void;
+
+                    /**
+                     * Calls ListTemplates.
+                     * @param request ListTemplatesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listTemplates(request: google.cloud.modelarmor.v1beta.IListTemplatesRequest): Promise<google.cloud.modelarmor.v1beta.ListTemplatesResponse>;
+
+                    /**
+                     * Calls GetTemplate.
+                     * @param request GetTemplateRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Template
+                     */
+                    public getTemplate(request: google.cloud.modelarmor.v1beta.IGetTemplateRequest, callback: google.cloud.modelarmor.v1beta.ModelArmor.GetTemplateCallback): void;
+
+                    /**
+                     * Calls GetTemplate.
+                     * @param request GetTemplateRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getTemplate(request: google.cloud.modelarmor.v1beta.IGetTemplateRequest): Promise<google.cloud.modelarmor.v1beta.Template>;
+
+                    /**
+                     * Calls CreateTemplate.
+                     * @param request CreateTemplateRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Template
+                     */
+                    public createTemplate(request: google.cloud.modelarmor.v1beta.ICreateTemplateRequest, callback: google.cloud.modelarmor.v1beta.ModelArmor.CreateTemplateCallback): void;
+
+                    /**
+                     * Calls CreateTemplate.
+                     * @param request CreateTemplateRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createTemplate(request: google.cloud.modelarmor.v1beta.ICreateTemplateRequest): Promise<google.cloud.modelarmor.v1beta.Template>;
+
+                    /**
+                     * Calls UpdateTemplate.
+                     * @param request UpdateTemplateRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Template
+                     */
+                    public updateTemplate(request: google.cloud.modelarmor.v1beta.IUpdateTemplateRequest, callback: google.cloud.modelarmor.v1beta.ModelArmor.UpdateTemplateCallback): void;
+
+                    /**
+                     * Calls UpdateTemplate.
+                     * @param request UpdateTemplateRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateTemplate(request: google.cloud.modelarmor.v1beta.IUpdateTemplateRequest): Promise<google.cloud.modelarmor.v1beta.Template>;
+
+                    /**
+                     * Calls DeleteTemplate.
+                     * @param request DeleteTemplateRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteTemplate(request: google.cloud.modelarmor.v1beta.IDeleteTemplateRequest, callback: google.cloud.modelarmor.v1beta.ModelArmor.DeleteTemplateCallback): void;
+
+                    /**
+                     * Calls DeleteTemplate.
+                     * @param request DeleteTemplateRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteTemplate(request: google.cloud.modelarmor.v1beta.IDeleteTemplateRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls GetFloorSetting.
+                     * @param request GetFloorSettingRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FloorSetting
+                     */
+                    public getFloorSetting(request: google.cloud.modelarmor.v1beta.IGetFloorSettingRequest, callback: google.cloud.modelarmor.v1beta.ModelArmor.GetFloorSettingCallback): void;
+
+                    /**
+                     * Calls GetFloorSetting.
+                     * @param request GetFloorSettingRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getFloorSetting(request: google.cloud.modelarmor.v1beta.IGetFloorSettingRequest): Promise<google.cloud.modelarmor.v1beta.FloorSetting>;
+
+                    /**
+                     * Calls UpdateFloorSetting.
+                     * @param request UpdateFloorSettingRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FloorSetting
+                     */
+                    public updateFloorSetting(request: google.cloud.modelarmor.v1beta.IUpdateFloorSettingRequest, callback: google.cloud.modelarmor.v1beta.ModelArmor.UpdateFloorSettingCallback): void;
+
+                    /**
+                     * Calls UpdateFloorSetting.
+                     * @param request UpdateFloorSettingRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateFloorSetting(request: google.cloud.modelarmor.v1beta.IUpdateFloorSettingRequest): Promise<google.cloud.modelarmor.v1beta.FloorSetting>;
+
+                    /**
+                     * Calls SanitizeUserPrompt.
+                     * @param request SanitizeUserPromptRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SanitizeUserPromptResponse
+                     */
+                    public sanitizeUserPrompt(request: google.cloud.modelarmor.v1beta.ISanitizeUserPromptRequest, callback: google.cloud.modelarmor.v1beta.ModelArmor.SanitizeUserPromptCallback): void;
+
+                    /**
+                     * Calls SanitizeUserPrompt.
+                     * @param request SanitizeUserPromptRequest message or plain object
+                     * @returns Promise
+                     */
+                    public sanitizeUserPrompt(request: google.cloud.modelarmor.v1beta.ISanitizeUserPromptRequest): Promise<google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse>;
+
+                    /**
+                     * Calls SanitizeModelResponse.
+                     * @param request SanitizeModelResponseRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SanitizeModelResponseResponse
+                     */
+                    public sanitizeModelResponse(request: google.cloud.modelarmor.v1beta.ISanitizeModelResponseRequest, callback: google.cloud.modelarmor.v1beta.ModelArmor.SanitizeModelResponseCallback): void;
+
+                    /**
+                     * Calls SanitizeModelResponse.
+                     * @param request SanitizeModelResponseRequest message or plain object
+                     * @returns Promise
+                     */
+                    public sanitizeModelResponse(request: google.cloud.modelarmor.v1beta.ISanitizeModelResponseRequest): Promise<google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse>;
+                }
+
+                namespace ModelArmor {
+
+                    /**
+                     * Callback as used by {@link google.cloud.modelarmor.v1beta.ModelArmor|listTemplates}.
+                     * @param error Error, if any
+                     * @param [response] ListTemplatesResponse
+                     */
+                    type ListTemplatesCallback = (error: (Error|null), response?: google.cloud.modelarmor.v1beta.ListTemplatesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.modelarmor.v1beta.ModelArmor|getTemplate}.
+                     * @param error Error, if any
+                     * @param [response] Template
+                     */
+                    type GetTemplateCallback = (error: (Error|null), response?: google.cloud.modelarmor.v1beta.Template) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.modelarmor.v1beta.ModelArmor|createTemplate}.
+                     * @param error Error, if any
+                     * @param [response] Template
+                     */
+                    type CreateTemplateCallback = (error: (Error|null), response?: google.cloud.modelarmor.v1beta.Template) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.modelarmor.v1beta.ModelArmor|updateTemplate}.
+                     * @param error Error, if any
+                     * @param [response] Template
+                     */
+                    type UpdateTemplateCallback = (error: (Error|null), response?: google.cloud.modelarmor.v1beta.Template) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.modelarmor.v1beta.ModelArmor|deleteTemplate}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteTemplateCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.modelarmor.v1beta.ModelArmor|getFloorSetting}.
+                     * @param error Error, if any
+                     * @param [response] FloorSetting
+                     */
+                    type GetFloorSettingCallback = (error: (Error|null), response?: google.cloud.modelarmor.v1beta.FloorSetting) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.modelarmor.v1beta.ModelArmor|updateFloorSetting}.
+                     * @param error Error, if any
+                     * @param [response] FloorSetting
+                     */
+                    type UpdateFloorSettingCallback = (error: (Error|null), response?: google.cloud.modelarmor.v1beta.FloorSetting) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.modelarmor.v1beta.ModelArmor|sanitizeUserPrompt}.
+                     * @param error Error, if any
+                     * @param [response] SanitizeUserPromptResponse
+                     */
+                    type SanitizeUserPromptCallback = (error: (Error|null), response?: google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.modelarmor.v1beta.ModelArmor|sanitizeModelResponse}.
+                     * @param error Error, if any
+                     * @param [response] SanitizeModelResponseResponse
+                     */
+                    type SanitizeModelResponseCallback = (error: (Error|null), response?: google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse) => void;
+                }
+
+                /** FilterMatchState enum. */
+                enum FilterMatchState {
+                    FILTER_MATCH_STATE_UNSPECIFIED = 0,
+                    NO_MATCH_FOUND = 1,
+                    MATCH_FOUND = 2
+                }
+
+                /** FilterExecutionState enum. */
+                enum FilterExecutionState {
+                    FILTER_EXECUTION_STATE_UNSPECIFIED = 0,
+                    EXECUTION_SUCCESS = 1,
+                    EXECUTION_SKIPPED = 2
+                }
+
+                /** RaiFilterType enum. */
+                enum RaiFilterType {
+                    RAI_FILTER_TYPE_UNSPECIFIED = 0,
+                    SEXUALLY_EXPLICIT = 2,
+                    HATE_SPEECH = 3,
+                    HARASSMENT = 6,
+                    DANGEROUS = 17
+                }
+
+                /** DetectionConfidenceLevel enum. */
+                enum DetectionConfidenceLevel {
+                    DETECTION_CONFIDENCE_LEVEL_UNSPECIFIED = 0,
+                    LOW_AND_ABOVE = 1,
+                    MEDIUM_AND_ABOVE = 2,
+                    HIGH = 3
+                }
+
+                /** SdpFindingLikelihood enum. */
+                enum SdpFindingLikelihood {
+                    SDP_FINDING_LIKELIHOOD_UNSPECIFIED = 0,
+                    VERY_UNLIKELY = 1,
+                    UNLIKELY = 2,
+                    POSSIBLE = 3,
+                    LIKELY = 4,
+                    VERY_LIKELY = 5
+                }
+
+                /** InvocationResult enum. */
+                enum InvocationResult {
+                    INVOCATION_RESULT_UNSPECIFIED = 0,
+                    SUCCESS = 1,
+                    PARTIAL = 2,
+                    FAILURE = 3
+                }
+
+                /** Properties of a Template. */
+                interface ITemplate {
+
+                    /** Template name */
+                    name?: (string|null);
+
+                    /** Template createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Template updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Template labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** Template filterConfig */
+                    filterConfig?: (google.cloud.modelarmor.v1beta.IFilterConfig|null);
+
+                    /** Template templateMetadata */
+                    templateMetadata?: (google.cloud.modelarmor.v1beta.Template.ITemplateMetadata|null);
+                }
+
+                /** Represents a Template. */
+                class Template implements ITemplate {
+
+                    /**
+                     * Constructs a new Template.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.ITemplate);
+
+                    /** Template name. */
+                    public name: string;
+
+                    /** Template createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Template updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Template labels. */
+                    public labels: { [k: string]: string };
+
+                    /** Template filterConfig. */
+                    public filterConfig?: (google.cloud.modelarmor.v1beta.IFilterConfig|null);
+
+                    /** Template templateMetadata. */
+                    public templateMetadata?: (google.cloud.modelarmor.v1beta.Template.ITemplateMetadata|null);
+
+                    /**
+                     * Creates a new Template instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Template instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.ITemplate): google.cloud.modelarmor.v1beta.Template;
+
+                    /**
+                     * Encodes the specified Template message. Does not implicitly {@link google.cloud.modelarmor.v1beta.Template.verify|verify} messages.
+                     * @param message Template message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.ITemplate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Template message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.Template.verify|verify} messages.
+                     * @param message Template message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.ITemplate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Template message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Template
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.Template;
+
+                    /**
+                     * Decodes a Template message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Template
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.Template;
+
+                    /**
+                     * Verifies a Template message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Template message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Template
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.Template;
+
+                    /**
+                     * Creates a plain object from a Template message. Also converts values to other types if specified.
+                     * @param message Template
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.Template, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Template to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Template
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Template {
+
+                    /** Properties of a TemplateMetadata. */
+                    interface ITemplateMetadata {
+
+                        /** TemplateMetadata ignorePartialInvocationFailures */
+                        ignorePartialInvocationFailures?: (boolean|null);
+
+                        /** TemplateMetadata customPromptSafetyErrorCode */
+                        customPromptSafetyErrorCode?: (number|null);
+
+                        /** TemplateMetadata customPromptSafetyErrorMessage */
+                        customPromptSafetyErrorMessage?: (string|null);
+
+                        /** TemplateMetadata customLlmResponseSafetyErrorCode */
+                        customLlmResponseSafetyErrorCode?: (number|null);
+
+                        /** TemplateMetadata customLlmResponseSafetyErrorMessage */
+                        customLlmResponseSafetyErrorMessage?: (string|null);
+
+                        /** TemplateMetadata logTemplateOperations */
+                        logTemplateOperations?: (boolean|null);
+
+                        /** TemplateMetadata logSanitizeOperations */
+                        logSanitizeOperations?: (boolean|null);
+                    }
+
+                    /** Represents a TemplateMetadata. */
+                    class TemplateMetadata implements ITemplateMetadata {
+
+                        /**
+                         * Constructs a new TemplateMetadata.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.modelarmor.v1beta.Template.ITemplateMetadata);
+
+                        /** TemplateMetadata ignorePartialInvocationFailures. */
+                        public ignorePartialInvocationFailures: boolean;
+
+                        /** TemplateMetadata customPromptSafetyErrorCode. */
+                        public customPromptSafetyErrorCode: number;
+
+                        /** TemplateMetadata customPromptSafetyErrorMessage. */
+                        public customPromptSafetyErrorMessage: string;
+
+                        /** TemplateMetadata customLlmResponseSafetyErrorCode. */
+                        public customLlmResponseSafetyErrorCode: number;
+
+                        /** TemplateMetadata customLlmResponseSafetyErrorMessage. */
+                        public customLlmResponseSafetyErrorMessage: string;
+
+                        /** TemplateMetadata logTemplateOperations. */
+                        public logTemplateOperations: boolean;
+
+                        /** TemplateMetadata logSanitizeOperations. */
+                        public logSanitizeOperations: boolean;
+
+                        /**
+                         * Creates a new TemplateMetadata instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TemplateMetadata instance
+                         */
+                        public static create(properties?: google.cloud.modelarmor.v1beta.Template.ITemplateMetadata): google.cloud.modelarmor.v1beta.Template.TemplateMetadata;
+
+                        /**
+                         * Encodes the specified TemplateMetadata message. Does not implicitly {@link google.cloud.modelarmor.v1beta.Template.TemplateMetadata.verify|verify} messages.
+                         * @param message TemplateMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.modelarmor.v1beta.Template.ITemplateMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TemplateMetadata message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.Template.TemplateMetadata.verify|verify} messages.
+                         * @param message TemplateMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.modelarmor.v1beta.Template.ITemplateMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TemplateMetadata message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TemplateMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.Template.TemplateMetadata;
+
+                        /**
+                         * Decodes a TemplateMetadata message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TemplateMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.Template.TemplateMetadata;
+
+                        /**
+                         * Verifies a TemplateMetadata message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TemplateMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TemplateMetadata
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.Template.TemplateMetadata;
+
+                        /**
+                         * Creates a plain object from a TemplateMetadata message. Also converts values to other types if specified.
+                         * @param message TemplateMetadata
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.modelarmor.v1beta.Template.TemplateMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TemplateMetadata to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TemplateMetadata
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a FloorSetting. */
+                interface IFloorSetting {
+
+                    /** FloorSetting name */
+                    name?: (string|null);
+
+                    /** FloorSetting createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FloorSetting updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FloorSetting filterConfig */
+                    filterConfig?: (google.cloud.modelarmor.v1beta.IFilterConfig|null);
+
+                    /** FloorSetting enableFloorSettingEnforcement */
+                    enableFloorSettingEnforcement?: (boolean|null);
+                }
+
+                /** Represents a FloorSetting. */
+                class FloorSetting implements IFloorSetting {
+
+                    /**
+                     * Constructs a new FloorSetting.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.IFloorSetting);
+
+                    /** FloorSetting name. */
+                    public name: string;
+
+                    /** FloorSetting createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FloorSetting updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FloorSetting filterConfig. */
+                    public filterConfig?: (google.cloud.modelarmor.v1beta.IFilterConfig|null);
+
+                    /** FloorSetting enableFloorSettingEnforcement. */
+                    public enableFloorSettingEnforcement?: (boolean|null);
+
+                    /** FloorSetting _enableFloorSettingEnforcement. */
+                    public _enableFloorSettingEnforcement?: "enableFloorSettingEnforcement";
+
+                    /**
+                     * Creates a new FloorSetting instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FloorSetting instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.IFloorSetting): google.cloud.modelarmor.v1beta.FloorSetting;
+
+                    /**
+                     * Encodes the specified FloorSetting message. Does not implicitly {@link google.cloud.modelarmor.v1beta.FloorSetting.verify|verify} messages.
+                     * @param message FloorSetting message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.IFloorSetting, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FloorSetting message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.FloorSetting.verify|verify} messages.
+                     * @param message FloorSetting message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.IFloorSetting, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FloorSetting message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FloorSetting
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.FloorSetting;
+
+                    /**
+                     * Decodes a FloorSetting message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FloorSetting
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.FloorSetting;
+
+                    /**
+                     * Verifies a FloorSetting message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FloorSetting message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FloorSetting
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.FloorSetting;
+
+                    /**
+                     * Creates a plain object from a FloorSetting message. Also converts values to other types if specified.
+                     * @param message FloorSetting
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.FloorSetting, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FloorSetting to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FloorSetting
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListTemplatesRequest. */
+                interface IListTemplatesRequest {
+
+                    /** ListTemplatesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListTemplatesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListTemplatesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListTemplatesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListTemplatesRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListTemplatesRequest. */
+                class ListTemplatesRequest implements IListTemplatesRequest {
+
+                    /**
+                     * Constructs a new ListTemplatesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.IListTemplatesRequest);
+
+                    /** ListTemplatesRequest parent. */
+                    public parent: string;
+
+                    /** ListTemplatesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListTemplatesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListTemplatesRequest filter. */
+                    public filter: string;
+
+                    /** ListTemplatesRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListTemplatesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListTemplatesRequest instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.IListTemplatesRequest): google.cloud.modelarmor.v1beta.ListTemplatesRequest;
+
+                    /**
+                     * Encodes the specified ListTemplatesRequest message. Does not implicitly {@link google.cloud.modelarmor.v1beta.ListTemplatesRequest.verify|verify} messages.
+                     * @param message ListTemplatesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.IListTemplatesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListTemplatesRequest message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.ListTemplatesRequest.verify|verify} messages.
+                     * @param message ListTemplatesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.IListTemplatesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListTemplatesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListTemplatesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.ListTemplatesRequest;
+
+                    /**
+                     * Decodes a ListTemplatesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListTemplatesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.ListTemplatesRequest;
+
+                    /**
+                     * Verifies a ListTemplatesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListTemplatesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListTemplatesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.ListTemplatesRequest;
+
+                    /**
+                     * Creates a plain object from a ListTemplatesRequest message. Also converts values to other types if specified.
+                     * @param message ListTemplatesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.ListTemplatesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListTemplatesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListTemplatesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListTemplatesResponse. */
+                interface IListTemplatesResponse {
+
+                    /** ListTemplatesResponse templates */
+                    templates?: (google.cloud.modelarmor.v1beta.ITemplate[]|null);
+
+                    /** ListTemplatesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListTemplatesResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListTemplatesResponse. */
+                class ListTemplatesResponse implements IListTemplatesResponse {
+
+                    /**
+                     * Constructs a new ListTemplatesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.IListTemplatesResponse);
+
+                    /** ListTemplatesResponse templates. */
+                    public templates: google.cloud.modelarmor.v1beta.ITemplate[];
+
+                    /** ListTemplatesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListTemplatesResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListTemplatesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListTemplatesResponse instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.IListTemplatesResponse): google.cloud.modelarmor.v1beta.ListTemplatesResponse;
+
+                    /**
+                     * Encodes the specified ListTemplatesResponse message. Does not implicitly {@link google.cloud.modelarmor.v1beta.ListTemplatesResponse.verify|verify} messages.
+                     * @param message ListTemplatesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.IListTemplatesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListTemplatesResponse message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.ListTemplatesResponse.verify|verify} messages.
+                     * @param message ListTemplatesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.IListTemplatesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListTemplatesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListTemplatesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.ListTemplatesResponse;
+
+                    /**
+                     * Decodes a ListTemplatesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListTemplatesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.ListTemplatesResponse;
+
+                    /**
+                     * Verifies a ListTemplatesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListTemplatesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListTemplatesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.ListTemplatesResponse;
+
+                    /**
+                     * Creates a plain object from a ListTemplatesResponse message. Also converts values to other types if specified.
+                     * @param message ListTemplatesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.ListTemplatesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListTemplatesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListTemplatesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetTemplateRequest. */
+                interface IGetTemplateRequest {
+
+                    /** GetTemplateRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetTemplateRequest. */
+                class GetTemplateRequest implements IGetTemplateRequest {
+
+                    /**
+                     * Constructs a new GetTemplateRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.IGetTemplateRequest);
+
+                    /** GetTemplateRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetTemplateRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetTemplateRequest instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.IGetTemplateRequest): google.cloud.modelarmor.v1beta.GetTemplateRequest;
+
+                    /**
+                     * Encodes the specified GetTemplateRequest message. Does not implicitly {@link google.cloud.modelarmor.v1beta.GetTemplateRequest.verify|verify} messages.
+                     * @param message GetTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.IGetTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.GetTemplateRequest.verify|verify} messages.
+                     * @param message GetTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.IGetTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetTemplateRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.GetTemplateRequest;
+
+                    /**
+                     * Decodes a GetTemplateRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.GetTemplateRequest;
+
+                    /**
+                     * Verifies a GetTemplateRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetTemplateRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.GetTemplateRequest;
+
+                    /**
+                     * Creates a plain object from a GetTemplateRequest message. Also converts values to other types if specified.
+                     * @param message GetTemplateRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.GetTemplateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetTemplateRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetTemplateRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateTemplateRequest. */
+                interface ICreateTemplateRequest {
+
+                    /** CreateTemplateRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateTemplateRequest templateId */
+                    templateId?: (string|null);
+
+                    /** CreateTemplateRequest template */
+                    template?: (google.cloud.modelarmor.v1beta.ITemplate|null);
+
+                    /** CreateTemplateRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateTemplateRequest. */
+                class CreateTemplateRequest implements ICreateTemplateRequest {
+
+                    /**
+                     * Constructs a new CreateTemplateRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.ICreateTemplateRequest);
+
+                    /** CreateTemplateRequest parent. */
+                    public parent: string;
+
+                    /** CreateTemplateRequest templateId. */
+                    public templateId: string;
+
+                    /** CreateTemplateRequest template. */
+                    public template?: (google.cloud.modelarmor.v1beta.ITemplate|null);
+
+                    /** CreateTemplateRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateTemplateRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateTemplateRequest instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.ICreateTemplateRequest): google.cloud.modelarmor.v1beta.CreateTemplateRequest;
+
+                    /**
+                     * Encodes the specified CreateTemplateRequest message. Does not implicitly {@link google.cloud.modelarmor.v1beta.CreateTemplateRequest.verify|verify} messages.
+                     * @param message CreateTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.ICreateTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.CreateTemplateRequest.verify|verify} messages.
+                     * @param message CreateTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.ICreateTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateTemplateRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.CreateTemplateRequest;
+
+                    /**
+                     * Decodes a CreateTemplateRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.CreateTemplateRequest;
+
+                    /**
+                     * Verifies a CreateTemplateRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateTemplateRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.CreateTemplateRequest;
+
+                    /**
+                     * Creates a plain object from a CreateTemplateRequest message. Also converts values to other types if specified.
+                     * @param message CreateTemplateRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.CreateTemplateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateTemplateRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateTemplateRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateTemplateRequest. */
+                interface IUpdateTemplateRequest {
+
+                    /** UpdateTemplateRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateTemplateRequest template */
+                    template?: (google.cloud.modelarmor.v1beta.ITemplate|null);
+
+                    /** UpdateTemplateRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateTemplateRequest. */
+                class UpdateTemplateRequest implements IUpdateTemplateRequest {
+
+                    /**
+                     * Constructs a new UpdateTemplateRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.IUpdateTemplateRequest);
+
+                    /** UpdateTemplateRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateTemplateRequest template. */
+                    public template?: (google.cloud.modelarmor.v1beta.ITemplate|null);
+
+                    /** UpdateTemplateRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateTemplateRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateTemplateRequest instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.IUpdateTemplateRequest): google.cloud.modelarmor.v1beta.UpdateTemplateRequest;
+
+                    /**
+                     * Encodes the specified UpdateTemplateRequest message. Does not implicitly {@link google.cloud.modelarmor.v1beta.UpdateTemplateRequest.verify|verify} messages.
+                     * @param message UpdateTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.IUpdateTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.UpdateTemplateRequest.verify|verify} messages.
+                     * @param message UpdateTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.IUpdateTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateTemplateRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.UpdateTemplateRequest;
+
+                    /**
+                     * Decodes an UpdateTemplateRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.UpdateTemplateRequest;
+
+                    /**
+                     * Verifies an UpdateTemplateRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateTemplateRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.UpdateTemplateRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateTemplateRequest message. Also converts values to other types if specified.
+                     * @param message UpdateTemplateRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.UpdateTemplateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateTemplateRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateTemplateRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteTemplateRequest. */
+                interface IDeleteTemplateRequest {
+
+                    /** DeleteTemplateRequest name */
+                    name?: (string|null);
+
+                    /** DeleteTemplateRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteTemplateRequest. */
+                class DeleteTemplateRequest implements IDeleteTemplateRequest {
+
+                    /**
+                     * Constructs a new DeleteTemplateRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.IDeleteTemplateRequest);
+
+                    /** DeleteTemplateRequest name. */
+                    public name: string;
+
+                    /** DeleteTemplateRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteTemplateRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteTemplateRequest instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.IDeleteTemplateRequest): google.cloud.modelarmor.v1beta.DeleteTemplateRequest;
+
+                    /**
+                     * Encodes the specified DeleteTemplateRequest message. Does not implicitly {@link google.cloud.modelarmor.v1beta.DeleteTemplateRequest.verify|verify} messages.
+                     * @param message DeleteTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.IDeleteTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.DeleteTemplateRequest.verify|verify} messages.
+                     * @param message DeleteTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.IDeleteTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteTemplateRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.DeleteTemplateRequest;
+
+                    /**
+                     * Decodes a DeleteTemplateRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.DeleteTemplateRequest;
+
+                    /**
+                     * Verifies a DeleteTemplateRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteTemplateRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.DeleteTemplateRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteTemplateRequest message. Also converts values to other types if specified.
+                     * @param message DeleteTemplateRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.DeleteTemplateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteTemplateRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteTemplateRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetFloorSettingRequest. */
+                interface IGetFloorSettingRequest {
+
+                    /** GetFloorSettingRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetFloorSettingRequest. */
+                class GetFloorSettingRequest implements IGetFloorSettingRequest {
+
+                    /**
+                     * Constructs a new GetFloorSettingRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.IGetFloorSettingRequest);
+
+                    /** GetFloorSettingRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetFloorSettingRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetFloorSettingRequest instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.IGetFloorSettingRequest): google.cloud.modelarmor.v1beta.GetFloorSettingRequest;
+
+                    /**
+                     * Encodes the specified GetFloorSettingRequest message. Does not implicitly {@link google.cloud.modelarmor.v1beta.GetFloorSettingRequest.verify|verify} messages.
+                     * @param message GetFloorSettingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.IGetFloorSettingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetFloorSettingRequest message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.GetFloorSettingRequest.verify|verify} messages.
+                     * @param message GetFloorSettingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.IGetFloorSettingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetFloorSettingRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetFloorSettingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.GetFloorSettingRequest;
+
+                    /**
+                     * Decodes a GetFloorSettingRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetFloorSettingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.GetFloorSettingRequest;
+
+                    /**
+                     * Verifies a GetFloorSettingRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetFloorSettingRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetFloorSettingRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.GetFloorSettingRequest;
+
+                    /**
+                     * Creates a plain object from a GetFloorSettingRequest message. Also converts values to other types if specified.
+                     * @param message GetFloorSettingRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.GetFloorSettingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetFloorSettingRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetFloorSettingRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateFloorSettingRequest. */
+                interface IUpdateFloorSettingRequest {
+
+                    /** UpdateFloorSettingRequest floorSetting */
+                    floorSetting?: (google.cloud.modelarmor.v1beta.IFloorSetting|null);
+
+                    /** UpdateFloorSettingRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateFloorSettingRequest. */
+                class UpdateFloorSettingRequest implements IUpdateFloorSettingRequest {
+
+                    /**
+                     * Constructs a new UpdateFloorSettingRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.IUpdateFloorSettingRequest);
+
+                    /** UpdateFloorSettingRequest floorSetting. */
+                    public floorSetting?: (google.cloud.modelarmor.v1beta.IFloorSetting|null);
+
+                    /** UpdateFloorSettingRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateFloorSettingRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateFloorSettingRequest instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.IUpdateFloorSettingRequest): google.cloud.modelarmor.v1beta.UpdateFloorSettingRequest;
+
+                    /**
+                     * Encodes the specified UpdateFloorSettingRequest message. Does not implicitly {@link google.cloud.modelarmor.v1beta.UpdateFloorSettingRequest.verify|verify} messages.
+                     * @param message UpdateFloorSettingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.IUpdateFloorSettingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateFloorSettingRequest message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.UpdateFloorSettingRequest.verify|verify} messages.
+                     * @param message UpdateFloorSettingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.IUpdateFloorSettingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateFloorSettingRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateFloorSettingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.UpdateFloorSettingRequest;
+
+                    /**
+                     * Decodes an UpdateFloorSettingRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateFloorSettingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.UpdateFloorSettingRequest;
+
+                    /**
+                     * Verifies an UpdateFloorSettingRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateFloorSettingRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateFloorSettingRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.UpdateFloorSettingRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateFloorSettingRequest message. Also converts values to other types if specified.
+                     * @param message UpdateFloorSettingRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.UpdateFloorSettingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateFloorSettingRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateFloorSettingRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FilterConfig. */
+                interface IFilterConfig {
+
+                    /** FilterConfig raiSettings */
+                    raiSettings?: (google.cloud.modelarmor.v1beta.IRaiFilterSettings|null);
+
+                    /** FilterConfig sdpSettings */
+                    sdpSettings?: (google.cloud.modelarmor.v1beta.ISdpFilterSettings|null);
+
+                    /** FilterConfig piAndJailbreakFilterSettings */
+                    piAndJailbreakFilterSettings?: (google.cloud.modelarmor.v1beta.IPiAndJailbreakFilterSettings|null);
+
+                    /** FilterConfig maliciousUriFilterSettings */
+                    maliciousUriFilterSettings?: (google.cloud.modelarmor.v1beta.IMaliciousUriFilterSettings|null);
+                }
+
+                /** Represents a FilterConfig. */
+                class FilterConfig implements IFilterConfig {
+
+                    /**
+                     * Constructs a new FilterConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.IFilterConfig);
+
+                    /** FilterConfig raiSettings. */
+                    public raiSettings?: (google.cloud.modelarmor.v1beta.IRaiFilterSettings|null);
+
+                    /** FilterConfig sdpSettings. */
+                    public sdpSettings?: (google.cloud.modelarmor.v1beta.ISdpFilterSettings|null);
+
+                    /** FilterConfig piAndJailbreakFilterSettings. */
+                    public piAndJailbreakFilterSettings?: (google.cloud.modelarmor.v1beta.IPiAndJailbreakFilterSettings|null);
+
+                    /** FilterConfig maliciousUriFilterSettings. */
+                    public maliciousUriFilterSettings?: (google.cloud.modelarmor.v1beta.IMaliciousUriFilterSettings|null);
+
+                    /**
+                     * Creates a new FilterConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FilterConfig instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.IFilterConfig): google.cloud.modelarmor.v1beta.FilterConfig;
+
+                    /**
+                     * Encodes the specified FilterConfig message. Does not implicitly {@link google.cloud.modelarmor.v1beta.FilterConfig.verify|verify} messages.
+                     * @param message FilterConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.IFilterConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FilterConfig message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.FilterConfig.verify|verify} messages.
+                     * @param message FilterConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.IFilterConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FilterConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FilterConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.FilterConfig;
+
+                    /**
+                     * Decodes a FilterConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FilterConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.FilterConfig;
+
+                    /**
+                     * Verifies a FilterConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FilterConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FilterConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.FilterConfig;
+
+                    /**
+                     * Creates a plain object from a FilterConfig message. Also converts values to other types if specified.
+                     * @param message FilterConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.FilterConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FilterConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FilterConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PiAndJailbreakFilterSettings. */
+                interface IPiAndJailbreakFilterSettings {
+
+                    /** PiAndJailbreakFilterSettings filterEnforcement */
+                    filterEnforcement?: (google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings.PiAndJailbreakFilterEnforcement|keyof typeof google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings.PiAndJailbreakFilterEnforcement|null);
+
+                    /** PiAndJailbreakFilterSettings confidenceLevel */
+                    confidenceLevel?: (google.cloud.modelarmor.v1beta.DetectionConfidenceLevel|keyof typeof google.cloud.modelarmor.v1beta.DetectionConfidenceLevel|null);
+                }
+
+                /** Represents a PiAndJailbreakFilterSettings. */
+                class PiAndJailbreakFilterSettings implements IPiAndJailbreakFilterSettings {
+
+                    /**
+                     * Constructs a new PiAndJailbreakFilterSettings.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.IPiAndJailbreakFilterSettings);
+
+                    /** PiAndJailbreakFilterSettings filterEnforcement. */
+                    public filterEnforcement: (google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings.PiAndJailbreakFilterEnforcement|keyof typeof google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings.PiAndJailbreakFilterEnforcement);
+
+                    /** PiAndJailbreakFilterSettings confidenceLevel. */
+                    public confidenceLevel: (google.cloud.modelarmor.v1beta.DetectionConfidenceLevel|keyof typeof google.cloud.modelarmor.v1beta.DetectionConfidenceLevel);
+
+                    /**
+                     * Creates a new PiAndJailbreakFilterSettings instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PiAndJailbreakFilterSettings instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.IPiAndJailbreakFilterSettings): google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings;
+
+                    /**
+                     * Encodes the specified PiAndJailbreakFilterSettings message. Does not implicitly {@link google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings.verify|verify} messages.
+                     * @param message PiAndJailbreakFilterSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.IPiAndJailbreakFilterSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PiAndJailbreakFilterSettings message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings.verify|verify} messages.
+                     * @param message PiAndJailbreakFilterSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.IPiAndJailbreakFilterSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PiAndJailbreakFilterSettings message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PiAndJailbreakFilterSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings;
+
+                    /**
+                     * Decodes a PiAndJailbreakFilterSettings message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PiAndJailbreakFilterSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings;
+
+                    /**
+                     * Verifies a PiAndJailbreakFilterSettings message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PiAndJailbreakFilterSettings message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PiAndJailbreakFilterSettings
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings;
+
+                    /**
+                     * Creates a plain object from a PiAndJailbreakFilterSettings message. Also converts values to other types if specified.
+                     * @param message PiAndJailbreakFilterSettings
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PiAndJailbreakFilterSettings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PiAndJailbreakFilterSettings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace PiAndJailbreakFilterSettings {
+
+                    /** PiAndJailbreakFilterEnforcement enum. */
+                    enum PiAndJailbreakFilterEnforcement {
+                        PI_AND_JAILBREAK_FILTER_ENFORCEMENT_UNSPECIFIED = 0,
+                        ENABLED = 1,
+                        DISABLED = 2
+                    }
+                }
+
+                /** Properties of a MaliciousUriFilterSettings. */
+                interface IMaliciousUriFilterSettings {
+
+                    /** MaliciousUriFilterSettings filterEnforcement */
+                    filterEnforcement?: (google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings.MaliciousUriFilterEnforcement|keyof typeof google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings.MaliciousUriFilterEnforcement|null);
+                }
+
+                /** Represents a MaliciousUriFilterSettings. */
+                class MaliciousUriFilterSettings implements IMaliciousUriFilterSettings {
+
+                    /**
+                     * Constructs a new MaliciousUriFilterSettings.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.IMaliciousUriFilterSettings);
+
+                    /** MaliciousUriFilterSettings filterEnforcement. */
+                    public filterEnforcement: (google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings.MaliciousUriFilterEnforcement|keyof typeof google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings.MaliciousUriFilterEnforcement);
+
+                    /**
+                     * Creates a new MaliciousUriFilterSettings instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MaliciousUriFilterSettings instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.IMaliciousUriFilterSettings): google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings;
+
+                    /**
+                     * Encodes the specified MaliciousUriFilterSettings message. Does not implicitly {@link google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings.verify|verify} messages.
+                     * @param message MaliciousUriFilterSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.IMaliciousUriFilterSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MaliciousUriFilterSettings message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings.verify|verify} messages.
+                     * @param message MaliciousUriFilterSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.IMaliciousUriFilterSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MaliciousUriFilterSettings message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MaliciousUriFilterSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings;
+
+                    /**
+                     * Decodes a MaliciousUriFilterSettings message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MaliciousUriFilterSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings;
+
+                    /**
+                     * Verifies a MaliciousUriFilterSettings message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MaliciousUriFilterSettings message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MaliciousUriFilterSettings
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings;
+
+                    /**
+                     * Creates a plain object from a MaliciousUriFilterSettings message. Also converts values to other types if specified.
+                     * @param message MaliciousUriFilterSettings
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MaliciousUriFilterSettings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MaliciousUriFilterSettings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace MaliciousUriFilterSettings {
+
+                    /** MaliciousUriFilterEnforcement enum. */
+                    enum MaliciousUriFilterEnforcement {
+                        MALICIOUS_URI_FILTER_ENFORCEMENT_UNSPECIFIED = 0,
+                        ENABLED = 1,
+                        DISABLED = 2
+                    }
+                }
+
+                /** Properties of a RaiFilterSettings. */
+                interface IRaiFilterSettings {
+
+                    /** RaiFilterSettings raiFilters */
+                    raiFilters?: (google.cloud.modelarmor.v1beta.RaiFilterSettings.IRaiFilter[]|null);
+                }
+
+                /** Represents a RaiFilterSettings. */
+                class RaiFilterSettings implements IRaiFilterSettings {
+
+                    /**
+                     * Constructs a new RaiFilterSettings.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.IRaiFilterSettings);
+
+                    /** RaiFilterSettings raiFilters. */
+                    public raiFilters: google.cloud.modelarmor.v1beta.RaiFilterSettings.IRaiFilter[];
+
+                    /**
+                     * Creates a new RaiFilterSettings instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RaiFilterSettings instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.IRaiFilterSettings): google.cloud.modelarmor.v1beta.RaiFilterSettings;
+
+                    /**
+                     * Encodes the specified RaiFilterSettings message. Does not implicitly {@link google.cloud.modelarmor.v1beta.RaiFilterSettings.verify|verify} messages.
+                     * @param message RaiFilterSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.IRaiFilterSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RaiFilterSettings message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.RaiFilterSettings.verify|verify} messages.
+                     * @param message RaiFilterSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.IRaiFilterSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RaiFilterSettings message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RaiFilterSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.RaiFilterSettings;
+
+                    /**
+                     * Decodes a RaiFilterSettings message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RaiFilterSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.RaiFilterSettings;
+
+                    /**
+                     * Verifies a RaiFilterSettings message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RaiFilterSettings message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RaiFilterSettings
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.RaiFilterSettings;
+
+                    /**
+                     * Creates a plain object from a RaiFilterSettings message. Also converts values to other types if specified.
+                     * @param message RaiFilterSettings
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.RaiFilterSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RaiFilterSettings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RaiFilterSettings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace RaiFilterSettings {
+
+                    /** Properties of a RaiFilter. */
+                    interface IRaiFilter {
+
+                        /** RaiFilter filterType */
+                        filterType?: (google.cloud.modelarmor.v1beta.RaiFilterType|keyof typeof google.cloud.modelarmor.v1beta.RaiFilterType|null);
+
+                        /** RaiFilter confidenceLevel */
+                        confidenceLevel?: (google.cloud.modelarmor.v1beta.DetectionConfidenceLevel|keyof typeof google.cloud.modelarmor.v1beta.DetectionConfidenceLevel|null);
+                    }
+
+                    /** Represents a RaiFilter. */
+                    class RaiFilter implements IRaiFilter {
+
+                        /**
+                         * Constructs a new RaiFilter.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.modelarmor.v1beta.RaiFilterSettings.IRaiFilter);
+
+                        /** RaiFilter filterType. */
+                        public filterType: (google.cloud.modelarmor.v1beta.RaiFilterType|keyof typeof google.cloud.modelarmor.v1beta.RaiFilterType);
+
+                        /** RaiFilter confidenceLevel. */
+                        public confidenceLevel: (google.cloud.modelarmor.v1beta.DetectionConfidenceLevel|keyof typeof google.cloud.modelarmor.v1beta.DetectionConfidenceLevel);
+
+                        /**
+                         * Creates a new RaiFilter instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RaiFilter instance
+                         */
+                        public static create(properties?: google.cloud.modelarmor.v1beta.RaiFilterSettings.IRaiFilter): google.cloud.modelarmor.v1beta.RaiFilterSettings.RaiFilter;
+
+                        /**
+                         * Encodes the specified RaiFilter message. Does not implicitly {@link google.cloud.modelarmor.v1beta.RaiFilterSettings.RaiFilter.verify|verify} messages.
+                         * @param message RaiFilter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.modelarmor.v1beta.RaiFilterSettings.IRaiFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RaiFilter message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.RaiFilterSettings.RaiFilter.verify|verify} messages.
+                         * @param message RaiFilter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.modelarmor.v1beta.RaiFilterSettings.IRaiFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RaiFilter message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RaiFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.RaiFilterSettings.RaiFilter;
+
+                        /**
+                         * Decodes a RaiFilter message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RaiFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.RaiFilterSettings.RaiFilter;
+
+                        /**
+                         * Verifies a RaiFilter message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RaiFilter message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RaiFilter
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.RaiFilterSettings.RaiFilter;
+
+                        /**
+                         * Creates a plain object from a RaiFilter message. Also converts values to other types if specified.
+                         * @param message RaiFilter
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.modelarmor.v1beta.RaiFilterSettings.RaiFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RaiFilter to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RaiFilter
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a SdpFilterSettings. */
+                interface ISdpFilterSettings {
+
+                    /** SdpFilterSettings basicConfig */
+                    basicConfig?: (google.cloud.modelarmor.v1beta.ISdpBasicConfig|null);
+
+                    /** SdpFilterSettings advancedConfig */
+                    advancedConfig?: (google.cloud.modelarmor.v1beta.ISdpAdvancedConfig|null);
+                }
+
+                /** Represents a SdpFilterSettings. */
+                class SdpFilterSettings implements ISdpFilterSettings {
+
+                    /**
+                     * Constructs a new SdpFilterSettings.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.ISdpFilterSettings);
+
+                    /** SdpFilterSettings basicConfig. */
+                    public basicConfig?: (google.cloud.modelarmor.v1beta.ISdpBasicConfig|null);
+
+                    /** SdpFilterSettings advancedConfig. */
+                    public advancedConfig?: (google.cloud.modelarmor.v1beta.ISdpAdvancedConfig|null);
+
+                    /** SdpFilterSettings sdpConfiguration. */
+                    public sdpConfiguration?: ("basicConfig"|"advancedConfig");
+
+                    /**
+                     * Creates a new SdpFilterSettings instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SdpFilterSettings instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.ISdpFilterSettings): google.cloud.modelarmor.v1beta.SdpFilterSettings;
+
+                    /**
+                     * Encodes the specified SdpFilterSettings message. Does not implicitly {@link google.cloud.modelarmor.v1beta.SdpFilterSettings.verify|verify} messages.
+                     * @param message SdpFilterSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.ISdpFilterSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SdpFilterSettings message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.SdpFilterSettings.verify|verify} messages.
+                     * @param message SdpFilterSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.ISdpFilterSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SdpFilterSettings message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SdpFilterSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.SdpFilterSettings;
+
+                    /**
+                     * Decodes a SdpFilterSettings message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SdpFilterSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.SdpFilterSettings;
+
+                    /**
+                     * Verifies a SdpFilterSettings message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SdpFilterSettings message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SdpFilterSettings
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.SdpFilterSettings;
+
+                    /**
+                     * Creates a plain object from a SdpFilterSettings message. Also converts values to other types if specified.
+                     * @param message SdpFilterSettings
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.SdpFilterSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SdpFilterSettings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SdpFilterSettings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SdpBasicConfig. */
+                interface ISdpBasicConfig {
+
+                    /** SdpBasicConfig filterEnforcement */
+                    filterEnforcement?: (google.cloud.modelarmor.v1beta.SdpBasicConfig.SdpBasicConfigEnforcement|keyof typeof google.cloud.modelarmor.v1beta.SdpBasicConfig.SdpBasicConfigEnforcement|null);
+                }
+
+                /** Represents a SdpBasicConfig. */
+                class SdpBasicConfig implements ISdpBasicConfig {
+
+                    /**
+                     * Constructs a new SdpBasicConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.ISdpBasicConfig);
+
+                    /** SdpBasicConfig filterEnforcement. */
+                    public filterEnforcement: (google.cloud.modelarmor.v1beta.SdpBasicConfig.SdpBasicConfigEnforcement|keyof typeof google.cloud.modelarmor.v1beta.SdpBasicConfig.SdpBasicConfigEnforcement);
+
+                    /**
+                     * Creates a new SdpBasicConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SdpBasicConfig instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.ISdpBasicConfig): google.cloud.modelarmor.v1beta.SdpBasicConfig;
+
+                    /**
+                     * Encodes the specified SdpBasicConfig message. Does not implicitly {@link google.cloud.modelarmor.v1beta.SdpBasicConfig.verify|verify} messages.
+                     * @param message SdpBasicConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.ISdpBasicConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SdpBasicConfig message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.SdpBasicConfig.verify|verify} messages.
+                     * @param message SdpBasicConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.ISdpBasicConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SdpBasicConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SdpBasicConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.SdpBasicConfig;
+
+                    /**
+                     * Decodes a SdpBasicConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SdpBasicConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.SdpBasicConfig;
+
+                    /**
+                     * Verifies a SdpBasicConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SdpBasicConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SdpBasicConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.SdpBasicConfig;
+
+                    /**
+                     * Creates a plain object from a SdpBasicConfig message. Also converts values to other types if specified.
+                     * @param message SdpBasicConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.SdpBasicConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SdpBasicConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SdpBasicConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SdpBasicConfig {
+
+                    /** SdpBasicConfigEnforcement enum. */
+                    enum SdpBasicConfigEnforcement {
+                        SDP_BASIC_CONFIG_ENFORCEMENT_UNSPECIFIED = 0,
+                        ENABLED = 1,
+                        DISABLED = 2
+                    }
+                }
+
+                /** Properties of a SdpAdvancedConfig. */
+                interface ISdpAdvancedConfig {
+
+                    /** SdpAdvancedConfig inspectTemplate */
+                    inspectTemplate?: (string|null);
+
+                    /** SdpAdvancedConfig deidentifyTemplate */
+                    deidentifyTemplate?: (string|null);
+                }
+
+                /** Represents a SdpAdvancedConfig. */
+                class SdpAdvancedConfig implements ISdpAdvancedConfig {
+
+                    /**
+                     * Constructs a new SdpAdvancedConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.ISdpAdvancedConfig);
+
+                    /** SdpAdvancedConfig inspectTemplate. */
+                    public inspectTemplate: string;
+
+                    /** SdpAdvancedConfig deidentifyTemplate. */
+                    public deidentifyTemplate: string;
+
+                    /**
+                     * Creates a new SdpAdvancedConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SdpAdvancedConfig instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.ISdpAdvancedConfig): google.cloud.modelarmor.v1beta.SdpAdvancedConfig;
+
+                    /**
+                     * Encodes the specified SdpAdvancedConfig message. Does not implicitly {@link google.cloud.modelarmor.v1beta.SdpAdvancedConfig.verify|verify} messages.
+                     * @param message SdpAdvancedConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.ISdpAdvancedConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SdpAdvancedConfig message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.SdpAdvancedConfig.verify|verify} messages.
+                     * @param message SdpAdvancedConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.ISdpAdvancedConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SdpAdvancedConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SdpAdvancedConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.SdpAdvancedConfig;
+
+                    /**
+                     * Decodes a SdpAdvancedConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SdpAdvancedConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.SdpAdvancedConfig;
+
+                    /**
+                     * Verifies a SdpAdvancedConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SdpAdvancedConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SdpAdvancedConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.SdpAdvancedConfig;
+
+                    /**
+                     * Creates a plain object from a SdpAdvancedConfig message. Also converts values to other types if specified.
+                     * @param message SdpAdvancedConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.SdpAdvancedConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SdpAdvancedConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SdpAdvancedConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SanitizeUserPromptRequest. */
+                interface ISanitizeUserPromptRequest {
+
+                    /** SanitizeUserPromptRequest name */
+                    name?: (string|null);
+
+                    /** SanitizeUserPromptRequest userPromptData */
+                    userPromptData?: (google.cloud.modelarmor.v1beta.IDataItem|null);
+                }
+
+                /** Represents a SanitizeUserPromptRequest. */
+                class SanitizeUserPromptRequest implements ISanitizeUserPromptRequest {
+
+                    /**
+                     * Constructs a new SanitizeUserPromptRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.ISanitizeUserPromptRequest);
+
+                    /** SanitizeUserPromptRequest name. */
+                    public name: string;
+
+                    /** SanitizeUserPromptRequest userPromptData. */
+                    public userPromptData?: (google.cloud.modelarmor.v1beta.IDataItem|null);
+
+                    /**
+                     * Creates a new SanitizeUserPromptRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SanitizeUserPromptRequest instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.ISanitizeUserPromptRequest): google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest;
+
+                    /**
+                     * Encodes the specified SanitizeUserPromptRequest message. Does not implicitly {@link google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest.verify|verify} messages.
+                     * @param message SanitizeUserPromptRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.ISanitizeUserPromptRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SanitizeUserPromptRequest message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest.verify|verify} messages.
+                     * @param message SanitizeUserPromptRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.ISanitizeUserPromptRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SanitizeUserPromptRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SanitizeUserPromptRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest;
+
+                    /**
+                     * Decodes a SanitizeUserPromptRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SanitizeUserPromptRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest;
+
+                    /**
+                     * Verifies a SanitizeUserPromptRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SanitizeUserPromptRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SanitizeUserPromptRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest;
+
+                    /**
+                     * Creates a plain object from a SanitizeUserPromptRequest message. Also converts values to other types if specified.
+                     * @param message SanitizeUserPromptRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SanitizeUserPromptRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SanitizeUserPromptRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SanitizeModelResponseRequest. */
+                interface ISanitizeModelResponseRequest {
+
+                    /** SanitizeModelResponseRequest name */
+                    name?: (string|null);
+
+                    /** SanitizeModelResponseRequest modelResponseData */
+                    modelResponseData?: (google.cloud.modelarmor.v1beta.IDataItem|null);
+
+                    /** SanitizeModelResponseRequest userPrompt */
+                    userPrompt?: (string|null);
+
+                    /** SanitizeModelResponseRequest multiLanguageDetectionMetadata */
+                    multiLanguageDetectionMetadata?: (google.cloud.modelarmor.v1beta.IMultiLanguageDetectionMetadata|null);
+                }
+
+                /** Represents a SanitizeModelResponseRequest. */
+                class SanitizeModelResponseRequest implements ISanitizeModelResponseRequest {
+
+                    /**
+                     * Constructs a new SanitizeModelResponseRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.ISanitizeModelResponseRequest);
+
+                    /** SanitizeModelResponseRequest name. */
+                    public name: string;
+
+                    /** SanitizeModelResponseRequest modelResponseData. */
+                    public modelResponseData?: (google.cloud.modelarmor.v1beta.IDataItem|null);
+
+                    /** SanitizeModelResponseRequest userPrompt. */
+                    public userPrompt: string;
+
+                    /** SanitizeModelResponseRequest multiLanguageDetectionMetadata. */
+                    public multiLanguageDetectionMetadata?: (google.cloud.modelarmor.v1beta.IMultiLanguageDetectionMetadata|null);
+
+                    /**
+                     * Creates a new SanitizeModelResponseRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SanitizeModelResponseRequest instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.ISanitizeModelResponseRequest): google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest;
+
+                    /**
+                     * Encodes the specified SanitizeModelResponseRequest message. Does not implicitly {@link google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest.verify|verify} messages.
+                     * @param message SanitizeModelResponseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.ISanitizeModelResponseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SanitizeModelResponseRequest message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest.verify|verify} messages.
+                     * @param message SanitizeModelResponseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.ISanitizeModelResponseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SanitizeModelResponseRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SanitizeModelResponseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest;
+
+                    /**
+                     * Decodes a SanitizeModelResponseRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SanitizeModelResponseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest;
+
+                    /**
+                     * Verifies a SanitizeModelResponseRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SanitizeModelResponseRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SanitizeModelResponseRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest;
+
+                    /**
+                     * Creates a plain object from a SanitizeModelResponseRequest message. Also converts values to other types if specified.
+                     * @param message SanitizeModelResponseRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SanitizeModelResponseRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SanitizeModelResponseRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SanitizeUserPromptResponse. */
+                interface ISanitizeUserPromptResponse {
+
+                    /** SanitizeUserPromptResponse sanitizationResult */
+                    sanitizationResult?: (google.cloud.modelarmor.v1beta.ISanitizationResult|null);
+                }
+
+                /** Represents a SanitizeUserPromptResponse. */
+                class SanitizeUserPromptResponse implements ISanitizeUserPromptResponse {
+
+                    /**
+                     * Constructs a new SanitizeUserPromptResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.ISanitizeUserPromptResponse);
+
+                    /** SanitizeUserPromptResponse sanitizationResult. */
+                    public sanitizationResult?: (google.cloud.modelarmor.v1beta.ISanitizationResult|null);
+
+                    /**
+                     * Creates a new SanitizeUserPromptResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SanitizeUserPromptResponse instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.ISanitizeUserPromptResponse): google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse;
+
+                    /**
+                     * Encodes the specified SanitizeUserPromptResponse message. Does not implicitly {@link google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse.verify|verify} messages.
+                     * @param message SanitizeUserPromptResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.ISanitizeUserPromptResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SanitizeUserPromptResponse message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse.verify|verify} messages.
+                     * @param message SanitizeUserPromptResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.ISanitizeUserPromptResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SanitizeUserPromptResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SanitizeUserPromptResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse;
+
+                    /**
+                     * Decodes a SanitizeUserPromptResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SanitizeUserPromptResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse;
+
+                    /**
+                     * Verifies a SanitizeUserPromptResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SanitizeUserPromptResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SanitizeUserPromptResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse;
+
+                    /**
+                     * Creates a plain object from a SanitizeUserPromptResponse message. Also converts values to other types if specified.
+                     * @param message SanitizeUserPromptResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SanitizeUserPromptResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SanitizeUserPromptResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SanitizeModelResponseResponse. */
+                interface ISanitizeModelResponseResponse {
+
+                    /** SanitizeModelResponseResponse sanitizationResult */
+                    sanitizationResult?: (google.cloud.modelarmor.v1beta.ISanitizationResult|null);
+                }
+
+                /** Represents a SanitizeModelResponseResponse. */
+                class SanitizeModelResponseResponse implements ISanitizeModelResponseResponse {
+
+                    /**
+                     * Constructs a new SanitizeModelResponseResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.ISanitizeModelResponseResponse);
+
+                    /** SanitizeModelResponseResponse sanitizationResult. */
+                    public sanitizationResult?: (google.cloud.modelarmor.v1beta.ISanitizationResult|null);
+
+                    /**
+                     * Creates a new SanitizeModelResponseResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SanitizeModelResponseResponse instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.ISanitizeModelResponseResponse): google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse;
+
+                    /**
+                     * Encodes the specified SanitizeModelResponseResponse message. Does not implicitly {@link google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse.verify|verify} messages.
+                     * @param message SanitizeModelResponseResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.ISanitizeModelResponseResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SanitizeModelResponseResponse message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse.verify|verify} messages.
+                     * @param message SanitizeModelResponseResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.ISanitizeModelResponseResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SanitizeModelResponseResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SanitizeModelResponseResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse;
+
+                    /**
+                     * Decodes a SanitizeModelResponseResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SanitizeModelResponseResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse;
+
+                    /**
+                     * Verifies a SanitizeModelResponseResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SanitizeModelResponseResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SanitizeModelResponseResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse;
+
+                    /**
+                     * Creates a plain object from a SanitizeModelResponseResponse message. Also converts values to other types if specified.
+                     * @param message SanitizeModelResponseResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SanitizeModelResponseResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SanitizeModelResponseResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SanitizationResult. */
+                interface ISanitizationResult {
+
+                    /** SanitizationResult filterMatchState */
+                    filterMatchState?: (google.cloud.modelarmor.v1beta.FilterMatchState|keyof typeof google.cloud.modelarmor.v1beta.FilterMatchState|null);
+
+                    /** SanitizationResult filterResults */
+                    filterResults?: ({ [k: string]: google.cloud.modelarmor.v1beta.IFilterResult }|null);
+
+                    /** SanitizationResult invocationResult */
+                    invocationResult?: (google.cloud.modelarmor.v1beta.InvocationResult|keyof typeof google.cloud.modelarmor.v1beta.InvocationResult|null);
+
+                    /** SanitizationResult sanitizationMetadata */
+                    sanitizationMetadata?: (google.cloud.modelarmor.v1beta.SanitizationResult.ISanitizationMetadata|null);
+                }
+
+                /** Represents a SanitizationResult. */
+                class SanitizationResult implements ISanitizationResult {
+
+                    /**
+                     * Constructs a new SanitizationResult.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.ISanitizationResult);
+
+                    /** SanitizationResult filterMatchState. */
+                    public filterMatchState: (google.cloud.modelarmor.v1beta.FilterMatchState|keyof typeof google.cloud.modelarmor.v1beta.FilterMatchState);
+
+                    /** SanitizationResult filterResults. */
+                    public filterResults: { [k: string]: google.cloud.modelarmor.v1beta.IFilterResult };
+
+                    /** SanitizationResult invocationResult. */
+                    public invocationResult: (google.cloud.modelarmor.v1beta.InvocationResult|keyof typeof google.cloud.modelarmor.v1beta.InvocationResult);
+
+                    /** SanitizationResult sanitizationMetadata. */
+                    public sanitizationMetadata?: (google.cloud.modelarmor.v1beta.SanitizationResult.ISanitizationMetadata|null);
+
+                    /**
+                     * Creates a new SanitizationResult instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SanitizationResult instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.ISanitizationResult): google.cloud.modelarmor.v1beta.SanitizationResult;
+
+                    /**
+                     * Encodes the specified SanitizationResult message. Does not implicitly {@link google.cloud.modelarmor.v1beta.SanitizationResult.verify|verify} messages.
+                     * @param message SanitizationResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.ISanitizationResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SanitizationResult message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.SanitizationResult.verify|verify} messages.
+                     * @param message SanitizationResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.ISanitizationResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SanitizationResult message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SanitizationResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.SanitizationResult;
+
+                    /**
+                     * Decodes a SanitizationResult message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SanitizationResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.SanitizationResult;
+
+                    /**
+                     * Verifies a SanitizationResult message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SanitizationResult message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SanitizationResult
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.SanitizationResult;
+
+                    /**
+                     * Creates a plain object from a SanitizationResult message. Also converts values to other types if specified.
+                     * @param message SanitizationResult
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.SanitizationResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SanitizationResult to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SanitizationResult
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SanitizationResult {
+
+                    /** Properties of a SanitizationMetadata. */
+                    interface ISanitizationMetadata {
+
+                        /** SanitizationMetadata errorCode */
+                        errorCode?: (number|Long|string|null);
+
+                        /** SanitizationMetadata errorMessage */
+                        errorMessage?: (string|null);
+
+                        /** SanitizationMetadata ignorePartialInvocationFailures */
+                        ignorePartialInvocationFailures?: (boolean|null);
+                    }
+
+                    /** Represents a SanitizationMetadata. */
+                    class SanitizationMetadata implements ISanitizationMetadata {
+
+                        /**
+                         * Constructs a new SanitizationMetadata.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.modelarmor.v1beta.SanitizationResult.ISanitizationMetadata);
+
+                        /** SanitizationMetadata errorCode. */
+                        public errorCode: (number|Long|string);
+
+                        /** SanitizationMetadata errorMessage. */
+                        public errorMessage: string;
+
+                        /** SanitizationMetadata ignorePartialInvocationFailures. */
+                        public ignorePartialInvocationFailures: boolean;
+
+                        /**
+                         * Creates a new SanitizationMetadata instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SanitizationMetadata instance
+                         */
+                        public static create(properties?: google.cloud.modelarmor.v1beta.SanitizationResult.ISanitizationMetadata): google.cloud.modelarmor.v1beta.SanitizationResult.SanitizationMetadata;
+
+                        /**
+                         * Encodes the specified SanitizationMetadata message. Does not implicitly {@link google.cloud.modelarmor.v1beta.SanitizationResult.SanitizationMetadata.verify|verify} messages.
+                         * @param message SanitizationMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.modelarmor.v1beta.SanitizationResult.ISanitizationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SanitizationMetadata message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.SanitizationResult.SanitizationMetadata.verify|verify} messages.
+                         * @param message SanitizationMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.modelarmor.v1beta.SanitizationResult.ISanitizationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SanitizationMetadata message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SanitizationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.SanitizationResult.SanitizationMetadata;
+
+                        /**
+                         * Decodes a SanitizationMetadata message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SanitizationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.SanitizationResult.SanitizationMetadata;
+
+                        /**
+                         * Verifies a SanitizationMetadata message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SanitizationMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SanitizationMetadata
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.SanitizationResult.SanitizationMetadata;
+
+                        /**
+                         * Creates a plain object from a SanitizationMetadata message. Also converts values to other types if specified.
+                         * @param message SanitizationMetadata
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.modelarmor.v1beta.SanitizationResult.SanitizationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SanitizationMetadata to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SanitizationMetadata
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a MultiLanguageDetectionMetadata. */
+                interface IMultiLanguageDetectionMetadata {
+                }
+
+                /** Represents a MultiLanguageDetectionMetadata. */
+                class MultiLanguageDetectionMetadata implements IMultiLanguageDetectionMetadata {
+
+                    /**
+                     * Constructs a new MultiLanguageDetectionMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.IMultiLanguageDetectionMetadata);
+
+                    /**
+                     * Creates a new MultiLanguageDetectionMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MultiLanguageDetectionMetadata instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.IMultiLanguageDetectionMetadata): google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata;
+
+                    /**
+                     * Encodes the specified MultiLanguageDetectionMetadata message. Does not implicitly {@link google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata.verify|verify} messages.
+                     * @param message MultiLanguageDetectionMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.IMultiLanguageDetectionMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MultiLanguageDetectionMetadata message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata.verify|verify} messages.
+                     * @param message MultiLanguageDetectionMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.IMultiLanguageDetectionMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MultiLanguageDetectionMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MultiLanguageDetectionMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata;
+
+                    /**
+                     * Decodes a MultiLanguageDetectionMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MultiLanguageDetectionMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata;
+
+                    /**
+                     * Verifies a MultiLanguageDetectionMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MultiLanguageDetectionMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MultiLanguageDetectionMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata;
+
+                    /**
+                     * Creates a plain object from a MultiLanguageDetectionMetadata message. Also converts values to other types if specified.
+                     * @param message MultiLanguageDetectionMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MultiLanguageDetectionMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MultiLanguageDetectionMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FilterResult. */
+                interface IFilterResult {
+
+                    /** FilterResult raiFilterResult */
+                    raiFilterResult?: (google.cloud.modelarmor.v1beta.IRaiFilterResult|null);
+
+                    /** FilterResult sdpFilterResult */
+                    sdpFilterResult?: (google.cloud.modelarmor.v1beta.ISdpFilterResult|null);
+
+                    /** FilterResult piAndJailbreakFilterResult */
+                    piAndJailbreakFilterResult?: (google.cloud.modelarmor.v1beta.IPiAndJailbreakFilterResult|null);
+
+                    /** FilterResult maliciousUriFilterResult */
+                    maliciousUriFilterResult?: (google.cloud.modelarmor.v1beta.IMaliciousUriFilterResult|null);
+
+                    /** FilterResult csamFilterFilterResult */
+                    csamFilterFilterResult?: (google.cloud.modelarmor.v1beta.ICsamFilterResult|null);
+
+                    /** FilterResult virusScanFilterResult */
+                    virusScanFilterResult?: (google.cloud.modelarmor.v1beta.IVirusScanFilterResult|null);
+                }
+
+                /** Represents a FilterResult. */
+                class FilterResult implements IFilterResult {
+
+                    /**
+                     * Constructs a new FilterResult.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.IFilterResult);
+
+                    /** FilterResult raiFilterResult. */
+                    public raiFilterResult?: (google.cloud.modelarmor.v1beta.IRaiFilterResult|null);
+
+                    /** FilterResult sdpFilterResult. */
+                    public sdpFilterResult?: (google.cloud.modelarmor.v1beta.ISdpFilterResult|null);
+
+                    /** FilterResult piAndJailbreakFilterResult. */
+                    public piAndJailbreakFilterResult?: (google.cloud.modelarmor.v1beta.IPiAndJailbreakFilterResult|null);
+
+                    /** FilterResult maliciousUriFilterResult. */
+                    public maliciousUriFilterResult?: (google.cloud.modelarmor.v1beta.IMaliciousUriFilterResult|null);
+
+                    /** FilterResult csamFilterFilterResult. */
+                    public csamFilterFilterResult?: (google.cloud.modelarmor.v1beta.ICsamFilterResult|null);
+
+                    /** FilterResult virusScanFilterResult. */
+                    public virusScanFilterResult?: (google.cloud.modelarmor.v1beta.IVirusScanFilterResult|null);
+
+                    /** FilterResult filterResult. */
+                    public filterResult?: ("raiFilterResult"|"sdpFilterResult"|"piAndJailbreakFilterResult"|"maliciousUriFilterResult"|"csamFilterFilterResult"|"virusScanFilterResult");
+
+                    /**
+                     * Creates a new FilterResult instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FilterResult instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.IFilterResult): google.cloud.modelarmor.v1beta.FilterResult;
+
+                    /**
+                     * Encodes the specified FilterResult message. Does not implicitly {@link google.cloud.modelarmor.v1beta.FilterResult.verify|verify} messages.
+                     * @param message FilterResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.IFilterResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FilterResult message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.FilterResult.verify|verify} messages.
+                     * @param message FilterResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.IFilterResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FilterResult message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FilterResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.FilterResult;
+
+                    /**
+                     * Decodes a FilterResult message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FilterResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.FilterResult;
+
+                    /**
+                     * Verifies a FilterResult message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FilterResult message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FilterResult
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.FilterResult;
+
+                    /**
+                     * Creates a plain object from a FilterResult message. Also converts values to other types if specified.
+                     * @param message FilterResult
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.FilterResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FilterResult to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FilterResult
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RaiFilterResult. */
+                interface IRaiFilterResult {
+
+                    /** RaiFilterResult executionState */
+                    executionState?: (google.cloud.modelarmor.v1beta.FilterExecutionState|keyof typeof google.cloud.modelarmor.v1beta.FilterExecutionState|null);
+
+                    /** RaiFilterResult messageItems */
+                    messageItems?: (google.cloud.modelarmor.v1beta.IMessageItem[]|null);
+
+                    /** RaiFilterResult matchState */
+                    matchState?: (google.cloud.modelarmor.v1beta.FilterMatchState|keyof typeof google.cloud.modelarmor.v1beta.FilterMatchState|null);
+
+                    /** RaiFilterResult raiFilterTypeResults */
+                    raiFilterTypeResults?: ({ [k: string]: google.cloud.modelarmor.v1beta.RaiFilterResult.IRaiFilterTypeResult }|null);
+                }
+
+                /** Represents a RaiFilterResult. */
+                class RaiFilterResult implements IRaiFilterResult {
+
+                    /**
+                     * Constructs a new RaiFilterResult.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.IRaiFilterResult);
+
+                    /** RaiFilterResult executionState. */
+                    public executionState: (google.cloud.modelarmor.v1beta.FilterExecutionState|keyof typeof google.cloud.modelarmor.v1beta.FilterExecutionState);
+
+                    /** RaiFilterResult messageItems. */
+                    public messageItems: google.cloud.modelarmor.v1beta.IMessageItem[];
+
+                    /** RaiFilterResult matchState. */
+                    public matchState: (google.cloud.modelarmor.v1beta.FilterMatchState|keyof typeof google.cloud.modelarmor.v1beta.FilterMatchState);
+
+                    /** RaiFilterResult raiFilterTypeResults. */
+                    public raiFilterTypeResults: { [k: string]: google.cloud.modelarmor.v1beta.RaiFilterResult.IRaiFilterTypeResult };
+
+                    /**
+                     * Creates a new RaiFilterResult instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RaiFilterResult instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.IRaiFilterResult): google.cloud.modelarmor.v1beta.RaiFilterResult;
+
+                    /**
+                     * Encodes the specified RaiFilterResult message. Does not implicitly {@link google.cloud.modelarmor.v1beta.RaiFilterResult.verify|verify} messages.
+                     * @param message RaiFilterResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.IRaiFilterResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RaiFilterResult message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.RaiFilterResult.verify|verify} messages.
+                     * @param message RaiFilterResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.IRaiFilterResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RaiFilterResult message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RaiFilterResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.RaiFilterResult;
+
+                    /**
+                     * Decodes a RaiFilterResult message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RaiFilterResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.RaiFilterResult;
+
+                    /**
+                     * Verifies a RaiFilterResult message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RaiFilterResult message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RaiFilterResult
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.RaiFilterResult;
+
+                    /**
+                     * Creates a plain object from a RaiFilterResult message. Also converts values to other types if specified.
+                     * @param message RaiFilterResult
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.RaiFilterResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RaiFilterResult to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RaiFilterResult
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace RaiFilterResult {
+
+                    /** Properties of a RaiFilterTypeResult. */
+                    interface IRaiFilterTypeResult {
+
+                        /** RaiFilterTypeResult filterType */
+                        filterType?: (google.cloud.modelarmor.v1beta.RaiFilterType|keyof typeof google.cloud.modelarmor.v1beta.RaiFilterType|null);
+
+                        /** RaiFilterTypeResult confidenceLevel */
+                        confidenceLevel?: (google.cloud.modelarmor.v1beta.DetectionConfidenceLevel|keyof typeof google.cloud.modelarmor.v1beta.DetectionConfidenceLevel|null);
+
+                        /** RaiFilterTypeResult matchState */
+                        matchState?: (google.cloud.modelarmor.v1beta.FilterMatchState|keyof typeof google.cloud.modelarmor.v1beta.FilterMatchState|null);
+                    }
+
+                    /** Represents a RaiFilterTypeResult. */
+                    class RaiFilterTypeResult implements IRaiFilterTypeResult {
+
+                        /**
+                         * Constructs a new RaiFilterTypeResult.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.modelarmor.v1beta.RaiFilterResult.IRaiFilterTypeResult);
+
+                        /** RaiFilterTypeResult filterType. */
+                        public filterType: (google.cloud.modelarmor.v1beta.RaiFilterType|keyof typeof google.cloud.modelarmor.v1beta.RaiFilterType);
+
+                        /** RaiFilterTypeResult confidenceLevel. */
+                        public confidenceLevel: (google.cloud.modelarmor.v1beta.DetectionConfidenceLevel|keyof typeof google.cloud.modelarmor.v1beta.DetectionConfidenceLevel);
+
+                        /** RaiFilterTypeResult matchState. */
+                        public matchState: (google.cloud.modelarmor.v1beta.FilterMatchState|keyof typeof google.cloud.modelarmor.v1beta.FilterMatchState);
+
+                        /**
+                         * Creates a new RaiFilterTypeResult instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RaiFilterTypeResult instance
+                         */
+                        public static create(properties?: google.cloud.modelarmor.v1beta.RaiFilterResult.IRaiFilterTypeResult): google.cloud.modelarmor.v1beta.RaiFilterResult.RaiFilterTypeResult;
+
+                        /**
+                         * Encodes the specified RaiFilterTypeResult message. Does not implicitly {@link google.cloud.modelarmor.v1beta.RaiFilterResult.RaiFilterTypeResult.verify|verify} messages.
+                         * @param message RaiFilterTypeResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.modelarmor.v1beta.RaiFilterResult.IRaiFilterTypeResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RaiFilterTypeResult message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.RaiFilterResult.RaiFilterTypeResult.verify|verify} messages.
+                         * @param message RaiFilterTypeResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.modelarmor.v1beta.RaiFilterResult.IRaiFilterTypeResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RaiFilterTypeResult message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RaiFilterTypeResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.RaiFilterResult.RaiFilterTypeResult;
+
+                        /**
+                         * Decodes a RaiFilterTypeResult message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RaiFilterTypeResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.RaiFilterResult.RaiFilterTypeResult;
+
+                        /**
+                         * Verifies a RaiFilterTypeResult message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RaiFilterTypeResult message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RaiFilterTypeResult
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.RaiFilterResult.RaiFilterTypeResult;
+
+                        /**
+                         * Creates a plain object from a RaiFilterTypeResult message. Also converts values to other types if specified.
+                         * @param message RaiFilterTypeResult
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.modelarmor.v1beta.RaiFilterResult.RaiFilterTypeResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RaiFilterTypeResult to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RaiFilterTypeResult
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a SdpFilterResult. */
+                interface ISdpFilterResult {
+
+                    /** SdpFilterResult inspectResult */
+                    inspectResult?: (google.cloud.modelarmor.v1beta.ISdpInspectResult|null);
+
+                    /** SdpFilterResult deidentifyResult */
+                    deidentifyResult?: (google.cloud.modelarmor.v1beta.ISdpDeidentifyResult|null);
+                }
+
+                /** Represents a SdpFilterResult. */
+                class SdpFilterResult implements ISdpFilterResult {
+
+                    /**
+                     * Constructs a new SdpFilterResult.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.ISdpFilterResult);
+
+                    /** SdpFilterResult inspectResult. */
+                    public inspectResult?: (google.cloud.modelarmor.v1beta.ISdpInspectResult|null);
+
+                    /** SdpFilterResult deidentifyResult. */
+                    public deidentifyResult?: (google.cloud.modelarmor.v1beta.ISdpDeidentifyResult|null);
+
+                    /** SdpFilterResult result. */
+                    public result?: ("inspectResult"|"deidentifyResult");
+
+                    /**
+                     * Creates a new SdpFilterResult instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SdpFilterResult instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.ISdpFilterResult): google.cloud.modelarmor.v1beta.SdpFilterResult;
+
+                    /**
+                     * Encodes the specified SdpFilterResult message. Does not implicitly {@link google.cloud.modelarmor.v1beta.SdpFilterResult.verify|verify} messages.
+                     * @param message SdpFilterResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.ISdpFilterResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SdpFilterResult message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.SdpFilterResult.verify|verify} messages.
+                     * @param message SdpFilterResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.ISdpFilterResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SdpFilterResult message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SdpFilterResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.SdpFilterResult;
+
+                    /**
+                     * Decodes a SdpFilterResult message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SdpFilterResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.SdpFilterResult;
+
+                    /**
+                     * Verifies a SdpFilterResult message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SdpFilterResult message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SdpFilterResult
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.SdpFilterResult;
+
+                    /**
+                     * Creates a plain object from a SdpFilterResult message. Also converts values to other types if specified.
+                     * @param message SdpFilterResult
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.SdpFilterResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SdpFilterResult to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SdpFilterResult
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SdpInspectResult. */
+                interface ISdpInspectResult {
+
+                    /** SdpInspectResult executionState */
+                    executionState?: (google.cloud.modelarmor.v1beta.FilterExecutionState|keyof typeof google.cloud.modelarmor.v1beta.FilterExecutionState|null);
+
+                    /** SdpInspectResult messageItems */
+                    messageItems?: (google.cloud.modelarmor.v1beta.IMessageItem[]|null);
+
+                    /** SdpInspectResult matchState */
+                    matchState?: (google.cloud.modelarmor.v1beta.FilterMatchState|keyof typeof google.cloud.modelarmor.v1beta.FilterMatchState|null);
+
+                    /** SdpInspectResult findings */
+                    findings?: (google.cloud.modelarmor.v1beta.ISdpFinding[]|null);
+
+                    /** SdpInspectResult findingsTruncated */
+                    findingsTruncated?: (boolean|null);
+                }
+
+                /** Represents a SdpInspectResult. */
+                class SdpInspectResult implements ISdpInspectResult {
+
+                    /**
+                     * Constructs a new SdpInspectResult.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.ISdpInspectResult);
+
+                    /** SdpInspectResult executionState. */
+                    public executionState: (google.cloud.modelarmor.v1beta.FilterExecutionState|keyof typeof google.cloud.modelarmor.v1beta.FilterExecutionState);
+
+                    /** SdpInspectResult messageItems. */
+                    public messageItems: google.cloud.modelarmor.v1beta.IMessageItem[];
+
+                    /** SdpInspectResult matchState. */
+                    public matchState: (google.cloud.modelarmor.v1beta.FilterMatchState|keyof typeof google.cloud.modelarmor.v1beta.FilterMatchState);
+
+                    /** SdpInspectResult findings. */
+                    public findings: google.cloud.modelarmor.v1beta.ISdpFinding[];
+
+                    /** SdpInspectResult findingsTruncated. */
+                    public findingsTruncated: boolean;
+
+                    /**
+                     * Creates a new SdpInspectResult instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SdpInspectResult instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.ISdpInspectResult): google.cloud.modelarmor.v1beta.SdpInspectResult;
+
+                    /**
+                     * Encodes the specified SdpInspectResult message. Does not implicitly {@link google.cloud.modelarmor.v1beta.SdpInspectResult.verify|verify} messages.
+                     * @param message SdpInspectResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.ISdpInspectResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SdpInspectResult message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.SdpInspectResult.verify|verify} messages.
+                     * @param message SdpInspectResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.ISdpInspectResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SdpInspectResult message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SdpInspectResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.SdpInspectResult;
+
+                    /**
+                     * Decodes a SdpInspectResult message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SdpInspectResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.SdpInspectResult;
+
+                    /**
+                     * Verifies a SdpInspectResult message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SdpInspectResult message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SdpInspectResult
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.SdpInspectResult;
+
+                    /**
+                     * Creates a plain object from a SdpInspectResult message. Also converts values to other types if specified.
+                     * @param message SdpInspectResult
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.SdpInspectResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SdpInspectResult to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SdpInspectResult
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DataItem. */
+                interface IDataItem {
+
+                    /** DataItem text */
+                    text?: (string|null);
+
+                    /** DataItem byteItem */
+                    byteItem?: (google.cloud.modelarmor.v1beta.IByteDataItem|null);
+                }
+
+                /** Represents a DataItem. */
+                class DataItem implements IDataItem {
+
+                    /**
+                     * Constructs a new DataItem.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.IDataItem);
+
+                    /** DataItem text. */
+                    public text?: (string|null);
+
+                    /** DataItem byteItem. */
+                    public byteItem?: (google.cloud.modelarmor.v1beta.IByteDataItem|null);
+
+                    /** DataItem dataItem. */
+                    public dataItem?: ("text"|"byteItem");
+
+                    /**
+                     * Creates a new DataItem instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataItem instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.IDataItem): google.cloud.modelarmor.v1beta.DataItem;
+
+                    /**
+                     * Encodes the specified DataItem message. Does not implicitly {@link google.cloud.modelarmor.v1beta.DataItem.verify|verify} messages.
+                     * @param message DataItem message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.IDataItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataItem message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.DataItem.verify|verify} messages.
+                     * @param message DataItem message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.IDataItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataItem message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataItem
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.DataItem;
+
+                    /**
+                     * Decodes a DataItem message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataItem
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.DataItem;
+
+                    /**
+                     * Verifies a DataItem message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataItem message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataItem
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.DataItem;
+
+                    /**
+                     * Creates a plain object from a DataItem message. Also converts values to other types if specified.
+                     * @param message DataItem
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.DataItem, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataItem to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DataItem
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ByteDataItem. */
+                interface IByteDataItem {
+
+                    /** ByteDataItem byteDataType */
+                    byteDataType?: (google.cloud.modelarmor.v1beta.ByteDataItem.ByteItemType|keyof typeof google.cloud.modelarmor.v1beta.ByteDataItem.ByteItemType|null);
+
+                    /** ByteDataItem byteData */
+                    byteData?: (Uint8Array|string|null);
+                }
+
+                /** Represents a ByteDataItem. */
+                class ByteDataItem implements IByteDataItem {
+
+                    /**
+                     * Constructs a new ByteDataItem.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.IByteDataItem);
+
+                    /** ByteDataItem byteDataType. */
+                    public byteDataType: (google.cloud.modelarmor.v1beta.ByteDataItem.ByteItemType|keyof typeof google.cloud.modelarmor.v1beta.ByteDataItem.ByteItemType);
+
+                    /** ByteDataItem byteData. */
+                    public byteData: (Uint8Array|string);
+
+                    /**
+                     * Creates a new ByteDataItem instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ByteDataItem instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.IByteDataItem): google.cloud.modelarmor.v1beta.ByteDataItem;
+
+                    /**
+                     * Encodes the specified ByteDataItem message. Does not implicitly {@link google.cloud.modelarmor.v1beta.ByteDataItem.verify|verify} messages.
+                     * @param message ByteDataItem message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.IByteDataItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ByteDataItem message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.ByteDataItem.verify|verify} messages.
+                     * @param message ByteDataItem message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.IByteDataItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ByteDataItem message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ByteDataItem
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.ByteDataItem;
+
+                    /**
+                     * Decodes a ByteDataItem message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ByteDataItem
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.ByteDataItem;
+
+                    /**
+                     * Verifies a ByteDataItem message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ByteDataItem message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ByteDataItem
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.ByteDataItem;
+
+                    /**
+                     * Creates a plain object from a ByteDataItem message. Also converts values to other types if specified.
+                     * @param message ByteDataItem
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.ByteDataItem, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ByteDataItem to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ByteDataItem
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ByteDataItem {
+
+                    /** ByteItemType enum. */
+                    enum ByteItemType {
+                        BYTE_ITEM_TYPE_UNSPECIFIED = 0,
+                        PLAINTEXT_UTF8 = 1,
+                        PDF = 2,
+                        WORD_DOCUMENT = 3,
+                        EXCEL_DOCUMENT = 4,
+                        POWERPOINT_DOCUMENT = 5,
+                        TXT = 6,
+                        CSV = 7
+                    }
+                }
+
+                /** Properties of a SdpDeidentifyResult. */
+                interface ISdpDeidentifyResult {
+
+                    /** SdpDeidentifyResult executionState */
+                    executionState?: (google.cloud.modelarmor.v1beta.FilterExecutionState|keyof typeof google.cloud.modelarmor.v1beta.FilterExecutionState|null);
+
+                    /** SdpDeidentifyResult messageItems */
+                    messageItems?: (google.cloud.modelarmor.v1beta.IMessageItem[]|null);
+
+                    /** SdpDeidentifyResult matchState */
+                    matchState?: (google.cloud.modelarmor.v1beta.FilterMatchState|keyof typeof google.cloud.modelarmor.v1beta.FilterMatchState|null);
+
+                    /** SdpDeidentifyResult data */
+                    data?: (google.cloud.modelarmor.v1beta.IDataItem|null);
+
+                    /** SdpDeidentifyResult transformedBytes */
+                    transformedBytes?: (number|Long|string|null);
+
+                    /** SdpDeidentifyResult infoTypes */
+                    infoTypes?: (string[]|null);
+                }
+
+                /** Represents a SdpDeidentifyResult. */
+                class SdpDeidentifyResult implements ISdpDeidentifyResult {
+
+                    /**
+                     * Constructs a new SdpDeidentifyResult.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.ISdpDeidentifyResult);
+
+                    /** SdpDeidentifyResult executionState. */
+                    public executionState: (google.cloud.modelarmor.v1beta.FilterExecutionState|keyof typeof google.cloud.modelarmor.v1beta.FilterExecutionState);
+
+                    /** SdpDeidentifyResult messageItems. */
+                    public messageItems: google.cloud.modelarmor.v1beta.IMessageItem[];
+
+                    /** SdpDeidentifyResult matchState. */
+                    public matchState: (google.cloud.modelarmor.v1beta.FilterMatchState|keyof typeof google.cloud.modelarmor.v1beta.FilterMatchState);
+
+                    /** SdpDeidentifyResult data. */
+                    public data?: (google.cloud.modelarmor.v1beta.IDataItem|null);
+
+                    /** SdpDeidentifyResult transformedBytes. */
+                    public transformedBytes: (number|Long|string);
+
+                    /** SdpDeidentifyResult infoTypes. */
+                    public infoTypes: string[];
+
+                    /**
+                     * Creates a new SdpDeidentifyResult instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SdpDeidentifyResult instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.ISdpDeidentifyResult): google.cloud.modelarmor.v1beta.SdpDeidentifyResult;
+
+                    /**
+                     * Encodes the specified SdpDeidentifyResult message. Does not implicitly {@link google.cloud.modelarmor.v1beta.SdpDeidentifyResult.verify|verify} messages.
+                     * @param message SdpDeidentifyResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.ISdpDeidentifyResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SdpDeidentifyResult message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.SdpDeidentifyResult.verify|verify} messages.
+                     * @param message SdpDeidentifyResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.ISdpDeidentifyResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SdpDeidentifyResult message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SdpDeidentifyResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.SdpDeidentifyResult;
+
+                    /**
+                     * Decodes a SdpDeidentifyResult message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SdpDeidentifyResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.SdpDeidentifyResult;
+
+                    /**
+                     * Verifies a SdpDeidentifyResult message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SdpDeidentifyResult message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SdpDeidentifyResult
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.SdpDeidentifyResult;
+
+                    /**
+                     * Creates a plain object from a SdpDeidentifyResult message. Also converts values to other types if specified.
+                     * @param message SdpDeidentifyResult
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.SdpDeidentifyResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SdpDeidentifyResult to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SdpDeidentifyResult
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SdpFinding. */
+                interface ISdpFinding {
+
+                    /** SdpFinding infoType */
+                    infoType?: (string|null);
+
+                    /** SdpFinding likelihood */
+                    likelihood?: (google.cloud.modelarmor.v1beta.SdpFindingLikelihood|keyof typeof google.cloud.modelarmor.v1beta.SdpFindingLikelihood|null);
+
+                    /** SdpFinding location */
+                    location?: (google.cloud.modelarmor.v1beta.SdpFinding.ISdpFindingLocation|null);
+                }
+
+                /** Represents a SdpFinding. */
+                class SdpFinding implements ISdpFinding {
+
+                    /**
+                     * Constructs a new SdpFinding.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.ISdpFinding);
+
+                    /** SdpFinding infoType. */
+                    public infoType: string;
+
+                    /** SdpFinding likelihood. */
+                    public likelihood: (google.cloud.modelarmor.v1beta.SdpFindingLikelihood|keyof typeof google.cloud.modelarmor.v1beta.SdpFindingLikelihood);
+
+                    /** SdpFinding location. */
+                    public location?: (google.cloud.modelarmor.v1beta.SdpFinding.ISdpFindingLocation|null);
+
+                    /**
+                     * Creates a new SdpFinding instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SdpFinding instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.ISdpFinding): google.cloud.modelarmor.v1beta.SdpFinding;
+
+                    /**
+                     * Encodes the specified SdpFinding message. Does not implicitly {@link google.cloud.modelarmor.v1beta.SdpFinding.verify|verify} messages.
+                     * @param message SdpFinding message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.ISdpFinding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SdpFinding message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.SdpFinding.verify|verify} messages.
+                     * @param message SdpFinding message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.ISdpFinding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SdpFinding message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SdpFinding
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.SdpFinding;
+
+                    /**
+                     * Decodes a SdpFinding message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SdpFinding
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.SdpFinding;
+
+                    /**
+                     * Verifies a SdpFinding message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SdpFinding message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SdpFinding
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.SdpFinding;
+
+                    /**
+                     * Creates a plain object from a SdpFinding message. Also converts values to other types if specified.
+                     * @param message SdpFinding
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.SdpFinding, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SdpFinding to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SdpFinding
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SdpFinding {
+
+                    /** Properties of a SdpFindingLocation. */
+                    interface ISdpFindingLocation {
+
+                        /** SdpFindingLocation byteRange */
+                        byteRange?: (google.cloud.modelarmor.v1beta.IRangeInfo|null);
+
+                        /** SdpFindingLocation codepointRange */
+                        codepointRange?: (google.cloud.modelarmor.v1beta.IRangeInfo|null);
+                    }
+
+                    /** Represents a SdpFindingLocation. */
+                    class SdpFindingLocation implements ISdpFindingLocation {
+
+                        /**
+                         * Constructs a new SdpFindingLocation.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.modelarmor.v1beta.SdpFinding.ISdpFindingLocation);
+
+                        /** SdpFindingLocation byteRange. */
+                        public byteRange?: (google.cloud.modelarmor.v1beta.IRangeInfo|null);
+
+                        /** SdpFindingLocation codepointRange. */
+                        public codepointRange?: (google.cloud.modelarmor.v1beta.IRangeInfo|null);
+
+                        /**
+                         * Creates a new SdpFindingLocation instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SdpFindingLocation instance
+                         */
+                        public static create(properties?: google.cloud.modelarmor.v1beta.SdpFinding.ISdpFindingLocation): google.cloud.modelarmor.v1beta.SdpFinding.SdpFindingLocation;
+
+                        /**
+                         * Encodes the specified SdpFindingLocation message. Does not implicitly {@link google.cloud.modelarmor.v1beta.SdpFinding.SdpFindingLocation.verify|verify} messages.
+                         * @param message SdpFindingLocation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.modelarmor.v1beta.SdpFinding.ISdpFindingLocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SdpFindingLocation message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.SdpFinding.SdpFindingLocation.verify|verify} messages.
+                         * @param message SdpFindingLocation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.modelarmor.v1beta.SdpFinding.ISdpFindingLocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SdpFindingLocation message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SdpFindingLocation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.SdpFinding.SdpFindingLocation;
+
+                        /**
+                         * Decodes a SdpFindingLocation message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SdpFindingLocation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.SdpFinding.SdpFindingLocation;
+
+                        /**
+                         * Verifies a SdpFindingLocation message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SdpFindingLocation message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SdpFindingLocation
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.SdpFinding.SdpFindingLocation;
+
+                        /**
+                         * Creates a plain object from a SdpFindingLocation message. Also converts values to other types if specified.
+                         * @param message SdpFindingLocation
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.modelarmor.v1beta.SdpFinding.SdpFindingLocation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SdpFindingLocation to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SdpFindingLocation
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a PiAndJailbreakFilterResult. */
+                interface IPiAndJailbreakFilterResult {
+
+                    /** PiAndJailbreakFilterResult executionState */
+                    executionState?: (google.cloud.modelarmor.v1beta.FilterExecutionState|keyof typeof google.cloud.modelarmor.v1beta.FilterExecutionState|null);
+
+                    /** PiAndJailbreakFilterResult messageItems */
+                    messageItems?: (google.cloud.modelarmor.v1beta.IMessageItem[]|null);
+
+                    /** PiAndJailbreakFilterResult matchState */
+                    matchState?: (google.cloud.modelarmor.v1beta.FilterMatchState|keyof typeof google.cloud.modelarmor.v1beta.FilterMatchState|null);
+
+                    /** PiAndJailbreakFilterResult confidenceLevel */
+                    confidenceLevel?: (google.cloud.modelarmor.v1beta.DetectionConfidenceLevel|keyof typeof google.cloud.modelarmor.v1beta.DetectionConfidenceLevel|null);
+                }
+
+                /** Represents a PiAndJailbreakFilterResult. */
+                class PiAndJailbreakFilterResult implements IPiAndJailbreakFilterResult {
+
+                    /**
+                     * Constructs a new PiAndJailbreakFilterResult.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.IPiAndJailbreakFilterResult);
+
+                    /** PiAndJailbreakFilterResult executionState. */
+                    public executionState: (google.cloud.modelarmor.v1beta.FilterExecutionState|keyof typeof google.cloud.modelarmor.v1beta.FilterExecutionState);
+
+                    /** PiAndJailbreakFilterResult messageItems. */
+                    public messageItems: google.cloud.modelarmor.v1beta.IMessageItem[];
+
+                    /** PiAndJailbreakFilterResult matchState. */
+                    public matchState: (google.cloud.modelarmor.v1beta.FilterMatchState|keyof typeof google.cloud.modelarmor.v1beta.FilterMatchState);
+
+                    /** PiAndJailbreakFilterResult confidenceLevel. */
+                    public confidenceLevel: (google.cloud.modelarmor.v1beta.DetectionConfidenceLevel|keyof typeof google.cloud.modelarmor.v1beta.DetectionConfidenceLevel);
+
+                    /**
+                     * Creates a new PiAndJailbreakFilterResult instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PiAndJailbreakFilterResult instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.IPiAndJailbreakFilterResult): google.cloud.modelarmor.v1beta.PiAndJailbreakFilterResult;
+
+                    /**
+                     * Encodes the specified PiAndJailbreakFilterResult message. Does not implicitly {@link google.cloud.modelarmor.v1beta.PiAndJailbreakFilterResult.verify|verify} messages.
+                     * @param message PiAndJailbreakFilterResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.IPiAndJailbreakFilterResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PiAndJailbreakFilterResult message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.PiAndJailbreakFilterResult.verify|verify} messages.
+                     * @param message PiAndJailbreakFilterResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.IPiAndJailbreakFilterResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PiAndJailbreakFilterResult message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PiAndJailbreakFilterResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.PiAndJailbreakFilterResult;
+
+                    /**
+                     * Decodes a PiAndJailbreakFilterResult message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PiAndJailbreakFilterResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.PiAndJailbreakFilterResult;
+
+                    /**
+                     * Verifies a PiAndJailbreakFilterResult message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PiAndJailbreakFilterResult message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PiAndJailbreakFilterResult
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.PiAndJailbreakFilterResult;
+
+                    /**
+                     * Creates a plain object from a PiAndJailbreakFilterResult message. Also converts values to other types if specified.
+                     * @param message PiAndJailbreakFilterResult
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.PiAndJailbreakFilterResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PiAndJailbreakFilterResult to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PiAndJailbreakFilterResult
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a MaliciousUriFilterResult. */
+                interface IMaliciousUriFilterResult {
+
+                    /** MaliciousUriFilterResult executionState */
+                    executionState?: (google.cloud.modelarmor.v1beta.FilterExecutionState|keyof typeof google.cloud.modelarmor.v1beta.FilterExecutionState|null);
+
+                    /** MaliciousUriFilterResult messageItems */
+                    messageItems?: (google.cloud.modelarmor.v1beta.IMessageItem[]|null);
+
+                    /** MaliciousUriFilterResult matchState */
+                    matchState?: (google.cloud.modelarmor.v1beta.FilterMatchState|keyof typeof google.cloud.modelarmor.v1beta.FilterMatchState|null);
+
+                    /** MaliciousUriFilterResult maliciousUriMatchedItems */
+                    maliciousUriMatchedItems?: (google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.IMaliciousUriMatchedItem[]|null);
+                }
+
+                /** Represents a MaliciousUriFilterResult. */
+                class MaliciousUriFilterResult implements IMaliciousUriFilterResult {
+
+                    /**
+                     * Constructs a new MaliciousUriFilterResult.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.IMaliciousUriFilterResult);
+
+                    /** MaliciousUriFilterResult executionState. */
+                    public executionState: (google.cloud.modelarmor.v1beta.FilterExecutionState|keyof typeof google.cloud.modelarmor.v1beta.FilterExecutionState);
+
+                    /** MaliciousUriFilterResult messageItems. */
+                    public messageItems: google.cloud.modelarmor.v1beta.IMessageItem[];
+
+                    /** MaliciousUriFilterResult matchState. */
+                    public matchState: (google.cloud.modelarmor.v1beta.FilterMatchState|keyof typeof google.cloud.modelarmor.v1beta.FilterMatchState);
+
+                    /** MaliciousUriFilterResult maliciousUriMatchedItems. */
+                    public maliciousUriMatchedItems: google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.IMaliciousUriMatchedItem[];
+
+                    /**
+                     * Creates a new MaliciousUriFilterResult instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MaliciousUriFilterResult instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.IMaliciousUriFilterResult): google.cloud.modelarmor.v1beta.MaliciousUriFilterResult;
+
+                    /**
+                     * Encodes the specified MaliciousUriFilterResult message. Does not implicitly {@link google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.verify|verify} messages.
+                     * @param message MaliciousUriFilterResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.IMaliciousUriFilterResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MaliciousUriFilterResult message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.verify|verify} messages.
+                     * @param message MaliciousUriFilterResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.IMaliciousUriFilterResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MaliciousUriFilterResult message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MaliciousUriFilterResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.MaliciousUriFilterResult;
+
+                    /**
+                     * Decodes a MaliciousUriFilterResult message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MaliciousUriFilterResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.MaliciousUriFilterResult;
+
+                    /**
+                     * Verifies a MaliciousUriFilterResult message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MaliciousUriFilterResult message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MaliciousUriFilterResult
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.MaliciousUriFilterResult;
+
+                    /**
+                     * Creates a plain object from a MaliciousUriFilterResult message. Also converts values to other types if specified.
+                     * @param message MaliciousUriFilterResult
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.MaliciousUriFilterResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MaliciousUriFilterResult to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MaliciousUriFilterResult
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace MaliciousUriFilterResult {
+
+                    /** Properties of a MaliciousUriMatchedItem. */
+                    interface IMaliciousUriMatchedItem {
+
+                        /** MaliciousUriMatchedItem uri */
+                        uri?: (string|null);
+
+                        /** MaliciousUriMatchedItem locations */
+                        locations?: (google.cloud.modelarmor.v1beta.IRangeInfo[]|null);
+                    }
+
+                    /** Represents a MaliciousUriMatchedItem. */
+                    class MaliciousUriMatchedItem implements IMaliciousUriMatchedItem {
+
+                        /**
+                         * Constructs a new MaliciousUriMatchedItem.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.IMaliciousUriMatchedItem);
+
+                        /** MaliciousUriMatchedItem uri. */
+                        public uri: string;
+
+                        /** MaliciousUriMatchedItem locations. */
+                        public locations: google.cloud.modelarmor.v1beta.IRangeInfo[];
+
+                        /**
+                         * Creates a new MaliciousUriMatchedItem instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MaliciousUriMatchedItem instance
+                         */
+                        public static create(properties?: google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.IMaliciousUriMatchedItem): google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.MaliciousUriMatchedItem;
+
+                        /**
+                         * Encodes the specified MaliciousUriMatchedItem message. Does not implicitly {@link google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.MaliciousUriMatchedItem.verify|verify} messages.
+                         * @param message MaliciousUriMatchedItem message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.IMaliciousUriMatchedItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MaliciousUriMatchedItem message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.MaliciousUriMatchedItem.verify|verify} messages.
+                         * @param message MaliciousUriMatchedItem message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.IMaliciousUriMatchedItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MaliciousUriMatchedItem message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MaliciousUriMatchedItem
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.MaliciousUriMatchedItem;
+
+                        /**
+                         * Decodes a MaliciousUriMatchedItem message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MaliciousUriMatchedItem
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.MaliciousUriMatchedItem;
+
+                        /**
+                         * Verifies a MaliciousUriMatchedItem message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MaliciousUriMatchedItem message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MaliciousUriMatchedItem
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.MaliciousUriMatchedItem;
+
+                        /**
+                         * Creates a plain object from a MaliciousUriMatchedItem message. Also converts values to other types if specified.
+                         * @param message MaliciousUriMatchedItem
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.MaliciousUriMatchedItem, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MaliciousUriMatchedItem to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MaliciousUriMatchedItem
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a VirusScanFilterResult. */
+                interface IVirusScanFilterResult {
+
+                    /** VirusScanFilterResult executionState */
+                    executionState?: (google.cloud.modelarmor.v1beta.FilterExecutionState|keyof typeof google.cloud.modelarmor.v1beta.FilterExecutionState|null);
+
+                    /** VirusScanFilterResult messageItems */
+                    messageItems?: (google.cloud.modelarmor.v1beta.IMessageItem[]|null);
+
+                    /** VirusScanFilterResult matchState */
+                    matchState?: (google.cloud.modelarmor.v1beta.FilterMatchState|keyof typeof google.cloud.modelarmor.v1beta.FilterMatchState|null);
+
+                    /** VirusScanFilterResult scannedContentType */
+                    scannedContentType?: (google.cloud.modelarmor.v1beta.VirusScanFilterResult.ScannedContentType|keyof typeof google.cloud.modelarmor.v1beta.VirusScanFilterResult.ScannedContentType|null);
+
+                    /** VirusScanFilterResult scannedSize */
+                    scannedSize?: (number|Long|string|null);
+
+                    /** VirusScanFilterResult virusDetails */
+                    virusDetails?: (google.cloud.modelarmor.v1beta.IVirusDetail[]|null);
+                }
+
+                /** Represents a VirusScanFilterResult. */
+                class VirusScanFilterResult implements IVirusScanFilterResult {
+
+                    /**
+                     * Constructs a new VirusScanFilterResult.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.IVirusScanFilterResult);
+
+                    /** VirusScanFilterResult executionState. */
+                    public executionState: (google.cloud.modelarmor.v1beta.FilterExecutionState|keyof typeof google.cloud.modelarmor.v1beta.FilterExecutionState);
+
+                    /** VirusScanFilterResult messageItems. */
+                    public messageItems: google.cloud.modelarmor.v1beta.IMessageItem[];
+
+                    /** VirusScanFilterResult matchState. */
+                    public matchState: (google.cloud.modelarmor.v1beta.FilterMatchState|keyof typeof google.cloud.modelarmor.v1beta.FilterMatchState);
+
+                    /** VirusScanFilterResult scannedContentType. */
+                    public scannedContentType: (google.cloud.modelarmor.v1beta.VirusScanFilterResult.ScannedContentType|keyof typeof google.cloud.modelarmor.v1beta.VirusScanFilterResult.ScannedContentType);
+
+                    /** VirusScanFilterResult scannedSize. */
+                    public scannedSize?: (number|Long|string|null);
+
+                    /** VirusScanFilterResult virusDetails. */
+                    public virusDetails: google.cloud.modelarmor.v1beta.IVirusDetail[];
+
+                    /** VirusScanFilterResult _scannedSize. */
+                    public _scannedSize?: "scannedSize";
+
+                    /**
+                     * Creates a new VirusScanFilterResult instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VirusScanFilterResult instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.IVirusScanFilterResult): google.cloud.modelarmor.v1beta.VirusScanFilterResult;
+
+                    /**
+                     * Encodes the specified VirusScanFilterResult message. Does not implicitly {@link google.cloud.modelarmor.v1beta.VirusScanFilterResult.verify|verify} messages.
+                     * @param message VirusScanFilterResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.IVirusScanFilterResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VirusScanFilterResult message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.VirusScanFilterResult.verify|verify} messages.
+                     * @param message VirusScanFilterResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.IVirusScanFilterResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VirusScanFilterResult message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VirusScanFilterResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.VirusScanFilterResult;
+
+                    /**
+                     * Decodes a VirusScanFilterResult message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VirusScanFilterResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.VirusScanFilterResult;
+
+                    /**
+                     * Verifies a VirusScanFilterResult message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VirusScanFilterResult message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VirusScanFilterResult
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.VirusScanFilterResult;
+
+                    /**
+                     * Creates a plain object from a VirusScanFilterResult message. Also converts values to other types if specified.
+                     * @param message VirusScanFilterResult
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.VirusScanFilterResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VirusScanFilterResult to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VirusScanFilterResult
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace VirusScanFilterResult {
+
+                    /** ScannedContentType enum. */
+                    enum ScannedContentType {
+                        SCANNED_CONTENT_TYPE_UNSPECIFIED = 0,
+                        UNKNOWN = 1,
+                        PLAINTEXT = 2,
+                        PDF = 3
+                    }
+                }
+
+                /** Properties of a VirusDetail. */
+                interface IVirusDetail {
+
+                    /** VirusDetail vendor */
+                    vendor?: (string|null);
+
+                    /** VirusDetail names */
+                    names?: (string[]|null);
+
+                    /** VirusDetail threatType */
+                    threatType?: (google.cloud.modelarmor.v1beta.VirusDetail.ThreatType|keyof typeof google.cloud.modelarmor.v1beta.VirusDetail.ThreatType|null);
+                }
+
+                /** Represents a VirusDetail. */
+                class VirusDetail implements IVirusDetail {
+
+                    /**
+                     * Constructs a new VirusDetail.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.IVirusDetail);
+
+                    /** VirusDetail vendor. */
+                    public vendor: string;
+
+                    /** VirusDetail names. */
+                    public names: string[];
+
+                    /** VirusDetail threatType. */
+                    public threatType: (google.cloud.modelarmor.v1beta.VirusDetail.ThreatType|keyof typeof google.cloud.modelarmor.v1beta.VirusDetail.ThreatType);
+
+                    /**
+                     * Creates a new VirusDetail instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VirusDetail instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.IVirusDetail): google.cloud.modelarmor.v1beta.VirusDetail;
+
+                    /**
+                     * Encodes the specified VirusDetail message. Does not implicitly {@link google.cloud.modelarmor.v1beta.VirusDetail.verify|verify} messages.
+                     * @param message VirusDetail message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.IVirusDetail, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VirusDetail message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.VirusDetail.verify|verify} messages.
+                     * @param message VirusDetail message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.IVirusDetail, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VirusDetail message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VirusDetail
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.VirusDetail;
+
+                    /**
+                     * Decodes a VirusDetail message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VirusDetail
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.VirusDetail;
+
+                    /**
+                     * Verifies a VirusDetail message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VirusDetail message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VirusDetail
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.VirusDetail;
+
+                    /**
+                     * Creates a plain object from a VirusDetail message. Also converts values to other types if specified.
+                     * @param message VirusDetail
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.VirusDetail, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VirusDetail to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VirusDetail
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace VirusDetail {
+
+                    /** ThreatType enum. */
+                    enum ThreatType {
+                        THREAT_TYPE_UNSPECIFIED = 0,
+                        UNKNOWN = 1,
+                        VIRUS_OR_WORM = 2,
+                        MALICIOUS_PROGRAM = 3,
+                        POTENTIALLY_HARMFUL_CONTENT = 4,
+                        POTENTIALLY_UNWANTED_CONTENT = 5
+                    }
+                }
+
+                /** Properties of a CsamFilterResult. */
+                interface ICsamFilterResult {
+
+                    /** CsamFilterResult executionState */
+                    executionState?: (google.cloud.modelarmor.v1beta.FilterExecutionState|keyof typeof google.cloud.modelarmor.v1beta.FilterExecutionState|null);
+
+                    /** CsamFilterResult messageItems */
+                    messageItems?: (google.cloud.modelarmor.v1beta.IMessageItem[]|null);
+
+                    /** CsamFilterResult matchState */
+                    matchState?: (google.cloud.modelarmor.v1beta.FilterMatchState|keyof typeof google.cloud.modelarmor.v1beta.FilterMatchState|null);
+                }
+
+                /** Represents a CsamFilterResult. */
+                class CsamFilterResult implements ICsamFilterResult {
+
+                    /**
+                     * Constructs a new CsamFilterResult.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.ICsamFilterResult);
+
+                    /** CsamFilterResult executionState. */
+                    public executionState: (google.cloud.modelarmor.v1beta.FilterExecutionState|keyof typeof google.cloud.modelarmor.v1beta.FilterExecutionState);
+
+                    /** CsamFilterResult messageItems. */
+                    public messageItems: google.cloud.modelarmor.v1beta.IMessageItem[];
+
+                    /** CsamFilterResult matchState. */
+                    public matchState: (google.cloud.modelarmor.v1beta.FilterMatchState|keyof typeof google.cloud.modelarmor.v1beta.FilterMatchState);
+
+                    /**
+                     * Creates a new CsamFilterResult instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CsamFilterResult instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.ICsamFilterResult): google.cloud.modelarmor.v1beta.CsamFilterResult;
+
+                    /**
+                     * Encodes the specified CsamFilterResult message. Does not implicitly {@link google.cloud.modelarmor.v1beta.CsamFilterResult.verify|verify} messages.
+                     * @param message CsamFilterResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.ICsamFilterResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CsamFilterResult message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.CsamFilterResult.verify|verify} messages.
+                     * @param message CsamFilterResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.ICsamFilterResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CsamFilterResult message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CsamFilterResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.CsamFilterResult;
+
+                    /**
+                     * Decodes a CsamFilterResult message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CsamFilterResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.CsamFilterResult;
+
+                    /**
+                     * Verifies a CsamFilterResult message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CsamFilterResult message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CsamFilterResult
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.CsamFilterResult;
+
+                    /**
+                     * Creates a plain object from a CsamFilterResult message. Also converts values to other types if specified.
+                     * @param message CsamFilterResult
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.CsamFilterResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CsamFilterResult to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CsamFilterResult
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a MessageItem. */
+                interface IMessageItem {
+
+                    /** MessageItem messageType */
+                    messageType?: (google.cloud.modelarmor.v1beta.MessageItem.MessageType|keyof typeof google.cloud.modelarmor.v1beta.MessageItem.MessageType|null);
+
+                    /** MessageItem message */
+                    message?: (string|null);
+                }
+
+                /** Represents a MessageItem. */
+                class MessageItem implements IMessageItem {
+
+                    /**
+                     * Constructs a new MessageItem.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.IMessageItem);
+
+                    /** MessageItem messageType. */
+                    public messageType: (google.cloud.modelarmor.v1beta.MessageItem.MessageType|keyof typeof google.cloud.modelarmor.v1beta.MessageItem.MessageType);
+
+                    /** MessageItem message. */
+                    public message: string;
+
+                    /**
+                     * Creates a new MessageItem instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MessageItem instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.IMessageItem): google.cloud.modelarmor.v1beta.MessageItem;
+
+                    /**
+                     * Encodes the specified MessageItem message. Does not implicitly {@link google.cloud.modelarmor.v1beta.MessageItem.verify|verify} messages.
+                     * @param message MessageItem message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.IMessageItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MessageItem message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.MessageItem.verify|verify} messages.
+                     * @param message MessageItem message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.IMessageItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MessageItem message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MessageItem
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.MessageItem;
+
+                    /**
+                     * Decodes a MessageItem message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MessageItem
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.MessageItem;
+
+                    /**
+                     * Verifies a MessageItem message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MessageItem message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MessageItem
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.MessageItem;
+
+                    /**
+                     * Creates a plain object from a MessageItem message. Also converts values to other types if specified.
+                     * @param message MessageItem
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.MessageItem, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MessageItem to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MessageItem
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace MessageItem {
+
+                    /** MessageType enum. */
+                    enum MessageType {
+                        MESSAGE_TYPE_UNSPECIFIED = 0,
+                        INFO = 1,
+                        WARNING = 2,
+                        ERROR = 3
+                    }
+                }
+
+                /** Properties of a RangeInfo. */
+                interface IRangeInfo {
+
+                    /** RangeInfo start */
+                    start?: (number|Long|string|null);
+
+                    /** RangeInfo end */
+                    end?: (number|Long|string|null);
+                }
+
+                /** Represents a RangeInfo. */
+                class RangeInfo implements IRangeInfo {
+
+                    /**
+                     * Constructs a new RangeInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.IRangeInfo);
+
+                    /** RangeInfo start. */
+                    public start?: (number|Long|string|null);
+
+                    /** RangeInfo end. */
+                    public end?: (number|Long|string|null);
+
+                    /** RangeInfo _start. */
+                    public _start?: "start";
+
+                    /** RangeInfo _end. */
+                    public _end?: "end";
+
+                    /**
+                     * Creates a new RangeInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RangeInfo instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.IRangeInfo): google.cloud.modelarmor.v1beta.RangeInfo;
+
+                    /**
+                     * Encodes the specified RangeInfo message. Does not implicitly {@link google.cloud.modelarmor.v1beta.RangeInfo.verify|verify} messages.
+                     * @param message RangeInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.IRangeInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RangeInfo message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.RangeInfo.verify|verify} messages.
+                     * @param message RangeInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.IRangeInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RangeInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RangeInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.RangeInfo;
+
+                    /**
+                     * Decodes a RangeInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RangeInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.RangeInfo;
+
+                    /**
+                     * Verifies a RangeInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RangeInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RangeInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.RangeInfo;
+
+                    /**
+                     * Creates a plain object from a RangeInfo message. Also converts values to other types if specified.
+                     * @param message RangeInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.RangeInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RangeInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RangeInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+            }
         }
     }
 

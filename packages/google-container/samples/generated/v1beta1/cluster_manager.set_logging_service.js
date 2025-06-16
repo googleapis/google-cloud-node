@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(projectId, zone, clusterId, loggingService) {
+function main(loggingService) {
   // [START container_v1beta1_generated_ClusterManager_SetLoggingService_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -55,9 +55,6 @@ function main(projectId, zone, clusterId, loggingService) {
   async function callSetLoggingService() {
     // Construct request
     const request = {
-      projectId,
-      zone,
-      clusterId,
       loggingService,
     };
 

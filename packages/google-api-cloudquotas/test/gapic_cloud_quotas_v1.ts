@@ -29,2134 +29,1546 @@ import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.CloudQuotasClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new cloudquotasModule.v1.CloudQuotasClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'cloudquotas.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new cloudquotasModule.v1.CloudQuotasClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath = cloudquotasModule.v1.CloudQuotasClient.servicePath;
-        assert.strictEqual(servicePath, 'cloudquotas.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint = cloudquotasModule.v1.CloudQuotasClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'cloudquotas.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'cloudquotas.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'cloudquotas.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new cloudquotasModule.v1.CloudQuotasClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'cloudquotas.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new cloudquotasModule.v1.CloudQuotasClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'cloudquotas.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new cloudquotasModule.v1.CloudQuotasClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'cloudquotas.configured.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new cloudquotasModule.v1.CloudQuotasClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new cloudquotasModule.v1.CloudQuotasClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = cloudquotasModule.v1.CloudQuotasClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = cloudquotasModule.v1.CloudQuotasClient.servicePath;
+                assert.strictEqual(servicePath, 'cloudquotas.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
 
-    it('should create a client with no option', () => {
-      const client = new cloudquotasModule.v1.CloudQuotasClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.cloudQuotasStub, undefined);
-      await client.initialize();
-      assert(client.cloudQuotasStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.cloudQuotasStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.cloudQuotasStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('getQuotaInfo', () => {
-    it('invokes getQuotaInfo without error', async () => {
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1.GetQuotaInfoRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.cloudquotas.v1.GetQuotaInfoRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1.QuotaInfo()
-      );
-      client.innerApiCalls.getQuotaInfo = stubSimpleCall(expectedResponse);
-      const [response] = await client.getQuotaInfo(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getQuotaInfo as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getQuotaInfo as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getQuotaInfo without error using callback', async () => {
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1.GetQuotaInfoRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.cloudquotas.v1.GetQuotaInfoRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1.QuotaInfo()
-      );
-      client.innerApiCalls.getQuotaInfo =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getQuotaInfo(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.api.cloudquotas.v1.IQuotaInfo | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getQuotaInfo as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getQuotaInfo as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getQuotaInfo with error', async () => {
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1.GetQuotaInfoRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.cloudquotas.v1.GetQuotaInfoRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getQuotaInfo = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getQuotaInfo(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getQuotaInfo as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getQuotaInfo as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getQuotaInfo with closed client', async () => {
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1.GetQuotaInfoRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.cloudquotas.v1.GetQuotaInfoRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getQuotaInfo(request), expectedError);
-    });
-  });
-
-  describe('getQuotaPreference', () => {
-    it('invokes getQuotaPreference without error', async () => {
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1.GetQuotaPreferenceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.cloudquotas.v1.GetQuotaPreferenceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1.QuotaPreference()
-      );
-      client.innerApiCalls.getQuotaPreference =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getQuotaPreference(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getQuotaPreference as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getQuotaPreference as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getQuotaPreference without error using callback', async () => {
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1.GetQuotaPreferenceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.cloudquotas.v1.GetQuotaPreferenceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1.QuotaPreference()
-      );
-      client.innerApiCalls.getQuotaPreference =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getQuotaPreference(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.api.cloudquotas.v1.IQuotaPreference | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getQuotaPreference as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getQuotaPreference as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getQuotaPreference with error', async () => {
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1.GetQuotaPreferenceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.cloudquotas.v1.GetQuotaPreferenceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getQuotaPreference = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getQuotaPreference(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getQuotaPreference as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getQuotaPreference as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getQuotaPreference with closed client', async () => {
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1.GetQuotaPreferenceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.cloudquotas.v1.GetQuotaPreferenceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getQuotaPreference(request), expectedError);
-    });
-  });
-
-  describe('createQuotaPreference', () => {
-    it('invokes createQuotaPreference without error', async () => {
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1.CreateQuotaPreferenceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.cloudquotas.v1.CreateQuotaPreferenceRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1.QuotaPreference()
-      );
-      client.innerApiCalls.createQuotaPreference =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.createQuotaPreference(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createQuotaPreference as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createQuotaPreference as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createQuotaPreference without error using callback', async () => {
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1.CreateQuotaPreferenceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.cloudquotas.v1.CreateQuotaPreferenceRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1.QuotaPreference()
-      );
-      client.innerApiCalls.createQuotaPreference =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createQuotaPreference(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.api.cloudquotas.v1.IQuotaPreference | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createQuotaPreference as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createQuotaPreference as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createQuotaPreference with error', async () => {
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1.CreateQuotaPreferenceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.cloudquotas.v1.CreateQuotaPreferenceRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createQuotaPreference = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.createQuotaPreference(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.createQuotaPreference as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createQuotaPreference as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createQuotaPreference with closed client', async () => {
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1.CreateQuotaPreferenceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.cloudquotas.v1.CreateQuotaPreferenceRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.createQuotaPreference(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('updateQuotaPreference', () => {
-    it('invokes updateQuotaPreference without error', async () => {
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1.UpdateQuotaPreferenceRequest()
-      );
-      request.quotaPreference ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.cloudquotas.v1.UpdateQuotaPreferenceRequest',
-        ['quotaPreference', 'name']
-      );
-      request.quotaPreference.name = defaultValue1;
-      const expectedHeaderRequestParams = `quota_preference.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1.QuotaPreference()
-      );
-      client.innerApiCalls.updateQuotaPreference =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.updateQuotaPreference(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateQuotaPreference as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateQuotaPreference as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateQuotaPreference without error using callback', async () => {
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1.UpdateQuotaPreferenceRequest()
-      );
-      request.quotaPreference ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.cloudquotas.v1.UpdateQuotaPreferenceRequest',
-        ['quotaPreference', 'name']
-      );
-      request.quotaPreference.name = defaultValue1;
-      const expectedHeaderRequestParams = `quota_preference.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1.QuotaPreference()
-      );
-      client.innerApiCalls.updateQuotaPreference =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateQuotaPreference(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.api.cloudquotas.v1.IQuotaPreference | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateQuotaPreference as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateQuotaPreference as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateQuotaPreference with error', async () => {
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1.UpdateQuotaPreferenceRequest()
-      );
-      request.quotaPreference ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.cloudquotas.v1.UpdateQuotaPreferenceRequest',
-        ['quotaPreference', 'name']
-      );
-      request.quotaPreference.name = defaultValue1;
-      const expectedHeaderRequestParams = `quota_preference.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateQuotaPreference = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.updateQuotaPreference(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.updateQuotaPreference as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateQuotaPreference as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateQuotaPreference with closed client', async () => {
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1.UpdateQuotaPreferenceRequest()
-      );
-      request.quotaPreference ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.cloudquotas.v1.UpdateQuotaPreferenceRequest',
-        ['quotaPreference', 'name']
-      );
-      request.quotaPreference.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.updateQuotaPreference(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('listQuotaInfos', () => {
-    it('invokes listQuotaInfos without error', async () => {
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1.ListQuotaInfosRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.cloudquotas.v1.ListQuotaInfosRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.api.cloudquotas.v1.QuotaInfo()),
-        generateSampleMessage(new protos.google.api.cloudquotas.v1.QuotaInfo()),
-        generateSampleMessage(new protos.google.api.cloudquotas.v1.QuotaInfo()),
-      ];
-      client.innerApiCalls.listQuotaInfos = stubSimpleCall(expectedResponse);
-      const [response] = await client.listQuotaInfos(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listQuotaInfos as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listQuotaInfos as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listQuotaInfos without error using callback', async () => {
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1.ListQuotaInfosRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.cloudquotas.v1.ListQuotaInfosRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.api.cloudquotas.v1.QuotaInfo()),
-        generateSampleMessage(new protos.google.api.cloudquotas.v1.QuotaInfo()),
-        generateSampleMessage(new protos.google.api.cloudquotas.v1.QuotaInfo()),
-      ];
-      client.innerApiCalls.listQuotaInfos =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listQuotaInfos(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.api.cloudquotas.v1.IQuotaInfo[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listQuotaInfos as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listQuotaInfos as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listQuotaInfos with error', async () => {
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1.ListQuotaInfosRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.cloudquotas.v1.ListQuotaInfosRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listQuotaInfos = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listQuotaInfos(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listQuotaInfos as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listQuotaInfos as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listQuotaInfosStream without error', async () => {
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1.ListQuotaInfosRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.cloudquotas.v1.ListQuotaInfosRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.api.cloudquotas.v1.QuotaInfo()),
-        generateSampleMessage(new protos.google.api.cloudquotas.v1.QuotaInfo()),
-        generateSampleMessage(new protos.google.api.cloudquotas.v1.QuotaInfo()),
-      ];
-      client.descriptors.page.listQuotaInfos.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listQuotaInfosStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.api.cloudquotas.v1.QuotaInfo[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.api.cloudquotas.v1.QuotaInfo) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listQuotaInfos.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listQuotaInfos, request)
-      );
-      assert(
-        (client.descriptors.page.listQuotaInfos.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listQuotaInfosStream with error', async () => {
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1.ListQuotaInfosRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.cloudquotas.v1.ListQuotaInfosRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listQuotaInfos.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listQuotaInfosStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.api.cloudquotas.v1.QuotaInfo[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.api.cloudquotas.v1.QuotaInfo) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listQuotaInfos.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listQuotaInfos, request)
-      );
-      assert(
-        (client.descriptors.page.listQuotaInfos.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listQuotaInfos without error', async () => {
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1.ListQuotaInfosRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.cloudquotas.v1.ListQuotaInfosRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.api.cloudquotas.v1.QuotaInfo()),
-        generateSampleMessage(new protos.google.api.cloudquotas.v1.QuotaInfo()),
-        generateSampleMessage(new protos.google.api.cloudquotas.v1.QuotaInfo()),
-      ];
-      client.descriptors.page.listQuotaInfos.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.api.cloudquotas.v1.IQuotaInfo[] = [];
-      const iterable = client.listQuotaInfosAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listQuotaInfos.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listQuotaInfos.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listQuotaInfos with error', async () => {
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1.ListQuotaInfosRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.cloudquotas.v1.ListQuotaInfosRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listQuotaInfos.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listQuotaInfosAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.api.cloudquotas.v1.IQuotaInfo[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = cloudquotasModule.v1.CloudQuotasClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'cloudquotas.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listQuotaInfos.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listQuotaInfos.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('listQuotaPreferences', () => {
-    it('invokes listQuotaPreferences without error', async () => {
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1.ListQuotaPreferencesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.cloudquotas.v1.ListQuotaPreferencesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.api.cloudquotas.v1.QuotaPreference()
-        ),
-        generateSampleMessage(
-          new protos.google.api.cloudquotas.v1.QuotaPreference()
-        ),
-        generateSampleMessage(
-          new protos.google.api.cloudquotas.v1.QuotaPreference()
-        ),
-      ];
-      client.innerApiCalls.listQuotaPreferences =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listQuotaPreferences(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listQuotaPreferences as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listQuotaPreferences as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listQuotaPreferences without error using callback', async () => {
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1.ListQuotaPreferencesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.cloudquotas.v1.ListQuotaPreferencesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.api.cloudquotas.v1.QuotaPreference()
-        ),
-        generateSampleMessage(
-          new protos.google.api.cloudquotas.v1.QuotaPreference()
-        ),
-        generateSampleMessage(
-          new protos.google.api.cloudquotas.v1.QuotaPreference()
-        ),
-      ];
-      client.innerApiCalls.listQuotaPreferences =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listQuotaPreferences(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.api.cloudquotas.v1.IQuotaPreference[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listQuotaPreferences as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listQuotaPreferences as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listQuotaPreferences with error', async () => {
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1.ListQuotaPreferencesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.cloudquotas.v1.ListQuotaPreferencesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listQuotaPreferences = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listQuotaPreferences(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listQuotaPreferences as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listQuotaPreferences as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listQuotaPreferencesStream without error', async () => {
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1.ListQuotaPreferencesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.cloudquotas.v1.ListQuotaPreferencesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.api.cloudquotas.v1.QuotaPreference()
-        ),
-        generateSampleMessage(
-          new protos.google.api.cloudquotas.v1.QuotaPreference()
-        ),
-        generateSampleMessage(
-          new protos.google.api.cloudquotas.v1.QuotaPreference()
-        ),
-      ];
-      client.descriptors.page.listQuotaPreferences.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listQuotaPreferencesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.api.cloudquotas.v1.QuotaPreference[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.api.cloudquotas.v1.QuotaPreference) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new cloudquotasModule.v1.CloudQuotasClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'cloudquotas.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listQuotaPreferences.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listQuotaPreferences, request)
-      );
-      assert(
-        (client.descriptors.page.listQuotaPreferences.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('invokes listQuotaPreferencesStream with error', async () => {
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1.ListQuotaPreferencesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.cloudquotas.v1.ListQuotaPreferencesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listQuotaPreferences.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listQuotaPreferencesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.api.cloudquotas.v1.QuotaPreference[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.api.cloudquotas.v1.QuotaPreference) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new cloudquotasModule.v1.CloudQuotasClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'cloudquotas.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listQuotaPreferences.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listQuotaPreferences, request)
-      );
-      assert(
-        (client.descriptors.page.listQuotaPreferences.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listQuotaPreferences without error', async () => {
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1.ListQuotaPreferencesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.cloudquotas.v1.ListQuotaPreferencesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.api.cloudquotas.v1.QuotaPreference()
-        ),
-        generateSampleMessage(
-          new protos.google.api.cloudquotas.v1.QuotaPreference()
-        ),
-        generateSampleMessage(
-          new protos.google.api.cloudquotas.v1.QuotaPreference()
-        ),
-      ];
-      client.descriptors.page.listQuotaPreferences.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.api.cloudquotas.v1.IQuotaPreference[] = [];
-      const iterable = client.listQuotaPreferencesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listQuotaPreferences.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listQuotaPreferences.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new cloudquotasModule.v1.CloudQuotasClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'cloudquotas.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('uses async iteration with listQuotaPreferences with error', async () => {
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.api.cloudquotas.v1.ListQuotaPreferencesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.api.cloudquotas.v1.ListQuotaPreferencesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listQuotaPreferences.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listQuotaPreferencesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.api.cloudquotas.v1.IQuotaPreference[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new cloudquotasModule.v1.CloudQuotasClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'cloudquotas.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listQuotaPreferences.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listQuotaPreferences.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new cloudquotasModule.v1.CloudQuotasClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-  describe('Path templates', () => {
-    describe('folderLocationQuotaPreference', async () => {
-      const fakePath = '/rendered/path/folderLocationQuotaPreference';
-      const expectedParameters = {
-        folder: 'folderValue',
-        location: 'locationValue',
-        quota_preference: 'quotaPreferenceValue',
-      };
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.folderLocationQuotaPreferencePathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.folderLocationQuotaPreferencePathTemplate.match =
-        sinon.stub().returns(expectedParameters);
+        it('has port', () => {
+            const port = cloudquotasModule.v1.CloudQuotasClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
 
-      it('folderLocationQuotaPreferencePath', () => {
-        const result = client.folderLocationQuotaPreferencePath(
-          'folderValue',
-          'locationValue',
-          'quotaPreferenceValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.folderLocationQuotaPreferencePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('should create a client with no option', () => {
+            const client = new cloudquotasModule.v1.CloudQuotasClient();
+            assert(client);
+        });
 
-      it('matchFolderFromFolderLocationQuotaPreferenceName', () => {
-        const result =
-          client.matchFolderFromFolderLocationQuotaPreferenceName(fakePath);
-        assert.strictEqual(result, 'folderValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationQuotaPreferencePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('should create a client with gRPC fallback', () => {
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+                fallback: true,
+            });
+            assert(client);
+        });
 
-      it('matchLocationFromFolderLocationQuotaPreferenceName', () => {
-        const result =
-          client.matchLocationFromFolderLocationQuotaPreferenceName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationQuotaPreferencePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.cloudQuotasStub, undefined);
+            await client.initialize();
+            assert(client.cloudQuotasStub);
+        });
 
-      it('matchQuotaPreferenceFromFolderLocationQuotaPreferenceName', () => {
-        const result =
-          client.matchQuotaPreferenceFromFolderLocationQuotaPreferenceName(
-            fakePath
-          );
-        assert.strictEqual(result, 'quotaPreferenceValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationQuotaPreferencePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has close method for the initialized client', done => {
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.cloudQuotasStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.cloudQuotasStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    describe('folderLocationServiceQuotaInfo', async () => {
-      const fakePath = '/rendered/path/folderLocationServiceQuotaInfo';
-      const expectedParameters = {
-        folder: 'folderValue',
-        location: 'locationValue',
-        service: 'serviceValue',
-        quota_info: 'quotaInfoValue',
-      };
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.folderLocationServiceQuotaInfoPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.folderLocationServiceQuotaInfoPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
+    describe('getQuotaInfo', () => {
+        it('invokes getQuotaInfo without error', async () => {
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1.GetQuotaInfoRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.cloudquotas.v1.GetQuotaInfoRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1.QuotaInfo()
+            );
+            client.innerApiCalls.getQuotaInfo = stubSimpleCall(expectedResponse);
+            const [response] = await client.getQuotaInfo(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getQuotaInfo as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getQuotaInfo as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('folderLocationServiceQuotaInfoPath', () => {
-        const result = client.folderLocationServiceQuotaInfoPath(
-          'folderValue',
-          'locationValue',
-          'serviceValue',
-          'quotaInfoValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.folderLocationServiceQuotaInfoPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes getQuotaInfo without error using callback', async () => {
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1.GetQuotaInfoRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.cloudquotas.v1.GetQuotaInfoRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1.QuotaInfo()
+            );
+            client.innerApiCalls.getQuotaInfo = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getQuotaInfo(
+                    request,
+                    (err?: Error|null, result?: protos.google.api.cloudquotas.v1.IQuotaInfo|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getQuotaInfo as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getQuotaInfo as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchFolderFromFolderLocationServiceQuotaInfoName', () => {
-        const result =
-          client.matchFolderFromFolderLocationServiceQuotaInfoName(fakePath);
-        assert.strictEqual(result, 'folderValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationServiceQuotaInfoPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes getQuotaInfo with error', async () => {
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1.GetQuotaInfoRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.cloudquotas.v1.GetQuotaInfoRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getQuotaInfo = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getQuotaInfo(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getQuotaInfo as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getQuotaInfo as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchLocationFromFolderLocationServiceQuotaInfoName', () => {
-        const result =
-          client.matchLocationFromFolderLocationServiceQuotaInfoName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationServiceQuotaInfoPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchServiceFromFolderLocationServiceQuotaInfoName', () => {
-        const result =
-          client.matchServiceFromFolderLocationServiceQuotaInfoName(fakePath);
-        assert.strictEqual(result, 'serviceValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationServiceQuotaInfoPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchQuotaInfoFromFolderLocationServiceQuotaInfoName', () => {
-        const result =
-          client.matchQuotaInfoFromFolderLocationServiceQuotaInfoName(fakePath);
-        assert.strictEqual(result, 'quotaInfoValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationServiceQuotaInfoPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes getQuotaInfo with closed client', async () => {
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1.GetQuotaInfoRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.cloudquotas.v1.GetQuotaInfoRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getQuotaInfo(request), expectedError);
+        });
     });
 
-    describe('organizationLocationQuotaPreference', async () => {
-      const fakePath = '/rendered/path/organizationLocationQuotaPreference';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        location: 'locationValue',
-        quota_preference: 'quotaPreferenceValue',
-      };
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationLocationQuotaPreferencePathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.organizationLocationQuotaPreferencePathTemplate.match =
-        sinon.stub().returns(expectedParameters);
+    describe('getQuotaPreference', () => {
+        it('invokes getQuotaPreference without error', async () => {
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1.GetQuotaPreferenceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.cloudquotas.v1.GetQuotaPreferenceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1.QuotaPreference()
+            );
+            client.innerApiCalls.getQuotaPreference = stubSimpleCall(expectedResponse);
+            const [response] = await client.getQuotaPreference(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getQuotaPreference as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getQuotaPreference as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('organizationLocationQuotaPreferencePath', () => {
-        const result = client.organizationLocationQuotaPreferencePath(
-          'organizationValue',
-          'locationValue',
-          'quotaPreferenceValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.organizationLocationQuotaPreferencePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes getQuotaPreference without error using callback', async () => {
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1.GetQuotaPreferenceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.cloudquotas.v1.GetQuotaPreferenceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1.QuotaPreference()
+            );
+            client.innerApiCalls.getQuotaPreference = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getQuotaPreference(
+                    request,
+                    (err?: Error|null, result?: protos.google.api.cloudquotas.v1.IQuotaPreference|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getQuotaPreference as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getQuotaPreference as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchOrganizationFromOrganizationLocationQuotaPreferenceName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationLocationQuotaPreferenceName(
-            fakePath
-          );
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates.organizationLocationQuotaPreferencePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes getQuotaPreference with error', async () => {
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1.GetQuotaPreferenceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.cloudquotas.v1.GetQuotaPreferenceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getQuotaPreference = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getQuotaPreference(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getQuotaPreference as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getQuotaPreference as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchLocationFromOrganizationLocationQuotaPreferenceName', () => {
-        const result =
-          client.matchLocationFromOrganizationLocationQuotaPreferenceName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.organizationLocationQuotaPreferencePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchQuotaPreferenceFromOrganizationLocationQuotaPreferenceName', () => {
-        const result =
-          client.matchQuotaPreferenceFromOrganizationLocationQuotaPreferenceName(
-            fakePath
-          );
-        assert.strictEqual(result, 'quotaPreferenceValue');
-        assert(
-          (
-            client.pathTemplates.organizationLocationQuotaPreferencePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes getQuotaPreference with closed client', async () => {
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1.GetQuotaPreferenceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.cloudquotas.v1.GetQuotaPreferenceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getQuotaPreference(request), expectedError);
+        });
     });
 
-    describe('organizationLocationServiceQuotaInfo', async () => {
-      const fakePath = '/rendered/path/organizationLocationServiceQuotaInfo';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        location: 'locationValue',
-        service: 'serviceValue',
-        quota_info: 'quotaInfoValue',
-      };
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationLocationServiceQuotaInfoPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.organizationLocationServiceQuotaInfoPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
+    describe('createQuotaPreference', () => {
+        it('invokes createQuotaPreference without error', async () => {
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1.CreateQuotaPreferenceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.cloudquotas.v1.CreateQuotaPreferenceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1.QuotaPreference()
+            );
+            client.innerApiCalls.createQuotaPreference = stubSimpleCall(expectedResponse);
+            const [response] = await client.createQuotaPreference(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createQuotaPreference as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createQuotaPreference as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('organizationLocationServiceQuotaInfoPath', () => {
-        const result = client.organizationLocationServiceQuotaInfoPath(
-          'organizationValue',
-          'locationValue',
-          'serviceValue',
-          'quotaInfoValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationServiceQuotaInfoPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes createQuotaPreference without error using callback', async () => {
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1.CreateQuotaPreferenceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.cloudquotas.v1.CreateQuotaPreferenceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1.QuotaPreference()
+            );
+            client.innerApiCalls.createQuotaPreference = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createQuotaPreference(
+                    request,
+                    (err?: Error|null, result?: protos.google.api.cloudquotas.v1.IQuotaPreference|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createQuotaPreference as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createQuotaPreference as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchOrganizationFromOrganizationLocationServiceQuotaInfoName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationLocationServiceQuotaInfoName(
-            fakePath
-          );
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationServiceQuotaInfoPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes createQuotaPreference with error', async () => {
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1.CreateQuotaPreferenceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.cloudquotas.v1.CreateQuotaPreferenceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createQuotaPreference = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createQuotaPreference(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createQuotaPreference as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createQuotaPreference as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchLocationFromOrganizationLocationServiceQuotaInfoName', () => {
-        const result =
-          client.matchLocationFromOrganizationLocationServiceQuotaInfoName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationServiceQuotaInfoPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchServiceFromOrganizationLocationServiceQuotaInfoName', () => {
-        const result =
-          client.matchServiceFromOrganizationLocationServiceQuotaInfoName(
-            fakePath
-          );
-        assert.strictEqual(result, 'serviceValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationServiceQuotaInfoPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchQuotaInfoFromOrganizationLocationServiceQuotaInfoName', () => {
-        const result =
-          client.matchQuotaInfoFromOrganizationLocationServiceQuotaInfoName(
-            fakePath
-          );
-        assert.strictEqual(result, 'quotaInfoValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationServiceQuotaInfoPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes createQuotaPreference with closed client', async () => {
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1.CreateQuotaPreferenceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.cloudquotas.v1.CreateQuotaPreferenceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createQuotaPreference(request), expectedError);
+        });
     });
 
-    describe('projectLocation', async () => {
-      const fakePath = '/rendered/path/projectLocation';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-      };
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectLocationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('updateQuotaPreference', () => {
+        it('invokes updateQuotaPreference without error', async () => {
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1.UpdateQuotaPreferenceRequest()
+            );
+            request.quotaPreference ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.cloudquotas.v1.UpdateQuotaPreferenceRequest', ['quotaPreference', 'name']);
+            request.quotaPreference.name = defaultValue1;
+            const expectedHeaderRequestParams = `quota_preference.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1.QuotaPreference()
+            );
+            client.innerApiCalls.updateQuotaPreference = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateQuotaPreference(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateQuotaPreference as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateQuotaPreference as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('projectLocationPath', () => {
-        const result = client.projectLocationPath(
-          'projectValue',
-          'locationValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectLocationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes updateQuotaPreference without error using callback', async () => {
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1.UpdateQuotaPreferenceRequest()
+            );
+            request.quotaPreference ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.cloudquotas.v1.UpdateQuotaPreferenceRequest', ['quotaPreference', 'name']);
+            request.quotaPreference.name = defaultValue1;
+            const expectedHeaderRequestParams = `quota_preference.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1.QuotaPreference()
+            );
+            client.innerApiCalls.updateQuotaPreference = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateQuotaPreference(
+                    request,
+                    (err?: Error|null, result?: protos.google.api.cloudquotas.v1.IQuotaPreference|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateQuotaPreference as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateQuotaPreference as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchProjectFromProjectLocationName', () => {
-        const result = client.matchProjectFromProjectLocationName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectLocationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes updateQuotaPreference with error', async () => {
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1.UpdateQuotaPreferenceRequest()
+            );
+            request.quotaPreference ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.cloudquotas.v1.UpdateQuotaPreferenceRequest', ['quotaPreference', 'name']);
+            request.quotaPreference.name = defaultValue1;
+            const expectedHeaderRequestParams = `quota_preference.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateQuotaPreference = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateQuotaPreference(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateQuotaPreference as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateQuotaPreference as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchLocationFromProjectLocationName', () => {
-        const result = client.matchLocationFromProjectLocationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.projectLocationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes updateQuotaPreference with closed client', async () => {
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1.UpdateQuotaPreferenceRequest()
+            );
+            request.quotaPreference ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.cloudquotas.v1.UpdateQuotaPreferenceRequest', ['quotaPreference', 'name']);
+            request.quotaPreference.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateQuotaPreference(request), expectedError);
+        });
     });
 
-    describe('projectLocationQuotaPreference', async () => {
-      const fakePath = '/rendered/path/projectLocationQuotaPreference';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        quota_preference: 'quotaPreferenceValue',
-      };
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationQuotaPreferencePathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationQuotaPreferencePathTemplate.match =
-        sinon.stub().returns(expectedParameters);
+    describe('listQuotaInfos', () => {
+        it('invokes listQuotaInfos without error', async () => {
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1.ListQuotaInfosRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.cloudquotas.v1.ListQuotaInfosRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.api.cloudquotas.v1.QuotaInfo()),
+              generateSampleMessage(new protos.google.api.cloudquotas.v1.QuotaInfo()),
+              generateSampleMessage(new protos.google.api.cloudquotas.v1.QuotaInfo()),
+            ];
+            client.innerApiCalls.listQuotaInfos = stubSimpleCall(expectedResponse);
+            const [response] = await client.listQuotaInfos(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listQuotaInfos as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listQuotaInfos as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('projectLocationQuotaPreferencePath', () => {
-        const result = client.projectLocationQuotaPreferencePath(
-          'projectValue',
-          'locationValue',
-          'quotaPreferenceValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectLocationQuotaPreferencePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes listQuotaInfos without error using callback', async () => {
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1.ListQuotaInfosRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.cloudquotas.v1.ListQuotaInfosRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.api.cloudquotas.v1.QuotaInfo()),
+              generateSampleMessage(new protos.google.api.cloudquotas.v1.QuotaInfo()),
+              generateSampleMessage(new protos.google.api.cloudquotas.v1.QuotaInfo()),
+            ];
+            client.innerApiCalls.listQuotaInfos = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listQuotaInfos(
+                    request,
+                    (err?: Error|null, result?: protos.google.api.cloudquotas.v1.IQuotaInfo[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listQuotaInfos as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listQuotaInfos as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchProjectFromProjectLocationQuotaPreferenceName', () => {
-        const result =
-          client.matchProjectFromProjectLocationQuotaPreferenceName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationQuotaPreferencePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes listQuotaInfos with error', async () => {
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1.ListQuotaInfosRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.cloudquotas.v1.ListQuotaInfosRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listQuotaInfos = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listQuotaInfos(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listQuotaInfos as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listQuotaInfos as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchLocationFromProjectLocationQuotaPreferenceName', () => {
-        const result =
-          client.matchLocationFromProjectLocationQuotaPreferenceName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationQuotaPreferencePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes listQuotaInfosStream without error', async () => {
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1.ListQuotaInfosRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.cloudquotas.v1.ListQuotaInfosRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.api.cloudquotas.v1.QuotaInfo()),
+              generateSampleMessage(new protos.google.api.cloudquotas.v1.QuotaInfo()),
+              generateSampleMessage(new protos.google.api.cloudquotas.v1.QuotaInfo()),
+            ];
+            client.descriptors.page.listQuotaInfos.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listQuotaInfosStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.api.cloudquotas.v1.QuotaInfo[] = [];
+                stream.on('data', (response: protos.google.api.cloudquotas.v1.QuotaInfo) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listQuotaInfos.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listQuotaInfos, request));
+            assert(
+                (client.descriptors.page.listQuotaInfos.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-      it('matchQuotaPreferenceFromProjectLocationQuotaPreferenceName', () => {
-        const result =
-          client.matchQuotaPreferenceFromProjectLocationQuotaPreferenceName(
-            fakePath
-          );
-        assert.strictEqual(result, 'quotaPreferenceValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationQuotaPreferencePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes listQuotaInfosStream with error', async () => {
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1.ListQuotaInfosRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.cloudquotas.v1.ListQuotaInfosRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listQuotaInfos.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listQuotaInfosStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.api.cloudquotas.v1.QuotaInfo[] = [];
+                stream.on('data', (response: protos.google.api.cloudquotas.v1.QuotaInfo) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listQuotaInfos.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listQuotaInfos, request));
+            assert(
+                (client.descriptors.page.listQuotaInfos.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listQuotaInfos without error', async () => {
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1.ListQuotaInfosRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.cloudquotas.v1.ListQuotaInfosRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.api.cloudquotas.v1.QuotaInfo()),
+              generateSampleMessage(new protos.google.api.cloudquotas.v1.QuotaInfo()),
+              generateSampleMessage(new protos.google.api.cloudquotas.v1.QuotaInfo()),
+            ];
+            client.descriptors.page.listQuotaInfos.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.api.cloudquotas.v1.IQuotaInfo[] = [];
+            const iterable = client.listQuotaInfosAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listQuotaInfos.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listQuotaInfos.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listQuotaInfos with error', async () => {
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1.ListQuotaInfosRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.cloudquotas.v1.ListQuotaInfosRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listQuotaInfos.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listQuotaInfosAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.api.cloudquotas.v1.IQuotaInfo[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listQuotaInfos.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listQuotaInfos.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    describe('projectLocationService', async () => {
-      const fakePath = '/rendered/path/projectLocationService';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        service: 'serviceValue',
-      };
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationServicePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectLocationServicePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('listQuotaPreferences', () => {
+        it('invokes listQuotaPreferences without error', async () => {
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1.ListQuotaPreferencesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.cloudquotas.v1.ListQuotaPreferencesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.api.cloudquotas.v1.QuotaPreference()),
+              generateSampleMessage(new protos.google.api.cloudquotas.v1.QuotaPreference()),
+              generateSampleMessage(new protos.google.api.cloudquotas.v1.QuotaPreference()),
+            ];
+            client.innerApiCalls.listQuotaPreferences = stubSimpleCall(expectedResponse);
+            const [response] = await client.listQuotaPreferences(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listQuotaPreferences as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listQuotaPreferences as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('projectLocationServicePath', () => {
-        const result = client.projectLocationServicePath(
-          'projectValue',
-          'locationValue',
-          'serviceValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectLocationServicePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes listQuotaPreferences without error using callback', async () => {
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1.ListQuotaPreferencesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.cloudquotas.v1.ListQuotaPreferencesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.api.cloudquotas.v1.QuotaPreference()),
+              generateSampleMessage(new protos.google.api.cloudquotas.v1.QuotaPreference()),
+              generateSampleMessage(new protos.google.api.cloudquotas.v1.QuotaPreference()),
+            ];
+            client.innerApiCalls.listQuotaPreferences = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listQuotaPreferences(
+                    request,
+                    (err?: Error|null, result?: protos.google.api.cloudquotas.v1.IQuotaPreference[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listQuotaPreferences as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listQuotaPreferences as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchProjectFromProjectLocationServiceName', () => {
-        const result =
-          client.matchProjectFromProjectLocationServiceName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationServicePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes listQuotaPreferences with error', async () => {
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1.ListQuotaPreferencesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.cloudquotas.v1.ListQuotaPreferencesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listQuotaPreferences = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listQuotaPreferences(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listQuotaPreferences as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listQuotaPreferences as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchLocationFromProjectLocationServiceName', () => {
-        const result =
-          client.matchLocationFromProjectLocationServiceName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationServicePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes listQuotaPreferencesStream without error', async () => {
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1.ListQuotaPreferencesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.cloudquotas.v1.ListQuotaPreferencesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.api.cloudquotas.v1.QuotaPreference()),
+              generateSampleMessage(new protos.google.api.cloudquotas.v1.QuotaPreference()),
+              generateSampleMessage(new protos.google.api.cloudquotas.v1.QuotaPreference()),
+            ];
+            client.descriptors.page.listQuotaPreferences.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listQuotaPreferencesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.api.cloudquotas.v1.QuotaPreference[] = [];
+                stream.on('data', (response: protos.google.api.cloudquotas.v1.QuotaPreference) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listQuotaPreferences.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listQuotaPreferences, request));
+            assert(
+                (client.descriptors.page.listQuotaPreferences.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-      it('matchServiceFromProjectLocationServiceName', () => {
-        const result =
-          client.matchServiceFromProjectLocationServiceName(fakePath);
-        assert.strictEqual(result, 'serviceValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationServicePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes listQuotaPreferencesStream with error', async () => {
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1.ListQuotaPreferencesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.cloudquotas.v1.ListQuotaPreferencesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listQuotaPreferences.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listQuotaPreferencesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.api.cloudquotas.v1.QuotaPreference[] = [];
+                stream.on('data', (response: protos.google.api.cloudquotas.v1.QuotaPreference) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listQuotaPreferences.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listQuotaPreferences, request));
+            assert(
+                (client.descriptors.page.listQuotaPreferences.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listQuotaPreferences without error', async () => {
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1.ListQuotaPreferencesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.cloudquotas.v1.ListQuotaPreferencesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.api.cloudquotas.v1.QuotaPreference()),
+              generateSampleMessage(new protos.google.api.cloudquotas.v1.QuotaPreference()),
+              generateSampleMessage(new protos.google.api.cloudquotas.v1.QuotaPreference()),
+            ];
+            client.descriptors.page.listQuotaPreferences.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.api.cloudquotas.v1.IQuotaPreference[] = [];
+            const iterable = client.listQuotaPreferencesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listQuotaPreferences.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listQuotaPreferences.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listQuotaPreferences with error', async () => {
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.api.cloudquotas.v1.ListQuotaPreferencesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.api.cloudquotas.v1.ListQuotaPreferencesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listQuotaPreferences.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listQuotaPreferencesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.api.cloudquotas.v1.IQuotaPreference[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listQuotaPreferences.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listQuotaPreferences.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    describe('projectLocationServiceQuotaInfo', async () => {
-      const fakePath = '/rendered/path/projectLocationServiceQuotaInfo';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        service: 'serviceValue',
-        quota_info: 'quotaInfoValue',
-      };
-      const client = new cloudquotasModule.v1.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationServiceQuotaInfoPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationServiceQuotaInfoPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
+    describe('Path templates', () => {
 
-      it('projectLocationServiceQuotaInfoPath', () => {
-        const result = client.projectLocationServiceQuotaInfoPath(
-          'projectValue',
-          'locationValue',
-          'serviceValue',
-          'quotaInfoValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectLocationServiceQuotaInfoPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('folderLocationQuotaPreference', async () => {
+            const fakePath = "/rendered/path/folderLocationQuotaPreference";
+            const expectedParameters = {
+                folder: "folderValue",
+                location: "locationValue",
+                quota_preference: "quotaPreferenceValue",
+            };
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderLocationQuotaPreferencePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderLocationQuotaPreferencePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromProjectLocationServiceQuotaInfoName', () => {
-        const result =
-          client.matchProjectFromProjectLocationServiceQuotaInfoName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationServiceQuotaInfoPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('folderLocationQuotaPreferencePath', () => {
+                const result = client.folderLocationQuotaPreferencePath("folderValue", "locationValue", "quotaPreferenceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderLocationQuotaPreferencePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromProjectLocationServiceQuotaInfoName', () => {
-        const result =
-          client.matchLocationFromProjectLocationServiceQuotaInfoName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationServiceQuotaInfoPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchFolderFromFolderLocationQuotaPreferenceName', () => {
+                const result = client.matchFolderFromFolderLocationQuotaPreferenceName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderLocationQuotaPreferencePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchServiceFromProjectLocationServiceQuotaInfoName', () => {
-        const result =
-          client.matchServiceFromProjectLocationServiceQuotaInfoName(fakePath);
-        assert.strictEqual(result, 'serviceValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationServiceQuotaInfoPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchLocationFromFolderLocationQuotaPreferenceName', () => {
+                const result = client.matchLocationFromFolderLocationQuotaPreferenceName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.folderLocationQuotaPreferencePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchQuotaInfoFromProjectLocationServiceQuotaInfoName', () => {
-        const result =
-          client.matchQuotaInfoFromProjectLocationServiceQuotaInfoName(
-            fakePath
-          );
-        assert.strictEqual(result, 'quotaInfoValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationServiceQuotaInfoPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchQuotaPreferenceFromFolderLocationQuotaPreferenceName', () => {
+                const result = client.matchQuotaPreferenceFromFolderLocationQuotaPreferenceName(fakePath);
+                assert.strictEqual(result, "quotaPreferenceValue");
+                assert((client.pathTemplates.folderLocationQuotaPreferencePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('folderLocationServiceQuotaInfo', async () => {
+            const fakePath = "/rendered/path/folderLocationServiceQuotaInfo";
+            const expectedParameters = {
+                folder: "folderValue",
+                location: "locationValue",
+                service: "serviceValue",
+                quota_info: "quotaInfoValue",
+            };
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderLocationServiceQuotaInfoPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderLocationServiceQuotaInfoPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderLocationServiceQuotaInfoPath', () => {
+                const result = client.folderLocationServiceQuotaInfoPath("folderValue", "locationValue", "serviceValue", "quotaInfoValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderLocationServiceQuotaInfoPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderLocationServiceQuotaInfoName', () => {
+                const result = client.matchFolderFromFolderLocationServiceQuotaInfoName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderLocationServiceQuotaInfoPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromFolderLocationServiceQuotaInfoName', () => {
+                const result = client.matchLocationFromFolderLocationServiceQuotaInfoName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.folderLocationServiceQuotaInfoPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchServiceFromFolderLocationServiceQuotaInfoName', () => {
+                const result = client.matchServiceFromFolderLocationServiceQuotaInfoName(fakePath);
+                assert.strictEqual(result, "serviceValue");
+                assert((client.pathTemplates.folderLocationServiceQuotaInfoPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchQuotaInfoFromFolderLocationServiceQuotaInfoName', () => {
+                const result = client.matchQuotaInfoFromFolderLocationServiceQuotaInfoName(fakePath);
+                assert.strictEqual(result, "quotaInfoValue");
+                assert((client.pathTemplates.folderLocationServiceQuotaInfoPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationLocationQuotaPreference', async () => {
+            const fakePath = "/rendered/path/organizationLocationQuotaPreference";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                quota_preference: "quotaPreferenceValue",
+            };
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationLocationQuotaPreferencePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationLocationQuotaPreferencePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationLocationQuotaPreferencePath', () => {
+                const result = client.organizationLocationQuotaPreferencePath("organizationValue", "locationValue", "quotaPreferenceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationLocationQuotaPreferencePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationLocationQuotaPreferenceName', () => {
+                const result = client.matchOrganizationFromOrganizationLocationQuotaPreferenceName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationLocationQuotaPreferencePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationLocationQuotaPreferenceName', () => {
+                const result = client.matchLocationFromOrganizationLocationQuotaPreferenceName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationLocationQuotaPreferencePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchQuotaPreferenceFromOrganizationLocationQuotaPreferenceName', () => {
+                const result = client.matchQuotaPreferenceFromOrganizationLocationQuotaPreferenceName(fakePath);
+                assert.strictEqual(result, "quotaPreferenceValue");
+                assert((client.pathTemplates.organizationLocationQuotaPreferencePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationLocationServiceQuotaInfo', async () => {
+            const fakePath = "/rendered/path/organizationLocationServiceQuotaInfo";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                service: "serviceValue",
+                quota_info: "quotaInfoValue",
+            };
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationLocationServiceQuotaInfoPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationLocationServiceQuotaInfoPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationLocationServiceQuotaInfoPath', () => {
+                const result = client.organizationLocationServiceQuotaInfoPath("organizationValue", "locationValue", "serviceValue", "quotaInfoValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationLocationServiceQuotaInfoPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationLocationServiceQuotaInfoName', () => {
+                const result = client.matchOrganizationFromOrganizationLocationServiceQuotaInfoName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationLocationServiceQuotaInfoPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationLocationServiceQuotaInfoName', () => {
+                const result = client.matchLocationFromOrganizationLocationServiceQuotaInfoName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationLocationServiceQuotaInfoPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchServiceFromOrganizationLocationServiceQuotaInfoName', () => {
+                const result = client.matchServiceFromOrganizationLocationServiceQuotaInfoName(fakePath);
+                assert.strictEqual(result, "serviceValue");
+                assert((client.pathTemplates.organizationLocationServiceQuotaInfoPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchQuotaInfoFromOrganizationLocationServiceQuotaInfoName', () => {
+                const result = client.matchQuotaInfoFromOrganizationLocationServiceQuotaInfoName(fakePath);
+                assert.strictEqual(result, "quotaInfoValue");
+                assert((client.pathTemplates.organizationLocationServiceQuotaInfoPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocation', async () => {
+            const fakePath = "/rendered/path/projectLocation";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationPath', () => {
+                const result = client.projectLocationPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationName', () => {
+                const result = client.matchProjectFromProjectLocationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationName', () => {
+                const result = client.matchLocationFromProjectLocationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationQuotaPreference', async () => {
+            const fakePath = "/rendered/path/projectLocationQuotaPreference";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                quota_preference: "quotaPreferenceValue",
+            };
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationQuotaPreferencePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationQuotaPreferencePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationQuotaPreferencePath', () => {
+                const result = client.projectLocationQuotaPreferencePath("projectValue", "locationValue", "quotaPreferenceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationQuotaPreferencePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationQuotaPreferenceName', () => {
+                const result = client.matchProjectFromProjectLocationQuotaPreferenceName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationQuotaPreferencePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationQuotaPreferenceName', () => {
+                const result = client.matchLocationFromProjectLocationQuotaPreferenceName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationQuotaPreferencePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchQuotaPreferenceFromProjectLocationQuotaPreferenceName', () => {
+                const result = client.matchQuotaPreferenceFromProjectLocationQuotaPreferenceName(fakePath);
+                assert.strictEqual(result, "quotaPreferenceValue");
+                assert((client.pathTemplates.projectLocationQuotaPreferencePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationService', async () => {
+            const fakePath = "/rendered/path/projectLocationService";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                service: "serviceValue",
+            };
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationServicePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationServicePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationServicePath', () => {
+                const result = client.projectLocationServicePath("projectValue", "locationValue", "serviceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationServicePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationServiceName', () => {
+                const result = client.matchProjectFromProjectLocationServiceName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationServicePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationServiceName', () => {
+                const result = client.matchLocationFromProjectLocationServiceName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationServicePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchServiceFromProjectLocationServiceName', () => {
+                const result = client.matchServiceFromProjectLocationServiceName(fakePath);
+                assert.strictEqual(result, "serviceValue");
+                assert((client.pathTemplates.projectLocationServicePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationServiceQuotaInfo', async () => {
+            const fakePath = "/rendered/path/projectLocationServiceQuotaInfo";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                service: "serviceValue",
+                quota_info: "quotaInfoValue",
+            };
+            const client = new cloudquotasModule.v1.CloudQuotasClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationServiceQuotaInfoPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationServiceQuotaInfoPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationServiceQuotaInfoPath', () => {
+                const result = client.projectLocationServiceQuotaInfoPath("projectValue", "locationValue", "serviceValue", "quotaInfoValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationServiceQuotaInfoPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationServiceQuotaInfoName', () => {
+                const result = client.matchProjectFromProjectLocationServiceQuotaInfoName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationServiceQuotaInfoPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationServiceQuotaInfoName', () => {
+                const result = client.matchLocationFromProjectLocationServiceQuotaInfoName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationServiceQuotaInfoPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchServiceFromProjectLocationServiceQuotaInfoName', () => {
+                const result = client.matchServiceFromProjectLocationServiceQuotaInfoName(fakePath);
+                assert.strictEqual(result, "serviceValue");
+                assert((client.pathTemplates.projectLocationServiceQuotaInfoPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchQuotaInfoFromProjectLocationServiceQuotaInfoName', () => {
+                const result = client.matchQuotaInfoFromProjectLocationServiceQuotaInfoName(fakePath);
+                assert.strictEqual(result, "quotaInfoValue");
+                assert((client.pathTemplates.projectLocationServiceQuotaInfoPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-  });
 });

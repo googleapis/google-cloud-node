@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/policysimulator-v0.5.1...policysimulator-v0.6.0) (2025-06-03)
+
+
+### Features
+
+* Add protobufjs 2023 edition support ([#6302](https://github.com/googleapis/google-cloud-node/issues/6302)) ([abc35be](https://github.com/googleapis/google-cloud-node/commit/abc35be4817709467e6c6b2a12ac4e749ffed72d))
+
 ## [0.5.1](https://github.com/googleapis/google-cloud-node/compare/policysimulator-v0.5.0...policysimulator-v0.5.1) (2025-03-21)
 
 

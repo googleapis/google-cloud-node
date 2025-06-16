@@ -3727,6 +3727,18 @@
                         }
                       }
                     },
+                    "DenoiserConfig": {
+                      "fields": {
+                        "denoiseAudio": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "snrThreshold": {
+                          "type": "float",
+                          "id": 2
+                        }
+                      }
+                    },
                     "RecognitionConfig": {
                       "oneofs": {
                         "decodingConfig": {
@@ -3778,6 +3790,13 @@
                         "translationConfig": {
                           "type": "TranslationConfig",
                           "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "denoiserConfig": {
+                          "type": "DenoiserConfig",
+                          "id": 16,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }

@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.2.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v9.1.0...documentai-v9.2.0) (2025-06-03)
+
+
+### Features
+
+* [documentai] Added config options to enable table annotation and image extraction ([#6287](https://github.com/googleapis/google-cloud-node/issues/6287)) ([18185f8](https://github.com/googleapis/google-cloud-node/commit/18185f8a2318aeac3207c8daebe020dcbaa9bbb0))
+
 ## [9.1.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v9.0.0...documentai-v9.1.0) (2025-03-19)
 
 

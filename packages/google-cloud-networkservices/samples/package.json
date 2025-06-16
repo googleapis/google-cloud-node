@@ -14,7 +14,7 @@
     "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
-    "@google-cloud/networkservices": "^0.8.1"
+    "@google-cloud/networkservices": "^0.9.0"
   },
   "devDependencies": {
     "c8": "^9.0.0",

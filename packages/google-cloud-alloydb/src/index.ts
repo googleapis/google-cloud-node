@@ -26,12 +26,6 @@ const AlloyDBCSQLAdminClient = v1.AlloyDBCSQLAdminClient;
 type AlloyDBCSQLAdminClient = v1.AlloyDBCSQLAdminClient;
 
 export {v1, v1alpha, v1beta, AlloyDBAdminClient, AlloyDBCSQLAdminClient};
-export default {
-  v1,
-  v1alpha,
-  v1beta,
-  AlloyDBAdminClient,
-  AlloyDBCSQLAdminClient,
-};
+export default {v1, v1alpha, v1beta, AlloyDBAdminClient, AlloyDBCSQLAdminClient};
 import * as protos from '../protos/protos';
 export {protos};

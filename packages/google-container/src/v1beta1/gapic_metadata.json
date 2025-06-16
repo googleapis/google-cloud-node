@@ -180,6 +180,16 @@
                 "listLocations"
               ]
             },
+            "FetchClusterUpgradeInfo": {
+              "methods": [
+                "fetchClusterUpgradeInfo"
+              ]
+            },
+            "FetchNodePoolUpgradeInfo": {
+              "methods": [
+                "fetchNodePoolUpgradeInfo"
+              ]
+            },
             "ListUsableSubnetworks": {
               "methods": [
                 "listUsableSubnetworks",
@@ -360,6 +370,16 @@
             "ListLocations": {
               "methods": [
                 "listLocations"
+              ]
+            },
+            "FetchClusterUpgradeInfo": {
+              "methods": [
+                "fetchClusterUpgradeInfo"
+              ]
+            },
+            "FetchNodePoolUpgradeInfo": {
+              "methods": [
+                "fetchNodePoolUpgradeInfo"
               ]
             },
             "ListUsableSubnetworks": {

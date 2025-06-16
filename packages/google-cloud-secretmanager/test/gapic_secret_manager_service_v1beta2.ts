@@ -29,3336 +29,2552 @@ import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1beta2.SecretManagerServiceClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'secretmanager.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          secretmanagerserviceModule.v1beta2.SecretManagerServiceClient
-            .servicePath;
-        assert.strictEqual(servicePath, 'secretmanager.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          secretmanagerserviceModule.v1beta2.SecretManagerServiceClient
-            .apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'secretmanager.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          universeDomain: 'example.com',
-        });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'secretmanager.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          universe_domain: 'example.com',
-        });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'secretmanager.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'secretmanager.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'secretmanager.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-              universeDomain: 'configured.example.com',
+        it('has universeDomain', () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
+        });
+
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = secretmanagerserviceModule.v1beta2.SecretManagerServiceClient.servicePath;
+                assert.strictEqual(servicePath, 'secretmanager.googleapis.com');
+                assert(stub.called);
+                stub.restore();
             });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'secretmanager.configured.example.com'
-          );
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
-        });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port =
-        secretmanagerserviceModule.v1beta2.SecretManagerServiceClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
-
-    it('should create a client with no option', () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          fallback: true,
-        });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      assert.strictEqual(client.secretManagerServiceStub, undefined);
-      await client.initialize();
-      assert(client.secretManagerServiceStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.secretManagerServiceStub);
-      client.close().then(() => {
-        done();
-      });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      assert.strictEqual(client.secretManagerServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('createSecret', () => {
-    it('invokes createSecret without error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.CreateSecretRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.CreateSecretRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.Secret()
-      );
-      client.innerApiCalls.createSecret = stubSimpleCall(expectedResponse);
-      const [response] = await client.createSecret(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createSecret as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createSecret as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createSecret without error using callback', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.CreateSecretRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.CreateSecretRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.Secret()
-      );
-      client.innerApiCalls.createSecret =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createSecret(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.secretmanager.v1beta2.ISecret | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createSecret as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createSecret as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createSecret with error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.CreateSecretRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.CreateSecretRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createSecret = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createSecret(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createSecret as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createSecret as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createSecret with closed client', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.CreateSecretRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.CreateSecretRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.createSecret(request), expectedError);
-    });
-  });
-
-  describe('addSecretVersion', () => {
-    it('invokes addSecretVersion without error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.AddSecretVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.AddSecretVersionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
-      );
-      client.innerApiCalls.addSecretVersion = stubSimpleCall(expectedResponse);
-      const [response] = await client.addSecretVersion(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.addSecretVersion as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.addSecretVersion as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes addSecretVersion without error using callback', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.AddSecretVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.AddSecretVersionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
-      );
-      client.innerApiCalls.addSecretVersion =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.addSecretVersion(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.secretmanager.v1beta2.ISecretVersion | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.addSecretVersion as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.addSecretVersion as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes addSecretVersion with error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.AddSecretVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.AddSecretVersionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.addSecretVersion = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.addSecretVersion(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.addSecretVersion as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.addSecretVersion as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes addSecretVersion with closed client', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.AddSecretVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.AddSecretVersionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.addSecretVersion(request), expectedError);
-    });
-  });
-
-  describe('getSecret', () => {
-    it('invokes getSecret without error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.GetSecretRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.GetSecretRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.Secret()
-      );
-      client.innerApiCalls.getSecret = stubSimpleCall(expectedResponse);
-      const [response] = await client.getSecret(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getSecret as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getSecret as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getSecret without error using callback', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.GetSecretRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.GetSecretRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.Secret()
-      );
-      client.innerApiCalls.getSecret =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getSecret(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.secretmanager.v1beta2.ISecret | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getSecret as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getSecret as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getSecret with error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.GetSecretRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.GetSecretRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getSecret = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getSecret(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getSecret as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getSecret as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getSecret with closed client', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.GetSecretRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.GetSecretRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getSecret(request), expectedError);
-    });
-  });
-
-  describe('updateSecret', () => {
-    it('invokes updateSecret without error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.UpdateSecretRequest()
-      );
-      request.secret ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.UpdateSecretRequest',
-        ['secret', 'name']
-      );
-      request.secret.name = defaultValue1;
-      const expectedHeaderRequestParams = `secret.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.Secret()
-      );
-      client.innerApiCalls.updateSecret = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateSecret(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateSecret as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSecret as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateSecret without error using callback', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.UpdateSecretRequest()
-      );
-      request.secret ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.UpdateSecretRequest',
-        ['secret', 'name']
-      );
-      request.secret.name = defaultValue1;
-      const expectedHeaderRequestParams = `secret.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.Secret()
-      );
-      client.innerApiCalls.updateSecret =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateSecret(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.secretmanager.v1beta2.ISecret | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateSecret as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSecret as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateSecret with error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.UpdateSecretRequest()
-      );
-      request.secret ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.UpdateSecretRequest',
-        ['secret', 'name']
-      );
-      request.secret.name = defaultValue1;
-      const expectedHeaderRequestParams = `secret.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateSecret = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateSecret(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateSecret as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSecret as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateSecret with closed client', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.UpdateSecretRequest()
-      );
-      request.secret ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.UpdateSecretRequest',
-        ['secret', 'name']
-      );
-      request.secret.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.updateSecret(request), expectedError);
-    });
-  });
-
-  describe('deleteSecret', () => {
-    it('invokes deleteSecret without error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.DeleteSecretRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.DeleteSecretRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteSecret = stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteSecret(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteSecret as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteSecret as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteSecret without error using callback', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.DeleteSecretRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.DeleteSecretRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteSecret =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteSecret(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteSecret as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteSecret as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteSecret with error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.DeleteSecretRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.DeleteSecretRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteSecret = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteSecret(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteSecret as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteSecret as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteSecret with closed client', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.DeleteSecretRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.DeleteSecretRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.deleteSecret(request), expectedError);
-    });
-  });
-
-  describe('getSecretVersion', () => {
-    it('invokes getSecretVersion without error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.GetSecretVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.GetSecretVersionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
-      );
-      client.innerApiCalls.getSecretVersion = stubSimpleCall(expectedResponse);
-      const [response] = await client.getSecretVersion(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getSecretVersion as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getSecretVersion as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getSecretVersion without error using callback', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.GetSecretVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.GetSecretVersionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
-      );
-      client.innerApiCalls.getSecretVersion =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getSecretVersion(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.secretmanager.v1beta2.ISecretVersion | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getSecretVersion as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getSecretVersion as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getSecretVersion with error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.GetSecretVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.GetSecretVersionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getSecretVersion = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getSecretVersion(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getSecretVersion as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getSecretVersion as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getSecretVersion with closed client', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.GetSecretVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.GetSecretVersionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getSecretVersion(request), expectedError);
-    });
-  });
-
-  describe('accessSecretVersion', () => {
-    it('invokes accessSecretVersion without error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse()
-      );
-      client.innerApiCalls.accessSecretVersion =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.accessSecretVersion(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.accessSecretVersion as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.accessSecretVersion as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes accessSecretVersion without error using callback', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse()
-      );
-      client.innerApiCalls.accessSecretVersion =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.accessSecretVersion(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.secretmanager.v1beta2.IAccessSecretVersionResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.accessSecretVersion as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.accessSecretVersion as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes accessSecretVersion with error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.accessSecretVersion = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.accessSecretVersion(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.accessSecretVersion as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.accessSecretVersion as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes accessSecretVersion with closed client', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.accessSecretVersion(request), expectedError);
-    });
-  });
-
-  describe('disableSecretVersion', () => {
-    it('invokes disableSecretVersion without error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
-      );
-      client.innerApiCalls.disableSecretVersion =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.disableSecretVersion(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.disableSecretVersion as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.disableSecretVersion as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes disableSecretVersion without error using callback', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
-      );
-      client.innerApiCalls.disableSecretVersion =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.disableSecretVersion(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.secretmanager.v1beta2.ISecretVersion | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.disableSecretVersion as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.disableSecretVersion as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes disableSecretVersion with error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.disableSecretVersion = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.disableSecretVersion(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.disableSecretVersion as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.disableSecretVersion as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes disableSecretVersion with closed client', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.disableSecretVersion(request), expectedError);
-    });
-  });
-
-  describe('enableSecretVersion', () => {
-    it('invokes enableSecretVersion without error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
-      );
-      client.innerApiCalls.enableSecretVersion =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.enableSecretVersion(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.enableSecretVersion as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.enableSecretVersion as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes enableSecretVersion without error using callback', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
-      );
-      client.innerApiCalls.enableSecretVersion =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.enableSecretVersion(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.secretmanager.v1beta2.ISecretVersion | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.enableSecretVersion as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.enableSecretVersion as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes enableSecretVersion with error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.enableSecretVersion = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.enableSecretVersion(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.enableSecretVersion as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.enableSecretVersion as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes enableSecretVersion with closed client', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.enableSecretVersion(request), expectedError);
-    });
-  });
-
-  describe('destroySecretVersion', () => {
-    it('invokes destroySecretVersion without error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
-      );
-      client.innerApiCalls.destroySecretVersion =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.destroySecretVersion(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.destroySecretVersion as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.destroySecretVersion as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes destroySecretVersion without error using callback', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
-      );
-      client.innerApiCalls.destroySecretVersion =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.destroySecretVersion(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.secretmanager.v1beta2.ISecretVersion | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.destroySecretVersion as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.destroySecretVersion as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes destroySecretVersion with error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.destroySecretVersion = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.destroySecretVersion(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.destroySecretVersion as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.destroySecretVersion as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes destroySecretVersion with closed client', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.destroySecretVersion(request), expectedError);
-    });
-  });
-
-  describe('setIamPolicy', () => {
-    it('invokes setIamPolicy without error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.SetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.SetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.Policy()
-      );
-      client.innerApiCalls.setIamPolicy = stubSimpleCall(expectedResponse);
-      const [response] = await client.setIamPolicy(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setIamPolicy without error using callback', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.SetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.SetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.Policy()
-      );
-      client.innerApiCalls.setIamPolicy =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.setIamPolicy(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.iam.v1.IPolicy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setIamPolicy with error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.SetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.SetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.setIamPolicy = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.setIamPolicy(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setIamPolicy with closed client', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.SetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.SetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.setIamPolicy(request), expectedError);
-    });
-  });
-
-  describe('getIamPolicy', () => {
-    it('invokes getIamPolicy without error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.GetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.GetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.Policy()
-      );
-      client.innerApiCalls.getIamPolicy = stubSimpleCall(expectedResponse);
-      const [response] = await client.getIamPolicy(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getIamPolicy without error using callback', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.GetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.GetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.Policy()
-      );
-      client.innerApiCalls.getIamPolicy =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getIamPolicy(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.iam.v1.IPolicy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getIamPolicy with error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.GetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.GetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getIamPolicy = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getIamPolicy(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getIamPolicy with closed client', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.GetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.GetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getIamPolicy(request), expectedError);
-    });
-  });
-
-  describe('testIamPermissions', () => {
-    it('invokes testIamPermissions without error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.TestIamPermissionsRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsResponse()
-      );
-      client.innerApiCalls.testIamPermissions =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.testIamPermissions(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes testIamPermissions without error using callback', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.TestIamPermissionsRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsResponse()
-      );
-      client.innerApiCalls.testIamPermissions =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.testIamPermissions(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.iam.v1.ITestIamPermissionsResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes testIamPermissions with error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.TestIamPermissionsRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.testIamPermissions = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.testIamPermissions(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes testIamPermissions with closed client', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.TestIamPermissionsRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.testIamPermissions(request), expectedError);
-    });
-  });
-
-  describe('listSecrets', () => {
-    it('invokes listSecrets without error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.ListSecretsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.ListSecretsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1beta2.Secret()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1beta2.Secret()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1beta2.Secret()
-        ),
-      ];
-      client.innerApiCalls.listSecrets = stubSimpleCall(expectedResponse);
-      const [response] = await client.listSecrets(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listSecrets as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listSecrets as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listSecrets without error using callback', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.ListSecretsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.ListSecretsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1beta2.Secret()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1beta2.Secret()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1beta2.Secret()
-        ),
-      ];
-      client.innerApiCalls.listSecrets =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listSecrets(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.secretmanager.v1beta2.ISecret[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listSecrets as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listSecrets as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listSecrets with error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.ListSecretsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.ListSecretsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listSecrets = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listSecrets(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listSecrets as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listSecrets as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listSecretsStream without error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.ListSecretsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.ListSecretsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1beta2.Secret()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1beta2.Secret()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1beta2.Secret()
-        ),
-      ];
-      client.descriptors.page.listSecrets.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listSecretsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.secretmanager.v1beta2.Secret[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.secretmanager.v1beta2.Secret) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listSecrets.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listSecrets, request)
-      );
-      assert(
-        (client.descriptors.page.listSecrets.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listSecretsStream with error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.ListSecretsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.ListSecretsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listSecrets.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listSecretsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.secretmanager.v1beta2.Secret[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.secretmanager.v1beta2.Secret) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listSecrets.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listSecrets, request)
-      );
-      assert(
-        (client.descriptors.page.listSecrets.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listSecrets without error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.ListSecretsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.ListSecretsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1beta2.Secret()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1beta2.Secret()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1beta2.Secret()
-        ),
-      ];
-      client.descriptors.page.listSecrets.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.secretmanager.v1beta2.ISecret[] = [];
-      const iterable = client.listSecretsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listSecrets.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listSecrets.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listSecrets with error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.ListSecretsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.ListSecretsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listSecrets.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listSecretsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.secretmanager.v1beta2.ISecret[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = secretmanagerserviceModule.v1beta2.SecretManagerServiceClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'secretmanager.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listSecrets.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listSecrets.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'secretmanager.example.com');
+        });
 
-  describe('listSecretVersions', () => {
-    it('invokes listSecretVersions without error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'secretmanager.example.com');
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
-        ),
-      ];
-      client.innerApiCalls.listSecretVersions =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listSecretVersions(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listSecretVersions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listSecretVersions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
 
-    it('invokes listSecretVersions without error using callback', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
-        ),
-      ];
-      client.innerApiCalls.listSecretVersions =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listSecretVersions(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.secretmanager.v1beta2.ISecretVersion[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listSecretVersions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listSecretVersions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'secretmanager.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('invokes listSecretVersions with error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listSecretVersions = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listSecretVersions(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listSecretVersions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listSecretVersions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listSecretVersionsStream without error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
-        ),
-      ];
-      client.descriptors.page.listSecretVersions.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listSecretVersionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.secretmanager.v1beta2.SecretVersion[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.secretmanager.v1beta2.SecretVersion
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listSecretVersions.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listSecretVersions, request)
-      );
-      assert(
-        (client.descriptors.page.listSecretVersions.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listSecretVersionsStream with error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listSecretVersions.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listSecretVersionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.secretmanager.v1beta2.SecretVersion[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.secretmanager.v1beta2.SecretVersion
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listSecretVersions.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listSecretVersions, request)
-      );
-      assert(
-        (client.descriptors.page.listSecretVersions.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listSecretVersions without error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
-        ),
-      ];
-      client.descriptors.page.listSecretVersions.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.secretmanager.v1beta2.ISecretVersion[] =
-        [];
-      const iterable = client.listSecretVersionsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listSecretVersions.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listSecretVersions.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listSecretVersions with error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listSecretVersions.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listSecretVersionsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.secretmanager.v1beta2.ISecretVersion[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'secretmanager.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listSecretVersions.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listSecretVersions.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-  describe('getLocation', () => {
-    it('invokes getLocation without error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
-      const response = await client.getLocation(request, expectedOptions);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-    it('invokes getLocation without error using callback', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+
+        it('has port', () => {
+            const port = secretmanagerserviceModule.v1beta2.SecretManagerServiceClient.port;
+            assert(port);
+            assert(typeof port === 'number');
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getLocation(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: LocationProtos.google.cloud.location.ILocation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+
+        it('should create a client with no option', () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.secretManagerServiceStub, undefined);
+            await client.initialize();
+            assert(client.secretManagerServiceStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.secretManagerServiceStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.secretManagerServiceStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
+    });
+
+    describe('createSecret', () => {
+        it('invokes createSecret without error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.CreateSecretRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.CreateSecretRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.Secret()
+            );
+            client.innerApiCalls.createSecret = stubSimpleCall(expectedResponse);
+            const [response] = await client.createSecret(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createSecret as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createSecret as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createSecret without error using callback', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.CreateSecretRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.CreateSecretRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.Secret()
+            );
+            client.innerApiCalls.createSecret = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createSecret(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.secretmanager.v1beta2.ISecret|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createSecret as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createSecret as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createSecret with error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.CreateSecretRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.CreateSecretRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createSecret = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createSecret(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createSecret as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createSecret as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createSecret with closed client', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.CreateSecretRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.CreateSecretRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createSecret(request), expectedError);
+        });
+    });
+
+    describe('addSecretVersion', () => {
+        it('invokes addSecretVersion without error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.AddSecretVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.AddSecretVersionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
+            );
+            client.innerApiCalls.addSecretVersion = stubSimpleCall(expectedResponse);
+            const [response] = await client.addSecretVersion(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.addSecretVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.addSecretVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes addSecretVersion without error using callback', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.AddSecretVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.AddSecretVersionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
+            );
+            client.innerApiCalls.addSecretVersion = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.addSecretVersion(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.secretmanager.v1beta2.ISecretVersion|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.addSecretVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.addSecretVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes addSecretVersion with error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.AddSecretVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.AddSecretVersionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.addSecretVersion = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.addSecretVersion(request), expectedError);
+            const actualRequest = (client.innerApiCalls.addSecretVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.addSecretVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes addSecretVersion with closed client', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.AddSecretVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.AddSecretVersionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.addSecretVersion(request), expectedError);
+        });
+    });
+
+    describe('getSecret', () => {
+        it('invokes getSecret without error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.GetSecretRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.GetSecretRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.Secret()
+            );
+            client.innerApiCalls.getSecret = stubSimpleCall(expectedResponse);
+            const [response] = await client.getSecret(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getSecret as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSecret as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getSecret without error using callback', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.GetSecretRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.GetSecretRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.Secret()
+            );
+            client.innerApiCalls.getSecret = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getSecret(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.secretmanager.v1beta2.ISecret|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getSecret as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSecret as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getSecret with error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.GetSecretRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.GetSecretRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getSecret = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getSecret(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getSecret as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSecret as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getSecret with closed client', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.GetSecretRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.GetSecretRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getSecret(request), expectedError);
+        });
+    });
+
+    describe('updateSecret', () => {
+        it('invokes updateSecret without error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.UpdateSecretRequest()
+            );
+            request.secret ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.UpdateSecretRequest', ['secret', 'name']);
+            request.secret.name = defaultValue1;
+            const expectedHeaderRequestParams = `secret.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.Secret()
+            );
+            client.innerApiCalls.updateSecret = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateSecret(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateSecret as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSecret as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateSecret without error using callback', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.UpdateSecretRequest()
+            );
+            request.secret ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.UpdateSecretRequest', ['secret', 'name']);
+            request.secret.name = defaultValue1;
+            const expectedHeaderRequestParams = `secret.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.Secret()
+            );
+            client.innerApiCalls.updateSecret = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateSecret(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.secretmanager.v1beta2.ISecret|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateSecret as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSecret as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateSecret with error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.UpdateSecretRequest()
+            );
+            request.secret ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.UpdateSecretRequest', ['secret', 'name']);
+            request.secret.name = defaultValue1;
+            const expectedHeaderRequestParams = `secret.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateSecret = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateSecret(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateSecret as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSecret as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateSecret with closed client', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.UpdateSecretRequest()
+            );
+            request.secret ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.UpdateSecretRequest', ['secret', 'name']);
+            request.secret.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateSecret(request), expectedError);
+        });
+    });
+
+    describe('deleteSecret', () => {
+        it('invokes deleteSecret without error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.DeleteSecretRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.DeleteSecretRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteSecret = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteSecret(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteSecret as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteSecret as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteSecret without error using callback', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.DeleteSecretRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.DeleteSecretRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteSecret = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteSecret(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteSecret as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteSecret as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteSecret with error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.DeleteSecretRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.DeleteSecretRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteSecret = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteSecret(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteSecret as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteSecret as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteSecret with closed client', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.DeleteSecretRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.DeleteSecretRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteSecret(request), expectedError);
+        });
+    });
+
+    describe('getSecretVersion', () => {
+        it('invokes getSecretVersion without error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.GetSecretVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.GetSecretVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
+            );
+            client.innerApiCalls.getSecretVersion = stubSimpleCall(expectedResponse);
+            const [response] = await client.getSecretVersion(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getSecretVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSecretVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getSecretVersion without error using callback', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.GetSecretVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.GetSecretVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
+            );
+            client.innerApiCalls.getSecretVersion = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getSecretVersion(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.secretmanager.v1beta2.ISecretVersion|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getSecretVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSecretVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getSecretVersion with error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.GetSecretVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.GetSecretVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getSecretVersion = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getSecretVersion(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getSecretVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSecretVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getSecretVersion with closed client', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.GetSecretVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.GetSecretVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getSecretVersion(request), expectedError);
+        });
+    });
+
+    describe('accessSecretVersion', () => {
+        it('invokes accessSecretVersion without error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse()
+            );
+            client.innerApiCalls.accessSecretVersion = stubSimpleCall(expectedResponse);
+            const [response] = await client.accessSecretVersion(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.accessSecretVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.accessSecretVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes accessSecretVersion without error using callback', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse()
+            );
+            client.innerApiCalls.accessSecretVersion = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.accessSecretVersion(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.secretmanager.v1beta2.IAccessSecretVersionResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.accessSecretVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.accessSecretVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes accessSecretVersion with error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.accessSecretVersion = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.accessSecretVersion(request), expectedError);
+            const actualRequest = (client.innerApiCalls.accessSecretVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.accessSecretVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes accessSecretVersion with closed client', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.accessSecretVersion(request), expectedError);
+        });
+    });
+
+    describe('disableSecretVersion', () => {
+        it('invokes disableSecretVersion without error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
+            );
+            client.innerApiCalls.disableSecretVersion = stubSimpleCall(expectedResponse);
+            const [response] = await client.disableSecretVersion(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.disableSecretVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.disableSecretVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes disableSecretVersion without error using callback', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
+            );
+            client.innerApiCalls.disableSecretVersion = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.disableSecretVersion(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.secretmanager.v1beta2.ISecretVersion|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.disableSecretVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.disableSecretVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes disableSecretVersion with error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.disableSecretVersion = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.disableSecretVersion(request), expectedError);
+            const actualRequest = (client.innerApiCalls.disableSecretVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.disableSecretVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes disableSecretVersion with closed client', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.disableSecretVersion(request), expectedError);
+        });
+    });
+
+    describe('enableSecretVersion', () => {
+        it('invokes enableSecretVersion without error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
+            );
+            client.innerApiCalls.enableSecretVersion = stubSimpleCall(expectedResponse);
+            const [response] = await client.enableSecretVersion(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.enableSecretVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.enableSecretVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes enableSecretVersion without error using callback', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
+            );
+            client.innerApiCalls.enableSecretVersion = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.enableSecretVersion(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.secretmanager.v1beta2.ISecretVersion|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.enableSecretVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.enableSecretVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes enableSecretVersion with error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.enableSecretVersion = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.enableSecretVersion(request), expectedError);
+            const actualRequest = (client.innerApiCalls.enableSecretVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.enableSecretVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes enableSecretVersion with closed client', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.enableSecretVersion(request), expectedError);
+        });
+    });
+
+    describe('destroySecretVersion', () => {
+        it('invokes destroySecretVersion without error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
+            );
+            client.innerApiCalls.destroySecretVersion = stubSimpleCall(expectedResponse);
+            const [response] = await client.destroySecretVersion(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.destroySecretVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.destroySecretVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes destroySecretVersion without error using callback', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
+            );
+            client.innerApiCalls.destroySecretVersion = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.destroySecretVersion(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.secretmanager.v1beta2.ISecretVersion|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.destroySecretVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.destroySecretVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes destroySecretVersion with error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.destroySecretVersion = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.destroySecretVersion(request), expectedError);
+            const actualRequest = (client.innerApiCalls.destroySecretVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.destroySecretVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes destroySecretVersion with closed client', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.destroySecretVersion(request), expectedError);
+        });
+    });
+
+    describe('setIamPolicy', () => {
+        it('invokes setIamPolicy without error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.SetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.SetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.Policy()
+            );
+            client.innerApiCalls.setIamPolicy = stubSimpleCall(expectedResponse);
+            const [response] = await client.setIamPolicy(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setIamPolicy without error using callback', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.SetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.SetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.Policy()
+            );
+            client.innerApiCalls.setIamPolicy = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.setIamPolicy(
+                    request,
+                    (err?: Error|null, result?: protos.google.iam.v1.IPolicy|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setIamPolicy with error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.SetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.SetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.setIamPolicy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.setIamPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setIamPolicy with closed client', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.SetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.SetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.setIamPolicy(request), expectedError);
+        });
+    });
+
+    describe('getIamPolicy', () => {
+        it('invokes getIamPolicy without error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.GetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.GetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.Policy()
+            );
+            client.innerApiCalls.getIamPolicy = stubSimpleCall(expectedResponse);
+            const [response] = await client.getIamPolicy(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getIamPolicy without error using callback', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.GetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.GetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.Policy()
+            );
+            client.innerApiCalls.getIamPolicy = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getIamPolicy(
+                    request,
+                    (err?: Error|null, result?: protos.google.iam.v1.IPolicy|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getIamPolicy with error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.GetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.GetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getIamPolicy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getIamPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getIamPolicy with closed client', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.GetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.GetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getIamPolicy(request), expectedError);
+        });
+    });
+
+    describe('testIamPermissions', () => {
+        it('invokes testIamPermissions without error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.TestIamPermissionsRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsResponse()
+            );
+            client.innerApiCalls.testIamPermissions = stubSimpleCall(expectedResponse);
+            const [response] = await client.testIamPermissions(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes testIamPermissions without error using callback', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.TestIamPermissionsRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsResponse()
+            );
+            client.innerApiCalls.testIamPermissions = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.testIamPermissions(
+                    request,
+                    (err?: Error|null, result?: protos.google.iam.v1.ITestIamPermissionsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes testIamPermissions with error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.TestIamPermissionsRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.testIamPermissions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.testIamPermissions(request), expectedError);
+            const actualRequest = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes testIamPermissions with closed client', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.TestIamPermissionsRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.testIamPermissions(request), expectedError);
+        });
+    });
+
+    describe('listSecrets', () => {
+        it('invokes listSecrets without error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.ListSecretsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.ListSecretsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.secretmanager.v1beta2.Secret()),
+              generateSampleMessage(new protos.google.cloud.secretmanager.v1beta2.Secret()),
+              generateSampleMessage(new protos.google.cloud.secretmanager.v1beta2.Secret()),
+            ];
+            client.innerApiCalls.listSecrets = stubSimpleCall(expectedResponse);
+            const [response] = await client.listSecrets(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listSecrets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listSecrets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listSecrets without error using callback', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.ListSecretsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.ListSecretsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.secretmanager.v1beta2.Secret()),
+              generateSampleMessage(new protos.google.cloud.secretmanager.v1beta2.Secret()),
+              generateSampleMessage(new protos.google.cloud.secretmanager.v1beta2.Secret()),
+            ];
+            client.innerApiCalls.listSecrets = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listSecrets(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.secretmanager.v1beta2.ISecret[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listSecrets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listSecrets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listSecrets with error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.ListSecretsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.ListSecretsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listSecrets = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listSecrets(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listSecrets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listSecrets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listSecretsStream without error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.ListSecretsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.ListSecretsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.secretmanager.v1beta2.Secret()),
+              generateSampleMessage(new protos.google.cloud.secretmanager.v1beta2.Secret()),
+              generateSampleMessage(new protos.google.cloud.secretmanager.v1beta2.Secret()),
+            ];
+            client.descriptors.page.listSecrets.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listSecretsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.secretmanager.v1beta2.Secret[] = [];
+                stream.on('data', (response: protos.google.cloud.secretmanager.v1beta2.Secret) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listSecrets.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listSecrets, request));
+            assert(
+                (client.descriptors.page.listSecrets.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listSecretsStream with error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.ListSecretsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.ListSecretsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listSecrets.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listSecretsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.secretmanager.v1beta2.Secret[] = [];
+                stream.on('data', (response: protos.google.cloud.secretmanager.v1beta2.Secret) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listSecrets.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listSecrets, request));
+            assert(
+                (client.descriptors.page.listSecrets.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listSecrets without error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.ListSecretsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.ListSecretsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.secretmanager.v1beta2.Secret()),
+              generateSampleMessage(new protos.google.cloud.secretmanager.v1beta2.Secret()),
+              generateSampleMessage(new protos.google.cloud.secretmanager.v1beta2.Secret()),
+            ];
+            client.descriptors.page.listSecrets.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.secretmanager.v1beta2.ISecret[] = [];
+            const iterable = client.listSecretsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.locationsClient.getLocation as SinonStub).getCall(0));
-    });
-    it('invokes getLocation with error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listSecrets.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listSecrets.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.locationsClient.getLocation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getLocation(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-  describe('listLocationsAsync', () => {
-    it('uses async iteration with listLocations without error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+
+        it('uses async iteration with listSecrets with error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.ListSecretsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.ListSecretsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listSecrets.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listSecretsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.secretmanager.v1beta2.ISecret[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listSecrets.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listSecrets.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedResponse = [
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-      ];
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-      const iterable = client.listLocationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
     });
-    it('uses async iteration with listLocations with error', async () => {
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+
+    describe('listSecretVersions', () => {
+        it('invokes listSecretVersions without error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.secretmanager.v1beta2.SecretVersion()),
+              generateSampleMessage(new protos.google.cloud.secretmanager.v1beta2.SecretVersion()),
+              generateSampleMessage(new protos.google.cloud.secretmanager.v1beta2.SecretVersion()),
+            ];
+            client.innerApiCalls.listSecretVersions = stubSimpleCall(expectedResponse);
+            const [response] = await client.listSecretVersions(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listSecretVersions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listSecretVersions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedError = new Error('expected');
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listLocationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
 
-  describe('Path templates', () => {
-    describe('project', async () => {
-      const fakePath = '/rendered/path/project';
-      const expectedParameters = {
-        project: 'projectValue',
-      };
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listSecretVersions without error using callback', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.secretmanager.v1beta2.SecretVersion()),
+              generateSampleMessage(new protos.google.cloud.secretmanager.v1beta2.SecretVersion()),
+              generateSampleMessage(new protos.google.cloud.secretmanager.v1beta2.SecretVersion()),
+            ];
+            client.innerApiCalls.listSecretVersions = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listSecretVersions(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.secretmanager.v1beta2.ISecretVersion[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listSecretVersions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listSecretVersions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      client.pathTemplates.projectPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
 
-      it('projectPath', () => {
-        const result = client.projectPath('projectValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectName', () => {
-        const result = client.matchProjectFromProjectName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationSecret', async () => {
-      const fakePath = '/rendered/path/projectLocationSecret';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        secret: 'secretValue',
-      };
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listSecretVersions with error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listSecretVersions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listSecretVersions(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listSecretVersions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listSecretVersions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      client.pathTemplates.projectLocationSecretPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectLocationSecretPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
 
-      it('projectLocationSecretPath', () => {
-        const result = client.projectLocationSecretPath(
-          'projectValue',
-          'locationValue',
-          'secretValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectLocationSecretPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationSecretName', () => {
-        const result =
-          client.matchProjectFromProjectLocationSecretName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationSecretPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationSecretName', () => {
-        const result =
-          client.matchLocationFromProjectLocationSecretName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationSecretPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSecretFromProjectLocationSecretName', () => {
-        const result =
-          client.matchSecretFromProjectLocationSecretName(fakePath);
-        assert.strictEqual(result, 'secretValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationSecretPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationSecretSecretVersion', async () => {
-      const fakePath = '/rendered/path/projectLocationSecretSecretVersion';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        secret: 'secretValue',
-        secret_version: 'secretVersionValue',
-      };
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listSecretVersionsStream without error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.secretmanager.v1beta2.SecretVersion()),
+              generateSampleMessage(new protos.google.cloud.secretmanager.v1beta2.SecretVersion()),
+              generateSampleMessage(new protos.google.cloud.secretmanager.v1beta2.SecretVersion()),
+            ];
+            client.descriptors.page.listSecretVersions.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listSecretVersionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.secretmanager.v1beta2.SecretVersion[] = [];
+                stream.on('data', (response: protos.google.cloud.secretmanager.v1beta2.SecretVersion) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listSecretVersions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listSecretVersions, request));
+            assert(
+                (client.descriptors.page.listSecretVersions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      await client.initialize();
-      client.pathTemplates.projectLocationSecretSecretVersionPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationSecretSecretVersionPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
 
-      it('projectLocationSecretSecretVersionPath', () => {
-        const result = client.projectLocationSecretSecretVersionPath(
-          'projectValue',
-          'locationValue',
-          'secretValue',
-          'secretVersionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectLocationSecretSecretVersionPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationSecretSecretVersionName', () => {
-        const result =
-          client.matchProjectFromProjectLocationSecretSecretVersionName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationSecretSecretVersionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationSecretSecretVersionName', () => {
-        const result =
-          client.matchLocationFromProjectLocationSecretSecretVersionName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationSecretSecretVersionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSecretFromProjectLocationSecretSecretVersionName', () => {
-        const result =
-          client.matchSecretFromProjectLocationSecretSecretVersionName(
-            fakePath
-          );
-        assert.strictEqual(result, 'secretValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationSecretSecretVersionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSecretVersionFromProjectLocationSecretSecretVersionName', () => {
-        const result =
-          client.matchSecretVersionFromProjectLocationSecretSecretVersionName(
-            fakePath
-          );
-        assert.strictEqual(result, 'secretVersionValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationSecretSecretVersionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectSecret', async () => {
-      const fakePath = '/rendered/path/projectSecret';
-      const expectedParameters = {
-        project: 'projectValue',
-        secret: 'secretValue',
-      };
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listSecretVersionsStream with error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listSecretVersions.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listSecretVersionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.secretmanager.v1beta2.SecretVersion[] = [];
+                stream.on('data', (response: protos.google.cloud.secretmanager.v1beta2.SecretVersion) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listSecretVersions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listSecretVersions, request));
+            assert(
+                (client.descriptors.page.listSecretVersions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
         });
-      await client.initialize();
-      client.pathTemplates.projectSecretPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectSecretPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
 
-      it('projectSecretPath', () => {
-        const result = client.projectSecretPath('projectValue', 'secretValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectSecretPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectSecretName', () => {
-        const result = client.matchProjectFromProjectSecretName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectSecretPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSecretFromProjectSecretName', () => {
-        const result = client.matchSecretFromProjectSecretName(fakePath);
-        assert.strictEqual(result, 'secretValue');
-        assert(
-          (client.pathTemplates.projectSecretPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectSecretSecretVersion', async () => {
-      const fakePath = '/rendered/path/projectSecretSecretVersion';
-      const expectedParameters = {
-        project: 'projectValue',
-        secret: 'secretValue',
-        secret_version: 'secretVersionValue',
-      };
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('uses async iteration with listSecretVersions without error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.secretmanager.v1beta2.SecretVersion()),
+              generateSampleMessage(new protos.google.cloud.secretmanager.v1beta2.SecretVersion()),
+              generateSampleMessage(new protos.google.cloud.secretmanager.v1beta2.SecretVersion()),
+            ];
+            client.descriptors.page.listSecretVersions.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.secretmanager.v1beta2.ISecretVersion[] = [];
+            const iterable = client.listSecretVersionsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listSecretVersions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listSecretVersions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      await client.initialize();
-      client.pathTemplates.projectSecretSecretVersionPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectSecretSecretVersionPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
 
-      it('projectSecretSecretVersionPath', () => {
-        const result = client.projectSecretSecretVersionPath(
-          'projectValue',
-          'secretValue',
-          'secretVersionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectSecretSecretVersionPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectSecretSecretVersionName', () => {
-        const result =
-          client.matchProjectFromProjectSecretSecretVersionName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectSecretSecretVersionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSecretFromProjectSecretSecretVersionName', () => {
-        const result =
-          client.matchSecretFromProjectSecretSecretVersionName(fakePath);
-        assert.strictEqual(result, 'secretValue');
-        assert(
-          (
-            client.pathTemplates.projectSecretSecretVersionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSecretVersionFromProjectSecretSecretVersionName', () => {
-        const result =
-          client.matchSecretVersionFromProjectSecretSecretVersionName(fakePath);
-        assert.strictEqual(result, 'secretVersionValue');
-        assert(
-          (
-            client.pathTemplates.projectSecretSecretVersionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('topic', async () => {
-      const fakePath = '/rendered/path/topic';
-      const expectedParameters = {
-        project: 'projectValue',
-        topic: 'topicValue',
-      };
-      const client =
-        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('uses async iteration with listSecretVersions with error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listSecretVersions.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listSecretVersionsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.secretmanager.v1beta2.ISecretVersion[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listSecretVersions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listSecretVersions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      await client.initialize();
-      client.pathTemplates.topicPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.topicPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('topicPath', () => {
-        const result = client.topicPath('projectValue', 'topicValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.topicPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromTopicName', () => {
-        const result = client.matchProjectFromTopicName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.topicPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchTopicFromTopicName', () => {
-        const result = client.matchTopicFromTopicName(fakePath);
-        assert.strictEqual(result, 'topicValue');
-        assert(
-          (client.pathTemplates.topicPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
     });
-  });
+    describe('getLocation', () => {
+        it('invokes getLocation without error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
+            const response = await client.getLocation(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+        it('invokes getLocation without error using callback', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getLocation(
+                    request,
+                    expectedOptions,
+                    (
+                        err?: Error | null,
+                        result?: LocationProtos.google.cloud.location.ILocation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getLocation with error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.locationsClient.getLocation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getLocation(request, expectedOptions), expectedError);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+    });
+    describe('listLocationsAsync', () => {
+        it('uses async iteration with listLocations without error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+                new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedResponse = [
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+            ];
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+            const iterable = client.listLocationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+        it('uses async iteration with listLocations with error', async () => {
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedError = new Error('expected');
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listLocationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('Path templates', () => {
+
+        describe('project', async () => {
+            const fakePath = "/rendered/path/project";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectPath', () => {
+                const result = client.projectPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectName', () => {
+                const result = client.matchProjectFromProjectName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationSecret', async () => {
+            const fakePath = "/rendered/path/projectLocationSecret";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                secret: "secretValue",
+            };
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationSecretPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationSecretPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationSecretPath', () => {
+                const result = client.projectLocationSecretPath("projectValue", "locationValue", "secretValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationSecretPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationSecretName', () => {
+                const result = client.matchProjectFromProjectLocationSecretName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationSecretPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationSecretName', () => {
+                const result = client.matchLocationFromProjectLocationSecretName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationSecretPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSecretFromProjectLocationSecretName', () => {
+                const result = client.matchSecretFromProjectLocationSecretName(fakePath);
+                assert.strictEqual(result, "secretValue");
+                assert((client.pathTemplates.projectLocationSecretPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationSecretSecretVersion', async () => {
+            const fakePath = "/rendered/path/projectLocationSecretSecretVersion";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                secret: "secretValue",
+                secret_version: "secretVersionValue",
+            };
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationSecretSecretVersionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationSecretSecretVersionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationSecretSecretVersionPath', () => {
+                const result = client.projectLocationSecretSecretVersionPath("projectValue", "locationValue", "secretValue", "secretVersionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationSecretSecretVersionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationSecretSecretVersionName', () => {
+                const result = client.matchProjectFromProjectLocationSecretSecretVersionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationSecretSecretVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationSecretSecretVersionName', () => {
+                const result = client.matchLocationFromProjectLocationSecretSecretVersionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationSecretSecretVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSecretFromProjectLocationSecretSecretVersionName', () => {
+                const result = client.matchSecretFromProjectLocationSecretSecretVersionName(fakePath);
+                assert.strictEqual(result, "secretValue");
+                assert((client.pathTemplates.projectLocationSecretSecretVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSecretVersionFromProjectLocationSecretSecretVersionName', () => {
+                const result = client.matchSecretVersionFromProjectLocationSecretSecretVersionName(fakePath);
+                assert.strictEqual(result, "secretVersionValue");
+                assert((client.pathTemplates.projectLocationSecretSecretVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectSecret', async () => {
+            const fakePath = "/rendered/path/projectSecret";
+            const expectedParameters = {
+                project: "projectValue",
+                secret: "secretValue",
+            };
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectSecretPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectSecretPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectSecretPath', () => {
+                const result = client.projectSecretPath("projectValue", "secretValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectSecretPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectSecretName', () => {
+                const result = client.matchProjectFromProjectSecretName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectSecretPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSecretFromProjectSecretName', () => {
+                const result = client.matchSecretFromProjectSecretName(fakePath);
+                assert.strictEqual(result, "secretValue");
+                assert((client.pathTemplates.projectSecretPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectSecretSecretVersion', async () => {
+            const fakePath = "/rendered/path/projectSecretSecretVersion";
+            const expectedParameters = {
+                project: "projectValue",
+                secret: "secretValue",
+                secret_version: "secretVersionValue",
+            };
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectSecretSecretVersionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectSecretSecretVersionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectSecretSecretVersionPath', () => {
+                const result = client.projectSecretSecretVersionPath("projectValue", "secretValue", "secretVersionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectSecretSecretVersionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectSecretSecretVersionName', () => {
+                const result = client.matchProjectFromProjectSecretSecretVersionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectSecretSecretVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSecretFromProjectSecretSecretVersionName', () => {
+                const result = client.matchSecretFromProjectSecretSecretVersionName(fakePath);
+                assert.strictEqual(result, "secretValue");
+                assert((client.pathTemplates.projectSecretSecretVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSecretVersionFromProjectSecretSecretVersionName', () => {
+                const result = client.matchSecretVersionFromProjectSecretSecretVersionName(fakePath);
+                assert.strictEqual(result, "secretVersionValue");
+                assert((client.pathTemplates.projectSecretSecretVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('topic', async () => {
+            const fakePath = "/rendered/path/topic";
+            const expectedParameters = {
+                project: "projectValue",
+                topic: "topicValue",
+            };
+            const client = new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.topicPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.topicPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('topicPath', () => {
+                const result = client.topicPath("projectValue", "topicValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.topicPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromTopicName', () => {
+                const result = client.matchProjectFromTopicName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.topicPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchTopicFromTopicName', () => {
+                const result = client.matchTopicFromTopicName(fakePath);
+                assert.strictEqual(result, "topicValue");
+                assert((client.pathTemplates.topicPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+    });
 });

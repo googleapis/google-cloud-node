@@ -1,0 +1,17 @@
+{
+  "name": "workspaceevents",
+  "name_pretty": "Google Workspace Events API",
+  "product_documentation": "https://developers.google.com/workspace/events",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/workspaceevents/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "release_level": "preview",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/subscriptions",
+  "api_id": "workspaceevents.googleapis.com",
+  "default_version": "v1",
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO",
+  "api_shortname": "workspaceevents"
+}
+

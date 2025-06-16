@@ -382,6 +382,29 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "volumeRegion": {
+                          "type": "string",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "backupRegion": {
+                          "type": "string",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "enforcedRetentionEndTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -793,9 +816,94 @@
                           "keyType": "string",
                           "type": "string",
                           "id": 5
+                        },
+                        "backupVaultType": {
+                          "type": "BackupVaultType",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "sourceRegion": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "backupRegion": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "sourceBackupVault": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "netapp.googleapis.com/BackupVault"
+                          }
+                        },
+                        "destinationBackupVault": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "netapp.googleapis.com/BackupVault"
+                          }
+                        },
+                        "backupRetentionPolicy": {
+                          "type": "BackupRetentionPolicy",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
+                        "BackupRetentionPolicy": {
+                          "fields": {
+                            "backupMinimumEnforcedRetentionDays": {
+                              "type": "int32",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "dailyBackupImmutable": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "weeklyBackupImmutable": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "monthlyBackupImmutable": {
+                              "type": "bool",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "manualBackupImmutable": {
+                              "type": "bool",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
                         "State": {
                           "values": {
                             "STATE_UNSPECIFIED": 0,
@@ -804,6 +912,13 @@
                             "DELETING": 3,
                             "ERROR": 4,
                             "UPDATING": 5
+                          }
+                        },
+                        "BackupVaultType": {
+                          "values": {
+                            "BACKUP_VAULT_TYPE_UNSPECIFIED": 0,
+                            "IN_REGION": 1,
+                            "CROSS_REGION": 2
                           }
                         }
                       }
@@ -5093,6 +5208,27 @@
                           "id": 24,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "customPerformanceEnabled": {
+                          "type": "bool",
+                          "id": 25,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "totalThroughputMibps": {
+                          "type": "int64",
+                          "id": 26,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "totalIops": {
+                          "type": "int64",
+                          "id": 27,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       },

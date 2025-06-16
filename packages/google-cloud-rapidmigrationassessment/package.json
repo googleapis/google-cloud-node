@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/rapidmigrationassessment",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Rapid Migration Assessment API client for Node.js",
   "repository": {
     "type": "git",

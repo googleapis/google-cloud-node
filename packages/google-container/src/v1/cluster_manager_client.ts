@@ -305,6 +305,8 @@ export class ClusterManagerClient {
       'setMaintenancePolicy',
       'listUsableSubnetworks',
       'checkAutopilotCompatibility',
+      'fetchClusterUpgradeInfo',
+      'fetchNodePoolUpgradeInfo',
     ];
     for (const methodName of clusterManagerStubMethods) {
       const callPromise = this.clusterManagerStub.then(
@@ -1047,6 +1049,11 @@ export class ClusterManagerClient {
    * @param {string[]} request.storagePools
    *   List of Storage Pools where boot disks are provisioned.
    *   Existing Storage Pools will be replaced with storage-pools.
+   * @param {google.protobuf.Duration} request.maxRunDuration
+   *   The maximum duration for the nodes to exist.
+   *   If unspecified, the nodes can exist indefinitely.
+   * @param {boolean} request.flexStart
+   *   Flex Start flag for enabling Flex Start VM.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1454,7 +1461,7 @@ export class ClusterManagerClient {
    *   Required. The monitoring service the cluster should use to write metrics.
    *   Currently available options:
    *
-   *   * "monitoring.googleapis.com/kubernetes" - The Cloud Monitoring
+   *   * `monitoring.googleapis.com/kubernetes` - The Cloud Monitoring
    *   service with a Kubernetes-native resource model
    *   * `monitoring.googleapis.com` - The legacy Cloud Monitoring service (no
    *     longer available as of GKE 1.15).
@@ -4799,6 +4806,257 @@ export class ClusterManagerClient {
           {} | undefined,
         ]) => {
           this._log.info('checkAutopilotCompatibility response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Fetch upgrade information of a specific cluster.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name (project, location, cluster) of the cluster to get.
+   *   Specified in the format `projects/* /locations/* /clusters/*` or
+   *   `projects/* /zones/* /clusters/*`.
+   * @param {string} request.version
+   *   API request version that initiates this operation.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.container.v1.ClusterUpgradeInfo|ClusterUpgradeInfo}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cluster_manager.fetch_cluster_upgrade_info.js</caption>
+   * region_tag:container_v1_generated_ClusterManager_FetchClusterUpgradeInfo_async
+   */
+  fetchClusterUpgradeInfo(
+    request?: protos.google.container.v1.IFetchClusterUpgradeInfoRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.container.v1.IClusterUpgradeInfo,
+      protos.google.container.v1.IFetchClusterUpgradeInfoRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  fetchClusterUpgradeInfo(
+    request: protos.google.container.v1.IFetchClusterUpgradeInfoRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.container.v1.IClusterUpgradeInfo,
+      | protos.google.container.v1.IFetchClusterUpgradeInfoRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  fetchClusterUpgradeInfo(
+    request: protos.google.container.v1.IFetchClusterUpgradeInfoRequest,
+    callback: Callback<
+      protos.google.container.v1.IClusterUpgradeInfo,
+      | protos.google.container.v1.IFetchClusterUpgradeInfoRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  fetchClusterUpgradeInfo(
+    request?: protos.google.container.v1.IFetchClusterUpgradeInfoRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.container.v1.IClusterUpgradeInfo,
+          | protos.google.container.v1.IFetchClusterUpgradeInfoRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.container.v1.IClusterUpgradeInfo,
+      | protos.google.container.v1.IFetchClusterUpgradeInfoRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.container.v1.IClusterUpgradeInfo,
+      protos.google.container.v1.IFetchClusterUpgradeInfoRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchClusterUpgradeInfo request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.container.v1.IClusterUpgradeInfo,
+          | protos.google.container.v1.IFetchClusterUpgradeInfoRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('fetchClusterUpgradeInfo response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .fetchClusterUpgradeInfo(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.container.v1.IClusterUpgradeInfo,
+          (
+            | protos.google.container.v1.IFetchClusterUpgradeInfoRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('fetchClusterUpgradeInfo response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Fetch upgrade information of a specific nodepool.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name (project, location, cluster, nodepool) of the nodepool
+   *   to get. Specified in the format
+   *   `projects/* /locations/* /clusters/* /nodePools/*` or
+   *   `projects/* /zones/* /clusters/* /nodePools/*`.
+   * @param {string} request.version
+   *   API request version that initiates this operation.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.container.v1.NodePoolUpgradeInfo|NodePoolUpgradeInfo}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cluster_manager.fetch_node_pool_upgrade_info.js</caption>
+   * region_tag:container_v1_generated_ClusterManager_FetchNodePoolUpgradeInfo_async
+   */
+  fetchNodePoolUpgradeInfo(
+    request?: protos.google.container.v1.IFetchNodePoolUpgradeInfoRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.container.v1.INodePoolUpgradeInfo,
+      protos.google.container.v1.IFetchNodePoolUpgradeInfoRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  fetchNodePoolUpgradeInfo(
+    request: protos.google.container.v1.IFetchNodePoolUpgradeInfoRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.container.v1.INodePoolUpgradeInfo,
+      | protos.google.container.v1.IFetchNodePoolUpgradeInfoRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  fetchNodePoolUpgradeInfo(
+    request: protos.google.container.v1.IFetchNodePoolUpgradeInfoRequest,
+    callback: Callback<
+      protos.google.container.v1.INodePoolUpgradeInfo,
+      | protos.google.container.v1.IFetchNodePoolUpgradeInfoRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  fetchNodePoolUpgradeInfo(
+    request?: protos.google.container.v1.IFetchNodePoolUpgradeInfoRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.container.v1.INodePoolUpgradeInfo,
+          | protos.google.container.v1.IFetchNodePoolUpgradeInfoRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.container.v1.INodePoolUpgradeInfo,
+      | protos.google.container.v1.IFetchNodePoolUpgradeInfoRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.container.v1.INodePoolUpgradeInfo,
+      protos.google.container.v1.IFetchNodePoolUpgradeInfoRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchNodePoolUpgradeInfo request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.container.v1.INodePoolUpgradeInfo,
+          | protos.google.container.v1.IFetchNodePoolUpgradeInfoRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('fetchNodePoolUpgradeInfo response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .fetchNodePoolUpgradeInfo(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.container.v1.INodePoolUpgradeInfo,
+          (
+            | protos.google.container.v1.IFetchNodePoolUpgradeInfoRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('fetchNodePoolUpgradeInfo response %j', response);
           return [response, options, rawResponse];
         }
       );

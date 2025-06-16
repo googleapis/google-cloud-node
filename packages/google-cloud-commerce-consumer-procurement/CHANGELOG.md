@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.2](https://github.com/googleapis/google-cloud-node/compare/procurement-v0.6.1...procurement-v0.6.2) (2025-06-03)
+
+
+### Bug Fixes
+
+* [cloudcommerceconsumerprocurement] An existing google.api.http annotation `http_uri` is changed for method `UpdateLicensePool` in service `LicenseManagementService` ([#6373](https://github.com/googleapis/google-cloud-node/issues/6373)) ([2215522](https://github.com/googleapis/google-cloud-node/commit/22155222919286135360dd822df1d4f8b5a3f656))
+
 ## [0.6.1](https://github.com/googleapis/google-cloud-node/compare/procurement-v0.6.0...procurement-v0.6.1) (2025-03-19)
 
 

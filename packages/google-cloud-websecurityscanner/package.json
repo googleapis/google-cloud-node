@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/web-security-scanner",
-  "version": "4.0.1",
+  "version": "4.1.0",
   "description": "Websecurityscanner client for Node.js",
   "repository": {
     "type": "git",
