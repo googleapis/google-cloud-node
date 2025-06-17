@@ -1,0 +1,195 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.securesourcemanager.v1",
+  "libraryPackage": "@google-cloud/securesourcemanager",
+  "services": {
+    "SecureSourceManager": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SecureSourceManagerClient",
+          "rpcs": {
+            "GetInstance": {
+              "methods": [
+                "getInstance"
+              ]
+            },
+            "GetRepository": {
+              "methods": [
+                "getRepository"
+              ]
+            },
+            "GetIamPolicyRepo": {
+              "methods": [
+                "getIamPolicyRepo"
+              ]
+            },
+            "SetIamPolicyRepo": {
+              "methods": [
+                "setIamPolicyRepo"
+              ]
+            },
+            "TestIamPermissionsRepo": {
+              "methods": [
+                "testIamPermissionsRepo"
+              ]
+            },
+            "GetBranchRule": {
+              "methods": [
+                "getBranchRule"
+              ]
+            },
+            "CreateInstance": {
+              "methods": [
+                "createInstance"
+              ]
+            },
+            "DeleteInstance": {
+              "methods": [
+                "deleteInstance"
+              ]
+            },
+            "CreateRepository": {
+              "methods": [
+                "createRepository"
+              ]
+            },
+            "DeleteRepository": {
+              "methods": [
+                "deleteRepository"
+              ]
+            },
+            "CreateBranchRule": {
+              "methods": [
+                "createBranchRule"
+              ]
+            },
+            "UpdateBranchRule": {
+              "methods": [
+                "updateBranchRule"
+              ]
+            },
+            "DeleteBranchRule": {
+              "methods": [
+                "deleteBranchRule"
+              ]
+            },
+            "ListInstances": {
+              "methods": [
+                "listInstances",
+                "listInstancesStream",
+                "listInstancesAsync"
+              ]
+            },
+            "ListRepositories": {
+              "methods": [
+                "listRepositories",
+                "listRepositoriesStream",
+                "listRepositoriesAsync"
+              ]
+            },
+            "ListBranchRules": {
+              "methods": [
+                "listBranchRules",
+                "listBranchRulesStream",
+                "listBranchRulesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SecureSourceManagerClient",
+          "rpcs": {
+            "GetInstance": {
+              "methods": [
+                "getInstance"
+              ]
+            },
+            "GetRepository": {
+              "methods": [
+                "getRepository"
+              ]
+            },
+            "GetIamPolicyRepo": {
+              "methods": [
+                "getIamPolicyRepo"
+              ]
+            },
+            "SetIamPolicyRepo": {
+              "methods": [
+                "setIamPolicyRepo"
+              ]
+            },
+            "TestIamPermissionsRepo": {
+              "methods": [
+                "testIamPermissionsRepo"
+              ]
+            },
+            "GetBranchRule": {
+              "methods": [
+                "getBranchRule"
+              ]
+            },
+            "CreateInstance": {
+              "methods": [
+                "createInstance"
+              ]
+            },
+            "DeleteInstance": {
+              "methods": [
+                "deleteInstance"
+              ]
+            },
+            "CreateRepository": {
+              "methods": [
+                "createRepository"
+              ]
+            },
+            "DeleteRepository": {
+              "methods": [
+                "deleteRepository"
+              ]
+            },
+            "CreateBranchRule": {
+              "methods": [
+                "createBranchRule"
+              ]
+            },
+            "UpdateBranchRule": {
+              "methods": [
+                "updateBranchRule"
+              ]
+            },
+            "DeleteBranchRule": {
+              "methods": [
+                "deleteBranchRule"
+              ]
+            },
+            "ListInstances": {
+              "methods": [
+                "listInstances",
+                "listInstancesStream",
+                "listInstancesAsync"
+              ]
+            },
+            "ListRepositories": {
+              "methods": [
+                "listRepositories",
+                "listRepositoriesStream",
+                "listRepositoriesAsync"
+              ]
+            },
+            "ListBranchRules": {
+              "methods": [
+                "listBranchRules",
+                "listBranchRulesStream",
+                "listBranchRulesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

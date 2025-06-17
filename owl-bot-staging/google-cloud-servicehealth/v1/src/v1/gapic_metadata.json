@@ -1,0 +1,95 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.servicehealth.v1",
+  "libraryPackage": "@google-cloud/servicehealth",
+  "services": {
+    "ServiceHealth": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ServiceHealthClient",
+          "rpcs": {
+            "GetEvent": {
+              "methods": [
+                "getEvent"
+              ]
+            },
+            "GetOrganizationEvent": {
+              "methods": [
+                "getOrganizationEvent"
+              ]
+            },
+            "GetOrganizationImpact": {
+              "methods": [
+                "getOrganizationImpact"
+              ]
+            },
+            "ListEvents": {
+              "methods": [
+                "listEvents",
+                "listEventsStream",
+                "listEventsAsync"
+              ]
+            },
+            "ListOrganizationEvents": {
+              "methods": [
+                "listOrganizationEvents",
+                "listOrganizationEventsStream",
+                "listOrganizationEventsAsync"
+              ]
+            },
+            "ListOrganizationImpacts": {
+              "methods": [
+                "listOrganizationImpacts",
+                "listOrganizationImpactsStream",
+                "listOrganizationImpactsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ServiceHealthClient",
+          "rpcs": {
+            "GetEvent": {
+              "methods": [
+                "getEvent"
+              ]
+            },
+            "GetOrganizationEvent": {
+              "methods": [
+                "getOrganizationEvent"
+              ]
+            },
+            "GetOrganizationImpact": {
+              "methods": [
+                "getOrganizationImpact"
+              ]
+            },
+            "ListEvents": {
+              "methods": [
+                "listEvents",
+                "listEventsStream",
+                "listEventsAsync"
+              ]
+            },
+            "ListOrganizationEvents": {
+              "methods": [
+                "listOrganizationEvents",
+                "listOrganizationEventsStream",
+                "listOrganizationEventsAsync"
+              ]
+            },
+            "ListOrganizationImpacts": {
+              "methods": [
+                "listOrganizationImpacts",
+                "listOrganizationImpactsStream",
+                "listOrganizationImpactsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
