@@ -8592,9 +8592,6 @@ export namespace google {
                     /** AnalyzeOrgPoliciesRequest pageToken. */
                     public pageToken: string;
 
-                    /** AnalyzeOrgPoliciesRequest _pageSize. */
-                    public _pageSize?: "pageSize";
-
                     /**
                      * Creates a new AnalyzeOrgPoliciesRequest instance using the specified properties.
                      * @param [properties] Properties to set
@@ -8948,9 +8945,6 @@ export namespace google {
 
                     /** AnalyzeOrgPolicyGovernedContainersRequest pageToken. */
                     public pageToken: string;
-
-                    /** AnalyzeOrgPolicyGovernedContainersRequest _pageSize. */
-                    public _pageSize?: "pageSize";
 
                     /**
                      * Creates a new AnalyzeOrgPolicyGovernedContainersRequest instance using the specified properties.
@@ -9323,9 +9317,6 @@ export namespace google {
 
                     /** AnalyzeOrgPolicyGovernedAssetsRequest pageToken. */
                     public pageToken: string;
-
-                    /** AnalyzeOrgPolicyGovernedAssetsRequest _pageSize. */
-                    public _pageSize?: "pageSize";
 
                     /**
                      * Creates a new AnalyzeOrgPolicyGovernedAssetsRequest instance using the specified properties.
@@ -10917,18 +10908,6 @@ export namespace google {
                     /** Tag tagValueId. */
                     public tagValueId?: (string|null);
 
-                    /** Tag _tagKey. */
-                    public _tagKey?: "tagKey";
-
-                    /** Tag _tagKeyId. */
-                    public _tagKeyId?: "tagKeyId";
-
-                    /** Tag _tagValue. */
-                    public _tagValue?: "tagValue";
-
-                    /** Tag _tagValueId. */
-                    public _tagValueId?: "tagValueId";
-
                     /**
                      * Creates a new Tag instance using the specified properties.
                      * @param [properties] Properties to set
@@ -11031,9 +11010,6 @@ export namespace google {
 
                     /** EffectiveTagDetails effectiveTags. */
                     public effectiveTags: google.cloud.asset.v1.ITag[];
-
-                    /** EffectiveTagDetails _attachedResource. */
-                    public _attachedResource?: "attachedResource";
 
                     /**
                      * Creates a new EffectiveTagDetails instance using the specified properties.
@@ -20491,7 +20467,7 @@ export namespace google {
                     constraint?: (string|null);
 
                     /** Policy etag */
-                    etag?: (Uint8Array|string|null);
+                    etag?: (Uint8Array|Buffer|string|null);
 
                     /** Policy updateTime */
                     updateTime?: (google.protobuf.ITimestamp|null);
@@ -20522,7 +20498,7 @@ export namespace google {
                     public constraint: string;
 
                     /** Policy etag. */
-                    public etag: (Uint8Array|string);
+                    public etag: (Uint8Array|Buffer|string);
 
                     /** Policy updateTime. */
                     public updateTime?: (google.protobuf.ITimestamp|null);
@@ -23207,6 +23183,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -23247,6 +23226,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -27465,6 +27447,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -27716,7 +27701,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -27747,7 +27732,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -29318,7 +29303,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -29334,7 +29319,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.
@@ -29850,7 +29835,7 @@ export namespace google {
                 auditConfigs?: (google.iam.v1.IAuditConfig[]|null);
 
                 /** Policy etag */
-                etag?: (Uint8Array|string|null);
+                etag?: (Uint8Array|Buffer|string|null);
             }
 
             /** Represents a Policy. */
@@ -29872,7 +29857,7 @@ export namespace google {
                 public auditConfigs: google.iam.v1.IAuditConfig[];
 
                 /** Policy etag. */
-                public etag: (Uint8Array|string);
+                public etag: (Uint8Array|Buffer|string);
 
                 /**
                  * Creates a new Policy instance using the specified properties.
