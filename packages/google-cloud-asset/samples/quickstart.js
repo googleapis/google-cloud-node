@@ -20,9 +20,6 @@
 //   usage: node listAssets <ASSET_TYPES> <content_type>
 //   example: node listAssets "storage.googleapis.com/Bucket,bigquery.googleapis.com/Table" 'RESOURCE'
 
-// Service has limited quota, adding max results to keep in the limit.
-const MAX_RESULTS = 10;
-
 async function main(assetTypes, contentType, projectId) {
   // [START asset_quickstart_list_assets]
   /**
@@ -52,10 +49,7 @@ async function main(assetTypes, contentType, projectId) {
     };
 
     // Call cloud.assets.v1.ListAssets API.
-    const result = await client.listAssets(request, {
-      autopaginate: false,
-      maxResults: MAX_RESULTS,
-    });
+    const result = await client.listAssets(request);
     // Handle the response.
     console.log(util.inspect(result, {depth: null}));
   }
