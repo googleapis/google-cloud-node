@@ -183,9 +183,6 @@ export namespace google {
                         /** ProductInput customAttributes. */
                         public customAttributes: google.shopping.type.ICustomAttribute[];
 
-                        /** ProductInput _versionNumber. */
-                        public _versionNumber?: "versionNumber";
-
                         /**
                          * Creates a new ProductInput instance using the specified properties.
                          * @param [properties] Properties to set
@@ -1163,162 +1160,6 @@ export namespace google {
                         /** Attributes sustainabilityIncentives. */
                         public sustainabilityIncentives: google.shopping.merchant.products.v1beta.IProductSustainabilityIncentive[];
 
-                        /** Attributes _identifierExists. */
-                        public _identifierExists?: "identifierExists";
-
-                        /** Attributes _isBundle. */
-                        public _isBundle?: "isBundle";
-
-                        /** Attributes _title. */
-                        public _title?: "title";
-
-                        /** Attributes _description. */
-                        public _description?: "description";
-
-                        /** Attributes _link. */
-                        public _link?: "link";
-
-                        /** Attributes _mobileLink. */
-                        public _mobileLink?: "mobileLink";
-
-                        /** Attributes _canonicalLink. */
-                        public _canonicalLink?: "canonicalLink";
-
-                        /** Attributes _imageLink. */
-                        public _imageLink?: "imageLink";
-
-                        /** Attributes _adult. */
-                        public _adult?: "adult";
-
-                        /** Attributes _ageGroup. */
-                        public _ageGroup?: "ageGroup";
-
-                        /** Attributes _availability. */
-                        public _availability?: "availability";
-
-                        /** Attributes _brand. */
-                        public _brand?: "brand";
-
-                        /** Attributes _color. */
-                        public _color?: "color";
-
-                        /** Attributes _condition. */
-                        public _condition?: "condition";
-
-                        /** Attributes _gender. */
-                        public _gender?: "gender";
-
-                        /** Attributes _googleProductCategory. */
-                        public _googleProductCategory?: "googleProductCategory";
-
-                        /** Attributes _itemGroupId. */
-                        public _itemGroupId?: "itemGroupId";
-
-                        /** Attributes _material. */
-                        public _material?: "material";
-
-                        /** Attributes _mpn. */
-                        public _mpn?: "mpn";
-
-                        /** Attributes _pattern. */
-                        public _pattern?: "pattern";
-
-                        /** Attributes _sellOnGoogleQuantity. */
-                        public _sellOnGoogleQuantity?: "sellOnGoogleQuantity";
-
-                        /** Attributes _maxHandlingTime. */
-                        public _maxHandlingTime?: "maxHandlingTime";
-
-                        /** Attributes _minHandlingTime. */
-                        public _minHandlingTime?: "minHandlingTime";
-
-                        /** Attributes _shippingLabel. */
-                        public _shippingLabel?: "shippingLabel";
-
-                        /** Attributes _transitTimeLabel. */
-                        public _transitTimeLabel?: "transitTimeLabel";
-
-                        /** Attributes _size. */
-                        public _size?: "size";
-
-                        /** Attributes _sizeSystem. */
-                        public _sizeSystem?: "sizeSystem";
-
-                        /** Attributes _taxCategory. */
-                        public _taxCategory?: "taxCategory";
-
-                        /** Attributes _energyEfficiencyClass. */
-                        public _energyEfficiencyClass?: "energyEfficiencyClass";
-
-                        /** Attributes _minEnergyEfficiencyClass. */
-                        public _minEnergyEfficiencyClass?: "minEnergyEfficiencyClass";
-
-                        /** Attributes _maxEnergyEfficiencyClass. */
-                        public _maxEnergyEfficiencyClass?: "maxEnergyEfficiencyClass";
-
-                        /** Attributes _multipack. */
-                        public _multipack?: "multipack";
-
-                        /** Attributes _adsGrouping. */
-                        public _adsGrouping?: "adsGrouping";
-
-                        /** Attributes _adsRedirect. */
-                        public _adsRedirect?: "adsRedirect";
-
-                        /** Attributes _displayAdsId. */
-                        public _displayAdsId?: "displayAdsId";
-
-                        /** Attributes _displayAdsTitle. */
-                        public _displayAdsTitle?: "displayAdsTitle";
-
-                        /** Attributes _displayAdsLink. */
-                        public _displayAdsLink?: "displayAdsLink";
-
-                        /** Attributes _displayAdsValue. */
-                        public _displayAdsValue?: "displayAdsValue";
-
-                        /** Attributes _pickupMethod. */
-                        public _pickupMethod?: "pickupMethod";
-
-                        /** Attributes _pickupSla. */
-                        public _pickupSla?: "pickupSla";
-
-                        /** Attributes _linkTemplate. */
-                        public _linkTemplate?: "linkTemplate";
-
-                        /** Attributes _mobileLinkTemplate. */
-                        public _mobileLinkTemplate?: "mobileLinkTemplate";
-
-                        /** Attributes _customLabel_0. */
-                        public _customLabel_0?: "customLabel_0";
-
-                        /** Attributes _customLabel_1. */
-                        public _customLabel_1?: "customLabel_1";
-
-                        /** Attributes _customLabel_2. */
-                        public _customLabel_2?: "customLabel_2";
-
-                        /** Attributes _customLabel_3. */
-                        public _customLabel_3?: "customLabel_3";
-
-                        /** Attributes _customLabel_4. */
-                        public _customLabel_4?: "customLabel_4";
-
-                        /** Attributes _externalSellerId. */
-                        public _externalSellerId?: "externalSellerId";
-
-                        /** Attributes _pause. */
-                        public _pause?: "pause";
-
-                        /** Attributes _virtualModelLink. */
-                        public _virtualModelLink?: "virtualModelLink";
-
-                        /** Attributes _structuredTitle. */
-                        public _structuredTitle?: "structuredTitle";
-
-                        /** Attributes _structuredDescription. */
-                        public _structuredDescription?: "structuredDescription";
-
                         /**
                          * Creates a new Attributes instance using the specified properties.
                          * @param [properties] Properties to set
@@ -2082,12 +1923,6 @@ export namespace google {
                         /** Installment creditType. */
                         public creditType?: (string|null);
 
-                        /** Installment _downpayment. */
-                        public _downpayment?: "downpayment";
-
-                        /** Installment _creditType. */
-                        public _creditType?: "creditType";
-
                         /**
                          * Creates a new Installment instance using the specified properties.
                          * @param [properties] Properties to set
@@ -2330,27 +2165,6 @@ export namespace google {
                         /** LoyaltyProgram shippingLabel. */
                         public shippingLabel?: (string|null);
 
-                        /** LoyaltyProgram _programLabel. */
-                        public _programLabel?: "programLabel";
-
-                        /** LoyaltyProgram _tierLabel. */
-                        public _tierLabel?: "tierLabel";
-
-                        /** LoyaltyProgram _price. */
-                        public _price?: "price";
-
-                        /** LoyaltyProgram _cashbackForFutureUse. */
-                        public _cashbackForFutureUse?: "cashbackForFutureUse";
-
-                        /** LoyaltyProgram _loyaltyPoints. */
-                        public _loyaltyPoints?: "loyaltyPoints";
-
-                        /** LoyaltyProgram _memberPriceEffectiveDate. */
-                        public _memberPriceEffectiveDate?: "memberPriceEffectiveDate";
-
-                        /** LoyaltyProgram _shippingLabel. */
-                        public _shippingLabel?: "shippingLabel";
-
                         /**
                          * Creates a new LoyaltyProgram instance using the specified properties.
                          * @param [properties] Properties to set
@@ -2508,18 +2322,6 @@ export namespace google {
                         /** Shipping maxTransitTime. */
                         public maxTransitTime?: (number|Long|string|null);
 
-                        /** Shipping _minHandlingTime. */
-                        public _minHandlingTime?: "minHandlingTime";
-
-                        /** Shipping _maxHandlingTime. */
-                        public _maxHandlingTime?: "maxHandlingTime";
-
-                        /** Shipping _minTransitTime. */
-                        public _minTransitTime?: "minTransitTime";
-
-                        /** Shipping _maxTransitTime. */
-                        public _maxTransitTime?: "maxTransitTime";
-
                         /**
                          * Creates a new Shipping instance using the specified properties.
                          * @param [properties] Properties to set
@@ -2622,12 +2424,6 @@ export namespace google {
 
                         /** FreeShippingThreshold priceThreshold. */
                         public priceThreshold?: (google.shopping.type.IPrice|null);
-
-                        /** FreeShippingThreshold _country. */
-                        public _country?: "country";
-
-                        /** FreeShippingThreshold _priceThreshold. */
-                        public _priceThreshold?: "priceThreshold";
 
                         /**
                          * Creates a new FreeShippingThreshold instance using the specified properties.
@@ -2853,18 +2649,6 @@ export namespace google {
                         /** Certification certificationValue. */
                         public certificationValue?: (string|null);
 
-                        /** Certification _certificationAuthority. */
-                        public _certificationAuthority?: "certificationAuthority";
-
-                        /** Certification _certificationName. */
-                        public _certificationName?: "certificationName";
-
-                        /** Certification _certificationCode. */
-                        public _certificationCode?: "certificationCode";
-
-                        /** Certification _certificationValue. */
-                        public _certificationValue?: "certificationValue";
-
                         /**
                          * Creates a new Certification instance using the specified properties.
                          * @param [properties] Properties to set
@@ -2968,12 +2752,6 @@ export namespace google {
                         /** ProductStructuredTitle content. */
                         public content?: (string|null);
 
-                        /** ProductStructuredTitle _digitalSourceType. */
-                        public _digitalSourceType?: "digitalSourceType";
-
-                        /** ProductStructuredTitle _content. */
-                        public _content?: "content";
-
                         /**
                          * Creates a new ProductStructuredTitle instance using the specified properties.
                          * @param [properties] Properties to set
@@ -3076,12 +2854,6 @@ export namespace google {
 
                         /** ProductStructuredDescription content. */
                         public content?: (string|null);
-
-                        /** ProductStructuredDescription _digitalSourceType. */
-                        public _digitalSourceType?: "digitalSourceType";
-
-                        /** ProductStructuredDescription _content. */
-                        public _content?: "content";
 
                         /**
                          * Creates a new ProductStructuredDescription instance using the specified properties.
@@ -3823,21 +3595,6 @@ export namespace google {
                         /** CloudExportAdditionalProperties unitCode. */
                         public unitCode?: (string|null);
 
-                        /** CloudExportAdditionalProperties _propertyName. */
-                        public _propertyName?: "propertyName";
-
-                        /** CloudExportAdditionalProperties _boolValue. */
-                        public _boolValue?: "boolValue";
-
-                        /** CloudExportAdditionalProperties _minValue. */
-                        public _minValue?: "minValue";
-
-                        /** CloudExportAdditionalProperties _maxValue. */
-                        public _maxValue?: "maxValue";
-
-                        /** CloudExportAdditionalProperties _unitCode. */
-                        public _unitCode?: "unitCode";
-
                         /**
                          * Creates a new CloudExportAdditionalProperties instance using the specified properties.
                          * @param [properties] Properties to set
@@ -3949,9 +3706,6 @@ export namespace google {
 
                         /** ProductSustainabilityIncentive value. */
                         public value?: ("amount"|"percentage");
-
-                        /** ProductSustainabilityIncentive _type. */
-                        public _type?: "type";
 
                         /**
                          * Creates a new ProductSustainabilityIncentive instance using the specified properties.
@@ -4294,9 +4048,6 @@ export namespace google {
 
                         /** Product automatedDiscounts. */
                         public automatedDiscounts?: (google.shopping.merchant.products.v1beta.IAutomatedDiscounts|null);
-
-                        /** Product _versionNumber. */
-                        public _versionNumber?: "versionNumber";
 
                         /**
                          * Creates a new Product instance using the specified properties.
@@ -4716,9 +4467,6 @@ export namespace google {
                 /** Weight unit. */
                 public unit: (google.shopping.type.Weight.WeightUnit|keyof typeof google.shopping.type.Weight.WeightUnit);
 
-                /** Weight _amountMicros. */
-                public _amountMicros?: "amountMicros";
-
                 /**
                  * Creates a new Weight instance using the specified properties.
                  * @param [properties] Properties to set
@@ -4832,12 +4580,6 @@ export namespace google {
                 /** Price currencyCode. */
                 public currencyCode?: (string|null);
 
-                /** Price _amountMicros. */
-                public _amountMicros?: "amountMicros";
-
-                /** Price _currencyCode. */
-                public _currencyCode?: "currencyCode";
-
                 /**
                  * Creates a new Price instance using the specified properties.
                  * @param [properties] Properties to set
@@ -4946,12 +4688,6 @@ export namespace google {
 
                 /** CustomAttribute groupValues. */
                 public groupValues: google.shopping.type.ICustomAttribute[];
-
-                /** CustomAttribute _name. */
-                public _name?: "name";
-
-                /** CustomAttribute _value. */
-                public _value?: "value";
 
                 /**
                  * Creates a new CustomAttribute instance using the specified properties.

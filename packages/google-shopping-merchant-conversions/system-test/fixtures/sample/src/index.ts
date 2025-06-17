@@ -19,9 +19,7 @@
 import {ConversionSourcesServiceClient} from '@google-shopping/conversions';
 
 // check that the client class type name can be used
-function doStuffWithConversionSourcesServiceClient(
-  client: ConversionSourcesServiceClient
-) {
+function doStuffWithConversionSourcesServiceClient(client: ConversionSourcesServiceClient) {
   client.close();
 }
 

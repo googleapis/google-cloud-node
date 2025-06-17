@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -107,42 +100,20 @@ export class ConversionSourcesServiceClient {
    *     const client = new ConversionSourcesServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof ConversionSourcesServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    const staticMembers = this.constructor as typeof ConversionSourcesServiceClient;
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'merchantapi.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -168,7 +139,7 @@ export class ConversionSourcesServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -182,7 +153,10 @@ export class ConversionSourcesServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -215,20 +189,14 @@ export class ConversionSourcesServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listConversionSources: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'conversionSources'
-      ),
+      listConversionSources:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'conversionSources')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.shopping.merchant.conversions.v1beta.ConversionSourcesService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.shopping.merchant.conversions.v1beta.ConversionSourcesService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -259,43 +227,32 @@ export class ConversionSourcesServiceClient {
     // Put together the "service stub" for
     // google.shopping.merchant.conversions.v1beta.ConversionSourcesService.
     this.conversionSourcesServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.shopping.merchant.conversions.v1beta.ConversionSourcesService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.shopping.merchant.conversions.v1beta
-            .ConversionSourcesService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.shopping.merchant.conversions.v1beta.ConversionSourcesService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.shopping.merchant.conversions.v1beta.ConversionSourcesService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const conversionSourcesServiceStubMethods = [
-      'createConversionSource',
-      'updateConversionSource',
-      'deleteConversionSource',
-      'undeleteConversionSource',
-      'getConversionSource',
-      'listConversionSources',
-    ];
+    const conversionSourcesServiceStubMethods =
+        ['createConversionSource', 'updateConversionSource', 'deleteConversionSource', 'undeleteConversionSource', 'getConversionSource', 'listConversionSources'];
     for (const methodName of conversionSourcesServiceStubMethods) {
       const callPromise = this.conversionSourcesServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -315,14 +272,8 @@ export class ConversionSourcesServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'merchantapi.googleapis.com';
   }
@@ -333,14 +284,8 @@ export class ConversionSourcesServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'merchantapi.googleapis.com';
   }
@@ -371,7 +316,9 @@ export class ConversionSourcesServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/content'];
+    return [
+      'https://www.googleapis.com/auth/content'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -380,9 +327,8 @@ export class ConversionSourcesServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -393,770 +339,580 @@ export class ConversionSourcesServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Creates a new conversion source.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The merchant account that will own the new conversion source.
-   *   Format: accounts/{account}
-   * @param {google.shopping.merchant.conversions.v1beta.ConversionSource} request.conversionSource
-   *   Required. The conversion source description. A new ID will be automatically
-   *   assigned to it upon creation.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.conversions.v1beta.ConversionSource|ConversionSource}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/conversion_sources_service.create_conversion_source.js</caption>
-   * region_tag:merchantapi_v1beta_generated_ConversionSourcesService_CreateConversionSource_async
-   */
+/**
+ * Creates a new conversion source.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The merchant account that will own the new conversion source.
+ *   Format: accounts/{account}
+ * @param {google.shopping.merchant.conversions.v1beta.ConversionSource} request.conversionSource
+ *   Required. The conversion source description. A new ID will be automatically
+ *   assigned to it upon creation.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.shopping.merchant.conversions.v1beta.ConversionSource|ConversionSource}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/conversion_sources_service.create_conversion_source.js</caption>
+ * region_tag:merchantapi_v1beta_generated_ConversionSourcesService_CreateConversionSource_async
+ */
   createConversionSource(
-    request?: protos.google.shopping.merchant.conversions.v1beta.ICreateConversionSourceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
-      (
-        | protos.google.shopping.merchant.conversions.v1beta.ICreateConversionSourceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.shopping.merchant.conversions.v1beta.ICreateConversionSourceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
+        protos.google.shopping.merchant.conversions.v1beta.ICreateConversionSourceRequest|undefined, {}|undefined
+      ]>;
   createConversionSource(
-    request: protos.google.shopping.merchant.conversions.v1beta.ICreateConversionSourceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
-      | protos.google.shopping.merchant.conversions.v1beta.ICreateConversionSourceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createConversionSource(
-    request: protos.google.shopping.merchant.conversions.v1beta.ICreateConversionSourceRequest,
-    callback: Callback<
-      protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
-      | protos.google.shopping.merchant.conversions.v1beta.ICreateConversionSourceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createConversionSource(
-    request?: protos.google.shopping.merchant.conversions.v1beta.ICreateConversionSourceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.shopping.merchant.conversions.v1beta.ICreateConversionSourceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
-          | protos.google.shopping.merchant.conversions.v1beta.ICreateConversionSourceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
-      | protos.google.shopping.merchant.conversions.v1beta.ICreateConversionSourceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
-      (
-        | protos.google.shopping.merchant.conversions.v1beta.ICreateConversionSourceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.shopping.merchant.conversions.v1beta.ICreateConversionSourceRequest|null|undefined,
+          {}|null|undefined>): void;
+  createConversionSource(
+      request: protos.google.shopping.merchant.conversions.v1beta.ICreateConversionSourceRequest,
+      callback: Callback<
+          protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
+          protos.google.shopping.merchant.conversions.v1beta.ICreateConversionSourceRequest|null|undefined,
+          {}|null|undefined>): void;
+  createConversionSource(
+      request?: protos.google.shopping.merchant.conversions.v1beta.ICreateConversionSourceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
+          protos.google.shopping.merchant.conversions.v1beta.ICreateConversionSourceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
+          protos.google.shopping.merchant.conversions.v1beta.ICreateConversionSourceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
+        protos.google.shopping.merchant.conversions.v1beta.ICreateConversionSourceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createConversionSource request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
-          | protos.google.shopping.merchant.conversions.v1beta.ICreateConversionSourceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
+        protos.google.shopping.merchant.conversions.v1beta.ICreateConversionSourceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createConversionSource response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createConversionSource(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
-          (
-            | protos.google.shopping.merchant.conversions.v1beta.ICreateConversionSourceRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createConversionSource response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createConversionSource(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
+        protos.google.shopping.merchant.conversions.v1beta.ICreateConversionSourceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createConversionSource response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates information of an existing conversion source. Available only for
-   * Merchant Center Destination conversion sources.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.shopping.merchant.conversions.v1beta.ConversionSource} request.conversionSource
-   *   Required. The new version of the conversion source data.
-   *   Format: accounts/{account}/conversionSources/{conversion_source}
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. List of fields being updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.conversions.v1beta.ConversionSource|ConversionSource}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/conversion_sources_service.update_conversion_source.js</caption>
-   * region_tag:merchantapi_v1beta_generated_ConversionSourcesService_UpdateConversionSource_async
-   */
+/**
+ * Updates information of an existing conversion source. Available only for
+ * Merchant Center Destination conversion sources.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.shopping.merchant.conversions.v1beta.ConversionSource} request.conversionSource
+ *   Required. The new version of the conversion source data.
+ *   Format: accounts/{account}/conversionSources/{conversion_source}
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. List of fields being updated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.shopping.merchant.conversions.v1beta.ConversionSource|ConversionSource}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/conversion_sources_service.update_conversion_source.js</caption>
+ * region_tag:merchantapi_v1beta_generated_ConversionSourcesService_UpdateConversionSource_async
+ */
   updateConversionSource(
-    request?: protos.google.shopping.merchant.conversions.v1beta.IUpdateConversionSourceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
-      (
-        | protos.google.shopping.merchant.conversions.v1beta.IUpdateConversionSourceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.shopping.merchant.conversions.v1beta.IUpdateConversionSourceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
+        protos.google.shopping.merchant.conversions.v1beta.IUpdateConversionSourceRequest|undefined, {}|undefined
+      ]>;
   updateConversionSource(
-    request: protos.google.shopping.merchant.conversions.v1beta.IUpdateConversionSourceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
-      | protos.google.shopping.merchant.conversions.v1beta.IUpdateConversionSourceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateConversionSource(
-    request: protos.google.shopping.merchant.conversions.v1beta.IUpdateConversionSourceRequest,
-    callback: Callback<
-      protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
-      | protos.google.shopping.merchant.conversions.v1beta.IUpdateConversionSourceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateConversionSource(
-    request?: protos.google.shopping.merchant.conversions.v1beta.IUpdateConversionSourceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.shopping.merchant.conversions.v1beta.IUpdateConversionSourceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
-          | protos.google.shopping.merchant.conversions.v1beta.IUpdateConversionSourceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
-      | protos.google.shopping.merchant.conversions.v1beta.IUpdateConversionSourceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
-      (
-        | protos.google.shopping.merchant.conversions.v1beta.IUpdateConversionSourceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.shopping.merchant.conversions.v1beta.IUpdateConversionSourceRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateConversionSource(
+      request: protos.google.shopping.merchant.conversions.v1beta.IUpdateConversionSourceRequest,
+      callback: Callback<
+          protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
+          protos.google.shopping.merchant.conversions.v1beta.IUpdateConversionSourceRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateConversionSource(
+      request?: protos.google.shopping.merchant.conversions.v1beta.IUpdateConversionSourceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
+          protos.google.shopping.merchant.conversions.v1beta.IUpdateConversionSourceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
+          protos.google.shopping.merchant.conversions.v1beta.IUpdateConversionSourceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
+        protos.google.shopping.merchant.conversions.v1beta.IUpdateConversionSourceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'conversion_source.name': request.conversionSource!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'conversion_source.name': request.conversionSource!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateConversionSource request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
-          | protos.google.shopping.merchant.conversions.v1beta.IUpdateConversionSourceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
+        protos.google.shopping.merchant.conversions.v1beta.IUpdateConversionSourceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateConversionSource response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateConversionSource(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
-          (
-            | protos.google.shopping.merchant.conversions.v1beta.IUpdateConversionSourceRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateConversionSource response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateConversionSource(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
+        protos.google.shopping.merchant.conversions.v1beta.IUpdateConversionSourceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateConversionSource response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Archives an existing conversion source. If the conversion source is a
-   * Merchant Center Destination, it will be recoverable for 30 days. If the
-   * conversion source is a Google Analytics Link, it will be deleted
-   * immediately and can be restored by creating a new one.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the conversion source to be deleted.
-   *   Format: accounts/{account}/conversionSources/{conversion_source}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/conversion_sources_service.delete_conversion_source.js</caption>
-   * region_tag:merchantapi_v1beta_generated_ConversionSourcesService_DeleteConversionSource_async
-   */
+/**
+ * Archives an existing conversion source. If the conversion source is a
+ * Merchant Center Destination, it will be recoverable for 30 days. If the
+ * conversion source is a Google Analytics Link, it will be deleted
+ * immediately and can be restored by creating a new one.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the conversion source to be deleted.
+ *   Format: accounts/{account}/conversionSources/{conversion_source}
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/conversion_sources_service.delete_conversion_source.js</caption>
+ * region_tag:merchantapi_v1beta_generated_ConversionSourcesService_DeleteConversionSource_async
+ */
   deleteConversionSource(
-    request?: protos.google.shopping.merchant.conversions.v1beta.IDeleteConversionSourceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.shopping.merchant.conversions.v1beta.IDeleteConversionSourceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.shopping.merchant.conversions.v1beta.IDeleteConversionSourceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.shopping.merchant.conversions.v1beta.IDeleteConversionSourceRequest|undefined, {}|undefined
+      ]>;
   deleteConversionSource(
-    request: protos.google.shopping.merchant.conversions.v1beta.IDeleteConversionSourceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.shopping.merchant.conversions.v1beta.IDeleteConversionSourceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteConversionSource(
-    request: protos.google.shopping.merchant.conversions.v1beta.IDeleteConversionSourceRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.shopping.merchant.conversions.v1beta.IDeleteConversionSourceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteConversionSource(
-    request?: protos.google.shopping.merchant.conversions.v1beta.IDeleteConversionSourceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.shopping.merchant.conversions.v1beta.IDeleteConversionSourceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.shopping.merchant.conversions.v1beta.IDeleteConversionSourceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.shopping.merchant.conversions.v1beta.IDeleteConversionSourceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.shopping.merchant.conversions.v1beta.IDeleteConversionSourceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.shopping.merchant.conversions.v1beta.IDeleteConversionSourceRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteConversionSource(
+      request: protos.google.shopping.merchant.conversions.v1beta.IDeleteConversionSourceRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.shopping.merchant.conversions.v1beta.IDeleteConversionSourceRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteConversionSource(
+      request?: protos.google.shopping.merchant.conversions.v1beta.IDeleteConversionSourceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.shopping.merchant.conversions.v1beta.IDeleteConversionSourceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.shopping.merchant.conversions.v1beta.IDeleteConversionSourceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.shopping.merchant.conversions.v1beta.IDeleteConversionSourceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteConversionSource request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.shopping.merchant.conversions.v1beta.IDeleteConversionSourceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.shopping.merchant.conversions.v1beta.IDeleteConversionSourceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteConversionSource response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteConversionSource(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.shopping.merchant.conversions.v1beta.IDeleteConversionSourceRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteConversionSource response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteConversionSource(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.shopping.merchant.conversions.v1beta.IDeleteConversionSourceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteConversionSource response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Re-enables an archived conversion source. Only Available for Merchant
-   * Center Destination conversion sources.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the conversion source to be undeleted.
-   *   Format: accounts/{account}/conversionSources/{conversion_source}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.conversions.v1beta.ConversionSource|ConversionSource}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/conversion_sources_service.undelete_conversion_source.js</caption>
-   * region_tag:merchantapi_v1beta_generated_ConversionSourcesService_UndeleteConversionSource_async
-   */
+/**
+ * Re-enables an archived conversion source. Only Available for Merchant
+ * Center Destination conversion sources.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the conversion source to be undeleted.
+ *   Format: accounts/{account}/conversionSources/{conversion_source}
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.shopping.merchant.conversions.v1beta.ConversionSource|ConversionSource}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/conversion_sources_service.undelete_conversion_source.js</caption>
+ * region_tag:merchantapi_v1beta_generated_ConversionSourcesService_UndeleteConversionSource_async
+ */
   undeleteConversionSource(
-    request?: protos.google.shopping.merchant.conversions.v1beta.IUndeleteConversionSourceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
-      (
-        | protos.google.shopping.merchant.conversions.v1beta.IUndeleteConversionSourceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.shopping.merchant.conversions.v1beta.IUndeleteConversionSourceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
+        protos.google.shopping.merchant.conversions.v1beta.IUndeleteConversionSourceRequest|undefined, {}|undefined
+      ]>;
   undeleteConversionSource(
-    request: protos.google.shopping.merchant.conversions.v1beta.IUndeleteConversionSourceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
-      | protos.google.shopping.merchant.conversions.v1beta.IUndeleteConversionSourceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  undeleteConversionSource(
-    request: protos.google.shopping.merchant.conversions.v1beta.IUndeleteConversionSourceRequest,
-    callback: Callback<
-      protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
-      | protos.google.shopping.merchant.conversions.v1beta.IUndeleteConversionSourceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  undeleteConversionSource(
-    request?: protos.google.shopping.merchant.conversions.v1beta.IUndeleteConversionSourceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.shopping.merchant.conversions.v1beta.IUndeleteConversionSourceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
-          | protos.google.shopping.merchant.conversions.v1beta.IUndeleteConversionSourceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
-      | protos.google.shopping.merchant.conversions.v1beta.IUndeleteConversionSourceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
-      (
-        | protos.google.shopping.merchant.conversions.v1beta.IUndeleteConversionSourceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.shopping.merchant.conversions.v1beta.IUndeleteConversionSourceRequest|null|undefined,
+          {}|null|undefined>): void;
+  undeleteConversionSource(
+      request: protos.google.shopping.merchant.conversions.v1beta.IUndeleteConversionSourceRequest,
+      callback: Callback<
+          protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
+          protos.google.shopping.merchant.conversions.v1beta.IUndeleteConversionSourceRequest|null|undefined,
+          {}|null|undefined>): void;
+  undeleteConversionSource(
+      request?: protos.google.shopping.merchant.conversions.v1beta.IUndeleteConversionSourceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
+          protos.google.shopping.merchant.conversions.v1beta.IUndeleteConversionSourceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
+          protos.google.shopping.merchant.conversions.v1beta.IUndeleteConversionSourceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
+        protos.google.shopping.merchant.conversions.v1beta.IUndeleteConversionSourceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('undeleteConversionSource request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
-          | protos.google.shopping.merchant.conversions.v1beta.IUndeleteConversionSourceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
+        protos.google.shopping.merchant.conversions.v1beta.IUndeleteConversionSourceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('undeleteConversionSource response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .undeleteConversionSource(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
-          (
-            | protos.google.shopping.merchant.conversions.v1beta.IUndeleteConversionSourceRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('undeleteConversionSource response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.undeleteConversionSource(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
+        protos.google.shopping.merchant.conversions.v1beta.IUndeleteConversionSourceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('undeleteConversionSource response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Fetches a conversion source.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the conversion source to be fetched.
-   *   Format: accounts/{account}/conversionsources/{conversion_source}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.conversions.v1beta.ConversionSource|ConversionSource}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/conversion_sources_service.get_conversion_source.js</caption>
-   * region_tag:merchantapi_v1beta_generated_ConversionSourcesService_GetConversionSource_async
-   */
+/**
+ * Fetches a conversion source.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the conversion source to be fetched.
+ *   Format: accounts/{account}/conversionsources/{conversion_source}
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.shopping.merchant.conversions.v1beta.ConversionSource|ConversionSource}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/conversion_sources_service.get_conversion_source.js</caption>
+ * region_tag:merchantapi_v1beta_generated_ConversionSourcesService_GetConversionSource_async
+ */
   getConversionSource(
-    request?: protos.google.shopping.merchant.conversions.v1beta.IGetConversionSourceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
-      (
-        | protos.google.shopping.merchant.conversions.v1beta.IGetConversionSourceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.shopping.merchant.conversions.v1beta.IGetConversionSourceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
+        protos.google.shopping.merchant.conversions.v1beta.IGetConversionSourceRequest|undefined, {}|undefined
+      ]>;
   getConversionSource(
-    request: protos.google.shopping.merchant.conversions.v1beta.IGetConversionSourceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
-      | protos.google.shopping.merchant.conversions.v1beta.IGetConversionSourceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getConversionSource(
-    request: protos.google.shopping.merchant.conversions.v1beta.IGetConversionSourceRequest,
-    callback: Callback<
-      protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
-      | protos.google.shopping.merchant.conversions.v1beta.IGetConversionSourceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getConversionSource(
-    request?: protos.google.shopping.merchant.conversions.v1beta.IGetConversionSourceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.shopping.merchant.conversions.v1beta.IGetConversionSourceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
-          | protos.google.shopping.merchant.conversions.v1beta.IGetConversionSourceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
-      | protos.google.shopping.merchant.conversions.v1beta.IGetConversionSourceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
-      (
-        | protos.google.shopping.merchant.conversions.v1beta.IGetConversionSourceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.shopping.merchant.conversions.v1beta.IGetConversionSourceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getConversionSource(
+      request: protos.google.shopping.merchant.conversions.v1beta.IGetConversionSourceRequest,
+      callback: Callback<
+          protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
+          protos.google.shopping.merchant.conversions.v1beta.IGetConversionSourceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getConversionSource(
+      request?: protos.google.shopping.merchant.conversions.v1beta.IGetConversionSourceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
+          protos.google.shopping.merchant.conversions.v1beta.IGetConversionSourceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
+          protos.google.shopping.merchant.conversions.v1beta.IGetConversionSourceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
+        protos.google.shopping.merchant.conversions.v1beta.IGetConversionSourceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getConversionSource request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
-          | protos.google.shopping.merchant.conversions.v1beta.IGetConversionSourceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
+        protos.google.shopping.merchant.conversions.v1beta.IGetConversionSourceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getConversionSource response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getConversionSource(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
-          (
-            | protos.google.shopping.merchant.conversions.v1beta.IGetConversionSourceRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getConversionSource response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getConversionSource(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.shopping.merchant.conversions.v1beta.IConversionSource,
+        protos.google.shopping.merchant.conversions.v1beta.IGetConversionSourceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getConversionSource response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Retrieves the list of conversion sources the caller has access to.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The merchant account who owns the collection of conversion
-   *   sources. Format: accounts/{account}
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of conversion sources to return in a page.
-   *   If no `page_size` is specified, `100` is used as the default value. The
-   *   maximum value is `200`. Values above `200` will be coerced to `200`.
-   *   Regardless of pagination, at most `200` conversion sources are returned
-   *   in total.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token.
-   * @param {boolean} [request.showDeleted]
-   *   Optional. Show deleted (archived) option.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.shopping.merchant.conversions.v1beta.ConversionSource|ConversionSource}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listConversionSourcesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Retrieves the list of conversion sources the caller has access to.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The merchant account who owns the collection of conversion
+ *   sources. Format: accounts/{account}
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of conversion sources to return in a page.
+ *   If no `page_size` is specified, `100` is used as the default value. The
+ *   maximum value is `200`. Values above `200` will be coerced to `200`.
+ *   Regardless of pagination, at most `200` conversion sources are returned
+ *   in total.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token.
+ * @param {boolean} [request.showDeleted]
+ *   Optional. Show deleted (archived) option.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.shopping.merchant.conversions.v1beta.ConversionSource|ConversionSource}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listConversionSourcesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listConversionSources(
-    request?: protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.shopping.merchant.conversions.v1beta.IConversionSource[],
-      protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesRequest | null,
-      protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesResponse,
-    ]
-  >;
+      request?: protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.shopping.merchant.conversions.v1beta.IConversionSource[],
+        protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesRequest|null,
+        protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesResponse
+      ]>;
   listConversionSources(
-    request: protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesRequest,
-      | protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesResponse
-      | null
-      | undefined,
-      protos.google.shopping.merchant.conversions.v1beta.IConversionSource
-    >
-  ): void;
-  listConversionSources(
-    request: protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesRequest,
-    callback: PaginationCallback<
-      protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesRequest,
-      | protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesResponse
-      | null
-      | undefined,
-      protos.google.shopping.merchant.conversions.v1beta.IConversionSource
-    >
-  ): void;
-  listConversionSources(
-    request?: protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesRequest,
-          | protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesResponse
-          | null
-          | undefined,
-          protos.google.shopping.merchant.conversions.v1beta.IConversionSource
-        >,
-    callback?: PaginationCallback<
-      protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesRequest,
-      | protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesResponse
-      | null
-      | undefined,
-      protos.google.shopping.merchant.conversions.v1beta.IConversionSource
-    >
-  ): Promise<
-    [
-      protos.google.shopping.merchant.conversions.v1beta.IConversionSource[],
-      protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesRequest | null,
-      protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesResponse,
-    ]
-  > | void {
+          protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesResponse|null|undefined,
+          protos.google.shopping.merchant.conversions.v1beta.IConversionSource>): void;
+  listConversionSources(
+      request: protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesRequest,
+      callback: PaginationCallback<
+          protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesRequest,
+          protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesResponse|null|undefined,
+          protos.google.shopping.merchant.conversions.v1beta.IConversionSource>): void;
+  listConversionSources(
+      request?: protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesRequest,
+          protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesResponse|null|undefined,
+          protos.google.shopping.merchant.conversions.v1beta.IConversionSource>,
+      callback?: PaginationCallback<
+          protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesRequest,
+          protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesResponse|null|undefined,
+          protos.google.shopping.merchant.conversions.v1beta.IConversionSource>):
+      Promise<[
+        protos.google.shopping.merchant.conversions.v1beta.IConversionSource[],
+        protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesRequest|null,
+        protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesRequest,
-          | protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesResponse
-          | null
-          | undefined,
-          protos.google.shopping.merchant.conversions.v1beta.IConversionSource
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesRequest,
+      protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesResponse|null|undefined,
+      protos.google.shopping.merchant.conversions.v1beta.IConversionSource>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listConversionSources values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1165,63 +921,60 @@ export class ConversionSourcesServiceClient {
     this._log.info('listConversionSources request %j', request);
     return this.innerApiCalls
       .listConversionSources(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.shopping.merchant.conversions.v1beta.IConversionSource[],
-          protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesRequest | null,
-          protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesResponse,
-        ]) => {
-          this._log.info('listConversionSources values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.shopping.merchant.conversions.v1beta.IConversionSource[],
+        protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesRequest|null,
+        protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesResponse
+      ]) => {
+        this._log.info('listConversionSources values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listConversionSources`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The merchant account who owns the collection of conversion
-   *   sources. Format: accounts/{account}
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of conversion sources to return in a page.
-   *   If no `page_size` is specified, `100` is used as the default value. The
-   *   maximum value is `200`. Values above `200` will be coerced to `200`.
-   *   Regardless of pagination, at most `200` conversion sources are returned
-   *   in total.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token.
-   * @param {boolean} [request.showDeleted]
-   *   Optional. Show deleted (archived) option.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.shopping.merchant.conversions.v1beta.ConversionSource|ConversionSource} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listConversionSourcesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listConversionSources`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The merchant account who owns the collection of conversion
+ *   sources. Format: accounts/{account}
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of conversion sources to return in a page.
+ *   If no `page_size` is specified, `100` is used as the default value. The
+ *   maximum value is `200`. Values above `200` will be coerced to `200`.
+ *   Regardless of pagination, at most `200` conversion sources are returned
+ *   in total.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token.
+ * @param {boolean} [request.showDeleted]
+ *   Optional. Show deleted (archived) option.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.shopping.merchant.conversions.v1beta.ConversionSource|ConversionSource} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listConversionSourcesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listConversionSourcesStream(
-    request?: protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listConversionSources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listConversionSources stream %j', request);
     return this.descriptors.page.listConversionSources.createStream(
       this.innerApiCalls.listConversionSources as GaxCall,
@@ -1230,54 +983,53 @@ export class ConversionSourcesServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listConversionSources`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The merchant account who owns the collection of conversion
-   *   sources. Format: accounts/{account}
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of conversion sources to return in a page.
-   *   If no `page_size` is specified, `100` is used as the default value. The
-   *   maximum value is `200`. Values above `200` will be coerced to `200`.
-   *   Regardless of pagination, at most `200` conversion sources are returned
-   *   in total.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token.
-   * @param {boolean} [request.showDeleted]
-   *   Optional. Show deleted (archived) option.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.shopping.merchant.conversions.v1beta.ConversionSource|ConversionSource}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/conversion_sources_service.list_conversion_sources.js</caption>
-   * region_tag:merchantapi_v1beta_generated_ConversionSourcesService_ListConversionSources_async
-   */
+/**
+ * Equivalent to `listConversionSources`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The merchant account who owns the collection of conversion
+ *   sources. Format: accounts/{account}
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of conversion sources to return in a page.
+ *   If no `page_size` is specified, `100` is used as the default value. The
+ *   maximum value is `200`. Values above `200` will be coerced to `200`.
+ *   Regardless of pagination, at most `200` conversion sources are returned
+ *   in total.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token.
+ * @param {boolean} [request.showDeleted]
+ *   Optional. Show deleted (archived) option.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.shopping.merchant.conversions.v1beta.ConversionSource|ConversionSource}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/conversion_sources_service.list_conversion_sources.js</caption>
+ * region_tag:merchantapi_v1beta_generated_ConversionSourcesService_ListConversionSources_async
+ */
   listConversionSourcesAsync(
-    request?: protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.shopping.merchant.conversions.v1beta.IConversionSource> {
+      request?: protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.shopping.merchant.conversions.v1beta.IConversionSource>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listConversionSources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listConversionSources iterate %j', request);
     return this.descriptors.page.listConversionSources.asyncIterate(
       this.innerApiCalls['listConversionSources'] as GaxCall,
@@ -1295,7 +1047,7 @@ export class ConversionSourcesServiceClient {
    * @param {string} account
    * @returns {string} Resource name string.
    */
-  accountPath(account: string) {
+  accountPath(account:string) {
     return this.pathTemplates.accountPathTemplate.render({
       account: account,
     });
@@ -1319,7 +1071,7 @@ export class ConversionSourcesServiceClient {
    * @param {string} conversion_source
    * @returns {string} Resource name string.
    */
-  conversionSourcePath(account: string, conversionSource: string) {
+  conversionSourcePath(account:string,conversionSource:string) {
     return this.pathTemplates.conversionSourcePathTemplate.render({
       account: account,
       conversion_source: conversionSource,
@@ -1334,9 +1086,7 @@ export class ConversionSourcesServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromConversionSourceName(conversionSourceName: string) {
-    return this.pathTemplates.conversionSourcePathTemplate.match(
-      conversionSourceName
-    ).account;
+    return this.pathTemplates.conversionSourcePathTemplate.match(conversionSourceName).account;
   }
 
   /**
@@ -1347,9 +1097,7 @@ export class ConversionSourcesServiceClient {
    * @returns {string} A string representing the conversion_source.
    */
   matchConversionSourceFromConversionSourceName(conversionSourceName: string) {
-    return this.pathTemplates.conversionSourcePathTemplate.match(
-      conversionSourceName
-    ).conversion_source;
+    return this.pathTemplates.conversionSourcePathTemplate.match(conversionSourceName).conversion_source;
   }
 
   /**

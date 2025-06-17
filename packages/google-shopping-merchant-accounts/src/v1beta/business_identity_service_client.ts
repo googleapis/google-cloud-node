@@ -18,16 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -106,42 +101,20 @@ export class BusinessIdentityServiceClient {
    *     const client = new BusinessIdentityServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof BusinessIdentityServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    const staticMembers = this.constructor as typeof BusinessIdentityServiceClient;
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'merchantapi.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -167,7 +140,7 @@ export class BusinessIdentityServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -181,7 +154,10 @@ export class BusinessIdentityServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -253,10 +229,9 @@ export class BusinessIdentityServiceClient {
       termsOfServicePathTemplate: new this._gaxModule.PathTemplate(
         'termsOfService/{version}'
       ),
-      termsOfServiceAgreementStatePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'accounts/{account}/termsOfServiceAgreementStates/{identifier}'
-        ),
+      termsOfServiceAgreementStatePathTemplate: new this._gaxModule.PathTemplate(
+        'accounts/{account}/termsOfServiceAgreementStates/{identifier}'
+      ),
       userPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/users/{email}'
       ),
@@ -264,11 +239,8 @@ export class BusinessIdentityServiceClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.shopping.merchant.accounts.v1beta.BusinessIdentityService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.shopping.merchant.accounts.v1beta.BusinessIdentityService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -299,39 +271,31 @@ export class BusinessIdentityServiceClient {
     // Put together the "service stub" for
     // google.shopping.merchant.accounts.v1beta.BusinessIdentityService.
     this.businessIdentityServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.shopping.merchant.accounts.v1beta.BusinessIdentityService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.shopping.merchant.accounts.v1beta
-            .BusinessIdentityService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.shopping.merchant.accounts.v1beta.BusinessIdentityService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.shopping.merchant.accounts.v1beta.BusinessIdentityService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const businessIdentityServiceStubMethods = [
-      'getBusinessIdentity',
-      'updateBusinessIdentity',
-    ];
+    const businessIdentityServiceStubMethods =
+        ['getBusinessIdentity', 'updateBusinessIdentity'];
     for (const methodName of businessIdentityServiceStubMethods) {
       const callPromise = this.businessIdentityServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = undefined;
+      const descriptor =
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -351,14 +315,8 @@ export class BusinessIdentityServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'merchantapi.googleapis.com';
   }
@@ -369,14 +327,8 @@ export class BusinessIdentityServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'merchantapi.googleapis.com';
   }
@@ -407,7 +359,9 @@ export class BusinessIdentityServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/content'];
+    return [
+      'https://www.googleapis.com/auth/content'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -416,9 +370,8 @@ export class BusinessIdentityServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -429,263 +382,197 @@ export class BusinessIdentityServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Retrieves the business identity of an account.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the business identity.
-   *   Format: `accounts/{account}/businessIdentity`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1beta.BusinessIdentity|BusinessIdentity}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/business_identity_service.get_business_identity.js</caption>
-   * region_tag:merchantapi_v1beta_generated_BusinessIdentityService_GetBusinessIdentity_async
-   */
+/**
+ * Retrieves the business identity of an account.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the business identity.
+ *   Format: `accounts/{account}/businessIdentity`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1beta.BusinessIdentity|BusinessIdentity}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/business_identity_service.get_business_identity.js</caption>
+ * region_tag:merchantapi_v1beta_generated_BusinessIdentityService_GetBusinessIdentity_async
+ */
   getBusinessIdentity(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IGetBusinessIdentityRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.shopping.merchant.accounts.v1beta.IBusinessIdentity,
-      (
-        | protos.google.shopping.merchant.accounts.v1beta.IGetBusinessIdentityRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.shopping.merchant.accounts.v1beta.IGetBusinessIdentityRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.shopping.merchant.accounts.v1beta.IBusinessIdentity,
+        protos.google.shopping.merchant.accounts.v1beta.IGetBusinessIdentityRequest|undefined, {}|undefined
+      ]>;
   getBusinessIdentity(
-    request: protos.google.shopping.merchant.accounts.v1beta.IGetBusinessIdentityRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IBusinessIdentity,
-      | protos.google.shopping.merchant.accounts.v1beta.IGetBusinessIdentityRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getBusinessIdentity(
-    request: protos.google.shopping.merchant.accounts.v1beta.IGetBusinessIdentityRequest,
-    callback: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IBusinessIdentity,
-      | protos.google.shopping.merchant.accounts.v1beta.IGetBusinessIdentityRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getBusinessIdentity(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IGetBusinessIdentityRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.shopping.merchant.accounts.v1beta.IGetBusinessIdentityRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.shopping.merchant.accounts.v1beta.IBusinessIdentity,
-          | protos.google.shopping.merchant.accounts.v1beta.IGetBusinessIdentityRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IBusinessIdentity,
-      | protos.google.shopping.merchant.accounts.v1beta.IGetBusinessIdentityRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.shopping.merchant.accounts.v1beta.IBusinessIdentity,
-      (
-        | protos.google.shopping.merchant.accounts.v1beta.IGetBusinessIdentityRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.shopping.merchant.accounts.v1beta.IGetBusinessIdentityRequest|null|undefined,
+          {}|null|undefined>): void;
+  getBusinessIdentity(
+      request: protos.google.shopping.merchant.accounts.v1beta.IGetBusinessIdentityRequest,
+      callback: Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IBusinessIdentity,
+          protos.google.shopping.merchant.accounts.v1beta.IGetBusinessIdentityRequest|null|undefined,
+          {}|null|undefined>): void;
+  getBusinessIdentity(
+      request?: protos.google.shopping.merchant.accounts.v1beta.IGetBusinessIdentityRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IBusinessIdentity,
+          protos.google.shopping.merchant.accounts.v1beta.IGetBusinessIdentityRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IBusinessIdentity,
+          protos.google.shopping.merchant.accounts.v1beta.IGetBusinessIdentityRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.shopping.merchant.accounts.v1beta.IBusinessIdentity,
+        protos.google.shopping.merchant.accounts.v1beta.IGetBusinessIdentityRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getBusinessIdentity request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.shopping.merchant.accounts.v1beta.IBusinessIdentity,
-          | protos.google.shopping.merchant.accounts.v1beta.IGetBusinessIdentityRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.shopping.merchant.accounts.v1beta.IBusinessIdentity,
+        protos.google.shopping.merchant.accounts.v1beta.IGetBusinessIdentityRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getBusinessIdentity response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getBusinessIdentity(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.shopping.merchant.accounts.v1beta.IBusinessIdentity,
-          (
-            | protos.google.shopping.merchant.accounts.v1beta.IGetBusinessIdentityRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getBusinessIdentity response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getBusinessIdentity(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.shopping.merchant.accounts.v1beta.IBusinessIdentity,
+        protos.google.shopping.merchant.accounts.v1beta.IGetBusinessIdentityRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getBusinessIdentity response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates the business identity of an account. Executing this method requires
-   * admin access.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.shopping.merchant.accounts.v1beta.BusinessIdentity} request.businessIdentity
-   *   Required. The new version of the business identity.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. List of fields being updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1beta.BusinessIdentity|BusinessIdentity}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/business_identity_service.update_business_identity.js</caption>
-   * region_tag:merchantapi_v1beta_generated_BusinessIdentityService_UpdateBusinessIdentity_async
-   */
+/**
+ * Updates the business identity of an account. Executing this method requires
+ * admin access.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.shopping.merchant.accounts.v1beta.BusinessIdentity} request.businessIdentity
+ *   Required. The new version of the business identity.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. List of fields being updated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1beta.BusinessIdentity|BusinessIdentity}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/business_identity_service.update_business_identity.js</caption>
+ * region_tag:merchantapi_v1beta_generated_BusinessIdentityService_UpdateBusinessIdentity_async
+ */
   updateBusinessIdentity(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IUpdateBusinessIdentityRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.shopping.merchant.accounts.v1beta.IBusinessIdentity,
-      (
-        | protos.google.shopping.merchant.accounts.v1beta.IUpdateBusinessIdentityRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.shopping.merchant.accounts.v1beta.IUpdateBusinessIdentityRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.shopping.merchant.accounts.v1beta.IBusinessIdentity,
+        protos.google.shopping.merchant.accounts.v1beta.IUpdateBusinessIdentityRequest|undefined, {}|undefined
+      ]>;
   updateBusinessIdentity(
-    request: protos.google.shopping.merchant.accounts.v1beta.IUpdateBusinessIdentityRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IBusinessIdentity,
-      | protos.google.shopping.merchant.accounts.v1beta.IUpdateBusinessIdentityRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateBusinessIdentity(
-    request: protos.google.shopping.merchant.accounts.v1beta.IUpdateBusinessIdentityRequest,
-    callback: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IBusinessIdentity,
-      | protos.google.shopping.merchant.accounts.v1beta.IUpdateBusinessIdentityRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateBusinessIdentity(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IUpdateBusinessIdentityRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.shopping.merchant.accounts.v1beta.IUpdateBusinessIdentityRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.shopping.merchant.accounts.v1beta.IBusinessIdentity,
-          | protos.google.shopping.merchant.accounts.v1beta.IUpdateBusinessIdentityRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IBusinessIdentity,
-      | protos.google.shopping.merchant.accounts.v1beta.IUpdateBusinessIdentityRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.shopping.merchant.accounts.v1beta.IBusinessIdentity,
-      (
-        | protos.google.shopping.merchant.accounts.v1beta.IUpdateBusinessIdentityRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.shopping.merchant.accounts.v1beta.IUpdateBusinessIdentityRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateBusinessIdentity(
+      request: protos.google.shopping.merchant.accounts.v1beta.IUpdateBusinessIdentityRequest,
+      callback: Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IBusinessIdentity,
+          protos.google.shopping.merchant.accounts.v1beta.IUpdateBusinessIdentityRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateBusinessIdentity(
+      request?: protos.google.shopping.merchant.accounts.v1beta.IUpdateBusinessIdentityRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IBusinessIdentity,
+          protos.google.shopping.merchant.accounts.v1beta.IUpdateBusinessIdentityRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IBusinessIdentity,
+          protos.google.shopping.merchant.accounts.v1beta.IUpdateBusinessIdentityRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.shopping.merchant.accounts.v1beta.IBusinessIdentity,
+        protos.google.shopping.merchant.accounts.v1beta.IUpdateBusinessIdentityRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'business_identity.name': request.businessIdentity!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'business_identity.name': request.businessIdentity!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateBusinessIdentity request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.shopping.merchant.accounts.v1beta.IBusinessIdentity,
-          | protos.google.shopping.merchant.accounts.v1beta.IUpdateBusinessIdentityRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.shopping.merchant.accounts.v1beta.IBusinessIdentity,
+        protos.google.shopping.merchant.accounts.v1beta.IUpdateBusinessIdentityRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateBusinessIdentity response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateBusinessIdentity(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.shopping.merchant.accounts.v1beta.IBusinessIdentity,
-          (
-            | protos.google.shopping.merchant.accounts.v1beta.IUpdateBusinessIdentityRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateBusinessIdentity response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateBusinessIdentity(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.shopping.merchant.accounts.v1beta.IBusinessIdentity,
+        protos.google.shopping.merchant.accounts.v1beta.IUpdateBusinessIdentityRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateBusinessIdentity response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
   // --------------------
@@ -698,7 +585,7 @@ export class BusinessIdentityServiceClient {
    * @param {string} account
    * @returns {string} Resource name string.
    */
-  accountPath(account: string) {
+  accountPath(account:string) {
     return this.pathTemplates.accountPathTemplate.render({
       account: account,
     });
@@ -722,7 +609,7 @@ export class BusinessIdentityServiceClient {
    * @param {string} issue
    * @returns {string} Resource name string.
    */
-  accountIssuePath(account: string, issue: string) {
+  accountIssuePath(account:string,issue:string) {
     return this.pathTemplates.accountIssuePathTemplate.render({
       account: account,
       issue: issue,
@@ -737,8 +624,7 @@ export class BusinessIdentityServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromAccountIssueName(accountIssueName: string) {
-    return this.pathTemplates.accountIssuePathTemplate.match(accountIssueName)
-      .account;
+    return this.pathTemplates.accountIssuePathTemplate.match(accountIssueName).account;
   }
 
   /**
@@ -749,8 +635,7 @@ export class BusinessIdentityServiceClient {
    * @returns {string} A string representing the issue.
    */
   matchIssueFromAccountIssueName(accountIssueName: string) {
-    return this.pathTemplates.accountIssuePathTemplate.match(accountIssueName)
-      .issue;
+    return this.pathTemplates.accountIssuePathTemplate.match(accountIssueName).issue;
   }
 
   /**
@@ -760,7 +645,7 @@ export class BusinessIdentityServiceClient {
    * @param {string} tax
    * @returns {string} Resource name string.
    */
-  accountTaxPath(account: string, tax: string) {
+  accountTaxPath(account:string,tax:string) {
     return this.pathTemplates.accountTaxPathTemplate.render({
       account: account,
       tax: tax,
@@ -775,8 +660,7 @@ export class BusinessIdentityServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromAccountTaxName(accountTaxName: string) {
-    return this.pathTemplates.accountTaxPathTemplate.match(accountTaxName)
-      .account;
+    return this.pathTemplates.accountTaxPathTemplate.match(accountTaxName).account;
   }
 
   /**
@@ -796,7 +680,7 @@ export class BusinessIdentityServiceClient {
    * @param {string} account
    * @returns {string} Resource name string.
    */
-  autofeedSettingsPath(account: string) {
+  autofeedSettingsPath(account:string) {
     return this.pathTemplates.autofeedSettingsPathTemplate.render({
       account: account,
     });
@@ -810,9 +694,7 @@ export class BusinessIdentityServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromAutofeedSettingsName(autofeedSettingsName: string) {
-    return this.pathTemplates.autofeedSettingsPathTemplate.match(
-      autofeedSettingsName
-    ).account;
+    return this.pathTemplates.autofeedSettingsPathTemplate.match(autofeedSettingsName).account;
   }
 
   /**
@@ -821,7 +703,7 @@ export class BusinessIdentityServiceClient {
    * @param {string} account
    * @returns {string} Resource name string.
    */
-  automaticImprovementsPath(account: string) {
+  automaticImprovementsPath(account:string) {
     return this.pathTemplates.automaticImprovementsPathTemplate.render({
       account: account,
     });
@@ -835,9 +717,7 @@ export class BusinessIdentityServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromAutomaticImprovementsName(automaticImprovementsName: string) {
-    return this.pathTemplates.automaticImprovementsPathTemplate.match(
-      automaticImprovementsName
-    ).account;
+    return this.pathTemplates.automaticImprovementsPathTemplate.match(automaticImprovementsName).account;
   }
 
   /**
@@ -846,7 +726,7 @@ export class BusinessIdentityServiceClient {
    * @param {string} account
    * @returns {string} Resource name string.
    */
-  businessIdentityPath(account: string) {
+  businessIdentityPath(account:string) {
     return this.pathTemplates.businessIdentityPathTemplate.render({
       account: account,
     });
@@ -860,9 +740,7 @@ export class BusinessIdentityServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromBusinessIdentityName(businessIdentityName: string) {
-    return this.pathTemplates.businessIdentityPathTemplate.match(
-      businessIdentityName
-    ).account;
+    return this.pathTemplates.businessIdentityPathTemplate.match(businessIdentityName).account;
   }
 
   /**
@@ -871,7 +749,7 @@ export class BusinessIdentityServiceClient {
    * @param {string} account
    * @returns {string} Resource name string.
    */
-  businessInfoPath(account: string) {
+  businessInfoPath(account:string) {
     return this.pathTemplates.businessInfoPathTemplate.render({
       account: account,
     });
@@ -885,8 +763,7 @@ export class BusinessIdentityServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromBusinessInfoName(businessInfoName: string) {
-    return this.pathTemplates.businessInfoPathTemplate.match(businessInfoName)
-      .account;
+    return this.pathTemplates.businessInfoPathTemplate.match(businessInfoName).account;
   }
 
   /**
@@ -896,7 +773,7 @@ export class BusinessIdentityServiceClient {
    * @param {string} email
    * @returns {string} Resource name string.
    */
-  emailPreferencesPath(account: string, email: string) {
+  emailPreferencesPath(account:string,email:string) {
     return this.pathTemplates.emailPreferencesPathTemplate.render({
       account: account,
       email: email,
@@ -911,9 +788,7 @@ export class BusinessIdentityServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromEmailPreferencesName(emailPreferencesName: string) {
-    return this.pathTemplates.emailPreferencesPathTemplate.match(
-      emailPreferencesName
-    ).account;
+    return this.pathTemplates.emailPreferencesPathTemplate.match(emailPreferencesName).account;
   }
 
   /**
@@ -924,9 +799,7 @@ export class BusinessIdentityServiceClient {
    * @returns {string} A string representing the email.
    */
   matchEmailFromEmailPreferencesName(emailPreferencesName: string) {
-    return this.pathTemplates.emailPreferencesPathTemplate.match(
-      emailPreferencesName
-    ).email;
+    return this.pathTemplates.emailPreferencesPathTemplate.match(emailPreferencesName).email;
   }
 
   /**
@@ -936,7 +809,7 @@ export class BusinessIdentityServiceClient {
    * @param {string} gbp_account
    * @returns {string} Resource name string.
    */
-  gbpAccountPath(account: string, gbpAccount: string) {
+  gbpAccountPath(account:string,gbpAccount:string) {
     return this.pathTemplates.gbpAccountPathTemplate.render({
       account: account,
       gbp_account: gbpAccount,
@@ -951,8 +824,7 @@ export class BusinessIdentityServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromGbpAccountName(gbpAccountName: string) {
-    return this.pathTemplates.gbpAccountPathTemplate.match(gbpAccountName)
-      .account;
+    return this.pathTemplates.gbpAccountPathTemplate.match(gbpAccountName).account;
   }
 
   /**
@@ -963,8 +835,7 @@ export class BusinessIdentityServiceClient {
    * @returns {string} A string representing the gbp_account.
    */
   matchGbpAccountFromGbpAccountName(gbpAccountName: string) {
-    return this.pathTemplates.gbpAccountPathTemplate.match(gbpAccountName)
-      .gbp_account;
+    return this.pathTemplates.gbpAccountPathTemplate.match(gbpAccountName).gbp_account;
   }
 
   /**
@@ -973,7 +844,7 @@ export class BusinessIdentityServiceClient {
    * @param {string} account
    * @returns {string} Resource name string.
    */
-  homepagePath(account: string) {
+  homepagePath(account:string) {
     return this.pathTemplates.homepagePathTemplate.render({
       account: account,
     });
@@ -998,11 +869,7 @@ export class BusinessIdentityServiceClient {
    * @param {string} lfp_provider
    * @returns {string} Resource name string.
    */
-  lfpProviderPath(
-    account: string,
-    omnichannelSetting: string,
-    lfpProvider: string
-  ) {
+  lfpProviderPath(account:string,omnichannelSetting:string,lfpProvider:string) {
     return this.pathTemplates.lfpProviderPathTemplate.render({
       account: account,
       omnichannel_setting: omnichannelSetting,
@@ -1018,8 +885,7 @@ export class BusinessIdentityServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromLfpProviderName(lfpProviderName: string) {
-    return this.pathTemplates.lfpProviderPathTemplate.match(lfpProviderName)
-      .account;
+    return this.pathTemplates.lfpProviderPathTemplate.match(lfpProviderName).account;
   }
 
   /**
@@ -1030,8 +896,7 @@ export class BusinessIdentityServiceClient {
    * @returns {string} A string representing the omnichannel_setting.
    */
   matchOmnichannelSettingFromLfpProviderName(lfpProviderName: string) {
-    return this.pathTemplates.lfpProviderPathTemplate.match(lfpProviderName)
-      .omnichannel_setting;
+    return this.pathTemplates.lfpProviderPathTemplate.match(lfpProviderName).omnichannel_setting;
   }
 
   /**
@@ -1042,8 +907,7 @@ export class BusinessIdentityServiceClient {
    * @returns {string} A string representing the lfp_provider.
    */
   matchLfpProviderFromLfpProviderName(lfpProviderName: string) {
-    return this.pathTemplates.lfpProviderPathTemplate.match(lfpProviderName)
-      .lfp_provider;
+    return this.pathTemplates.lfpProviderPathTemplate.match(lfpProviderName).lfp_provider;
   }
 
   /**
@@ -1053,7 +917,7 @@ export class BusinessIdentityServiceClient {
    * @param {string} omnichannel_setting
    * @returns {string} Resource name string.
    */
-  omnichannelSettingPath(account: string, omnichannelSetting: string) {
+  omnichannelSettingPath(account:string,omnichannelSetting:string) {
     return this.pathTemplates.omnichannelSettingPathTemplate.render({
       account: account,
       omnichannel_setting: omnichannelSetting,
@@ -1068,9 +932,7 @@ export class BusinessIdentityServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromOmnichannelSettingName(omnichannelSettingName: string) {
-    return this.pathTemplates.omnichannelSettingPathTemplate.match(
-      omnichannelSettingName
-    ).account;
+    return this.pathTemplates.omnichannelSettingPathTemplate.match(omnichannelSettingName).account;
   }
 
   /**
@@ -1080,12 +942,8 @@ export class BusinessIdentityServiceClient {
    *   A fully-qualified path representing OmnichannelSetting resource.
    * @returns {string} A string representing the omnichannel_setting.
    */
-  matchOmnichannelSettingFromOmnichannelSettingName(
-    omnichannelSettingName: string
-  ) {
-    return this.pathTemplates.omnichannelSettingPathTemplate.match(
-      omnichannelSettingName
-    ).omnichannel_setting;
+  matchOmnichannelSettingFromOmnichannelSettingName(omnichannelSettingName: string) {
+    return this.pathTemplates.omnichannelSettingPathTemplate.match(omnichannelSettingName).omnichannel_setting;
   }
 
   /**
@@ -1095,7 +953,7 @@ export class BusinessIdentityServiceClient {
    * @param {string} return_policy
    * @returns {string} Resource name string.
    */
-  onlineReturnPolicyPath(account: string, returnPolicy: string) {
+  onlineReturnPolicyPath(account:string,returnPolicy:string) {
     return this.pathTemplates.onlineReturnPolicyPathTemplate.render({
       account: account,
       return_policy: returnPolicy,
@@ -1110,9 +968,7 @@ export class BusinessIdentityServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromOnlineReturnPolicyName(onlineReturnPolicyName: string) {
-    return this.pathTemplates.onlineReturnPolicyPathTemplate.match(
-      onlineReturnPolicyName
-    ).account;
+    return this.pathTemplates.onlineReturnPolicyPathTemplate.match(onlineReturnPolicyName).account;
   }
 
   /**
@@ -1123,9 +979,7 @@ export class BusinessIdentityServiceClient {
    * @returns {string} A string representing the return_policy.
    */
   matchReturnPolicyFromOnlineReturnPolicyName(onlineReturnPolicyName: string) {
-    return this.pathTemplates.onlineReturnPolicyPathTemplate.match(
-      onlineReturnPolicyName
-    ).return_policy;
+    return this.pathTemplates.onlineReturnPolicyPathTemplate.match(onlineReturnPolicyName).return_policy;
   }
 
   /**
@@ -1135,7 +989,7 @@ export class BusinessIdentityServiceClient {
    * @param {string} program
    * @returns {string} Resource name string.
    */
-  programPath(account: string, program: string) {
+  programPath(account:string,program:string) {
     return this.pathTemplates.programPathTemplate.render({
       account: account,
       program: program,
@@ -1171,7 +1025,7 @@ export class BusinessIdentityServiceClient {
    * @param {string} region
    * @returns {string} Resource name string.
    */
-  regionPath(account: string, region: string) {
+  regionPath(account:string,region:string) {
     return this.pathTemplates.regionPathTemplate.render({
       account: account,
       region: region,
@@ -1206,7 +1060,7 @@ export class BusinessIdentityServiceClient {
    * @param {string} account
    * @returns {string} Resource name string.
    */
-  shippingSettingsPath(account: string) {
+  shippingSettingsPath(account:string) {
     return this.pathTemplates.shippingSettingsPathTemplate.render({
       account: account,
     });
@@ -1220,9 +1074,7 @@ export class BusinessIdentityServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromShippingSettingsName(shippingSettingsName: string) {
-    return this.pathTemplates.shippingSettingsPathTemplate.match(
-      shippingSettingsName
-    ).account;
+    return this.pathTemplates.shippingSettingsPathTemplate.match(shippingSettingsName).account;
   }
 
   /**
@@ -1231,7 +1083,7 @@ export class BusinessIdentityServiceClient {
    * @param {string} version
    * @returns {string} Resource name string.
    */
-  termsOfServicePath(version: string) {
+  termsOfServicePath(version:string) {
     return this.pathTemplates.termsOfServicePathTemplate.render({
       version: version,
     });
@@ -1245,9 +1097,7 @@ export class BusinessIdentityServiceClient {
    * @returns {string} A string representing the version.
    */
   matchVersionFromTermsOfServiceName(termsOfServiceName: string) {
-    return this.pathTemplates.termsOfServicePathTemplate.match(
-      termsOfServiceName
-    ).version;
+    return this.pathTemplates.termsOfServicePathTemplate.match(termsOfServiceName).version;
   }
 
   /**
@@ -1257,7 +1107,7 @@ export class BusinessIdentityServiceClient {
    * @param {string} identifier
    * @returns {string} Resource name string.
    */
-  termsOfServiceAgreementStatePath(account: string, identifier: string) {
+  termsOfServiceAgreementStatePath(account:string,identifier:string) {
     return this.pathTemplates.termsOfServiceAgreementStatePathTemplate.render({
       account: account,
       identifier: identifier,
@@ -1271,12 +1121,8 @@ export class BusinessIdentityServiceClient {
    *   A fully-qualified path representing TermsOfServiceAgreementState resource.
    * @returns {string} A string representing the account.
    */
-  matchAccountFromTermsOfServiceAgreementStateName(
-    termsOfServiceAgreementStateName: string
-  ) {
-    return this.pathTemplates.termsOfServiceAgreementStatePathTemplate.match(
-      termsOfServiceAgreementStateName
-    ).account;
+  matchAccountFromTermsOfServiceAgreementStateName(termsOfServiceAgreementStateName: string) {
+    return this.pathTemplates.termsOfServiceAgreementStatePathTemplate.match(termsOfServiceAgreementStateName).account;
   }
 
   /**
@@ -1286,12 +1132,8 @@ export class BusinessIdentityServiceClient {
    *   A fully-qualified path representing TermsOfServiceAgreementState resource.
    * @returns {string} A string representing the identifier.
    */
-  matchIdentifierFromTermsOfServiceAgreementStateName(
-    termsOfServiceAgreementStateName: string
-  ) {
-    return this.pathTemplates.termsOfServiceAgreementStatePathTemplate.match(
-      termsOfServiceAgreementStateName
-    ).identifier;
+  matchIdentifierFromTermsOfServiceAgreementStateName(termsOfServiceAgreementStateName: string) {
+    return this.pathTemplates.termsOfServiceAgreementStatePathTemplate.match(termsOfServiceAgreementStateName).identifier;
   }
 
   /**
@@ -1301,7 +1143,7 @@ export class BusinessIdentityServiceClient {
    * @param {string} email
    * @returns {string} Resource name string.
    */
-  userPath(account: string, email: string) {
+  userPath(account:string,email:string) {
     return this.pathTemplates.userPathTemplate.render({
       account: account,
       email: email,

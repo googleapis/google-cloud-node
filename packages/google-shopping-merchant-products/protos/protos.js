@@ -317,12 +317,7 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * ProductInput _versionNumber.
-                             * @member {"versionNumber"|undefined} _versionNumber
-                             * @memberof google.shopping.merchant.products.v1beta.ProductInput
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductInput.prototype, "_versionNumber", {
                                 get: $util.oneOfGetter($oneOfFields = ["versionNumber"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -2326,573 +2321,313 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * Attributes _identifierExists.
-                             * @member {"identifierExists"|undefined} _identifierExists
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_identifierExists", {
                                 get: $util.oneOfGetter($oneOfFields = ["identifierExists"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _isBundle.
-                             * @member {"isBundle"|undefined} _isBundle
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_isBundle", {
                                 get: $util.oneOfGetter($oneOfFields = ["isBundle"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _title.
-                             * @member {"title"|undefined} _title
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_title", {
                                 get: $util.oneOfGetter($oneOfFields = ["title"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _description.
-                             * @member {"description"|undefined} _description
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_description", {
                                 get: $util.oneOfGetter($oneOfFields = ["description"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _link.
-                             * @member {"link"|undefined} _link
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_link", {
                                 get: $util.oneOfGetter($oneOfFields = ["link"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _mobileLink.
-                             * @member {"mobileLink"|undefined} _mobileLink
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_mobileLink", {
                                 get: $util.oneOfGetter($oneOfFields = ["mobileLink"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _canonicalLink.
-                             * @member {"canonicalLink"|undefined} _canonicalLink
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_canonicalLink", {
                                 get: $util.oneOfGetter($oneOfFields = ["canonicalLink"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _imageLink.
-                             * @member {"imageLink"|undefined} _imageLink
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_imageLink", {
                                 get: $util.oneOfGetter($oneOfFields = ["imageLink"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _adult.
-                             * @member {"adult"|undefined} _adult
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_adult", {
                                 get: $util.oneOfGetter($oneOfFields = ["adult"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _ageGroup.
-                             * @member {"ageGroup"|undefined} _ageGroup
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_ageGroup", {
                                 get: $util.oneOfGetter($oneOfFields = ["ageGroup"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _availability.
-                             * @member {"availability"|undefined} _availability
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_availability", {
                                 get: $util.oneOfGetter($oneOfFields = ["availability"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _brand.
-                             * @member {"brand"|undefined} _brand
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_brand", {
                                 get: $util.oneOfGetter($oneOfFields = ["brand"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _color.
-                             * @member {"color"|undefined} _color
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_color", {
                                 get: $util.oneOfGetter($oneOfFields = ["color"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _condition.
-                             * @member {"condition"|undefined} _condition
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_condition", {
                                 get: $util.oneOfGetter($oneOfFields = ["condition"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _gender.
-                             * @member {"gender"|undefined} _gender
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_gender", {
                                 get: $util.oneOfGetter($oneOfFields = ["gender"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _googleProductCategory.
-                             * @member {"googleProductCategory"|undefined} _googleProductCategory
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_googleProductCategory", {
                                 get: $util.oneOfGetter($oneOfFields = ["googleProductCategory"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _itemGroupId.
-                             * @member {"itemGroupId"|undefined} _itemGroupId
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_itemGroupId", {
                                 get: $util.oneOfGetter($oneOfFields = ["itemGroupId"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _material.
-                             * @member {"material"|undefined} _material
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_material", {
                                 get: $util.oneOfGetter($oneOfFields = ["material"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _mpn.
-                             * @member {"mpn"|undefined} _mpn
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_mpn", {
                                 get: $util.oneOfGetter($oneOfFields = ["mpn"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _pattern.
-                             * @member {"pattern"|undefined} _pattern
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_pattern", {
                                 get: $util.oneOfGetter($oneOfFields = ["pattern"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _sellOnGoogleQuantity.
-                             * @member {"sellOnGoogleQuantity"|undefined} _sellOnGoogleQuantity
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_sellOnGoogleQuantity", {
                                 get: $util.oneOfGetter($oneOfFields = ["sellOnGoogleQuantity"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _maxHandlingTime.
-                             * @member {"maxHandlingTime"|undefined} _maxHandlingTime
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_maxHandlingTime", {
                                 get: $util.oneOfGetter($oneOfFields = ["maxHandlingTime"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _minHandlingTime.
-                             * @member {"minHandlingTime"|undefined} _minHandlingTime
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_minHandlingTime", {
                                 get: $util.oneOfGetter($oneOfFields = ["minHandlingTime"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _shippingLabel.
-                             * @member {"shippingLabel"|undefined} _shippingLabel
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_shippingLabel", {
                                 get: $util.oneOfGetter($oneOfFields = ["shippingLabel"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _transitTimeLabel.
-                             * @member {"transitTimeLabel"|undefined} _transitTimeLabel
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_transitTimeLabel", {
                                 get: $util.oneOfGetter($oneOfFields = ["transitTimeLabel"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _size.
-                             * @member {"size"|undefined} _size
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_size", {
                                 get: $util.oneOfGetter($oneOfFields = ["size"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _sizeSystem.
-                             * @member {"sizeSystem"|undefined} _sizeSystem
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_sizeSystem", {
                                 get: $util.oneOfGetter($oneOfFields = ["sizeSystem"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _taxCategory.
-                             * @member {"taxCategory"|undefined} _taxCategory
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_taxCategory", {
                                 get: $util.oneOfGetter($oneOfFields = ["taxCategory"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _energyEfficiencyClass.
-                             * @member {"energyEfficiencyClass"|undefined} _energyEfficiencyClass
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_energyEfficiencyClass", {
                                 get: $util.oneOfGetter($oneOfFields = ["energyEfficiencyClass"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _minEnergyEfficiencyClass.
-                             * @member {"minEnergyEfficiencyClass"|undefined} _minEnergyEfficiencyClass
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_minEnergyEfficiencyClass", {
                                 get: $util.oneOfGetter($oneOfFields = ["minEnergyEfficiencyClass"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _maxEnergyEfficiencyClass.
-                             * @member {"maxEnergyEfficiencyClass"|undefined} _maxEnergyEfficiencyClass
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_maxEnergyEfficiencyClass", {
                                 get: $util.oneOfGetter($oneOfFields = ["maxEnergyEfficiencyClass"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _multipack.
-                             * @member {"multipack"|undefined} _multipack
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_multipack", {
                                 get: $util.oneOfGetter($oneOfFields = ["multipack"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _adsGrouping.
-                             * @member {"adsGrouping"|undefined} _adsGrouping
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_adsGrouping", {
                                 get: $util.oneOfGetter($oneOfFields = ["adsGrouping"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _adsRedirect.
-                             * @member {"adsRedirect"|undefined} _adsRedirect
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_adsRedirect", {
                                 get: $util.oneOfGetter($oneOfFields = ["adsRedirect"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _displayAdsId.
-                             * @member {"displayAdsId"|undefined} _displayAdsId
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_displayAdsId", {
                                 get: $util.oneOfGetter($oneOfFields = ["displayAdsId"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _displayAdsTitle.
-                             * @member {"displayAdsTitle"|undefined} _displayAdsTitle
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_displayAdsTitle", {
                                 get: $util.oneOfGetter($oneOfFields = ["displayAdsTitle"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _displayAdsLink.
-                             * @member {"displayAdsLink"|undefined} _displayAdsLink
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_displayAdsLink", {
                                 get: $util.oneOfGetter($oneOfFields = ["displayAdsLink"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _displayAdsValue.
-                             * @member {"displayAdsValue"|undefined} _displayAdsValue
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_displayAdsValue", {
                                 get: $util.oneOfGetter($oneOfFields = ["displayAdsValue"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _pickupMethod.
-                             * @member {"pickupMethod"|undefined} _pickupMethod
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_pickupMethod", {
                                 get: $util.oneOfGetter($oneOfFields = ["pickupMethod"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _pickupSla.
-                             * @member {"pickupSla"|undefined} _pickupSla
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_pickupSla", {
                                 get: $util.oneOfGetter($oneOfFields = ["pickupSla"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _linkTemplate.
-                             * @member {"linkTemplate"|undefined} _linkTemplate
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_linkTemplate", {
                                 get: $util.oneOfGetter($oneOfFields = ["linkTemplate"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _mobileLinkTemplate.
-                             * @member {"mobileLinkTemplate"|undefined} _mobileLinkTemplate
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_mobileLinkTemplate", {
                                 get: $util.oneOfGetter($oneOfFields = ["mobileLinkTemplate"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _customLabel_0.
-                             * @member {"customLabel_0"|undefined} _customLabel_0
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_customLabel_0", {
                                 get: $util.oneOfGetter($oneOfFields = ["customLabel_0"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _customLabel_1.
-                             * @member {"customLabel_1"|undefined} _customLabel_1
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_customLabel_1", {
                                 get: $util.oneOfGetter($oneOfFields = ["customLabel_1"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _customLabel_2.
-                             * @member {"customLabel_2"|undefined} _customLabel_2
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_customLabel_2", {
                                 get: $util.oneOfGetter($oneOfFields = ["customLabel_2"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _customLabel_3.
-                             * @member {"customLabel_3"|undefined} _customLabel_3
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_customLabel_3", {
                                 get: $util.oneOfGetter($oneOfFields = ["customLabel_3"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _customLabel_4.
-                             * @member {"customLabel_4"|undefined} _customLabel_4
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_customLabel_4", {
                                 get: $util.oneOfGetter($oneOfFields = ["customLabel_4"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _externalSellerId.
-                             * @member {"externalSellerId"|undefined} _externalSellerId
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_externalSellerId", {
                                 get: $util.oneOfGetter($oneOfFields = ["externalSellerId"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _pause.
-                             * @member {"pause"|undefined} _pause
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_pause", {
                                 get: $util.oneOfGetter($oneOfFields = ["pause"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _virtualModelLink.
-                             * @member {"virtualModelLink"|undefined} _virtualModelLink
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_virtualModelLink", {
                                 get: $util.oneOfGetter($oneOfFields = ["virtualModelLink"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _structuredTitle.
-                             * @member {"structuredTitle"|undefined} _structuredTitle
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_structuredTitle", {
                                 get: $util.oneOfGetter($oneOfFields = ["structuredTitle"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Attributes _structuredDescription.
-                             * @member {"structuredDescription"|undefined} _structuredDescription
-                             * @memberof google.shopping.merchant.products.v1beta.Attributes
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Attributes.prototype, "_structuredDescription", {
                                 get: $util.oneOfGetter($oneOfFields = ["structuredDescription"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -6690,23 +6425,13 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * Installment _downpayment.
-                             * @member {"downpayment"|undefined} _downpayment
-                             * @memberof google.shopping.merchant.products.v1beta.Installment
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Installment.prototype, "_downpayment", {
                                 get: $util.oneOfGetter($oneOfFields = ["downpayment"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Installment _creditType.
-                             * @member {"creditType"|undefined} _creditType
-                             * @memberof google.shopping.merchant.products.v1beta.Installment
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Installment.prototype, "_creditType", {
                                 get: $util.oneOfGetter($oneOfFields = ["creditType"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -7317,78 +7042,43 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * LoyaltyProgram _programLabel.
-                             * @member {"programLabel"|undefined} _programLabel
-                             * @memberof google.shopping.merchant.products.v1beta.LoyaltyProgram
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(LoyaltyProgram.prototype, "_programLabel", {
                                 get: $util.oneOfGetter($oneOfFields = ["programLabel"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * LoyaltyProgram _tierLabel.
-                             * @member {"tierLabel"|undefined} _tierLabel
-                             * @memberof google.shopping.merchant.products.v1beta.LoyaltyProgram
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(LoyaltyProgram.prototype, "_tierLabel", {
                                 get: $util.oneOfGetter($oneOfFields = ["tierLabel"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * LoyaltyProgram _price.
-                             * @member {"price"|undefined} _price
-                             * @memberof google.shopping.merchant.products.v1beta.LoyaltyProgram
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(LoyaltyProgram.prototype, "_price", {
                                 get: $util.oneOfGetter($oneOfFields = ["price"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * LoyaltyProgram _cashbackForFutureUse.
-                             * @member {"cashbackForFutureUse"|undefined} _cashbackForFutureUse
-                             * @memberof google.shopping.merchant.products.v1beta.LoyaltyProgram
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(LoyaltyProgram.prototype, "_cashbackForFutureUse", {
                                 get: $util.oneOfGetter($oneOfFields = ["cashbackForFutureUse"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * LoyaltyProgram _loyaltyPoints.
-                             * @member {"loyaltyPoints"|undefined} _loyaltyPoints
-                             * @memberof google.shopping.merchant.products.v1beta.LoyaltyProgram
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(LoyaltyProgram.prototype, "_loyaltyPoints", {
                                 get: $util.oneOfGetter($oneOfFields = ["loyaltyPoints"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * LoyaltyProgram _memberPriceEffectiveDate.
-                             * @member {"memberPriceEffectiveDate"|undefined} _memberPriceEffectiveDate
-                             * @memberof google.shopping.merchant.products.v1beta.LoyaltyProgram
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(LoyaltyProgram.prototype, "_memberPriceEffectiveDate", {
                                 get: $util.oneOfGetter($oneOfFields = ["memberPriceEffectiveDate"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * LoyaltyProgram _shippingLabel.
-                             * @member {"shippingLabel"|undefined} _shippingLabel
-                             * @memberof google.shopping.merchant.products.v1beta.LoyaltyProgram
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(LoyaltyProgram.prototype, "_shippingLabel", {
                                 get: $util.oneOfGetter($oneOfFields = ["shippingLabel"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -7832,45 +7522,25 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * Shipping _minHandlingTime.
-                             * @member {"minHandlingTime"|undefined} _minHandlingTime
-                             * @memberof google.shopping.merchant.products.v1beta.Shipping
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Shipping.prototype, "_minHandlingTime", {
                                 get: $util.oneOfGetter($oneOfFields = ["minHandlingTime"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Shipping _maxHandlingTime.
-                             * @member {"maxHandlingTime"|undefined} _maxHandlingTime
-                             * @memberof google.shopping.merchant.products.v1beta.Shipping
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Shipping.prototype, "_maxHandlingTime", {
                                 get: $util.oneOfGetter($oneOfFields = ["maxHandlingTime"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Shipping _minTransitTime.
-                             * @member {"minTransitTime"|undefined} _minTransitTime
-                             * @memberof google.shopping.merchant.products.v1beta.Shipping
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Shipping.prototype, "_minTransitTime", {
                                 get: $util.oneOfGetter($oneOfFields = ["minTransitTime"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Shipping _maxTransitTime.
-                             * @member {"maxTransitTime"|undefined} _maxTransitTime
-                             * @memberof google.shopping.merchant.products.v1beta.Shipping
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Shipping.prototype, "_maxTransitTime", {
                                 get: $util.oneOfGetter($oneOfFields = ["maxTransitTime"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -8310,23 +7980,13 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * FreeShippingThreshold _country.
-                             * @member {"country"|undefined} _country
-                             * @memberof google.shopping.merchant.products.v1beta.FreeShippingThreshold
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(FreeShippingThreshold.prototype, "_country", {
                                 get: $util.oneOfGetter($oneOfFields = ["country"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * FreeShippingThreshold _priceThreshold.
-                             * @member {"priceThreshold"|undefined} _priceThreshold
-                             * @memberof google.shopping.merchant.products.v1beta.FreeShippingThreshold
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(FreeShippingThreshold.prototype, "_priceThreshold", {
                                 get: $util.oneOfGetter($oneOfFields = ["priceThreshold"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -8847,45 +8507,25 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * Certification _certificationAuthority.
-                             * @member {"certificationAuthority"|undefined} _certificationAuthority
-                             * @memberof google.shopping.merchant.products.v1beta.Certification
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Certification.prototype, "_certificationAuthority", {
                                 get: $util.oneOfGetter($oneOfFields = ["certificationAuthority"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Certification _certificationName.
-                             * @member {"certificationName"|undefined} _certificationName
-                             * @memberof google.shopping.merchant.products.v1beta.Certification
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Certification.prototype, "_certificationName", {
                                 get: $util.oneOfGetter($oneOfFields = ["certificationName"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Certification _certificationCode.
-                             * @member {"certificationCode"|undefined} _certificationCode
-                             * @memberof google.shopping.merchant.products.v1beta.Certification
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Certification.prototype, "_certificationCode", {
                                 get: $util.oneOfGetter($oneOfFields = ["certificationCode"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * Certification _certificationValue.
-                             * @member {"certificationValue"|undefined} _certificationValue
-                             * @memberof google.shopping.merchant.products.v1beta.Certification
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Certification.prototype, "_certificationValue", {
                                 get: $util.oneOfGetter($oneOfFields = ["certificationValue"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -9166,23 +8806,13 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * ProductStructuredTitle _digitalSourceType.
-                             * @member {"digitalSourceType"|undefined} _digitalSourceType
-                             * @memberof google.shopping.merchant.products.v1beta.ProductStructuredTitle
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductStructuredTitle.prototype, "_digitalSourceType", {
                                 get: $util.oneOfGetter($oneOfFields = ["digitalSourceType"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductStructuredTitle _content.
-                             * @member {"content"|undefined} _content
-                             * @memberof google.shopping.merchant.products.v1beta.ProductStructuredTitle
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductStructuredTitle.prototype, "_content", {
                                 get: $util.oneOfGetter($oneOfFields = ["content"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -9427,23 +9057,13 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * ProductStructuredDescription _digitalSourceType.
-                             * @member {"digitalSourceType"|undefined} _digitalSourceType
-                             * @memberof google.shopping.merchant.products.v1beta.ProductStructuredDescription
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductStructuredDescription.prototype, "_digitalSourceType", {
                                 get: $util.oneOfGetter($oneOfFields = ["digitalSourceType"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductStructuredDescription _content.
-                             * @member {"content"|undefined} _content
-                             * @memberof google.shopping.merchant.products.v1beta.ProductStructuredDescription
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductStructuredDescription.prototype, "_content", {
                                 get: $util.oneOfGetter($oneOfFields = ["content"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -11506,56 +11126,31 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * CloudExportAdditionalProperties _propertyName.
-                             * @member {"propertyName"|undefined} _propertyName
-                             * @memberof google.shopping.merchant.products.v1beta.CloudExportAdditionalProperties
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(CloudExportAdditionalProperties.prototype, "_propertyName", {
                                 get: $util.oneOfGetter($oneOfFields = ["propertyName"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * CloudExportAdditionalProperties _boolValue.
-                             * @member {"boolValue"|undefined} _boolValue
-                             * @memberof google.shopping.merchant.products.v1beta.CloudExportAdditionalProperties
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(CloudExportAdditionalProperties.prototype, "_boolValue", {
                                 get: $util.oneOfGetter($oneOfFields = ["boolValue"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * CloudExportAdditionalProperties _minValue.
-                             * @member {"minValue"|undefined} _minValue
-                             * @memberof google.shopping.merchant.products.v1beta.CloudExportAdditionalProperties
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(CloudExportAdditionalProperties.prototype, "_minValue", {
                                 get: $util.oneOfGetter($oneOfFields = ["minValue"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * CloudExportAdditionalProperties _maxValue.
-                             * @member {"maxValue"|undefined} _maxValue
-                             * @memberof google.shopping.merchant.products.v1beta.CloudExportAdditionalProperties
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(CloudExportAdditionalProperties.prototype, "_maxValue", {
                                 get: $util.oneOfGetter($oneOfFields = ["maxValue"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * CloudExportAdditionalProperties _unitCode.
-                             * @member {"unitCode"|undefined} _unitCode
-                             * @memberof google.shopping.merchant.products.v1beta.CloudExportAdditionalProperties
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(CloudExportAdditionalProperties.prototype, "_unitCode", {
                                 get: $util.oneOfGetter($oneOfFields = ["unitCode"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -11989,12 +11584,7 @@
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductSustainabilityIncentive _type.
-                             * @member {"type"|undefined} _type
-                             * @memberof google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductSustainabilityIncentive.prototype, "_type", {
                                 get: $util.oneOfGetter($oneOfFields = ["type"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -12755,12 +12345,7 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * Product _versionNumber.
-                             * @member {"versionNumber"|undefined} _versionNumber
-                             * @memberof google.shopping.merchant.products.v1beta.Product
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Product.prototype, "_versionNumber", {
                                 get: $util.oneOfGetter($oneOfFields = ["versionNumber"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -13924,12 +13509,7 @@
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
-                    /**
-                     * Weight _amountMicros.
-                     * @member {"amountMicros"|undefined} _amountMicros
-                     * @memberof google.shopping.type.Weight
-                     * @instance
-                     */
+                    // Virtual OneOf for proto3 optional field
                     Object.defineProperty(Weight.prototype, "_amountMicros", {
                         get: $util.oneOfGetter($oneOfFields = ["amountMicros"]),
                         set: $util.oneOfSetter($oneOfFields)
@@ -14221,23 +13801,13 @@
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
-                    /**
-                     * Price _amountMicros.
-                     * @member {"amountMicros"|undefined} _amountMicros
-                     * @memberof google.shopping.type.Price
-                     * @instance
-                     */
+                    // Virtual OneOf for proto3 optional field
                     Object.defineProperty(Price.prototype, "_amountMicros", {
                         get: $util.oneOfGetter($oneOfFields = ["amountMicros"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
-                    /**
-                     * Price _currencyCode.
-                     * @member {"currencyCode"|undefined} _currencyCode
-                     * @memberof google.shopping.type.Price
-                     * @instance
-                     */
+                    // Virtual OneOf for proto3 optional field
                     Object.defineProperty(Price.prototype, "_currencyCode", {
                         get: $util.oneOfGetter($oneOfFields = ["currencyCode"]),
                         set: $util.oneOfSetter($oneOfFields)
@@ -14502,23 +14072,13 @@
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
-                    /**
-                     * CustomAttribute _name.
-                     * @member {"name"|undefined} _name
-                     * @memberof google.shopping.type.CustomAttribute
-                     * @instance
-                     */
+                    // Virtual OneOf for proto3 optional field
                     Object.defineProperty(CustomAttribute.prototype, "_name", {
                         get: $util.oneOfGetter($oneOfFields = ["name"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
-                    /**
-                     * CustomAttribute _value.
-                     * @member {"value"|undefined} _value
-                     * @memberof google.shopping.type.CustomAttribute
-                     * @instance
-                     */
+                    // Virtual OneOf for proto3 optional field
                     Object.defineProperty(CustomAttribute.prototype, "_value", {
                         get: $util.oneOfGetter($oneOfFields = ["value"]),
                         set: $util.oneOfSetter($oneOfFields)

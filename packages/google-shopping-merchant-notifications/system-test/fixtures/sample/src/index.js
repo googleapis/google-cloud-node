@@ -16,12 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const notifications = require('@google-shopping/notifications');
 
 function main() {
-  const notificationsApiServiceClient =
-    new notifications.NotificationsApiServiceClient();
+  const notificationsApiServiceClient = new notifications.NotificationsApiServiceClient();
 }
 
 main();

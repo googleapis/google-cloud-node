@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -120,41 +113,20 @@ export class GrafeasClient {
    *     const client = new GrafeasClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof GrafeasClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'containeranalysis.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -180,7 +152,7 @@ export class GrafeasClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -194,7 +166,10 @@ export class GrafeasClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -230,30 +205,18 @@ export class GrafeasClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listOccurrences: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'occurrences'
-      ),
-      listNotes: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'notes'
-      ),
-      listNoteOccurrences: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'occurrences'
-      ),
+      listOccurrences:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'occurrences'),
+      listNotes:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'notes'),
+      listNoteOccurrences:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'occurrences')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'grafeas.v1.Grafeas',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'grafeas.v1.Grafeas', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -284,48 +247,32 @@ export class GrafeasClient {
     // Put together the "service stub" for
     // grafeas.v1.Grafeas.
     this.grafeasStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService('grafeas.v1.Grafeas')
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('grafeas.v1.Grafeas') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).grafeas.v1.Grafeas,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const grafeasStubMethods = [
-      'getOccurrence',
-      'listOccurrences',
-      'deleteOccurrence',
-      'createOccurrence',
-      'batchCreateOccurrences',
-      'updateOccurrence',
-      'getOccurrenceNote',
-      'getNote',
-      'listNotes',
-      'deleteNote',
-      'createNote',
-      'batchCreateNotes',
-      'updateNote',
-      'listNoteOccurrences',
-    ];
+    const grafeasStubMethods =
+        ['getOccurrence', 'listOccurrences', 'deleteOccurrence', 'createOccurrence', 'batchCreateOccurrences', 'updateOccurrence', 'getOccurrenceNote', 'getNote', 'listNotes', 'deleteNote', 'createNote', 'batchCreateNotes', 'updateNote', 'listNoteOccurrences'];
     for (const methodName of grafeasStubMethods) {
       const callPromise = this.grafeasStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -345,14 +292,8 @@ export class GrafeasClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'containeranalysis.googleapis.com';
   }
@@ -363,14 +304,8 @@ export class GrafeasClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'containeranalysis.googleapis.com';
   }
@@ -410,9 +345,8 @@ export class GrafeasClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -423,1327 +357,1158 @@ export class GrafeasClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets the specified occurrence.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The name of the occurrence in the form of
-   *   `projects/[PROJECT_ID]/occurrences/[OCCURRENCE_ID]`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.grafeas.v1.Occurrence|Occurrence}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/grafeas.get_occurrence.js</caption>
-   * region_tag:containeranalysis_v1_generated_Grafeas_GetOccurrence_async
-   */
+/**
+ * Gets the specified occurrence.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   The name of the occurrence in the form of
+ *   `projects/[PROJECT_ID]/occurrences/[OCCURRENCE_ID]`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.grafeas.v1.Occurrence|Occurrence}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/grafeas.get_occurrence.js</caption>
+ * region_tag:containeranalysis_v1_generated_Grafeas_GetOccurrence_async
+ */
   getOccurrence(
-    request?: protos.grafeas.v1.IGetOccurrenceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.grafeas.v1.IOccurrence,
-      protos.grafeas.v1.IGetOccurrenceRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.grafeas.v1.IGetOccurrenceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.grafeas.v1.IOccurrence,
+        protos.grafeas.v1.IGetOccurrenceRequest|undefined, {}|undefined
+      ]>;
   getOccurrence(
-    request: protos.grafeas.v1.IGetOccurrenceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.grafeas.v1.IOccurrence,
-      protos.grafeas.v1.IGetOccurrenceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getOccurrence(
-    request: protos.grafeas.v1.IGetOccurrenceRequest,
-    callback: Callback<
-      protos.grafeas.v1.IOccurrence,
-      protos.grafeas.v1.IGetOccurrenceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getOccurrence(
-    request?: protos.grafeas.v1.IGetOccurrenceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.grafeas.v1.IGetOccurrenceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.grafeas.v1.IOccurrence,
-          protos.grafeas.v1.IGetOccurrenceRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.grafeas.v1.IOccurrence,
-      protos.grafeas.v1.IGetOccurrenceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.grafeas.v1.IOccurrence,
-      protos.grafeas.v1.IGetOccurrenceRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.grafeas.v1.IGetOccurrenceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getOccurrence(
+      request: protos.grafeas.v1.IGetOccurrenceRequest,
+      callback: Callback<
+          protos.grafeas.v1.IOccurrence,
+          protos.grafeas.v1.IGetOccurrenceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getOccurrence(
+      request?: protos.grafeas.v1.IGetOccurrenceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.grafeas.v1.IOccurrence,
+          protos.grafeas.v1.IGetOccurrenceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.grafeas.v1.IOccurrence,
+          protos.grafeas.v1.IGetOccurrenceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.grafeas.v1.IOccurrence,
+        protos.grafeas.v1.IGetOccurrenceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getOccurrence request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.grafeas.v1.IOccurrence,
-          protos.grafeas.v1.IGetOccurrenceRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.grafeas.v1.IOccurrence,
+        protos.grafeas.v1.IGetOccurrenceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getOccurrence response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getOccurrence(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.grafeas.v1.IOccurrence,
-          protos.grafeas.v1.IGetOccurrenceRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getOccurrence response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getOccurrence(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.grafeas.v1.IOccurrence,
+        protos.grafeas.v1.IGetOccurrenceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getOccurrence response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes the specified occurrence. For example, use this method to delete an
-   * occurrence when the occurrence is no longer applicable for the given
-   * resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The name of the occurrence in the form of
-   *   `projects/[PROJECT_ID]/occurrences/[OCCURRENCE_ID]`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/grafeas.delete_occurrence.js</caption>
-   * region_tag:containeranalysis_v1_generated_Grafeas_DeleteOccurrence_async
-   */
+/**
+ * Deletes the specified occurrence. For example, use this method to delete an
+ * occurrence when the occurrence is no longer applicable for the given
+ * resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   The name of the occurrence in the form of
+ *   `projects/[PROJECT_ID]/occurrences/[OCCURRENCE_ID]`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/grafeas.delete_occurrence.js</caption>
+ * region_tag:containeranalysis_v1_generated_Grafeas_DeleteOccurrence_async
+ */
   deleteOccurrence(
-    request?: protos.grafeas.v1.IDeleteOccurrenceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.grafeas.v1.IDeleteOccurrenceRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.grafeas.v1.IDeleteOccurrenceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.grafeas.v1.IDeleteOccurrenceRequest|undefined, {}|undefined
+      ]>;
   deleteOccurrence(
-    request: protos.grafeas.v1.IDeleteOccurrenceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.grafeas.v1.IDeleteOccurrenceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteOccurrence(
-    request: protos.grafeas.v1.IDeleteOccurrenceRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.grafeas.v1.IDeleteOccurrenceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteOccurrence(
-    request?: protos.grafeas.v1.IDeleteOccurrenceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.grafeas.v1.IDeleteOccurrenceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          protos.grafeas.v1.IDeleteOccurrenceRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.grafeas.v1.IDeleteOccurrenceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.grafeas.v1.IDeleteOccurrenceRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.grafeas.v1.IDeleteOccurrenceRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteOccurrence(
+      request: protos.grafeas.v1.IDeleteOccurrenceRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.grafeas.v1.IDeleteOccurrenceRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteOccurrence(
+      request?: protos.grafeas.v1.IDeleteOccurrenceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.grafeas.v1.IDeleteOccurrenceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.grafeas.v1.IDeleteOccurrenceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.grafeas.v1.IDeleteOccurrenceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteOccurrence request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          protos.grafeas.v1.IDeleteOccurrenceRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.grafeas.v1.IDeleteOccurrenceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteOccurrence response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteOccurrence(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          protos.grafeas.v1.IDeleteOccurrenceRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteOccurrence response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteOccurrence(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.grafeas.v1.IDeleteOccurrenceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteOccurrence response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a new occurrence.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The name of the project in the form of `projects/[PROJECT_ID]`, under which
-   *   the occurrence is to be created.
-   * @param {grafeas.v1.Occurrence} request.occurrence
-   *   The occurrence to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.grafeas.v1.Occurrence|Occurrence}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/grafeas.create_occurrence.js</caption>
-   * region_tag:containeranalysis_v1_generated_Grafeas_CreateOccurrence_async
-   */
+/**
+ * Creates a new occurrence.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   The name of the project in the form of `projects/[PROJECT_ID]`, under which
+ *   the occurrence is to be created.
+ * @param {grafeas.v1.Occurrence} request.occurrence
+ *   The occurrence to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.grafeas.v1.Occurrence|Occurrence}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/grafeas.create_occurrence.js</caption>
+ * region_tag:containeranalysis_v1_generated_Grafeas_CreateOccurrence_async
+ */
   createOccurrence(
-    request?: protos.grafeas.v1.ICreateOccurrenceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.grafeas.v1.IOccurrence,
-      protos.grafeas.v1.ICreateOccurrenceRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.grafeas.v1.ICreateOccurrenceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.grafeas.v1.IOccurrence,
+        protos.grafeas.v1.ICreateOccurrenceRequest|undefined, {}|undefined
+      ]>;
   createOccurrence(
-    request: protos.grafeas.v1.ICreateOccurrenceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.grafeas.v1.IOccurrence,
-      protos.grafeas.v1.ICreateOccurrenceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createOccurrence(
-    request: protos.grafeas.v1.ICreateOccurrenceRequest,
-    callback: Callback<
-      protos.grafeas.v1.IOccurrence,
-      protos.grafeas.v1.ICreateOccurrenceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createOccurrence(
-    request?: protos.grafeas.v1.ICreateOccurrenceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.grafeas.v1.ICreateOccurrenceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.grafeas.v1.IOccurrence,
-          protos.grafeas.v1.ICreateOccurrenceRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.grafeas.v1.IOccurrence,
-      protos.grafeas.v1.ICreateOccurrenceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.grafeas.v1.IOccurrence,
-      protos.grafeas.v1.ICreateOccurrenceRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.grafeas.v1.ICreateOccurrenceRequest|null|undefined,
+          {}|null|undefined>): void;
+  createOccurrence(
+      request: protos.grafeas.v1.ICreateOccurrenceRequest,
+      callback: Callback<
+          protos.grafeas.v1.IOccurrence,
+          protos.grafeas.v1.ICreateOccurrenceRequest|null|undefined,
+          {}|null|undefined>): void;
+  createOccurrence(
+      request?: protos.grafeas.v1.ICreateOccurrenceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.grafeas.v1.IOccurrence,
+          protos.grafeas.v1.ICreateOccurrenceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.grafeas.v1.IOccurrence,
+          protos.grafeas.v1.ICreateOccurrenceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.grafeas.v1.IOccurrence,
+        protos.grafeas.v1.ICreateOccurrenceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createOccurrence request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.grafeas.v1.IOccurrence,
-          protos.grafeas.v1.ICreateOccurrenceRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.grafeas.v1.IOccurrence,
+        protos.grafeas.v1.ICreateOccurrenceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createOccurrence response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createOccurrence(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.grafeas.v1.IOccurrence,
-          protos.grafeas.v1.ICreateOccurrenceRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createOccurrence response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createOccurrence(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.grafeas.v1.IOccurrence,
+        protos.grafeas.v1.ICreateOccurrenceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createOccurrence response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates new occurrences in batch.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The name of the project in the form of `projects/[PROJECT_ID]`, under which
-   *   the occurrences are to be created.
-   * @param {number[]} request.occurrences
-   *   The occurrences to create. Max allowed length is 1000.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.grafeas.v1.BatchCreateOccurrencesResponse|BatchCreateOccurrencesResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/grafeas.batch_create_occurrences.js</caption>
-   * region_tag:containeranalysis_v1_generated_Grafeas_BatchCreateOccurrences_async
-   */
+/**
+ * Creates new occurrences in batch.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   The name of the project in the form of `projects/[PROJECT_ID]`, under which
+ *   the occurrences are to be created.
+ * @param {number[]} request.occurrences
+ *   The occurrences to create. Max allowed length is 1000.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.grafeas.v1.BatchCreateOccurrencesResponse|BatchCreateOccurrencesResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/grafeas.batch_create_occurrences.js</caption>
+ * region_tag:containeranalysis_v1_generated_Grafeas_BatchCreateOccurrences_async
+ */
   batchCreateOccurrences(
-    request?: protos.grafeas.v1.IBatchCreateOccurrencesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.grafeas.v1.IBatchCreateOccurrencesResponse,
-      protos.grafeas.v1.IBatchCreateOccurrencesRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.grafeas.v1.IBatchCreateOccurrencesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.grafeas.v1.IBatchCreateOccurrencesResponse,
+        protos.grafeas.v1.IBatchCreateOccurrencesRequest|undefined, {}|undefined
+      ]>;
   batchCreateOccurrences(
-    request: protos.grafeas.v1.IBatchCreateOccurrencesRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.grafeas.v1.IBatchCreateOccurrencesResponse,
-      protos.grafeas.v1.IBatchCreateOccurrencesRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchCreateOccurrences(
-    request: protos.grafeas.v1.IBatchCreateOccurrencesRequest,
-    callback: Callback<
-      protos.grafeas.v1.IBatchCreateOccurrencesResponse,
-      protos.grafeas.v1.IBatchCreateOccurrencesRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchCreateOccurrences(
-    request?: protos.grafeas.v1.IBatchCreateOccurrencesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.grafeas.v1.IBatchCreateOccurrencesRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.grafeas.v1.IBatchCreateOccurrencesResponse,
-          protos.grafeas.v1.IBatchCreateOccurrencesRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.grafeas.v1.IBatchCreateOccurrencesResponse,
-      protos.grafeas.v1.IBatchCreateOccurrencesRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.grafeas.v1.IBatchCreateOccurrencesResponse,
-      protos.grafeas.v1.IBatchCreateOccurrencesRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.grafeas.v1.IBatchCreateOccurrencesRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchCreateOccurrences(
+      request: protos.grafeas.v1.IBatchCreateOccurrencesRequest,
+      callback: Callback<
+          protos.grafeas.v1.IBatchCreateOccurrencesResponse,
+          protos.grafeas.v1.IBatchCreateOccurrencesRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchCreateOccurrences(
+      request?: protos.grafeas.v1.IBatchCreateOccurrencesRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.grafeas.v1.IBatchCreateOccurrencesResponse,
+          protos.grafeas.v1.IBatchCreateOccurrencesRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.grafeas.v1.IBatchCreateOccurrencesResponse,
+          protos.grafeas.v1.IBatchCreateOccurrencesRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.grafeas.v1.IBatchCreateOccurrencesResponse,
+        protos.grafeas.v1.IBatchCreateOccurrencesRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('batchCreateOccurrences request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.grafeas.v1.IBatchCreateOccurrencesResponse,
-          protos.grafeas.v1.IBatchCreateOccurrencesRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.grafeas.v1.IBatchCreateOccurrencesResponse,
+        protos.grafeas.v1.IBatchCreateOccurrencesRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('batchCreateOccurrences response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .batchCreateOccurrences(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.grafeas.v1.IBatchCreateOccurrencesResponse,
-          protos.grafeas.v1.IBatchCreateOccurrencesRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('batchCreateOccurrences response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.batchCreateOccurrences(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.grafeas.v1.IBatchCreateOccurrencesResponse,
+        protos.grafeas.v1.IBatchCreateOccurrencesRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('batchCreateOccurrences response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates the specified occurrence.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The name of the occurrence in the form of
-   *   `projects/[PROJECT_ID]/occurrences/[OCCURRENCE_ID]`.
-   * @param {grafeas.v1.Occurrence} request.occurrence
-   *   The updated occurrence.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The fields to update.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.grafeas.v1.Occurrence|Occurrence}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/grafeas.update_occurrence.js</caption>
-   * region_tag:containeranalysis_v1_generated_Grafeas_UpdateOccurrence_async
-   */
+/**
+ * Updates the specified occurrence.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   The name of the occurrence in the form of
+ *   `projects/[PROJECT_ID]/occurrences/[OCCURRENCE_ID]`.
+ * @param {grafeas.v1.Occurrence} request.occurrence
+ *   The updated occurrence.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   The fields to update.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.grafeas.v1.Occurrence|Occurrence}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/grafeas.update_occurrence.js</caption>
+ * region_tag:containeranalysis_v1_generated_Grafeas_UpdateOccurrence_async
+ */
   updateOccurrence(
-    request?: protos.grafeas.v1.IUpdateOccurrenceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.grafeas.v1.IOccurrence,
-      protos.grafeas.v1.IUpdateOccurrenceRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.grafeas.v1.IUpdateOccurrenceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.grafeas.v1.IOccurrence,
+        protos.grafeas.v1.IUpdateOccurrenceRequest|undefined, {}|undefined
+      ]>;
   updateOccurrence(
-    request: protos.grafeas.v1.IUpdateOccurrenceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.grafeas.v1.IOccurrence,
-      protos.grafeas.v1.IUpdateOccurrenceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateOccurrence(
-    request: protos.grafeas.v1.IUpdateOccurrenceRequest,
-    callback: Callback<
-      protos.grafeas.v1.IOccurrence,
-      protos.grafeas.v1.IUpdateOccurrenceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateOccurrence(
-    request?: protos.grafeas.v1.IUpdateOccurrenceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.grafeas.v1.IUpdateOccurrenceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.grafeas.v1.IOccurrence,
-          protos.grafeas.v1.IUpdateOccurrenceRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.grafeas.v1.IOccurrence,
-      protos.grafeas.v1.IUpdateOccurrenceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.grafeas.v1.IOccurrence,
-      protos.grafeas.v1.IUpdateOccurrenceRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.grafeas.v1.IUpdateOccurrenceRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateOccurrence(
+      request: protos.grafeas.v1.IUpdateOccurrenceRequest,
+      callback: Callback<
+          protos.grafeas.v1.IOccurrence,
+          protos.grafeas.v1.IUpdateOccurrenceRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateOccurrence(
+      request?: protos.grafeas.v1.IUpdateOccurrenceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.grafeas.v1.IOccurrence,
+          protos.grafeas.v1.IUpdateOccurrenceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.grafeas.v1.IOccurrence,
+          protos.grafeas.v1.IUpdateOccurrenceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.grafeas.v1.IOccurrence,
+        protos.grafeas.v1.IUpdateOccurrenceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateOccurrence request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.grafeas.v1.IOccurrence,
-          protos.grafeas.v1.IUpdateOccurrenceRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.grafeas.v1.IOccurrence,
+        protos.grafeas.v1.IUpdateOccurrenceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateOccurrence response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateOccurrence(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.grafeas.v1.IOccurrence,
-          protos.grafeas.v1.IUpdateOccurrenceRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateOccurrence response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateOccurrence(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.grafeas.v1.IOccurrence,
+        protos.grafeas.v1.IUpdateOccurrenceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateOccurrence response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets the note attached to the specified occurrence. Consumer projects can
-   * use this method to get a note that belongs to a provider project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The name of the occurrence in the form of
-   *   `projects/[PROJECT_ID]/occurrences/[OCCURRENCE_ID]`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.grafeas.v1.Note|Note}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/grafeas.get_occurrence_note.js</caption>
-   * region_tag:containeranalysis_v1_generated_Grafeas_GetOccurrenceNote_async
-   */
+/**
+ * Gets the note attached to the specified occurrence. Consumer projects can
+ * use this method to get a note that belongs to a provider project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   The name of the occurrence in the form of
+ *   `projects/[PROJECT_ID]/occurrences/[OCCURRENCE_ID]`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.grafeas.v1.Note|Note}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/grafeas.get_occurrence_note.js</caption>
+ * region_tag:containeranalysis_v1_generated_Grafeas_GetOccurrenceNote_async
+ */
   getOccurrenceNote(
-    request?: protos.grafeas.v1.IGetOccurrenceNoteRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.grafeas.v1.INote,
-      protos.grafeas.v1.IGetOccurrenceNoteRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.grafeas.v1.IGetOccurrenceNoteRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.grafeas.v1.INote,
+        protos.grafeas.v1.IGetOccurrenceNoteRequest|undefined, {}|undefined
+      ]>;
   getOccurrenceNote(
-    request: protos.grafeas.v1.IGetOccurrenceNoteRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.grafeas.v1.INote,
-      protos.grafeas.v1.IGetOccurrenceNoteRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getOccurrenceNote(
-    request: protos.grafeas.v1.IGetOccurrenceNoteRequest,
-    callback: Callback<
-      protos.grafeas.v1.INote,
-      protos.grafeas.v1.IGetOccurrenceNoteRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getOccurrenceNote(
-    request?: protos.grafeas.v1.IGetOccurrenceNoteRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.grafeas.v1.IGetOccurrenceNoteRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.grafeas.v1.INote,
-          protos.grafeas.v1.IGetOccurrenceNoteRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.grafeas.v1.INote,
-      protos.grafeas.v1.IGetOccurrenceNoteRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.grafeas.v1.INote,
-      protos.grafeas.v1.IGetOccurrenceNoteRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.grafeas.v1.IGetOccurrenceNoteRequest|null|undefined,
+          {}|null|undefined>): void;
+  getOccurrenceNote(
+      request: protos.grafeas.v1.IGetOccurrenceNoteRequest,
+      callback: Callback<
+          protos.grafeas.v1.INote,
+          protos.grafeas.v1.IGetOccurrenceNoteRequest|null|undefined,
+          {}|null|undefined>): void;
+  getOccurrenceNote(
+      request?: protos.grafeas.v1.IGetOccurrenceNoteRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.grafeas.v1.INote,
+          protos.grafeas.v1.IGetOccurrenceNoteRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.grafeas.v1.INote,
+          protos.grafeas.v1.IGetOccurrenceNoteRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.grafeas.v1.INote,
+        protos.grafeas.v1.IGetOccurrenceNoteRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getOccurrenceNote request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.grafeas.v1.INote,
-          protos.grafeas.v1.IGetOccurrenceNoteRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.grafeas.v1.INote,
+        protos.grafeas.v1.IGetOccurrenceNoteRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getOccurrenceNote response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getOccurrenceNote(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.grafeas.v1.INote,
-          protos.grafeas.v1.IGetOccurrenceNoteRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getOccurrenceNote response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getOccurrenceNote(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.grafeas.v1.INote,
+        protos.grafeas.v1.IGetOccurrenceNoteRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getOccurrenceNote response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets the specified note.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The name of the note in the form of
-   *   `projects/[PROVIDER_ID]/notes/[NOTE_ID]`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.grafeas.v1.Note|Note}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/grafeas.get_note.js</caption>
-   * region_tag:containeranalysis_v1_generated_Grafeas_GetNote_async
-   */
+/**
+ * Gets the specified note.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   The name of the note in the form of
+ *   `projects/[PROVIDER_ID]/notes/[NOTE_ID]`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.grafeas.v1.Note|Note}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/grafeas.get_note.js</caption>
+ * region_tag:containeranalysis_v1_generated_Grafeas_GetNote_async
+ */
   getNote(
-    request?: protos.grafeas.v1.IGetNoteRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.grafeas.v1.INote,
-      protos.grafeas.v1.IGetNoteRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.grafeas.v1.IGetNoteRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.grafeas.v1.INote,
+        protos.grafeas.v1.IGetNoteRequest|undefined, {}|undefined
+      ]>;
   getNote(
-    request: protos.grafeas.v1.IGetNoteRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.grafeas.v1.INote,
-      protos.grafeas.v1.IGetNoteRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getNote(
-    request: protos.grafeas.v1.IGetNoteRequest,
-    callback: Callback<
-      protos.grafeas.v1.INote,
-      protos.grafeas.v1.IGetNoteRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getNote(
-    request?: protos.grafeas.v1.IGetNoteRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.grafeas.v1.IGetNoteRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.grafeas.v1.INote,
-          protos.grafeas.v1.IGetNoteRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.grafeas.v1.INote,
-      protos.grafeas.v1.IGetNoteRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.grafeas.v1.INote,
-      protos.grafeas.v1.IGetNoteRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.grafeas.v1.IGetNoteRequest|null|undefined,
+          {}|null|undefined>): void;
+  getNote(
+      request: protos.grafeas.v1.IGetNoteRequest,
+      callback: Callback<
+          protos.grafeas.v1.INote,
+          protos.grafeas.v1.IGetNoteRequest|null|undefined,
+          {}|null|undefined>): void;
+  getNote(
+      request?: protos.grafeas.v1.IGetNoteRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.grafeas.v1.INote,
+          protos.grafeas.v1.IGetNoteRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.grafeas.v1.INote,
+          protos.grafeas.v1.IGetNoteRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.grafeas.v1.INote,
+        protos.grafeas.v1.IGetNoteRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getNote request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.grafeas.v1.INote,
-          protos.grafeas.v1.IGetNoteRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.grafeas.v1.INote,
+        protos.grafeas.v1.IGetNoteRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getNote response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getNote(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.grafeas.v1.INote,
-          protos.grafeas.v1.IGetNoteRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getNote response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getNote(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.grafeas.v1.INote,
+        protos.grafeas.v1.IGetNoteRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getNote response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes the specified note.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The name of the note in the form of
-   *   `projects/[PROVIDER_ID]/notes/[NOTE_ID]`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/grafeas.delete_note.js</caption>
-   * region_tag:containeranalysis_v1_generated_Grafeas_DeleteNote_async
-   */
+/**
+ * Deletes the specified note.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   The name of the note in the form of
+ *   `projects/[PROVIDER_ID]/notes/[NOTE_ID]`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/grafeas.delete_note.js</caption>
+ * region_tag:containeranalysis_v1_generated_Grafeas_DeleteNote_async
+ */
   deleteNote(
-    request?: protos.grafeas.v1.IDeleteNoteRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.grafeas.v1.IDeleteNoteRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.grafeas.v1.IDeleteNoteRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.grafeas.v1.IDeleteNoteRequest|undefined, {}|undefined
+      ]>;
   deleteNote(
-    request: protos.grafeas.v1.IDeleteNoteRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.grafeas.v1.IDeleteNoteRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteNote(
-    request: protos.grafeas.v1.IDeleteNoteRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.grafeas.v1.IDeleteNoteRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteNote(
-    request?: protos.grafeas.v1.IDeleteNoteRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.grafeas.v1.IDeleteNoteRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          protos.grafeas.v1.IDeleteNoteRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.grafeas.v1.IDeleteNoteRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.grafeas.v1.IDeleteNoteRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.grafeas.v1.IDeleteNoteRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteNote(
+      request: protos.grafeas.v1.IDeleteNoteRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.grafeas.v1.IDeleteNoteRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteNote(
+      request?: protos.grafeas.v1.IDeleteNoteRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.grafeas.v1.IDeleteNoteRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.grafeas.v1.IDeleteNoteRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.grafeas.v1.IDeleteNoteRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteNote request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          protos.grafeas.v1.IDeleteNoteRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.grafeas.v1.IDeleteNoteRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteNote response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteNote(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          protos.grafeas.v1.IDeleteNoteRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteNote response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteNote(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.grafeas.v1.IDeleteNoteRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteNote response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a new note.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The name of the project in the form of `projects/[PROJECT_ID]`, under which
-   *   the note is to be created.
-   * @param {string} request.noteId
-   *   The ID to use for this note.
-   * @param {grafeas.v1.Note} request.note
-   *   The note to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.grafeas.v1.Note|Note}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/grafeas.create_note.js</caption>
-   * region_tag:containeranalysis_v1_generated_Grafeas_CreateNote_async
-   */
+/**
+ * Creates a new note.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   The name of the project in the form of `projects/[PROJECT_ID]`, under which
+ *   the note is to be created.
+ * @param {string} request.noteId
+ *   The ID to use for this note.
+ * @param {grafeas.v1.Note} request.note
+ *   The note to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.grafeas.v1.Note|Note}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/grafeas.create_note.js</caption>
+ * region_tag:containeranalysis_v1_generated_Grafeas_CreateNote_async
+ */
   createNote(
-    request?: protos.grafeas.v1.ICreateNoteRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.grafeas.v1.INote,
-      protos.grafeas.v1.ICreateNoteRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.grafeas.v1.ICreateNoteRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.grafeas.v1.INote,
+        protos.grafeas.v1.ICreateNoteRequest|undefined, {}|undefined
+      ]>;
   createNote(
-    request: protos.grafeas.v1.ICreateNoteRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.grafeas.v1.INote,
-      protos.grafeas.v1.ICreateNoteRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createNote(
-    request: protos.grafeas.v1.ICreateNoteRequest,
-    callback: Callback<
-      protos.grafeas.v1.INote,
-      protos.grafeas.v1.ICreateNoteRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createNote(
-    request?: protos.grafeas.v1.ICreateNoteRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.grafeas.v1.ICreateNoteRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.grafeas.v1.INote,
-          protos.grafeas.v1.ICreateNoteRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.grafeas.v1.INote,
-      protos.grafeas.v1.ICreateNoteRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.grafeas.v1.INote,
-      protos.grafeas.v1.ICreateNoteRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.grafeas.v1.ICreateNoteRequest|null|undefined,
+          {}|null|undefined>): void;
+  createNote(
+      request: protos.grafeas.v1.ICreateNoteRequest,
+      callback: Callback<
+          protos.grafeas.v1.INote,
+          protos.grafeas.v1.ICreateNoteRequest|null|undefined,
+          {}|null|undefined>): void;
+  createNote(
+      request?: protos.grafeas.v1.ICreateNoteRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.grafeas.v1.INote,
+          protos.grafeas.v1.ICreateNoteRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.grafeas.v1.INote,
+          protos.grafeas.v1.ICreateNoteRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.grafeas.v1.INote,
+        protos.grafeas.v1.ICreateNoteRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createNote request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.grafeas.v1.INote,
-          protos.grafeas.v1.ICreateNoteRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.grafeas.v1.INote,
+        protos.grafeas.v1.ICreateNoteRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createNote response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createNote(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.grafeas.v1.INote,
-          protos.grafeas.v1.ICreateNoteRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createNote response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createNote(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.grafeas.v1.INote,
+        protos.grafeas.v1.ICreateNoteRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createNote response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates new notes in batch.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The name of the project in the form of `projects/[PROJECT_ID]`, under which
-   *   the notes are to be created.
-   * @param {number[]} request.notes
-   *   The notes to create. Max allowed length is 1000.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.grafeas.v1.BatchCreateNotesResponse|BatchCreateNotesResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/grafeas.batch_create_notes.js</caption>
-   * region_tag:containeranalysis_v1_generated_Grafeas_BatchCreateNotes_async
-   */
+/**
+ * Creates new notes in batch.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   The name of the project in the form of `projects/[PROJECT_ID]`, under which
+ *   the notes are to be created.
+ * @param {number[]} request.notes
+ *   The notes to create. Max allowed length is 1000.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.grafeas.v1.BatchCreateNotesResponse|BatchCreateNotesResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/grafeas.batch_create_notes.js</caption>
+ * region_tag:containeranalysis_v1_generated_Grafeas_BatchCreateNotes_async
+ */
   batchCreateNotes(
-    request?: protos.grafeas.v1.IBatchCreateNotesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.grafeas.v1.IBatchCreateNotesResponse,
-      protos.grafeas.v1.IBatchCreateNotesRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.grafeas.v1.IBatchCreateNotesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.grafeas.v1.IBatchCreateNotesResponse,
+        protos.grafeas.v1.IBatchCreateNotesRequest|undefined, {}|undefined
+      ]>;
   batchCreateNotes(
-    request: protos.grafeas.v1.IBatchCreateNotesRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.grafeas.v1.IBatchCreateNotesResponse,
-      protos.grafeas.v1.IBatchCreateNotesRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchCreateNotes(
-    request: protos.grafeas.v1.IBatchCreateNotesRequest,
-    callback: Callback<
-      protos.grafeas.v1.IBatchCreateNotesResponse,
-      protos.grafeas.v1.IBatchCreateNotesRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchCreateNotes(
-    request?: protos.grafeas.v1.IBatchCreateNotesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.grafeas.v1.IBatchCreateNotesRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.grafeas.v1.IBatchCreateNotesResponse,
-          protos.grafeas.v1.IBatchCreateNotesRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.grafeas.v1.IBatchCreateNotesResponse,
-      protos.grafeas.v1.IBatchCreateNotesRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.grafeas.v1.IBatchCreateNotesResponse,
-      protos.grafeas.v1.IBatchCreateNotesRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.grafeas.v1.IBatchCreateNotesRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchCreateNotes(
+      request: protos.grafeas.v1.IBatchCreateNotesRequest,
+      callback: Callback<
+          protos.grafeas.v1.IBatchCreateNotesResponse,
+          protos.grafeas.v1.IBatchCreateNotesRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchCreateNotes(
+      request?: protos.grafeas.v1.IBatchCreateNotesRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.grafeas.v1.IBatchCreateNotesResponse,
+          protos.grafeas.v1.IBatchCreateNotesRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.grafeas.v1.IBatchCreateNotesResponse,
+          protos.grafeas.v1.IBatchCreateNotesRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.grafeas.v1.IBatchCreateNotesResponse,
+        protos.grafeas.v1.IBatchCreateNotesRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('batchCreateNotes request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.grafeas.v1.IBatchCreateNotesResponse,
-          protos.grafeas.v1.IBatchCreateNotesRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.grafeas.v1.IBatchCreateNotesResponse,
+        protos.grafeas.v1.IBatchCreateNotesRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('batchCreateNotes response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .batchCreateNotes(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.grafeas.v1.IBatchCreateNotesResponse,
-          protos.grafeas.v1.IBatchCreateNotesRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('batchCreateNotes response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.batchCreateNotes(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.grafeas.v1.IBatchCreateNotesResponse,
+        protos.grafeas.v1.IBatchCreateNotesRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('batchCreateNotes response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates the specified note.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The name of the note in the form of
-   *   `projects/[PROVIDER_ID]/notes/[NOTE_ID]`.
-   * @param {grafeas.v1.Note} request.note
-   *   The updated note.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The fields to update.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.grafeas.v1.Note|Note}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/grafeas.update_note.js</caption>
-   * region_tag:containeranalysis_v1_generated_Grafeas_UpdateNote_async
-   */
+/**
+ * Updates the specified note.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   The name of the note in the form of
+ *   `projects/[PROVIDER_ID]/notes/[NOTE_ID]`.
+ * @param {grafeas.v1.Note} request.note
+ *   The updated note.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   The fields to update.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.grafeas.v1.Note|Note}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/grafeas.update_note.js</caption>
+ * region_tag:containeranalysis_v1_generated_Grafeas_UpdateNote_async
+ */
   updateNote(
-    request?: protos.grafeas.v1.IUpdateNoteRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.grafeas.v1.INote,
-      protos.grafeas.v1.IUpdateNoteRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.grafeas.v1.IUpdateNoteRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.grafeas.v1.INote,
+        protos.grafeas.v1.IUpdateNoteRequest|undefined, {}|undefined
+      ]>;
   updateNote(
-    request: protos.grafeas.v1.IUpdateNoteRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.grafeas.v1.INote,
-      protos.grafeas.v1.IUpdateNoteRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateNote(
-    request: protos.grafeas.v1.IUpdateNoteRequest,
-    callback: Callback<
-      protos.grafeas.v1.INote,
-      protos.grafeas.v1.IUpdateNoteRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateNote(
-    request?: protos.grafeas.v1.IUpdateNoteRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.grafeas.v1.IUpdateNoteRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.grafeas.v1.INote,
-          protos.grafeas.v1.IUpdateNoteRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.grafeas.v1.INote,
-      protos.grafeas.v1.IUpdateNoteRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.grafeas.v1.INote,
-      protos.grafeas.v1.IUpdateNoteRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.grafeas.v1.IUpdateNoteRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateNote(
+      request: protos.grafeas.v1.IUpdateNoteRequest,
+      callback: Callback<
+          protos.grafeas.v1.INote,
+          protos.grafeas.v1.IUpdateNoteRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateNote(
+      request?: protos.grafeas.v1.IUpdateNoteRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.grafeas.v1.INote,
+          protos.grafeas.v1.IUpdateNoteRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.grafeas.v1.INote,
+          protos.grafeas.v1.IUpdateNoteRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.grafeas.v1.INote,
+        protos.grafeas.v1.IUpdateNoteRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateNote request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.grafeas.v1.INote,
-          protos.grafeas.v1.IUpdateNoteRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.grafeas.v1.INote,
+        protos.grafeas.v1.IUpdateNoteRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateNote response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateNote(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.grafeas.v1.INote,
-          protos.grafeas.v1.IUpdateNoteRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateNote response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateNote(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.grafeas.v1.INote,
+        protos.grafeas.v1.IUpdateNoteRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateNote response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Lists occurrences for the specified project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The name of the project to list occurrences for in the form of
-   *   `projects/[PROJECT_ID]`.
-   * @param {string} request.filter
-   *   The filter expression.
-   * @param {number} request.pageSize
-   *   Number of occurrences to return in the list. Must be positive. Max allowed
-   *   page size is 1000. If not specified, page size defaults to 20.
-   * @param {string} request.pageToken
-   *   Token to provide to skip to a particular spot in the list.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.grafeas.v1.Occurrence|Occurrence}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listOccurrencesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists occurrences for the specified project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   The name of the project to list occurrences for in the form of
+ *   `projects/[PROJECT_ID]`.
+ * @param {string} request.filter
+ *   The filter expression.
+ * @param {number} request.pageSize
+ *   Number of occurrences to return in the list. Must be positive. Max allowed
+ *   page size is 1000. If not specified, page size defaults to 20.
+ * @param {string} request.pageToken
+ *   Token to provide to skip to a particular spot in the list.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.grafeas.v1.Occurrence|Occurrence}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listOccurrencesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listOccurrences(
-    request?: protos.grafeas.v1.IListOccurrencesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.grafeas.v1.IOccurrence[],
-      protos.grafeas.v1.IListOccurrencesRequest | null,
-      protos.grafeas.v1.IListOccurrencesResponse,
-    ]
-  >;
+      request?: protos.grafeas.v1.IListOccurrencesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.grafeas.v1.IOccurrence[],
+        protos.grafeas.v1.IListOccurrencesRequest|null,
+        protos.grafeas.v1.IListOccurrencesResponse
+      ]>;
   listOccurrences(
-    request: protos.grafeas.v1.IListOccurrencesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.grafeas.v1.IListOccurrencesRequest,
-      protos.grafeas.v1.IListOccurrencesResponse | null | undefined,
-      protos.grafeas.v1.IOccurrence
-    >
-  ): void;
-  listOccurrences(
-    request: protos.grafeas.v1.IListOccurrencesRequest,
-    callback: PaginationCallback<
-      protos.grafeas.v1.IListOccurrencesRequest,
-      protos.grafeas.v1.IListOccurrencesResponse | null | undefined,
-      protos.grafeas.v1.IOccurrence
-    >
-  ): void;
-  listOccurrences(
-    request?: protos.grafeas.v1.IListOccurrencesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.grafeas.v1.IListOccurrencesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.grafeas.v1.IListOccurrencesRequest,
-          protos.grafeas.v1.IListOccurrencesResponse | null | undefined,
-          protos.grafeas.v1.IOccurrence
-        >,
-    callback?: PaginationCallback<
-      protos.grafeas.v1.IListOccurrencesRequest,
-      protos.grafeas.v1.IListOccurrencesResponse | null | undefined,
-      protos.grafeas.v1.IOccurrence
-    >
-  ): Promise<
-    [
-      protos.grafeas.v1.IOccurrence[],
-      protos.grafeas.v1.IListOccurrencesRequest | null,
-      protos.grafeas.v1.IListOccurrencesResponse,
-    ]
-  > | void {
+          protos.grafeas.v1.IListOccurrencesResponse|null|undefined,
+          protos.grafeas.v1.IOccurrence>): void;
+  listOccurrences(
+      request: protos.grafeas.v1.IListOccurrencesRequest,
+      callback: PaginationCallback<
+          protos.grafeas.v1.IListOccurrencesRequest,
+          protos.grafeas.v1.IListOccurrencesResponse|null|undefined,
+          protos.grafeas.v1.IOccurrence>): void;
+  listOccurrences(
+      request?: protos.grafeas.v1.IListOccurrencesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.grafeas.v1.IListOccurrencesRequest,
+          protos.grafeas.v1.IListOccurrencesResponse|null|undefined,
+          protos.grafeas.v1.IOccurrence>,
+      callback?: PaginationCallback<
+          protos.grafeas.v1.IListOccurrencesRequest,
+          protos.grafeas.v1.IListOccurrencesResponse|null|undefined,
+          protos.grafeas.v1.IOccurrence>):
+      Promise<[
+        protos.grafeas.v1.IOccurrence[],
+        protos.grafeas.v1.IListOccurrencesRequest|null,
+        protos.grafeas.v1.IListOccurrencesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.grafeas.v1.IListOccurrencesRequest,
-          protos.grafeas.v1.IListOccurrencesResponse | null | undefined,
-          protos.grafeas.v1.IOccurrence
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.grafeas.v1.IListOccurrencesRequest,
+      protos.grafeas.v1.IListOccurrencesResponse|null|undefined,
+      protos.grafeas.v1.IOccurrence>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listOccurrences values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1752,60 +1517,57 @@ export class GrafeasClient {
     this._log.info('listOccurrences request %j', request);
     return this.innerApiCalls
       .listOccurrences(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.grafeas.v1.IOccurrence[],
-          protos.grafeas.v1.IListOccurrencesRequest | null,
-          protos.grafeas.v1.IListOccurrencesResponse,
-        ]) => {
-          this._log.info('listOccurrences values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.grafeas.v1.IOccurrence[],
+        protos.grafeas.v1.IListOccurrencesRequest|null,
+        protos.grafeas.v1.IListOccurrencesResponse
+      ]) => {
+        this._log.info('listOccurrences values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listOccurrences`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The name of the project to list occurrences for in the form of
-   *   `projects/[PROJECT_ID]`.
-   * @param {string} request.filter
-   *   The filter expression.
-   * @param {number} request.pageSize
-   *   Number of occurrences to return in the list. Must be positive. Max allowed
-   *   page size is 1000. If not specified, page size defaults to 20.
-   * @param {string} request.pageToken
-   *   Token to provide to skip to a particular spot in the list.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.grafeas.v1.Occurrence|Occurrence} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listOccurrencesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listOccurrences`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   The name of the project to list occurrences for in the form of
+ *   `projects/[PROJECT_ID]`.
+ * @param {string} request.filter
+ *   The filter expression.
+ * @param {number} request.pageSize
+ *   Number of occurrences to return in the list. Must be positive. Max allowed
+ *   page size is 1000. If not specified, page size defaults to 20.
+ * @param {string} request.pageToken
+ *   Token to provide to skip to a particular spot in the list.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.grafeas.v1.Occurrence|Occurrence} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listOccurrencesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listOccurrencesStream(
-    request?: protos.grafeas.v1.IListOccurrencesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.grafeas.v1.IListOccurrencesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listOccurrences'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listOccurrences stream %j', request);
     return this.descriptors.page.listOccurrences.createStream(
       this.innerApiCalls.listOccurrences as GaxCall,
@@ -1814,51 +1576,50 @@ export class GrafeasClient {
     );
   }
 
-  /**
-   * Equivalent to `listOccurrences`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The name of the project to list occurrences for in the form of
-   *   `projects/[PROJECT_ID]`.
-   * @param {string} request.filter
-   *   The filter expression.
-   * @param {number} request.pageSize
-   *   Number of occurrences to return in the list. Must be positive. Max allowed
-   *   page size is 1000. If not specified, page size defaults to 20.
-   * @param {string} request.pageToken
-   *   Token to provide to skip to a particular spot in the list.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.grafeas.v1.Occurrence|Occurrence}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/grafeas.list_occurrences.js</caption>
-   * region_tag:containeranalysis_v1_generated_Grafeas_ListOccurrences_async
-   */
+/**
+ * Equivalent to `listOccurrences`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   The name of the project to list occurrences for in the form of
+ *   `projects/[PROJECT_ID]`.
+ * @param {string} request.filter
+ *   The filter expression.
+ * @param {number} request.pageSize
+ *   Number of occurrences to return in the list. Must be positive. Max allowed
+ *   page size is 1000. If not specified, page size defaults to 20.
+ * @param {string} request.pageToken
+ *   Token to provide to skip to a particular spot in the list.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.grafeas.v1.Occurrence|Occurrence}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/grafeas.list_occurrences.js</caption>
+ * region_tag:containeranalysis_v1_generated_Grafeas_ListOccurrences_async
+ */
   listOccurrencesAsync(
-    request?: protos.grafeas.v1.IListOccurrencesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.grafeas.v1.IOccurrence> {
+      request?: protos.grafeas.v1.IListOccurrencesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.grafeas.v1.IOccurrence>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listOccurrences'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listOccurrences iterate %j', request);
     return this.descriptors.page.listOccurrences.asyncIterate(
       this.innerApiCalls['listOccurrences'] as GaxCall,
@@ -1866,106 +1627,91 @@ export class GrafeasClient {
       callSettings
     ) as AsyncIterable<protos.grafeas.v1.IOccurrence>;
   }
-  /**
-   * Lists notes for the specified project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The name of the project to list notes for in the form of
-   *   `projects/[PROJECT_ID]`.
-   * @param {string} request.filter
-   *   The filter expression.
-   * @param {number} request.pageSize
-   *   Number of notes to return in the list. Must be positive. Max allowed page
-   *   size is 1000. If not specified, page size defaults to 20.
-   * @param {string} request.pageToken
-   *   Token to provide to skip to a particular spot in the list.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.grafeas.v1.Note|Note}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listNotesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists notes for the specified project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   The name of the project to list notes for in the form of
+ *   `projects/[PROJECT_ID]`.
+ * @param {string} request.filter
+ *   The filter expression.
+ * @param {number} request.pageSize
+ *   Number of notes to return in the list. Must be positive. Max allowed page
+ *   size is 1000. If not specified, page size defaults to 20.
+ * @param {string} request.pageToken
+ *   Token to provide to skip to a particular spot in the list.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.grafeas.v1.Note|Note}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listNotesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listNotes(
-    request?: protos.grafeas.v1.IListNotesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.grafeas.v1.INote[],
-      protos.grafeas.v1.IListNotesRequest | null,
-      protos.grafeas.v1.IListNotesResponse,
-    ]
-  >;
+      request?: protos.grafeas.v1.IListNotesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.grafeas.v1.INote[],
+        protos.grafeas.v1.IListNotesRequest|null,
+        protos.grafeas.v1.IListNotesResponse
+      ]>;
   listNotes(
-    request: protos.grafeas.v1.IListNotesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.grafeas.v1.IListNotesRequest,
-      protos.grafeas.v1.IListNotesResponse | null | undefined,
-      protos.grafeas.v1.INote
-    >
-  ): void;
-  listNotes(
-    request: protos.grafeas.v1.IListNotesRequest,
-    callback: PaginationCallback<
-      protos.grafeas.v1.IListNotesRequest,
-      protos.grafeas.v1.IListNotesResponse | null | undefined,
-      protos.grafeas.v1.INote
-    >
-  ): void;
-  listNotes(
-    request?: protos.grafeas.v1.IListNotesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.grafeas.v1.IListNotesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.grafeas.v1.IListNotesRequest,
-          protos.grafeas.v1.IListNotesResponse | null | undefined,
-          protos.grafeas.v1.INote
-        >,
-    callback?: PaginationCallback<
-      protos.grafeas.v1.IListNotesRequest,
-      protos.grafeas.v1.IListNotesResponse | null | undefined,
-      protos.grafeas.v1.INote
-    >
-  ): Promise<
-    [
-      protos.grafeas.v1.INote[],
-      protos.grafeas.v1.IListNotesRequest | null,
-      protos.grafeas.v1.IListNotesResponse,
-    ]
-  > | void {
+          protos.grafeas.v1.IListNotesResponse|null|undefined,
+          protos.grafeas.v1.INote>): void;
+  listNotes(
+      request: protos.grafeas.v1.IListNotesRequest,
+      callback: PaginationCallback<
+          protos.grafeas.v1.IListNotesRequest,
+          protos.grafeas.v1.IListNotesResponse|null|undefined,
+          protos.grafeas.v1.INote>): void;
+  listNotes(
+      request?: protos.grafeas.v1.IListNotesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.grafeas.v1.IListNotesRequest,
+          protos.grafeas.v1.IListNotesResponse|null|undefined,
+          protos.grafeas.v1.INote>,
+      callback?: PaginationCallback<
+          protos.grafeas.v1.IListNotesRequest,
+          protos.grafeas.v1.IListNotesResponse|null|undefined,
+          protos.grafeas.v1.INote>):
+      Promise<[
+        protos.grafeas.v1.INote[],
+        protos.grafeas.v1.IListNotesRequest|null,
+        protos.grafeas.v1.IListNotesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.grafeas.v1.IListNotesRequest,
-          protos.grafeas.v1.IListNotesResponse | null | undefined,
-          protos.grafeas.v1.INote
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.grafeas.v1.IListNotesRequest,
+      protos.grafeas.v1.IListNotesResponse|null|undefined,
+      protos.grafeas.v1.INote>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listNotes values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1974,60 +1720,57 @@ export class GrafeasClient {
     this._log.info('listNotes request %j', request);
     return this.innerApiCalls
       .listNotes(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.grafeas.v1.INote[],
-          protos.grafeas.v1.IListNotesRequest | null,
-          protos.grafeas.v1.IListNotesResponse,
-        ]) => {
-          this._log.info('listNotes values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.grafeas.v1.INote[],
+        protos.grafeas.v1.IListNotesRequest|null,
+        protos.grafeas.v1.IListNotesResponse
+      ]) => {
+        this._log.info('listNotes values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listNotes`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The name of the project to list notes for in the form of
-   *   `projects/[PROJECT_ID]`.
-   * @param {string} request.filter
-   *   The filter expression.
-   * @param {number} request.pageSize
-   *   Number of notes to return in the list. Must be positive. Max allowed page
-   *   size is 1000. If not specified, page size defaults to 20.
-   * @param {string} request.pageToken
-   *   Token to provide to skip to a particular spot in the list.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.grafeas.v1.Note|Note} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listNotesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listNotes`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   The name of the project to list notes for in the form of
+ *   `projects/[PROJECT_ID]`.
+ * @param {string} request.filter
+ *   The filter expression.
+ * @param {number} request.pageSize
+ *   Number of notes to return in the list. Must be positive. Max allowed page
+ *   size is 1000. If not specified, page size defaults to 20.
+ * @param {string} request.pageToken
+ *   Token to provide to skip to a particular spot in the list.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.grafeas.v1.Note|Note} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listNotesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listNotesStream(
-    request?: protos.grafeas.v1.IListNotesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.grafeas.v1.IListNotesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listNotes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listNotes stream %j', request);
     return this.descriptors.page.listNotes.createStream(
       this.innerApiCalls.listNotes as GaxCall,
@@ -2036,51 +1779,50 @@ export class GrafeasClient {
     );
   }
 
-  /**
-   * Equivalent to `listNotes`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The name of the project to list notes for in the form of
-   *   `projects/[PROJECT_ID]`.
-   * @param {string} request.filter
-   *   The filter expression.
-   * @param {number} request.pageSize
-   *   Number of notes to return in the list. Must be positive. Max allowed page
-   *   size is 1000. If not specified, page size defaults to 20.
-   * @param {string} request.pageToken
-   *   Token to provide to skip to a particular spot in the list.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.grafeas.v1.Note|Note}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/grafeas.list_notes.js</caption>
-   * region_tag:containeranalysis_v1_generated_Grafeas_ListNotes_async
-   */
+/**
+ * Equivalent to `listNotes`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   The name of the project to list notes for in the form of
+ *   `projects/[PROJECT_ID]`.
+ * @param {string} request.filter
+ *   The filter expression.
+ * @param {number} request.pageSize
+ *   Number of notes to return in the list. Must be positive. Max allowed page
+ *   size is 1000. If not specified, page size defaults to 20.
+ * @param {string} request.pageToken
+ *   Token to provide to skip to a particular spot in the list.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.grafeas.v1.Note|Note}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/grafeas.list_notes.js</caption>
+ * region_tag:containeranalysis_v1_generated_Grafeas_ListNotes_async
+ */
   listNotesAsync(
-    request?: protos.grafeas.v1.IListNotesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.grafeas.v1.INote> {
+      request?: protos.grafeas.v1.IListNotesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.grafeas.v1.INote>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listNotes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listNotes iterate %j', request);
     return this.descriptors.page.listNotes.asyncIterate(
       this.innerApiCalls['listNotes'] as GaxCall,
@@ -2088,107 +1830,92 @@ export class GrafeasClient {
       callSettings
     ) as AsyncIterable<protos.grafeas.v1.INote>;
   }
-  /**
-   * Lists occurrences referencing the specified note. Provider projects can use
-   * this method to get all occurrences across consumer projects referencing the
-   * specified note.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The name of the note to list occurrences for in the form of
-   *   `projects/[PROVIDER_ID]/notes/[NOTE_ID]`.
-   * @param {string} request.filter
-   *   The filter expression.
-   * @param {number} request.pageSize
-   *   Number of occurrences to return in the list.
-   * @param {string} request.pageToken
-   *   Token to provide to skip to a particular spot in the list.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.grafeas.v1.Occurrence|Occurrence}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listNoteOccurrencesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists occurrences referencing the specified note. Provider projects can use
+ * this method to get all occurrences across consumer projects referencing the
+ * specified note.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   The name of the note to list occurrences for in the form of
+ *   `projects/[PROVIDER_ID]/notes/[NOTE_ID]`.
+ * @param {string} request.filter
+ *   The filter expression.
+ * @param {number} request.pageSize
+ *   Number of occurrences to return in the list.
+ * @param {string} request.pageToken
+ *   Token to provide to skip to a particular spot in the list.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.grafeas.v1.Occurrence|Occurrence}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listNoteOccurrencesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listNoteOccurrences(
-    request?: protos.grafeas.v1.IListNoteOccurrencesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.grafeas.v1.IOccurrence[],
-      protos.grafeas.v1.IListNoteOccurrencesRequest | null,
-      protos.grafeas.v1.IListNoteOccurrencesResponse,
-    ]
-  >;
+      request?: protos.grafeas.v1.IListNoteOccurrencesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.grafeas.v1.IOccurrence[],
+        protos.grafeas.v1.IListNoteOccurrencesRequest|null,
+        protos.grafeas.v1.IListNoteOccurrencesResponse
+      ]>;
   listNoteOccurrences(
-    request: protos.grafeas.v1.IListNoteOccurrencesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.grafeas.v1.IListNoteOccurrencesRequest,
-      protos.grafeas.v1.IListNoteOccurrencesResponse | null | undefined,
-      protos.grafeas.v1.IOccurrence
-    >
-  ): void;
-  listNoteOccurrences(
-    request: protos.grafeas.v1.IListNoteOccurrencesRequest,
-    callback: PaginationCallback<
-      protos.grafeas.v1.IListNoteOccurrencesRequest,
-      protos.grafeas.v1.IListNoteOccurrencesResponse | null | undefined,
-      protos.grafeas.v1.IOccurrence
-    >
-  ): void;
-  listNoteOccurrences(
-    request?: protos.grafeas.v1.IListNoteOccurrencesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.grafeas.v1.IListNoteOccurrencesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.grafeas.v1.IListNoteOccurrencesRequest,
-          protos.grafeas.v1.IListNoteOccurrencesResponse | null | undefined,
-          protos.grafeas.v1.IOccurrence
-        >,
-    callback?: PaginationCallback<
-      protos.grafeas.v1.IListNoteOccurrencesRequest,
-      protos.grafeas.v1.IListNoteOccurrencesResponse | null | undefined,
-      protos.grafeas.v1.IOccurrence
-    >
-  ): Promise<
-    [
-      protos.grafeas.v1.IOccurrence[],
-      protos.grafeas.v1.IListNoteOccurrencesRequest | null,
-      protos.grafeas.v1.IListNoteOccurrencesResponse,
-    ]
-  > | void {
+          protos.grafeas.v1.IListNoteOccurrencesResponse|null|undefined,
+          protos.grafeas.v1.IOccurrence>): void;
+  listNoteOccurrences(
+      request: protos.grafeas.v1.IListNoteOccurrencesRequest,
+      callback: PaginationCallback<
+          protos.grafeas.v1.IListNoteOccurrencesRequest,
+          protos.grafeas.v1.IListNoteOccurrencesResponse|null|undefined,
+          protos.grafeas.v1.IOccurrence>): void;
+  listNoteOccurrences(
+      request?: protos.grafeas.v1.IListNoteOccurrencesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.grafeas.v1.IListNoteOccurrencesRequest,
+          protos.grafeas.v1.IListNoteOccurrencesResponse|null|undefined,
+          protos.grafeas.v1.IOccurrence>,
+      callback?: PaginationCallback<
+          protos.grafeas.v1.IListNoteOccurrencesRequest,
+          protos.grafeas.v1.IListNoteOccurrencesResponse|null|undefined,
+          protos.grafeas.v1.IOccurrence>):
+      Promise<[
+        protos.grafeas.v1.IOccurrence[],
+        protos.grafeas.v1.IListNoteOccurrencesRequest|null,
+        protos.grafeas.v1.IListNoteOccurrencesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.grafeas.v1.IListNoteOccurrencesRequest,
-          protos.grafeas.v1.IListNoteOccurrencesResponse | null | undefined,
-          protos.grafeas.v1.IOccurrence
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.grafeas.v1.IListNoteOccurrencesRequest,
+      protos.grafeas.v1.IListNoteOccurrencesResponse|null|undefined,
+      protos.grafeas.v1.IOccurrence>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listNoteOccurrences values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2197,59 +1924,56 @@ export class GrafeasClient {
     this._log.info('listNoteOccurrences request %j', request);
     return this.innerApiCalls
       .listNoteOccurrences(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.grafeas.v1.IOccurrence[],
-          protos.grafeas.v1.IListNoteOccurrencesRequest | null,
-          protos.grafeas.v1.IListNoteOccurrencesResponse,
-        ]) => {
-          this._log.info('listNoteOccurrences values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.grafeas.v1.IOccurrence[],
+        protos.grafeas.v1.IListNoteOccurrencesRequest|null,
+        protos.grafeas.v1.IListNoteOccurrencesResponse
+      ]) => {
+        this._log.info('listNoteOccurrences values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listNoteOccurrences`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The name of the note to list occurrences for in the form of
-   *   `projects/[PROVIDER_ID]/notes/[NOTE_ID]`.
-   * @param {string} request.filter
-   *   The filter expression.
-   * @param {number} request.pageSize
-   *   Number of occurrences to return in the list.
-   * @param {string} request.pageToken
-   *   Token to provide to skip to a particular spot in the list.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.grafeas.v1.Occurrence|Occurrence} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listNoteOccurrencesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listNoteOccurrences`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   The name of the note to list occurrences for in the form of
+ *   `projects/[PROVIDER_ID]/notes/[NOTE_ID]`.
+ * @param {string} request.filter
+ *   The filter expression.
+ * @param {number} request.pageSize
+ *   Number of occurrences to return in the list.
+ * @param {string} request.pageToken
+ *   Token to provide to skip to a particular spot in the list.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.grafeas.v1.Occurrence|Occurrence} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listNoteOccurrencesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listNoteOccurrencesStream(
-    request?: protos.grafeas.v1.IListNoteOccurrencesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.grafeas.v1.IListNoteOccurrencesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
     const defaultCallSettings = this._defaults['listNoteOccurrences'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listNoteOccurrences stream %j', request);
     return this.descriptors.page.listNoteOccurrences.createStream(
       this.innerApiCalls.listNoteOccurrences as GaxCall,
@@ -2258,50 +1982,49 @@ export class GrafeasClient {
     );
   }
 
-  /**
-   * Equivalent to `listNoteOccurrences`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The name of the note to list occurrences for in the form of
-   *   `projects/[PROVIDER_ID]/notes/[NOTE_ID]`.
-   * @param {string} request.filter
-   *   The filter expression.
-   * @param {number} request.pageSize
-   *   Number of occurrences to return in the list.
-   * @param {string} request.pageToken
-   *   Token to provide to skip to a particular spot in the list.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.grafeas.v1.Occurrence|Occurrence}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/grafeas.list_note_occurrences.js</caption>
-   * region_tag:containeranalysis_v1_generated_Grafeas_ListNoteOccurrences_async
-   */
+/**
+ * Equivalent to `listNoteOccurrences`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   The name of the note to list occurrences for in the form of
+ *   `projects/[PROVIDER_ID]/notes/[NOTE_ID]`.
+ * @param {string} request.filter
+ *   The filter expression.
+ * @param {number} request.pageSize
+ *   Number of occurrences to return in the list.
+ * @param {string} request.pageToken
+ *   Token to provide to skip to a particular spot in the list.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.grafeas.v1.Occurrence|Occurrence}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/grafeas.list_note_occurrences.js</caption>
+ * region_tag:containeranalysis_v1_generated_Grafeas_ListNoteOccurrences_async
+ */
   listNoteOccurrencesAsync(
-    request?: protos.grafeas.v1.IListNoteOccurrencesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.grafeas.v1.IOccurrence> {
+      request?: protos.grafeas.v1.IListNoteOccurrencesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.grafeas.v1.IOccurrence>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
     const defaultCallSettings = this._defaults['listNoteOccurrences'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listNoteOccurrences iterate %j', request);
     return this.descriptors.page.listNoteOccurrences.asyncIterate(
       this.innerApiCalls['listNoteOccurrences'] as GaxCall,
@@ -2320,7 +2043,7 @@ export class GrafeasClient {
    * @param {string} note
    * @returns {string} Resource name string.
    */
-  notePath(project: string, note: string) {
+  notePath(project:string,note:string) {
     return this.pathTemplates.notePathTemplate.render({
       project: project,
       note: note,
@@ -2356,7 +2079,7 @@ export class GrafeasClient {
    * @param {string} occurrence
    * @returns {string} Resource name string.
    */
-  occurrencePath(project: string, occurrence: string) {
+  occurrencePath(project:string,occurrence:string) {
     return this.pathTemplates.occurrencePathTemplate.render({
       project: project,
       occurrence: occurrence,
@@ -2371,8 +2094,7 @@ export class GrafeasClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromOccurrenceName(occurrenceName: string) {
-    return this.pathTemplates.occurrencePathTemplate.match(occurrenceName)
-      .project;
+    return this.pathTemplates.occurrencePathTemplate.match(occurrenceName).project;
   }
 
   /**
@@ -2383,8 +2105,7 @@ export class GrafeasClient {
    * @returns {string} A string representing the occurrence.
    */
   matchOccurrenceFromOccurrenceName(occurrenceName: string) {
-    return this.pathTemplates.occurrencePathTemplate.match(occurrenceName)
-      .occurrence;
+    return this.pathTemplates.occurrencePathTemplate.match(occurrenceName).occurrence;
   }
 
   /**
@@ -2393,7 +2114,7 @@ export class GrafeasClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });

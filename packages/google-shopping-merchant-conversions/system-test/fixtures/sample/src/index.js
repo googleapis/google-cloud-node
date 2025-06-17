@@ -16,12 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const conversions = require('@google-shopping/conversions');
 
 function main() {
-  const conversionSourcesServiceClient =
-    new conversions.ConversionSourcesServiceClient();
+  const conversionSourcesServiceClient = new conversions.ConversionSourcesServiceClient();
 }
 
 main();

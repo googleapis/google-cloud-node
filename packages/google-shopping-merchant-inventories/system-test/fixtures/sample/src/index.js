@@ -16,14 +16,13 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const inventories = require('@google-shopping/inventories');
 
 function main() {
-  const localInventoryServiceClient =
-    new inventories.LocalInventoryServiceClient();
-  const regionalInventoryServiceClient =
-    new inventories.RegionalInventoryServiceClient();
+  const localInventoryServiceClient = new inventories.LocalInventoryServiceClient();
+  const regionalInventoryServiceClient = new inventories.RegionalInventoryServiceClient();
 }
 
 main();

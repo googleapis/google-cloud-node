@@ -10,14 +10,198 @@
                   "nested": {
                     "v1beta": {
                       "options": {
+                        "csharp_namespace": "Google.Shopping.Merchant.IssueResolution.V1Beta",
                         "go_package": "cloud.google.com/go/shopping/merchant/issueresolution/apiv1beta/issueresolutionpb;issueresolutionpb",
                         "java_multiple_files": true,
                         "java_outer_classname": "IssueResolutionProto",
                         "java_package": "com.google.shopping.merchant.issueresolution.v1beta",
+                        "php_namespace": "Google\\Shopping\\Merchant\\IssueResolution\\V1beta",
+                        "ruby_package": "Google::Shopping::Merchant::IssueResolution::V1beta",
                         "(google.api.resource_definition).type": "merchantapi.googleapis.com/Product",
                         "(google.api.resource_definition).pattern": "accounts/{account}/products/{product}"
                       },
                       "nested": {
+                        "AggregateProductStatusesService": {
+                          "options": {
+                            "(google.api.default_host)": "merchantapi.googleapis.com",
+                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/content"
+                          },
+                          "methods": {
+                            "ListAggregateProductStatuses": {
+                              "requestType": "ListAggregateProductStatusesRequest",
+                              "responseType": "ListAggregateProductStatusesResponse",
+                              "options": {
+                                "(google.api.http).get": "/issueresolution/v1beta/{parent=accounts/*}/aggregateProductStatuses",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/issueresolution/v1beta/{parent=accounts/*}/aggregateProductStatuses"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "ListAggregateProductStatusesRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "merchantapi.googleapis.com/AggregateProductStatus"
+                              }
+                            },
+                            "pageSize": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "filter": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "ListAggregateProductStatusesResponse": {
+                          "fields": {
+                            "aggregateProductStatuses": {
+                              "rule": "repeated",
+                              "type": "AggregateProductStatus",
+                              "id": 1
+                            },
+                            "nextPageToken": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "AggregateProductStatus": {
+                          "options": {
+                            "(google.api.resource).type": "merchantapi.googleapis.com/AggregateProductStatus",
+                            "(google.api.resource).pattern": "accounts/{account}/aggregateProductStatuses/{aggregate_product_status}",
+                            "(google.api.resource).plural": "aggregateProductStatuses",
+                            "(google.api.resource).singular": "aggregateProductStatus"
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "IDENTIFIER"
+                              }
+                            },
+                            "reportingContext": {
+                              "type": "google.shopping.type.ReportingContext.ReportingContextEnum",
+                              "id": 3
+                            },
+                            "country": {
+                              "type": "string",
+                              "id": 4
+                            },
+                            "stats": {
+                              "type": "Stats",
+                              "id": 5
+                            },
+                            "itemLevelIssues": {
+                              "rule": "repeated",
+                              "type": "ItemLevelIssue",
+                              "id": 6
+                            }
+                          },
+                          "nested": {
+                            "Stats": {
+                              "fields": {
+                                "activeCount": {
+                                  "type": "int64",
+                                  "id": 1
+                                },
+                                "pendingCount": {
+                                  "type": "int64",
+                                  "id": 2
+                                },
+                                "disapprovedCount": {
+                                  "type": "int64",
+                                  "id": 3
+                                },
+                                "expiringCount": {
+                                  "type": "int64",
+                                  "id": 4
+                                }
+                              }
+                            },
+                            "ItemLevelIssue": {
+                              "fields": {
+                                "code": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "severity": {
+                                  "type": "Severity",
+                                  "id": 2
+                                },
+                                "resolution": {
+                                  "type": "Resolution",
+                                  "id": 3
+                                },
+                                "attribute": {
+                                  "type": "string",
+                                  "id": 4
+                                },
+                                "description": {
+                                  "type": "string",
+                                  "id": 6
+                                },
+                                "detail": {
+                                  "type": "string",
+                                  "id": 7
+                                },
+                                "documentationUri": {
+                                  "type": "string",
+                                  "id": 8
+                                },
+                                "productCount": {
+                                  "type": "int64",
+                                  "id": 9
+                                }
+                              },
+                              "nested": {
+                                "Severity": {
+                                  "values": {
+                                    "SEVERITY_UNSPECIFIED": 0,
+                                    "NOT_IMPACTED": 1,
+                                    "DEMOTED": 2,
+                                    "DISAPPROVED": 3
+                                  }
+                                },
+                                "Resolution": {
+                                  "values": {
+                                    "RESOLUTION_UNSPECIFIED": 0,
+                                    "MERCHANT_ACTION": 1,
+                                    "PENDING_PROCESSING": 2
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
                         "IssueResolutionService": {
                           "options": {
                             "(google.api.default_host)": "merchantapi.googleapis.com",
@@ -864,6 +1048,170 @@
                             }
                           }
                         }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "type": {
+              "options": {
+                "csharp_namespace": "Google.Shopping.Type",
+                "go_package": "cloud.google.com/go/shopping/type/typepb;typepb",
+                "java_multiple_files": true,
+                "java_outer_classname": "TypesProto",
+                "java_package": "com.google.shopping.type"
+              },
+              "nested": {
+                "Weight": {
+                  "oneofs": {
+                    "_amountMicros": {
+                      "oneof": [
+                        "amountMicros"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "amountMicros": {
+                      "type": "int64",
+                      "id": 1,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "unit": {
+                      "type": "WeightUnit",
+                      "id": 2
+                    }
+                  },
+                  "nested": {
+                    "WeightUnit": {
+                      "values": {
+                        "WEIGHT_UNIT_UNSPECIFIED": 0,
+                        "POUND": 1,
+                        "KILOGRAM": 2
+                      }
+                    }
+                  }
+                },
+                "Price": {
+                  "oneofs": {
+                    "_amountMicros": {
+                      "oneof": [
+                        "amountMicros"
+                      ]
+                    },
+                    "_currencyCode": {
+                      "oneof": [
+                        "currencyCode"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "amountMicros": {
+                      "type": "int64",
+                      "id": 1,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "currencyCode": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    }
+                  }
+                },
+                "CustomAttribute": {
+                  "oneofs": {
+                    "_name": {
+                      "oneof": [
+                        "name"
+                      ]
+                    },
+                    "_value": {
+                      "oneof": [
+                        "value"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "value": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "groupValues": {
+                      "rule": "repeated",
+                      "type": "CustomAttribute",
+                      "id": 3
+                    }
+                  }
+                },
+                "Destination": {
+                  "fields": {},
+                  "nested": {
+                    "DestinationEnum": {
+                      "values": {
+                        "DESTINATION_ENUM_UNSPECIFIED": 0,
+                        "SHOPPING_ADS": 1,
+                        "DISPLAY_ADS": 2,
+                        "LOCAL_INVENTORY_ADS": 3,
+                        "FREE_LISTINGS": 4,
+                        "FREE_LOCAL_LISTINGS": 5,
+                        "YOUTUBE_SHOPPING": 6
+                      }
+                    }
+                  }
+                },
+                "ReportingContext": {
+                  "fields": {},
+                  "nested": {
+                    "ReportingContextEnum": {
+                      "valuesOptions": {
+                        "DISCOVERY_ADS": {
+                          "deprecated": true
+                        }
+                      },
+                      "values": {
+                        "REPORTING_CONTEXT_ENUM_UNSPECIFIED": 0,
+                        "SHOPPING_ADS": 1,
+                        "DISCOVERY_ADS": 2,
+                        "DEMAND_GEN_ADS": 13,
+                        "DEMAND_GEN_ADS_DISCOVER_SURFACE": 14,
+                        "VIDEO_ADS": 3,
+                        "DISPLAY_ADS": 4,
+                        "LOCAL_INVENTORY_ADS": 5,
+                        "VEHICLE_INVENTORY_ADS": 6,
+                        "FREE_LISTINGS": 7,
+                        "FREE_LOCAL_LISTINGS": 8,
+                        "FREE_LOCAL_VEHICLE_LISTINGS": 9,
+                        "YOUTUBE_SHOPPING": 10,
+                        "CLOUD_RETAIL": 11,
+                        "LOCAL_CLOUD_RETAIL": 12
+                      }
+                    }
+                  }
+                },
+                "Channel": {
+                  "fields": {},
+                  "nested": {
+                    "ChannelEnum": {
+                      "values": {
+                        "CHANNEL_ENUM_UNSPECIFIED": 0,
+                        "ONLINE": 1,
+                        "LOCAL": 2
                       }
                     }
                   }

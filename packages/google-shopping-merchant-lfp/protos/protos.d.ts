@@ -171,21 +171,6 @@ export namespace google {
                         /** LfpInventory feedLabel. */
                         public feedLabel?: (string|null);
 
-                        /** LfpInventory _gtin. */
-                        public _gtin?: "gtin";
-
-                        /** LfpInventory _quantity. */
-                        public _quantity?: "quantity";
-
-                        /** LfpInventory _pickupMethod. */
-                        public _pickupMethod?: "pickupMethod";
-
-                        /** LfpInventory _pickupSla. */
-                        public _pickupSla?: "pickupSla";
-
-                        /** LfpInventory _feedLabel. */
-                        public _feedLabel?: "feedLabel";
-
                         /**
                          * Creates a new LfpInventory instance using the specified properties.
                          * @param [properties] Properties to set
@@ -1149,12 +1134,6 @@ export namespace google {
                         /** LfpSale feedLabel. */
                         public feedLabel?: (string|null);
 
-                        /** LfpSale _uid. */
-                        public _uid?: "uid";
-
-                        /** LfpSale _feedLabel. */
-                        public _feedLabel?: "feedLabel";
-
                         /**
                          * Creates a new LfpSale instance using the specified properties.
                          * @param [properties] Properties to set
@@ -1522,21 +1501,6 @@ export namespace google {
 
                         /** LfpStore matchingStateHint. */
                         public matchingStateHint?: (string|null);
-
-                        /** LfpStore _storeName. */
-                        public _storeName?: "storeName";
-
-                        /** LfpStore _phoneNumber. */
-                        public _phoneNumber?: "phoneNumber";
-
-                        /** LfpStore _websiteUri. */
-                        public _websiteUri?: "websiteUri";
-
-                        /** LfpStore _placeId. */
-                        public _placeId?: "placeId";
-
-                        /** LfpStore _matchingStateHint. */
-                        public _matchingStateHint?: "matchingStateHint";
 
                         /**
                          * Creates a new LfpStore instance using the specified properties.
@@ -2172,9 +2136,6 @@ export namespace google {
                 /** Weight unit. */
                 public unit: (google.shopping.type.Weight.WeightUnit|keyof typeof google.shopping.type.Weight.WeightUnit);
 
-                /** Weight _amountMicros. */
-                public _amountMicros?: "amountMicros";
-
                 /**
                  * Creates a new Weight instance using the specified properties.
                  * @param [properties] Properties to set
@@ -2288,12 +2249,6 @@ export namespace google {
                 /** Price currencyCode. */
                 public currencyCode?: (string|null);
 
-                /** Price _amountMicros. */
-                public _amountMicros?: "amountMicros";
-
-                /** Price _currencyCode. */
-                public _currencyCode?: "currencyCode";
-
                 /**
                  * Creates a new Price instance using the specified properties.
                  * @param [properties] Properties to set
@@ -2402,12 +2357,6 @@ export namespace google {
 
                 /** CustomAttribute groupValues. */
                 public groupValues: google.shopping.type.ICustomAttribute[];
-
-                /** CustomAttribute _name. */
-                public _name?: "name";
-
-                /** CustomAttribute _value. */
-                public _value?: "value";
 
                 /**
                  * Creates a new CustomAttribute instance using the specified properties.

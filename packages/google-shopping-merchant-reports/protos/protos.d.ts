@@ -624,81 +624,6 @@ export namespace google {
                         /** ProductPerformanceView conversionRate. */
                         public conversionRate?: (number|null);
 
-                        /** ProductPerformanceView _marketingMethod. */
-                        public _marketingMethod?: "marketingMethod";
-
-                        /** ProductPerformanceView _customerCountryCode. */
-                        public _customerCountryCode?: "customerCountryCode";
-
-                        /** ProductPerformanceView _offerId. */
-                        public _offerId?: "offerId";
-
-                        /** ProductPerformanceView _title. */
-                        public _title?: "title";
-
-                        /** ProductPerformanceView _brand. */
-                        public _brand?: "brand";
-
-                        /** ProductPerformanceView _categoryL1. */
-                        public _categoryL1?: "categoryL1";
-
-                        /** ProductPerformanceView _categoryL2. */
-                        public _categoryL2?: "categoryL2";
-
-                        /** ProductPerformanceView _categoryL3. */
-                        public _categoryL3?: "categoryL3";
-
-                        /** ProductPerformanceView _categoryL4. */
-                        public _categoryL4?: "categoryL4";
-
-                        /** ProductPerformanceView _categoryL5. */
-                        public _categoryL5?: "categoryL5";
-
-                        /** ProductPerformanceView _productTypeL1. */
-                        public _productTypeL1?: "productTypeL1";
-
-                        /** ProductPerformanceView _productTypeL2. */
-                        public _productTypeL2?: "productTypeL2";
-
-                        /** ProductPerformanceView _productTypeL3. */
-                        public _productTypeL3?: "productTypeL3";
-
-                        /** ProductPerformanceView _productTypeL4. */
-                        public _productTypeL4?: "productTypeL4";
-
-                        /** ProductPerformanceView _productTypeL5. */
-                        public _productTypeL5?: "productTypeL5";
-
-                        /** ProductPerformanceView _customLabel0. */
-                        public _customLabel0?: "customLabel0";
-
-                        /** ProductPerformanceView _customLabel1. */
-                        public _customLabel1?: "customLabel1";
-
-                        /** ProductPerformanceView _customLabel2. */
-                        public _customLabel2?: "customLabel2";
-
-                        /** ProductPerformanceView _customLabel3. */
-                        public _customLabel3?: "customLabel3";
-
-                        /** ProductPerformanceView _customLabel4. */
-                        public _customLabel4?: "customLabel4";
-
-                        /** ProductPerformanceView _clicks. */
-                        public _clicks?: "clicks";
-
-                        /** ProductPerformanceView _impressions. */
-                        public _impressions?: "impressions";
-
-                        /** ProductPerformanceView _clickThroughRate. */
-                        public _clickThroughRate?: "clickThroughRate";
-
-                        /** ProductPerformanceView _conversions. */
-                        public _conversions?: "conversions";
-
-                        /** ProductPerformanceView _conversionRate. */
-                        public _conversionRate?: "conversionRate";
-
                         /**
                          * Creates a new ProductPerformanceView instance using the specified properties.
                          * @param [properties] Properties to set
@@ -970,78 +895,6 @@ export namespace google {
                         /** ProductView clickPotentialRank. */
                         public clickPotentialRank?: (number|Long|string|null);
 
-                        /** ProductView _id. */
-                        public _id?: "id";
-
-                        /** ProductView _channel. */
-                        public _channel?: "channel";
-
-                        /** ProductView _languageCode. */
-                        public _languageCode?: "languageCode";
-
-                        /** ProductView _feedLabel. */
-                        public _feedLabel?: "feedLabel";
-
-                        /** ProductView _offerId. */
-                        public _offerId?: "offerId";
-
-                        /** ProductView _title. */
-                        public _title?: "title";
-
-                        /** ProductView _brand. */
-                        public _brand?: "brand";
-
-                        /** ProductView _categoryL1. */
-                        public _categoryL1?: "categoryL1";
-
-                        /** ProductView _categoryL2. */
-                        public _categoryL2?: "categoryL2";
-
-                        /** ProductView _categoryL3. */
-                        public _categoryL3?: "categoryL3";
-
-                        /** ProductView _categoryL4. */
-                        public _categoryL4?: "categoryL4";
-
-                        /** ProductView _categoryL5. */
-                        public _categoryL5?: "categoryL5";
-
-                        /** ProductView _productTypeL1. */
-                        public _productTypeL1?: "productTypeL1";
-
-                        /** ProductView _productTypeL2. */
-                        public _productTypeL2?: "productTypeL2";
-
-                        /** ProductView _productTypeL3. */
-                        public _productTypeL3?: "productTypeL3";
-
-                        /** ProductView _productTypeL4. */
-                        public _productTypeL4?: "productTypeL4";
-
-                        /** ProductView _productTypeL5. */
-                        public _productTypeL5?: "productTypeL5";
-
-                        /** ProductView _condition. */
-                        public _condition?: "condition";
-
-                        /** ProductView _availability. */
-                        public _availability?: "availability";
-
-                        /** ProductView _shippingLabel. */
-                        public _shippingLabel?: "shippingLabel";
-
-                        /** ProductView _itemGroupId. */
-                        public _itemGroupId?: "itemGroupId";
-
-                        /** ProductView _thumbnailLink. */
-                        public _thumbnailLink?: "thumbnailLink";
-
-                        /** ProductView _aggregatedReportingContextStatus. */
-                        public _aggregatedReportingContextStatus?: "aggregatedReportingContextStatus";
-
-                        /** ProductView _clickPotentialRank. */
-                        public _clickPotentialRank?: "clickPotentialRank";
-
                         /**
                          * Creates a new ProductView instance using the specified properties.
                          * @param [properties] Properties to set
@@ -1153,9 +1006,6 @@ export namespace google {
                             /** ItemIssue resolution. */
                             public resolution?: (google.shopping.merchant.reports.v1beta.ProductView.ItemIssue.ItemIssueResolution|keyof typeof google.shopping.merchant.reports.v1beta.ProductView.ItemIssue.ItemIssueResolution|null);
 
-                            /** ItemIssue _resolution. */
-                            public _resolution?: "resolution";
-
                             /**
                              * Creates a new ItemIssue instance using the specified properties.
                              * @param [properties] Properties to set
@@ -1261,12 +1111,6 @@ export namespace google {
                                 /** ItemIssueType canonicalAttribute. */
                                 public canonicalAttribute?: (string|null);
 
-                                /** ItemIssueType _code. */
-                                public _code?: "code";
-
-                                /** ItemIssueType _canonicalAttribute. */
-                                public _canonicalAttribute?: "canonicalAttribute";
-
                                 /**
                                  * Creates a new ItemIssueType instance using the specified properties.
                                  * @param [properties] Properties to set
@@ -1369,9 +1213,6 @@ export namespace google {
 
                                 /** ItemIssueSeverity aggregatedSeverity. */
                                 public aggregatedSeverity?: (google.shopping.merchant.reports.v1beta.ProductView.ItemIssue.ItemIssueSeverity.AggregatedIssueSeverity|keyof typeof google.shopping.merchant.reports.v1beta.ProductView.ItemIssue.ItemIssueSeverity.AggregatedIssueSeverity|null);
-
-                                /** ItemIssueSeverity _aggregatedSeverity. */
-                                public _aggregatedSeverity?: "aggregatedSeverity";
 
                                 /**
                                  * Creates a new ItemIssueSeverity instance using the specified properties.
@@ -1483,9 +1324,6 @@ export namespace google {
 
                                     /** IssueSeverityPerReportingContext demotedCountries. */
                                     public demotedCountries: string[];
-
-                                    /** IssueSeverityPerReportingContext _reportingContext. */
-                                    public _reportingContext?: "reportingContext";
 
                                     /**
                                      * Creates a new IssueSeverityPerReportingContext instance using the specified properties.
@@ -1715,51 +1553,6 @@ export namespace google {
                         /** PriceCompetitivenessProductView benchmarkPrice. */
                         public benchmarkPrice?: (google.shopping.type.IPrice|null);
 
-                        /** PriceCompetitivenessProductView _reportCountryCode. */
-                        public _reportCountryCode?: "reportCountryCode";
-
-                        /** PriceCompetitivenessProductView _id. */
-                        public _id?: "id";
-
-                        /** PriceCompetitivenessProductView _offerId. */
-                        public _offerId?: "offerId";
-
-                        /** PriceCompetitivenessProductView _title. */
-                        public _title?: "title";
-
-                        /** PriceCompetitivenessProductView _brand. */
-                        public _brand?: "brand";
-
-                        /** PriceCompetitivenessProductView _categoryL1. */
-                        public _categoryL1?: "categoryL1";
-
-                        /** PriceCompetitivenessProductView _categoryL2. */
-                        public _categoryL2?: "categoryL2";
-
-                        /** PriceCompetitivenessProductView _categoryL3. */
-                        public _categoryL3?: "categoryL3";
-
-                        /** PriceCompetitivenessProductView _categoryL4. */
-                        public _categoryL4?: "categoryL4";
-
-                        /** PriceCompetitivenessProductView _categoryL5. */
-                        public _categoryL5?: "categoryL5";
-
-                        /** PriceCompetitivenessProductView _productTypeL1. */
-                        public _productTypeL1?: "productTypeL1";
-
-                        /** PriceCompetitivenessProductView _productTypeL2. */
-                        public _productTypeL2?: "productTypeL2";
-
-                        /** PriceCompetitivenessProductView _productTypeL3. */
-                        public _productTypeL3?: "productTypeL3";
-
-                        /** PriceCompetitivenessProductView _productTypeL4. */
-                        public _productTypeL4?: "productTypeL4";
-
-                        /** PriceCompetitivenessProductView _productTypeL5. */
-                        public _productTypeL5?: "productTypeL5";
-
                         /**
                          * Creates a new PriceCompetitivenessProductView instance using the specified properties.
                          * @param [properties] Properties to set
@@ -1970,57 +1763,6 @@ export namespace google {
 
                         /** PriceInsightsProductView effectiveness. */
                         public effectiveness: (google.shopping.merchant.reports.v1beta.PriceInsightsProductView.Effectiveness|keyof typeof google.shopping.merchant.reports.v1beta.PriceInsightsProductView.Effectiveness);
-
-                        /** PriceInsightsProductView _id. */
-                        public _id?: "id";
-
-                        /** PriceInsightsProductView _offerId. */
-                        public _offerId?: "offerId";
-
-                        /** PriceInsightsProductView _title. */
-                        public _title?: "title";
-
-                        /** PriceInsightsProductView _brand. */
-                        public _brand?: "brand";
-
-                        /** PriceInsightsProductView _categoryL1. */
-                        public _categoryL1?: "categoryL1";
-
-                        /** PriceInsightsProductView _categoryL2. */
-                        public _categoryL2?: "categoryL2";
-
-                        /** PriceInsightsProductView _categoryL3. */
-                        public _categoryL3?: "categoryL3";
-
-                        /** PriceInsightsProductView _categoryL4. */
-                        public _categoryL4?: "categoryL4";
-
-                        /** PriceInsightsProductView _categoryL5. */
-                        public _categoryL5?: "categoryL5";
-
-                        /** PriceInsightsProductView _productTypeL1. */
-                        public _productTypeL1?: "productTypeL1";
-
-                        /** PriceInsightsProductView _productTypeL2. */
-                        public _productTypeL2?: "productTypeL2";
-
-                        /** PriceInsightsProductView _productTypeL3. */
-                        public _productTypeL3?: "productTypeL3";
-
-                        /** PriceInsightsProductView _productTypeL4. */
-                        public _productTypeL4?: "productTypeL4";
-
-                        /** PriceInsightsProductView _productTypeL5. */
-                        public _productTypeL5?: "productTypeL5";
-
-                        /** PriceInsightsProductView _predictedImpressionsChangeFraction. */
-                        public _predictedImpressionsChangeFraction?: "predictedImpressionsChangeFraction";
-
-                        /** PriceInsightsProductView _predictedClicksChangeFraction. */
-                        public _predictedClicksChangeFraction?: "predictedClicksChangeFraction";
-
-                        /** PriceInsightsProductView _predictedConversionsChangeFraction. */
-                        public _predictedConversionsChangeFraction?: "predictedConversionsChangeFraction";
 
                         /**
                          * Creates a new PriceInsightsProductView instance using the specified properties.
@@ -2238,57 +1980,6 @@ export namespace google {
                         /** BestSellersProductClusterView relativeDemandChange. */
                         public relativeDemandChange?: (google.shopping.merchant.reports.v1beta.RelativeDemandChangeType.RelativeDemandChangeTypeEnum|keyof typeof google.shopping.merchant.reports.v1beta.RelativeDemandChangeType.RelativeDemandChangeTypeEnum|null);
 
-                        /** BestSellersProductClusterView _reportGranularity. */
-                        public _reportGranularity?: "reportGranularity";
-
-                        /** BestSellersProductClusterView _reportCountryCode. */
-                        public _reportCountryCode?: "reportCountryCode";
-
-                        /** BestSellersProductClusterView _reportCategoryId. */
-                        public _reportCategoryId?: "reportCategoryId";
-
-                        /** BestSellersProductClusterView _title. */
-                        public _title?: "title";
-
-                        /** BestSellersProductClusterView _brand. */
-                        public _brand?: "brand";
-
-                        /** BestSellersProductClusterView _categoryL1. */
-                        public _categoryL1?: "categoryL1";
-
-                        /** BestSellersProductClusterView _categoryL2. */
-                        public _categoryL2?: "categoryL2";
-
-                        /** BestSellersProductClusterView _categoryL3. */
-                        public _categoryL3?: "categoryL3";
-
-                        /** BestSellersProductClusterView _categoryL4. */
-                        public _categoryL4?: "categoryL4";
-
-                        /** BestSellersProductClusterView _categoryL5. */
-                        public _categoryL5?: "categoryL5";
-
-                        /** BestSellersProductClusterView _inventoryStatus. */
-                        public _inventoryStatus?: "inventoryStatus";
-
-                        /** BestSellersProductClusterView _brandInventoryStatus. */
-                        public _brandInventoryStatus?: "brandInventoryStatus";
-
-                        /** BestSellersProductClusterView _rank. */
-                        public _rank?: "rank";
-
-                        /** BestSellersProductClusterView _previousRank. */
-                        public _previousRank?: "previousRank";
-
-                        /** BestSellersProductClusterView _relativeDemand. */
-                        public _relativeDemand?: "relativeDemand";
-
-                        /** BestSellersProductClusterView _previousRelativeDemand. */
-                        public _previousRelativeDemand?: "previousRelativeDemand";
-
-                        /** BestSellersProductClusterView _relativeDemandChange. */
-                        public _relativeDemandChange?: "relativeDemandChange";
-
                         /**
                          * Creates a new BestSellersProductClusterView instance using the specified properties.
                          * @param [properties] Properties to set
@@ -2451,33 +2142,6 @@ export namespace google {
                         /** BestSellersBrandView relativeDemandChange. */
                         public relativeDemandChange?: (google.shopping.merchant.reports.v1beta.RelativeDemandChangeType.RelativeDemandChangeTypeEnum|keyof typeof google.shopping.merchant.reports.v1beta.RelativeDemandChangeType.RelativeDemandChangeTypeEnum|null);
 
-                        /** BestSellersBrandView _reportGranularity. */
-                        public _reportGranularity?: "reportGranularity";
-
-                        /** BestSellersBrandView _reportCountryCode. */
-                        public _reportCountryCode?: "reportCountryCode";
-
-                        /** BestSellersBrandView _reportCategoryId. */
-                        public _reportCategoryId?: "reportCategoryId";
-
-                        /** BestSellersBrandView _brand. */
-                        public _brand?: "brand";
-
-                        /** BestSellersBrandView _rank. */
-                        public _rank?: "rank";
-
-                        /** BestSellersBrandView _previousRank. */
-                        public _previousRank?: "previousRank";
-
-                        /** BestSellersBrandView _relativeDemand. */
-                        public _relativeDemand?: "relativeDemand";
-
-                        /** BestSellersBrandView _previousRelativeDemand. */
-                        public _previousRelativeDemand?: "previousRelativeDemand";
-
-                        /** BestSellersBrandView _relativeDemandChange. */
-                        public _relativeDemandChange?: "relativeDemandChange";
-
                         /**
                          * Creates a new BestSellersBrandView instance using the specified properties.
                          * @param [properties] Properties to set
@@ -2598,15 +2262,6 @@ export namespace google {
 
                         /** NonProductPerformanceView clickThroughRate. */
                         public clickThroughRate?: (number|null);
-
-                        /** NonProductPerformanceView _clicks. */
-                        public _clicks?: "clicks";
-
-                        /** NonProductPerformanceView _impressions. */
-                        public _impressions?: "impressions";
-
-                        /** NonProductPerformanceView _clickThroughRate. */
-                        public _clickThroughRate?: "clickThroughRate";
 
                         /**
                          * Creates a new NonProductPerformanceView instance using the specified properties.
@@ -2765,36 +2420,6 @@ export namespace google {
                         /** CompetitiveVisibilityCompetitorView relativeVisibility. */
                         public relativeVisibility?: (number|null);
 
-                        /** CompetitiveVisibilityCompetitorView _domain. */
-                        public _domain?: "domain";
-
-                        /** CompetitiveVisibilityCompetitorView _isYourDomain. */
-                        public _isYourDomain?: "isYourDomain";
-
-                        /** CompetitiveVisibilityCompetitorView _reportCountryCode. */
-                        public _reportCountryCode?: "reportCountryCode";
-
-                        /** CompetitiveVisibilityCompetitorView _reportCategoryId. */
-                        public _reportCategoryId?: "reportCategoryId";
-
-                        /** CompetitiveVisibilityCompetitorView _trafficSource. */
-                        public _trafficSource?: "trafficSource";
-
-                        /** CompetitiveVisibilityCompetitorView _rank. */
-                        public _rank?: "rank";
-
-                        /** CompetitiveVisibilityCompetitorView _adsOrganicRatio. */
-                        public _adsOrganicRatio?: "adsOrganicRatio";
-
-                        /** CompetitiveVisibilityCompetitorView _pageOverlapRate. */
-                        public _pageOverlapRate?: "pageOverlapRate";
-
-                        /** CompetitiveVisibilityCompetitorView _higherPositionRate. */
-                        public _higherPositionRate?: "higherPositionRate";
-
-                        /** CompetitiveVisibilityCompetitorView _relativeVisibility. */
-                        public _relativeVisibility?: "relativeVisibility";
-
                         /**
                          * Creates a new CompetitiveVisibilityCompetitorView instance using the specified properties.
                          * @param [properties] Properties to set
@@ -2946,33 +2571,6 @@ export namespace google {
                         /** CompetitiveVisibilityTopMerchantView higherPositionRate. */
                         public higherPositionRate?: (number|null);
 
-                        /** CompetitiveVisibilityTopMerchantView _domain. */
-                        public _domain?: "domain";
-
-                        /** CompetitiveVisibilityTopMerchantView _isYourDomain. */
-                        public _isYourDomain?: "isYourDomain";
-
-                        /** CompetitiveVisibilityTopMerchantView _reportCountryCode. */
-                        public _reportCountryCode?: "reportCountryCode";
-
-                        /** CompetitiveVisibilityTopMerchantView _reportCategoryId. */
-                        public _reportCategoryId?: "reportCategoryId";
-
-                        /** CompetitiveVisibilityTopMerchantView _trafficSource. */
-                        public _trafficSource?: "trafficSource";
-
-                        /** CompetitiveVisibilityTopMerchantView _rank. */
-                        public _rank?: "rank";
-
-                        /** CompetitiveVisibilityTopMerchantView _adsOrganicRatio. */
-                        public _adsOrganicRatio?: "adsOrganicRatio";
-
-                        /** CompetitiveVisibilityTopMerchantView _pageOverlapRate. */
-                        public _pageOverlapRate?: "pageOverlapRate";
-
-                        /** CompetitiveVisibilityTopMerchantView _higherPositionRate. */
-                        public _higherPositionRate?: "higherPositionRate";
-
                         /**
                          * Creates a new CompetitiveVisibilityTopMerchantView instance using the specified properties.
                          * @param [properties] Properties to set
@@ -3099,21 +2697,6 @@ export namespace google {
 
                         /** CompetitiveVisibilityBenchmarkView categoryBenchmarkVisibilityTrend. */
                         public categoryBenchmarkVisibilityTrend?: (number|null);
-
-                        /** CompetitiveVisibilityBenchmarkView _reportCountryCode. */
-                        public _reportCountryCode?: "reportCountryCode";
-
-                        /** CompetitiveVisibilityBenchmarkView _reportCategoryId. */
-                        public _reportCategoryId?: "reportCategoryId";
-
-                        /** CompetitiveVisibilityBenchmarkView _trafficSource. */
-                        public _trafficSource?: "trafficSource";
-
-                        /** CompetitiveVisibilityBenchmarkView _yourDomainVisibilityTrend. */
-                        public _yourDomainVisibilityTrend?: "yourDomainVisibilityTrend";
-
-                        /** CompetitiveVisibilityBenchmarkView _categoryBenchmarkVisibilityTrend. */
-                        public _categoryBenchmarkVisibilityTrend?: "categoryBenchmarkVisibilityTrend";
 
                         /**
                          * Creates a new CompetitiveVisibilityBenchmarkView instance using the specified properties.
@@ -3734,9 +3317,6 @@ export namespace google {
                 /** Weight unit. */
                 public unit: (google.shopping.type.Weight.WeightUnit|keyof typeof google.shopping.type.Weight.WeightUnit);
 
-                /** Weight _amountMicros. */
-                public _amountMicros?: "amountMicros";
-
                 /**
                  * Creates a new Weight instance using the specified properties.
                  * @param [properties] Properties to set
@@ -3850,12 +3430,6 @@ export namespace google {
                 /** Price currencyCode. */
                 public currencyCode?: (string|null);
 
-                /** Price _amountMicros. */
-                public _amountMicros?: "amountMicros";
-
-                /** Price _currencyCode. */
-                public _currencyCode?: "currencyCode";
-
                 /**
                  * Creates a new Price instance using the specified properties.
                  * @param [properties] Properties to set
@@ -3964,12 +3538,6 @@ export namespace google {
 
                 /** CustomAttribute groupValues. */
                 public groupValues: google.shopping.type.ICustomAttribute[];
-
-                /** CustomAttribute _name. */
-                public _name?: "name";
-
-                /** CustomAttribute _value. */
-                public _value?: "value";
 
                 /**
                  * Creates a new CustomAttribute instance using the specified properties.
@@ -5025,6 +4593,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -5065,6 +4636,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -9022,6 +8596,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -9270,7 +8847,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -9301,7 +8878,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;

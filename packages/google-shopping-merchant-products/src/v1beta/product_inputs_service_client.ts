@@ -18,16 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -106,41 +101,20 @@ export class ProductInputsServiceClient {
    *     const client = new ProductInputsServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ProductInputsServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'merchantapi.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -166,7 +140,7 @@ export class ProductInputsServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -180,7 +154,10 @@ export class ProductInputsServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -214,11 +191,8 @@ export class ProductInputsServiceClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.shopping.merchant.products.v1beta.ProductInputsService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.shopping.merchant.products.v1beta.ProductInputsService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -249,40 +223,31 @@ export class ProductInputsServiceClient {
     // Put together the "service stub" for
     // google.shopping.merchant.products.v1beta.ProductInputsService.
     this.productInputsServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.shopping.merchant.products.v1beta.ProductInputsService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.shopping.merchant.products.v1beta
-            .ProductInputsService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.shopping.merchant.products.v1beta.ProductInputsService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.shopping.merchant.products.v1beta.ProductInputsService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const productInputsServiceStubMethods = [
-      'insertProductInput',
-      'updateProductInput',
-      'deleteProductInput',
-    ];
+    const productInputsServiceStubMethods =
+        ['insertProductInput', 'updateProductInput', 'deleteProductInput'];
     for (const methodName of productInputsServiceStubMethods) {
       const callPromise = this.productInputsServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = undefined;
+      const descriptor =
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -302,14 +267,8 @@ export class ProductInputsServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'merchantapi.googleapis.com';
   }
@@ -320,14 +279,8 @@ export class ProductInputsServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'merchantapi.googleapis.com';
   }
@@ -358,7 +311,9 @@ export class ProductInputsServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/content'];
+    return [
+      'https://www.googleapis.com/auth/content'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -367,9 +322,8 @@ export class ProductInputsServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -380,441 +334,342 @@ export class ProductInputsServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Uploads a product input to your Merchant Center account. If an input
-   * with the same contentLanguage, offerId, and dataSource already exists,
-   * this method replaces that entry.
-   *
-   * After inserting, updating, or deleting a product input, it may take several
-   * minutes before the processed product can be retrieved.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The account where this product will be inserted.
-   *   Format: accounts/{account}
-   * @param {google.shopping.merchant.products.v1beta.ProductInput} request.productInput
-   *   Required. The product input to insert.
-   * @param {string} request.dataSource
-   *   Required. The primary or supplemental product data source name. If the
-   *   product already exists and data source provided is different, then the
-   *   product will be moved to a new data source.
-   *
-   *   Only API data sources are supported.
-   *
-   *   Format: `accounts/{account}/dataSources/{datasource}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.products.v1beta.ProductInput|ProductInput}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/product_inputs_service.insert_product_input.js</caption>
-   * region_tag:merchantapi_v1beta_generated_ProductInputsService_InsertProductInput_async
-   */
+/**
+ * Uploads a product input to your Merchant Center account. If an input
+ * with the same contentLanguage, offerId, and dataSource already exists,
+ * this method replaces that entry.
+ *
+ * After inserting, updating, or deleting a product input, it may take several
+ * minutes before the processed product can be retrieved.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The account where this product will be inserted.
+ *   Format: accounts/{account}
+ * @param {google.shopping.merchant.products.v1beta.ProductInput} request.productInput
+ *   Required. The product input to insert.
+ * @param {string} request.dataSource
+ *   Required. The primary or supplemental product data source name. If the
+ *   product already exists and data source provided is different, then the
+ *   product will be moved to a new data source.
+ *
+ *   Only API data sources are supported.
+ *
+ *   Format: `accounts/{account}/dataSources/{datasource}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.shopping.merchant.products.v1beta.ProductInput|ProductInput}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/product_inputs_service.insert_product_input.js</caption>
+ * region_tag:merchantapi_v1beta_generated_ProductInputsService_InsertProductInput_async
+ */
   insertProductInput(
-    request?: protos.google.shopping.merchant.products.v1beta.IInsertProductInputRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.shopping.merchant.products.v1beta.IProductInput,
-      (
-        | protos.google.shopping.merchant.products.v1beta.IInsertProductInputRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.shopping.merchant.products.v1beta.IInsertProductInputRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.shopping.merchant.products.v1beta.IProductInput,
+        protos.google.shopping.merchant.products.v1beta.IInsertProductInputRequest|undefined, {}|undefined
+      ]>;
   insertProductInput(
-    request: protos.google.shopping.merchant.products.v1beta.IInsertProductInputRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.shopping.merchant.products.v1beta.IProductInput,
-      | protos.google.shopping.merchant.products.v1beta.IInsertProductInputRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  insertProductInput(
-    request: protos.google.shopping.merchant.products.v1beta.IInsertProductInputRequest,
-    callback: Callback<
-      protos.google.shopping.merchant.products.v1beta.IProductInput,
-      | protos.google.shopping.merchant.products.v1beta.IInsertProductInputRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  insertProductInput(
-    request?: protos.google.shopping.merchant.products.v1beta.IInsertProductInputRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.shopping.merchant.products.v1beta.IInsertProductInputRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.shopping.merchant.products.v1beta.IProductInput,
-          | protos.google.shopping.merchant.products.v1beta.IInsertProductInputRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.shopping.merchant.products.v1beta.IProductInput,
-      | protos.google.shopping.merchant.products.v1beta.IInsertProductInputRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.shopping.merchant.products.v1beta.IProductInput,
-      (
-        | protos.google.shopping.merchant.products.v1beta.IInsertProductInputRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.shopping.merchant.products.v1beta.IInsertProductInputRequest|null|undefined,
+          {}|null|undefined>): void;
+  insertProductInput(
+      request: protos.google.shopping.merchant.products.v1beta.IInsertProductInputRequest,
+      callback: Callback<
+          protos.google.shopping.merchant.products.v1beta.IProductInput,
+          protos.google.shopping.merchant.products.v1beta.IInsertProductInputRequest|null|undefined,
+          {}|null|undefined>): void;
+  insertProductInput(
+      request?: protos.google.shopping.merchant.products.v1beta.IInsertProductInputRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.shopping.merchant.products.v1beta.IProductInput,
+          protos.google.shopping.merchant.products.v1beta.IInsertProductInputRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.shopping.merchant.products.v1beta.IProductInput,
+          protos.google.shopping.merchant.products.v1beta.IInsertProductInputRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.shopping.merchant.products.v1beta.IProductInput,
+        protos.google.shopping.merchant.products.v1beta.IInsertProductInputRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('insertProductInput request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.shopping.merchant.products.v1beta.IProductInput,
-          | protos.google.shopping.merchant.products.v1beta.IInsertProductInputRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.shopping.merchant.products.v1beta.IProductInput,
+        protos.google.shopping.merchant.products.v1beta.IInsertProductInputRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('insertProductInput response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .insertProductInput(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.shopping.merchant.products.v1beta.IProductInput,
-          (
-            | protos.google.shopping.merchant.products.v1beta.IInsertProductInputRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('insertProductInput response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.insertProductInput(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.shopping.merchant.products.v1beta.IProductInput,
+        protos.google.shopping.merchant.products.v1beta.IInsertProductInputRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('insertProductInput response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates the existing product input in your Merchant Center account.
-   *
-   * After inserting, updating, or deleting a product input, it may take several
-   * minutes before the processed product can be retrieved.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.shopping.merchant.products.v1beta.ProductInput} request.productInput
-   *   Required. The product input resource to update. Information you submit will
-   *   be applied to the processed product as well.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. The list of product attributes to be updated.
-   *
-   *   If the update mask is omitted, then it is treated as implied field mask
-   *   equivalent to all fields that are populated (have a non-empty value).
-   *
-   *   Attributes specified in the update mask without a value specified in the
-   *   body will be deleted from the product.
-   *
-   *   Update mask can only be specified for top level fields in
-   *   attributes and custom attributes.
-   *
-   *   To specify the update mask for custom attributes you need to add the
-   *   `custom_attribute.` prefix.
-   *
-   *   Providing special "*" value for full product replacement is not supported.
-   * @param {string} request.dataSource
-   *   Required. The primary or supplemental product data source where
-   *   `data_source` name identifies the product input to be updated.
-   *
-   *   Only API data sources are supported.
-   *
-   *   Format: `accounts/{account}/dataSources/{datasource}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.products.v1beta.ProductInput|ProductInput}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/product_inputs_service.update_product_input.js</caption>
-   * region_tag:merchantapi_v1beta_generated_ProductInputsService_UpdateProductInput_async
-   */
+/**
+ * Updates the existing product input in your Merchant Center account.
+ *
+ * After inserting, updating, or deleting a product input, it may take several
+ * minutes before the processed product can be retrieved.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.shopping.merchant.products.v1beta.ProductInput} request.productInput
+ *   Required. The product input resource to update. Information you submit will
+ *   be applied to the processed product as well.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. The list of product attributes to be updated.
+ *
+ *   If the update mask is omitted, then it is treated as implied field mask
+ *   equivalent to all fields that are populated (have a non-empty value).
+ *
+ *   Attributes specified in the update mask without a value specified in the
+ *   body will be deleted from the product.
+ *
+ *   Update mask can only be specified for top level fields in
+ *   attributes and custom attributes.
+ *
+ *   To specify the update mask for custom attributes you need to add the
+ *   `custom_attribute.` prefix.
+ *
+ *   Providing special "*" value for full product replacement is not supported.
+ * @param {string} request.dataSource
+ *   Required. The primary or supplemental product data source where
+ *   `data_source` name identifies the product input to be updated.
+ *
+ *   Only API data sources are supported.
+ *
+ *   Format: `accounts/{account}/dataSources/{datasource}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.shopping.merchant.products.v1beta.ProductInput|ProductInput}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/product_inputs_service.update_product_input.js</caption>
+ * region_tag:merchantapi_v1beta_generated_ProductInputsService_UpdateProductInput_async
+ */
   updateProductInput(
-    request?: protos.google.shopping.merchant.products.v1beta.IUpdateProductInputRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.shopping.merchant.products.v1beta.IProductInput,
-      (
-        | protos.google.shopping.merchant.products.v1beta.IUpdateProductInputRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.shopping.merchant.products.v1beta.IUpdateProductInputRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.shopping.merchant.products.v1beta.IProductInput,
+        protos.google.shopping.merchant.products.v1beta.IUpdateProductInputRequest|undefined, {}|undefined
+      ]>;
   updateProductInput(
-    request: protos.google.shopping.merchant.products.v1beta.IUpdateProductInputRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.shopping.merchant.products.v1beta.IProductInput,
-      | protos.google.shopping.merchant.products.v1beta.IUpdateProductInputRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateProductInput(
-    request: protos.google.shopping.merchant.products.v1beta.IUpdateProductInputRequest,
-    callback: Callback<
-      protos.google.shopping.merchant.products.v1beta.IProductInput,
-      | protos.google.shopping.merchant.products.v1beta.IUpdateProductInputRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateProductInput(
-    request?: protos.google.shopping.merchant.products.v1beta.IUpdateProductInputRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.shopping.merchant.products.v1beta.IUpdateProductInputRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.shopping.merchant.products.v1beta.IProductInput,
-          | protos.google.shopping.merchant.products.v1beta.IUpdateProductInputRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.shopping.merchant.products.v1beta.IProductInput,
-      | protos.google.shopping.merchant.products.v1beta.IUpdateProductInputRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.shopping.merchant.products.v1beta.IProductInput,
-      (
-        | protos.google.shopping.merchant.products.v1beta.IUpdateProductInputRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.shopping.merchant.products.v1beta.IUpdateProductInputRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateProductInput(
+      request: protos.google.shopping.merchant.products.v1beta.IUpdateProductInputRequest,
+      callback: Callback<
+          protos.google.shopping.merchant.products.v1beta.IProductInput,
+          protos.google.shopping.merchant.products.v1beta.IUpdateProductInputRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateProductInput(
+      request?: protos.google.shopping.merchant.products.v1beta.IUpdateProductInputRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.shopping.merchant.products.v1beta.IProductInput,
+          protos.google.shopping.merchant.products.v1beta.IUpdateProductInputRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.shopping.merchant.products.v1beta.IProductInput,
+          protos.google.shopping.merchant.products.v1beta.IUpdateProductInputRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.shopping.merchant.products.v1beta.IProductInput,
+        protos.google.shopping.merchant.products.v1beta.IUpdateProductInputRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'product_input.name': request.productInput!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'product_input.name': request.productInput!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateProductInput request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.shopping.merchant.products.v1beta.IProductInput,
-          | protos.google.shopping.merchant.products.v1beta.IUpdateProductInputRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.shopping.merchant.products.v1beta.IProductInput,
+        protos.google.shopping.merchant.products.v1beta.IUpdateProductInputRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateProductInput response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateProductInput(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.shopping.merchant.products.v1beta.IProductInput,
-          (
-            | protos.google.shopping.merchant.products.v1beta.IUpdateProductInputRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateProductInput response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateProductInput(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.shopping.merchant.products.v1beta.IProductInput,
+        protos.google.shopping.merchant.products.v1beta.IUpdateProductInputRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateProductInput response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a product input from your Merchant Center account.
-   *
-   * After inserting, updating, or deleting a product input, it may take several
-   * minutes before the processed product can be retrieved.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the product input resource to delete.
-   *   Format: accounts/{account}/productInputs/{product}
-   *   where the last section `product` consists of 4 parts:
-   *   channel~content_language~feed_label~offer_id
-   *   example for product name is
-   *   "accounts/123/productInputs/online~en~US~sku123"
-   * @param {string} request.dataSource
-   *   Required. The primary or supplemental data source from which the product
-   *   input should be deleted. Format:
-   *   `accounts/{account}/dataSources/{datasource}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/product_inputs_service.delete_product_input.js</caption>
-   * region_tag:merchantapi_v1beta_generated_ProductInputsService_DeleteProductInput_async
-   */
+/**
+ * Deletes a product input from your Merchant Center account.
+ *
+ * After inserting, updating, or deleting a product input, it may take several
+ * minutes before the processed product can be retrieved.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the product input resource to delete.
+ *   Format: accounts/{account}/productInputs/{product}
+ *   where the last section `product` consists of 4 parts:
+ *   channel~content_language~feed_label~offer_id
+ *   example for product name is
+ *   "accounts/123/productInputs/online~en~US~sku123"
+ * @param {string} request.dataSource
+ *   Required. The primary or supplemental data source from which the product
+ *   input should be deleted. Format:
+ *   `accounts/{account}/dataSources/{datasource}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/product_inputs_service.delete_product_input.js</caption>
+ * region_tag:merchantapi_v1beta_generated_ProductInputsService_DeleteProductInput_async
+ */
   deleteProductInput(
-    request?: protos.google.shopping.merchant.products.v1beta.IDeleteProductInputRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.shopping.merchant.products.v1beta.IDeleteProductInputRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.shopping.merchant.products.v1beta.IDeleteProductInputRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.shopping.merchant.products.v1beta.IDeleteProductInputRequest|undefined, {}|undefined
+      ]>;
   deleteProductInput(
-    request: protos.google.shopping.merchant.products.v1beta.IDeleteProductInputRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.shopping.merchant.products.v1beta.IDeleteProductInputRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteProductInput(
-    request: protos.google.shopping.merchant.products.v1beta.IDeleteProductInputRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.shopping.merchant.products.v1beta.IDeleteProductInputRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteProductInput(
-    request?: protos.google.shopping.merchant.products.v1beta.IDeleteProductInputRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.shopping.merchant.products.v1beta.IDeleteProductInputRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.shopping.merchant.products.v1beta.IDeleteProductInputRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.shopping.merchant.products.v1beta.IDeleteProductInputRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.shopping.merchant.products.v1beta.IDeleteProductInputRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.shopping.merchant.products.v1beta.IDeleteProductInputRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteProductInput(
+      request: protos.google.shopping.merchant.products.v1beta.IDeleteProductInputRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.shopping.merchant.products.v1beta.IDeleteProductInputRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteProductInput(
+      request?: protos.google.shopping.merchant.products.v1beta.IDeleteProductInputRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.shopping.merchant.products.v1beta.IDeleteProductInputRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.shopping.merchant.products.v1beta.IDeleteProductInputRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.shopping.merchant.products.v1beta.IDeleteProductInputRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteProductInput request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.shopping.merchant.products.v1beta.IDeleteProductInputRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.shopping.merchant.products.v1beta.IDeleteProductInputRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteProductInput response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteProductInput(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.shopping.merchant.products.v1beta.IDeleteProductInputRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteProductInput response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteProductInput(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.shopping.merchant.products.v1beta.IDeleteProductInputRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteProductInput response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
   // --------------------
@@ -827,7 +682,7 @@ export class ProductInputsServiceClient {
    * @param {string} account
    * @returns {string} Resource name string.
    */
-  accountPath(account: string) {
+  accountPath(account:string) {
     return this.pathTemplates.accountPathTemplate.render({
       account: account,
     });
@@ -851,7 +706,7 @@ export class ProductInputsServiceClient {
    * @param {string} product
    * @returns {string} Resource name string.
    */
-  productPath(account: string, product: string) {
+  productPath(account:string,product:string) {
     return this.pathTemplates.productPathTemplate.render({
       account: account,
       product: product,
@@ -887,7 +742,7 @@ export class ProductInputsServiceClient {
    * @param {string} productinput
    * @returns {string} Resource name string.
    */
-  productInputPath(account: string, productinput: string) {
+  productInputPath(account:string,productinput:string) {
     return this.pathTemplates.productInputPathTemplate.render({
       account: account,
       productinput: productinput,
@@ -902,8 +757,7 @@ export class ProductInputsServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromProductInputName(productInputName: string) {
-    return this.pathTemplates.productInputPathTemplate.match(productInputName)
-      .account;
+    return this.pathTemplates.productInputPathTemplate.match(productInputName).account;
   }
 
   /**
@@ -914,8 +768,7 @@ export class ProductInputsServiceClient {
    * @returns {string} A string representing the productinput.
    */
   matchProductinputFromProductInputName(productInputName: string) {
-    return this.pathTemplates.productInputPathTemplate.match(productInputName)
-      .productinput;
+    return this.pathTemplates.productInputPathTemplate.match(productInputName).productinput;
   }
 
   /**

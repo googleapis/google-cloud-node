@@ -1089,9 +1089,6 @@ export namespace google {
                             /** ImpactedDestination impacts. */
                             public impacts: google.shopping.merchant.accounts.v1beta.AccountIssue.ImpactedDestination.IImpact[];
 
-                            /** ImpactedDestination _reportingContext. */
-                            public _reportingContext?: "reportingContext";
-
                             /**
                              * Creates a new ImpactedDestination instance using the specified properties.
                              * @param [properties] Properties to set
@@ -1926,9 +1923,6 @@ export namespace google {
                         /** CreateAndConfigureAccountRequest service. */
                         public service: google.shopping.merchant.accounts.v1beta.CreateAndConfigureAccountRequest.IAddAccountService[];
 
-                        /** CreateAndConfigureAccountRequest _acceptTermsOfService. */
-                        public _acceptTermsOfService?: "acceptTermsOfService";
-
                         /**
                          * Creates a new CreateAndConfigureAccountRequest instance using the specified properties.
                          * @param [properties] Properties to set
@@ -2139,9 +2133,6 @@ export namespace google {
 
                             /** AddAccountService serviceType. */
                             public serviceType?: "accountAggregation";
-
-                            /** AddAccountService _provider. */
-                            public _provider?: "provider";
 
                             /**
                              * Creates a new AddAccountService instance using the specified properties.
@@ -4287,15 +4278,6 @@ export namespace google {
                         /** AutomaticImprovements shippingImprovements. */
                         public shippingImprovements?: (google.shopping.merchant.accounts.v1beta.IAutomaticShippingImprovements|null);
 
-                        /** AutomaticImprovements _itemUpdates. */
-                        public _itemUpdates?: "itemUpdates";
-
-                        /** AutomaticImprovements _imageImprovements. */
-                        public _imageImprovements?: "imageImprovements";
-
-                        /** AutomaticImprovements _shippingImprovements. */
-                        public _shippingImprovements?: "shippingImprovements";
-
                         /**
                          * Creates a new AutomaticImprovements instance using the specified properties.
                          * @param [properties] Properties to set
@@ -4534,18 +4516,6 @@ export namespace google {
                             /** ItemUpdatesAccountLevelSettings allowConditionUpdates. */
                             public allowConditionUpdates?: (boolean|null);
 
-                            /** ItemUpdatesAccountLevelSettings _allowPriceUpdates. */
-                            public _allowPriceUpdates?: "allowPriceUpdates";
-
-                            /** ItemUpdatesAccountLevelSettings _allowAvailabilityUpdates. */
-                            public _allowAvailabilityUpdates?: "allowAvailabilityUpdates";
-
-                            /** ItemUpdatesAccountLevelSettings _allowStrictAvailabilityUpdates. */
-                            public _allowStrictAvailabilityUpdates?: "allowStrictAvailabilityUpdates";
-
-                            /** ItemUpdatesAccountLevelSettings _allowConditionUpdates. */
-                            public _allowConditionUpdates?: "allowConditionUpdates";
-
                             /**
                              * Creates a new ItemUpdatesAccountLevelSettings instance using the specified properties.
                              * @param [properties] Properties to set
@@ -4650,9 +4620,6 @@ export namespace google {
                         /** AutomaticImageImprovements effectiveAllowAutomaticImageImprovements. */
                         public effectiveAllowAutomaticImageImprovements: boolean;
 
-                        /** AutomaticImageImprovements _accountImageImprovementsSettings. */
-                        public _accountImageImprovementsSettings?: "accountImageImprovementsSettings";
-
                         /**
                          * Creates a new AutomaticImageImprovements instance using the specified properties.
                          * @param [properties] Properties to set
@@ -4752,9 +4719,6 @@ export namespace google {
                             /** ImageImprovementsAccountLevelSettings allowAutomaticImageImprovements. */
                             public allowAutomaticImageImprovements?: (boolean|null);
 
-                            /** ImageImprovementsAccountLevelSettings _allowAutomaticImageImprovements. */
-                            public _allowAutomaticImageImprovements?: "allowAutomaticImageImprovements";
-
                             /**
                              * Creates a new ImageImprovementsAccountLevelSettings instance using the specified properties.
                              * @param [properties] Properties to set
@@ -4852,9 +4816,6 @@ export namespace google {
 
                         /** AutomaticShippingImprovements allowShippingImprovements. */
                         public allowShippingImprovements?: (boolean|null);
-
-                        /** AutomaticShippingImprovements _allowShippingImprovements. */
-                        public _allowShippingImprovements?: "allowShippingImprovements";
 
                         /**
                          * Creates a new AutomaticShippingImprovements instance using the specified properties.
@@ -5765,21 +5726,6 @@ export namespace google {
                         /** BusinessInfo koreanBusinessRegistrationNumber. */
                         public koreanBusinessRegistrationNumber?: (string|null);
 
-                        /** BusinessInfo _address. */
-                        public _address?: "address";
-
-                        /** BusinessInfo _phone. */
-                        public _phone?: "phone";
-
-                        /** BusinessInfo _phoneVerificationState. */
-                        public _phoneVerificationState?: "phoneVerificationState";
-
-                        /** BusinessInfo _customerService. */
-                        public _customerService?: "customerService";
-
-                        /** BusinessInfo _koreanBusinessRegistrationNumber. */
-                        public _koreanBusinessRegistrationNumber?: "koreanBusinessRegistrationNumber";
-
                         /**
                          * Creates a new BusinessInfo instance using the specified properties.
                          * @param [properties] Properties to set
@@ -6088,15 +6034,6 @@ export namespace google {
 
                         /** CustomerService phone. */
                         public phone?: (google.type.IPhoneNumber|null);
-
-                        /** CustomerService _uri. */
-                        public _uri?: "uri";
-
-                        /** CustomerService _email. */
-                        public _email?: "email";
-
-                        /** CustomerService _phone. */
-                        public _phone?: "phone";
 
                         /**
                          * Creates a new CustomerService instance using the specified properties.
@@ -7310,9 +7247,6 @@ export namespace google {
 
                         /** Homepage claimed. */
                         public claimed: boolean;
-
-                        /** Homepage _uri. */
-                        public _uri?: "uri";
 
                         /**
                          * Creates a new Homepage instance using the specified properties.
@@ -10963,18 +10897,6 @@ export namespace google {
                         /** OnlineReturnPolicy returnLabelSource. */
                         public returnLabelSource?: (google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.ReturnLabelSource|keyof typeof google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.ReturnLabelSource|null);
 
-                        /** OnlineReturnPolicy _acceptDefectiveOnly. */
-                        public _acceptDefectiveOnly?: "acceptDefectiveOnly";
-
-                        /** OnlineReturnPolicy _processRefundDays. */
-                        public _processRefundDays?: "processRefundDays";
-
-                        /** OnlineReturnPolicy _acceptExchange. */
-                        public _acceptExchange?: "acceptExchange";
-
-                        /** OnlineReturnPolicy _returnLabelSource. */
-                        public _returnLabelSource?: "returnLabelSource";
-
                         /**
                          * Creates a new OnlineReturnPolicy instance using the specified properties.
                          * @param [properties] Properties to set
@@ -13184,9 +13106,6 @@ export namespace google {
                         /** Region shippingEligible. */
                         public shippingEligible?: (google.protobuf.IBoolValue|null);
 
-                        /** Region _displayName. */
-                        public _displayName?: "displayName";
-
                         /**
                          * Creates a new Region instance using the specified properties.
                          * @param [properties] Properties to set
@@ -13834,30 +13753,6 @@ export namespace google {
                         /** Service loyaltyPrograms. */
                         public loyaltyPrograms: google.shopping.merchant.accounts.v1beta.Service.ILoyaltyProgram[];
 
-                        /** Service _serviceName. */
-                        public _serviceName?: "serviceName";
-
-                        /** Service _active. */
-                        public _active?: "active";
-
-                        /** Service _currencyCode. */
-                        public _currencyCode?: "currencyCode";
-
-                        /** Service _deliveryTime. */
-                        public _deliveryTime?: "deliveryTime";
-
-                        /** Service _shipmentType. */
-                        public _shipmentType?: "shipmentType";
-
-                        /** Service _minimumOrderValue. */
-                        public _minimumOrderValue?: "minimumOrderValue";
-
-                        /** Service _minimumOrderValueTable. */
-                        public _minimumOrderValueTable?: "minimumOrderValueTable";
-
-                        /** Service _storeConfig. */
-                        public _storeConfig?: "storeConfig";
-
                         /**
                          * Creates a new Service instance using the specified properties.
                          * @param [properties] Properties to set
@@ -13975,15 +13870,6 @@ export namespace google {
                             /** StoreConfig serviceRadius. */
                             public serviceRadius?: (google.shopping.merchant.accounts.v1beta.IDistance|null);
 
-                            /** StoreConfig _storeServiceType. */
-                            public _storeServiceType?: "storeServiceType";
-
-                            /** StoreConfig _cutoffConfig. */
-                            public _cutoffConfig?: "cutoffConfig";
-
-                            /** StoreConfig _serviceRadius. */
-                            public _serviceRadius?: "serviceRadius";
-
                             /**
                              * Creates a new StoreConfig instance using the specified properties.
                              * @param [properties] Properties to set
@@ -14095,15 +13981,6 @@ export namespace google {
                                 /** CutoffConfig noDeliveryPostCutoff. */
                                 public noDeliveryPostCutoff?: (boolean|null);
 
-                                /** CutoffConfig _localCutoffTime. */
-                                public _localCutoffTime?: "localCutoffTime";
-
-                                /** CutoffConfig _storeCloseOffsetHours. */
-                                public _storeCloseOffsetHours?: "storeCloseOffsetHours";
-
-                                /** CutoffConfig _noDeliveryPostCutoff. */
-                                public _noDeliveryPostCutoff?: "noDeliveryPostCutoff";
-
                                 /**
                                  * Creates a new CutoffConfig instance using the specified properties.
                                  * @param [properties] Properties to set
@@ -14208,12 +14085,6 @@ export namespace google {
 
                                     /** LocalCutoffTime minute. */
                                     public minute?: (number|Long|string|null);
-
-                                    /** LocalCutoffTime _hour. */
-                                    public _hour?: "hour";
-
-                                    /** LocalCutoffTime _minute. */
-                                    public _minute?: "minute";
 
                                     /**
                                      * Creates a new LocalCutoffTime instance using the specified properties.
@@ -14327,9 +14198,6 @@ export namespace google {
                             /** LoyaltyProgram loyaltyProgramTiers. */
                             public loyaltyProgramTiers: google.shopping.merchant.accounts.v1beta.Service.LoyaltyProgram.ILoyaltyProgramTiers[];
 
-                            /** LoyaltyProgram _programLabel. */
-                            public _programLabel?: "programLabel";
-
                             /**
                              * Creates a new LoyaltyProgram instance using the specified properties.
                              * @param [properties] Properties to set
@@ -14428,9 +14296,6 @@ export namespace google {
 
                                 /** LoyaltyProgramTiers tierLabel. */
                                 public tierLabel?: (string|null);
-
-                                /** LoyaltyProgramTiers _tierLabel. */
-                                public _tierLabel?: "tierLabel";
 
                                 /**
                                  * Creates a new LoyaltyProgramTiers instance using the specified properties.
@@ -14544,12 +14409,6 @@ export namespace google {
 
                         /** Distance unit. */
                         public unit?: (google.shopping.merchant.accounts.v1beta.Distance.Unit|keyof typeof google.shopping.merchant.accounts.v1beta.Distance.Unit|null);
-
-                        /** Distance _value. */
-                        public _value?: "value";
-
-                        /** Distance _unit. */
-                        public _unit?: "unit";
 
                         /**
                          * Creates a new Distance instance using the specified properties.
@@ -14682,21 +14541,6 @@ export namespace google {
                         /** Warehouse businessDayConfig. */
                         public businessDayConfig?: (google.shopping.merchant.accounts.v1beta.IBusinessDayConfig|null);
 
-                        /** Warehouse _name. */
-                        public _name?: "name";
-
-                        /** Warehouse _shippingAddress. */
-                        public _shippingAddress?: "shippingAddress";
-
-                        /** Warehouse _cutoffTime. */
-                        public _cutoffTime?: "cutoffTime";
-
-                        /** Warehouse _handlingDays. */
-                        public _handlingDays?: "handlingDays";
-
-                        /** Warehouse _businessDayConfig. */
-                        public _businessDayConfig?: "businessDayConfig";
-
                         /**
                          * Creates a new Warehouse instance using the specified properties.
                          * @param [properties] Properties to set
@@ -14799,12 +14643,6 @@ export namespace google {
 
                         /** WarehouseCutoffTime minute. */
                         public minute?: (number|null);
-
-                        /** WarehouseCutoffTime _hour. */
-                        public _hour?: "hour";
-
-                        /** WarehouseCutoffTime _minute. */
-                        public _minute?: "minute";
 
                         /**
                          * Creates a new WarehouseCutoffTime instance using the specified properties.
@@ -14926,21 +14764,6 @@ export namespace google {
 
                         /** Address regionCode. */
                         public regionCode?: (string|null);
-
-                        /** Address _streetAddress. */
-                        public _streetAddress?: "streetAddress";
-
-                        /** Address _city. */
-                        public _city?: "city";
-
-                        /** Address _administrativeArea. */
-                        public _administrativeArea?: "administrativeArea";
-
-                        /** Address _postalCode. */
-                        public _postalCode?: "postalCode";
-
-                        /** Address _regionCode. */
-                        public _regionCode?: "regionCode";
 
                         /**
                          * Creates a new Address instance using the specified properties.
@@ -15087,30 +14910,6 @@ export namespace google {
                         /** DeliveryTime warehouseBasedDeliveryTimes. */
                         public warehouseBasedDeliveryTimes: google.shopping.merchant.accounts.v1beta.IWarehouseBasedDeliveryTime[];
 
-                        /** DeliveryTime _minTransitDays. */
-                        public _minTransitDays?: "minTransitDays";
-
-                        /** DeliveryTime _maxTransitDays. */
-                        public _maxTransitDays?: "maxTransitDays";
-
-                        /** DeliveryTime _cutoffTime. */
-                        public _cutoffTime?: "cutoffTime";
-
-                        /** DeliveryTime _minHandlingDays. */
-                        public _minHandlingDays?: "minHandlingDays";
-
-                        /** DeliveryTime _maxHandlingDays. */
-                        public _maxHandlingDays?: "maxHandlingDays";
-
-                        /** DeliveryTime _transitTimeTable. */
-                        public _transitTimeTable?: "transitTimeTable";
-
-                        /** DeliveryTime _handlingBusinessDayConfig. */
-                        public _handlingBusinessDayConfig?: "handlingBusinessDayConfig";
-
-                        /** DeliveryTime _transitBusinessDayConfig. */
-                        public _transitBusinessDayConfig?: "transitBusinessDayConfig";
-
                         /**
                          * Creates a new DeliveryTime instance using the specified properties.
                          * @param [properties] Properties to set
@@ -15219,15 +15018,6 @@ export namespace google {
 
                         /** CutoffTime timeZone. */
                         public timeZone?: (string|null);
-
-                        /** CutoffTime _hour. */
-                        public _hour?: "hour";
-
-                        /** CutoffTime _minute. */
-                        public _minute?: "minute";
-
-                        /** CutoffTime _timeZone. */
-                        public _timeZone?: "timeZone";
 
                         /**
                          * Creates a new CutoffTime instance using the specified properties.
@@ -15450,15 +15240,6 @@ export namespace google {
                         /** WarehouseBasedDeliveryTime warehouse. */
                         public warehouse?: (string|null);
 
-                        /** WarehouseBasedDeliveryTime _carrier. */
-                        public _carrier?: "carrier";
-
-                        /** WarehouseBasedDeliveryTime _carrierService. */
-                        public _carrierService?: "carrierService";
-
-                        /** WarehouseBasedDeliveryTime _warehouse. */
-                        public _warehouse?: "warehouse";
-
                         /**
                          * Creates a new WarehouseBasedDeliveryTime instance using the specified properties.
                          * @param [properties] Properties to set
@@ -15586,15 +15367,6 @@ export namespace google {
                         /** RateGroup name. */
                         public name?: (string|null);
 
-                        /** RateGroup _singleValue. */
-                        public _singleValue?: "singleValue";
-
-                        /** RateGroup _mainTable. */
-                        public _mainTable?: "mainTable";
-
-                        /** RateGroup _name. */
-                        public _name?: "name";
-
                         /**
                          * Creates a new RateGroup instance using the specified properties.
                          * @param [properties] Properties to set
@@ -15709,15 +15481,6 @@ export namespace google {
 
                         /** Table rows. */
                         public rows: google.shopping.merchant.accounts.v1beta.IRow[];
-
-                        /** Table _name. */
-                        public _name?: "name";
-
-                        /** Table _rowHeaders. */
-                        public _rowHeaders?: "rowHeaders";
-
-                        /** Table _columnHeaders. */
-                        public _columnHeaders?: "columnHeaders";
 
                         /**
                          * Creates a new Table instance using the specified properties.
@@ -16032,12 +15795,6 @@ export namespace google {
                                 /** TransitTimeValue maxTransitDays. */
                                 public maxTransitDays?: (number|null);
 
-                                /** TransitTimeValue _minTransitDays. */
-                                public _minTransitDays?: "minTransitDays";
-
-                                /** TransitTimeValue _maxTransitDays. */
-                                public _maxTransitDays?: "maxTransitDays";
-
                                 /**
                                  * Creates a new TransitTimeValue instance using the specified properties.
                                  * @param [properties] Properties to set
@@ -16241,9 +15998,6 @@ export namespace google {
 
                             /** StoreCodeSetWithMov value. */
                             public value?: (google.shopping.type.IPrice|null);
-
-                            /** StoreCodeSetWithMov _value. */
-                            public _value?: "value";
 
                             /**
                              * Creates a new StoreCodeSetWithMov instance using the specified properties.
@@ -16682,21 +16436,6 @@ export namespace google {
                         /** Value subtable. */
                         public subtable?: (string|null);
 
-                        /** Value _noShipping. */
-                        public _noShipping?: "noShipping";
-
-                        /** Value _flatRate. */
-                        public _flatRate?: "flatRate";
-
-                        /** Value _pricePercentage. */
-                        public _pricePercentage?: "pricePercentage";
-
-                        /** Value _carrierRate. */
-                        public _carrierRate?: "carrierRate";
-
-                        /** Value _subtable. */
-                        public _subtable?: "subtable";
-
                         /**
                          * Creates a new Value instance using the specified properties.
                          * @param [properties] Properties to set
@@ -16823,24 +16562,6 @@ export namespace google {
 
                         /** CarrierRate flatAdjustment. */
                         public flatAdjustment?: (google.shopping.type.IPrice|null);
-
-                        /** CarrierRate _name. */
-                        public _name?: "name";
-
-                        /** CarrierRate _carrier. */
-                        public _carrier?: "carrier";
-
-                        /** CarrierRate _carrierService. */
-                        public _carrierService?: "carrierService";
-
-                        /** CarrierRate _originPostalCode. */
-                        public _originPostalCode?: "originPostalCode";
-
-                        /** CarrierRate _percentageAdjustment. */
-                        public _percentageAdjustment?: "percentageAdjustment";
-
-                        /** CarrierRate _flatAdjustment. */
-                        public _flatAdjustment?: "flatAdjustment";
 
                         /**
                          * Creates a new CarrierRate instance using the specified properties.
@@ -17249,9 +16970,6 @@ export namespace google {
 
                         /** TermsOfService external. */
                         public external: boolean;
-
-                        /** TermsOfService _fileUri. */
-                        public _fileUri?: "fileUri";
 
                         /**
                          * Creates a new TermsOfService instance using the specified properties.
@@ -17755,12 +17473,6 @@ export namespace google {
                         /** TermsOfServiceAgreementState required. */
                         public required?: (google.shopping.merchant.accounts.v1beta.IRequired|null);
 
-                        /** TermsOfServiceAgreementState _accepted. */
-                        public _accepted?: "accepted";
-
-                        /** TermsOfServiceAgreementState _required. */
-                        public _required?: "required";
-
                         /**
                          * Creates a new TermsOfServiceAgreementState instance using the specified properties.
                          * @param [properties] Properties to set
@@ -17869,9 +17581,6 @@ export namespace google {
 
                         /** Accepted validUntil. */
                         public validUntil?: (google.type.IDate|null);
-
-                        /** Accepted _validUntil. */
-                        public _validUntil?: "validUntil";
 
                         /**
                          * Creates a new Accepted instance using the specified properties.
@@ -18279,9 +17988,6 @@ export namespace google {
                 /** Weight unit. */
                 public unit: (google.shopping.type.Weight.WeightUnit|keyof typeof google.shopping.type.Weight.WeightUnit);
 
-                /** Weight _amountMicros. */
-                public _amountMicros?: "amountMicros";
-
                 /**
                  * Creates a new Weight instance using the specified properties.
                  * @param [properties] Properties to set
@@ -18395,12 +18101,6 @@ export namespace google {
                 /** Price currencyCode. */
                 public currencyCode?: (string|null);
 
-                /** Price _amountMicros. */
-                public _amountMicros?: "amountMicros";
-
-                /** Price _currencyCode. */
-                public _currencyCode?: "currencyCode";
-
                 /**
                  * Creates a new Price instance using the specified properties.
                  * @param [properties] Properties to set
@@ -18509,12 +18209,6 @@ export namespace google {
 
                 /** CustomAttribute groupValues. */
                 public groupValues: google.shopping.type.ICustomAttribute[];
-
-                /** CustomAttribute _name. */
-                public _name?: "name";
-
-                /** CustomAttribute _value. */
-                public _value?: "value";
 
                 /**
                  * Creates a new CustomAttribute instance using the specified properties.
@@ -19570,6 +19264,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -19610,6 +19307,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -23828,6 +23528,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -24076,7 +23779,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -24107,7 +23810,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -26310,7 +26013,7 @@ export namespace google {
         interface IBytesValue {
 
             /** BytesValue value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents a BytesValue. */
@@ -26323,7 +26026,7 @@ export namespace google {
             constructor(properties?: google.protobuf.IBytesValue);
 
             /** BytesValue value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new BytesValue instance using the specified properties.

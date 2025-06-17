@@ -24,10 +24,6 @@ const RegionalInventoryServiceClient = v1beta.RegionalInventoryServiceClient;
 type RegionalInventoryServiceClient = v1beta.RegionalInventoryServiceClient;
 
 export {v1beta, LocalInventoryServiceClient, RegionalInventoryServiceClient};
-export default {
-  v1beta,
-  LocalInventoryServiceClient,
-  RegionalInventoryServiceClient,
-};
+export default {v1beta, LocalInventoryServiceClient, RegionalInventoryServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

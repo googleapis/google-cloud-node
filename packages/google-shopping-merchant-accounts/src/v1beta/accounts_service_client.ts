@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -107,41 +100,20 @@ export class AccountsServiceClient {
    *     const client = new AccountsServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof AccountsServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'merchantapi.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -167,7 +139,7 @@ export class AccountsServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -181,7 +153,10 @@ export class AccountsServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -253,10 +228,9 @@ export class AccountsServiceClient {
       termsOfServicePathTemplate: new this._gaxModule.PathTemplate(
         'termsOfService/{version}'
       ),
-      termsOfServiceAgreementStatePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'accounts/{account}/termsOfServiceAgreementStates/{identifier}'
-        ),
+      termsOfServiceAgreementStatePathTemplate: new this._gaxModule.PathTemplate(
+        'accounts/{account}/termsOfServiceAgreementStates/{identifier}'
+      ),
       userPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/users/{email}'
       ),
@@ -266,25 +240,16 @@ export class AccountsServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listAccounts: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'accounts'
-      ),
-      listSubAccounts: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'accounts'
-      ),
+      listAccounts:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'accounts'),
+      listSubAccounts:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'accounts')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.shopping.merchant.accounts.v1beta.AccountsService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.shopping.merchant.accounts.v1beta.AccountsService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -315,43 +280,32 @@ export class AccountsServiceClient {
     // Put together the "service stub" for
     // google.shopping.merchant.accounts.v1beta.AccountsService.
     this.accountsServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.shopping.merchant.accounts.v1beta.AccountsService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.shopping.merchant.accounts.v1beta
-            .AccountsService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.shopping.merchant.accounts.v1beta.AccountsService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.shopping.merchant.accounts.v1beta.AccountsService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const accountsServiceStubMethods = [
-      'getAccount',
-      'createAndConfigureAccount',
-      'deleteAccount',
-      'updateAccount',
-      'listAccounts',
-      'listSubAccounts',
-    ];
+    const accountsServiceStubMethods =
+        ['getAccount', 'createAndConfigureAccount', 'deleteAccount', 'updateAccount', 'listAccounts', 'listSubAccounts'];
     for (const methodName of accountsServiceStubMethods) {
       const callPromise = this.accountsServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -371,14 +325,8 @@ export class AccountsServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'merchantapi.googleapis.com';
   }
@@ -389,14 +337,8 @@ export class AccountsServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'merchantapi.googleapis.com';
   }
@@ -427,7 +369,9 @@ export class AccountsServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/content'];
+    return [
+      'https://www.googleapis.com/auth/content'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -436,9 +380,8 @@ export class AccountsServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -449,655 +392,496 @@ export class AccountsServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Retrieves an account from your Merchant Center account.
-   * After inserting, updating, or deleting an account, it may take several
-   * minutes before changes take effect.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the account to retrieve.
-   *   Format: `accounts/{account}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1beta.Account|Account}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/accounts_service.get_account.js</caption>
-   * region_tag:merchantapi_v1beta_generated_AccountsService_GetAccount_async
-   */
+/**
+ * Retrieves an account from your Merchant Center account.
+ * After inserting, updating, or deleting an account, it may take several
+ * minutes before changes take effect.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the account to retrieve.
+ *   Format: `accounts/{account}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1beta.Account|Account}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/accounts_service.get_account.js</caption>
+ * region_tag:merchantapi_v1beta_generated_AccountsService_GetAccount_async
+ */
   getAccount(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IGetAccountRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.shopping.merchant.accounts.v1beta.IAccount,
-      (
-        | protos.google.shopping.merchant.accounts.v1beta.IGetAccountRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.shopping.merchant.accounts.v1beta.IGetAccountRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.shopping.merchant.accounts.v1beta.IAccount,
+        protos.google.shopping.merchant.accounts.v1beta.IGetAccountRequest|undefined, {}|undefined
+      ]>;
   getAccount(
-    request: protos.google.shopping.merchant.accounts.v1beta.IGetAccountRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IAccount,
-      | protos.google.shopping.merchant.accounts.v1beta.IGetAccountRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAccount(
-    request: protos.google.shopping.merchant.accounts.v1beta.IGetAccountRequest,
-    callback: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IAccount,
-      | protos.google.shopping.merchant.accounts.v1beta.IGetAccountRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAccount(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IGetAccountRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.shopping.merchant.accounts.v1beta.IGetAccountRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.shopping.merchant.accounts.v1beta.IAccount,
-          | protos.google.shopping.merchant.accounts.v1beta.IGetAccountRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IAccount,
-      | protos.google.shopping.merchant.accounts.v1beta.IGetAccountRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.shopping.merchant.accounts.v1beta.IAccount,
-      (
-        | protos.google.shopping.merchant.accounts.v1beta.IGetAccountRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.shopping.merchant.accounts.v1beta.IGetAccountRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAccount(
+      request: protos.google.shopping.merchant.accounts.v1beta.IGetAccountRequest,
+      callback: Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IAccount,
+          protos.google.shopping.merchant.accounts.v1beta.IGetAccountRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAccount(
+      request?: protos.google.shopping.merchant.accounts.v1beta.IGetAccountRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IAccount,
+          protos.google.shopping.merchant.accounts.v1beta.IGetAccountRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IAccount,
+          protos.google.shopping.merchant.accounts.v1beta.IGetAccountRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.shopping.merchant.accounts.v1beta.IAccount,
+        protos.google.shopping.merchant.accounts.v1beta.IGetAccountRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getAccount request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.shopping.merchant.accounts.v1beta.IAccount,
-          | protos.google.shopping.merchant.accounts.v1beta.IGetAccountRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.shopping.merchant.accounts.v1beta.IAccount,
+        protos.google.shopping.merchant.accounts.v1beta.IGetAccountRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getAccount response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getAccount(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.shopping.merchant.accounts.v1beta.IAccount,
-          (
-            | protos.google.shopping.merchant.accounts.v1beta.IGetAccountRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getAccount response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getAccount(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.shopping.merchant.accounts.v1beta.IAccount,
+        protos.google.shopping.merchant.accounts.v1beta.IGetAccountRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getAccount response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a standalone Merchant Center account with additional configuration.
-   * Adds the user that makes the request as an admin for the new account.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.shopping.merchant.accounts.v1beta.Account} request.account
-   *   Required. The account to be created.
-   * @param {number[]} [request.users]
-   *   Optional. Users to be added to the account.
-   * @param {google.shopping.merchant.accounts.v1beta.CreateAndConfigureAccountRequest.AcceptTermsOfService} [request.acceptTermsOfService]
-   *   Optional. The Terms of Service (ToS) to be accepted immediately upon
-   *   account creation.
-   * @param {number[]} request.service
-   *   Required. An account service between the account to be created and the
-   *   provider account is initialized as part of the creation. At least one such
-   *   service needs to be provided. Currently exactly one of these needs to be
-   *   `account_aggregation`, which means you can only create sub accounts, not
-   *   standalone account through this method. Additional `account_management` or
-   *   `product_management` services may be provided.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1beta.Account|Account}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/accounts_service.create_and_configure_account.js</caption>
-   * region_tag:merchantapi_v1beta_generated_AccountsService_CreateAndConfigureAccount_async
-   */
+/**
+ * Creates a standalone Merchant Center account with additional configuration.
+ * Adds the user that makes the request as an admin for the new account.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.shopping.merchant.accounts.v1beta.Account} request.account
+ *   Required. The account to be created.
+ * @param {number[]} [request.users]
+ *   Optional. Users to be added to the account.
+ * @param {google.shopping.merchant.accounts.v1beta.CreateAndConfigureAccountRequest.AcceptTermsOfService} [request.acceptTermsOfService]
+ *   Optional. The Terms of Service (ToS) to be accepted immediately upon
+ *   account creation.
+ * @param {number[]} request.service
+ *   Required. An account service between the account to be created and the
+ *   provider account is initialized as part of the creation. At least one such
+ *   service needs to be provided. Currently exactly one of these needs to be
+ *   `account_aggregation`, which means you can only create sub accounts, not
+ *   standalone account through this method. Additional `account_management` or
+ *   `product_management` services may be provided.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1beta.Account|Account}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/accounts_service.create_and_configure_account.js</caption>
+ * region_tag:merchantapi_v1beta_generated_AccountsService_CreateAndConfigureAccount_async
+ */
   createAndConfigureAccount(
-    request?: protos.google.shopping.merchant.accounts.v1beta.ICreateAndConfigureAccountRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.shopping.merchant.accounts.v1beta.IAccount,
-      (
-        | protos.google.shopping.merchant.accounts.v1beta.ICreateAndConfigureAccountRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.shopping.merchant.accounts.v1beta.ICreateAndConfigureAccountRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.shopping.merchant.accounts.v1beta.IAccount,
+        protos.google.shopping.merchant.accounts.v1beta.ICreateAndConfigureAccountRequest|undefined, {}|undefined
+      ]>;
   createAndConfigureAccount(
-    request: protos.google.shopping.merchant.accounts.v1beta.ICreateAndConfigureAccountRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IAccount,
-      | protos.google.shopping.merchant.accounts.v1beta.ICreateAndConfigureAccountRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createAndConfigureAccount(
-    request: protos.google.shopping.merchant.accounts.v1beta.ICreateAndConfigureAccountRequest,
-    callback: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IAccount,
-      | protos.google.shopping.merchant.accounts.v1beta.ICreateAndConfigureAccountRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createAndConfigureAccount(
-    request?: protos.google.shopping.merchant.accounts.v1beta.ICreateAndConfigureAccountRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.shopping.merchant.accounts.v1beta.ICreateAndConfigureAccountRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.shopping.merchant.accounts.v1beta.IAccount,
-          | protos.google.shopping.merchant.accounts.v1beta.ICreateAndConfigureAccountRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IAccount,
-      | protos.google.shopping.merchant.accounts.v1beta.ICreateAndConfigureAccountRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.shopping.merchant.accounts.v1beta.IAccount,
-      (
-        | protos.google.shopping.merchant.accounts.v1beta.ICreateAndConfigureAccountRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.shopping.merchant.accounts.v1beta.ICreateAndConfigureAccountRequest|null|undefined,
+          {}|null|undefined>): void;
+  createAndConfigureAccount(
+      request: protos.google.shopping.merchant.accounts.v1beta.ICreateAndConfigureAccountRequest,
+      callback: Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IAccount,
+          protos.google.shopping.merchant.accounts.v1beta.ICreateAndConfigureAccountRequest|null|undefined,
+          {}|null|undefined>): void;
+  createAndConfigureAccount(
+      request?: protos.google.shopping.merchant.accounts.v1beta.ICreateAndConfigureAccountRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IAccount,
+          protos.google.shopping.merchant.accounts.v1beta.ICreateAndConfigureAccountRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IAccount,
+          protos.google.shopping.merchant.accounts.v1beta.ICreateAndConfigureAccountRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.shopping.merchant.accounts.v1beta.IAccount,
+        protos.google.shopping.merchant.accounts.v1beta.ICreateAndConfigureAccountRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('createAndConfigureAccount request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.shopping.merchant.accounts.v1beta.IAccount,
-          | protos.google.shopping.merchant.accounts.v1beta.ICreateAndConfigureAccountRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.shopping.merchant.accounts.v1beta.IAccount,
+        protos.google.shopping.merchant.accounts.v1beta.ICreateAndConfigureAccountRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createAndConfigureAccount response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createAndConfigureAccount(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.shopping.merchant.accounts.v1beta.IAccount,
-          (
-            | protos.google.shopping.merchant.accounts.v1beta.ICreateAndConfigureAccountRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createAndConfigureAccount response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createAndConfigureAccount(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.shopping.merchant.accounts.v1beta.IAccount,
+        protos.google.shopping.merchant.accounts.v1beta.ICreateAndConfigureAccountRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createAndConfigureAccount response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes the specified account regardless of its type: standalone, MCA or
-   * sub-account. Deleting an MCA leads to the deletion of all of its
-   * sub-accounts. Executing this method requires admin access.
-   * The deletion succeeds only if the account does not provide services
-   * to any other account and has no processed offers. You can use the `force`
-   * parameter to override this.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the account to delete.
-   *   Format: `accounts/{account}`
-   * @param {boolean} [request.force]
-   *   Optional. If set to `true`, the account is deleted even if it provides
-   *   services to other accounts or has processed offers.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/accounts_service.delete_account.js</caption>
-   * region_tag:merchantapi_v1beta_generated_AccountsService_DeleteAccount_async
-   */
+/**
+ * Deletes the specified account regardless of its type: standalone, MCA or
+ * sub-account. Deleting an MCA leads to the deletion of all of its
+ * sub-accounts. Executing this method requires admin access.
+ * The deletion succeeds only if the account does not provide services
+ * to any other account and has no processed offers. You can use the `force`
+ * parameter to override this.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the account to delete.
+ *   Format: `accounts/{account}`
+ * @param {boolean} [request.force]
+ *   Optional. If set to `true`, the account is deleted even if it provides
+ *   services to other accounts or has processed offers.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/accounts_service.delete_account.js</caption>
+ * region_tag:merchantapi_v1beta_generated_AccountsService_DeleteAccount_async
+ */
   deleteAccount(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IDeleteAccountRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.shopping.merchant.accounts.v1beta.IDeleteAccountRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.shopping.merchant.accounts.v1beta.IDeleteAccountRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.shopping.merchant.accounts.v1beta.IDeleteAccountRequest|undefined, {}|undefined
+      ]>;
   deleteAccount(
-    request: protos.google.shopping.merchant.accounts.v1beta.IDeleteAccountRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.shopping.merchant.accounts.v1beta.IDeleteAccountRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteAccount(
-    request: protos.google.shopping.merchant.accounts.v1beta.IDeleteAccountRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.shopping.merchant.accounts.v1beta.IDeleteAccountRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteAccount(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IDeleteAccountRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.shopping.merchant.accounts.v1beta.IDeleteAccountRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.shopping.merchant.accounts.v1beta.IDeleteAccountRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.shopping.merchant.accounts.v1beta.IDeleteAccountRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.shopping.merchant.accounts.v1beta.IDeleteAccountRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.shopping.merchant.accounts.v1beta.IDeleteAccountRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteAccount(
+      request: protos.google.shopping.merchant.accounts.v1beta.IDeleteAccountRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.shopping.merchant.accounts.v1beta.IDeleteAccountRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteAccount(
+      request?: protos.google.shopping.merchant.accounts.v1beta.IDeleteAccountRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.shopping.merchant.accounts.v1beta.IDeleteAccountRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.shopping.merchant.accounts.v1beta.IDeleteAccountRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.shopping.merchant.accounts.v1beta.IDeleteAccountRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteAccount request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.shopping.merchant.accounts.v1beta.IDeleteAccountRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.shopping.merchant.accounts.v1beta.IDeleteAccountRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteAccount response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteAccount(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.shopping.merchant.accounts.v1beta.IDeleteAccountRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteAccount response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteAccount(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.shopping.merchant.accounts.v1beta.IDeleteAccountRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteAccount response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates an account regardless of its type: standalone, MCA or sub-account.
-   * Executing this method requires admin access.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.shopping.merchant.accounts.v1beta.Account} request.account
-   *   Required. The new version of the account.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. List of fields being updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1beta.Account|Account}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/accounts_service.update_account.js</caption>
-   * region_tag:merchantapi_v1beta_generated_AccountsService_UpdateAccount_async
-   */
+/**
+ * Updates an account regardless of its type: standalone, MCA or sub-account.
+ * Executing this method requires admin access.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.shopping.merchant.accounts.v1beta.Account} request.account
+ *   Required. The new version of the account.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. List of fields being updated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1beta.Account|Account}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/accounts_service.update_account.js</caption>
+ * region_tag:merchantapi_v1beta_generated_AccountsService_UpdateAccount_async
+ */
   updateAccount(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IUpdateAccountRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.shopping.merchant.accounts.v1beta.IAccount,
-      (
-        | protos.google.shopping.merchant.accounts.v1beta.IUpdateAccountRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.shopping.merchant.accounts.v1beta.IUpdateAccountRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.shopping.merchant.accounts.v1beta.IAccount,
+        protos.google.shopping.merchant.accounts.v1beta.IUpdateAccountRequest|undefined, {}|undefined
+      ]>;
   updateAccount(
-    request: protos.google.shopping.merchant.accounts.v1beta.IUpdateAccountRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IAccount,
-      | protos.google.shopping.merchant.accounts.v1beta.IUpdateAccountRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateAccount(
-    request: protos.google.shopping.merchant.accounts.v1beta.IUpdateAccountRequest,
-    callback: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IAccount,
-      | protos.google.shopping.merchant.accounts.v1beta.IUpdateAccountRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateAccount(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IUpdateAccountRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.shopping.merchant.accounts.v1beta.IUpdateAccountRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.shopping.merchant.accounts.v1beta.IAccount,
-          | protos.google.shopping.merchant.accounts.v1beta.IUpdateAccountRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IAccount,
-      | protos.google.shopping.merchant.accounts.v1beta.IUpdateAccountRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.shopping.merchant.accounts.v1beta.IAccount,
-      (
-        | protos.google.shopping.merchant.accounts.v1beta.IUpdateAccountRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.shopping.merchant.accounts.v1beta.IUpdateAccountRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateAccount(
+      request: protos.google.shopping.merchant.accounts.v1beta.IUpdateAccountRequest,
+      callback: Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IAccount,
+          protos.google.shopping.merchant.accounts.v1beta.IUpdateAccountRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateAccount(
+      request?: protos.google.shopping.merchant.accounts.v1beta.IUpdateAccountRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IAccount,
+          protos.google.shopping.merchant.accounts.v1beta.IUpdateAccountRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IAccount,
+          protos.google.shopping.merchant.accounts.v1beta.IUpdateAccountRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.shopping.merchant.accounts.v1beta.IAccount,
+        protos.google.shopping.merchant.accounts.v1beta.IUpdateAccountRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'account.name': request.account!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'account.name': request.account!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateAccount request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.shopping.merchant.accounts.v1beta.IAccount,
-          | protos.google.shopping.merchant.accounts.v1beta.IUpdateAccountRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.shopping.merchant.accounts.v1beta.IAccount,
+        protos.google.shopping.merchant.accounts.v1beta.IUpdateAccountRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateAccount response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateAccount(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.shopping.merchant.accounts.v1beta.IAccount,
-          (
-            | protos.google.shopping.merchant.accounts.v1beta.IUpdateAccountRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateAccount response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateAccount(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.shopping.merchant.accounts.v1beta.IAccount,
+        protos.google.shopping.merchant.accounts.v1beta.IUpdateAccountRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateAccount response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Lists accounts accessible to the calling user and matching the
-   * constraints of the request such as page size or filters.
-   * This is not just listing the sub-accounts of an MCA, but all accounts the
-   * calling user has access to including other MCAs, linked accounts,
-   * standalone accounts and so on. If no filter is provided, then it returns
-   * accounts the user is directly added to.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of accounts to return. The service may return
-   *   fewer than this value.  If unspecified, at most 250 accounts are returned.
-   *   The maximum value is 500; values above 500 are coerced to 500.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListAccounts` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListAccounts` must match
-   *   the call that provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. Returns only accounts that match the
-   *   [filter](/merchant/api/guides/accounts/filter).
-   *   For more details, see the
-   *   [filter syntax reference](/merchant/api/guides/accounts/filter-syntax).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.shopping.merchant.accounts.v1beta.Account|Account}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listAccountsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists accounts accessible to the calling user and matching the
+ * constraints of the request such as page size or filters.
+ * This is not just listing the sub-accounts of an MCA, but all accounts the
+ * calling user has access to including other MCAs, linked accounts,
+ * standalone accounts and so on. If no filter is provided, then it returns
+ * accounts the user is directly added to.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of accounts to return. The service may return
+ *   fewer than this value.  If unspecified, at most 250 accounts are returned.
+ *   The maximum value is 500; values above 500 are coerced to 500.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListAccounts` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListAccounts` must match
+ *   the call that provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. Returns only accounts that match the
+ *   [filter](/merchant/api/guides/accounts/filter).
+ *   For more details, see the
+ *   [filter syntax reference](/merchant/api/guides/accounts/filter-syntax).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.shopping.merchant.accounts.v1beta.Account|Account}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listAccountsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAccounts(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IListAccountsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.shopping.merchant.accounts.v1beta.IAccount[],
-      protos.google.shopping.merchant.accounts.v1beta.IListAccountsRequest | null,
-      protos.google.shopping.merchant.accounts.v1beta.IListAccountsResponse,
-    ]
-  >;
+      request?: protos.google.shopping.merchant.accounts.v1beta.IListAccountsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.shopping.merchant.accounts.v1beta.IAccount[],
+        protos.google.shopping.merchant.accounts.v1beta.IListAccountsRequest|null,
+        protos.google.shopping.merchant.accounts.v1beta.IListAccountsResponse
+      ]>;
   listAccounts(
-    request: protos.google.shopping.merchant.accounts.v1beta.IListAccountsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.shopping.merchant.accounts.v1beta.IListAccountsRequest,
-      | protos.google.shopping.merchant.accounts.v1beta.IListAccountsResponse
-      | null
-      | undefined,
-      protos.google.shopping.merchant.accounts.v1beta.IAccount
-    >
-  ): void;
-  listAccounts(
-    request: protos.google.shopping.merchant.accounts.v1beta.IListAccountsRequest,
-    callback: PaginationCallback<
-      protos.google.shopping.merchant.accounts.v1beta.IListAccountsRequest,
-      | protos.google.shopping.merchant.accounts.v1beta.IListAccountsResponse
-      | null
-      | undefined,
-      protos.google.shopping.merchant.accounts.v1beta.IAccount
-    >
-  ): void;
-  listAccounts(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IListAccountsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.shopping.merchant.accounts.v1beta.IListAccountsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.shopping.merchant.accounts.v1beta.IListAccountsRequest,
-          | protos.google.shopping.merchant.accounts.v1beta.IListAccountsResponse
-          | null
-          | undefined,
-          protos.google.shopping.merchant.accounts.v1beta.IAccount
-        >,
-    callback?: PaginationCallback<
-      protos.google.shopping.merchant.accounts.v1beta.IListAccountsRequest,
-      | protos.google.shopping.merchant.accounts.v1beta.IListAccountsResponse
-      | null
-      | undefined,
-      protos.google.shopping.merchant.accounts.v1beta.IAccount
-    >
-  ): Promise<
-    [
-      protos.google.shopping.merchant.accounts.v1beta.IAccount[],
-      protos.google.shopping.merchant.accounts.v1beta.IListAccountsRequest | null,
-      protos.google.shopping.merchant.accounts.v1beta.IListAccountsResponse,
-    ]
-  > | void {
+          protos.google.shopping.merchant.accounts.v1beta.IListAccountsResponse|null|undefined,
+          protos.google.shopping.merchant.accounts.v1beta.IAccount>): void;
+  listAccounts(
+      request: protos.google.shopping.merchant.accounts.v1beta.IListAccountsRequest,
+      callback: PaginationCallback<
+          protos.google.shopping.merchant.accounts.v1beta.IListAccountsRequest,
+          protos.google.shopping.merchant.accounts.v1beta.IListAccountsResponse|null|undefined,
+          protos.google.shopping.merchant.accounts.v1beta.IAccount>): void;
+  listAccounts(
+      request?: protos.google.shopping.merchant.accounts.v1beta.IListAccountsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.shopping.merchant.accounts.v1beta.IListAccountsRequest,
+          protos.google.shopping.merchant.accounts.v1beta.IListAccountsResponse|null|undefined,
+          protos.google.shopping.merchant.accounts.v1beta.IAccount>,
+      callback?: PaginationCallback<
+          protos.google.shopping.merchant.accounts.v1beta.IListAccountsRequest,
+          protos.google.shopping.merchant.accounts.v1beta.IListAccountsResponse|null|undefined,
+          protos.google.shopping.merchant.accounts.v1beta.IAccount>):
+      Promise<[
+        protos.google.shopping.merchant.accounts.v1beta.IAccount[],
+        protos.google.shopping.merchant.accounts.v1beta.IListAccountsRequest|null,
+        protos.google.shopping.merchant.accounts.v1beta.IListAccountsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.shopping.merchant.accounts.v1beta.IListAccountsRequest,
-          | protos.google.shopping.merchant.accounts.v1beta.IListAccountsResponse
-          | null
-          | undefined,
-          protos.google.shopping.merchant.accounts.v1beta.IAccount
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.shopping.merchant.accounts.v1beta.IListAccountsRequest,
+      protos.google.shopping.merchant.accounts.v1beta.IListAccountsResponse|null|undefined,
+      protos.google.shopping.merchant.accounts.v1beta.IAccount>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listAccounts values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1106,61 +890,57 @@ export class AccountsServiceClient {
     this._log.info('listAccounts request %j', request);
     return this.innerApiCalls
       .listAccounts(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.shopping.merchant.accounts.v1beta.IAccount[],
-          protos.google.shopping.merchant.accounts.v1beta.IListAccountsRequest | null,
-          protos.google.shopping.merchant.accounts.v1beta.IListAccountsResponse,
-        ]) => {
-          this._log.info('listAccounts values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.shopping.merchant.accounts.v1beta.IAccount[],
+        protos.google.shopping.merchant.accounts.v1beta.IListAccountsRequest|null,
+        protos.google.shopping.merchant.accounts.v1beta.IListAccountsResponse
+      ]) => {
+        this._log.info('listAccounts values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listAccounts`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of accounts to return. The service may return
-   *   fewer than this value.  If unspecified, at most 250 accounts are returned.
-   *   The maximum value is 500; values above 500 are coerced to 500.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListAccounts` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListAccounts` must match
-   *   the call that provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. Returns only accounts that match the
-   *   [filter](/merchant/api/guides/accounts/filter).
-   *   For more details, see the
-   *   [filter syntax reference](/merchant/api/guides/accounts/filter-syntax).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.shopping.merchant.accounts.v1beta.Account|Account} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listAccountsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listAccounts`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of accounts to return. The service may return
+ *   fewer than this value.  If unspecified, at most 250 accounts are returned.
+ *   The maximum value is 500; values above 500 are coerced to 500.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListAccounts` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListAccounts` must match
+ *   the call that provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. Returns only accounts that match the
+ *   [filter](/merchant/api/guides/accounts/filter).
+ *   For more details, see the
+ *   [filter syntax reference](/merchant/api/guides/accounts/filter-syntax).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.shopping.merchant.accounts.v1beta.Account|Account} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listAccountsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAccountsStream(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IListAccountsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.shopping.merchant.accounts.v1beta.IListAccountsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listAccounts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAccounts stream %j', request);
     return this.descriptors.page.listAccounts.createStream(
       this.innerApiCalls.listAccounts as GaxCall,
@@ -1169,52 +949,50 @@ export class AccountsServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listAccounts`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of accounts to return. The service may return
-   *   fewer than this value.  If unspecified, at most 250 accounts are returned.
-   *   The maximum value is 500; values above 500 are coerced to 500.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListAccounts` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListAccounts` must match
-   *   the call that provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. Returns only accounts that match the
-   *   [filter](/merchant/api/guides/accounts/filter).
-   *   For more details, see the
-   *   [filter syntax reference](/merchant/api/guides/accounts/filter-syntax).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.shopping.merchant.accounts.v1beta.Account|Account}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/accounts_service.list_accounts.js</caption>
-   * region_tag:merchantapi_v1beta_generated_AccountsService_ListAccounts_async
-   */
+/**
+ * Equivalent to `listAccounts`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of accounts to return. The service may return
+ *   fewer than this value.  If unspecified, at most 250 accounts are returned.
+ *   The maximum value is 500; values above 500 are coerced to 500.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListAccounts` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListAccounts` must match
+ *   the call that provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. Returns only accounts that match the
+ *   [filter](/merchant/api/guides/accounts/filter).
+ *   For more details, see the
+ *   [filter syntax reference](/merchant/api/guides/accounts/filter-syntax).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.shopping.merchant.accounts.v1beta.Account|Account}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/accounts_service.list_accounts.js</caption>
+ * region_tag:merchantapi_v1beta_generated_AccountsService_ListAccounts_async
+ */
   listAccountsAsync(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IListAccountsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.shopping.merchant.accounts.v1beta.IAccount> {
+      request?: protos.google.shopping.merchant.accounts.v1beta.IListAccountsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.shopping.merchant.accounts.v1beta.IAccount>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listAccounts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAccounts iterate %j', request);
     return this.descriptors.page.listAccounts.asyncIterate(
       this.innerApiCalls['listAccounts'] as GaxCall,
@@ -1222,123 +1000,98 @@ export class AccountsServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.shopping.merchant.accounts.v1beta.IAccount>;
   }
-  /**
-   * List all sub-accounts for a given multi client account. This is a
-   * convenience wrapper for the more powerful `ListAccounts` method. This
-   * method will produce the same results as calling `ListsAccounts` with the
-   * following filter:
-   * `relationship(providerId={parent} AND service(type="ACCOUNT_AGGREGATION"))`
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.provider
-   *   Required. The parent account.
-   *   Format: `accounts/{account}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of accounts to return. The service may return
-   *   fewer than this value.  If unspecified, at most 250 accounts are returned.
-   *   The maximum value is 500; values above 500 are coerced to 500.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListAccounts` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListAccounts` must match
-   *   the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.shopping.merchant.accounts.v1beta.Account|Account}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listSubAccountsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * List all sub-accounts for a given multi client account. This is a
+ * convenience wrapper for the more powerful `ListAccounts` method. This
+ * method will produce the same results as calling `ListsAccounts` with the
+ * following filter:
+ * `relationship(providerId={parent} AND service(type="ACCOUNT_AGGREGATION"))`
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.provider
+ *   Required. The parent account.
+ *   Format: `accounts/{account}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of accounts to return. The service may return
+ *   fewer than this value.  If unspecified, at most 250 accounts are returned.
+ *   The maximum value is 500; values above 500 are coerced to 500.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListAccounts` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListAccounts` must match
+ *   the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.shopping.merchant.accounts.v1beta.Account|Account}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listSubAccountsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listSubAccounts(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.shopping.merchant.accounts.v1beta.IAccount[],
-      protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsRequest | null,
-      protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsResponse,
-    ]
-  >;
+      request?: protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.shopping.merchant.accounts.v1beta.IAccount[],
+        protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsRequest|null,
+        protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsResponse
+      ]>;
   listSubAccounts(
-    request: protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsRequest,
-      | protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsResponse
-      | null
-      | undefined,
-      protos.google.shopping.merchant.accounts.v1beta.IAccount
-    >
-  ): void;
-  listSubAccounts(
-    request: protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsRequest,
-    callback: PaginationCallback<
-      protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsRequest,
-      | protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsResponse
-      | null
-      | undefined,
-      protos.google.shopping.merchant.accounts.v1beta.IAccount
-    >
-  ): void;
-  listSubAccounts(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsRequest,
-          | protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsResponse
-          | null
-          | undefined,
-          protos.google.shopping.merchant.accounts.v1beta.IAccount
-        >,
-    callback?: PaginationCallback<
-      protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsRequest,
-      | protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsResponse
-      | null
-      | undefined,
-      protos.google.shopping.merchant.accounts.v1beta.IAccount
-    >
-  ): Promise<
-    [
-      protos.google.shopping.merchant.accounts.v1beta.IAccount[],
-      protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsRequest | null,
-      protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsResponse,
-    ]
-  > | void {
+          protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsResponse|null|undefined,
+          protos.google.shopping.merchant.accounts.v1beta.IAccount>): void;
+  listSubAccounts(
+      request: protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsRequest,
+      callback: PaginationCallback<
+          protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsRequest,
+          protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsResponse|null|undefined,
+          protos.google.shopping.merchant.accounts.v1beta.IAccount>): void;
+  listSubAccounts(
+      request?: protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsRequest,
+          protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsResponse|null|undefined,
+          protos.google.shopping.merchant.accounts.v1beta.IAccount>,
+      callback?: PaginationCallback<
+          protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsRequest,
+          protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsResponse|null|undefined,
+          protos.google.shopping.merchant.accounts.v1beta.IAccount>):
+      Promise<[
+        protos.google.shopping.merchant.accounts.v1beta.IAccount[],
+        protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsRequest|null,
+        protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        provider: request.provider ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'provider': request.provider ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsRequest,
-          | protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsResponse
-          | null
-          | undefined,
-          protos.google.shopping.merchant.accounts.v1beta.IAccount
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsRequest,
+      protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsResponse|null|undefined,
+      protos.google.shopping.merchant.accounts.v1beta.IAccount>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listSubAccounts values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1347,63 +1100,60 @@ export class AccountsServiceClient {
     this._log.info('listSubAccounts request %j', request);
     return this.innerApiCalls
       .listSubAccounts(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.shopping.merchant.accounts.v1beta.IAccount[],
-          protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsRequest | null,
-          protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsResponse,
-        ]) => {
-          this._log.info('listSubAccounts values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.shopping.merchant.accounts.v1beta.IAccount[],
+        protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsRequest|null,
+        protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsResponse
+      ]) => {
+        this._log.info('listSubAccounts values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listSubAccounts`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.provider
-   *   Required. The parent account.
-   *   Format: `accounts/{account}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of accounts to return. The service may return
-   *   fewer than this value.  If unspecified, at most 250 accounts are returned.
-   *   The maximum value is 500; values above 500 are coerced to 500.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListAccounts` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListAccounts` must match
-   *   the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.shopping.merchant.accounts.v1beta.Account|Account} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listSubAccountsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listSubAccounts`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.provider
+ *   Required. The parent account.
+ *   Format: `accounts/{account}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of accounts to return. The service may return
+ *   fewer than this value.  If unspecified, at most 250 accounts are returned.
+ *   The maximum value is 500; values above 500 are coerced to 500.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListAccounts` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListAccounts` must match
+ *   the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.shopping.merchant.accounts.v1beta.Account|Account} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listSubAccountsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listSubAccountsStream(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        provider: request.provider ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'provider': request.provider ?? '',
+    });
     const defaultCallSettings = this._defaults['listSubAccounts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listSubAccounts stream %j', request);
     return this.descriptors.page.listSubAccounts.createStream(
       this.innerApiCalls.listSubAccounts as GaxCall,
@@ -1412,54 +1162,53 @@ export class AccountsServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listSubAccounts`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.provider
-   *   Required. The parent account.
-   *   Format: `accounts/{account}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of accounts to return. The service may return
-   *   fewer than this value.  If unspecified, at most 250 accounts are returned.
-   *   The maximum value is 500; values above 500 are coerced to 500.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListAccounts` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListAccounts` must match
-   *   the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.shopping.merchant.accounts.v1beta.Account|Account}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/accounts_service.list_sub_accounts.js</caption>
-   * region_tag:merchantapi_v1beta_generated_AccountsService_ListSubAccounts_async
-   */
+/**
+ * Equivalent to `listSubAccounts`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.provider
+ *   Required. The parent account.
+ *   Format: `accounts/{account}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of accounts to return. The service may return
+ *   fewer than this value.  If unspecified, at most 250 accounts are returned.
+ *   The maximum value is 500; values above 500 are coerced to 500.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListAccounts` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListAccounts` must match
+ *   the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.shopping.merchant.accounts.v1beta.Account|Account}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/accounts_service.list_sub_accounts.js</caption>
+ * region_tag:merchantapi_v1beta_generated_AccountsService_ListSubAccounts_async
+ */
   listSubAccountsAsync(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.shopping.merchant.accounts.v1beta.IAccount> {
+      request?: protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.shopping.merchant.accounts.v1beta.IAccount>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        provider: request.provider ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'provider': request.provider ?? '',
+    });
     const defaultCallSettings = this._defaults['listSubAccounts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listSubAccounts iterate %j', request);
     return this.descriptors.page.listSubAccounts.asyncIterate(
       this.innerApiCalls['listSubAccounts'] as GaxCall,
@@ -1477,7 +1226,7 @@ export class AccountsServiceClient {
    * @param {string} account
    * @returns {string} Resource name string.
    */
-  accountPath(account: string) {
+  accountPath(account:string) {
     return this.pathTemplates.accountPathTemplate.render({
       account: account,
     });
@@ -1501,7 +1250,7 @@ export class AccountsServiceClient {
    * @param {string} issue
    * @returns {string} Resource name string.
    */
-  accountIssuePath(account: string, issue: string) {
+  accountIssuePath(account:string,issue:string) {
     return this.pathTemplates.accountIssuePathTemplate.render({
       account: account,
       issue: issue,
@@ -1516,8 +1265,7 @@ export class AccountsServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromAccountIssueName(accountIssueName: string) {
-    return this.pathTemplates.accountIssuePathTemplate.match(accountIssueName)
-      .account;
+    return this.pathTemplates.accountIssuePathTemplate.match(accountIssueName).account;
   }
 
   /**
@@ -1528,8 +1276,7 @@ export class AccountsServiceClient {
    * @returns {string} A string representing the issue.
    */
   matchIssueFromAccountIssueName(accountIssueName: string) {
-    return this.pathTemplates.accountIssuePathTemplate.match(accountIssueName)
-      .issue;
+    return this.pathTemplates.accountIssuePathTemplate.match(accountIssueName).issue;
   }
 
   /**
@@ -1539,7 +1286,7 @@ export class AccountsServiceClient {
    * @param {string} tax
    * @returns {string} Resource name string.
    */
-  accountTaxPath(account: string, tax: string) {
+  accountTaxPath(account:string,tax:string) {
     return this.pathTemplates.accountTaxPathTemplate.render({
       account: account,
       tax: tax,
@@ -1554,8 +1301,7 @@ export class AccountsServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromAccountTaxName(accountTaxName: string) {
-    return this.pathTemplates.accountTaxPathTemplate.match(accountTaxName)
-      .account;
+    return this.pathTemplates.accountTaxPathTemplate.match(accountTaxName).account;
   }
 
   /**
@@ -1575,7 +1321,7 @@ export class AccountsServiceClient {
    * @param {string} account
    * @returns {string} Resource name string.
    */
-  autofeedSettingsPath(account: string) {
+  autofeedSettingsPath(account:string) {
     return this.pathTemplates.autofeedSettingsPathTemplate.render({
       account: account,
     });
@@ -1589,9 +1335,7 @@ export class AccountsServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromAutofeedSettingsName(autofeedSettingsName: string) {
-    return this.pathTemplates.autofeedSettingsPathTemplate.match(
-      autofeedSettingsName
-    ).account;
+    return this.pathTemplates.autofeedSettingsPathTemplate.match(autofeedSettingsName).account;
   }
 
   /**
@@ -1600,7 +1344,7 @@ export class AccountsServiceClient {
    * @param {string} account
    * @returns {string} Resource name string.
    */
-  automaticImprovementsPath(account: string) {
+  automaticImprovementsPath(account:string) {
     return this.pathTemplates.automaticImprovementsPathTemplate.render({
       account: account,
     });
@@ -1614,9 +1358,7 @@ export class AccountsServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromAutomaticImprovementsName(automaticImprovementsName: string) {
-    return this.pathTemplates.automaticImprovementsPathTemplate.match(
-      automaticImprovementsName
-    ).account;
+    return this.pathTemplates.automaticImprovementsPathTemplate.match(automaticImprovementsName).account;
   }
 
   /**
@@ -1625,7 +1367,7 @@ export class AccountsServiceClient {
    * @param {string} account
    * @returns {string} Resource name string.
    */
-  businessIdentityPath(account: string) {
+  businessIdentityPath(account:string) {
     return this.pathTemplates.businessIdentityPathTemplate.render({
       account: account,
     });
@@ -1639,9 +1381,7 @@ export class AccountsServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromBusinessIdentityName(businessIdentityName: string) {
-    return this.pathTemplates.businessIdentityPathTemplate.match(
-      businessIdentityName
-    ).account;
+    return this.pathTemplates.businessIdentityPathTemplate.match(businessIdentityName).account;
   }
 
   /**
@@ -1650,7 +1390,7 @@ export class AccountsServiceClient {
    * @param {string} account
    * @returns {string} Resource name string.
    */
-  businessInfoPath(account: string) {
+  businessInfoPath(account:string) {
     return this.pathTemplates.businessInfoPathTemplate.render({
       account: account,
     });
@@ -1664,8 +1404,7 @@ export class AccountsServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromBusinessInfoName(businessInfoName: string) {
-    return this.pathTemplates.businessInfoPathTemplate.match(businessInfoName)
-      .account;
+    return this.pathTemplates.businessInfoPathTemplate.match(businessInfoName).account;
   }
 
   /**
@@ -1675,7 +1414,7 @@ export class AccountsServiceClient {
    * @param {string} email
    * @returns {string} Resource name string.
    */
-  emailPreferencesPath(account: string, email: string) {
+  emailPreferencesPath(account:string,email:string) {
     return this.pathTemplates.emailPreferencesPathTemplate.render({
       account: account,
       email: email,
@@ -1690,9 +1429,7 @@ export class AccountsServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromEmailPreferencesName(emailPreferencesName: string) {
-    return this.pathTemplates.emailPreferencesPathTemplate.match(
-      emailPreferencesName
-    ).account;
+    return this.pathTemplates.emailPreferencesPathTemplate.match(emailPreferencesName).account;
   }
 
   /**
@@ -1703,9 +1440,7 @@ export class AccountsServiceClient {
    * @returns {string} A string representing the email.
    */
   matchEmailFromEmailPreferencesName(emailPreferencesName: string) {
-    return this.pathTemplates.emailPreferencesPathTemplate.match(
-      emailPreferencesName
-    ).email;
+    return this.pathTemplates.emailPreferencesPathTemplate.match(emailPreferencesName).email;
   }
 
   /**
@@ -1715,7 +1450,7 @@ export class AccountsServiceClient {
    * @param {string} gbp_account
    * @returns {string} Resource name string.
    */
-  gbpAccountPath(account: string, gbpAccount: string) {
+  gbpAccountPath(account:string,gbpAccount:string) {
     return this.pathTemplates.gbpAccountPathTemplate.render({
       account: account,
       gbp_account: gbpAccount,
@@ -1730,8 +1465,7 @@ export class AccountsServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromGbpAccountName(gbpAccountName: string) {
-    return this.pathTemplates.gbpAccountPathTemplate.match(gbpAccountName)
-      .account;
+    return this.pathTemplates.gbpAccountPathTemplate.match(gbpAccountName).account;
   }
 
   /**
@@ -1742,8 +1476,7 @@ export class AccountsServiceClient {
    * @returns {string} A string representing the gbp_account.
    */
   matchGbpAccountFromGbpAccountName(gbpAccountName: string) {
-    return this.pathTemplates.gbpAccountPathTemplate.match(gbpAccountName)
-      .gbp_account;
+    return this.pathTemplates.gbpAccountPathTemplate.match(gbpAccountName).gbp_account;
   }
 
   /**
@@ -1752,7 +1485,7 @@ export class AccountsServiceClient {
    * @param {string} account
    * @returns {string} Resource name string.
    */
-  homepagePath(account: string) {
+  homepagePath(account:string) {
     return this.pathTemplates.homepagePathTemplate.render({
       account: account,
     });
@@ -1777,11 +1510,7 @@ export class AccountsServiceClient {
    * @param {string} lfp_provider
    * @returns {string} Resource name string.
    */
-  lfpProviderPath(
-    account: string,
-    omnichannelSetting: string,
-    lfpProvider: string
-  ) {
+  lfpProviderPath(account:string,omnichannelSetting:string,lfpProvider:string) {
     return this.pathTemplates.lfpProviderPathTemplate.render({
       account: account,
       omnichannel_setting: omnichannelSetting,
@@ -1797,8 +1526,7 @@ export class AccountsServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromLfpProviderName(lfpProviderName: string) {
-    return this.pathTemplates.lfpProviderPathTemplate.match(lfpProviderName)
-      .account;
+    return this.pathTemplates.lfpProviderPathTemplate.match(lfpProviderName).account;
   }
 
   /**
@@ -1809,8 +1537,7 @@ export class AccountsServiceClient {
    * @returns {string} A string representing the omnichannel_setting.
    */
   matchOmnichannelSettingFromLfpProviderName(lfpProviderName: string) {
-    return this.pathTemplates.lfpProviderPathTemplate.match(lfpProviderName)
-      .omnichannel_setting;
+    return this.pathTemplates.lfpProviderPathTemplate.match(lfpProviderName).omnichannel_setting;
   }
 
   /**
@@ -1821,8 +1548,7 @@ export class AccountsServiceClient {
    * @returns {string} A string representing the lfp_provider.
    */
   matchLfpProviderFromLfpProviderName(lfpProviderName: string) {
-    return this.pathTemplates.lfpProviderPathTemplate.match(lfpProviderName)
-      .lfp_provider;
+    return this.pathTemplates.lfpProviderPathTemplate.match(lfpProviderName).lfp_provider;
   }
 
   /**
@@ -1832,7 +1558,7 @@ export class AccountsServiceClient {
    * @param {string} omnichannel_setting
    * @returns {string} Resource name string.
    */
-  omnichannelSettingPath(account: string, omnichannelSetting: string) {
+  omnichannelSettingPath(account:string,omnichannelSetting:string) {
     return this.pathTemplates.omnichannelSettingPathTemplate.render({
       account: account,
       omnichannel_setting: omnichannelSetting,
@@ -1847,9 +1573,7 @@ export class AccountsServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromOmnichannelSettingName(omnichannelSettingName: string) {
-    return this.pathTemplates.omnichannelSettingPathTemplate.match(
-      omnichannelSettingName
-    ).account;
+    return this.pathTemplates.omnichannelSettingPathTemplate.match(omnichannelSettingName).account;
   }
 
   /**
@@ -1859,12 +1583,8 @@ export class AccountsServiceClient {
    *   A fully-qualified path representing OmnichannelSetting resource.
    * @returns {string} A string representing the omnichannel_setting.
    */
-  matchOmnichannelSettingFromOmnichannelSettingName(
-    omnichannelSettingName: string
-  ) {
-    return this.pathTemplates.omnichannelSettingPathTemplate.match(
-      omnichannelSettingName
-    ).omnichannel_setting;
+  matchOmnichannelSettingFromOmnichannelSettingName(omnichannelSettingName: string) {
+    return this.pathTemplates.omnichannelSettingPathTemplate.match(omnichannelSettingName).omnichannel_setting;
   }
 
   /**
@@ -1874,7 +1594,7 @@ export class AccountsServiceClient {
    * @param {string} return_policy
    * @returns {string} Resource name string.
    */
-  onlineReturnPolicyPath(account: string, returnPolicy: string) {
+  onlineReturnPolicyPath(account:string,returnPolicy:string) {
     return this.pathTemplates.onlineReturnPolicyPathTemplate.render({
       account: account,
       return_policy: returnPolicy,
@@ -1889,9 +1609,7 @@ export class AccountsServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromOnlineReturnPolicyName(onlineReturnPolicyName: string) {
-    return this.pathTemplates.onlineReturnPolicyPathTemplate.match(
-      onlineReturnPolicyName
-    ).account;
+    return this.pathTemplates.onlineReturnPolicyPathTemplate.match(onlineReturnPolicyName).account;
   }
 
   /**
@@ -1902,9 +1620,7 @@ export class AccountsServiceClient {
    * @returns {string} A string representing the return_policy.
    */
   matchReturnPolicyFromOnlineReturnPolicyName(onlineReturnPolicyName: string) {
-    return this.pathTemplates.onlineReturnPolicyPathTemplate.match(
-      onlineReturnPolicyName
-    ).return_policy;
+    return this.pathTemplates.onlineReturnPolicyPathTemplate.match(onlineReturnPolicyName).return_policy;
   }
 
   /**
@@ -1914,7 +1630,7 @@ export class AccountsServiceClient {
    * @param {string} program
    * @returns {string} Resource name string.
    */
-  programPath(account: string, program: string) {
+  programPath(account:string,program:string) {
     return this.pathTemplates.programPathTemplate.render({
       account: account,
       program: program,
@@ -1950,7 +1666,7 @@ export class AccountsServiceClient {
    * @param {string} region
    * @returns {string} Resource name string.
    */
-  regionPath(account: string, region: string) {
+  regionPath(account:string,region:string) {
     return this.pathTemplates.regionPathTemplate.render({
       account: account,
       region: region,
@@ -1985,7 +1701,7 @@ export class AccountsServiceClient {
    * @param {string} account
    * @returns {string} Resource name string.
    */
-  shippingSettingsPath(account: string) {
+  shippingSettingsPath(account:string) {
     return this.pathTemplates.shippingSettingsPathTemplate.render({
       account: account,
     });
@@ -1999,9 +1715,7 @@ export class AccountsServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromShippingSettingsName(shippingSettingsName: string) {
-    return this.pathTemplates.shippingSettingsPathTemplate.match(
-      shippingSettingsName
-    ).account;
+    return this.pathTemplates.shippingSettingsPathTemplate.match(shippingSettingsName).account;
   }
 
   /**
@@ -2010,7 +1724,7 @@ export class AccountsServiceClient {
    * @param {string} version
    * @returns {string} Resource name string.
    */
-  termsOfServicePath(version: string) {
+  termsOfServicePath(version:string) {
     return this.pathTemplates.termsOfServicePathTemplate.render({
       version: version,
     });
@@ -2024,9 +1738,7 @@ export class AccountsServiceClient {
    * @returns {string} A string representing the version.
    */
   matchVersionFromTermsOfServiceName(termsOfServiceName: string) {
-    return this.pathTemplates.termsOfServicePathTemplate.match(
-      termsOfServiceName
-    ).version;
+    return this.pathTemplates.termsOfServicePathTemplate.match(termsOfServiceName).version;
   }
 
   /**
@@ -2036,7 +1748,7 @@ export class AccountsServiceClient {
    * @param {string} identifier
    * @returns {string} Resource name string.
    */
-  termsOfServiceAgreementStatePath(account: string, identifier: string) {
+  termsOfServiceAgreementStatePath(account:string,identifier:string) {
     return this.pathTemplates.termsOfServiceAgreementStatePathTemplate.render({
       account: account,
       identifier: identifier,
@@ -2050,12 +1762,8 @@ export class AccountsServiceClient {
    *   A fully-qualified path representing TermsOfServiceAgreementState resource.
    * @returns {string} A string representing the account.
    */
-  matchAccountFromTermsOfServiceAgreementStateName(
-    termsOfServiceAgreementStateName: string
-  ) {
-    return this.pathTemplates.termsOfServiceAgreementStatePathTemplate.match(
-      termsOfServiceAgreementStateName
-    ).account;
+  matchAccountFromTermsOfServiceAgreementStateName(termsOfServiceAgreementStateName: string) {
+    return this.pathTemplates.termsOfServiceAgreementStatePathTemplate.match(termsOfServiceAgreementStateName).account;
   }
 
   /**
@@ -2065,12 +1773,8 @@ export class AccountsServiceClient {
    *   A fully-qualified path representing TermsOfServiceAgreementState resource.
    * @returns {string} A string representing the identifier.
    */
-  matchIdentifierFromTermsOfServiceAgreementStateName(
-    termsOfServiceAgreementStateName: string
-  ) {
-    return this.pathTemplates.termsOfServiceAgreementStatePathTemplate.match(
-      termsOfServiceAgreementStateName
-    ).identifier;
+  matchIdentifierFromTermsOfServiceAgreementStateName(termsOfServiceAgreementStateName: string) {
+    return this.pathTemplates.termsOfServiceAgreementStatePathTemplate.match(termsOfServiceAgreementStateName).identifier;
   }
 
   /**
@@ -2080,7 +1784,7 @@ export class AccountsServiceClient {
    * @param {string} email
    * @returns {string} Resource name string.
    */
-  userPath(account: string, email: string) {
+  userPath(account:string,email:string) {
     return this.pathTemplates.userPathTemplate.render({
       account: account,
       email: email,
