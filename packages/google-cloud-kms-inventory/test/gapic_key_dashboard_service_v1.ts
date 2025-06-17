@@ -29,1307 +29,905 @@ import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.KeyDashboardServiceClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client =
-        new keydashboardserviceModule.v1.KeyDashboardServiceClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'kmsinventory.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client =
-        new keydashboardserviceModule.v1.KeyDashboardServiceClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          keydashboardserviceModule.v1.KeyDashboardServiceClient.servicePath;
-        assert.strictEqual(servicePath, 'kmsinventory.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          keydashboardserviceModule.v1.KeyDashboardServiceClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'kmsinventory.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient(
-        {universeDomain: 'example.com'}
-      );
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'kmsinventory.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient(
-        {universe_domain: 'example.com'}
-      );
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'kmsinventory.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new keydashboardserviceModule.v1.KeyDashboardServiceClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'kmsinventory.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'kmsinventory.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new keydashboardserviceModule.v1.KeyDashboardServiceClient({
-              universeDomain: 'configured.example.com',
+        it('has universeDomain', () => {
+            const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
+        });
+
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = keydashboardserviceModule.v1.KeyDashboardServiceClient.servicePath;
+                assert.strictEqual(servicePath, 'kmsinventory.googleapis.com');
+                assert(stub.called);
+                stub.restore();
             });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'kmsinventory.configured.example.com'
-          );
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = keydashboardserviceModule.v1.KeyDashboardServiceClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'kmsinventory.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+        }
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'kmsinventory.example.com');
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new keydashboardserviceModule.v1.KeyDashboardServiceClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
+
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'kmsinventory.example.com');
         });
-      });
-    });
 
-    it('has port', () => {
-      const port = keydashboardserviceModule.v1.KeyDashboardServiceClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'kmsinventory.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('should create a client with no option', () => {
-      const client =
-        new keydashboardserviceModule.v1.KeyDashboardServiceClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient(
-        {
-          fallback: true,
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'kmsinventory.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      );
-      assert(client);
-    });
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new keydashboardserviceModule.v1.KeyDashboardServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      assert.strictEqual(client.keyDashboardServiceStub, undefined);
-      await client.initialize();
-      assert(client.keyDashboardServiceStub);
-    });
+        it('has port', () => {
+            const port = keydashboardserviceModule.v1.KeyDashboardServiceClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
 
-    it('has close method for the initialized client', done => {
-      const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.keyDashboardServiceStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
+        it('should create a client with no option', () => {
+            const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.keyDashboardServiceStub, undefined);
+            await client.initialize();
+            assert(client.keyDashboardServiceStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.keyDashboardServiceStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.keyDashboardServiceStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
         });
     });
 
-    it('has close method for the non-initialized client', done => {
-      const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      assert.strictEqual(client.keyDashboardServiceStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
+    describe('listCryptoKeys', () => {
+        it('invokes listCryptoKeys without error', async () => {
+            const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.kms.inventory.v1.ListCryptoKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.kms.inventory.v1.ListCryptoKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
+              generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
+              generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
+            ];
+            client.innerApiCalls.listCryptoKeys = stubSimpleCall(expectedResponse);
+            const [response] = await client.listCryptoKeys(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listCryptoKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listCryptoKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-    });
 
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
+        it('invokes listCryptoKeys without error using callback', async () => {
+            const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.kms.inventory.v1.ListCryptoKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.kms.inventory.v1.ListCryptoKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
+              generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
+              generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
+            ];
+            client.innerApiCalls.listCryptoKeys = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listCryptoKeys(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.kms.v1.ICryptoKey[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listCryptoKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listCryptoKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
 
-  describe('listCryptoKeys', () => {
-    it('invokes listCryptoKeys without error', async () => {
-      const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.kms.inventory.v1.ListCryptoKeysRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.inventory.v1.ListCryptoKeysRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
-        generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
-        generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
-      ];
-      client.innerApiCalls.listCryptoKeys = stubSimpleCall(expectedResponse);
-      const [response] = await client.listCryptoKeys(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listCryptoKeys as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listCryptoKeys as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listCryptoKeys with error', async () => {
+            const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.kms.inventory.v1.ListCryptoKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.kms.inventory.v1.ListCryptoKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listCryptoKeys = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listCryptoKeys(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listCryptoKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listCryptoKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('invokes listCryptoKeys without error using callback', async () => {
-      const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.kms.inventory.v1.ListCryptoKeysRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.inventory.v1.ListCryptoKeysRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
-        generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
-        generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
-      ];
-      client.innerApiCalls.listCryptoKeys =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listCryptoKeys(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.kms.v1.ICryptoKey[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('invokes listCryptoKeysStream without error', async () => {
+            const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.kms.inventory.v1.ListCryptoKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.kms.inventory.v1.ListCryptoKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
+              generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
+              generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
+            ];
+            client.descriptors.page.listCryptoKeys.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listCryptoKeysStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.kms.v1.CryptoKey[] = [];
+                stream.on('data', (response: protos.google.cloud.kms.v1.CryptoKey) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listCryptoKeys.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listCryptoKeys, request));
+            assert(
+                (client.descriptors.page.listCryptoKeys.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listCryptoKeysStream with error', async () => {
+            const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.kms.inventory.v1.ListCryptoKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.kms.inventory.v1.ListCryptoKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listCryptoKeys.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listCryptoKeysStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.kms.v1.CryptoKey[] = [];
+                stream.on('data', (response: protos.google.cloud.kms.v1.CryptoKey) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listCryptoKeys.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listCryptoKeys, request));
+            assert(
+                (client.descriptors.page.listCryptoKeys.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listCryptoKeys without error', async () => {
+            const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.kms.inventory.v1.ListCryptoKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.kms.inventory.v1.ListCryptoKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
+              generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
+              generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
+            ];
+            client.descriptors.page.listCryptoKeys.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.kms.v1.ICryptoKey[] = [];
+            const iterable = client.listCryptoKeysAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listCryptoKeys as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listCryptoKeys as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listCryptoKeys with error', async () => {
-      const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.kms.inventory.v1.ListCryptoKeysRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.inventory.v1.ListCryptoKeysRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listCryptoKeys = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listCryptoKeys(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listCryptoKeys as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listCryptoKeys as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listCryptoKeysStream without error', async () => {
-      const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.kms.inventory.v1.ListCryptoKeysRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.inventory.v1.ListCryptoKeysRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
-        generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
-        generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
-      ];
-      client.descriptors.page.listCryptoKeys.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listCryptoKeysStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.kms.v1.CryptoKey[] = [];
-        stream.on('data', (response: protos.google.cloud.kms.v1.CryptoKey) => {
-          responses.push(response);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listCryptoKeys.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listCryptoKeys.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('end', () => {
-          resolve(responses);
+
+        it('uses async iteration with listCryptoKeys with error', async () => {
+            const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.kms.inventory.v1.ListCryptoKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.kms.inventory.v1.ListCryptoKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listCryptoKeys.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listCryptoKeysAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.kms.v1.ICryptoKey[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listCryptoKeys.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listCryptoKeys.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+    });
+
+    describe('Path templates', () => {
+
+        describe('cryptoKey', async () => {
+            const fakePath = "/rendered/path/cryptoKey";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                key_ring: "keyRingValue",
+                crypto_key: "cryptoKeyValue",
+            };
+            const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.cryptoKeyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.cryptoKeyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('cryptoKeyPath', () => {
+                const result = client.cryptoKeyPath("projectValue", "locationValue", "keyRingValue", "cryptoKeyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.cryptoKeyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromCryptoKeyName', () => {
+                const result = client.matchProjectFromCryptoKeyName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromCryptoKeyName', () => {
+                const result = client.matchLocationFromCryptoKeyName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchKeyRingFromCryptoKeyName', () => {
+                const result = client.matchKeyRingFromCryptoKeyName(fakePath);
+                assert.strictEqual(result, "keyRingValue");
+                assert((client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCryptoKeyFromCryptoKeyName', () => {
+                const result = client.matchCryptoKeyFromCryptoKeyName(fakePath);
+                assert.strictEqual(result, "cryptoKeyValue");
+                assert((client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listCryptoKeys.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listCryptoKeys, request)
-      );
-      assert(
-        (client.descriptors.page.listCryptoKeys.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('invokes listCryptoKeysStream with error', async () => {
-      const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.kms.inventory.v1.ListCryptoKeysRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.inventory.v1.ListCryptoKeysRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listCryptoKeys.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listCryptoKeysStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.kms.v1.CryptoKey[] = [];
-        stream.on('data', (response: protos.google.cloud.kms.v1.CryptoKey) => {
-          responses.push(response);
+        describe('cryptoKeyVersion', async () => {
+            const fakePath = "/rendered/path/cryptoKeyVersion";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                key_ring: "keyRingValue",
+                crypto_key: "cryptoKeyValue",
+                crypto_key_version: "cryptoKeyVersionValue",
+            };
+            const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.cryptoKeyVersionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.cryptoKeyVersionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('cryptoKeyVersionPath', () => {
+                const result = client.cryptoKeyVersionPath("projectValue", "locationValue", "keyRingValue", "cryptoKeyValue", "cryptoKeyVersionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.cryptoKeyVersionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromCryptoKeyVersionName', () => {
+                const result = client.matchProjectFromCryptoKeyVersionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromCryptoKeyVersionName', () => {
+                const result = client.matchLocationFromCryptoKeyVersionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchKeyRingFromCryptoKeyVersionName', () => {
+                const result = client.matchKeyRingFromCryptoKeyVersionName(fakePath);
+                assert.strictEqual(result, "keyRingValue");
+                assert((client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCryptoKeyFromCryptoKeyVersionName', () => {
+                const result = client.matchCryptoKeyFromCryptoKeyVersionName(fakePath);
+                assert.strictEqual(result, "cryptoKeyValue");
+                assert((client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCryptoKeyVersionFromCryptoKeyVersionName', () => {
+                const result = client.matchCryptoKeyVersionFromCryptoKeyVersionName(fakePath);
+                assert.strictEqual(result, "cryptoKeyVersionValue");
+                assert((client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-        stream.on('end', () => {
-          resolve(responses);
+
+        describe('importJob', async () => {
+            const fakePath = "/rendered/path/importJob";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                key_ring: "keyRingValue",
+                import_job: "importJobValue",
+            };
+            const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.importJobPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.importJobPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('importJobPath', () => {
+                const result = client.importJobPath("projectValue", "locationValue", "keyRingValue", "importJobValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.importJobPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromImportJobName', () => {
+                const result = client.matchProjectFromImportJobName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.importJobPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromImportJobName', () => {
+                const result = client.matchLocationFromImportJobName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.importJobPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchKeyRingFromImportJobName', () => {
+                const result = client.matchKeyRingFromImportJobName(fakePath);
+                assert.strictEqual(result, "keyRingValue");
+                assert((client.pathTemplates.importJobPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchImportJobFromImportJobName', () => {
+                const result = client.matchImportJobFromImportJobName(fakePath);
+                assert.strictEqual(result, "importJobValue");
+                assert((client.pathTemplates.importJobPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        describe('keyRing', async () => {
+            const fakePath = "/rendered/path/keyRing";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                key_ring: "keyRingValue",
+            };
+            const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.keyRingPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.keyRingPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('keyRingPath', () => {
+                const result = client.keyRingPath("projectValue", "locationValue", "keyRingValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.keyRingPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromKeyRingName', () => {
+                const result = client.matchProjectFromKeyRingName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.keyRingPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromKeyRingName', () => {
+                const result = client.matchLocationFromKeyRingName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.keyRingPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchKeyRingFromKeyRingName', () => {
+                const result = client.matchKeyRingFromKeyRingName(fakePath);
+                assert.strictEqual(result, "keyRingValue");
+                assert((client.pathTemplates.keyRingPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listCryptoKeys.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listCryptoKeys, request)
-      );
-      assert(
-        (client.descriptors.page.listCryptoKeys.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
+
+        describe('project', async () => {
+            const fakePath = "/rendered/path/project";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectPath', () => {
+                const result = client.projectPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectName', () => {
+                const result = client.matchProjectFromProjectName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummary', async () => {
+            const fakePath = "/rendered/path/projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummary";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                key_ring: "keyRingValue",
+                crypto_key: "cryptoKeyValue",
+                crypto_key_version: "cryptoKeyVersionValue",
+            };
+            const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPath', () => {
+                const result = client.projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPath("projectValue", "locationValue", "keyRingValue", "cryptoKeyValue", "cryptoKeyVersionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName', () => {
+                const result = client.matchProjectFromProjectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName', () => {
+                const result = client.matchLocationFromProjectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchKeyRingFromProjectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName', () => {
+                const result = client.matchKeyRingFromProjectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName(fakePath);
+                assert.strictEqual(result, "keyRingValue");
+                assert((client.pathTemplates.projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCryptoKeyFromProjectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName', () => {
+                const result = client.matchCryptoKeyFromProjectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName(fakePath);
+                assert.strictEqual(result, "cryptoKeyValue");
+                assert((client.pathTemplates.projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCryptoKeyVersionFromProjectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName', () => {
+                const result = client.matchCryptoKeyVersionFromProjectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName(fakePath);
+                assert.strictEqual(result, "cryptoKeyVersionValue");
+                assert((client.pathTemplates.projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationKeyRingCryptoKeyProtectedResourcesSummary', async () => {
+            const fakePath = "/rendered/path/projectLocationKeyRingCryptoKeyProtectedResourcesSummary";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                key_ring: "keyRingValue",
+                crypto_key: "cryptoKeyValue",
+            };
+            const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationKeyRingCryptoKeyProtectedResourcesSummaryPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationKeyRingCryptoKeyProtectedResourcesSummaryPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationKeyRingCryptoKeyProtectedResourcesSummaryPath', () => {
+                const result = client.projectLocationKeyRingCryptoKeyProtectedResourcesSummaryPath("projectValue", "locationValue", "keyRingValue", "cryptoKeyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationKeyRingCryptoKeyProtectedResourcesSummaryPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationKeyRingCryptoKeyProtectedResourcesSummaryName', () => {
+                const result = client.matchProjectFromProjectLocationKeyRingCryptoKeyProtectedResourcesSummaryName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationKeyRingCryptoKeyProtectedResourcesSummaryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationKeyRingCryptoKeyProtectedResourcesSummaryName', () => {
+                const result = client.matchLocationFromProjectLocationKeyRingCryptoKeyProtectedResourcesSummaryName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationKeyRingCryptoKeyProtectedResourcesSummaryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchKeyRingFromProjectLocationKeyRingCryptoKeyProtectedResourcesSummaryName', () => {
+                const result = client.matchKeyRingFromProjectLocationKeyRingCryptoKeyProtectedResourcesSummaryName(fakePath);
+                assert.strictEqual(result, "keyRingValue");
+                assert((client.pathTemplates.projectLocationKeyRingCryptoKeyProtectedResourcesSummaryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCryptoKeyFromProjectLocationKeyRingCryptoKeyProtectedResourcesSummaryName', () => {
+                const result = client.matchCryptoKeyFromProjectLocationKeyRingCryptoKeyProtectedResourcesSummaryName(fakePath);
+                assert.strictEqual(result, "cryptoKeyValue");
+                assert((client.pathTemplates.projectLocationKeyRingCryptoKeyProtectedResourcesSummaryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('publicKey', async () => {
+            const fakePath = "/rendered/path/publicKey";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                key_ring: "keyRingValue",
+                crypto_key: "cryptoKeyValue",
+                crypto_key_version: "cryptoKeyVersionValue",
+            };
+            const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.publicKeyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.publicKeyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('publicKeyPath', () => {
+                const result = client.publicKeyPath("projectValue", "locationValue", "keyRingValue", "cryptoKeyValue", "cryptoKeyVersionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.publicKeyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromPublicKeyName', () => {
+                const result = client.matchProjectFromPublicKeyName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.publicKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromPublicKeyName', () => {
+                const result = client.matchLocationFromPublicKeyName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.publicKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchKeyRingFromPublicKeyName', () => {
+                const result = client.matchKeyRingFromPublicKeyName(fakePath);
+                assert.strictEqual(result, "keyRingValue");
+                assert((client.pathTemplates.publicKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCryptoKeyFromPublicKeyName', () => {
+                const result = client.matchCryptoKeyFromPublicKeyName(fakePath);
+                assert.strictEqual(result, "cryptoKeyValue");
+                assert((client.pathTemplates.publicKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCryptoKeyVersionFromPublicKeyName', () => {
+                const result = client.matchCryptoKeyVersionFromPublicKeyName(fakePath);
+                assert.strictEqual(result, "cryptoKeyVersionValue");
+                assert((client.pathTemplates.publicKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-
-    it('uses async iteration with listCryptoKeys without error', async () => {
-      const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.kms.inventory.v1.ListCryptoKeysRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.inventory.v1.ListCryptoKeysRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
-        generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
-        generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
-      ];
-      client.descriptors.page.listCryptoKeys.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.kms.v1.ICryptoKey[] = [];
-      const iterable = client.listCryptoKeysAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listCryptoKeys.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listCryptoKeys.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listCryptoKeys with error', async () => {
-      const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.kms.inventory.v1.ListCryptoKeysRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.inventory.v1.ListCryptoKeysRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listCryptoKeys.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listCryptoKeysAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.kms.v1.ICryptoKey[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listCryptoKeys.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listCryptoKeys.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('Path templates', () => {
-    describe('cryptoKey', async () => {
-      const fakePath = '/rendered/path/cryptoKey';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        key_ring: 'keyRingValue',
-        crypto_key: 'cryptoKeyValue',
-      };
-      const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      client.pathTemplates.cryptoKeyPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.cryptoKeyPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('cryptoKeyPath', () => {
-        const result = client.cryptoKeyPath(
-          'projectValue',
-          'locationValue',
-          'keyRingValue',
-          'cryptoKeyValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.cryptoKeyPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromCryptoKeyName', () => {
-        const result = client.matchProjectFromCryptoKeyName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromCryptoKeyName', () => {
-        const result = client.matchLocationFromCryptoKeyName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchKeyRingFromCryptoKeyName', () => {
-        const result = client.matchKeyRingFromCryptoKeyName(fakePath);
-        assert.strictEqual(result, 'keyRingValue');
-        assert(
-          (client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCryptoKeyFromCryptoKeyName', () => {
-        const result = client.matchCryptoKeyFromCryptoKeyName(fakePath);
-        assert.strictEqual(result, 'cryptoKeyValue');
-        assert(
-          (client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('cryptoKeyVersion', async () => {
-      const fakePath = '/rendered/path/cryptoKeyVersion';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        key_ring: 'keyRingValue',
-        crypto_key: 'cryptoKeyValue',
-        crypto_key_version: 'cryptoKeyVersionValue',
-      };
-      const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      client.pathTemplates.cryptoKeyVersionPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.cryptoKeyVersionPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('cryptoKeyVersionPath', () => {
-        const result = client.cryptoKeyVersionPath(
-          'projectValue',
-          'locationValue',
-          'keyRingValue',
-          'cryptoKeyValue',
-          'cryptoKeyVersionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.cryptoKeyVersionPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromCryptoKeyVersionName', () => {
-        const result = client.matchProjectFromCryptoKeyVersionName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromCryptoKeyVersionName', () => {
-        const result = client.matchLocationFromCryptoKeyVersionName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchKeyRingFromCryptoKeyVersionName', () => {
-        const result = client.matchKeyRingFromCryptoKeyVersionName(fakePath);
-        assert.strictEqual(result, 'keyRingValue');
-        assert(
-          (client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCryptoKeyFromCryptoKeyVersionName', () => {
-        const result = client.matchCryptoKeyFromCryptoKeyVersionName(fakePath);
-        assert.strictEqual(result, 'cryptoKeyValue');
-        assert(
-          (client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCryptoKeyVersionFromCryptoKeyVersionName', () => {
-        const result =
-          client.matchCryptoKeyVersionFromCryptoKeyVersionName(fakePath);
-        assert.strictEqual(result, 'cryptoKeyVersionValue');
-        assert(
-          (client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('importJob', async () => {
-      const fakePath = '/rendered/path/importJob';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        key_ring: 'keyRingValue',
-        import_job: 'importJobValue',
-      };
-      const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      client.pathTemplates.importJobPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.importJobPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('importJobPath', () => {
-        const result = client.importJobPath(
-          'projectValue',
-          'locationValue',
-          'keyRingValue',
-          'importJobValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.importJobPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromImportJobName', () => {
-        const result = client.matchProjectFromImportJobName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.importJobPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromImportJobName', () => {
-        const result = client.matchLocationFromImportJobName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.importJobPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchKeyRingFromImportJobName', () => {
-        const result = client.matchKeyRingFromImportJobName(fakePath);
-        assert.strictEqual(result, 'keyRingValue');
-        assert(
-          (client.pathTemplates.importJobPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchImportJobFromImportJobName', () => {
-        const result = client.matchImportJobFromImportJobName(fakePath);
-        assert.strictEqual(result, 'importJobValue');
-        assert(
-          (client.pathTemplates.importJobPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('keyRing', async () => {
-      const fakePath = '/rendered/path/keyRing';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        key_ring: 'keyRingValue',
-      };
-      const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      client.pathTemplates.keyRingPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.keyRingPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('keyRingPath', () => {
-        const result = client.keyRingPath(
-          'projectValue',
-          'locationValue',
-          'keyRingValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.keyRingPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromKeyRingName', () => {
-        const result = client.matchProjectFromKeyRingName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.keyRingPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromKeyRingName', () => {
-        const result = client.matchLocationFromKeyRingName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.keyRingPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchKeyRingFromKeyRingName', () => {
-        const result = client.matchKeyRingFromKeyRingName(fakePath);
-        assert.strictEqual(result, 'keyRingValue');
-        assert(
-          (client.pathTemplates.keyRingPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('project', async () => {
-      const fakePath = '/rendered/path/project';
-      const expectedParameters = {
-        project: 'projectValue',
-      };
-      const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      client.pathTemplates.projectPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectPath', () => {
-        const result = client.projectPath('projectValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectName', () => {
-        const result = client.matchProjectFromProjectName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummary', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummary';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        key_ring: 'keyRingValue',
-        crypto_key: 'cryptoKeyValue',
-        crypto_key_version: 'cryptoKeyVersionValue',
-      };
-      const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      client.pathTemplates.projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPath', () => {
-        const result =
-          client.projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPath(
-            'projectValue',
-            'locationValue',
-            'keyRingValue',
-            'cryptoKeyValue',
-            'cryptoKeyVersionValue'
-          );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName', () => {
-        const result =
-          client.matchProjectFromProjectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName', () => {
-        const result =
-          client.matchLocationFromProjectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchKeyRingFromProjectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName', () => {
-        const result =
-          client.matchKeyRingFromProjectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName(
-            fakePath
-          );
-        assert.strictEqual(result, 'keyRingValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCryptoKeyFromProjectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName', () => {
-        const result =
-          client.matchCryptoKeyFromProjectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName(
-            fakePath
-          );
-        assert.strictEqual(result, 'cryptoKeyValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCryptoKeyVersionFromProjectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName', () => {
-        const result =
-          client.matchCryptoKeyVersionFromProjectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName(
-            fakePath
-          );
-        assert.strictEqual(result, 'cryptoKeyVersionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationKeyRingCryptoKeyProtectedResourcesSummary', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationKeyRingCryptoKeyProtectedResourcesSummary';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        key_ring: 'keyRingValue',
-        crypto_key: 'cryptoKeyValue',
-      };
-      const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      client.pathTemplates.projectLocationKeyRingCryptoKeyProtectedResourcesSummaryPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationKeyRingCryptoKeyProtectedResourcesSummaryPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationKeyRingCryptoKeyProtectedResourcesSummaryPath', () => {
-        const result =
-          client.projectLocationKeyRingCryptoKeyProtectedResourcesSummaryPath(
-            'projectValue',
-            'locationValue',
-            'keyRingValue',
-            'cryptoKeyValue'
-          );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationKeyRingCryptoKeyProtectedResourcesSummaryPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationKeyRingCryptoKeyProtectedResourcesSummaryName', () => {
-        const result =
-          client.matchProjectFromProjectLocationKeyRingCryptoKeyProtectedResourcesSummaryName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationKeyRingCryptoKeyProtectedResourcesSummaryPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationKeyRingCryptoKeyProtectedResourcesSummaryName', () => {
-        const result =
-          client.matchLocationFromProjectLocationKeyRingCryptoKeyProtectedResourcesSummaryName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationKeyRingCryptoKeyProtectedResourcesSummaryPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchKeyRingFromProjectLocationKeyRingCryptoKeyProtectedResourcesSummaryName', () => {
-        const result =
-          client.matchKeyRingFromProjectLocationKeyRingCryptoKeyProtectedResourcesSummaryName(
-            fakePath
-          );
-        assert.strictEqual(result, 'keyRingValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationKeyRingCryptoKeyProtectedResourcesSummaryPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCryptoKeyFromProjectLocationKeyRingCryptoKeyProtectedResourcesSummaryName', () => {
-        const result =
-          client.matchCryptoKeyFromProjectLocationKeyRingCryptoKeyProtectedResourcesSummaryName(
-            fakePath
-          );
-        assert.strictEqual(result, 'cryptoKeyValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationKeyRingCryptoKeyProtectedResourcesSummaryPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('publicKey', async () => {
-      const fakePath = '/rendered/path/publicKey';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        key_ring: 'keyRingValue',
-        crypto_key: 'cryptoKeyValue',
-        crypto_key_version: 'cryptoKeyVersionValue',
-      };
-      const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      client.pathTemplates.publicKeyPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.publicKeyPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('publicKeyPath', () => {
-        const result = client.publicKeyPath(
-          'projectValue',
-          'locationValue',
-          'keyRingValue',
-          'cryptoKeyValue',
-          'cryptoKeyVersionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.publicKeyPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromPublicKeyName', () => {
-        const result = client.matchProjectFromPublicKeyName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.publicKeyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromPublicKeyName', () => {
-        const result = client.matchLocationFromPublicKeyName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.publicKeyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchKeyRingFromPublicKeyName', () => {
-        const result = client.matchKeyRingFromPublicKeyName(fakePath);
-        assert.strictEqual(result, 'keyRingValue');
-        assert(
-          (client.pathTemplates.publicKeyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCryptoKeyFromPublicKeyName', () => {
-        const result = client.matchCryptoKeyFromPublicKeyName(fakePath);
-        assert.strictEqual(result, 'cryptoKeyValue');
-        assert(
-          (client.pathTemplates.publicKeyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCryptoKeyVersionFromPublicKeyName', () => {
-        const result = client.matchCryptoKeyVersionFromPublicKeyName(fakePath);
-        assert.strictEqual(result, 'cryptoKeyVersionValue');
-        assert(
-          (client.pathTemplates.publicKeyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

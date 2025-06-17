@@ -2258,7 +2258,7 @@ export namespace google {
                 interface ICertificate {
 
                     /** Certificate rawDer */
-                    rawDer?: (Uint8Array|string|null);
+                    rawDer?: (Uint8Array|Buffer|string|null);
 
                     /** Certificate parsed */
                     parsed?: (boolean|null);
@@ -2295,7 +2295,7 @@ export namespace google {
                     constructor(properties?: google.cloud.kms.v1.ICertificate);
 
                     /** Certificate rawDer. */
-                    public rawDer: (Uint8Array|string);
+                    public rawDer: (Uint8Array|Buffer|string);
 
                     /** Certificate parsed. */
                     public parsed: boolean;
@@ -3334,7 +3334,7 @@ export namespace google {
                     format?: (google.cloud.kms.v1.KeyOperationAttestation.AttestationFormat|keyof typeof google.cloud.kms.v1.KeyOperationAttestation.AttestationFormat|null);
 
                     /** KeyOperationAttestation content */
-                    content?: (Uint8Array|string|null);
+                    content?: (Uint8Array|Buffer|string|null);
 
                     /** KeyOperationAttestation certChains */
                     certChains?: (google.cloud.kms.v1.KeyOperationAttestation.ICertificateChains|null);
@@ -3353,7 +3353,7 @@ export namespace google {
                     public format: (google.cloud.kms.v1.KeyOperationAttestation.AttestationFormat|keyof typeof google.cloud.kms.v1.KeyOperationAttestation.AttestationFormat);
 
                     /** KeyOperationAttestation content. */
-                    public content: (Uint8Array|string);
+                    public content: (Uint8Array|Buffer|string);
 
                     /** KeyOperationAttestation certChains. */
                     public certChains?: (google.cloud.kms.v1.KeyOperationAttestation.ICertificateChains|null);
@@ -3812,7 +3812,7 @@ export namespace google {
                 interface IChecksummedData {
 
                     /** ChecksummedData data */
-                    data?: (Uint8Array|string|null);
+                    data?: (Uint8Array|Buffer|string|null);
 
                     /** ChecksummedData crc32cChecksum */
                     crc32cChecksum?: (google.protobuf.IInt64Value|null);
@@ -3828,7 +3828,7 @@ export namespace google {
                     constructor(properties?: google.cloud.kms.v1.IChecksummedData);
 
                     /** ChecksummedData data. */
-                    public data: (Uint8Array|string);
+                    public data: (Uint8Array|Buffer|string);
 
                     /** ChecksummedData crc32cChecksum. */
                     public crc32cChecksum?: (google.protobuf.IInt64Value|null);
@@ -6927,10 +6927,10 @@ export namespace google {
                     importJob?: (string|null);
 
                     /** ImportCryptoKeyVersionRequest wrappedKey */
-                    wrappedKey?: (Uint8Array|string|null);
+                    wrappedKey?: (Uint8Array|Buffer|string|null);
 
                     /** ImportCryptoKeyVersionRequest rsaAesWrappedKey */
-                    rsaAesWrappedKey?: (Uint8Array|string|null);
+                    rsaAesWrappedKey?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents an ImportCryptoKeyVersionRequest. */
@@ -6955,10 +6955,10 @@ export namespace google {
                     public importJob: string;
 
                     /** ImportCryptoKeyVersionRequest wrappedKey. */
-                    public wrappedKey: (Uint8Array|string);
+                    public wrappedKey: (Uint8Array|Buffer|string);
 
                     /** ImportCryptoKeyVersionRequest rsaAesWrappedKey. */
-                    public rsaAesWrappedKey?: (Uint8Array|string|null);
+                    public rsaAesWrappedKey?: (Uint8Array|Buffer|string|null);
 
                     /** ImportCryptoKeyVersionRequest wrappedKeyMaterial. */
                     public wrappedKeyMaterial?: "rsaAesWrappedKey";
@@ -7660,10 +7660,10 @@ export namespace google {
                     name?: (string|null);
 
                     /** EncryptRequest plaintext */
-                    plaintext?: (Uint8Array|string|null);
+                    plaintext?: (Uint8Array|Buffer|string|null);
 
                     /** EncryptRequest additionalAuthenticatedData */
-                    additionalAuthenticatedData?: (Uint8Array|string|null);
+                    additionalAuthenticatedData?: (Uint8Array|Buffer|string|null);
 
                     /** EncryptRequest plaintextCrc32c */
                     plaintextCrc32c?: (google.protobuf.IInt64Value|null);
@@ -7685,10 +7685,10 @@ export namespace google {
                     public name: string;
 
                     /** EncryptRequest plaintext. */
-                    public plaintext: (Uint8Array|string);
+                    public plaintext: (Uint8Array|Buffer|string);
 
                     /** EncryptRequest additionalAuthenticatedData. */
-                    public additionalAuthenticatedData: (Uint8Array|string);
+                    public additionalAuthenticatedData: (Uint8Array|Buffer|string);
 
                     /** EncryptRequest plaintextCrc32c. */
                     public plaintextCrc32c?: (google.protobuf.IInt64Value|null);
@@ -7781,10 +7781,10 @@ export namespace google {
                     name?: (string|null);
 
                     /** DecryptRequest ciphertext */
-                    ciphertext?: (Uint8Array|string|null);
+                    ciphertext?: (Uint8Array|Buffer|string|null);
 
                     /** DecryptRequest additionalAuthenticatedData */
-                    additionalAuthenticatedData?: (Uint8Array|string|null);
+                    additionalAuthenticatedData?: (Uint8Array|Buffer|string|null);
 
                     /** DecryptRequest ciphertextCrc32c */
                     ciphertextCrc32c?: (google.protobuf.IInt64Value|null);
@@ -7806,10 +7806,10 @@ export namespace google {
                     public name: string;
 
                     /** DecryptRequest ciphertext. */
-                    public ciphertext: (Uint8Array|string);
+                    public ciphertext: (Uint8Array|Buffer|string);
 
                     /** DecryptRequest additionalAuthenticatedData. */
-                    public additionalAuthenticatedData: (Uint8Array|string);
+                    public additionalAuthenticatedData: (Uint8Array|Buffer|string);
 
                     /** DecryptRequest ciphertextCrc32c. */
                     public ciphertextCrc32c?: (google.protobuf.IInt64Value|null);
@@ -7902,10 +7902,10 @@ export namespace google {
                     name?: (string|null);
 
                     /** RawEncryptRequest plaintext */
-                    plaintext?: (Uint8Array|string|null);
+                    plaintext?: (Uint8Array|Buffer|string|null);
 
                     /** RawEncryptRequest additionalAuthenticatedData */
-                    additionalAuthenticatedData?: (Uint8Array|string|null);
+                    additionalAuthenticatedData?: (Uint8Array|Buffer|string|null);
 
                     /** RawEncryptRequest plaintextCrc32c */
                     plaintextCrc32c?: (google.protobuf.IInt64Value|null);
@@ -7914,7 +7914,7 @@ export namespace google {
                     additionalAuthenticatedDataCrc32c?: (google.protobuf.IInt64Value|null);
 
                     /** RawEncryptRequest initializationVector */
-                    initializationVector?: (Uint8Array|string|null);
+                    initializationVector?: (Uint8Array|Buffer|string|null);
 
                     /** RawEncryptRequest initializationVectorCrc32c */
                     initializationVectorCrc32c?: (google.protobuf.IInt64Value|null);
@@ -7933,10 +7933,10 @@ export namespace google {
                     public name: string;
 
                     /** RawEncryptRequest plaintext. */
-                    public plaintext: (Uint8Array|string);
+                    public plaintext: (Uint8Array|Buffer|string);
 
                     /** RawEncryptRequest additionalAuthenticatedData. */
-                    public additionalAuthenticatedData: (Uint8Array|string);
+                    public additionalAuthenticatedData: (Uint8Array|Buffer|string);
 
                     /** RawEncryptRequest plaintextCrc32c. */
                     public plaintextCrc32c?: (google.protobuf.IInt64Value|null);
@@ -7945,7 +7945,7 @@ export namespace google {
                     public additionalAuthenticatedDataCrc32c?: (google.protobuf.IInt64Value|null);
 
                     /** RawEncryptRequest initializationVector. */
-                    public initializationVector: (Uint8Array|string);
+                    public initializationVector: (Uint8Array|Buffer|string);
 
                     /** RawEncryptRequest initializationVectorCrc32c. */
                     public initializationVectorCrc32c?: (google.protobuf.IInt64Value|null);
@@ -8035,13 +8035,13 @@ export namespace google {
                     name?: (string|null);
 
                     /** RawDecryptRequest ciphertext */
-                    ciphertext?: (Uint8Array|string|null);
+                    ciphertext?: (Uint8Array|Buffer|string|null);
 
                     /** RawDecryptRequest additionalAuthenticatedData */
-                    additionalAuthenticatedData?: (Uint8Array|string|null);
+                    additionalAuthenticatedData?: (Uint8Array|Buffer|string|null);
 
                     /** RawDecryptRequest initializationVector */
-                    initializationVector?: (Uint8Array|string|null);
+                    initializationVector?: (Uint8Array|Buffer|string|null);
 
                     /** RawDecryptRequest tagLength */
                     tagLength?: (number|null);
@@ -8069,13 +8069,13 @@ export namespace google {
                     public name: string;
 
                     /** RawDecryptRequest ciphertext. */
-                    public ciphertext: (Uint8Array|string);
+                    public ciphertext: (Uint8Array|Buffer|string);
 
                     /** RawDecryptRequest additionalAuthenticatedData. */
-                    public additionalAuthenticatedData: (Uint8Array|string);
+                    public additionalAuthenticatedData: (Uint8Array|Buffer|string);
 
                     /** RawDecryptRequest initializationVector. */
-                    public initializationVector: (Uint8Array|string);
+                    public initializationVector: (Uint8Array|Buffer|string);
 
                     /** RawDecryptRequest tagLength. */
                     public tagLength: number;
@@ -8180,7 +8180,7 @@ export namespace google {
                     digestCrc32c?: (google.protobuf.IInt64Value|null);
 
                     /** AsymmetricSignRequest data */
-                    data?: (Uint8Array|string|null);
+                    data?: (Uint8Array|Buffer|string|null);
 
                     /** AsymmetricSignRequest dataCrc32c */
                     dataCrc32c?: (google.protobuf.IInt64Value|null);
@@ -8205,7 +8205,7 @@ export namespace google {
                     public digestCrc32c?: (google.protobuf.IInt64Value|null);
 
                     /** AsymmetricSignRequest data. */
-                    public data: (Uint8Array|string);
+                    public data: (Uint8Array|Buffer|string);
 
                     /** AsymmetricSignRequest dataCrc32c. */
                     public dataCrc32c?: (google.protobuf.IInt64Value|null);
@@ -8295,7 +8295,7 @@ export namespace google {
                     name?: (string|null);
 
                     /** AsymmetricDecryptRequest ciphertext */
-                    ciphertext?: (Uint8Array|string|null);
+                    ciphertext?: (Uint8Array|Buffer|string|null);
 
                     /** AsymmetricDecryptRequest ciphertextCrc32c */
                     ciphertextCrc32c?: (google.protobuf.IInt64Value|null);
@@ -8314,7 +8314,7 @@ export namespace google {
                     public name: string;
 
                     /** AsymmetricDecryptRequest ciphertext. */
-                    public ciphertext: (Uint8Array|string);
+                    public ciphertext: (Uint8Array|Buffer|string);
 
                     /** AsymmetricDecryptRequest ciphertextCrc32c. */
                     public ciphertextCrc32c?: (google.protobuf.IInt64Value|null);
@@ -8404,7 +8404,7 @@ export namespace google {
                     name?: (string|null);
 
                     /** MacSignRequest data */
-                    data?: (Uint8Array|string|null);
+                    data?: (Uint8Array|Buffer|string|null);
 
                     /** MacSignRequest dataCrc32c */
                     dataCrc32c?: (google.protobuf.IInt64Value|null);
@@ -8423,7 +8423,7 @@ export namespace google {
                     public name: string;
 
                     /** MacSignRequest data. */
-                    public data: (Uint8Array|string);
+                    public data: (Uint8Array|Buffer|string);
 
                     /** MacSignRequest dataCrc32c. */
                     public dataCrc32c?: (google.protobuf.IInt64Value|null);
@@ -8513,13 +8513,13 @@ export namespace google {
                     name?: (string|null);
 
                     /** MacVerifyRequest data */
-                    data?: (Uint8Array|string|null);
+                    data?: (Uint8Array|Buffer|string|null);
 
                     /** MacVerifyRequest dataCrc32c */
                     dataCrc32c?: (google.protobuf.IInt64Value|null);
 
                     /** MacVerifyRequest mac */
-                    mac?: (Uint8Array|string|null);
+                    mac?: (Uint8Array|Buffer|string|null);
 
                     /** MacVerifyRequest macCrc32c */
                     macCrc32c?: (google.protobuf.IInt64Value|null);
@@ -8538,13 +8538,13 @@ export namespace google {
                     public name: string;
 
                     /** MacVerifyRequest data. */
-                    public data: (Uint8Array|string);
+                    public data: (Uint8Array|Buffer|string);
 
                     /** MacVerifyRequest dataCrc32c. */
                     public dataCrc32c?: (google.protobuf.IInt64Value|null);
 
                     /** MacVerifyRequest mac. */
-                    public mac: (Uint8Array|string);
+                    public mac: (Uint8Array|Buffer|string);
 
                     /** MacVerifyRequest macCrc32c. */
                     public macCrc32c?: (google.protobuf.IInt64Value|null);
@@ -8743,7 +8743,7 @@ export namespace google {
                     name?: (string|null);
 
                     /** EncryptResponse ciphertext */
-                    ciphertext?: (Uint8Array|string|null);
+                    ciphertext?: (Uint8Array|Buffer|string|null);
 
                     /** EncryptResponse ciphertextCrc32c */
                     ciphertextCrc32c?: (google.protobuf.IInt64Value|null);
@@ -8771,7 +8771,7 @@ export namespace google {
                     public name: string;
 
                     /** EncryptResponse ciphertext. */
-                    public ciphertext: (Uint8Array|string);
+                    public ciphertext: (Uint8Array|Buffer|string);
 
                     /** EncryptResponse ciphertextCrc32c. */
                     public ciphertextCrc32c?: (google.protobuf.IInt64Value|null);
@@ -8867,7 +8867,7 @@ export namespace google {
                 interface IDecryptResponse {
 
                     /** DecryptResponse plaintext */
-                    plaintext?: (Uint8Array|string|null);
+                    plaintext?: (Uint8Array|Buffer|string|null);
 
                     /** DecryptResponse plaintextCrc32c */
                     plaintextCrc32c?: (google.protobuf.IInt64Value|null);
@@ -8889,7 +8889,7 @@ export namespace google {
                     constructor(properties?: google.cloud.kms.v1.IDecryptResponse);
 
                     /** DecryptResponse plaintext. */
-                    public plaintext: (Uint8Array|string);
+                    public plaintext: (Uint8Array|Buffer|string);
 
                     /** DecryptResponse plaintextCrc32c. */
                     public plaintextCrc32c?: (google.protobuf.IInt64Value|null);
@@ -8982,10 +8982,10 @@ export namespace google {
                 interface IRawEncryptResponse {
 
                     /** RawEncryptResponse ciphertext */
-                    ciphertext?: (Uint8Array|string|null);
+                    ciphertext?: (Uint8Array|Buffer|string|null);
 
                     /** RawEncryptResponse initializationVector */
-                    initializationVector?: (Uint8Array|string|null);
+                    initializationVector?: (Uint8Array|Buffer|string|null);
 
                     /** RawEncryptResponse tagLength */
                     tagLength?: (number|null);
@@ -9022,10 +9022,10 @@ export namespace google {
                     constructor(properties?: google.cloud.kms.v1.IRawEncryptResponse);
 
                     /** RawEncryptResponse ciphertext. */
-                    public ciphertext: (Uint8Array|string);
+                    public ciphertext: (Uint8Array|Buffer|string);
 
                     /** RawEncryptResponse initializationVector. */
-                    public initializationVector: (Uint8Array|string);
+                    public initializationVector: (Uint8Array|Buffer|string);
 
                     /** RawEncryptResponse tagLength. */
                     public tagLength: number;
@@ -9133,7 +9133,7 @@ export namespace google {
                 interface IRawDecryptResponse {
 
                     /** RawDecryptResponse plaintext */
-                    plaintext?: (Uint8Array|string|null);
+                    plaintext?: (Uint8Array|Buffer|string|null);
 
                     /** RawDecryptResponse plaintextCrc32c */
                     plaintextCrc32c?: (google.protobuf.IInt64Value|null);
@@ -9161,7 +9161,7 @@ export namespace google {
                     constructor(properties?: google.cloud.kms.v1.IRawDecryptResponse);
 
                     /** RawDecryptResponse plaintext. */
-                    public plaintext: (Uint8Array|string);
+                    public plaintext: (Uint8Array|Buffer|string);
 
                     /** RawDecryptResponse plaintextCrc32c. */
                     public plaintextCrc32c?: (google.protobuf.IInt64Value|null);
@@ -9260,7 +9260,7 @@ export namespace google {
                 interface IAsymmetricSignResponse {
 
                     /** AsymmetricSignResponse signature */
-                    signature?: (Uint8Array|string|null);
+                    signature?: (Uint8Array|Buffer|string|null);
 
                     /** AsymmetricSignResponse signatureCrc32c */
                     signatureCrc32c?: (google.protobuf.IInt64Value|null);
@@ -9288,7 +9288,7 @@ export namespace google {
                     constructor(properties?: google.cloud.kms.v1.IAsymmetricSignResponse);
 
                     /** AsymmetricSignResponse signature. */
-                    public signature: (Uint8Array|string);
+                    public signature: (Uint8Array|Buffer|string);
 
                     /** AsymmetricSignResponse signatureCrc32c. */
                     public signatureCrc32c?: (google.protobuf.IInt64Value|null);
@@ -9387,7 +9387,7 @@ export namespace google {
                 interface IAsymmetricDecryptResponse {
 
                     /** AsymmetricDecryptResponse plaintext */
-                    plaintext?: (Uint8Array|string|null);
+                    plaintext?: (Uint8Array|Buffer|string|null);
 
                     /** AsymmetricDecryptResponse plaintextCrc32c */
                     plaintextCrc32c?: (google.protobuf.IInt64Value|null);
@@ -9409,7 +9409,7 @@ export namespace google {
                     constructor(properties?: google.cloud.kms.v1.IAsymmetricDecryptResponse);
 
                     /** AsymmetricDecryptResponse plaintext. */
-                    public plaintext: (Uint8Array|string);
+                    public plaintext: (Uint8Array|Buffer|string);
 
                     /** AsymmetricDecryptResponse plaintextCrc32c. */
                     public plaintextCrc32c?: (google.protobuf.IInt64Value|null);
@@ -9505,7 +9505,7 @@ export namespace google {
                     name?: (string|null);
 
                     /** MacSignResponse mac */
-                    mac?: (Uint8Array|string|null);
+                    mac?: (Uint8Array|Buffer|string|null);
 
                     /** MacSignResponse macCrc32c */
                     macCrc32c?: (google.protobuf.IInt64Value|null);
@@ -9530,7 +9530,7 @@ export namespace google {
                     public name: string;
 
                     /** MacSignResponse mac. */
-                    public mac: (Uint8Array|string);
+                    public mac: (Uint8Array|Buffer|string);
 
                     /** MacSignResponse macCrc32c. */
                     public macCrc32c?: (google.protobuf.IInt64Value|null);
@@ -9750,7 +9750,7 @@ export namespace google {
                 interface IGenerateRandomBytesResponse {
 
                     /** GenerateRandomBytesResponse data */
-                    data?: (Uint8Array|string|null);
+                    data?: (Uint8Array|Buffer|string|null);
 
                     /** GenerateRandomBytesResponse dataCrc32c */
                     dataCrc32c?: (google.protobuf.IInt64Value|null);
@@ -9766,7 +9766,7 @@ export namespace google {
                     constructor(properties?: google.cloud.kms.v1.IGenerateRandomBytesResponse);
 
                     /** GenerateRandomBytesResponse data. */
-                    public data: (Uint8Array|string);
+                    public data: (Uint8Array|Buffer|string);
 
                     /** GenerateRandomBytesResponse dataCrc32c. */
                     public dataCrc32c?: (google.protobuf.IInt64Value|null);
@@ -9853,13 +9853,13 @@ export namespace google {
                 interface IDigest {
 
                     /** Digest sha256 */
-                    sha256?: (Uint8Array|string|null);
+                    sha256?: (Uint8Array|Buffer|string|null);
 
                     /** Digest sha384 */
-                    sha384?: (Uint8Array|string|null);
+                    sha384?: (Uint8Array|Buffer|string|null);
 
                     /** Digest sha512 */
-                    sha512?: (Uint8Array|string|null);
+                    sha512?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents a Digest. */
@@ -9872,13 +9872,13 @@ export namespace google {
                     constructor(properties?: google.cloud.kms.v1.IDigest);
 
                     /** Digest sha256. */
-                    public sha256?: (Uint8Array|string|null);
+                    public sha256?: (Uint8Array|Buffer|string|null);
 
                     /** Digest sha384. */
-                    public sha384?: (Uint8Array|string|null);
+                    public sha384?: (Uint8Array|Buffer|string|null);
 
                     /** Digest sha512. */
-                    public sha512?: (Uint8Array|string|null);
+                    public sha512?: (Uint8Array|Buffer|string|null);
 
                     /** Digest digest. */
                     public digest?: ("sha256"|"sha384"|"sha512");
@@ -10722,6 +10722,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -10762,6 +10765,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -14980,6 +14986,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -15231,7 +15240,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -15262,7 +15271,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -16401,7 +16410,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -16417,7 +16426,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.
@@ -17568,7 +17577,7 @@ export namespace google {
         interface IBytesValue {
 
             /** BytesValue value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents a BytesValue. */
@@ -17581,7 +17590,7 @@ export namespace google {
             constructor(properties?: google.protobuf.IBytesValue);
 
             /** BytesValue value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new BytesValue instance using the specified properties.

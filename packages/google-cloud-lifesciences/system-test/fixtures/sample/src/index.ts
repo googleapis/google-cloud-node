@@ -19,9 +19,7 @@
 import {WorkflowsServiceV2BetaClient} from '@google-cloud/life-sciences';
 
 // check that the client class type name can be used
-function doStuffWithWorkflowsServiceV2BetaClient(
-  client: WorkflowsServiceV2BetaClient
-) {
+function doStuffWithWorkflowsServiceV2BetaClient(client: WorkflowsServiceV2BetaClient) {
   client.close();
 }
 

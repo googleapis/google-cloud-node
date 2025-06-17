@@ -16,12 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const mediatranslation = require('@google-cloud/media-translation');
 
 function main() {
-  const speechTranslationServiceClient =
-    new mediatranslation.SpeechTranslationServiceClient();
+  const speechTranslationServiceClient = new mediatranslation.SpeechTranslationServiceClient();
 }
 
 main();

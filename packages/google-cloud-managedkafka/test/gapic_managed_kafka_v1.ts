@@ -25,5065 +25,4023 @@ import * as managedkafkaModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {
-  protobuf,
-  LROperation,
-  operationsProtos,
-  LocationProtos,
-} from 'google-gax';
+import {protobuf, LROperation, operationsProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubLongRunningCall<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().rejects(callError)
-    : sinon.stub().resolves([mockOperation]);
+function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
 }
 
-function stubLongRunningCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().callsArgWith(2, callError)
-    : sinon.stub().callsArgWith(2, null, mockOperation);
+function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.ManagedKafkaClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'managedkafka.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          managedkafkaModule.v1.ManagedKafkaClient.servicePath;
-        assert.strictEqual(servicePath, 'managedkafka.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          managedkafkaModule.v1.ManagedKafkaClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'managedkafka.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'managedkafka.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'managedkafka.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new managedkafkaModule.v1.ManagedKafkaClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'managedkafka.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'managedkafka.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new managedkafkaModule.v1.ManagedKafkaClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'managedkafka.configured.example.com'
-          );
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new managedkafkaModule.v1.ManagedKafkaClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = managedkafkaModule.v1.ManagedKafkaClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
-
-    it('should create a client with no option', () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.managedKafkaStub, undefined);
-      await client.initialize();
-      assert(client.managedKafkaStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.managedKafkaStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.managedKafkaStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('getCluster', () => {
-    it('invokes getCluster without error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.GetClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.GetClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.Cluster()
-      );
-      client.innerApiCalls.getCluster = stubSimpleCall(expectedResponse);
-      const [response] = await client.getCluster(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getCluster without error using callback', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.GetClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.GetClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.Cluster()
-      );
-      client.innerApiCalls.getCluster =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getCluster(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.managedkafka.v1.ICluster | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getCluster with error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.GetClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.GetClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getCluster = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getCluster(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getCluster with closed client', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.GetClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.GetClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getCluster(request), expectedError);
-    });
-  });
-
-  describe('getTopic', () => {
-    it('invokes getTopic without error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.GetTopicRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.GetTopicRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.Topic()
-      );
-      client.innerApiCalls.getTopic = stubSimpleCall(expectedResponse);
-      const [response] = await client.getTopic(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getTopic as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getTopic as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getTopic without error using callback', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.GetTopicRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.GetTopicRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.Topic()
-      );
-      client.innerApiCalls.getTopic =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getTopic(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.managedkafka.v1.ITopic | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getTopic as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getTopic as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getTopic with error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.GetTopicRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.GetTopicRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getTopic = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getTopic(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getTopic as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getTopic as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getTopic with closed client', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.GetTopicRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.GetTopicRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getTopic(request), expectedError);
-    });
-  });
-
-  describe('createTopic', () => {
-    it('invokes createTopic without error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.CreateTopicRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.CreateTopicRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.Topic()
-      );
-      client.innerApiCalls.createTopic = stubSimpleCall(expectedResponse);
-      const [response] = await client.createTopic(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createTopic as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createTopic as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createTopic without error using callback', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.CreateTopicRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.CreateTopicRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.Topic()
-      );
-      client.innerApiCalls.createTopic =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createTopic(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.managedkafka.v1.ITopic | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createTopic as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createTopic as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createTopic with error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.CreateTopicRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.CreateTopicRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createTopic = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createTopic(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createTopic as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createTopic as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createTopic with closed client', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.CreateTopicRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.CreateTopicRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createTopic(request), expectedError);
-    });
-  });
-
-  describe('updateTopic', () => {
-    it('invokes updateTopic without error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.UpdateTopicRequest()
-      );
-      request.topic ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.UpdateTopicRequest',
-        ['topic', 'name']
-      );
-      request.topic.name = defaultValue1;
-      const expectedHeaderRequestParams = `topic.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.Topic()
-      );
-      client.innerApiCalls.updateTopic = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateTopic(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateTopic as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateTopic as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateTopic without error using callback', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.UpdateTopicRequest()
-      );
-      request.topic ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.UpdateTopicRequest',
-        ['topic', 'name']
-      );
-      request.topic.name = defaultValue1;
-      const expectedHeaderRequestParams = `topic.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.Topic()
-      );
-      client.innerApiCalls.updateTopic =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateTopic(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.managedkafka.v1.ITopic | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateTopic as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateTopic as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateTopic with error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.UpdateTopicRequest()
-      );
-      request.topic ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.UpdateTopicRequest',
-        ['topic', 'name']
-      );
-      request.topic.name = defaultValue1;
-      const expectedHeaderRequestParams = `topic.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateTopic = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateTopic(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateTopic as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateTopic as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateTopic with closed client', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.UpdateTopicRequest()
-      );
-      request.topic ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.UpdateTopicRequest',
-        ['topic', 'name']
-      );
-      request.topic.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updateTopic(request), expectedError);
-    });
-  });
-
-  describe('deleteTopic', () => {
-    it('invokes deleteTopic without error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.DeleteTopicRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.DeleteTopicRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteTopic = stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteTopic(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteTopic as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteTopic as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteTopic without error using callback', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.DeleteTopicRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.DeleteTopicRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteTopic =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteTopic(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteTopic as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteTopic as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteTopic with error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.DeleteTopicRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.DeleteTopicRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteTopic = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteTopic(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteTopic as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteTopic as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteTopic with closed client', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.DeleteTopicRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.DeleteTopicRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.deleteTopic(request), expectedError);
-    });
-  });
-
-  describe('getConsumerGroup', () => {
-    it('invokes getConsumerGroup without error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.GetConsumerGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.GetConsumerGroupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.ConsumerGroup()
-      );
-      client.innerApiCalls.getConsumerGroup = stubSimpleCall(expectedResponse);
-      const [response] = await client.getConsumerGroup(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getConsumerGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getConsumerGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getConsumerGroup without error using callback', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.GetConsumerGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.GetConsumerGroupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.ConsumerGroup()
-      );
-      client.innerApiCalls.getConsumerGroup =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getConsumerGroup(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.managedkafka.v1.IConsumerGroup | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getConsumerGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getConsumerGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getConsumerGroup with error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.GetConsumerGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.GetConsumerGroupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getConsumerGroup = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getConsumerGroup(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getConsumerGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getConsumerGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getConsumerGroup with closed client', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.GetConsumerGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.GetConsumerGroupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getConsumerGroup(request), expectedError);
-    });
-  });
-
-  describe('updateConsumerGroup', () => {
-    it('invokes updateConsumerGroup without error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.UpdateConsumerGroupRequest()
-      );
-      request.consumerGroup ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.UpdateConsumerGroupRequest',
-        ['consumerGroup', 'name']
-      );
-      request.consumerGroup.name = defaultValue1;
-      const expectedHeaderRequestParams = `consumer_group.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.ConsumerGroup()
-      );
-      client.innerApiCalls.updateConsumerGroup =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.updateConsumerGroup(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateConsumerGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateConsumerGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateConsumerGroup without error using callback', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.UpdateConsumerGroupRequest()
-      );
-      request.consumerGroup ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.UpdateConsumerGroupRequest',
-        ['consumerGroup', 'name']
-      );
-      request.consumerGroup.name = defaultValue1;
-      const expectedHeaderRequestParams = `consumer_group.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.ConsumerGroup()
-      );
-      client.innerApiCalls.updateConsumerGroup =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateConsumerGroup(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.managedkafka.v1.IConsumerGroup | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateConsumerGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateConsumerGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateConsumerGroup with error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.UpdateConsumerGroupRequest()
-      );
-      request.consumerGroup ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.UpdateConsumerGroupRequest',
-        ['consumerGroup', 'name']
-      );
-      request.consumerGroup.name = defaultValue1;
-      const expectedHeaderRequestParams = `consumer_group.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateConsumerGroup = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateConsumerGroup(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateConsumerGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateConsumerGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateConsumerGroup with closed client', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.UpdateConsumerGroupRequest()
-      );
-      request.consumerGroup ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.UpdateConsumerGroupRequest',
-        ['consumerGroup', 'name']
-      );
-      request.consumerGroup.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updateConsumerGroup(request), expectedError);
-    });
-  });
-
-  describe('deleteConsumerGroup', () => {
-    it('invokes deleteConsumerGroup without error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.DeleteConsumerGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.DeleteConsumerGroupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteConsumerGroup =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteConsumerGroup(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteConsumerGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteConsumerGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteConsumerGroup without error using callback', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.DeleteConsumerGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.DeleteConsumerGroupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteConsumerGroup =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteConsumerGroup(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteConsumerGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteConsumerGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteConsumerGroup with error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.DeleteConsumerGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.DeleteConsumerGroupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteConsumerGroup = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteConsumerGroup(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteConsumerGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteConsumerGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteConsumerGroup with closed client', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.DeleteConsumerGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.DeleteConsumerGroupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.deleteConsumerGroup(request), expectedError);
-    });
-  });
-
-  describe('getAcl', () => {
-    it('invokes getAcl without error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.GetAclRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.GetAclRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.Acl()
-      );
-      client.innerApiCalls.getAcl = stubSimpleCall(expectedResponse);
-      const [response] = await client.getAcl(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.getAcl as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAcl as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAcl without error using callback', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.GetAclRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.GetAclRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.Acl()
-      );
-      client.innerApiCalls.getAcl =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getAcl(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.managedkafka.v1.IAcl | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.getAcl as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAcl as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAcl with error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.GetAclRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.GetAclRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getAcl = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getAcl(request), expectedError);
-      const actualRequest = (client.innerApiCalls.getAcl as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAcl as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAcl with closed client', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.GetAclRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.GetAclRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getAcl(request), expectedError);
-    });
-  });
-
-  describe('createAcl', () => {
-    it('invokes createAcl without error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.CreateAclRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.CreateAclRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.Acl()
-      );
-      client.innerApiCalls.createAcl = stubSimpleCall(expectedResponse);
-      const [response] = await client.createAcl(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createAcl as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createAcl as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createAcl without error using callback', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.CreateAclRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.CreateAclRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.Acl()
-      );
-      client.innerApiCalls.createAcl =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createAcl(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.managedkafka.v1.IAcl | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createAcl as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createAcl as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createAcl with error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.CreateAclRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.CreateAclRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createAcl = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.createAcl(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createAcl as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createAcl as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createAcl with closed client', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.CreateAclRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.CreateAclRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createAcl(request), expectedError);
-    });
-  });
-
-  describe('updateAcl', () => {
-    it('invokes updateAcl without error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.UpdateAclRequest()
-      );
-      request.acl ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.UpdateAclRequest',
-        ['acl', 'name']
-      );
-      request.acl.name = defaultValue1;
-      const expectedHeaderRequestParams = `acl.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.Acl()
-      );
-      client.innerApiCalls.updateAcl = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateAcl(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateAcl as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAcl as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateAcl without error using callback', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.UpdateAclRequest()
-      );
-      request.acl ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.UpdateAclRequest',
-        ['acl', 'name']
-      );
-      request.acl.name = defaultValue1;
-      const expectedHeaderRequestParams = `acl.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.Acl()
-      );
-      client.innerApiCalls.updateAcl =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateAcl(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.managedkafka.v1.IAcl | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateAcl as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAcl as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateAcl with error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.UpdateAclRequest()
-      );
-      request.acl ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.UpdateAclRequest',
-        ['acl', 'name']
-      );
-      request.acl.name = defaultValue1;
-      const expectedHeaderRequestParams = `acl.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateAcl = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.updateAcl(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateAcl as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAcl as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateAcl with closed client', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.UpdateAclRequest()
-      );
-      request.acl ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.UpdateAclRequest',
-        ['acl', 'name']
-      );
-      request.acl.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updateAcl(request), expectedError);
-    });
-  });
-
-  describe('deleteAcl', () => {
-    it('invokes deleteAcl without error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.DeleteAclRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.DeleteAclRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteAcl = stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteAcl(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteAcl as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAcl as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteAcl without error using callback', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.DeleteAclRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.DeleteAclRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteAcl =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteAcl(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteAcl as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAcl as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteAcl with error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.DeleteAclRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.DeleteAclRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteAcl = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.deleteAcl(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteAcl as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAcl as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteAcl with closed client', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.DeleteAclRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.DeleteAclRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.deleteAcl(request), expectedError);
-    });
-  });
-
-  describe('addAclEntry', () => {
-    it('invokes addAclEntry without error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.AddAclEntryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.AddAclEntryRequest',
-        ['acl']
-      );
-      request.acl = defaultValue1;
-      const expectedHeaderRequestParams = `acl=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.AddAclEntryResponse()
-      );
-      client.innerApiCalls.addAclEntry = stubSimpleCall(expectedResponse);
-      const [response] = await client.addAclEntry(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.addAclEntry as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.addAclEntry as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes addAclEntry without error using callback', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.AddAclEntryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.AddAclEntryRequest',
-        ['acl']
-      );
-      request.acl = defaultValue1;
-      const expectedHeaderRequestParams = `acl=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.AddAclEntryResponse()
-      );
-      client.innerApiCalls.addAclEntry =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.addAclEntry(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.managedkafka.v1.IAddAclEntryResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.addAclEntry as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.addAclEntry as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes addAclEntry with error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.AddAclEntryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.AddAclEntryRequest',
-        ['acl']
-      );
-      request.acl = defaultValue1;
-      const expectedHeaderRequestParams = `acl=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.addAclEntry = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.addAclEntry(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.addAclEntry as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.addAclEntry as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes addAclEntry with closed client', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.AddAclEntryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.AddAclEntryRequest',
-        ['acl']
-      );
-      request.acl = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.addAclEntry(request), expectedError);
-    });
-  });
-
-  describe('removeAclEntry', () => {
-    it('invokes removeAclEntry without error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.RemoveAclEntryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.RemoveAclEntryRequest',
-        ['acl']
-      );
-      request.acl = defaultValue1;
-      const expectedHeaderRequestParams = `acl=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.RemoveAclEntryResponse()
-      );
-      client.innerApiCalls.removeAclEntry = stubSimpleCall(expectedResponse);
-      const [response] = await client.removeAclEntry(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.removeAclEntry as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.removeAclEntry as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes removeAclEntry without error using callback', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.RemoveAclEntryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.RemoveAclEntryRequest',
-        ['acl']
-      );
-      request.acl = defaultValue1;
-      const expectedHeaderRequestParams = `acl=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.RemoveAclEntryResponse()
-      );
-      client.innerApiCalls.removeAclEntry =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.removeAclEntry(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.managedkafka.v1.IRemoveAclEntryResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.removeAclEntry as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.removeAclEntry as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes removeAclEntry with error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.RemoveAclEntryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.RemoveAclEntryRequest',
-        ['acl']
-      );
-      request.acl = defaultValue1;
-      const expectedHeaderRequestParams = `acl=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.removeAclEntry = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.removeAclEntry(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.removeAclEntry as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.removeAclEntry as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes removeAclEntry with closed client', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.RemoveAclEntryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.RemoveAclEntryRequest',
-        ['acl']
-      );
-      request.acl = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.removeAclEntry(request), expectedError);
-    });
-  });
-
-  describe('createCluster', () => {
-    it('invokes createCluster without error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.CreateClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.CreateClusterRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createCluster =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createCluster(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createCluster without error using callback', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.CreateClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.CreateClusterRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createCluster =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createCluster(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.managedkafka.v1.ICluster,
-              protos.google.cloud.managedkafka.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.managedkafka.v1.ICluster,
-        protos.google.cloud.managedkafka.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createCluster with call error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.CreateClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.CreateClusterRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createCluster = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createCluster(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createCluster with LRO error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.CreateClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.CreateClusterRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createCluster = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createCluster(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateClusterProgress without error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateClusterProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateClusterProgress with error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateClusterProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateCluster', () => {
-    it('invokes updateCluster without error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.UpdateClusterRequest()
-      );
-      request.cluster ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.UpdateClusterRequest',
-        ['cluster', 'name']
-      );
-      request.cluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateCluster =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateCluster(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateCluster without error using callback', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.UpdateClusterRequest()
-      );
-      request.cluster ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.UpdateClusterRequest',
-        ['cluster', 'name']
-      );
-      request.cluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateCluster =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateCluster(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.managedkafka.v1.ICluster,
-              protos.google.cloud.managedkafka.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.managedkafka.v1.ICluster,
-        protos.google.cloud.managedkafka.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateCluster with call error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.UpdateClusterRequest()
-      );
-      request.cluster ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.UpdateClusterRequest',
-        ['cluster', 'name']
-      );
-      request.cluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateCluster = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateCluster(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateCluster with LRO error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.UpdateClusterRequest()
-      );
-      request.cluster ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.UpdateClusterRequest',
-        ['cluster', 'name']
-      );
-      request.cluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateCluster = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateCluster(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateClusterProgress without error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateClusterProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateClusterProgress with error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateClusterProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteCluster', () => {
-    it('invokes deleteCluster without error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.DeleteClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.DeleteClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteCluster =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteCluster(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteCluster without error using callback', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.DeleteClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.DeleteClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteCluster =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteCluster(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.managedkafka.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.managedkafka.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteCluster with call error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.DeleteClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.DeleteClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteCluster = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteCluster(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteCluster with LRO error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.DeleteClusterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.DeleteClusterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteCluster = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteCluster(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteCluster as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteCluster as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteClusterProgress without error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteClusterProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteClusterProgress with error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteClusterProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('listClusters', () => {
-    it('invokes listClusters without error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.ListClustersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.ListClustersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.managedkafka.v1.Cluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.managedkafka.v1.Cluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.managedkafka.v1.Cluster()
-        ),
-      ];
-      client.innerApiCalls.listClusters = stubSimpleCall(expectedResponse);
-      const [response] = await client.listClusters(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listClusters as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listClusters as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listClusters without error using callback', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.ListClustersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.ListClustersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.managedkafka.v1.Cluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.managedkafka.v1.Cluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.managedkafka.v1.Cluster()
-        ),
-      ];
-      client.innerApiCalls.listClusters =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listClusters(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.managedkafka.v1.ICluster[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listClusters as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listClusters as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listClusters with error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.ListClustersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.ListClustersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listClusters = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listClusters(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listClusters as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listClusters as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listClustersStream without error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.ListClustersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.ListClustersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.managedkafka.v1.Cluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.managedkafka.v1.Cluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.managedkafka.v1.Cluster()
-        ),
-      ];
-      client.descriptors.page.listClusters.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listClustersStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.managedkafka.v1.Cluster[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.managedkafka.v1.Cluster) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listClusters.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listClusters, request)
-      );
-      assert(
-        (client.descriptors.page.listClusters.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listClustersStream with error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.ListClustersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.ListClustersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listClusters.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listClustersStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.managedkafka.v1.Cluster[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.managedkafka.v1.Cluster) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listClusters.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listClusters, request)
-      );
-      assert(
-        (client.descriptors.page.listClusters.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listClusters without error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.ListClustersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.ListClustersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.managedkafka.v1.Cluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.managedkafka.v1.Cluster()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.managedkafka.v1.Cluster()
-        ),
-      ];
-      client.descriptors.page.listClusters.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.managedkafka.v1.ICluster[] = [];
-      const iterable = client.listClustersAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listClusters.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listClusters.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listClusters with error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.ListClustersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.ListClustersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listClusters.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listClustersAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.managedkafka.v1.ICluster[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = managedkafkaModule.v1.ManagedKafkaClient.servicePath;
+                assert.strictEqual(servicePath, 'managedkafka.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = managedkafkaModule.v1.ManagedKafkaClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'managedkafka.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listClusters.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listClusters.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('listTopics', () => {
-    it('invokes listTopics without error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.ListTopicsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.ListTopicsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.managedkafka.v1.Topic()),
-        generateSampleMessage(new protos.google.cloud.managedkafka.v1.Topic()),
-        generateSampleMessage(new protos.google.cloud.managedkafka.v1.Topic()),
-      ];
-      client.innerApiCalls.listTopics = stubSimpleCall(expectedResponse);
-      const [response] = await client.listTopics(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listTopics as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listTopics as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listTopics without error using callback', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.ListTopicsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.ListTopicsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.managedkafka.v1.Topic()),
-        generateSampleMessage(new protos.google.cloud.managedkafka.v1.Topic()),
-        generateSampleMessage(new protos.google.cloud.managedkafka.v1.Topic()),
-      ];
-      client.innerApiCalls.listTopics =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listTopics(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.managedkafka.v1.ITopic[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listTopics as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listTopics as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listTopics with error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.ListTopicsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.ListTopicsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listTopics = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listTopics(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listTopics as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listTopics as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listTopicsStream without error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.ListTopicsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.ListTopicsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.managedkafka.v1.Topic()),
-        generateSampleMessage(new protos.google.cloud.managedkafka.v1.Topic()),
-        generateSampleMessage(new protos.google.cloud.managedkafka.v1.Topic()),
-      ];
-      client.descriptors.page.listTopics.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listTopicsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.managedkafka.v1.Topic[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.managedkafka.v1.Topic) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'managedkafka.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listTopics.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listTopics, request)
-      );
-      assert(
-        (client.descriptors.page.listTopics.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('invokes listTopicsStream with error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.ListTopicsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.ListTopicsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listTopics.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listTopicsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.managedkafka.v1.Topic[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.managedkafka.v1.Topic) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'managedkafka.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listTopics.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listTopics, request)
-      );
-      assert(
-        (client.descriptors.page.listTopics.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listTopics without error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.ListTopicsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.ListTopicsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.managedkafka.v1.Topic()),
-        generateSampleMessage(new protos.google.cloud.managedkafka.v1.Topic()),
-        generateSampleMessage(new protos.google.cloud.managedkafka.v1.Topic()),
-      ];
-      client.descriptors.page.listTopics.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.managedkafka.v1.ITopic[] = [];
-      const iterable = client.listTopicsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listTopics.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listTopics.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new managedkafkaModule.v1.ManagedKafkaClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'managedkafka.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('uses async iteration with listTopics with error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.ListTopicsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.ListTopicsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listTopics.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listTopicsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.managedkafka.v1.ITopic[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new managedkafkaModule.v1.ManagedKafkaClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'managedkafka.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listTopics.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listTopics.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new managedkafkaModule.v1.ManagedKafkaClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-  describe('listConsumerGroups', () => {
-    it('invokes listConsumerGroups without error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.ListConsumerGroupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.ListConsumerGroupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.managedkafka.v1.ConsumerGroup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.managedkafka.v1.ConsumerGroup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.managedkafka.v1.ConsumerGroup()
-        ),
-      ];
-      client.innerApiCalls.listConsumerGroups =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listConsumerGroups(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listConsumerGroups as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listConsumerGroups as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        it('has port', () => {
+            const port = managedkafkaModule.v1.ManagedKafkaClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.managedKafkaStub, undefined);
+            await client.initialize();
+            assert(client.managedKafkaStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.managedKafkaStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.managedKafkaStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    it('invokes listConsumerGroups without error using callback', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.ListConsumerGroupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.ListConsumerGroupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.managedkafka.v1.ConsumerGroup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.managedkafka.v1.ConsumerGroup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.managedkafka.v1.ConsumerGroup()
-        ),
-      ];
-      client.innerApiCalls.listConsumerGroups =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listConsumerGroups(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.managedkafka.v1.IConsumerGroup[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('getCluster', () => {
+        it('invokes getCluster without error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.GetClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.GetClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.Cluster()
+            );
+            client.innerApiCalls.getCluster = stubSimpleCall(expectedResponse);
+            const [response] = await client.getCluster(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getCluster without error using callback', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.GetClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.GetClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.Cluster()
+            );
+            client.innerApiCalls.getCluster = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getCluster(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.managedkafka.v1.ICluster|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getCluster with error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.GetClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.GetClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getCluster = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getCluster(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getCluster with closed client', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.GetClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.GetClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getCluster(request), expectedError);
+        });
+    });
+
+    describe('getTopic', () => {
+        it('invokes getTopic without error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.GetTopicRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.GetTopicRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.Topic()
+            );
+            client.innerApiCalls.getTopic = stubSimpleCall(expectedResponse);
+            const [response] = await client.getTopic(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getTopic as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getTopic as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getTopic without error using callback', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.GetTopicRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.GetTopicRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.Topic()
+            );
+            client.innerApiCalls.getTopic = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getTopic(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.managedkafka.v1.ITopic|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getTopic as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getTopic as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getTopic with error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.GetTopicRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.GetTopicRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getTopic = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getTopic(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getTopic as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getTopic as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getTopic with closed client', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.GetTopicRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.GetTopicRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getTopic(request), expectedError);
+        });
+    });
+
+    describe('createTopic', () => {
+        it('invokes createTopic without error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.CreateTopicRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.CreateTopicRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.Topic()
+            );
+            client.innerApiCalls.createTopic = stubSimpleCall(expectedResponse);
+            const [response] = await client.createTopic(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createTopic as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createTopic as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createTopic without error using callback', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.CreateTopicRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.CreateTopicRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.Topic()
+            );
+            client.innerApiCalls.createTopic = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createTopic(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.managedkafka.v1.ITopic|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createTopic as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createTopic as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createTopic with error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.CreateTopicRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.CreateTopicRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createTopic = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createTopic(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createTopic as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createTopic as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createTopic with closed client', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.CreateTopicRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.CreateTopicRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createTopic(request), expectedError);
+        });
+    });
+
+    describe('updateTopic', () => {
+        it('invokes updateTopic without error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.UpdateTopicRequest()
+            );
+            request.topic ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.UpdateTopicRequest', ['topic', 'name']);
+            request.topic.name = defaultValue1;
+            const expectedHeaderRequestParams = `topic.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.Topic()
+            );
+            client.innerApiCalls.updateTopic = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateTopic(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateTopic as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateTopic as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateTopic without error using callback', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.UpdateTopicRequest()
+            );
+            request.topic ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.UpdateTopicRequest', ['topic', 'name']);
+            request.topic.name = defaultValue1;
+            const expectedHeaderRequestParams = `topic.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.Topic()
+            );
+            client.innerApiCalls.updateTopic = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateTopic(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.managedkafka.v1.ITopic|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateTopic as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateTopic as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateTopic with error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.UpdateTopicRequest()
+            );
+            request.topic ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.UpdateTopicRequest', ['topic', 'name']);
+            request.topic.name = defaultValue1;
+            const expectedHeaderRequestParams = `topic.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateTopic = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateTopic(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateTopic as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateTopic as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateTopic with closed client', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.UpdateTopicRequest()
+            );
+            request.topic ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.UpdateTopicRequest', ['topic', 'name']);
+            request.topic.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateTopic(request), expectedError);
+        });
+    });
+
+    describe('deleteTopic', () => {
+        it('invokes deleteTopic without error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.DeleteTopicRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.DeleteTopicRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteTopic = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteTopic(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteTopic as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteTopic as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteTopic without error using callback', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.DeleteTopicRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.DeleteTopicRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteTopic = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteTopic(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteTopic as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteTopic as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteTopic with error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.DeleteTopicRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.DeleteTopicRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteTopic = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteTopic(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteTopic as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteTopic as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteTopic with closed client', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.DeleteTopicRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.DeleteTopicRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteTopic(request), expectedError);
+        });
+    });
+
+    describe('getConsumerGroup', () => {
+        it('invokes getConsumerGroup without error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.GetConsumerGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.GetConsumerGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.ConsumerGroup()
+            );
+            client.innerApiCalls.getConsumerGroup = stubSimpleCall(expectedResponse);
+            const [response] = await client.getConsumerGroup(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getConsumerGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getConsumerGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getConsumerGroup without error using callback', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.GetConsumerGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.GetConsumerGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.ConsumerGroup()
+            );
+            client.innerApiCalls.getConsumerGroup = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getConsumerGroup(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.managedkafka.v1.IConsumerGroup|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getConsumerGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getConsumerGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getConsumerGroup with error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.GetConsumerGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.GetConsumerGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getConsumerGroup = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getConsumerGroup(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getConsumerGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getConsumerGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getConsumerGroup with closed client', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.GetConsumerGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.GetConsumerGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getConsumerGroup(request), expectedError);
+        });
+    });
+
+    describe('updateConsumerGroup', () => {
+        it('invokes updateConsumerGroup without error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.UpdateConsumerGroupRequest()
+            );
+            request.consumerGroup ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.UpdateConsumerGroupRequest', ['consumerGroup', 'name']);
+            request.consumerGroup.name = defaultValue1;
+            const expectedHeaderRequestParams = `consumer_group.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.ConsumerGroup()
+            );
+            client.innerApiCalls.updateConsumerGroup = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateConsumerGroup(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateConsumerGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateConsumerGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateConsumerGroup without error using callback', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.UpdateConsumerGroupRequest()
+            );
+            request.consumerGroup ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.UpdateConsumerGroupRequest', ['consumerGroup', 'name']);
+            request.consumerGroup.name = defaultValue1;
+            const expectedHeaderRequestParams = `consumer_group.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.ConsumerGroup()
+            );
+            client.innerApiCalls.updateConsumerGroup = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateConsumerGroup(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.managedkafka.v1.IConsumerGroup|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateConsumerGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateConsumerGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateConsumerGroup with error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.UpdateConsumerGroupRequest()
+            );
+            request.consumerGroup ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.UpdateConsumerGroupRequest', ['consumerGroup', 'name']);
+            request.consumerGroup.name = defaultValue1;
+            const expectedHeaderRequestParams = `consumer_group.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateConsumerGroup = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateConsumerGroup(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateConsumerGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateConsumerGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateConsumerGroup with closed client', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.UpdateConsumerGroupRequest()
+            );
+            request.consumerGroup ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.UpdateConsumerGroupRequest', ['consumerGroup', 'name']);
+            request.consumerGroup.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateConsumerGroup(request), expectedError);
+        });
+    });
+
+    describe('deleteConsumerGroup', () => {
+        it('invokes deleteConsumerGroup without error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.DeleteConsumerGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.DeleteConsumerGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteConsumerGroup = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteConsumerGroup(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteConsumerGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteConsumerGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteConsumerGroup without error using callback', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.DeleteConsumerGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.DeleteConsumerGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteConsumerGroup = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteConsumerGroup(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteConsumerGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteConsumerGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteConsumerGroup with error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.DeleteConsumerGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.DeleteConsumerGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteConsumerGroup = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteConsumerGroup(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteConsumerGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteConsumerGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteConsumerGroup with closed client', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.DeleteConsumerGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.DeleteConsumerGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteConsumerGroup(request), expectedError);
+        });
+    });
+
+    describe('getAcl', () => {
+        it('invokes getAcl without error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.GetAclRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.GetAclRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.Acl()
+            );
+            client.innerApiCalls.getAcl = stubSimpleCall(expectedResponse);
+            const [response] = await client.getAcl(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAcl as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAcl as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAcl without error using callback', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.GetAclRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.GetAclRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.Acl()
+            );
+            client.innerApiCalls.getAcl = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getAcl(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.managedkafka.v1.IAcl|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAcl as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAcl as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAcl with error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.GetAclRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.GetAclRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getAcl = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getAcl(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getAcl as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAcl as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAcl with closed client', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.GetAclRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.GetAclRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getAcl(request), expectedError);
+        });
+    });
+
+    describe('createAcl', () => {
+        it('invokes createAcl without error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.CreateAclRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.CreateAclRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.Acl()
+            );
+            client.innerApiCalls.createAcl = stubSimpleCall(expectedResponse);
+            const [response] = await client.createAcl(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createAcl as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAcl as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createAcl without error using callback', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.CreateAclRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.CreateAclRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.Acl()
+            );
+            client.innerApiCalls.createAcl = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createAcl(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.managedkafka.v1.IAcl|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createAcl as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAcl as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createAcl with error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.CreateAclRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.CreateAclRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createAcl = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createAcl(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createAcl as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAcl as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createAcl with closed client', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.CreateAclRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.CreateAclRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createAcl(request), expectedError);
+        });
+    });
+
+    describe('updateAcl', () => {
+        it('invokes updateAcl without error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.UpdateAclRequest()
+            );
+            request.acl ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.UpdateAclRequest', ['acl', 'name']);
+            request.acl.name = defaultValue1;
+            const expectedHeaderRequestParams = `acl.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.Acl()
+            );
+            client.innerApiCalls.updateAcl = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateAcl(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateAcl as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAcl as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAcl without error using callback', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.UpdateAclRequest()
+            );
+            request.acl ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.UpdateAclRequest', ['acl', 'name']);
+            request.acl.name = defaultValue1;
+            const expectedHeaderRequestParams = `acl.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.Acl()
+            );
+            client.innerApiCalls.updateAcl = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateAcl(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.managedkafka.v1.IAcl|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateAcl as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAcl as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAcl with error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.UpdateAclRequest()
+            );
+            request.acl ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.UpdateAclRequest', ['acl', 'name']);
+            request.acl.name = defaultValue1;
+            const expectedHeaderRequestParams = `acl.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateAcl = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateAcl(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateAcl as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAcl as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAcl with closed client', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.UpdateAclRequest()
+            );
+            request.acl ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.UpdateAclRequest', ['acl', 'name']);
+            request.acl.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateAcl(request), expectedError);
+        });
+    });
+
+    describe('deleteAcl', () => {
+        it('invokes deleteAcl without error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.DeleteAclRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.DeleteAclRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteAcl = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteAcl(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteAcl as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAcl as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAcl without error using callback', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.DeleteAclRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.DeleteAclRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteAcl = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteAcl(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteAcl as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAcl as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAcl with error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.DeleteAclRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.DeleteAclRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteAcl = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteAcl(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteAcl as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAcl as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAcl with closed client', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.DeleteAclRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.DeleteAclRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteAcl(request), expectedError);
+        });
+    });
+
+    describe('addAclEntry', () => {
+        it('invokes addAclEntry without error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.AddAclEntryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.AddAclEntryRequest', ['acl']);
+            request.acl = defaultValue1;
+            const expectedHeaderRequestParams = `acl=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.AddAclEntryResponse()
+            );
+            client.innerApiCalls.addAclEntry = stubSimpleCall(expectedResponse);
+            const [response] = await client.addAclEntry(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.addAclEntry as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.addAclEntry as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes addAclEntry without error using callback', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.AddAclEntryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.AddAclEntryRequest', ['acl']);
+            request.acl = defaultValue1;
+            const expectedHeaderRequestParams = `acl=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.AddAclEntryResponse()
+            );
+            client.innerApiCalls.addAclEntry = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.addAclEntry(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.managedkafka.v1.IAddAclEntryResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.addAclEntry as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.addAclEntry as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes addAclEntry with error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.AddAclEntryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.AddAclEntryRequest', ['acl']);
+            request.acl = defaultValue1;
+            const expectedHeaderRequestParams = `acl=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.addAclEntry = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.addAclEntry(request), expectedError);
+            const actualRequest = (client.innerApiCalls.addAclEntry as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.addAclEntry as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes addAclEntry with closed client', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.AddAclEntryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.AddAclEntryRequest', ['acl']);
+            request.acl = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.addAclEntry(request), expectedError);
+        });
+    });
+
+    describe('removeAclEntry', () => {
+        it('invokes removeAclEntry without error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.RemoveAclEntryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.RemoveAclEntryRequest', ['acl']);
+            request.acl = defaultValue1;
+            const expectedHeaderRequestParams = `acl=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.RemoveAclEntryResponse()
+            );
+            client.innerApiCalls.removeAclEntry = stubSimpleCall(expectedResponse);
+            const [response] = await client.removeAclEntry(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.removeAclEntry as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.removeAclEntry as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes removeAclEntry without error using callback', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.RemoveAclEntryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.RemoveAclEntryRequest', ['acl']);
+            request.acl = defaultValue1;
+            const expectedHeaderRequestParams = `acl=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.RemoveAclEntryResponse()
+            );
+            client.innerApiCalls.removeAclEntry = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.removeAclEntry(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.managedkafka.v1.IRemoveAclEntryResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.removeAclEntry as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.removeAclEntry as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes removeAclEntry with error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.RemoveAclEntryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.RemoveAclEntryRequest', ['acl']);
+            request.acl = defaultValue1;
+            const expectedHeaderRequestParams = `acl=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.removeAclEntry = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.removeAclEntry(request), expectedError);
+            const actualRequest = (client.innerApiCalls.removeAclEntry as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.removeAclEntry as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes removeAclEntry with closed client', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.RemoveAclEntryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.RemoveAclEntryRequest', ['acl']);
+            request.acl = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.removeAclEntry(request), expectedError);
+        });
+    });
+
+    describe('createCluster', () => {
+        it('invokes createCluster without error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.CreateClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.CreateClusterRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createCluster = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createCluster(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createCluster without error using callback', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.CreateClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.CreateClusterRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createCluster = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createCluster(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.managedkafka.v1.ICluster, protos.google.cloud.managedkafka.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.managedkafka.v1.ICluster, protos.google.cloud.managedkafka.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createCluster with call error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.CreateClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.CreateClusterRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createCluster = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createCluster(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createCluster with LRO error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.CreateClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.CreateClusterRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createCluster = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createCluster(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateClusterProgress without error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateClusterProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateClusterProgress with error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateClusterProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateCluster', () => {
+        it('invokes updateCluster without error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.UpdateClusterRequest()
+            );
+            request.cluster ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.UpdateClusterRequest', ['cluster', 'name']);
+            request.cluster.name = defaultValue1;
+            const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateCluster = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateCluster(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateCluster without error using callback', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.UpdateClusterRequest()
+            );
+            request.cluster ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.UpdateClusterRequest', ['cluster', 'name']);
+            request.cluster.name = defaultValue1;
+            const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateCluster = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateCluster(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.managedkafka.v1.ICluster, protos.google.cloud.managedkafka.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.managedkafka.v1.ICluster, protos.google.cloud.managedkafka.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateCluster with call error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.UpdateClusterRequest()
+            );
+            request.cluster ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.UpdateClusterRequest', ['cluster', 'name']);
+            request.cluster.name = defaultValue1;
+            const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateCluster = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateCluster(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateCluster with LRO error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.UpdateClusterRequest()
+            );
+            request.cluster ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.UpdateClusterRequest', ['cluster', 'name']);
+            request.cluster.name = defaultValue1;
+            const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateCluster = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateCluster(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateClusterProgress without error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateClusterProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateClusterProgress with error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateClusterProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteCluster', () => {
+        it('invokes deleteCluster without error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.DeleteClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.DeleteClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteCluster = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteCluster(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteCluster without error using callback', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.DeleteClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.DeleteClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteCluster = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteCluster(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.managedkafka.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.managedkafka.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteCluster with call error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.DeleteClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.DeleteClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteCluster = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteCluster(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteCluster with LRO error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.DeleteClusterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.DeleteClusterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteCluster = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteCluster(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteCluster as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteCluster as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteClusterProgress without error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteClusterProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteClusterProgress with error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteClusterProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('listClusters', () => {
+        it('invokes listClusters without error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.ListClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.ListClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.Cluster()),
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.Cluster()),
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.Cluster()),
+            ];
+            client.innerApiCalls.listClusters = stubSimpleCall(expectedResponse);
+            const [response] = await client.listClusters(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listClusters as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listClusters as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listClusters without error using callback', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.ListClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.ListClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.Cluster()),
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.Cluster()),
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.Cluster()),
+            ];
+            client.innerApiCalls.listClusters = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listClusters(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.managedkafka.v1.ICluster[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listClusters as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listClusters as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listClusters with error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.ListClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.ListClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listClusters = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listClusters(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listClusters as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listClusters as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listClustersStream without error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.ListClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.ListClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.Cluster()),
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.Cluster()),
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.Cluster()),
+            ];
+            client.descriptors.page.listClusters.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listClustersStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.managedkafka.v1.Cluster[] = [];
+                stream.on('data', (response: protos.google.cloud.managedkafka.v1.Cluster) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listClusters.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listClusters, request));
+            assert(
+                (client.descriptors.page.listClusters.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listClustersStream with error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.ListClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.ListClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listClusters.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listClustersStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.managedkafka.v1.Cluster[] = [];
+                stream.on('data', (response: protos.google.cloud.managedkafka.v1.Cluster) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listClusters.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listClusters, request));
+            assert(
+                (client.descriptors.page.listClusters.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listClusters without error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.ListClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.ListClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.Cluster()),
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.Cluster()),
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.Cluster()),
+            ];
+            client.descriptors.page.listClusters.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.managedkafka.v1.ICluster[] = [];
+            const iterable = client.listClustersAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listConsumerGroups as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listConsumerGroups as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listConsumerGroups with error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.ListConsumerGroupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.ListConsumerGroupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listConsumerGroups = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listConsumerGroups(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listConsumerGroups as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listConsumerGroups as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listConsumerGroupsStream without error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.ListConsumerGroupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.ListConsumerGroupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.managedkafka.v1.ConsumerGroup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.managedkafka.v1.ConsumerGroup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.managedkafka.v1.ConsumerGroup()
-        ),
-      ];
-      client.descriptors.page.listConsumerGroups.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listConsumerGroupsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.managedkafka.v1.ConsumerGroup[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.managedkafka.v1.ConsumerGroup) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listClusters.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listClusters.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listClusters with error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.ListClustersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.ListClustersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listClusters.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listClustersAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.managedkafka.v1.ICluster[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listClusters.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listClusters.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listConsumerGroups.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listConsumerGroups, request)
-      );
-      assert(
-        (client.descriptors.page.listConsumerGroups.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listConsumerGroupsStream with error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.ListConsumerGroupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.ListConsumerGroupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listConsumerGroups.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listConsumerGroupsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.managedkafka.v1.ConsumerGroup[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.managedkafka.v1.ConsumerGroup) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listTopics', () => {
+        it('invokes listTopics without error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.ListTopicsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.ListTopicsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.Topic()),
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.Topic()),
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.Topic()),
+            ];
+            client.innerApiCalls.listTopics = stubSimpleCall(expectedResponse);
+            const [response] = await client.listTopics(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listTopics as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listTopics as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listTopics without error using callback', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.ListTopicsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.ListTopicsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.Topic()),
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.Topic()),
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.Topic()),
+            ];
+            client.innerApiCalls.listTopics = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listTopics(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.managedkafka.v1.ITopic[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listTopics as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listTopics as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listConsumerGroups.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listConsumerGroups, request)
-      );
-      assert(
-        (client.descriptors.page.listConsumerGroups.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listConsumerGroups without error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.ListConsumerGroupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.ListConsumerGroupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.managedkafka.v1.ConsumerGroup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.managedkafka.v1.ConsumerGroup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.managedkafka.v1.ConsumerGroup()
-        ),
-      ];
-      client.descriptors.page.listConsumerGroups.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.managedkafka.v1.IConsumerGroup[] =
-        [];
-      const iterable = client.listConsumerGroupsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listConsumerGroups.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listConsumerGroups.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listTopics with error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.ListTopicsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.ListTopicsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listTopics = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listTopics(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listTopics as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listTopics as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listConsumerGroups with error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.ListConsumerGroupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.ListConsumerGroupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listConsumerGroups.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listConsumerGroupsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.managedkafka.v1.IConsumerGroup[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listConsumerGroups.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listConsumerGroups.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listTopicsStream without error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.ListTopicsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.ListTopicsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.Topic()),
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.Topic()),
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.Topic()),
+            ];
+            client.descriptors.page.listTopics.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listTopicsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.managedkafka.v1.Topic[] = [];
+                stream.on('data', (response: protos.google.cloud.managedkafka.v1.Topic) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listTopics.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listTopics, request));
+            assert(
+                (client.descriptors.page.listTopics.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listAcls', () => {
-    it('invokes listAcls without error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.ListAclsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.ListAclsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.managedkafka.v1.Acl()),
-        generateSampleMessage(new protos.google.cloud.managedkafka.v1.Acl()),
-        generateSampleMessage(new protos.google.cloud.managedkafka.v1.Acl()),
-      ];
-      client.innerApiCalls.listAcls = stubSimpleCall(expectedResponse);
-      const [response] = await client.listAcls(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listAcls as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAcls as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listTopicsStream with error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.ListTopicsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.ListTopicsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listTopics.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listTopicsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.managedkafka.v1.Topic[] = [];
+                stream.on('data', (response: protos.google.cloud.managedkafka.v1.Topic) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listTopics.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listTopics, request));
+            assert(
+                (client.descriptors.page.listTopics.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listAcls without error using callback', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.ListAclsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.ListAclsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.managedkafka.v1.Acl()),
-        generateSampleMessage(new protos.google.cloud.managedkafka.v1.Acl()),
-        generateSampleMessage(new protos.google.cloud.managedkafka.v1.Acl()),
-      ];
-      client.innerApiCalls.listAcls =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listAcls(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.managedkafka.v1.IAcl[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listTopics without error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.ListTopicsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.ListTopicsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.Topic()),
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.Topic()),
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.Topic()),
+            ];
+            client.descriptors.page.listTopics.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.managedkafka.v1.ITopic[] = [];
+            const iterable = client.listTopicsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listAcls as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAcls as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAcls with error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.ListAclsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.ListAclsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listAcls = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.listAcls(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listAcls as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAcls as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAclsStream without error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.ListAclsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.ListAclsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.managedkafka.v1.Acl()),
-        generateSampleMessage(new protos.google.cloud.managedkafka.v1.Acl()),
-        generateSampleMessage(new protos.google.cloud.managedkafka.v1.Acl()),
-      ];
-      client.descriptors.page.listAcls.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listAclsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.managedkafka.v1.Acl[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.managedkafka.v1.Acl) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listTopics.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listTopics.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listTopics with error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.ListTopicsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.ListTopicsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listTopics.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listTopicsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.managedkafka.v1.ITopic[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listTopics.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listTopics.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listAcls.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listAcls, request)
-      );
-      assert(
-        (client.descriptors.page.listAcls.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listAclsStream with error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.ListAclsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.ListAclsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listAcls.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listAclsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.managedkafka.v1.Acl[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.managedkafka.v1.Acl) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listConsumerGroups', () => {
+        it('invokes listConsumerGroups without error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.ListConsumerGroupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.ListConsumerGroupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.ConsumerGroup()),
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.ConsumerGroup()),
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.ConsumerGroup()),
+            ];
+            client.innerApiCalls.listConsumerGroups = stubSimpleCall(expectedResponse);
+            const [response] = await client.listConsumerGroups(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listConsumerGroups as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listConsumerGroups as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listConsumerGroups without error using callback', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.ListConsumerGroupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.ListConsumerGroupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.ConsumerGroup()),
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.ConsumerGroup()),
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.ConsumerGroup()),
+            ];
+            client.innerApiCalls.listConsumerGroups = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listConsumerGroups(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.managedkafka.v1.IConsumerGroup[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listConsumerGroups as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listConsumerGroups as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listAcls.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listAcls, request)
-      );
-      assert(
-        (client.descriptors.page.listAcls.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listAcls without error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.ListAclsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.ListAclsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.managedkafka.v1.Acl()),
-        generateSampleMessage(new protos.google.cloud.managedkafka.v1.Acl()),
-        generateSampleMessage(new protos.google.cloud.managedkafka.v1.Acl()),
-      ];
-      client.descriptors.page.listAcls.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.managedkafka.v1.IAcl[] = [];
-      const iterable = client.listAclsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listAcls.asyncIterate as SinonStub).getCall(0)
-          .args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listAcls.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listConsumerGroups with error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.ListConsumerGroupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.ListConsumerGroupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listConsumerGroups = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listConsumerGroups(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listConsumerGroups as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listConsumerGroups as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listAcls with error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.managedkafka.v1.ListAclsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.managedkafka.v1.ListAclsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listAcls.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listAclsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.managedkafka.v1.IAcl[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listAcls.asyncIterate as SinonStub).getCall(0)
-          .args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listAcls.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-  describe('getLocation', () => {
-    it('invokes getLocation without error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
-      const response = await client.getLocation(request, expectedOptions);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-    it('invokes getLocation without error using callback', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getLocation(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: LocationProtos.google.cloud.location.ILocation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('invokes listConsumerGroupsStream without error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.ListConsumerGroupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.ListConsumerGroupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.ConsumerGroup()),
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.ConsumerGroup()),
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.ConsumerGroup()),
+            ];
+            client.descriptors.page.listConsumerGroups.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listConsumerGroupsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.managedkafka.v1.ConsumerGroup[] = [];
+                stream.on('data', (response: protos.google.cloud.managedkafka.v1.ConsumerGroup) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listConsumerGroups.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listConsumerGroups, request));
+            assert(
+                (client.descriptors.page.listConsumerGroups.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listConsumerGroupsStream with error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.ListConsumerGroupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.ListConsumerGroupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listConsumerGroups.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listConsumerGroupsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.managedkafka.v1.ConsumerGroup[] = [];
+                stream.on('data', (response: protos.google.cloud.managedkafka.v1.ConsumerGroup) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listConsumerGroups.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listConsumerGroups, request));
+            assert(
+                (client.descriptors.page.listConsumerGroups.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listConsumerGroups without error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.ListConsumerGroupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.ListConsumerGroupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.ConsumerGroup()),
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.ConsumerGroup()),
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.ConsumerGroup()),
+            ];
+            client.descriptors.page.listConsumerGroups.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.managedkafka.v1.IConsumerGroup[] = [];
+            const iterable = client.listConsumerGroupsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.locationsClient.getLocation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listConsumerGroups.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listConsumerGroups.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listConsumerGroups with error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.ListConsumerGroupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.ListConsumerGroupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listConsumerGroups.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listConsumerGroupsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.managedkafka.v1.IConsumerGroup[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listConsumerGroups.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listConsumerGroups.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes getLocation with error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.locationsClient.getLocation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getLocation(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-  describe('listLocationsAsync', () => {
-    it('uses async iteration with listLocations without error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedResponse = [
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-      ];
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-      const iterable = client.listLocationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-    it('uses async iteration with listLocations with error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedError = new Error('expected');
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listLocationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
-  describe('getOperation', () => {
-    it('invokes getOperation without error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const response = await client.getOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes getOperation without error using callback', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .getOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: operationsProtos.google.longrunning.Operation | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+
+    describe('listAcls', () => {
+        it('invokes listAcls without error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.ListAclsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.ListAclsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.Acl()),
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.Acl()),
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.Acl()),
+            ];
+            client.innerApiCalls.listAcls = stubSimpleCall(expectedResponse);
+            const [response] = await client.listAcls(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listAcls as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAcls as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listAcls without error using callback', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.ListAclsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.ListAclsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.Acl()),
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.Acl()),
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.Acl()),
+            ];
+            client.innerApiCalls.listAcls = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listAcls(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.managedkafka.v1.IAcl[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listAcls as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAcls as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listAcls with error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.ListAclsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.ListAclsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listAcls = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listAcls(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listAcls as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAcls as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listAclsStream without error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.ListAclsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.ListAclsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.Acl()),
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.Acl()),
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.Acl()),
+            ];
+            client.descriptors.page.listAcls.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listAclsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.managedkafka.v1.Acl[] = [];
+                stream.on('data', (response: protos.google.cloud.managedkafka.v1.Acl) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listAcls.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAcls, request));
+            assert(
+                (client.descriptors.page.listAcls.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listAclsStream with error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.ListAclsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.ListAclsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listAcls.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listAclsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.managedkafka.v1.Acl[] = [];
+                stream.on('data', (response: protos.google.cloud.managedkafka.v1.Acl) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listAcls.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAcls, request));
+            assert(
+                (client.descriptors.page.listAcls.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listAcls without error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.ListAclsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.ListAclsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.Acl()),
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.Acl()),
+              generateSampleMessage(new protos.google.cloud.managedkafka.v1.Acl()),
+            ];
+            client.descriptors.page.listAcls.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.managedkafka.v1.IAcl[] = [];
+            const iterable = client.listAclsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listAcls.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listAcls.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listAcls with error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.managedkafka.v1.ListAclsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.managedkafka.v1.ListAclsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listAcls.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listAclsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.managedkafka.v1.IAcl[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listAcls.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listAcls.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes getOperation with error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.getOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('getLocation', () => {
+        it('invokes getLocation without error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
+            const response = await client.getLocation(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+        it('invokes getLocation without error using callback', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getLocation(
+                    request,
+                    expectedOptions,
+                    (
+                        err?: Error | null,
+                        result?: LocationProtos.google.cloud.location.ILocation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getLocation with error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.locationsClient.getLocation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getLocation(request, expectedOptions), expectedError);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
     });
-  });
-  describe('cancelOperation', () => {
-    it('invokes cancelOperation without error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.cancelOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes cancelOperation without error using callback', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .cancelOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+    describe('listLocationsAsync', () => {
+        it('uses async iteration with listLocations without error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+                new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedResponse = [
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+            ];
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+            const iterable = client.listLocationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+        it('uses async iteration with listLocations with error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedError = new Error('expected');
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listLocationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes cancelOperation with error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.cancelOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.cancelOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('getOperation', () => {
+        it('invokes getOperation without error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const response = await client.getOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes getOperation without error using callback', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.getOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: operationsProtos.google.longrunning.Operation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getOperation with error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.getOperation(request)}, expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-  });
-  describe('deleteOperation', () => {
-    it('invokes deleteOperation without error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.deleteOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('cancelOperation', () => {
+        it('invokes cancelOperation without error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = stubSimpleCall(expectedResponse);
+            const response = await client.cancelOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes cancelOperation without error using callback', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.cancelOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes cancelOperation with error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.cancelOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.cancelOperation(request)}, expectedError);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-    it('invokes deleteOperation without error using callback', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .deleteOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+    describe('deleteOperation', () => {
+        it('invokes deleteOperation without error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = stubSimpleCall(expectedResponse);
+            const response = await client.deleteOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes deleteOperation without error using callback', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.deleteOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes deleteOperation with error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.deleteOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.deleteOperation(request)}, expectedError);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('listOperationsAsync', () => {
+        it('uses async iteration with listOperations without error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedResponse = [
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+            ];
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: operationsProtos.google.longrunning.IOperation[] = [];
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
-    });
-    it('invokes deleteOperation with error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.deleteOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.deleteOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('listOperationsAsync', () => {
-    it('uses async iteration with listOperations without error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-      ];
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.IOperation[] = [];
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-    it('uses async iteration with listOperations with error', async () => {
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.IOperation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-  });
-
-  describe('Path templates', () => {
-    describe('acl', async () => {
-      const fakePath = '/rendered/path/acl';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        cluster: 'clusterValue',
-        acl: 'aclValue',
-      };
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.aclPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.aclPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('aclPath', () => {
-        const result = client.aclPath(
-          'projectValue',
-          'locationValue',
-          'clusterValue',
-          'aclValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.aclPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromAclName', () => {
-        const result = client.matchProjectFromAclName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.aclPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromAclName', () => {
-        const result = client.matchLocationFromAclName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.aclPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchClusterFromAclName', () => {
-        const result = client.matchClusterFromAclName(fakePath);
-        assert.strictEqual(result, 'clusterValue');
-        assert(
-          (client.pathTemplates.aclPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAclFromAclName', () => {
-        const result = client.matchAclFromAclName(fakePath);
-        assert.strictEqual(result, 'aclValue');
-        assert(
-          (client.pathTemplates.aclPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+        it('uses async iteration with listOperations with error', async () => {
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: operationsProtos.google.longrunning.IOperation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
     });
 
-    describe('cluster', async () => {
-      const fakePath = '/rendered/path/cluster';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        cluster: 'clusterValue',
-      };
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.clusterPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.clusterPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('Path templates', () => {
 
-      it('clusterPath', () => {
-        const result = client.clusterPath(
-          'projectValue',
-          'locationValue',
-          'clusterValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.clusterPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('acl', async () => {
+            const fakePath = "/rendered/path/acl";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                cluster: "clusterValue",
+                acl: "aclValue",
+            };
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.aclPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.aclPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromClusterName', () => {
-        const result = client.matchProjectFromClusterName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.clusterPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('aclPath', () => {
+                const result = client.aclPath("projectValue", "locationValue", "clusterValue", "aclValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.aclPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromClusterName', () => {
-        const result = client.matchLocationFromClusterName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.clusterPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchProjectFromAclName', () => {
+                const result = client.matchProjectFromAclName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.aclPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchClusterFromClusterName', () => {
-        const result = client.matchClusterFromClusterName(fakePath);
-        assert.strictEqual(result, 'clusterValue');
-        assert(
-          (client.pathTemplates.clusterPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchLocationFromAclName', () => {
+                const result = client.matchLocationFromAclName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.aclPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchClusterFromAclName', () => {
+                const result = client.matchClusterFromAclName(fakePath);
+                assert.strictEqual(result, "clusterValue");
+                assert((client.pathTemplates.aclPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAclFromAclName', () => {
+                const result = client.matchAclFromAclName(fakePath);
+                assert.strictEqual(result, "aclValue");
+                assert((client.pathTemplates.aclPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('cluster', async () => {
+            const fakePath = "/rendered/path/cluster";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                cluster: "clusterValue",
+            };
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.clusterPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.clusterPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('clusterPath', () => {
+                const result = client.clusterPath("projectValue", "locationValue", "clusterValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.clusterPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromClusterName', () => {
+                const result = client.matchProjectFromClusterName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.clusterPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromClusterName', () => {
+                const result = client.matchLocationFromClusterName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.clusterPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchClusterFromClusterName', () => {
+                const result = client.matchClusterFromClusterName(fakePath);
+                assert.strictEqual(result, "clusterValue");
+                assert((client.pathTemplates.clusterPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('connectCluster', async () => {
+            const fakePath = "/rendered/path/connectCluster";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                connect_cluster: "connectClusterValue",
+            };
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.connectClusterPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.connectClusterPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('connectClusterPath', () => {
+                const result = client.connectClusterPath("projectValue", "locationValue", "connectClusterValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.connectClusterPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromConnectClusterName', () => {
+                const result = client.matchProjectFromConnectClusterName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.connectClusterPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromConnectClusterName', () => {
+                const result = client.matchLocationFromConnectClusterName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.connectClusterPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchConnectClusterFromConnectClusterName', () => {
+                const result = client.matchConnectClusterFromConnectClusterName(fakePath);
+                assert.strictEqual(result, "connectClusterValue");
+                assert((client.pathTemplates.connectClusterPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('connector', async () => {
+            const fakePath = "/rendered/path/connector";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                connect_cluster: "connectClusterValue",
+                connector: "connectorValue",
+            };
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.connectorPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.connectorPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('connectorPath', () => {
+                const result = client.connectorPath("projectValue", "locationValue", "connectClusterValue", "connectorValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.connectorPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromConnectorName', () => {
+                const result = client.matchProjectFromConnectorName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.connectorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromConnectorName', () => {
+                const result = client.matchLocationFromConnectorName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.connectorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchConnectClusterFromConnectorName', () => {
+                const result = client.matchConnectClusterFromConnectorName(fakePath);
+                assert.strictEqual(result, "connectClusterValue");
+                assert((client.pathTemplates.connectorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchConnectorFromConnectorName', () => {
+                const result = client.matchConnectorFromConnectorName(fakePath);
+                assert.strictEqual(result, "connectorValue");
+                assert((client.pathTemplates.connectorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('consumerGroup', async () => {
+            const fakePath = "/rendered/path/consumerGroup";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                cluster: "clusterValue",
+                consumer_group: "consumerGroupValue",
+            };
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.consumerGroupPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.consumerGroupPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('consumerGroupPath', () => {
+                const result = client.consumerGroupPath("projectValue", "locationValue", "clusterValue", "consumerGroupValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.consumerGroupPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromConsumerGroupName', () => {
+                const result = client.matchProjectFromConsumerGroupName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.consumerGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromConsumerGroupName', () => {
+                const result = client.matchLocationFromConsumerGroupName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.consumerGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchClusterFromConsumerGroupName', () => {
+                const result = client.matchClusterFromConsumerGroupName(fakePath);
+                assert.strictEqual(result, "clusterValue");
+                assert((client.pathTemplates.consumerGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchConsumerGroupFromConsumerGroupName', () => {
+                const result = client.matchConsumerGroupFromConsumerGroupName(fakePath);
+                assert.strictEqual(result, "consumerGroupValue");
+                assert((client.pathTemplates.consumerGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('location', async () => {
+            const fakePath = "/rendered/path/location";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.locationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.locationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('locationPath', () => {
+                const result = client.locationPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.locationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromLocationName', () => {
+                const result = client.matchProjectFromLocationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromLocationName', () => {
+                const result = client.matchLocationFromLocationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('project', async () => {
+            const fakePath = "/rendered/path/project";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectPath', () => {
+                const result = client.projectPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectName', () => {
+                const result = client.matchProjectFromProjectName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('topic', async () => {
+            const fakePath = "/rendered/path/topic";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                cluster: "clusterValue",
+                topic: "topicValue",
+            };
+            const client = new managedkafkaModule.v1.ManagedKafkaClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.topicPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.topicPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('topicPath', () => {
+                const result = client.topicPath("projectValue", "locationValue", "clusterValue", "topicValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.topicPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromTopicName', () => {
+                const result = client.matchProjectFromTopicName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.topicPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromTopicName', () => {
+                const result = client.matchLocationFromTopicName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.topicPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchClusterFromTopicName', () => {
+                const result = client.matchClusterFromTopicName(fakePath);
+                assert.strictEqual(result, "clusterValue");
+                assert((client.pathTemplates.topicPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchTopicFromTopicName', () => {
+                const result = client.matchTopicFromTopicName(fakePath);
+                assert.strictEqual(result, "topicValue");
+                assert((client.pathTemplates.topicPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-
-    describe('connectCluster', async () => {
-      const fakePath = '/rendered/path/connectCluster';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        connect_cluster: 'connectClusterValue',
-      };
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.connectClusterPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.connectClusterPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('connectClusterPath', () => {
-        const result = client.connectClusterPath(
-          'projectValue',
-          'locationValue',
-          'connectClusterValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.connectClusterPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromConnectClusterName', () => {
-        const result = client.matchProjectFromConnectClusterName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.connectClusterPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromConnectClusterName', () => {
-        const result = client.matchLocationFromConnectClusterName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.connectClusterPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchConnectClusterFromConnectClusterName', () => {
-        const result =
-          client.matchConnectClusterFromConnectClusterName(fakePath);
-        assert.strictEqual(result, 'connectClusterValue');
-        assert(
-          (client.pathTemplates.connectClusterPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('connector', async () => {
-      const fakePath = '/rendered/path/connector';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        connect_cluster: 'connectClusterValue',
-        connector: 'connectorValue',
-      };
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.connectorPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.connectorPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('connectorPath', () => {
-        const result = client.connectorPath(
-          'projectValue',
-          'locationValue',
-          'connectClusterValue',
-          'connectorValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.connectorPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromConnectorName', () => {
-        const result = client.matchProjectFromConnectorName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.connectorPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromConnectorName', () => {
-        const result = client.matchLocationFromConnectorName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.connectorPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchConnectClusterFromConnectorName', () => {
-        const result = client.matchConnectClusterFromConnectorName(fakePath);
-        assert.strictEqual(result, 'connectClusterValue');
-        assert(
-          (client.pathTemplates.connectorPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchConnectorFromConnectorName', () => {
-        const result = client.matchConnectorFromConnectorName(fakePath);
-        assert.strictEqual(result, 'connectorValue');
-        assert(
-          (client.pathTemplates.connectorPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('consumerGroup', async () => {
-      const fakePath = '/rendered/path/consumerGroup';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        cluster: 'clusterValue',
-        consumer_group: 'consumerGroupValue',
-      };
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.consumerGroupPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.consumerGroupPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('consumerGroupPath', () => {
-        const result = client.consumerGroupPath(
-          'projectValue',
-          'locationValue',
-          'clusterValue',
-          'consumerGroupValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.consumerGroupPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromConsumerGroupName', () => {
-        const result = client.matchProjectFromConsumerGroupName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.consumerGroupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromConsumerGroupName', () => {
-        const result = client.matchLocationFromConsumerGroupName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.consumerGroupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchClusterFromConsumerGroupName', () => {
-        const result = client.matchClusterFromConsumerGroupName(fakePath);
-        assert.strictEqual(result, 'clusterValue');
-        assert(
-          (client.pathTemplates.consumerGroupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchConsumerGroupFromConsumerGroupName', () => {
-        const result = client.matchConsumerGroupFromConsumerGroupName(fakePath);
-        assert.strictEqual(result, 'consumerGroupValue');
-        assert(
-          (client.pathTemplates.consumerGroupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('location', async () => {
-      const fakePath = '/rendered/path/location';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-      };
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.locationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.locationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('locationPath', () => {
-        const result = client.locationPath('projectValue', 'locationValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.locationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromLocationName', () => {
-        const result = client.matchProjectFromLocationName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromLocationName', () => {
-        const result = client.matchLocationFromLocationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('project', async () => {
-      const fakePath = '/rendered/path/project';
-      const expectedParameters = {
-        project: 'projectValue',
-      };
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectPath', () => {
-        const result = client.projectPath('projectValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectName', () => {
-        const result = client.matchProjectFromProjectName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('topic', async () => {
-      const fakePath = '/rendered/path/topic';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        cluster: 'clusterValue',
-        topic: 'topicValue',
-      };
-      const client = new managedkafkaModule.v1.ManagedKafkaClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.topicPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.topicPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('topicPath', () => {
-        const result = client.topicPath(
-          'projectValue',
-          'locationValue',
-          'clusterValue',
-          'topicValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.topicPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromTopicName', () => {
-        const result = client.matchProjectFromTopicName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.topicPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromTopicName', () => {
-        const result = client.matchLocationFromTopicName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.topicPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchClusterFromTopicName', () => {
-        const result = client.matchClusterFromTopicName(fakePath);
-        assert.strictEqual(result, 'clusterValue');
-        assert(
-          (client.pathTemplates.topicPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchTopicFromTopicName', () => {
-        const result = client.matchTopicFromTopicName(fakePath);
-        assert.strictEqual(result, 'topicValue');
-        assert(
-          (client.pathTemplates.topicPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

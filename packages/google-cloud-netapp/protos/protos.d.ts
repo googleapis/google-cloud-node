@@ -1003,9 +1003,6 @@ export namespace google {
                     /** Backup enforcedRetentionEndTime. */
                     public enforcedRetentionEndTime?: (google.protobuf.ITimestamp|null);
 
-                    /** Backup _sourceSnapshot. */
-                    public _sourceSnapshot?: "sourceSnapshot";
-
                     /**
                      * Creates a new Backup instance using the specified properties.
                      * @param [properties] Properties to set
@@ -1813,24 +1810,6 @@ export namespace google {
 
                     /** BackupPolicy state. */
                     public state: (google.cloud.netapp.v1.BackupPolicy.State|keyof typeof google.cloud.netapp.v1.BackupPolicy.State);
-
-                    /** BackupPolicy _dailyBackupLimit. */
-                    public _dailyBackupLimit?: "dailyBackupLimit";
-
-                    /** BackupPolicy _weeklyBackupLimit. */
-                    public _weeklyBackupLimit?: "weeklyBackupLimit";
-
-                    /** BackupPolicy _monthlyBackupLimit. */
-                    public _monthlyBackupLimit?: "monthlyBackupLimit";
-
-                    /** BackupPolicy _description. */
-                    public _description?: "description";
-
-                    /** BackupPolicy _enabled. */
-                    public _enabled?: "enabled";
-
-                    /** BackupPolicy _assignedVolumeCount. */
-                    public _assignedVolumeCount?: "assignedVolumeCount";
 
                     /**
                      * Creates a new BackupPolicy instance using the specified properties.
@@ -6877,30 +6856,6 @@ export namespace google {
                     /** TransferStats lastTransferError. */
                     public lastTransferError?: (string|null);
 
-                    /** TransferStats _transferBytes. */
-                    public _transferBytes?: "transferBytes";
-
-                    /** TransferStats _totalTransferDuration. */
-                    public _totalTransferDuration?: "totalTransferDuration";
-
-                    /** TransferStats _lastTransferBytes. */
-                    public _lastTransferBytes?: "lastTransferBytes";
-
-                    /** TransferStats _lastTransferDuration. */
-                    public _lastTransferDuration?: "lastTransferDuration";
-
-                    /** TransferStats _lagDuration. */
-                    public _lagDuration?: "lagDuration";
-
-                    /** TransferStats _updateTime. */
-                    public _updateTime?: "updateTime";
-
-                    /** TransferStats _lastTransferEndTime. */
-                    public _lastTransferEndTime?: "lastTransferEndTime";
-
-                    /** TransferStats _lastTransferError. */
-                    public _lastTransferError?: "lastTransferError";
-
                     /**
                      * Creates a new TransferStats instance using the specified properties.
                      * @param [properties] Properties to set
@@ -7093,12 +7048,6 @@ export namespace google {
 
                     /** Replication hybridReplicationType. */
                     public hybridReplicationType: (google.cloud.netapp.v1.Replication.HybridReplicationType|keyof typeof google.cloud.netapp.v1.Replication.HybridReplicationType);
-
-                    /** Replication _healthy. */
-                    public _healthy?: "healthy";
-
-                    /** Replication _description. */
-                    public _description?: "description";
 
                     /**
                      * Creates a new Replication instance using the specified properties.
@@ -7728,12 +7677,6 @@ export namespace google {
 
                     /** DestinationVolumeParameters tieringPolicy. */
                     public tieringPolicy?: (google.cloud.netapp.v1.ITieringPolicy|null);
-
-                    /** DestinationVolumeParameters _description. */
-                    public _description?: "description";
-
-                    /** DestinationVolumeParameters _tieringPolicy. */
-                    public _tieringPolicy?: "tieringPolicy";
 
                     /**
                      * Creates a new DestinationVolumeParameters instance using the specified properties.
@@ -9666,12 +9609,6 @@ export namespace google {
                     /** Volume hybridReplicationParameters. */
                     public hybridReplicationParameters?: (google.cloud.netapp.v1.IHybridReplicationParameters|null);
 
-                    /** Volume _backupConfig. */
-                    public _backupConfig?: "backupConfig";
-
-                    /** Volume _tieringPolicy. */
-                    public _tieringPolicy?: "tieringPolicy";
-
                     /**
                      * Creates a new Volume instance using the specified properties.
                      * @param [properties] Properties to set
@@ -9943,39 +9880,6 @@ export namespace google {
                     /** SimpleExportPolicyRule kerberos_5pReadWrite. */
                     public kerberos_5pReadWrite?: (boolean|null);
 
-                    /** SimpleExportPolicyRule _allowedClients. */
-                    public _allowedClients?: "allowedClients";
-
-                    /** SimpleExportPolicyRule _hasRootAccess. */
-                    public _hasRootAccess?: "hasRootAccess";
-
-                    /** SimpleExportPolicyRule _accessType. */
-                    public _accessType?: "accessType";
-
-                    /** SimpleExportPolicyRule _nfsv3. */
-                    public _nfsv3?: "nfsv3";
-
-                    /** SimpleExportPolicyRule _nfsv4. */
-                    public _nfsv4?: "nfsv4";
-
-                    /** SimpleExportPolicyRule _kerberos_5ReadOnly. */
-                    public _kerberos_5ReadOnly?: "kerberos_5ReadOnly";
-
-                    /** SimpleExportPolicyRule _kerberos_5ReadWrite. */
-                    public _kerberos_5ReadWrite?: "kerberos_5ReadWrite";
-
-                    /** SimpleExportPolicyRule _kerberos_5iReadOnly. */
-                    public _kerberos_5iReadOnly?: "kerberos_5iReadOnly";
-
-                    /** SimpleExportPolicyRule _kerberos_5iReadWrite. */
-                    public _kerberos_5iReadWrite?: "kerberos_5iReadWrite";
-
-                    /** SimpleExportPolicyRule _kerberos_5pReadOnly. */
-                    public _kerberos_5pReadOnly?: "kerberos_5pReadOnly";
-
-                    /** SimpleExportPolicyRule _kerberos_5pReadWrite. */
-                    public _kerberos_5pReadWrite?: "kerberos_5pReadWrite";
-
                     /**
                      * Creates a new SimpleExportPolicyRule instance using the specified properties.
                      * @param [properties] Properties to set
@@ -10097,21 +10001,6 @@ export namespace google {
                     /** SnapshotPolicy monthlySchedule. */
                     public monthlySchedule?: (google.cloud.netapp.v1.IMonthlySchedule|null);
 
-                    /** SnapshotPolicy _enabled. */
-                    public _enabled?: "enabled";
-
-                    /** SnapshotPolicy _hourlySchedule. */
-                    public _hourlySchedule?: "hourlySchedule";
-
-                    /** SnapshotPolicy _dailySchedule. */
-                    public _dailySchedule?: "dailySchedule";
-
-                    /** SnapshotPolicy _weeklySchedule. */
-                    public _weeklySchedule?: "weeklySchedule";
-
-                    /** SnapshotPolicy _monthlySchedule. */
-                    public _monthlySchedule?: "monthlySchedule";
-
                     /**
                      * Creates a new SnapshotPolicy instance using the specified properties.
                      * @param [properties] Properties to set
@@ -10214,12 +10103,6 @@ export namespace google {
 
                     /** HourlySchedule minute. */
                     public minute?: (number|null);
-
-                    /** HourlySchedule _snapshotsToKeep. */
-                    public _snapshotsToKeep?: "snapshotsToKeep";
-
-                    /** HourlySchedule _minute. */
-                    public _minute?: "minute";
 
                     /**
                      * Creates a new HourlySchedule instance using the specified properties.
@@ -10329,15 +10212,6 @@ export namespace google {
 
                     /** DailySchedule hour. */
                     public hour?: (number|null);
-
-                    /** DailySchedule _snapshotsToKeep. */
-                    public _snapshotsToKeep?: "snapshotsToKeep";
-
-                    /** DailySchedule _minute. */
-                    public _minute?: "minute";
-
-                    /** DailySchedule _hour. */
-                    public _hour?: "hour";
 
                     /**
                      * Creates a new DailySchedule instance using the specified properties.
@@ -10454,18 +10328,6 @@ export namespace google {
                     /** WeeklySchedule day. */
                     public day?: (string|null);
 
-                    /** WeeklySchedule _snapshotsToKeep. */
-                    public _snapshotsToKeep?: "snapshotsToKeep";
-
-                    /** WeeklySchedule _minute. */
-                    public _minute?: "minute";
-
-                    /** WeeklySchedule _hour. */
-                    public _hour?: "hour";
-
-                    /** WeeklySchedule _day. */
-                    public _day?: "day";
-
                     /**
                      * Creates a new WeeklySchedule instance using the specified properties.
                      * @param [properties] Properties to set
@@ -10580,18 +10442,6 @@ export namespace google {
 
                     /** MonthlySchedule daysOfMonth. */
                     public daysOfMonth?: (string|null);
-
-                    /** MonthlySchedule _snapshotsToKeep. */
-                    public _snapshotsToKeep?: "snapshotsToKeep";
-
-                    /** MonthlySchedule _minute. */
-                    public _minute?: "minute";
-
-                    /** MonthlySchedule _hour. */
-                    public _hour?: "hour";
-
-                    /** MonthlySchedule _daysOfMonth. */
-                    public _daysOfMonth?: "daysOfMonth";
 
                     /**
                      * Creates a new MonthlySchedule instance using the specified properties.
@@ -10935,12 +10785,6 @@ export namespace google {
                     /** BackupConfig backupChainBytes. */
                     public backupChainBytes?: (number|Long|string|null);
 
-                    /** BackupConfig _scheduledBackupEnabled. */
-                    public _scheduledBackupEnabled?: "scheduledBackupEnabled";
-
-                    /** BackupConfig _backupChainBytes. */
-                    public _backupChainBytes?: "backupChainBytes";
-
                     /**
                      * Creates a new BackupConfig instance using the specified properties.
                      * @param [properties] Properties to set
@@ -11043,12 +10887,6 @@ export namespace google {
 
                     /** TieringPolicy coolingThresholdDays. */
                     public coolingThresholdDays?: (number|null);
-
-                    /** TieringPolicy _tierAction. */
-                    public _tierAction?: "tierAction";
-
-                    /** TieringPolicy _coolingThresholdDays. */
-                    public _coolingThresholdDays?: "coolingThresholdDays";
 
                     /**
                      * Creates a new TieringPolicy instance using the specified properties.
@@ -13088,9 +12926,6 @@ export namespace google {
                     /** StoragePool totalIops. */
                     public totalIops: (number|Long|string);
 
-                    /** StoragePool _globalAccessAllowed. */
-                    public _globalAccessAllowed?: "globalAccessAllowed";
-
                     /**
                      * Creates a new StoragePool instance using the specified properties.
                      * @param [properties] Properties to set
@@ -14210,6 +14045,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -14250,6 +14088,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -18315,6 +18156,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -18566,7 +18410,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -18597,7 +18441,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -19936,7 +19780,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -19952,7 +19796,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.

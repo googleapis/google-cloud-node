@@ -16,13 +16,13 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const managedkafka = require('@google-cloud/managedkafka');
 
 function main() {
   const managedKafkaClient = new managedkafka.ManagedKafkaClient();
-  const managedKafkaConnectClient =
-    new managedkafka.ManagedKafkaConnectClient();
+  const managedKafkaConnectClient = new managedkafka.ManagedKafkaConnectClient();
 }
 
 main();

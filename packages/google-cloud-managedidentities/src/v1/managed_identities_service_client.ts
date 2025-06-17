@@ -18,20 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -141,42 +132,20 @@ export class ManagedIdentitiesServiceClient {
    *     const client = new ManagedIdentitiesServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof ManagedIdentitiesServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    const staticMembers = this.constructor as typeof ManagedIdentitiesServiceClient;
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'managedidentities.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -202,7 +171,7 @@ export class ManagedIdentitiesServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -216,7 +185,10 @@ export class ManagedIdentitiesServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -252,188 +224,90 @@ export class ManagedIdentitiesServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listDomains: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'domains'
-      ),
+      listDomains:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'domains')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v1/{name=projects/*/locations/*}',
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v1/{name=projects/*}/locations',
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
-          get: '/v1/{resource=projects/*/locations/global/domains/*}:getIamPolicy',
-          additional_bindings: [
-            {
-              get: '/v1/{resource=projects/*/locations/global/peerings/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/global/domains/*/backups/*}:getIamPolicy',
-            },
-          ],
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
-          post: '/v1/{resource=projects/*/locations/global/domains/*}:setIamPolicy',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1/{resource=projects/*/locations/global/peerings/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/global/domains/*/backups/*}:setIamPolicy',
-              body: '*',
-            },
-          ],
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
-          post: '/v1/{resource=projects/*/locations/global/domains/*}:testIamPermissions',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1/{resource=projects/*/locations/global/peerings/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/global/domains/*/backups/*}:testIamPermissions',
-              body: '*',
-            },
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v1/{name=projects/*/locations/global/operations/*}:cancel',
-          body: '*',
-        },
-        {
-          selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1/{name=projects/*/locations/global/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=projects/*/locations/global/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1/{name=projects/*/locations/global/operations}',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1/{resource=projects/*/locations/global/domains/*}:getIamPolicy',additional_bindings: [{get: '/v1/{resource=projects/*/locations/global/peerings/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/global/domains/*/backups/*}:getIamPolicy',}],
+      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/global/domains/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/global/peerings/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/global/domains/*/backups/*}:setIamPolicy',body: '*',}],
+      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/global/domains/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/global/peerings/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/global/domains/*/backups/*}:testIamPermissions',body: '*',}],
+      },{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/global/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/global/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/global/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/global/operations}',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createMicrosoftAdDomainResponse = protoFilesRoot.lookup(
-      '.google.cloud.managedidentities.v1.Domain'
-    ) as gax.protobuf.Type;
+      '.google.cloud.managedidentities.v1.Domain') as gax.protobuf.Type;
     const createMicrosoftAdDomainMetadata = protoFilesRoot.lookup(
-      '.google.cloud.managedidentities.v1.OpMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.managedidentities.v1.OpMetadata') as gax.protobuf.Type;
     const updateDomainResponse = protoFilesRoot.lookup(
-      '.google.cloud.managedidentities.v1.Domain'
-    ) as gax.protobuf.Type;
+      '.google.cloud.managedidentities.v1.Domain') as gax.protobuf.Type;
     const updateDomainMetadata = protoFilesRoot.lookup(
-      '.google.cloud.managedidentities.v1.OpMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.managedidentities.v1.OpMetadata') as gax.protobuf.Type;
     const deleteDomainResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteDomainMetadata = protoFilesRoot.lookup(
-      '.google.cloud.managedidentities.v1.OpMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.managedidentities.v1.OpMetadata') as gax.protobuf.Type;
     const attachTrustResponse = protoFilesRoot.lookup(
-      '.google.cloud.managedidentities.v1.Domain'
-    ) as gax.protobuf.Type;
+      '.google.cloud.managedidentities.v1.Domain') as gax.protobuf.Type;
     const attachTrustMetadata = protoFilesRoot.lookup(
-      '.google.cloud.managedidentities.v1.OpMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.managedidentities.v1.OpMetadata') as gax.protobuf.Type;
     const reconfigureTrustResponse = protoFilesRoot.lookup(
-      '.google.cloud.managedidentities.v1.Domain'
-    ) as gax.protobuf.Type;
+      '.google.cloud.managedidentities.v1.Domain') as gax.protobuf.Type;
     const reconfigureTrustMetadata = protoFilesRoot.lookup(
-      '.google.cloud.managedidentities.v1.OpMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.managedidentities.v1.OpMetadata') as gax.protobuf.Type;
     const detachTrustResponse = protoFilesRoot.lookup(
-      '.google.cloud.managedidentities.v1.Domain'
-    ) as gax.protobuf.Type;
+      '.google.cloud.managedidentities.v1.Domain') as gax.protobuf.Type;
     const detachTrustMetadata = protoFilesRoot.lookup(
-      '.google.cloud.managedidentities.v1.OpMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.managedidentities.v1.OpMetadata') as gax.protobuf.Type;
     const validateTrustResponse = protoFilesRoot.lookup(
-      '.google.cloud.managedidentities.v1.Domain'
-    ) as gax.protobuf.Type;
+      '.google.cloud.managedidentities.v1.Domain') as gax.protobuf.Type;
     const validateTrustMetadata = protoFilesRoot.lookup(
-      '.google.cloud.managedidentities.v1.OpMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.managedidentities.v1.OpMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createMicrosoftAdDomain: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createMicrosoftAdDomainResponse.decode.bind(
-          createMicrosoftAdDomainResponse
-        ),
-        createMicrosoftAdDomainMetadata.decode.bind(
-          createMicrosoftAdDomainMetadata
-        )
-      ),
+        createMicrosoftAdDomainResponse.decode.bind(createMicrosoftAdDomainResponse),
+        createMicrosoftAdDomainMetadata.decode.bind(createMicrosoftAdDomainMetadata)),
       updateDomain: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateDomainResponse.decode.bind(updateDomainResponse),
-        updateDomainMetadata.decode.bind(updateDomainMetadata)
-      ),
+        updateDomainMetadata.decode.bind(updateDomainMetadata)),
       deleteDomain: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteDomainResponse.decode.bind(deleteDomainResponse),
-        deleteDomainMetadata.decode.bind(deleteDomainMetadata)
-      ),
+        deleteDomainMetadata.decode.bind(deleteDomainMetadata)),
       attachTrust: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         attachTrustResponse.decode.bind(attachTrustResponse),
-        attachTrustMetadata.decode.bind(attachTrustMetadata)
-      ),
+        attachTrustMetadata.decode.bind(attachTrustMetadata)),
       reconfigureTrust: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         reconfigureTrustResponse.decode.bind(reconfigureTrustResponse),
-        reconfigureTrustMetadata.decode.bind(reconfigureTrustMetadata)
-      ),
+        reconfigureTrustMetadata.decode.bind(reconfigureTrustMetadata)),
       detachTrust: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         detachTrustResponse.decode.bind(detachTrustResponse),
-        detachTrustMetadata.decode.bind(detachTrustMetadata)
-      ),
+        detachTrustMetadata.decode.bind(detachTrustMetadata)),
       validateTrust: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         validateTrustResponse.decode.bind(validateTrustResponse),
-        validateTrustMetadata.decode.bind(validateTrustMetadata)
-      ),
+        validateTrustMetadata.decode.bind(validateTrustMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.managedidentities.v1.ManagedIdentitiesService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.managedidentities.v1.ManagedIdentitiesService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -464,45 +338,28 @@ export class ManagedIdentitiesServiceClient {
     // Put together the "service stub" for
     // google.cloud.managedidentities.v1.ManagedIdentitiesService.
     this.managedIdentitiesServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.managedidentities.v1.ManagedIdentitiesService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.managedidentities.v1
-            .ManagedIdentitiesService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.managedidentities.v1.ManagedIdentitiesService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.managedidentities.v1.ManagedIdentitiesService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const managedIdentitiesServiceStubMethods = [
-      'createMicrosoftAdDomain',
-      'resetAdminPassword',
-      'listDomains',
-      'getDomain',
-      'updateDomain',
-      'deleteDomain',
-      'attachTrust',
-      'reconfigureTrust',
-      'detachTrust',
-      'validateTrust',
-    ];
+    const managedIdentitiesServiceStubMethods =
+        ['createMicrosoftAdDomain', 'resetAdminPassword', 'listDomains', 'getDomain', 'updateDomain', 'deleteDomain', 'attachTrust', 'reconfigureTrust', 'detachTrust', 'validateTrust'];
     for (const methodName of managedIdentitiesServiceStubMethods) {
       const callPromise = this.managedIdentitiesServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -527,14 +384,8 @@ export class ManagedIdentitiesServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'managedidentities.googleapis.com';
   }
@@ -545,14 +396,8 @@ export class ManagedIdentitiesServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'managedidentities.googleapis.com';
   }
@@ -583,7 +428,9 @@ export class ManagedIdentitiesServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -592,9 +439,8 @@ export class ManagedIdentitiesServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -605,1603 +451,1084 @@ export class ManagedIdentitiesServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Resets a domain's administrator password.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The domain resource name using the form:
-   *   `projects/{project_id}/locations/global/domains/{domain_name}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.managedidentities.v1.ResetAdminPasswordResponse|ResetAdminPasswordResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_identities_service.reset_admin_password.js</caption>
-   * region_tag:managedidentities_v1_generated_ManagedIdentitiesService_ResetAdminPassword_async
-   */
+/**
+ * Resets a domain's administrator password.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The domain resource name using the form:
+ *   `projects/{project_id}/locations/global/domains/{domain_name}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.managedidentities.v1.ResetAdminPasswordResponse|ResetAdminPasswordResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_identities_service.reset_admin_password.js</caption>
+ * region_tag:managedidentities_v1_generated_ManagedIdentitiesService_ResetAdminPassword_async
+ */
   resetAdminPassword(
-    request?: protos.google.cloud.managedidentities.v1.IResetAdminPasswordRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.managedidentities.v1.IResetAdminPasswordResponse,
-      (
-        | protos.google.cloud.managedidentities.v1.IResetAdminPasswordRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.managedidentities.v1.IResetAdminPasswordRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.managedidentities.v1.IResetAdminPasswordResponse,
+        protos.google.cloud.managedidentities.v1.IResetAdminPasswordRequest|undefined, {}|undefined
+      ]>;
   resetAdminPassword(
-    request: protos.google.cloud.managedidentities.v1.IResetAdminPasswordRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.managedidentities.v1.IResetAdminPasswordResponse,
-      | protos.google.cloud.managedidentities.v1.IResetAdminPasswordRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  resetAdminPassword(
-    request: protos.google.cloud.managedidentities.v1.IResetAdminPasswordRequest,
-    callback: Callback<
-      protos.google.cloud.managedidentities.v1.IResetAdminPasswordResponse,
-      | protos.google.cloud.managedidentities.v1.IResetAdminPasswordRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  resetAdminPassword(
-    request?: protos.google.cloud.managedidentities.v1.IResetAdminPasswordRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.managedidentities.v1.IResetAdminPasswordRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.managedidentities.v1.IResetAdminPasswordResponse,
-          | protos.google.cloud.managedidentities.v1.IResetAdminPasswordRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.managedidentities.v1.IResetAdminPasswordResponse,
-      | protos.google.cloud.managedidentities.v1.IResetAdminPasswordRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.managedidentities.v1.IResetAdminPasswordResponse,
-      (
-        | protos.google.cloud.managedidentities.v1.IResetAdminPasswordRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.managedidentities.v1.IResetAdminPasswordRequest|null|undefined,
+          {}|null|undefined>): void;
+  resetAdminPassword(
+      request: protos.google.cloud.managedidentities.v1.IResetAdminPasswordRequest,
+      callback: Callback<
+          protos.google.cloud.managedidentities.v1.IResetAdminPasswordResponse,
+          protos.google.cloud.managedidentities.v1.IResetAdminPasswordRequest|null|undefined,
+          {}|null|undefined>): void;
+  resetAdminPassword(
+      request?: protos.google.cloud.managedidentities.v1.IResetAdminPasswordRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.managedidentities.v1.IResetAdminPasswordResponse,
+          protos.google.cloud.managedidentities.v1.IResetAdminPasswordRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.managedidentities.v1.IResetAdminPasswordResponse,
+          protos.google.cloud.managedidentities.v1.IResetAdminPasswordRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.managedidentities.v1.IResetAdminPasswordResponse,
+        protos.google.cloud.managedidentities.v1.IResetAdminPasswordRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('resetAdminPassword request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.managedidentities.v1.IResetAdminPasswordResponse,
-          | protos.google.cloud.managedidentities.v1.IResetAdminPasswordRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.managedidentities.v1.IResetAdminPasswordResponse,
+        protos.google.cloud.managedidentities.v1.IResetAdminPasswordRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('resetAdminPassword response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .resetAdminPassword(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.managedidentities.v1.IResetAdminPasswordResponse,
-          (
-            | protos.google.cloud.managedidentities.v1.IResetAdminPasswordRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('resetAdminPassword response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.resetAdminPassword(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.managedidentities.v1.IResetAdminPasswordResponse,
+        protos.google.cloud.managedidentities.v1.IResetAdminPasswordRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('resetAdminPassword response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets information about a domain.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The domain resource name using the form:
-   *   `projects/{project_id}/locations/global/domains/{domain_name}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.managedidentities.v1.Domain|Domain}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_identities_service.get_domain.js</caption>
-   * region_tag:managedidentities_v1_generated_ManagedIdentitiesService_GetDomain_async
-   */
+/**
+ * Gets information about a domain.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The domain resource name using the form:
+ *   `projects/{project_id}/locations/global/domains/{domain_name}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.managedidentities.v1.Domain|Domain}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_identities_service.get_domain.js</caption>
+ * region_tag:managedidentities_v1_generated_ManagedIdentitiesService_GetDomain_async
+ */
   getDomain(
-    request?: protos.google.cloud.managedidentities.v1.IGetDomainRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.managedidentities.v1.IDomain,
-      protos.google.cloud.managedidentities.v1.IGetDomainRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.managedidentities.v1.IGetDomainRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.managedidentities.v1.IDomain,
+        protos.google.cloud.managedidentities.v1.IGetDomainRequest|undefined, {}|undefined
+      ]>;
   getDomain(
-    request: protos.google.cloud.managedidentities.v1.IGetDomainRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.managedidentities.v1.IDomain,
-      | protos.google.cloud.managedidentities.v1.IGetDomainRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDomain(
-    request: protos.google.cloud.managedidentities.v1.IGetDomainRequest,
-    callback: Callback<
-      protos.google.cloud.managedidentities.v1.IDomain,
-      | protos.google.cloud.managedidentities.v1.IGetDomainRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDomain(
-    request?: protos.google.cloud.managedidentities.v1.IGetDomainRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.managedidentities.v1.IGetDomainRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.managedidentities.v1.IDomain,
-          | protos.google.cloud.managedidentities.v1.IGetDomainRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.managedidentities.v1.IDomain,
-      | protos.google.cloud.managedidentities.v1.IGetDomainRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.managedidentities.v1.IDomain,
-      protos.google.cloud.managedidentities.v1.IGetDomainRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.managedidentities.v1.IGetDomainRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDomain(
+      request: protos.google.cloud.managedidentities.v1.IGetDomainRequest,
+      callback: Callback<
+          protos.google.cloud.managedidentities.v1.IDomain,
+          protos.google.cloud.managedidentities.v1.IGetDomainRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDomain(
+      request?: protos.google.cloud.managedidentities.v1.IGetDomainRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.managedidentities.v1.IDomain,
+          protos.google.cloud.managedidentities.v1.IGetDomainRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.managedidentities.v1.IDomain,
+          protos.google.cloud.managedidentities.v1.IGetDomainRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.managedidentities.v1.IDomain,
+        protos.google.cloud.managedidentities.v1.IGetDomainRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getDomain request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.managedidentities.v1.IDomain,
-          | protos.google.cloud.managedidentities.v1.IGetDomainRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.managedidentities.v1.IDomain,
+        protos.google.cloud.managedidentities.v1.IGetDomainRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDomain response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getDomain(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.managedidentities.v1.IDomain,
-          (
-            | protos.google.cloud.managedidentities.v1.IGetDomainRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getDomain response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getDomain(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.managedidentities.v1.IDomain,
+        protos.google.cloud.managedidentities.v1.IGetDomainRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getDomain response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Creates a Microsoft AD domain.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource project name and location using the form:
-   *   `projects/{project_id}/locations/global`
-   * @param {string} request.domainName
-   *   Required. The fully qualified domain name.
-   *   e.g. mydomain.myorganization.com, with the following restrictions:
-   *
-   *    * Must contain only lowercase letters, numbers, periods and hyphens.
-   *    * Must start with a letter.
-   *    * Must contain between 2-64 characters.
-   *    * Must end with a number or a letter.
-   *    * Must not start with period.
-   *    * First segement length (mydomain form example above) shouldn't exceed
-   *      15 chars.
-   *    * The last segment cannot be fully numeric.
-   *    * Must be unique within the customer project.
-   * @param {google.cloud.managedidentities.v1.Domain} request.domain
-   *   Required. A Managed Identity domain resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_identities_service.create_microsoft_ad_domain.js</caption>
-   * region_tag:managedidentities_v1_generated_ManagedIdentitiesService_CreateMicrosoftAdDomain_async
-   */
+/**
+ * Creates a Microsoft AD domain.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource project name and location using the form:
+ *   `projects/{project_id}/locations/global`
+ * @param {string} request.domainName
+ *   Required. The fully qualified domain name.
+ *   e.g. mydomain.myorganization.com, with the following restrictions:
+ *
+ *    * Must contain only lowercase letters, numbers, periods and hyphens.
+ *    * Must start with a letter.
+ *    * Must contain between 2-64 characters.
+ *    * Must end with a number or a letter.
+ *    * Must not start with period.
+ *    * First segement length (mydomain form example above) shouldn't exceed
+ *      15 chars.
+ *    * The last segment cannot be fully numeric.
+ *    * Must be unique within the customer project.
+ * @param {google.cloud.managedidentities.v1.Domain} request.domain
+ *   Required. A Managed Identity domain resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_identities_service.create_microsoft_ad_domain.js</caption>
+ * region_tag:managedidentities_v1_generated_ManagedIdentitiesService_CreateMicrosoftAdDomain_async
+ */
   createMicrosoftAdDomain(
-    request?: protos.google.cloud.managedidentities.v1.ICreateMicrosoftAdDomainRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.managedidentities.v1.IDomain,
-        protos.google.cloud.managedidentities.v1.IOpMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.managedidentities.v1.ICreateMicrosoftAdDomainRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createMicrosoftAdDomain(
-    request: protos.google.cloud.managedidentities.v1.ICreateMicrosoftAdDomainRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.managedidentities.v1.IDomain,
-        protos.google.cloud.managedidentities.v1.IOpMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.managedidentities.v1.ICreateMicrosoftAdDomainRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createMicrosoftAdDomain(
-    request: protos.google.cloud.managedidentities.v1.ICreateMicrosoftAdDomainRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.managedidentities.v1.IDomain,
-        protos.google.cloud.managedidentities.v1.IOpMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.managedidentities.v1.ICreateMicrosoftAdDomainRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createMicrosoftAdDomain(
-    request?: protos.google.cloud.managedidentities.v1.ICreateMicrosoftAdDomainRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.managedidentities.v1.IDomain,
-            protos.google.cloud.managedidentities.v1.IOpMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.managedidentities.v1.IDomain,
-        protos.google.cloud.managedidentities.v1.IOpMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.managedidentities.v1.IDomain,
-        protos.google.cloud.managedidentities.v1.IOpMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.managedidentities.v1.ICreateMicrosoftAdDomainRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.managedidentities.v1.IDomain,
-            protos.google.cloud.managedidentities.v1.IOpMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createMicrosoftAdDomain response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createMicrosoftAdDomain request %j', request);
-    return this.innerApiCalls
-      .createMicrosoftAdDomain(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.managedidentities.v1.IDomain,
-            protos.google.cloud.managedidentities.v1.IOpMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createMicrosoftAdDomain response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createMicrosoftAdDomain(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createMicrosoftAdDomain response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createMicrosoftAdDomain()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_identities_service.create_microsoft_ad_domain.js</caption>
-   * region_tag:managedidentities_v1_generated_ManagedIdentitiesService_CreateMicrosoftAdDomain_async
-   */
-  async checkCreateMicrosoftAdDomainProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.managedidentities.v1.Domain,
-      protos.google.cloud.managedidentities.v1.OpMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createMicrosoftAdDomain()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_identities_service.create_microsoft_ad_domain.js</caption>
+ * region_tag:managedidentities_v1_generated_ManagedIdentitiesService_CreateMicrosoftAdDomain_async
+ */
+  async checkCreateMicrosoftAdDomainProgress(name: string): Promise<LROperation<protos.google.cloud.managedidentities.v1.Domain, protos.google.cloud.managedidentities.v1.OpMetadata>>{
     this._log.info('createMicrosoftAdDomain long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createMicrosoftAdDomain,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.managedidentities.v1.Domain,
-      protos.google.cloud.managedidentities.v1.OpMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createMicrosoftAdDomain, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.managedidentities.v1.Domain, protos.google.cloud.managedidentities.v1.OpMetadata>;
   }
-  /**
-   * Updates the metadata and configuration of a domain.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Mask of fields to update. At least one path must be supplied in this
-   *   field. The elements of the repeated paths field may only include
-   *   fields from {@link protos.google.cloud.managedidentities.v1.Domain|Domain}:
-   *    * `labels`
-   *    * `locations`
-   *    * `authorized_networks`
-   * @param {google.cloud.managedidentities.v1.Domain} request.domain
-   *   Required. Domain message with updated fields. Only supported fields specified in
-   *   update_mask are updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_identities_service.update_domain.js</caption>
-   * region_tag:managedidentities_v1_generated_ManagedIdentitiesService_UpdateDomain_async
-   */
+/**
+ * Updates the metadata and configuration of a domain.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Mask of fields to update. At least one path must be supplied in this
+ *   field. The elements of the repeated paths field may only include
+ *   fields from {@link protos.google.cloud.managedidentities.v1.Domain|Domain}:
+ *    * `labels`
+ *    * `locations`
+ *    * `authorized_networks`
+ * @param {google.cloud.managedidentities.v1.Domain} request.domain
+ *   Required. Domain message with updated fields. Only supported fields specified in
+ *   update_mask are updated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_identities_service.update_domain.js</caption>
+ * region_tag:managedidentities_v1_generated_ManagedIdentitiesService_UpdateDomain_async
+ */
   updateDomain(
-    request?: protos.google.cloud.managedidentities.v1.IUpdateDomainRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.managedidentities.v1.IDomain,
-        protos.google.cloud.managedidentities.v1.IOpMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.managedidentities.v1.IUpdateDomainRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateDomain(
-    request: protos.google.cloud.managedidentities.v1.IUpdateDomainRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.managedidentities.v1.IDomain,
-        protos.google.cloud.managedidentities.v1.IOpMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.managedidentities.v1.IUpdateDomainRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateDomain(
-    request: protos.google.cloud.managedidentities.v1.IUpdateDomainRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.managedidentities.v1.IDomain,
-        protos.google.cloud.managedidentities.v1.IOpMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.managedidentities.v1.IUpdateDomainRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateDomain(
-    request?: protos.google.cloud.managedidentities.v1.IUpdateDomainRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.managedidentities.v1.IDomain,
-            protos.google.cloud.managedidentities.v1.IOpMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.managedidentities.v1.IDomain,
-        protos.google.cloud.managedidentities.v1.IOpMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.managedidentities.v1.IDomain,
-        protos.google.cloud.managedidentities.v1.IOpMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.managedidentities.v1.IUpdateDomainRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'domain.name': request.domain!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'domain.name': request.domain!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.managedidentities.v1.IDomain,
-            protos.google.cloud.managedidentities.v1.IOpMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateDomain response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateDomain request %j', request);
-    return this.innerApiCalls
-      .updateDomain(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.managedidentities.v1.IDomain,
-            protos.google.cloud.managedidentities.v1.IOpMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateDomain response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateDomain(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateDomain response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateDomain()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_identities_service.update_domain.js</caption>
-   * region_tag:managedidentities_v1_generated_ManagedIdentitiesService_UpdateDomain_async
-   */
-  async checkUpdateDomainProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.managedidentities.v1.Domain,
-      protos.google.cloud.managedidentities.v1.OpMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateDomain()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_identities_service.update_domain.js</caption>
+ * region_tag:managedidentities_v1_generated_ManagedIdentitiesService_UpdateDomain_async
+ */
+  async checkUpdateDomainProgress(name: string): Promise<LROperation<protos.google.cloud.managedidentities.v1.Domain, protos.google.cloud.managedidentities.v1.OpMetadata>>{
     this._log.info('updateDomain long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateDomain,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.managedidentities.v1.Domain,
-      protos.google.cloud.managedidentities.v1.OpMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateDomain, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.managedidentities.v1.Domain, protos.google.cloud.managedidentities.v1.OpMetadata>;
   }
-  /**
-   * Deletes a domain.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The domain resource name using the form:
-   *   `projects/{project_id}/locations/global/domains/{domain_name}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_identities_service.delete_domain.js</caption>
-   * region_tag:managedidentities_v1_generated_ManagedIdentitiesService_DeleteDomain_async
-   */
+/**
+ * Deletes a domain.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The domain resource name using the form:
+ *   `projects/{project_id}/locations/global/domains/{domain_name}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_identities_service.delete_domain.js</caption>
+ * region_tag:managedidentities_v1_generated_ManagedIdentitiesService_DeleteDomain_async
+ */
   deleteDomain(
-    request?: protos.google.cloud.managedidentities.v1.IDeleteDomainRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.managedidentities.v1.IOpMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.managedidentities.v1.IDeleteDomainRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteDomain(
-    request: protos.google.cloud.managedidentities.v1.IDeleteDomainRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.managedidentities.v1.IOpMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.managedidentities.v1.IDeleteDomainRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteDomain(
-    request: protos.google.cloud.managedidentities.v1.IDeleteDomainRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.managedidentities.v1.IOpMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.managedidentities.v1.IDeleteDomainRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteDomain(
-    request?: protos.google.cloud.managedidentities.v1.IDeleteDomainRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.managedidentities.v1.IOpMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.managedidentities.v1.IOpMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.managedidentities.v1.IOpMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.managedidentities.v1.IDeleteDomainRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.managedidentities.v1.IOpMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteDomain response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteDomain request %j', request);
-    return this.innerApiCalls
-      .deleteDomain(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.managedidentities.v1.IOpMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteDomain response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteDomain(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteDomain response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteDomain()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_identities_service.delete_domain.js</caption>
-   * region_tag:managedidentities_v1_generated_ManagedIdentitiesService_DeleteDomain_async
-   */
-  async checkDeleteDomainProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.managedidentities.v1.OpMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteDomain()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_identities_service.delete_domain.js</caption>
+ * region_tag:managedidentities_v1_generated_ManagedIdentitiesService_DeleteDomain_async
+ */
+  async checkDeleteDomainProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.managedidentities.v1.OpMetadata>>{
     this._log.info('deleteDomain long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteDomain,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.managedidentities.v1.OpMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteDomain, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.managedidentities.v1.OpMetadata>;
   }
-  /**
-   * Adds an AD trust to a domain.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource domain name, project name and location using the form:
-   *   `projects/{project_id}/locations/global/domains/{domain_name}`
-   * @param {google.cloud.managedidentities.v1.Trust} request.trust
-   *   Required. The domain trust resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_identities_service.attach_trust.js</caption>
-   * region_tag:managedidentities_v1_generated_ManagedIdentitiesService_AttachTrust_async
-   */
+/**
+ * Adds an AD trust to a domain.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource domain name, project name and location using the form:
+ *   `projects/{project_id}/locations/global/domains/{domain_name}`
+ * @param {google.cloud.managedidentities.v1.Trust} request.trust
+ *   Required. The domain trust resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_identities_service.attach_trust.js</caption>
+ * region_tag:managedidentities_v1_generated_ManagedIdentitiesService_AttachTrust_async
+ */
   attachTrust(
-    request?: protos.google.cloud.managedidentities.v1.IAttachTrustRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.managedidentities.v1.IDomain,
-        protos.google.cloud.managedidentities.v1.IOpMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.managedidentities.v1.IAttachTrustRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   attachTrust(
-    request: protos.google.cloud.managedidentities.v1.IAttachTrustRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.managedidentities.v1.IDomain,
-        protos.google.cloud.managedidentities.v1.IOpMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.managedidentities.v1.IAttachTrustRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   attachTrust(
-    request: protos.google.cloud.managedidentities.v1.IAttachTrustRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.managedidentities.v1.IDomain,
-        protos.google.cloud.managedidentities.v1.IOpMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.managedidentities.v1.IAttachTrustRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   attachTrust(
-    request?: protos.google.cloud.managedidentities.v1.IAttachTrustRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.managedidentities.v1.IDomain,
-            protos.google.cloud.managedidentities.v1.IOpMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.managedidentities.v1.IDomain,
-        protos.google.cloud.managedidentities.v1.IOpMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.managedidentities.v1.IDomain,
-        protos.google.cloud.managedidentities.v1.IOpMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.managedidentities.v1.IAttachTrustRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.managedidentities.v1.IDomain,
-            protos.google.cloud.managedidentities.v1.IOpMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('attachTrust response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('attachTrust request %j', request);
-    return this.innerApiCalls
-      .attachTrust(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.managedidentities.v1.IDomain,
-            protos.google.cloud.managedidentities.v1.IOpMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('attachTrust response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.attachTrust(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('attachTrust response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `attachTrust()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_identities_service.attach_trust.js</caption>
-   * region_tag:managedidentities_v1_generated_ManagedIdentitiesService_AttachTrust_async
-   */
-  async checkAttachTrustProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.managedidentities.v1.Domain,
-      protos.google.cloud.managedidentities.v1.OpMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `attachTrust()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_identities_service.attach_trust.js</caption>
+ * region_tag:managedidentities_v1_generated_ManagedIdentitiesService_AttachTrust_async
+ */
+  async checkAttachTrustProgress(name: string): Promise<LROperation<protos.google.cloud.managedidentities.v1.Domain, protos.google.cloud.managedidentities.v1.OpMetadata>>{
     this._log.info('attachTrust long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.attachTrust,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.managedidentities.v1.Domain,
-      protos.google.cloud.managedidentities.v1.OpMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.attachTrust, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.managedidentities.v1.Domain, protos.google.cloud.managedidentities.v1.OpMetadata>;
   }
-  /**
-   * Updates the DNS conditional forwarder.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource domain name, project name and location using the form:
-   *   `projects/{project_id}/locations/global/domains/{domain_name}`
-   * @param {string} request.targetDomainName
-   *   Required. The fully-qualified target domain name which will be in trust with current
-   *   domain.
-   * @param {string[]} request.targetDnsIpAddresses
-   *   Required. The target DNS server IP addresses to resolve the remote domain involved
-   *   in the trust.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_identities_service.reconfigure_trust.js</caption>
-   * region_tag:managedidentities_v1_generated_ManagedIdentitiesService_ReconfigureTrust_async
-   */
+/**
+ * Updates the DNS conditional forwarder.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource domain name, project name and location using the form:
+ *   `projects/{project_id}/locations/global/domains/{domain_name}`
+ * @param {string} request.targetDomainName
+ *   Required. The fully-qualified target domain name which will be in trust with current
+ *   domain.
+ * @param {string[]} request.targetDnsIpAddresses
+ *   Required. The target DNS server IP addresses to resolve the remote domain involved
+ *   in the trust.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_identities_service.reconfigure_trust.js</caption>
+ * region_tag:managedidentities_v1_generated_ManagedIdentitiesService_ReconfigureTrust_async
+ */
   reconfigureTrust(
-    request?: protos.google.cloud.managedidentities.v1.IReconfigureTrustRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.managedidentities.v1.IDomain,
-        protos.google.cloud.managedidentities.v1.IOpMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.managedidentities.v1.IReconfigureTrustRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   reconfigureTrust(
-    request: protos.google.cloud.managedidentities.v1.IReconfigureTrustRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.managedidentities.v1.IDomain,
-        protos.google.cloud.managedidentities.v1.IOpMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.managedidentities.v1.IReconfigureTrustRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   reconfigureTrust(
-    request: protos.google.cloud.managedidentities.v1.IReconfigureTrustRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.managedidentities.v1.IDomain,
-        protos.google.cloud.managedidentities.v1.IOpMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.managedidentities.v1.IReconfigureTrustRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   reconfigureTrust(
-    request?: protos.google.cloud.managedidentities.v1.IReconfigureTrustRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.managedidentities.v1.IDomain,
-            protos.google.cloud.managedidentities.v1.IOpMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.managedidentities.v1.IDomain,
-        protos.google.cloud.managedidentities.v1.IOpMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.managedidentities.v1.IDomain,
-        protos.google.cloud.managedidentities.v1.IOpMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.managedidentities.v1.IReconfigureTrustRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.managedidentities.v1.IDomain,
-            protos.google.cloud.managedidentities.v1.IOpMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('reconfigureTrust response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('reconfigureTrust request %j', request);
-    return this.innerApiCalls
-      .reconfigureTrust(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.managedidentities.v1.IDomain,
-            protos.google.cloud.managedidentities.v1.IOpMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('reconfigureTrust response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.reconfigureTrust(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('reconfigureTrust response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `reconfigureTrust()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_identities_service.reconfigure_trust.js</caption>
-   * region_tag:managedidentities_v1_generated_ManagedIdentitiesService_ReconfigureTrust_async
-   */
-  async checkReconfigureTrustProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.managedidentities.v1.Domain,
-      protos.google.cloud.managedidentities.v1.OpMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `reconfigureTrust()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_identities_service.reconfigure_trust.js</caption>
+ * region_tag:managedidentities_v1_generated_ManagedIdentitiesService_ReconfigureTrust_async
+ */
+  async checkReconfigureTrustProgress(name: string): Promise<LROperation<protos.google.cloud.managedidentities.v1.Domain, protos.google.cloud.managedidentities.v1.OpMetadata>>{
     this._log.info('reconfigureTrust long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.reconfigureTrust,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.managedidentities.v1.Domain,
-      protos.google.cloud.managedidentities.v1.OpMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.reconfigureTrust, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.managedidentities.v1.Domain, protos.google.cloud.managedidentities.v1.OpMetadata>;
   }
-  /**
-   * Removes an AD trust.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource domain name, project name, and location using the form:
-   *   `projects/{project_id}/locations/global/domains/{domain_name}`
-   * @param {google.cloud.managedidentities.v1.Trust} request.trust
-   *   Required. The domain trust resource to removed.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_identities_service.detach_trust.js</caption>
-   * region_tag:managedidentities_v1_generated_ManagedIdentitiesService_DetachTrust_async
-   */
+/**
+ * Removes an AD trust.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource domain name, project name, and location using the form:
+ *   `projects/{project_id}/locations/global/domains/{domain_name}`
+ * @param {google.cloud.managedidentities.v1.Trust} request.trust
+ *   Required. The domain trust resource to removed.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_identities_service.detach_trust.js</caption>
+ * region_tag:managedidentities_v1_generated_ManagedIdentitiesService_DetachTrust_async
+ */
   detachTrust(
-    request?: protos.google.cloud.managedidentities.v1.IDetachTrustRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.managedidentities.v1.IDomain,
-        protos.google.cloud.managedidentities.v1.IOpMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.managedidentities.v1.IDetachTrustRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   detachTrust(
-    request: protos.google.cloud.managedidentities.v1.IDetachTrustRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.managedidentities.v1.IDomain,
-        protos.google.cloud.managedidentities.v1.IOpMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.managedidentities.v1.IDetachTrustRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   detachTrust(
-    request: protos.google.cloud.managedidentities.v1.IDetachTrustRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.managedidentities.v1.IDomain,
-        protos.google.cloud.managedidentities.v1.IOpMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.managedidentities.v1.IDetachTrustRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   detachTrust(
-    request?: protos.google.cloud.managedidentities.v1.IDetachTrustRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.managedidentities.v1.IDomain,
-            protos.google.cloud.managedidentities.v1.IOpMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.managedidentities.v1.IDomain,
-        protos.google.cloud.managedidentities.v1.IOpMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.managedidentities.v1.IDomain,
-        protos.google.cloud.managedidentities.v1.IOpMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.managedidentities.v1.IDetachTrustRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.managedidentities.v1.IDomain,
-            protos.google.cloud.managedidentities.v1.IOpMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('detachTrust response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('detachTrust request %j', request);
-    return this.innerApiCalls
-      .detachTrust(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.managedidentities.v1.IDomain,
-            protos.google.cloud.managedidentities.v1.IOpMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('detachTrust response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.detachTrust(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('detachTrust response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `detachTrust()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_identities_service.detach_trust.js</caption>
-   * region_tag:managedidentities_v1_generated_ManagedIdentitiesService_DetachTrust_async
-   */
-  async checkDetachTrustProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.managedidentities.v1.Domain,
-      protos.google.cloud.managedidentities.v1.OpMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `detachTrust()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_identities_service.detach_trust.js</caption>
+ * region_tag:managedidentities_v1_generated_ManagedIdentitiesService_DetachTrust_async
+ */
+  async checkDetachTrustProgress(name: string): Promise<LROperation<protos.google.cloud.managedidentities.v1.Domain, protos.google.cloud.managedidentities.v1.OpMetadata>>{
     this._log.info('detachTrust long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.detachTrust,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.managedidentities.v1.Domain,
-      protos.google.cloud.managedidentities.v1.OpMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.detachTrust, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.managedidentities.v1.Domain, protos.google.cloud.managedidentities.v1.OpMetadata>;
   }
-  /**
-   * Validates a trust state, that the target domain is reachable, and that the
-   * target domain is able to accept incoming trust requests.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource domain name, project name, and location using the form:
-   *   `projects/{project_id}/locations/global/domains/{domain_name}`
-   * @param {google.cloud.managedidentities.v1.Trust} request.trust
-   *   Required. The domain trust to validate trust state for.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_identities_service.validate_trust.js</caption>
-   * region_tag:managedidentities_v1_generated_ManagedIdentitiesService_ValidateTrust_async
-   */
+/**
+ * Validates a trust state, that the target domain is reachable, and that the
+ * target domain is able to accept incoming trust requests.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource domain name, project name, and location using the form:
+ *   `projects/{project_id}/locations/global/domains/{domain_name}`
+ * @param {google.cloud.managedidentities.v1.Trust} request.trust
+ *   Required. The domain trust to validate trust state for.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_identities_service.validate_trust.js</caption>
+ * region_tag:managedidentities_v1_generated_ManagedIdentitiesService_ValidateTrust_async
+ */
   validateTrust(
-    request?: protos.google.cloud.managedidentities.v1.IValidateTrustRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.managedidentities.v1.IDomain,
-        protos.google.cloud.managedidentities.v1.IOpMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.managedidentities.v1.IValidateTrustRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   validateTrust(
-    request: protos.google.cloud.managedidentities.v1.IValidateTrustRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.managedidentities.v1.IDomain,
-        protos.google.cloud.managedidentities.v1.IOpMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.managedidentities.v1.IValidateTrustRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   validateTrust(
-    request: protos.google.cloud.managedidentities.v1.IValidateTrustRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.managedidentities.v1.IDomain,
-        protos.google.cloud.managedidentities.v1.IOpMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.managedidentities.v1.IValidateTrustRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   validateTrust(
-    request?: protos.google.cloud.managedidentities.v1.IValidateTrustRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.managedidentities.v1.IDomain,
-            protos.google.cloud.managedidentities.v1.IOpMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.managedidentities.v1.IDomain,
-        protos.google.cloud.managedidentities.v1.IOpMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.managedidentities.v1.IDomain,
-        protos.google.cloud.managedidentities.v1.IOpMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.managedidentities.v1.IValidateTrustRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.managedidentities.v1.IDomain,
-            protos.google.cloud.managedidentities.v1.IOpMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('validateTrust response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('validateTrust request %j', request);
-    return this.innerApiCalls
-      .validateTrust(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.managedidentities.v1.IDomain,
-            protos.google.cloud.managedidentities.v1.IOpMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('validateTrust response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.validateTrust(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.managedidentities.v1.IDomain, protos.google.cloud.managedidentities.v1.IOpMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('validateTrust response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `validateTrust()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_identities_service.validate_trust.js</caption>
-   * region_tag:managedidentities_v1_generated_ManagedIdentitiesService_ValidateTrust_async
-   */
-  async checkValidateTrustProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.managedidentities.v1.Domain,
-      protos.google.cloud.managedidentities.v1.OpMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `validateTrust()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_identities_service.validate_trust.js</caption>
+ * region_tag:managedidentities_v1_generated_ManagedIdentitiesService_ValidateTrust_async
+ */
+  async checkValidateTrustProgress(name: string): Promise<LROperation<protos.google.cloud.managedidentities.v1.Domain, protos.google.cloud.managedidentities.v1.OpMetadata>>{
     this._log.info('validateTrust long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.validateTrust,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.managedidentities.v1.Domain,
-      protos.google.cloud.managedidentities.v1.OpMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.validateTrust, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.managedidentities.v1.Domain, protos.google.cloud.managedidentities.v1.OpMetadata>;
   }
-  /**
-   * Lists domains in a project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the domain location using the form:
-   *   `projects/{project_id}/locations/global`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   *   If not specified, a default value of 1000 will be used.
-   *   Regardless of the page_size value, the response may include a partial list.
-   *   Callers should rely on a response's
-   *   {@link protos.google.cloud.managedidentities.v1.ListDomainsResponse.next_page_token|next_page_token}
-   *   to determine if there are additional results to list.
-   * @param {string} [request.pageToken]
-   *   Optional. The `next_page_token` value returned from a previous ListDomainsRequest
-   *   request, if any.
-   * @param {string} [request.filter]
-   *   Optional. A filter specifying constraints of a list operation.
-   *   For example, `Domain.fqdn="mydomain.myorginization"`.
-   * @param {string} [request.orderBy]
-   *   Optional. Specifies the ordering of results. See
-   *   [Sorting
-   *   order](https://cloud.google.com/apis/design/design_patterns#sorting_order)
-   *   for more information.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.managedidentities.v1.Domain|Domain}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listDomainsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists domains in a project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the domain location using the form:
+ *   `projects/{project_id}/locations/global`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ *   If not specified, a default value of 1000 will be used.
+ *   Regardless of the page_size value, the response may include a partial list.
+ *   Callers should rely on a response's
+ *   {@link protos.google.cloud.managedidentities.v1.ListDomainsResponse.next_page_token|next_page_token}
+ *   to determine if there are additional results to list.
+ * @param {string} [request.pageToken]
+ *   Optional. The `next_page_token` value returned from a previous ListDomainsRequest
+ *   request, if any.
+ * @param {string} [request.filter]
+ *   Optional. A filter specifying constraints of a list operation.
+ *   For example, `Domain.fqdn="mydomain.myorginization"`.
+ * @param {string} [request.orderBy]
+ *   Optional. Specifies the ordering of results. See
+ *   [Sorting
+ *   order](https://cloud.google.com/apis/design/design_patterns#sorting_order)
+ *   for more information.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.managedidentities.v1.Domain|Domain}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listDomainsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDomains(
-    request?: protos.google.cloud.managedidentities.v1.IListDomainsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.managedidentities.v1.IDomain[],
-      protos.google.cloud.managedidentities.v1.IListDomainsRequest | null,
-      protos.google.cloud.managedidentities.v1.IListDomainsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.managedidentities.v1.IListDomainsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.managedidentities.v1.IDomain[],
+        protos.google.cloud.managedidentities.v1.IListDomainsRequest|null,
+        protos.google.cloud.managedidentities.v1.IListDomainsResponse
+      ]>;
   listDomains(
-    request: protos.google.cloud.managedidentities.v1.IListDomainsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.managedidentities.v1.IListDomainsRequest,
-      | protos.google.cloud.managedidentities.v1.IListDomainsResponse
-      | null
-      | undefined,
-      protos.google.cloud.managedidentities.v1.IDomain
-    >
-  ): void;
-  listDomains(
-    request: protos.google.cloud.managedidentities.v1.IListDomainsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.managedidentities.v1.IListDomainsRequest,
-      | protos.google.cloud.managedidentities.v1.IListDomainsResponse
-      | null
-      | undefined,
-      protos.google.cloud.managedidentities.v1.IDomain
-    >
-  ): void;
-  listDomains(
-    request?: protos.google.cloud.managedidentities.v1.IListDomainsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.managedidentities.v1.IListDomainsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.managedidentities.v1.IListDomainsRequest,
-          | protos.google.cloud.managedidentities.v1.IListDomainsResponse
-          | null
-          | undefined,
-          protos.google.cloud.managedidentities.v1.IDomain
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.managedidentities.v1.IListDomainsRequest,
-      | protos.google.cloud.managedidentities.v1.IListDomainsResponse
-      | null
-      | undefined,
-      protos.google.cloud.managedidentities.v1.IDomain
-    >
-  ): Promise<
-    [
-      protos.google.cloud.managedidentities.v1.IDomain[],
-      protos.google.cloud.managedidentities.v1.IListDomainsRequest | null,
-      protos.google.cloud.managedidentities.v1.IListDomainsResponse,
-    ]
-  > | void {
+          protos.google.cloud.managedidentities.v1.IListDomainsResponse|null|undefined,
+          protos.google.cloud.managedidentities.v1.IDomain>): void;
+  listDomains(
+      request: protos.google.cloud.managedidentities.v1.IListDomainsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.managedidentities.v1.IListDomainsRequest,
+          protos.google.cloud.managedidentities.v1.IListDomainsResponse|null|undefined,
+          protos.google.cloud.managedidentities.v1.IDomain>): void;
+  listDomains(
+      request?: protos.google.cloud.managedidentities.v1.IListDomainsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.managedidentities.v1.IListDomainsRequest,
+          protos.google.cloud.managedidentities.v1.IListDomainsResponse|null|undefined,
+          protos.google.cloud.managedidentities.v1.IDomain>,
+      callback?: PaginationCallback<
+          protos.google.cloud.managedidentities.v1.IListDomainsRequest,
+          protos.google.cloud.managedidentities.v1.IListDomainsResponse|null|undefined,
+          protos.google.cloud.managedidentities.v1.IDomain>):
+      Promise<[
+        protos.google.cloud.managedidentities.v1.IDomain[],
+        protos.google.cloud.managedidentities.v1.IListDomainsRequest|null,
+        protos.google.cloud.managedidentities.v1.IListDomainsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.managedidentities.v1.IListDomainsRequest,
-          | protos.google.cloud.managedidentities.v1.IListDomainsResponse
-          | null
-          | undefined,
-          protos.google.cloud.managedidentities.v1.IDomain
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.managedidentities.v1.IListDomainsRequest,
+      protos.google.cloud.managedidentities.v1.IListDomainsResponse|null|undefined,
+      protos.google.cloud.managedidentities.v1.IDomain>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDomains values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2210,71 +1537,68 @@ export class ManagedIdentitiesServiceClient {
     this._log.info('listDomains request %j', request);
     return this.innerApiCalls
       .listDomains(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.managedidentities.v1.IDomain[],
-          protos.google.cloud.managedidentities.v1.IListDomainsRequest | null,
-          protos.google.cloud.managedidentities.v1.IListDomainsResponse,
-        ]) => {
-          this._log.info('listDomains values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.managedidentities.v1.IDomain[],
+        protos.google.cloud.managedidentities.v1.IListDomainsRequest|null,
+        protos.google.cloud.managedidentities.v1.IListDomainsResponse
+      ]) => {
+        this._log.info('listDomains values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listDomains`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the domain location using the form:
-   *   `projects/{project_id}/locations/global`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   *   If not specified, a default value of 1000 will be used.
-   *   Regardless of the page_size value, the response may include a partial list.
-   *   Callers should rely on a response's
-   *   {@link protos.google.cloud.managedidentities.v1.ListDomainsResponse.next_page_token|next_page_token}
-   *   to determine if there are additional results to list.
-   * @param {string} [request.pageToken]
-   *   Optional. The `next_page_token` value returned from a previous ListDomainsRequest
-   *   request, if any.
-   * @param {string} [request.filter]
-   *   Optional. A filter specifying constraints of a list operation.
-   *   For example, `Domain.fqdn="mydomain.myorginization"`.
-   * @param {string} [request.orderBy]
-   *   Optional. Specifies the ordering of results. See
-   *   [Sorting
-   *   order](https://cloud.google.com/apis/design/design_patterns#sorting_order)
-   *   for more information.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.managedidentities.v1.Domain|Domain} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listDomainsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listDomains`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the domain location using the form:
+ *   `projects/{project_id}/locations/global`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ *   If not specified, a default value of 1000 will be used.
+ *   Regardless of the page_size value, the response may include a partial list.
+ *   Callers should rely on a response's
+ *   {@link protos.google.cloud.managedidentities.v1.ListDomainsResponse.next_page_token|next_page_token}
+ *   to determine if there are additional results to list.
+ * @param {string} [request.pageToken]
+ *   Optional. The `next_page_token` value returned from a previous ListDomainsRequest
+ *   request, if any.
+ * @param {string} [request.filter]
+ *   Optional. A filter specifying constraints of a list operation.
+ *   For example, `Domain.fqdn="mydomain.myorginization"`.
+ * @param {string} [request.orderBy]
+ *   Optional. Specifies the ordering of results. See
+ *   [Sorting
+ *   order](https://cloud.google.com/apis/design/design_patterns#sorting_order)
+ *   for more information.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.managedidentities.v1.Domain|Domain} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listDomainsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDomainsStream(
-    request?: protos.google.cloud.managedidentities.v1.IListDomainsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.managedidentities.v1.IListDomainsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDomains'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDomains stream %j', request);
     return this.descriptors.page.listDomains.createStream(
       this.innerApiCalls.listDomains as GaxCall,
@@ -2283,62 +1607,61 @@ export class ManagedIdentitiesServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listDomains`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the domain location using the form:
-   *   `projects/{project_id}/locations/global`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   *   If not specified, a default value of 1000 will be used.
-   *   Regardless of the page_size value, the response may include a partial list.
-   *   Callers should rely on a response's
-   *   {@link protos.google.cloud.managedidentities.v1.ListDomainsResponse.next_page_token|next_page_token}
-   *   to determine if there are additional results to list.
-   * @param {string} [request.pageToken]
-   *   Optional. The `next_page_token` value returned from a previous ListDomainsRequest
-   *   request, if any.
-   * @param {string} [request.filter]
-   *   Optional. A filter specifying constraints of a list operation.
-   *   For example, `Domain.fqdn="mydomain.myorginization"`.
-   * @param {string} [request.orderBy]
-   *   Optional. Specifies the ordering of results. See
-   *   [Sorting
-   *   order](https://cloud.google.com/apis/design/design_patterns#sorting_order)
-   *   for more information.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.managedidentities.v1.Domain|Domain}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_identities_service.list_domains.js</caption>
-   * region_tag:managedidentities_v1_generated_ManagedIdentitiesService_ListDomains_async
-   */
+/**
+ * Equivalent to `listDomains`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the domain location using the form:
+ *   `projects/{project_id}/locations/global`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ *   If not specified, a default value of 1000 will be used.
+ *   Regardless of the page_size value, the response may include a partial list.
+ *   Callers should rely on a response's
+ *   {@link protos.google.cloud.managedidentities.v1.ListDomainsResponse.next_page_token|next_page_token}
+ *   to determine if there are additional results to list.
+ * @param {string} [request.pageToken]
+ *   Optional. The `next_page_token` value returned from a previous ListDomainsRequest
+ *   request, if any.
+ * @param {string} [request.filter]
+ *   Optional. A filter specifying constraints of a list operation.
+ *   For example, `Domain.fqdn="mydomain.myorginization"`.
+ * @param {string} [request.orderBy]
+ *   Optional. Specifies the ordering of results. See
+ *   [Sorting
+ *   order](https://cloud.google.com/apis/design/design_patterns#sorting_order)
+ *   for more information.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.managedidentities.v1.Domain|Domain}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_identities_service.list_domains.js</caption>
+ * region_tag:managedidentities_v1_generated_ManagedIdentitiesService_ListDomains_async
+ */
   listDomainsAsync(
-    request?: protos.google.cloud.managedidentities.v1.IListDomainsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.managedidentities.v1.IDomain> {
+      request?: protos.google.cloud.managedidentities.v1.IListDomainsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.managedidentities.v1.IDomain>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDomains'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDomains iterate %j', request);
     return this.descriptors.page.listDomains.asyncIterate(
       this.innerApiCalls['listDomains'] as GaxCall,
@@ -2358,7 +1681,7 @@ export class ManagedIdentitiesServiceClient {
    * @param {string} domain
    * @returns {string} Resource name string.
    */
-  domainPath(project: string, location: string, domain: string) {
+  domainPath(project:string,location:string,domain:string) {
     return this.pathTemplates.domainPathTemplate.render({
       project: project,
       location: location,
@@ -2406,7 +1729,7 @@ export class ManagedIdentitiesServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -2441,7 +1764,7 @@ export class ManagedIdentitiesServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });

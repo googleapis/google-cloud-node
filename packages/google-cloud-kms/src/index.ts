@@ -27,19 +27,7 @@ type EkmServiceClient = v1.EkmServiceClient;
 const KeyManagementServiceClient = v1.KeyManagementServiceClient;
 type KeyManagementServiceClient = v1.KeyManagementServiceClient;
 
-export {
-  v1,
-  AutokeyClient,
-  AutokeyAdminClient,
-  EkmServiceClient,
-  KeyManagementServiceClient,
-};
-export default {
-  v1,
-  AutokeyClient,
-  AutokeyAdminClient,
-  EkmServiceClient,
-  KeyManagementServiceClient,
-};
+export {v1, AutokeyClient, AutokeyAdminClient, EkmServiceClient, KeyManagementServiceClient};
+export default {v1, AutokeyClient, AutokeyAdminClient, EkmServiceClient, KeyManagementServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

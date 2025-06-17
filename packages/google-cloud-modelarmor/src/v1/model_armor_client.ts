@@ -18,20 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -110,41 +101,20 @@ export class ModelArmorClient {
    *     const client = new ModelArmorClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ModelArmorClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'modelarmor.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -170,7 +140,7 @@ export class ModelArmorClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -186,9 +156,13 @@ export class ModelArmorClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -215,10 +189,9 @@ export class ModelArmorClient {
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
-      organizationLocationFloorSettingPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/locations/{location}/floorSetting'
-        ),
+      organizationLocationFloorSettingPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/floorSetting'
+      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
@@ -234,20 +207,14 @@ export class ModelArmorClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listTemplates: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'templates'
-      ),
+      listTemplates:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'templates')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.modelarmor.v1.ModelArmor',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.modelarmor.v1.ModelArmor', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -278,45 +245,32 @@ export class ModelArmorClient {
     // Put together the "service stub" for
     // google.cloud.modelarmor.v1.ModelArmor.
     this.modelArmorStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.modelarmor.v1.ModelArmor'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.modelarmor.v1.ModelArmor') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.modelarmor.v1.ModelArmor,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const modelArmorStubMethods = [
-      'listTemplates',
-      'getTemplate',
-      'createTemplate',
-      'updateTemplate',
-      'deleteTemplate',
-      'getFloorSetting',
-      'updateFloorSetting',
-      'sanitizeUserPrompt',
-      'sanitizeModelResponse',
-    ];
+    const modelArmorStubMethods =
+        ['listTemplates', 'getTemplate', 'createTemplate', 'updateTemplate', 'deleteTemplate', 'getFloorSetting', 'updateFloorSetting', 'sanitizeUserPrompt', 'sanitizeModelResponse'];
     for (const methodName of modelArmorStubMethods) {
       const callPromise = this.modelArmorStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -336,14 +290,8 @@ export class ModelArmorClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'modelarmor.googleapis.com';
   }
@@ -354,14 +302,8 @@ export class ModelArmorClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'modelarmor.googleapis.com';
   }
@@ -392,7 +334,9 @@ export class ModelArmorClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -401,9 +345,8 @@ export class ModelArmorClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -414,1140 +357,914 @@ export class ModelArmorClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets details of a single Template.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.modelarmor.v1.Template|Template}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/model_armor.get_template.js</caption>
-   * region_tag:modelarmor_v1_generated_ModelArmor_GetTemplate_async
-   */
+/**
+ * Gets details of a single Template.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.modelarmor.v1.Template|Template}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/model_armor.get_template.js</caption>
+ * region_tag:modelarmor_v1_generated_ModelArmor_GetTemplate_async
+ */
   getTemplate(
-    request?: protos.google.cloud.modelarmor.v1.IGetTemplateRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.modelarmor.v1.ITemplate,
-      protos.google.cloud.modelarmor.v1.IGetTemplateRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.modelarmor.v1.IGetTemplateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.modelarmor.v1.ITemplate,
+        protos.google.cloud.modelarmor.v1.IGetTemplateRequest|undefined, {}|undefined
+      ]>;
   getTemplate(
-    request: protos.google.cloud.modelarmor.v1.IGetTemplateRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.modelarmor.v1.ITemplate,
-      protos.google.cloud.modelarmor.v1.IGetTemplateRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getTemplate(
-    request: protos.google.cloud.modelarmor.v1.IGetTemplateRequest,
-    callback: Callback<
-      protos.google.cloud.modelarmor.v1.ITemplate,
-      protos.google.cloud.modelarmor.v1.IGetTemplateRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getTemplate(
-    request?: protos.google.cloud.modelarmor.v1.IGetTemplateRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.modelarmor.v1.IGetTemplateRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.modelarmor.v1.ITemplate,
-          | protos.google.cloud.modelarmor.v1.IGetTemplateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.modelarmor.v1.ITemplate,
-      protos.google.cloud.modelarmor.v1.IGetTemplateRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.modelarmor.v1.ITemplate,
-      protos.google.cloud.modelarmor.v1.IGetTemplateRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.modelarmor.v1.IGetTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  getTemplate(
+      request: protos.google.cloud.modelarmor.v1.IGetTemplateRequest,
+      callback: Callback<
+          protos.google.cloud.modelarmor.v1.ITemplate,
+          protos.google.cloud.modelarmor.v1.IGetTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  getTemplate(
+      request?: protos.google.cloud.modelarmor.v1.IGetTemplateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.modelarmor.v1.ITemplate,
+          protos.google.cloud.modelarmor.v1.IGetTemplateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.modelarmor.v1.ITemplate,
+          protos.google.cloud.modelarmor.v1.IGetTemplateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.modelarmor.v1.ITemplate,
+        protos.google.cloud.modelarmor.v1.IGetTemplateRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getTemplate request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.modelarmor.v1.ITemplate,
-          | protos.google.cloud.modelarmor.v1.IGetTemplateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.modelarmor.v1.ITemplate,
+        protos.google.cloud.modelarmor.v1.IGetTemplateRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getTemplate(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.modelarmor.v1.ITemplate,
-          protos.google.cloud.modelarmor.v1.IGetTemplateRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getTemplate response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getTemplate(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.modelarmor.v1.ITemplate,
+        protos.google.cloud.modelarmor.v1.IGetTemplateRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getTemplate response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a new Template in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Value for parent.
-   * @param {string} request.templateId
-   *   Required. Id of the requesting object
-   *   If auto-generating Id server-side, remove this field and
-   *   template_id from the method_signature of Create RPC
-   * @param {google.cloud.modelarmor.v1.Template} request.template
-   *   Required. The resource being created
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server stores the
-   *   request ID for 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.modelarmor.v1.Template|Template}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/model_armor.create_template.js</caption>
-   * region_tag:modelarmor_v1_generated_ModelArmor_CreateTemplate_async
-   */
+/**
+ * Creates a new Template in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Value for parent.
+ * @param {string} request.templateId
+ *   Required. Id of the requesting object
+ *   If auto-generating Id server-side, remove this field and
+ *   template_id from the method_signature of Create RPC
+ * @param {google.cloud.modelarmor.v1.Template} request.template
+ *   Required. The resource being created
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server stores the
+ *   request ID for 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.modelarmor.v1.Template|Template}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/model_armor.create_template.js</caption>
+ * region_tag:modelarmor_v1_generated_ModelArmor_CreateTemplate_async
+ */
   createTemplate(
-    request?: protos.google.cloud.modelarmor.v1.ICreateTemplateRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.modelarmor.v1.ITemplate,
-      protos.google.cloud.modelarmor.v1.ICreateTemplateRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.modelarmor.v1.ICreateTemplateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.modelarmor.v1.ITemplate,
+        protos.google.cloud.modelarmor.v1.ICreateTemplateRequest|undefined, {}|undefined
+      ]>;
   createTemplate(
-    request: protos.google.cloud.modelarmor.v1.ICreateTemplateRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.modelarmor.v1.ITemplate,
-      | protos.google.cloud.modelarmor.v1.ICreateTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createTemplate(
-    request: protos.google.cloud.modelarmor.v1.ICreateTemplateRequest,
-    callback: Callback<
-      protos.google.cloud.modelarmor.v1.ITemplate,
-      | protos.google.cloud.modelarmor.v1.ICreateTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createTemplate(
-    request?: protos.google.cloud.modelarmor.v1.ICreateTemplateRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.modelarmor.v1.ICreateTemplateRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.modelarmor.v1.ITemplate,
-          | protos.google.cloud.modelarmor.v1.ICreateTemplateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.modelarmor.v1.ITemplate,
-      | protos.google.cloud.modelarmor.v1.ICreateTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.modelarmor.v1.ITemplate,
-      protos.google.cloud.modelarmor.v1.ICreateTemplateRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.modelarmor.v1.ICreateTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  createTemplate(
+      request: protos.google.cloud.modelarmor.v1.ICreateTemplateRequest,
+      callback: Callback<
+          protos.google.cloud.modelarmor.v1.ITemplate,
+          protos.google.cloud.modelarmor.v1.ICreateTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  createTemplate(
+      request?: protos.google.cloud.modelarmor.v1.ICreateTemplateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.modelarmor.v1.ITemplate,
+          protos.google.cloud.modelarmor.v1.ICreateTemplateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.modelarmor.v1.ITemplate,
+          protos.google.cloud.modelarmor.v1.ICreateTemplateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.modelarmor.v1.ITemplate,
+        protos.google.cloud.modelarmor.v1.ICreateTemplateRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createTemplate request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.modelarmor.v1.ITemplate,
-          | protos.google.cloud.modelarmor.v1.ICreateTemplateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.modelarmor.v1.ITemplate,
+        protos.google.cloud.modelarmor.v1.ICreateTemplateRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createTemplate(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.modelarmor.v1.ITemplate,
-          protos.google.cloud.modelarmor.v1.ICreateTemplateRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createTemplate response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createTemplate(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.modelarmor.v1.ITemplate,
+        protos.google.cloud.modelarmor.v1.ICreateTemplateRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createTemplate response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates the parameters of a single Template.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Field mask is used to specify the fields to be overwritten in the
-   *   Template resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request. A field will be overwritten if it is in the mask. If the
-   *   user does not provide a mask then all fields will be overwritten.
-   * @param {google.cloud.modelarmor.v1.Template} request.template
-   *   Required. The resource being updated
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server stores the
-   *   request ID for 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.modelarmor.v1.Template|Template}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/model_armor.update_template.js</caption>
-   * region_tag:modelarmor_v1_generated_ModelArmor_UpdateTemplate_async
-   */
+/**
+ * Updates the parameters of a single Template.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Field mask is used to specify the fields to be overwritten in the
+ *   Template resource by the update.
+ *   The fields specified in the update_mask are relative to the resource, not
+ *   the full request. A field will be overwritten if it is in the mask. If the
+ *   user does not provide a mask then all fields will be overwritten.
+ * @param {google.cloud.modelarmor.v1.Template} request.template
+ *   Required. The resource being updated
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server stores the
+ *   request ID for 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.modelarmor.v1.Template|Template}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/model_armor.update_template.js</caption>
+ * region_tag:modelarmor_v1_generated_ModelArmor_UpdateTemplate_async
+ */
   updateTemplate(
-    request?: protos.google.cloud.modelarmor.v1.IUpdateTemplateRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.modelarmor.v1.ITemplate,
-      protos.google.cloud.modelarmor.v1.IUpdateTemplateRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.modelarmor.v1.IUpdateTemplateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.modelarmor.v1.ITemplate,
+        protos.google.cloud.modelarmor.v1.IUpdateTemplateRequest|undefined, {}|undefined
+      ]>;
   updateTemplate(
-    request: protos.google.cloud.modelarmor.v1.IUpdateTemplateRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.modelarmor.v1.ITemplate,
-      | protos.google.cloud.modelarmor.v1.IUpdateTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateTemplate(
-    request: protos.google.cloud.modelarmor.v1.IUpdateTemplateRequest,
-    callback: Callback<
-      protos.google.cloud.modelarmor.v1.ITemplate,
-      | protos.google.cloud.modelarmor.v1.IUpdateTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateTemplate(
-    request?: protos.google.cloud.modelarmor.v1.IUpdateTemplateRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.modelarmor.v1.IUpdateTemplateRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.modelarmor.v1.ITemplate,
-          | protos.google.cloud.modelarmor.v1.IUpdateTemplateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.modelarmor.v1.ITemplate,
-      | protos.google.cloud.modelarmor.v1.IUpdateTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.modelarmor.v1.ITemplate,
-      protos.google.cloud.modelarmor.v1.IUpdateTemplateRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.modelarmor.v1.IUpdateTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateTemplate(
+      request: protos.google.cloud.modelarmor.v1.IUpdateTemplateRequest,
+      callback: Callback<
+          protos.google.cloud.modelarmor.v1.ITemplate,
+          protos.google.cloud.modelarmor.v1.IUpdateTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateTemplate(
+      request?: protos.google.cloud.modelarmor.v1.IUpdateTemplateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.modelarmor.v1.ITemplate,
+          protos.google.cloud.modelarmor.v1.IUpdateTemplateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.modelarmor.v1.ITemplate,
+          protos.google.cloud.modelarmor.v1.IUpdateTemplateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.modelarmor.v1.ITemplate,
+        protos.google.cloud.modelarmor.v1.IUpdateTemplateRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'template.name': request.template!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'template.name': request.template!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateTemplate request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.modelarmor.v1.ITemplate,
-          | protos.google.cloud.modelarmor.v1.IUpdateTemplateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.modelarmor.v1.ITemplate,
+        protos.google.cloud.modelarmor.v1.IUpdateTemplateRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateTemplate(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.modelarmor.v1.ITemplate,
-          protos.google.cloud.modelarmor.v1.IUpdateTemplateRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateTemplate response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateTemplate(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.modelarmor.v1.ITemplate,
+        protos.google.cloud.modelarmor.v1.IUpdateTemplateRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateTemplate response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a single Template.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server stores the
-   *   request ID for 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/model_armor.delete_template.js</caption>
-   * region_tag:modelarmor_v1_generated_ModelArmor_DeleteTemplate_async
-   */
+/**
+ * Deletes a single Template.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server stores the
+ *   request ID for 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/model_armor.delete_template.js</caption>
+ * region_tag:modelarmor_v1_generated_ModelArmor_DeleteTemplate_async
+ */
   deleteTemplate(
-    request?: protos.google.cloud.modelarmor.v1.IDeleteTemplateRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.modelarmor.v1.IDeleteTemplateRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.modelarmor.v1.IDeleteTemplateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.modelarmor.v1.IDeleteTemplateRequest|undefined, {}|undefined
+      ]>;
   deleteTemplate(
-    request: protos.google.cloud.modelarmor.v1.IDeleteTemplateRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.modelarmor.v1.IDeleteTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteTemplate(
-    request: protos.google.cloud.modelarmor.v1.IDeleteTemplateRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.modelarmor.v1.IDeleteTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteTemplate(
-    request?: protos.google.cloud.modelarmor.v1.IDeleteTemplateRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.modelarmor.v1.IDeleteTemplateRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.modelarmor.v1.IDeleteTemplateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.modelarmor.v1.IDeleteTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.modelarmor.v1.IDeleteTemplateRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.modelarmor.v1.IDeleteTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteTemplate(
+      request: protos.google.cloud.modelarmor.v1.IDeleteTemplateRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.modelarmor.v1.IDeleteTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteTemplate(
+      request?: protos.google.cloud.modelarmor.v1.IDeleteTemplateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.modelarmor.v1.IDeleteTemplateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.modelarmor.v1.IDeleteTemplateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.modelarmor.v1.IDeleteTemplateRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteTemplate request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.modelarmor.v1.IDeleteTemplateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.modelarmor.v1.IDeleteTemplateRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteTemplate(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.modelarmor.v1.IDeleteTemplateRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteTemplate response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteTemplate(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.modelarmor.v1.IDeleteTemplateRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteTemplate response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets details of a single floor setting of a project
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the floor setting to get, example
-   *   projects/123/floorsetting.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.modelarmor.v1.FloorSetting|FloorSetting}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/model_armor.get_floor_setting.js</caption>
-   * region_tag:modelarmor_v1_generated_ModelArmor_GetFloorSetting_async
-   */
+/**
+ * Gets details of a single floor setting of a project
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the floor setting to get, example
+ *   projects/123/floorsetting.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.modelarmor.v1.FloorSetting|FloorSetting}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/model_armor.get_floor_setting.js</caption>
+ * region_tag:modelarmor_v1_generated_ModelArmor_GetFloorSetting_async
+ */
   getFloorSetting(
-    request?: protos.google.cloud.modelarmor.v1.IGetFloorSettingRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.modelarmor.v1.IFloorSetting,
-      protos.google.cloud.modelarmor.v1.IGetFloorSettingRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.modelarmor.v1.IGetFloorSettingRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.modelarmor.v1.IFloorSetting,
+        protos.google.cloud.modelarmor.v1.IGetFloorSettingRequest|undefined, {}|undefined
+      ]>;
   getFloorSetting(
-    request: protos.google.cloud.modelarmor.v1.IGetFloorSettingRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.modelarmor.v1.IFloorSetting,
-      | protos.google.cloud.modelarmor.v1.IGetFloorSettingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getFloorSetting(
-    request: protos.google.cloud.modelarmor.v1.IGetFloorSettingRequest,
-    callback: Callback<
-      protos.google.cloud.modelarmor.v1.IFloorSetting,
-      | protos.google.cloud.modelarmor.v1.IGetFloorSettingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getFloorSetting(
-    request?: protos.google.cloud.modelarmor.v1.IGetFloorSettingRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.modelarmor.v1.IGetFloorSettingRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.modelarmor.v1.IFloorSetting,
-          | protos.google.cloud.modelarmor.v1.IGetFloorSettingRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.modelarmor.v1.IFloorSetting,
-      | protos.google.cloud.modelarmor.v1.IGetFloorSettingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.modelarmor.v1.IFloorSetting,
-      protos.google.cloud.modelarmor.v1.IGetFloorSettingRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.modelarmor.v1.IGetFloorSettingRequest|null|undefined,
+          {}|null|undefined>): void;
+  getFloorSetting(
+      request: protos.google.cloud.modelarmor.v1.IGetFloorSettingRequest,
+      callback: Callback<
+          protos.google.cloud.modelarmor.v1.IFloorSetting,
+          protos.google.cloud.modelarmor.v1.IGetFloorSettingRequest|null|undefined,
+          {}|null|undefined>): void;
+  getFloorSetting(
+      request?: protos.google.cloud.modelarmor.v1.IGetFloorSettingRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.modelarmor.v1.IFloorSetting,
+          protos.google.cloud.modelarmor.v1.IGetFloorSettingRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.modelarmor.v1.IFloorSetting,
+          protos.google.cloud.modelarmor.v1.IGetFloorSettingRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.modelarmor.v1.IFloorSetting,
+        protos.google.cloud.modelarmor.v1.IGetFloorSettingRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getFloorSetting request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.modelarmor.v1.IFloorSetting,
-          | protos.google.cloud.modelarmor.v1.IGetFloorSettingRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.modelarmor.v1.IFloorSetting,
+        protos.google.cloud.modelarmor.v1.IGetFloorSettingRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getFloorSetting response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getFloorSetting(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.modelarmor.v1.IFloorSetting,
-          protos.google.cloud.modelarmor.v1.IGetFloorSettingRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getFloorSetting response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getFloorSetting(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.modelarmor.v1.IFloorSetting,
+        protos.google.cloud.modelarmor.v1.IGetFloorSettingRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getFloorSetting response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates the parameters of a single floor setting of a project
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.modelarmor.v1.FloorSetting} request.floorSetting
-   *   Required. The floor setting being updated.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. Field mask is used to specify the fields to be overwritten in the
-   *   FloorSetting resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request. A field will be overwritten if it is in the mask. If the
-   *   user does not provide a mask then all fields will be overwritten.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.modelarmor.v1.FloorSetting|FloorSetting}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/model_armor.update_floor_setting.js</caption>
-   * region_tag:modelarmor_v1_generated_ModelArmor_UpdateFloorSetting_async
-   */
+/**
+ * Updates the parameters of a single floor setting of a project
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.modelarmor.v1.FloorSetting} request.floorSetting
+ *   Required. The floor setting being updated.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Field mask is used to specify the fields to be overwritten in the
+ *   FloorSetting resource by the update.
+ *   The fields specified in the update_mask are relative to the resource, not
+ *   the full request. A field will be overwritten if it is in the mask. If the
+ *   user does not provide a mask then all fields will be overwritten.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.modelarmor.v1.FloorSetting|FloorSetting}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/model_armor.update_floor_setting.js</caption>
+ * region_tag:modelarmor_v1_generated_ModelArmor_UpdateFloorSetting_async
+ */
   updateFloorSetting(
-    request?: protos.google.cloud.modelarmor.v1.IUpdateFloorSettingRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.modelarmor.v1.IFloorSetting,
-      protos.google.cloud.modelarmor.v1.IUpdateFloorSettingRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.modelarmor.v1.IUpdateFloorSettingRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.modelarmor.v1.IFloorSetting,
+        protos.google.cloud.modelarmor.v1.IUpdateFloorSettingRequest|undefined, {}|undefined
+      ]>;
   updateFloorSetting(
-    request: protos.google.cloud.modelarmor.v1.IUpdateFloorSettingRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.modelarmor.v1.IFloorSetting,
-      | protos.google.cloud.modelarmor.v1.IUpdateFloorSettingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateFloorSetting(
-    request: protos.google.cloud.modelarmor.v1.IUpdateFloorSettingRequest,
-    callback: Callback<
-      protos.google.cloud.modelarmor.v1.IFloorSetting,
-      | protos.google.cloud.modelarmor.v1.IUpdateFloorSettingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateFloorSetting(
-    request?: protos.google.cloud.modelarmor.v1.IUpdateFloorSettingRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.modelarmor.v1.IUpdateFloorSettingRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.modelarmor.v1.IFloorSetting,
-          | protos.google.cloud.modelarmor.v1.IUpdateFloorSettingRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.modelarmor.v1.IFloorSetting,
-      | protos.google.cloud.modelarmor.v1.IUpdateFloorSettingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.modelarmor.v1.IFloorSetting,
-      protos.google.cloud.modelarmor.v1.IUpdateFloorSettingRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.modelarmor.v1.IUpdateFloorSettingRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateFloorSetting(
+      request: protos.google.cloud.modelarmor.v1.IUpdateFloorSettingRequest,
+      callback: Callback<
+          protos.google.cloud.modelarmor.v1.IFloorSetting,
+          protos.google.cloud.modelarmor.v1.IUpdateFloorSettingRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateFloorSetting(
+      request?: protos.google.cloud.modelarmor.v1.IUpdateFloorSettingRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.modelarmor.v1.IFloorSetting,
+          protos.google.cloud.modelarmor.v1.IUpdateFloorSettingRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.modelarmor.v1.IFloorSetting,
+          protos.google.cloud.modelarmor.v1.IUpdateFloorSettingRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.modelarmor.v1.IFloorSetting,
+        protos.google.cloud.modelarmor.v1.IUpdateFloorSettingRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'floor_setting.name': request.floorSetting!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'floor_setting.name': request.floorSetting!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateFloorSetting request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.modelarmor.v1.IFloorSetting,
-          | protos.google.cloud.modelarmor.v1.IUpdateFloorSettingRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.modelarmor.v1.IFloorSetting,
+        protos.google.cloud.modelarmor.v1.IUpdateFloorSettingRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateFloorSetting response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateFloorSetting(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.modelarmor.v1.IFloorSetting,
-          (
-            | protos.google.cloud.modelarmor.v1.IUpdateFloorSettingRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateFloorSetting response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateFloorSetting(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.modelarmor.v1.IFloorSetting,
+        protos.google.cloud.modelarmor.v1.IUpdateFloorSettingRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateFloorSetting response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Sanitizes User Prompt.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Represents resource name of template
-   *   e.g. name=projects/sample-project/locations/us-central1/templates/templ01
-   * @param {google.cloud.modelarmor.v1.DataItem} request.userPromptData
-   *   Required. User prompt data to sanitize.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.modelarmor.v1.SanitizeUserPromptResponse|SanitizeUserPromptResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/model_armor.sanitize_user_prompt.js</caption>
-   * region_tag:modelarmor_v1_generated_ModelArmor_SanitizeUserPrompt_async
-   */
+/**
+ * Sanitizes User Prompt.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Represents resource name of template
+ *   e.g. name=projects/sample-project/locations/us-central1/templates/templ01
+ * @param {google.cloud.modelarmor.v1.DataItem} request.userPromptData
+ *   Required. User prompt data to sanitize.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.modelarmor.v1.SanitizeUserPromptResponse|SanitizeUserPromptResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/model_armor.sanitize_user_prompt.js</caption>
+ * region_tag:modelarmor_v1_generated_ModelArmor_SanitizeUserPrompt_async
+ */
   sanitizeUserPrompt(
-    request?: protos.google.cloud.modelarmor.v1.ISanitizeUserPromptRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.modelarmor.v1.ISanitizeUserPromptResponse,
-      protos.google.cloud.modelarmor.v1.ISanitizeUserPromptRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.modelarmor.v1.ISanitizeUserPromptRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.modelarmor.v1.ISanitizeUserPromptResponse,
+        protos.google.cloud.modelarmor.v1.ISanitizeUserPromptRequest|undefined, {}|undefined
+      ]>;
   sanitizeUserPrompt(
-    request: protos.google.cloud.modelarmor.v1.ISanitizeUserPromptRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.modelarmor.v1.ISanitizeUserPromptResponse,
-      | protos.google.cloud.modelarmor.v1.ISanitizeUserPromptRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  sanitizeUserPrompt(
-    request: protos.google.cloud.modelarmor.v1.ISanitizeUserPromptRequest,
-    callback: Callback<
-      protos.google.cloud.modelarmor.v1.ISanitizeUserPromptResponse,
-      | protos.google.cloud.modelarmor.v1.ISanitizeUserPromptRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  sanitizeUserPrompt(
-    request?: protos.google.cloud.modelarmor.v1.ISanitizeUserPromptRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.modelarmor.v1.ISanitizeUserPromptRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.modelarmor.v1.ISanitizeUserPromptResponse,
-          | protos.google.cloud.modelarmor.v1.ISanitizeUserPromptRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.modelarmor.v1.ISanitizeUserPromptResponse,
-      | protos.google.cloud.modelarmor.v1.ISanitizeUserPromptRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.modelarmor.v1.ISanitizeUserPromptResponse,
-      protos.google.cloud.modelarmor.v1.ISanitizeUserPromptRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.modelarmor.v1.ISanitizeUserPromptRequest|null|undefined,
+          {}|null|undefined>): void;
+  sanitizeUserPrompt(
+      request: protos.google.cloud.modelarmor.v1.ISanitizeUserPromptRequest,
+      callback: Callback<
+          protos.google.cloud.modelarmor.v1.ISanitizeUserPromptResponse,
+          protos.google.cloud.modelarmor.v1.ISanitizeUserPromptRequest|null|undefined,
+          {}|null|undefined>): void;
+  sanitizeUserPrompt(
+      request?: protos.google.cloud.modelarmor.v1.ISanitizeUserPromptRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.modelarmor.v1.ISanitizeUserPromptResponse,
+          protos.google.cloud.modelarmor.v1.ISanitizeUserPromptRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.modelarmor.v1.ISanitizeUserPromptResponse,
+          protos.google.cloud.modelarmor.v1.ISanitizeUserPromptRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.modelarmor.v1.ISanitizeUserPromptResponse,
+        protos.google.cloud.modelarmor.v1.ISanitizeUserPromptRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('sanitizeUserPrompt request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.modelarmor.v1.ISanitizeUserPromptResponse,
-          | protos.google.cloud.modelarmor.v1.ISanitizeUserPromptRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.modelarmor.v1.ISanitizeUserPromptResponse,
+        protos.google.cloud.modelarmor.v1.ISanitizeUserPromptRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('sanitizeUserPrompt response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .sanitizeUserPrompt(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.modelarmor.v1.ISanitizeUserPromptResponse,
-          (
-            | protos.google.cloud.modelarmor.v1.ISanitizeUserPromptRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('sanitizeUserPrompt response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.sanitizeUserPrompt(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.modelarmor.v1.ISanitizeUserPromptResponse,
+        protos.google.cloud.modelarmor.v1.ISanitizeUserPromptRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('sanitizeUserPrompt response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Sanitizes Model Response.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Represents resource name of template
-   *   e.g. name=projects/sample-project/locations/us-central1/templates/templ01
-   * @param {google.cloud.modelarmor.v1.DataItem} request.modelResponseData
-   *   Required. Model response data to sanitize.
-   * @param {string} [request.userPrompt]
-   *   Optional. User Prompt associated with Model response.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.modelarmor.v1.SanitizeModelResponseResponse|SanitizeModelResponseResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/model_armor.sanitize_model_response.js</caption>
-   * region_tag:modelarmor_v1_generated_ModelArmor_SanitizeModelResponse_async
-   */
+/**
+ * Sanitizes Model Response.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Represents resource name of template
+ *   e.g. name=projects/sample-project/locations/us-central1/templates/templ01
+ * @param {google.cloud.modelarmor.v1.DataItem} request.modelResponseData
+ *   Required. Model response data to sanitize.
+ * @param {string} [request.userPrompt]
+ *   Optional. User Prompt associated with Model response.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.modelarmor.v1.SanitizeModelResponseResponse|SanitizeModelResponseResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/model_armor.sanitize_model_response.js</caption>
+ * region_tag:modelarmor_v1_generated_ModelArmor_SanitizeModelResponse_async
+ */
   sanitizeModelResponse(
-    request?: protos.google.cloud.modelarmor.v1.ISanitizeModelResponseRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.modelarmor.v1.ISanitizeModelResponseResponse,
-      (
-        | protos.google.cloud.modelarmor.v1.ISanitizeModelResponseRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.modelarmor.v1.ISanitizeModelResponseRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.modelarmor.v1.ISanitizeModelResponseResponse,
+        protos.google.cloud.modelarmor.v1.ISanitizeModelResponseRequest|undefined, {}|undefined
+      ]>;
   sanitizeModelResponse(
-    request: protos.google.cloud.modelarmor.v1.ISanitizeModelResponseRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.modelarmor.v1.ISanitizeModelResponseResponse,
-      | protos.google.cloud.modelarmor.v1.ISanitizeModelResponseRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  sanitizeModelResponse(
-    request: protos.google.cloud.modelarmor.v1.ISanitizeModelResponseRequest,
-    callback: Callback<
-      protos.google.cloud.modelarmor.v1.ISanitizeModelResponseResponse,
-      | protos.google.cloud.modelarmor.v1.ISanitizeModelResponseRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  sanitizeModelResponse(
-    request?: protos.google.cloud.modelarmor.v1.ISanitizeModelResponseRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.modelarmor.v1.ISanitizeModelResponseRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.modelarmor.v1.ISanitizeModelResponseResponse,
-          | protos.google.cloud.modelarmor.v1.ISanitizeModelResponseRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.modelarmor.v1.ISanitizeModelResponseResponse,
-      | protos.google.cloud.modelarmor.v1.ISanitizeModelResponseRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.modelarmor.v1.ISanitizeModelResponseResponse,
-      (
-        | protos.google.cloud.modelarmor.v1.ISanitizeModelResponseRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.modelarmor.v1.ISanitizeModelResponseRequest|null|undefined,
+          {}|null|undefined>): void;
+  sanitizeModelResponse(
+      request: protos.google.cloud.modelarmor.v1.ISanitizeModelResponseRequest,
+      callback: Callback<
+          protos.google.cloud.modelarmor.v1.ISanitizeModelResponseResponse,
+          protos.google.cloud.modelarmor.v1.ISanitizeModelResponseRequest|null|undefined,
+          {}|null|undefined>): void;
+  sanitizeModelResponse(
+      request?: protos.google.cloud.modelarmor.v1.ISanitizeModelResponseRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.modelarmor.v1.ISanitizeModelResponseResponse,
+          protos.google.cloud.modelarmor.v1.ISanitizeModelResponseRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.modelarmor.v1.ISanitizeModelResponseResponse,
+          protos.google.cloud.modelarmor.v1.ISanitizeModelResponseRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.modelarmor.v1.ISanitizeModelResponseResponse,
+        protos.google.cloud.modelarmor.v1.ISanitizeModelResponseRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('sanitizeModelResponse request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.modelarmor.v1.ISanitizeModelResponseResponse,
-          | protos.google.cloud.modelarmor.v1.ISanitizeModelResponseRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.modelarmor.v1.ISanitizeModelResponseResponse,
+        protos.google.cloud.modelarmor.v1.ISanitizeModelResponseRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('sanitizeModelResponse response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .sanitizeModelResponse(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.modelarmor.v1.ISanitizeModelResponseResponse,
-          (
-            | protos.google.cloud.modelarmor.v1.ISanitizeModelResponseRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('sanitizeModelResponse response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.sanitizeModelResponse(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.modelarmor.v1.ISanitizeModelResponseResponse,
+        protos.google.cloud.modelarmor.v1.ISanitizeModelResponseRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('sanitizeModelResponse response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Lists Templates in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListTemplatesRequest
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.modelarmor.v1.Template|Template}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listTemplatesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists Templates in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListTemplatesRequest
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.modelarmor.v1.Template|Template}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listTemplatesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listTemplates(
-    request?: protos.google.cloud.modelarmor.v1.IListTemplatesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.modelarmor.v1.ITemplate[],
-      protos.google.cloud.modelarmor.v1.IListTemplatesRequest | null,
-      protos.google.cloud.modelarmor.v1.IListTemplatesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.modelarmor.v1.IListTemplatesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.modelarmor.v1.ITemplate[],
+        protos.google.cloud.modelarmor.v1.IListTemplatesRequest|null,
+        protos.google.cloud.modelarmor.v1.IListTemplatesResponse
+      ]>;
   listTemplates(
-    request: protos.google.cloud.modelarmor.v1.IListTemplatesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.modelarmor.v1.IListTemplatesRequest,
-      | protos.google.cloud.modelarmor.v1.IListTemplatesResponse
-      | null
-      | undefined,
-      protos.google.cloud.modelarmor.v1.ITemplate
-    >
-  ): void;
-  listTemplates(
-    request: protos.google.cloud.modelarmor.v1.IListTemplatesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.modelarmor.v1.IListTemplatesRequest,
-      | protos.google.cloud.modelarmor.v1.IListTemplatesResponse
-      | null
-      | undefined,
-      protos.google.cloud.modelarmor.v1.ITemplate
-    >
-  ): void;
-  listTemplates(
-    request?: protos.google.cloud.modelarmor.v1.IListTemplatesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.modelarmor.v1.IListTemplatesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.modelarmor.v1.IListTemplatesRequest,
-          | protos.google.cloud.modelarmor.v1.IListTemplatesResponse
-          | null
-          | undefined,
-          protos.google.cloud.modelarmor.v1.ITemplate
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.modelarmor.v1.IListTemplatesRequest,
-      | protos.google.cloud.modelarmor.v1.IListTemplatesResponse
-      | null
-      | undefined,
-      protos.google.cloud.modelarmor.v1.ITemplate
-    >
-  ): Promise<
-    [
-      protos.google.cloud.modelarmor.v1.ITemplate[],
-      protos.google.cloud.modelarmor.v1.IListTemplatesRequest | null,
-      protos.google.cloud.modelarmor.v1.IListTemplatesResponse,
-    ]
-  > | void {
+          protos.google.cloud.modelarmor.v1.IListTemplatesResponse|null|undefined,
+          protos.google.cloud.modelarmor.v1.ITemplate>): void;
+  listTemplates(
+      request: protos.google.cloud.modelarmor.v1.IListTemplatesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.modelarmor.v1.IListTemplatesRequest,
+          protos.google.cloud.modelarmor.v1.IListTemplatesResponse|null|undefined,
+          protos.google.cloud.modelarmor.v1.ITemplate>): void;
+  listTemplates(
+      request?: protos.google.cloud.modelarmor.v1.IListTemplatesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.modelarmor.v1.IListTemplatesRequest,
+          protos.google.cloud.modelarmor.v1.IListTemplatesResponse|null|undefined,
+          protos.google.cloud.modelarmor.v1.ITemplate>,
+      callback?: PaginationCallback<
+          protos.google.cloud.modelarmor.v1.IListTemplatesRequest,
+          protos.google.cloud.modelarmor.v1.IListTemplatesResponse|null|undefined,
+          protos.google.cloud.modelarmor.v1.ITemplate>):
+      Promise<[
+        protos.google.cloud.modelarmor.v1.ITemplate[],
+        protos.google.cloud.modelarmor.v1.IListTemplatesRequest|null,
+        protos.google.cloud.modelarmor.v1.IListTemplatesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.modelarmor.v1.IListTemplatesRequest,
-          | protos.google.cloud.modelarmor.v1.IListTemplatesResponse
-          | null
-          | undefined,
-          protos.google.cloud.modelarmor.v1.ITemplate
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.modelarmor.v1.IListTemplatesRequest,
+      protos.google.cloud.modelarmor.v1.IListTemplatesResponse|null|undefined,
+      protos.google.cloud.modelarmor.v1.ITemplate>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listTemplates values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1556,61 +1273,58 @@ export class ModelArmorClient {
     this._log.info('listTemplates request %j', request);
     return this.innerApiCalls
       .listTemplates(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.modelarmor.v1.ITemplate[],
-          protos.google.cloud.modelarmor.v1.IListTemplatesRequest | null,
-          protos.google.cloud.modelarmor.v1.IListTemplatesResponse,
-        ]) => {
-          this._log.info('listTemplates values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.modelarmor.v1.ITemplate[],
+        protos.google.cloud.modelarmor.v1.IListTemplatesRequest|null,
+        protos.google.cloud.modelarmor.v1.IListTemplatesResponse
+      ]) => {
+        this._log.info('listTemplates values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listTemplates`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListTemplatesRequest
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.modelarmor.v1.Template|Template} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listTemplatesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listTemplates`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListTemplatesRequest
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.modelarmor.v1.Template|Template} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listTemplatesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listTemplatesStream(
-    request?: protos.google.cloud.modelarmor.v1.IListTemplatesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.modelarmor.v1.IListTemplatesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listTemplates'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listTemplates stream %j', request);
     return this.descriptors.page.listTemplates.createStream(
       this.innerApiCalls.listTemplates as GaxCall,
@@ -1619,52 +1333,51 @@ export class ModelArmorClient {
     );
   }
 
-  /**
-   * Equivalent to `listTemplates`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListTemplatesRequest
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.modelarmor.v1.Template|Template}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/model_armor.list_templates.js</caption>
-   * region_tag:modelarmor_v1_generated_ModelArmor_ListTemplates_async
-   */
+/**
+ * Equivalent to `listTemplates`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListTemplatesRequest
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.modelarmor.v1.Template|Template}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/model_armor.list_templates.js</caption>
+ * region_tag:modelarmor_v1_generated_ModelArmor_ListTemplates_async
+ */
   listTemplatesAsync(
-    request?: protos.google.cloud.modelarmor.v1.IListTemplatesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.modelarmor.v1.ITemplate> {
+      request?: protos.google.cloud.modelarmor.v1.IListTemplatesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.modelarmor.v1.ITemplate>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listTemplates'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listTemplates iterate %j', request);
     return this.descriptors.page.listTemplates.asyncIterate(
       this.innerApiCalls['listTemplates'] as GaxCall,
@@ -1672,7 +1385,7 @@ export class ModelArmorClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.modelarmor.v1.ITemplate>;
   }
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1712,7 +1425,7 @@ export class ModelArmorClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1761,7 +1474,7 @@ export class ModelArmorClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  folderLocationFloorSettingPath(folder: string, location: string) {
+  folderLocationFloorSettingPath(folder:string,location:string) {
     return this.pathTemplates.folderLocationFloorSettingPathTemplate.render({
       folder: folder,
       location: location,
@@ -1775,12 +1488,8 @@ export class ModelArmorClient {
    *   A fully-qualified path representing folder_location_floorSetting resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderLocationFloorSettingName(
-    folderLocationFloorSettingName: string
-  ) {
-    return this.pathTemplates.folderLocationFloorSettingPathTemplate.match(
-      folderLocationFloorSettingName
-    ).folder;
+  matchFolderFromFolderLocationFloorSettingName(folderLocationFloorSettingName: string) {
+    return this.pathTemplates.folderLocationFloorSettingPathTemplate.match(folderLocationFloorSettingName).folder;
   }
 
   /**
@@ -1790,12 +1499,8 @@ export class ModelArmorClient {
    *   A fully-qualified path representing folder_location_floorSetting resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromFolderLocationFloorSettingName(
-    folderLocationFloorSettingName: string
-  ) {
-    return this.pathTemplates.folderLocationFloorSettingPathTemplate.match(
-      folderLocationFloorSettingName
-    ).location;
+  matchLocationFromFolderLocationFloorSettingName(folderLocationFloorSettingName: string) {
+    return this.pathTemplates.folderLocationFloorSettingPathTemplate.match(folderLocationFloorSettingName).location;
   }
 
   /**
@@ -1805,7 +1510,7 @@ export class ModelArmorClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -1841,13 +1546,11 @@ export class ModelArmorClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  organizationLocationFloorSettingPath(organization: string, location: string) {
-    return this.pathTemplates.organizationLocationFloorSettingPathTemplate.render(
-      {
-        organization: organization,
-        location: location,
-      }
-    );
+  organizationLocationFloorSettingPath(organization:string,location:string) {
+    return this.pathTemplates.organizationLocationFloorSettingPathTemplate.render({
+      organization: organization,
+      location: location,
+    });
   }
 
   /**
@@ -1857,12 +1560,8 @@ export class ModelArmorClient {
    *   A fully-qualified path representing organization_location_floorSetting resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationFloorSettingName(
-    organizationLocationFloorSettingName: string
-  ) {
-    return this.pathTemplates.organizationLocationFloorSettingPathTemplate.match(
-      organizationLocationFloorSettingName
-    ).organization;
+  matchOrganizationFromOrganizationLocationFloorSettingName(organizationLocationFloorSettingName: string) {
+    return this.pathTemplates.organizationLocationFloorSettingPathTemplate.match(organizationLocationFloorSettingName).organization;
   }
 
   /**
@@ -1872,12 +1571,8 @@ export class ModelArmorClient {
    *   A fully-qualified path representing organization_location_floorSetting resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationFloorSettingName(
-    organizationLocationFloorSettingName: string
-  ) {
-    return this.pathTemplates.organizationLocationFloorSettingPathTemplate.match(
-      organizationLocationFloorSettingName
-    ).location;
+  matchLocationFromOrganizationLocationFloorSettingName(organizationLocationFloorSettingName: string) {
+    return this.pathTemplates.organizationLocationFloorSettingPathTemplate.match(organizationLocationFloorSettingName).location;
   }
 
   /**
@@ -1886,7 +1581,7 @@ export class ModelArmorClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -1910,7 +1605,7 @@ export class ModelArmorClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  projectLocationFloorSettingPath(project: string, location: string) {
+  projectLocationFloorSettingPath(project:string,location:string) {
     return this.pathTemplates.projectLocationFloorSettingPathTemplate.render({
       project: project,
       location: location,
@@ -1924,12 +1619,8 @@ export class ModelArmorClient {
    *   A fully-qualified path representing project_location_floorSetting resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationFloorSettingName(
-    projectLocationFloorSettingName: string
-  ) {
-    return this.pathTemplates.projectLocationFloorSettingPathTemplate.match(
-      projectLocationFloorSettingName
-    ).project;
+  matchProjectFromProjectLocationFloorSettingName(projectLocationFloorSettingName: string) {
+    return this.pathTemplates.projectLocationFloorSettingPathTemplate.match(projectLocationFloorSettingName).project;
   }
 
   /**
@@ -1939,12 +1630,8 @@ export class ModelArmorClient {
    *   A fully-qualified path representing project_location_floorSetting resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationFloorSettingName(
-    projectLocationFloorSettingName: string
-  ) {
-    return this.pathTemplates.projectLocationFloorSettingPathTemplate.match(
-      projectLocationFloorSettingName
-    ).location;
+  matchLocationFromProjectLocationFloorSettingName(projectLocationFloorSettingName: string) {
+    return this.pathTemplates.projectLocationFloorSettingPathTemplate.match(projectLocationFloorSettingName).location;
   }
 
   /**
@@ -1955,7 +1642,7 @@ export class ModelArmorClient {
    * @param {string} template
    * @returns {string} Resource name string.
    */
-  templatePath(project: string, location: string, template: string) {
+  templatePath(project:string,location:string,template:string) {
     return this.pathTemplates.templatePathTemplate.render({
       project: project,
       location: location,
@@ -2008,9 +1695,7 @@ export class ModelArmorClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.locationsClient.close().catch(err => {throw err});
       });
     }
     return Promise.resolve();

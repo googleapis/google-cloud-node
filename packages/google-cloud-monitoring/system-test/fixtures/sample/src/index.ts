@@ -16,16 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {
-  AlertPolicyServiceClient,
-  GroupServiceClient,
-  MetricServiceClient,
-  NotificationChannelServiceClient,
-  QueryServiceClient,
-  ServiceMonitoringServiceClient,
-  SnoozeServiceClient,
-  UptimeCheckServiceClient,
-} from '@google-cloud/monitoring';
+import {AlertPolicyServiceClient, GroupServiceClient, MetricServiceClient, NotificationChannelServiceClient, QueryServiceClient, ServiceMonitoringServiceClient, SnoozeServiceClient, UptimeCheckServiceClient} from '@google-cloud/monitoring';
 
 // check that the client class type name can be used
 function doStuffWithAlertPolicyServiceClient(client: AlertPolicyServiceClient) {
@@ -37,17 +28,13 @@ function doStuffWithGroupServiceClient(client: GroupServiceClient) {
 function doStuffWithMetricServiceClient(client: MetricServiceClient) {
   client.close();
 }
-function doStuffWithNotificationChannelServiceClient(
-  client: NotificationChannelServiceClient
-) {
+function doStuffWithNotificationChannelServiceClient(client: NotificationChannelServiceClient) {
   client.close();
 }
 function doStuffWithQueryServiceClient(client: QueryServiceClient) {
   client.close();
 }
-function doStuffWithServiceMonitoringServiceClient(
-  client: ServiceMonitoringServiceClient
-) {
+function doStuffWithServiceMonitoringServiceClient(client: ServiceMonitoringServiceClient) {
   client.close();
 }
 function doStuffWithSnoozeServiceClient(client: SnoozeServiceClient) {
@@ -68,8 +55,7 @@ function main() {
   const metricServiceClient = new MetricServiceClient();
   doStuffWithMetricServiceClient(metricServiceClient);
   // check that the client instance can be created
-  const notificationChannelServiceClient =
-    new NotificationChannelServiceClient();
+  const notificationChannelServiceClient = new NotificationChannelServiceClient();
   doStuffWithNotificationChannelServiceClient(notificationChannelServiceClient);
   // check that the client instance can be created
   const queryServiceClient = new QueryServiceClient();

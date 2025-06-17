@@ -18,16 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -105,41 +100,20 @@ export class LanguageServiceClient {
    *     const client = new LanguageServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof LanguageServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'language.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -165,7 +139,7 @@ export class LanguageServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -179,7 +153,10 @@ export class LanguageServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -198,11 +175,8 @@ export class LanguageServiceClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.language.v1.LanguageService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.language.v1.LanguageService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -233,43 +207,31 @@ export class LanguageServiceClient {
     // Put together the "service stub" for
     // google.cloud.language.v1.LanguageService.
     this.languageServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.language.v1.LanguageService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.language.v1.LanguageService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.language.v1.LanguageService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const languageServiceStubMethods = [
-      'analyzeSentiment',
-      'analyzeEntities',
-      'analyzeEntitySentiment',
-      'analyzeSyntax',
-      'classifyText',
-      'moderateText',
-      'annotateText',
-    ];
+    const languageServiceStubMethods =
+        ['analyzeSentiment', 'analyzeEntities', 'analyzeEntitySentiment', 'analyzeSyntax', 'classifyText', 'moderateText', 'annotateText'];
     for (const methodName of languageServiceStubMethods) {
       const callPromise = this.languageServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = undefined;
+      const descriptor =
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -289,14 +251,8 @@ export class LanguageServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'language.googleapis.com';
   }
@@ -307,14 +263,8 @@ export class LanguageServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'language.googleapis.com';
   }
@@ -347,7 +297,7 @@ export class LanguageServiceClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/cloud-language',
-      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/cloud-platform'
     ];
   }
 
@@ -357,9 +307,8 @@ export class LanguageServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -370,812 +319,653 @@ export class LanguageServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Analyzes the sentiment of the provided text.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.language.v1.Document} request.document
-   *   Required. Input document.
-   * @param {google.cloud.language.v1.EncodingType} request.encodingType
-   *   The encoding type used by the API to calculate sentence offsets.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.language.v1.AnalyzeSentimentResponse|AnalyzeSentimentResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/language_service.analyze_sentiment.js</caption>
-   * region_tag:language_v1_generated_LanguageService_AnalyzeSentiment_async
-   */
+/**
+ * Analyzes the sentiment of the provided text.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.language.v1.Document} request.document
+ *   Required. Input document.
+ * @param {google.cloud.language.v1.EncodingType} request.encodingType
+ *   The encoding type used by the API to calculate sentence offsets.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.language.v1.AnalyzeSentimentResponse|AnalyzeSentimentResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/language_service.analyze_sentiment.js</caption>
+ * region_tag:language_v1_generated_LanguageService_AnalyzeSentiment_async
+ */
   analyzeSentiment(
-    request?: protos.google.cloud.language.v1.IAnalyzeSentimentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.language.v1.IAnalyzeSentimentResponse,
-      protos.google.cloud.language.v1.IAnalyzeSentimentRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.language.v1.IAnalyzeSentimentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.language.v1.IAnalyzeSentimentResponse,
+        protos.google.cloud.language.v1.IAnalyzeSentimentRequest|undefined, {}|undefined
+      ]>;
   analyzeSentiment(
-    request: protos.google.cloud.language.v1.IAnalyzeSentimentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.language.v1.IAnalyzeSentimentResponse,
-      | protos.google.cloud.language.v1.IAnalyzeSentimentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  analyzeSentiment(
-    request: protos.google.cloud.language.v1.IAnalyzeSentimentRequest,
-    callback: Callback<
-      protos.google.cloud.language.v1.IAnalyzeSentimentResponse,
-      | protos.google.cloud.language.v1.IAnalyzeSentimentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  analyzeSentiment(
-    request?: protos.google.cloud.language.v1.IAnalyzeSentimentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.language.v1.IAnalyzeSentimentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.language.v1.IAnalyzeSentimentResponse,
-          | protos.google.cloud.language.v1.IAnalyzeSentimentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.language.v1.IAnalyzeSentimentResponse,
-      | protos.google.cloud.language.v1.IAnalyzeSentimentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.language.v1.IAnalyzeSentimentResponse,
-      protos.google.cloud.language.v1.IAnalyzeSentimentRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.language.v1.IAnalyzeSentimentRequest|null|undefined,
+          {}|null|undefined>): void;
+  analyzeSentiment(
+      request: protos.google.cloud.language.v1.IAnalyzeSentimentRequest,
+      callback: Callback<
+          protos.google.cloud.language.v1.IAnalyzeSentimentResponse,
+          protos.google.cloud.language.v1.IAnalyzeSentimentRequest|null|undefined,
+          {}|null|undefined>): void;
+  analyzeSentiment(
+      request?: protos.google.cloud.language.v1.IAnalyzeSentimentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.language.v1.IAnalyzeSentimentResponse,
+          protos.google.cloud.language.v1.IAnalyzeSentimentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.language.v1.IAnalyzeSentimentResponse,
+          protos.google.cloud.language.v1.IAnalyzeSentimentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.language.v1.IAnalyzeSentimentResponse,
+        protos.google.cloud.language.v1.IAnalyzeSentimentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('analyzeSentiment request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.language.v1.IAnalyzeSentimentResponse,
-          | protos.google.cloud.language.v1.IAnalyzeSentimentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.language.v1.IAnalyzeSentimentResponse,
+        protos.google.cloud.language.v1.IAnalyzeSentimentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('analyzeSentiment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .analyzeSentiment(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.language.v1.IAnalyzeSentimentResponse,
-          protos.google.cloud.language.v1.IAnalyzeSentimentRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('analyzeSentiment response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.analyzeSentiment(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.language.v1.IAnalyzeSentimentResponse,
+        protos.google.cloud.language.v1.IAnalyzeSentimentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('analyzeSentiment response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Finds named entities (currently proper names and common nouns) in the text
-   * along with entity types, salience, mentions for each entity, and
-   * other properties.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.language.v1.Document} request.document
-   *   Required. Input document.
-   * @param {google.cloud.language.v1.EncodingType} request.encodingType
-   *   The encoding type used by the API to calculate offsets.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.language.v1.AnalyzeEntitiesResponse|AnalyzeEntitiesResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/language_service.analyze_entities.js</caption>
-   * region_tag:language_v1_generated_LanguageService_AnalyzeEntities_async
-   */
+/**
+ * Finds named entities (currently proper names and common nouns) in the text
+ * along with entity types, salience, mentions for each entity, and
+ * other properties.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.language.v1.Document} request.document
+ *   Required. Input document.
+ * @param {google.cloud.language.v1.EncodingType} request.encodingType
+ *   The encoding type used by the API to calculate offsets.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.language.v1.AnalyzeEntitiesResponse|AnalyzeEntitiesResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/language_service.analyze_entities.js</caption>
+ * region_tag:language_v1_generated_LanguageService_AnalyzeEntities_async
+ */
   analyzeEntities(
-    request?: protos.google.cloud.language.v1.IAnalyzeEntitiesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.language.v1.IAnalyzeEntitiesResponse,
-      protos.google.cloud.language.v1.IAnalyzeEntitiesRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.language.v1.IAnalyzeEntitiesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.language.v1.IAnalyzeEntitiesResponse,
+        protos.google.cloud.language.v1.IAnalyzeEntitiesRequest|undefined, {}|undefined
+      ]>;
   analyzeEntities(
-    request: protos.google.cloud.language.v1.IAnalyzeEntitiesRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.language.v1.IAnalyzeEntitiesResponse,
-      | protos.google.cloud.language.v1.IAnalyzeEntitiesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  analyzeEntities(
-    request: protos.google.cloud.language.v1.IAnalyzeEntitiesRequest,
-    callback: Callback<
-      protos.google.cloud.language.v1.IAnalyzeEntitiesResponse,
-      | protos.google.cloud.language.v1.IAnalyzeEntitiesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  analyzeEntities(
-    request?: protos.google.cloud.language.v1.IAnalyzeEntitiesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.language.v1.IAnalyzeEntitiesRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.language.v1.IAnalyzeEntitiesResponse,
-          | protos.google.cloud.language.v1.IAnalyzeEntitiesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.language.v1.IAnalyzeEntitiesResponse,
-      | protos.google.cloud.language.v1.IAnalyzeEntitiesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.language.v1.IAnalyzeEntitiesResponse,
-      protos.google.cloud.language.v1.IAnalyzeEntitiesRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.language.v1.IAnalyzeEntitiesRequest|null|undefined,
+          {}|null|undefined>): void;
+  analyzeEntities(
+      request: protos.google.cloud.language.v1.IAnalyzeEntitiesRequest,
+      callback: Callback<
+          protos.google.cloud.language.v1.IAnalyzeEntitiesResponse,
+          protos.google.cloud.language.v1.IAnalyzeEntitiesRequest|null|undefined,
+          {}|null|undefined>): void;
+  analyzeEntities(
+      request?: protos.google.cloud.language.v1.IAnalyzeEntitiesRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.language.v1.IAnalyzeEntitiesResponse,
+          protos.google.cloud.language.v1.IAnalyzeEntitiesRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.language.v1.IAnalyzeEntitiesResponse,
+          protos.google.cloud.language.v1.IAnalyzeEntitiesRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.language.v1.IAnalyzeEntitiesResponse,
+        protos.google.cloud.language.v1.IAnalyzeEntitiesRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('analyzeEntities request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.language.v1.IAnalyzeEntitiesResponse,
-          | protos.google.cloud.language.v1.IAnalyzeEntitiesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.language.v1.IAnalyzeEntitiesResponse,
+        protos.google.cloud.language.v1.IAnalyzeEntitiesRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('analyzeEntities response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .analyzeEntities(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.language.v1.IAnalyzeEntitiesResponse,
-          protos.google.cloud.language.v1.IAnalyzeEntitiesRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('analyzeEntities response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.analyzeEntities(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.language.v1.IAnalyzeEntitiesResponse,
+        protos.google.cloud.language.v1.IAnalyzeEntitiesRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('analyzeEntities response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Finds entities, similar to
-   * {@link protos.google.cloud.language.v1.LanguageService.AnalyzeEntities|AnalyzeEntities}
-   * in the text and analyzes sentiment associated with each entity and its
-   * mentions.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.language.v1.Document} request.document
-   *   Required. Input document.
-   * @param {google.cloud.language.v1.EncodingType} request.encodingType
-   *   The encoding type used by the API to calculate offsets.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.language.v1.AnalyzeEntitySentimentResponse|AnalyzeEntitySentimentResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/language_service.analyze_entity_sentiment.js</caption>
-   * region_tag:language_v1_generated_LanguageService_AnalyzeEntitySentiment_async
-   */
+/**
+ * Finds entities, similar to
+ * {@link protos.google.cloud.language.v1.LanguageService.AnalyzeEntities|AnalyzeEntities}
+ * in the text and analyzes sentiment associated with each entity and its
+ * mentions.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.language.v1.Document} request.document
+ *   Required. Input document.
+ * @param {google.cloud.language.v1.EncodingType} request.encodingType
+ *   The encoding type used by the API to calculate offsets.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.language.v1.AnalyzeEntitySentimentResponse|AnalyzeEntitySentimentResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/language_service.analyze_entity_sentiment.js</caption>
+ * region_tag:language_v1_generated_LanguageService_AnalyzeEntitySentiment_async
+ */
   analyzeEntitySentiment(
-    request?: protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.language.v1.IAnalyzeEntitySentimentResponse,
-      (
-        | protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.language.v1.IAnalyzeEntitySentimentResponse,
+        protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest|undefined, {}|undefined
+      ]>;
   analyzeEntitySentiment(
-    request: protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.language.v1.IAnalyzeEntitySentimentResponse,
-      | protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  analyzeEntitySentiment(
-    request: protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest,
-    callback: Callback<
-      protos.google.cloud.language.v1.IAnalyzeEntitySentimentResponse,
-      | protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  analyzeEntitySentiment(
-    request?: protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.language.v1.IAnalyzeEntitySentimentResponse,
-          | protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.language.v1.IAnalyzeEntitySentimentResponse,
-      | protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.language.v1.IAnalyzeEntitySentimentResponse,
-      (
-        | protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest|null|undefined,
+          {}|null|undefined>): void;
+  analyzeEntitySentiment(
+      request: protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest,
+      callback: Callback<
+          protos.google.cloud.language.v1.IAnalyzeEntitySentimentResponse,
+          protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest|null|undefined,
+          {}|null|undefined>): void;
+  analyzeEntitySentiment(
+      request?: protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.language.v1.IAnalyzeEntitySentimentResponse,
+          protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.language.v1.IAnalyzeEntitySentimentResponse,
+          protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.language.v1.IAnalyzeEntitySentimentResponse,
+        protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('analyzeEntitySentiment request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.language.v1.IAnalyzeEntitySentimentResponse,
-          | protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.language.v1.IAnalyzeEntitySentimentResponse,
+        protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('analyzeEntitySentiment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .analyzeEntitySentiment(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.language.v1.IAnalyzeEntitySentimentResponse,
-          (
-            | protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('analyzeEntitySentiment response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.analyzeEntitySentiment(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.language.v1.IAnalyzeEntitySentimentResponse,
+        protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('analyzeEntitySentiment response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Analyzes the syntax of the text and provides sentence boundaries and
-   * tokenization along with part of speech tags, dependency trees, and other
-   * properties.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.language.v1.Document} request.document
-   *   Required. Input document.
-   * @param {google.cloud.language.v1.EncodingType} request.encodingType
-   *   The encoding type used by the API to calculate offsets.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.language.v1.AnalyzeSyntaxResponse|AnalyzeSyntaxResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/language_service.analyze_syntax.js</caption>
-   * region_tag:language_v1_generated_LanguageService_AnalyzeSyntax_async
-   */
+/**
+ * Analyzes the syntax of the text and provides sentence boundaries and
+ * tokenization along with part of speech tags, dependency trees, and other
+ * properties.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.language.v1.Document} request.document
+ *   Required. Input document.
+ * @param {google.cloud.language.v1.EncodingType} request.encodingType
+ *   The encoding type used by the API to calculate offsets.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.language.v1.AnalyzeSyntaxResponse|AnalyzeSyntaxResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/language_service.analyze_syntax.js</caption>
+ * region_tag:language_v1_generated_LanguageService_AnalyzeSyntax_async
+ */
   analyzeSyntax(
-    request?: protos.google.cloud.language.v1.IAnalyzeSyntaxRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.language.v1.IAnalyzeSyntaxResponse,
-      protos.google.cloud.language.v1.IAnalyzeSyntaxRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.language.v1.IAnalyzeSyntaxRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.language.v1.IAnalyzeSyntaxResponse,
+        protos.google.cloud.language.v1.IAnalyzeSyntaxRequest|undefined, {}|undefined
+      ]>;
   analyzeSyntax(
-    request: protos.google.cloud.language.v1.IAnalyzeSyntaxRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.language.v1.IAnalyzeSyntaxResponse,
-      protos.google.cloud.language.v1.IAnalyzeSyntaxRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  analyzeSyntax(
-    request: protos.google.cloud.language.v1.IAnalyzeSyntaxRequest,
-    callback: Callback<
-      protos.google.cloud.language.v1.IAnalyzeSyntaxResponse,
-      protos.google.cloud.language.v1.IAnalyzeSyntaxRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  analyzeSyntax(
-    request?: protos.google.cloud.language.v1.IAnalyzeSyntaxRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.language.v1.IAnalyzeSyntaxRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.language.v1.IAnalyzeSyntaxResponse,
-          | protos.google.cloud.language.v1.IAnalyzeSyntaxRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.language.v1.IAnalyzeSyntaxResponse,
-      protos.google.cloud.language.v1.IAnalyzeSyntaxRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.language.v1.IAnalyzeSyntaxResponse,
-      protos.google.cloud.language.v1.IAnalyzeSyntaxRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.language.v1.IAnalyzeSyntaxRequest|null|undefined,
+          {}|null|undefined>): void;
+  analyzeSyntax(
+      request: protos.google.cloud.language.v1.IAnalyzeSyntaxRequest,
+      callback: Callback<
+          protos.google.cloud.language.v1.IAnalyzeSyntaxResponse,
+          protos.google.cloud.language.v1.IAnalyzeSyntaxRequest|null|undefined,
+          {}|null|undefined>): void;
+  analyzeSyntax(
+      request?: protos.google.cloud.language.v1.IAnalyzeSyntaxRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.language.v1.IAnalyzeSyntaxResponse,
+          protos.google.cloud.language.v1.IAnalyzeSyntaxRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.language.v1.IAnalyzeSyntaxResponse,
+          protos.google.cloud.language.v1.IAnalyzeSyntaxRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.language.v1.IAnalyzeSyntaxResponse,
+        protos.google.cloud.language.v1.IAnalyzeSyntaxRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('analyzeSyntax request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.language.v1.IAnalyzeSyntaxResponse,
-          | protos.google.cloud.language.v1.IAnalyzeSyntaxRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.language.v1.IAnalyzeSyntaxResponse,
+        protos.google.cloud.language.v1.IAnalyzeSyntaxRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('analyzeSyntax response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .analyzeSyntax(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.language.v1.IAnalyzeSyntaxResponse,
-          protos.google.cloud.language.v1.IAnalyzeSyntaxRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('analyzeSyntax response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.analyzeSyntax(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.language.v1.IAnalyzeSyntaxResponse,
+        protos.google.cloud.language.v1.IAnalyzeSyntaxRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('analyzeSyntax response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Classifies a document into categories.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.language.v1.Document} request.document
-   *   Required. Input document.
-   * @param {google.cloud.language.v1.ClassificationModelOptions} request.classificationModelOptions
-   *   Model options to use for classification. Defaults to v1 options if not
-   *   specified.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.language.v1.ClassifyTextResponse|ClassifyTextResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/language_service.classify_text.js</caption>
-   * region_tag:language_v1_generated_LanguageService_ClassifyText_async
-   */
+/**
+ * Classifies a document into categories.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.language.v1.Document} request.document
+ *   Required. Input document.
+ * @param {google.cloud.language.v1.ClassificationModelOptions} request.classificationModelOptions
+ *   Model options to use for classification. Defaults to v1 options if not
+ *   specified.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.language.v1.ClassifyTextResponse|ClassifyTextResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/language_service.classify_text.js</caption>
+ * region_tag:language_v1_generated_LanguageService_ClassifyText_async
+ */
   classifyText(
-    request?: protos.google.cloud.language.v1.IClassifyTextRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.language.v1.IClassifyTextResponse,
-      protos.google.cloud.language.v1.IClassifyTextRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.language.v1.IClassifyTextRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.language.v1.IClassifyTextResponse,
+        protos.google.cloud.language.v1.IClassifyTextRequest|undefined, {}|undefined
+      ]>;
   classifyText(
-    request: protos.google.cloud.language.v1.IClassifyTextRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.language.v1.IClassifyTextResponse,
-      protos.google.cloud.language.v1.IClassifyTextRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  classifyText(
-    request: protos.google.cloud.language.v1.IClassifyTextRequest,
-    callback: Callback<
-      protos.google.cloud.language.v1.IClassifyTextResponse,
-      protos.google.cloud.language.v1.IClassifyTextRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  classifyText(
-    request?: protos.google.cloud.language.v1.IClassifyTextRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.language.v1.IClassifyTextRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.language.v1.IClassifyTextResponse,
-          | protos.google.cloud.language.v1.IClassifyTextRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.language.v1.IClassifyTextResponse,
-      protos.google.cloud.language.v1.IClassifyTextRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.language.v1.IClassifyTextResponse,
-      protos.google.cloud.language.v1.IClassifyTextRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.language.v1.IClassifyTextRequest|null|undefined,
+          {}|null|undefined>): void;
+  classifyText(
+      request: protos.google.cloud.language.v1.IClassifyTextRequest,
+      callback: Callback<
+          protos.google.cloud.language.v1.IClassifyTextResponse,
+          protos.google.cloud.language.v1.IClassifyTextRequest|null|undefined,
+          {}|null|undefined>): void;
+  classifyText(
+      request?: protos.google.cloud.language.v1.IClassifyTextRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.language.v1.IClassifyTextResponse,
+          protos.google.cloud.language.v1.IClassifyTextRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.language.v1.IClassifyTextResponse,
+          protos.google.cloud.language.v1.IClassifyTextRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.language.v1.IClassifyTextResponse,
+        protos.google.cloud.language.v1.IClassifyTextRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('classifyText request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.language.v1.IClassifyTextResponse,
-          | protos.google.cloud.language.v1.IClassifyTextRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.language.v1.IClassifyTextResponse,
+        protos.google.cloud.language.v1.IClassifyTextRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('classifyText response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .classifyText(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.language.v1.IClassifyTextResponse,
-          protos.google.cloud.language.v1.IClassifyTextRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('classifyText response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.classifyText(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.language.v1.IClassifyTextResponse,
+        protos.google.cloud.language.v1.IClassifyTextRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('classifyText response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Moderates a document for harmful and sensitive categories.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.language.v1.Document} request.document
-   *   Required. Input document.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.language.v1.ModerateTextResponse|ModerateTextResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/language_service.moderate_text.js</caption>
-   * region_tag:language_v1_generated_LanguageService_ModerateText_async
-   */
+/**
+ * Moderates a document for harmful and sensitive categories.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.language.v1.Document} request.document
+ *   Required. Input document.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.language.v1.ModerateTextResponse|ModerateTextResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/language_service.moderate_text.js</caption>
+ * region_tag:language_v1_generated_LanguageService_ModerateText_async
+ */
   moderateText(
-    request?: protos.google.cloud.language.v1.IModerateTextRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.language.v1.IModerateTextResponse,
-      protos.google.cloud.language.v1.IModerateTextRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.language.v1.IModerateTextRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.language.v1.IModerateTextResponse,
+        protos.google.cloud.language.v1.IModerateTextRequest|undefined, {}|undefined
+      ]>;
   moderateText(
-    request: protos.google.cloud.language.v1.IModerateTextRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.language.v1.IModerateTextResponse,
-      protos.google.cloud.language.v1.IModerateTextRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  moderateText(
-    request: protos.google.cloud.language.v1.IModerateTextRequest,
-    callback: Callback<
-      protos.google.cloud.language.v1.IModerateTextResponse,
-      protos.google.cloud.language.v1.IModerateTextRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  moderateText(
-    request?: protos.google.cloud.language.v1.IModerateTextRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.language.v1.IModerateTextRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.language.v1.IModerateTextResponse,
-          | protos.google.cloud.language.v1.IModerateTextRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.language.v1.IModerateTextResponse,
-      protos.google.cloud.language.v1.IModerateTextRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.language.v1.IModerateTextResponse,
-      protos.google.cloud.language.v1.IModerateTextRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.language.v1.IModerateTextRequest|null|undefined,
+          {}|null|undefined>): void;
+  moderateText(
+      request: protos.google.cloud.language.v1.IModerateTextRequest,
+      callback: Callback<
+          protos.google.cloud.language.v1.IModerateTextResponse,
+          protos.google.cloud.language.v1.IModerateTextRequest|null|undefined,
+          {}|null|undefined>): void;
+  moderateText(
+      request?: protos.google.cloud.language.v1.IModerateTextRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.language.v1.IModerateTextResponse,
+          protos.google.cloud.language.v1.IModerateTextRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.language.v1.IModerateTextResponse,
+          protos.google.cloud.language.v1.IModerateTextRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.language.v1.IModerateTextResponse,
+        protos.google.cloud.language.v1.IModerateTextRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('moderateText request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.language.v1.IModerateTextResponse,
-          | protos.google.cloud.language.v1.IModerateTextRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.language.v1.IModerateTextResponse,
+        protos.google.cloud.language.v1.IModerateTextRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('moderateText response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .moderateText(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.language.v1.IModerateTextResponse,
-          protos.google.cloud.language.v1.IModerateTextRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('moderateText response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.moderateText(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.language.v1.IModerateTextResponse,
+        protos.google.cloud.language.v1.IModerateTextRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('moderateText response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * A convenience method that provides all the features that analyzeSentiment,
-   * analyzeEntities, and analyzeSyntax provide in one call.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.language.v1.Document} request.document
-   *   Required. Input document.
-   * @param {google.cloud.language.v1.AnnotateTextRequest.Features} request.features
-   *   Required. The enabled features.
-   * @param {google.cloud.language.v1.EncodingType} request.encodingType
-   *   The encoding type used by the API to calculate offsets.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.language.v1.AnnotateTextResponse|AnnotateTextResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/language_service.annotate_text.js</caption>
-   * region_tag:language_v1_generated_LanguageService_AnnotateText_async
-   */
+/**
+ * A convenience method that provides all the features that analyzeSentiment,
+ * analyzeEntities, and analyzeSyntax provide in one call.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.language.v1.Document} request.document
+ *   Required. Input document.
+ * @param {google.cloud.language.v1.AnnotateTextRequest.Features} request.features
+ *   Required. The enabled features.
+ * @param {google.cloud.language.v1.EncodingType} request.encodingType
+ *   The encoding type used by the API to calculate offsets.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.language.v1.AnnotateTextResponse|AnnotateTextResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/language_service.annotate_text.js</caption>
+ * region_tag:language_v1_generated_LanguageService_AnnotateText_async
+ */
   annotateText(
-    request?: protos.google.cloud.language.v1.IAnnotateTextRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.language.v1.IAnnotateTextResponse,
-      protos.google.cloud.language.v1.IAnnotateTextRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.language.v1.IAnnotateTextRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.language.v1.IAnnotateTextResponse,
+        protos.google.cloud.language.v1.IAnnotateTextRequest|undefined, {}|undefined
+      ]>;
   annotateText(
-    request: protos.google.cloud.language.v1.IAnnotateTextRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.language.v1.IAnnotateTextResponse,
-      protos.google.cloud.language.v1.IAnnotateTextRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  annotateText(
-    request: protos.google.cloud.language.v1.IAnnotateTextRequest,
-    callback: Callback<
-      protos.google.cloud.language.v1.IAnnotateTextResponse,
-      protos.google.cloud.language.v1.IAnnotateTextRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  annotateText(
-    request?: protos.google.cloud.language.v1.IAnnotateTextRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.language.v1.IAnnotateTextRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.language.v1.IAnnotateTextResponse,
-          | protos.google.cloud.language.v1.IAnnotateTextRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.language.v1.IAnnotateTextResponse,
-      protos.google.cloud.language.v1.IAnnotateTextRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.language.v1.IAnnotateTextResponse,
-      protos.google.cloud.language.v1.IAnnotateTextRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.language.v1.IAnnotateTextRequest|null|undefined,
+          {}|null|undefined>): void;
+  annotateText(
+      request: protos.google.cloud.language.v1.IAnnotateTextRequest,
+      callback: Callback<
+          protos.google.cloud.language.v1.IAnnotateTextResponse,
+          protos.google.cloud.language.v1.IAnnotateTextRequest|null|undefined,
+          {}|null|undefined>): void;
+  annotateText(
+      request?: protos.google.cloud.language.v1.IAnnotateTextRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.language.v1.IAnnotateTextResponse,
+          protos.google.cloud.language.v1.IAnnotateTextRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.language.v1.IAnnotateTextResponse,
+          protos.google.cloud.language.v1.IAnnotateTextRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.language.v1.IAnnotateTextResponse,
+        protos.google.cloud.language.v1.IAnnotateTextRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('annotateText request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.language.v1.IAnnotateTextResponse,
-          | protos.google.cloud.language.v1.IAnnotateTextRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.language.v1.IAnnotateTextResponse,
+        protos.google.cloud.language.v1.IAnnotateTextRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('annotateText response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .annotateText(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.language.v1.IAnnotateTextResponse,
-          protos.google.cloud.language.v1.IAnnotateTextRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('annotateText response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.annotateText(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.language.v1.IAnnotateTextResponse,
+        protos.google.cloud.language.v1.IAnnotateTextRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('annotateText response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
+
 
   /**
    * Terminate the gRPC channel and close the client.

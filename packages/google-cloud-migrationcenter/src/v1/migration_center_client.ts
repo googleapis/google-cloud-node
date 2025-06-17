@@ -18,22 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -113,41 +102,20 @@ export class MigrationCenterClient {
    *     const client = new MigrationCenterClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof MigrationCenterClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'migrationcenter.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -173,7 +141,7 @@ export class MigrationCenterClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -189,9 +157,13 @@ export class MigrationCenterClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -254,360 +226,231 @@ export class MigrationCenterClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listAssets: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'assets'
-      ),
-      listImportJobs: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'importJobs'
-      ),
-      listImportDataFiles: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'importDataFiles'
-      ),
-      listGroups: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'groups'
-      ),
-      listErrorFrames: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'errorFrames'
-      ),
-      listSources: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'sources'
-      ),
-      listPreferenceSets: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'preferenceSets'
-      ),
-      listReportConfigs: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'reportConfigs'
-      ),
-      listReports: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'reports'
-      ),
+      listAssets:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'assets'),
+      listImportJobs:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'importJobs'),
+      listImportDataFiles:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'importDataFiles'),
+      listGroups:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'groups'),
+      listErrorFrames:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'errorFrames'),
+      listSources:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'sources'),
+      listPreferenceSets:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'preferenceSets'),
+      listReportConfigs:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'reportConfigs'),
+      listReports:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'reports')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v1/{name=projects/*/locations/*}',
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v1/{name=projects/*}/locations',
-        },
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
-          body: '*',
-        },
-        {
-          selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1/{name=projects/*/locations/*}/operations',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createImportJobResponse = protoFilesRoot.lookup(
-      '.google.cloud.migrationcenter.v1.ImportJob'
-    ) as gax.protobuf.Type;
+      '.google.cloud.migrationcenter.v1.ImportJob') as gax.protobuf.Type;
     const createImportJobMetadata = protoFilesRoot.lookup(
-      '.google.cloud.migrationcenter.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.migrationcenter.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteImportJobResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteImportJobMetadata = protoFilesRoot.lookup(
-      '.google.cloud.migrationcenter.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.migrationcenter.v1.OperationMetadata') as gax.protobuf.Type;
     const updateImportJobResponse = protoFilesRoot.lookup(
-      '.google.cloud.migrationcenter.v1.ImportJob'
-    ) as gax.protobuf.Type;
+      '.google.cloud.migrationcenter.v1.ImportJob') as gax.protobuf.Type;
     const updateImportJobMetadata = protoFilesRoot.lookup(
-      '.google.cloud.migrationcenter.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.migrationcenter.v1.OperationMetadata') as gax.protobuf.Type;
     const validateImportJobResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const validateImportJobMetadata = protoFilesRoot.lookup(
-      '.google.cloud.migrationcenter.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.migrationcenter.v1.OperationMetadata') as gax.protobuf.Type;
     const runImportJobResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const runImportJobMetadata = protoFilesRoot.lookup(
-      '.google.cloud.migrationcenter.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.migrationcenter.v1.OperationMetadata') as gax.protobuf.Type;
     const createImportDataFileResponse = protoFilesRoot.lookup(
-      '.google.cloud.migrationcenter.v1.ImportDataFile'
-    ) as gax.protobuf.Type;
+      '.google.cloud.migrationcenter.v1.ImportDataFile') as gax.protobuf.Type;
     const createImportDataFileMetadata = protoFilesRoot.lookup(
-      '.google.cloud.migrationcenter.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.migrationcenter.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteImportDataFileResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteImportDataFileMetadata = protoFilesRoot.lookup(
-      '.google.cloud.migrationcenter.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.migrationcenter.v1.OperationMetadata') as gax.protobuf.Type;
     const createGroupResponse = protoFilesRoot.lookup(
-      '.google.cloud.migrationcenter.v1.Group'
-    ) as gax.protobuf.Type;
+      '.google.cloud.migrationcenter.v1.Group') as gax.protobuf.Type;
     const createGroupMetadata = protoFilesRoot.lookup(
-      '.google.cloud.migrationcenter.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.migrationcenter.v1.OperationMetadata') as gax.protobuf.Type;
     const updateGroupResponse = protoFilesRoot.lookup(
-      '.google.cloud.migrationcenter.v1.Group'
-    ) as gax.protobuf.Type;
+      '.google.cloud.migrationcenter.v1.Group') as gax.protobuf.Type;
     const updateGroupMetadata = protoFilesRoot.lookup(
-      '.google.cloud.migrationcenter.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.migrationcenter.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteGroupResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteGroupMetadata = protoFilesRoot.lookup(
-      '.google.cloud.migrationcenter.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.migrationcenter.v1.OperationMetadata') as gax.protobuf.Type;
     const addAssetsToGroupResponse = protoFilesRoot.lookup(
-      '.google.cloud.migrationcenter.v1.Group'
-    ) as gax.protobuf.Type;
+      '.google.cloud.migrationcenter.v1.Group') as gax.protobuf.Type;
     const addAssetsToGroupMetadata = protoFilesRoot.lookup(
-      '.google.cloud.migrationcenter.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.migrationcenter.v1.OperationMetadata') as gax.protobuf.Type;
     const removeAssetsFromGroupResponse = protoFilesRoot.lookup(
-      '.google.cloud.migrationcenter.v1.Group'
-    ) as gax.protobuf.Type;
+      '.google.cloud.migrationcenter.v1.Group') as gax.protobuf.Type;
     const removeAssetsFromGroupMetadata = protoFilesRoot.lookup(
-      '.google.cloud.migrationcenter.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.migrationcenter.v1.OperationMetadata') as gax.protobuf.Type;
     const createSourceResponse = protoFilesRoot.lookup(
-      '.google.cloud.migrationcenter.v1.Source'
-    ) as gax.protobuf.Type;
+      '.google.cloud.migrationcenter.v1.Source') as gax.protobuf.Type;
     const createSourceMetadata = protoFilesRoot.lookup(
-      '.google.cloud.migrationcenter.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.migrationcenter.v1.OperationMetadata') as gax.protobuf.Type;
     const updateSourceResponse = protoFilesRoot.lookup(
-      '.google.cloud.migrationcenter.v1.Source'
-    ) as gax.protobuf.Type;
+      '.google.cloud.migrationcenter.v1.Source') as gax.protobuf.Type;
     const updateSourceMetadata = protoFilesRoot.lookup(
-      '.google.cloud.migrationcenter.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.migrationcenter.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteSourceResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteSourceMetadata = protoFilesRoot.lookup(
-      '.google.cloud.migrationcenter.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.migrationcenter.v1.OperationMetadata') as gax.protobuf.Type;
     const createPreferenceSetResponse = protoFilesRoot.lookup(
-      '.google.cloud.migrationcenter.v1.PreferenceSet'
-    ) as gax.protobuf.Type;
+      '.google.cloud.migrationcenter.v1.PreferenceSet') as gax.protobuf.Type;
     const createPreferenceSetMetadata = protoFilesRoot.lookup(
-      '.google.cloud.migrationcenter.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.migrationcenter.v1.OperationMetadata') as gax.protobuf.Type;
     const updatePreferenceSetResponse = protoFilesRoot.lookup(
-      '.google.cloud.migrationcenter.v1.PreferenceSet'
-    ) as gax.protobuf.Type;
+      '.google.cloud.migrationcenter.v1.PreferenceSet') as gax.protobuf.Type;
     const updatePreferenceSetMetadata = protoFilesRoot.lookup(
-      '.google.cloud.migrationcenter.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.migrationcenter.v1.OperationMetadata') as gax.protobuf.Type;
     const deletePreferenceSetResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deletePreferenceSetMetadata = protoFilesRoot.lookup(
-      '.google.cloud.migrationcenter.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.migrationcenter.v1.OperationMetadata') as gax.protobuf.Type;
     const updateSettingsResponse = protoFilesRoot.lookup(
-      '.google.cloud.migrationcenter.v1.Settings'
-    ) as gax.protobuf.Type;
+      '.google.cloud.migrationcenter.v1.Settings') as gax.protobuf.Type;
     const updateSettingsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.migrationcenter.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.migrationcenter.v1.OperationMetadata') as gax.protobuf.Type;
     const createReportConfigResponse = protoFilesRoot.lookup(
-      '.google.cloud.migrationcenter.v1.ReportConfig'
-    ) as gax.protobuf.Type;
+      '.google.cloud.migrationcenter.v1.ReportConfig') as gax.protobuf.Type;
     const createReportConfigMetadata = protoFilesRoot.lookup(
-      '.google.cloud.migrationcenter.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.migrationcenter.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteReportConfigResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteReportConfigMetadata = protoFilesRoot.lookup(
-      '.google.cloud.migrationcenter.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.migrationcenter.v1.OperationMetadata') as gax.protobuf.Type;
     const createReportResponse = protoFilesRoot.lookup(
-      '.google.cloud.migrationcenter.v1.Report'
-    ) as gax.protobuf.Type;
+      '.google.cloud.migrationcenter.v1.Report') as gax.protobuf.Type;
     const createReportMetadata = protoFilesRoot.lookup(
-      '.google.cloud.migrationcenter.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.migrationcenter.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteReportResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteReportMetadata = protoFilesRoot.lookup(
-      '.google.cloud.migrationcenter.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.migrationcenter.v1.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createImportJob: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createImportJobResponse.decode.bind(createImportJobResponse),
-        createImportJobMetadata.decode.bind(createImportJobMetadata)
-      ),
+        createImportJobMetadata.decode.bind(createImportJobMetadata)),
       deleteImportJob: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteImportJobResponse.decode.bind(deleteImportJobResponse),
-        deleteImportJobMetadata.decode.bind(deleteImportJobMetadata)
-      ),
+        deleteImportJobMetadata.decode.bind(deleteImportJobMetadata)),
       updateImportJob: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateImportJobResponse.decode.bind(updateImportJobResponse),
-        updateImportJobMetadata.decode.bind(updateImportJobMetadata)
-      ),
+        updateImportJobMetadata.decode.bind(updateImportJobMetadata)),
       validateImportJob: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         validateImportJobResponse.decode.bind(validateImportJobResponse),
-        validateImportJobMetadata.decode.bind(validateImportJobMetadata)
-      ),
+        validateImportJobMetadata.decode.bind(validateImportJobMetadata)),
       runImportJob: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         runImportJobResponse.decode.bind(runImportJobResponse),
-        runImportJobMetadata.decode.bind(runImportJobMetadata)
-      ),
+        runImportJobMetadata.decode.bind(runImportJobMetadata)),
       createImportDataFile: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createImportDataFileResponse.decode.bind(createImportDataFileResponse),
-        createImportDataFileMetadata.decode.bind(createImportDataFileMetadata)
-      ),
+        createImportDataFileMetadata.decode.bind(createImportDataFileMetadata)),
       deleteImportDataFile: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteImportDataFileResponse.decode.bind(deleteImportDataFileResponse),
-        deleteImportDataFileMetadata.decode.bind(deleteImportDataFileMetadata)
-      ),
+        deleteImportDataFileMetadata.decode.bind(deleteImportDataFileMetadata)),
       createGroup: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createGroupResponse.decode.bind(createGroupResponse),
-        createGroupMetadata.decode.bind(createGroupMetadata)
-      ),
+        createGroupMetadata.decode.bind(createGroupMetadata)),
       updateGroup: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateGroupResponse.decode.bind(updateGroupResponse),
-        updateGroupMetadata.decode.bind(updateGroupMetadata)
-      ),
+        updateGroupMetadata.decode.bind(updateGroupMetadata)),
       deleteGroup: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteGroupResponse.decode.bind(deleteGroupResponse),
-        deleteGroupMetadata.decode.bind(deleteGroupMetadata)
-      ),
+        deleteGroupMetadata.decode.bind(deleteGroupMetadata)),
       addAssetsToGroup: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         addAssetsToGroupResponse.decode.bind(addAssetsToGroupResponse),
-        addAssetsToGroupMetadata.decode.bind(addAssetsToGroupMetadata)
-      ),
+        addAssetsToGroupMetadata.decode.bind(addAssetsToGroupMetadata)),
       removeAssetsFromGroup: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        removeAssetsFromGroupResponse.decode.bind(
-          removeAssetsFromGroupResponse
-        ),
-        removeAssetsFromGroupMetadata.decode.bind(removeAssetsFromGroupMetadata)
-      ),
+        removeAssetsFromGroupResponse.decode.bind(removeAssetsFromGroupResponse),
+        removeAssetsFromGroupMetadata.decode.bind(removeAssetsFromGroupMetadata)),
       createSource: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createSourceResponse.decode.bind(createSourceResponse),
-        createSourceMetadata.decode.bind(createSourceMetadata)
-      ),
+        createSourceMetadata.decode.bind(createSourceMetadata)),
       updateSource: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateSourceResponse.decode.bind(updateSourceResponse),
-        updateSourceMetadata.decode.bind(updateSourceMetadata)
-      ),
+        updateSourceMetadata.decode.bind(updateSourceMetadata)),
       deleteSource: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteSourceResponse.decode.bind(deleteSourceResponse),
-        deleteSourceMetadata.decode.bind(deleteSourceMetadata)
-      ),
+        deleteSourceMetadata.decode.bind(deleteSourceMetadata)),
       createPreferenceSet: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createPreferenceSetResponse.decode.bind(createPreferenceSetResponse),
-        createPreferenceSetMetadata.decode.bind(createPreferenceSetMetadata)
-      ),
+        createPreferenceSetMetadata.decode.bind(createPreferenceSetMetadata)),
       updatePreferenceSet: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updatePreferenceSetResponse.decode.bind(updatePreferenceSetResponse),
-        updatePreferenceSetMetadata.decode.bind(updatePreferenceSetMetadata)
-      ),
+        updatePreferenceSetMetadata.decode.bind(updatePreferenceSetMetadata)),
       deletePreferenceSet: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deletePreferenceSetResponse.decode.bind(deletePreferenceSetResponse),
-        deletePreferenceSetMetadata.decode.bind(deletePreferenceSetMetadata)
-      ),
+        deletePreferenceSetMetadata.decode.bind(deletePreferenceSetMetadata)),
       updateSettings: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateSettingsResponse.decode.bind(updateSettingsResponse),
-        updateSettingsMetadata.decode.bind(updateSettingsMetadata)
-      ),
+        updateSettingsMetadata.decode.bind(updateSettingsMetadata)),
       createReportConfig: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createReportConfigResponse.decode.bind(createReportConfigResponse),
-        createReportConfigMetadata.decode.bind(createReportConfigMetadata)
-      ),
+        createReportConfigMetadata.decode.bind(createReportConfigMetadata)),
       deleteReportConfig: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteReportConfigResponse.decode.bind(deleteReportConfigResponse),
-        deleteReportConfigMetadata.decode.bind(deleteReportConfigMetadata)
-      ),
+        deleteReportConfigMetadata.decode.bind(deleteReportConfigMetadata)),
       createReport: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createReportResponse.decode.bind(createReportResponse),
-        createReportMetadata.decode.bind(createReportMetadata)
-      ),
+        createReportMetadata.decode.bind(createReportMetadata)),
       deleteReport: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteReportResponse.decode.bind(deleteReportResponse),
-        deleteReportMetadata.decode.bind(deleteReportMetadata)
-      ),
+        deleteReportMetadata.decode.bind(deleteReportMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.migrationcenter.v1.MigrationCenter',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.migrationcenter.v1.MigrationCenter', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -638,82 +481,28 @@ export class MigrationCenterClient {
     // Put together the "service stub" for
     // google.cloud.migrationcenter.v1.MigrationCenter.
     this.migrationCenterStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.migrationcenter.v1.MigrationCenter'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.migrationcenter.v1.MigrationCenter') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.migrationcenter.v1.MigrationCenter,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const migrationCenterStubMethods = [
-      'listAssets',
-      'getAsset',
-      'updateAsset',
-      'batchUpdateAssets',
-      'deleteAsset',
-      'batchDeleteAssets',
-      'reportAssetFrames',
-      'aggregateAssetsValues',
-      'createImportJob',
-      'listImportJobs',
-      'getImportJob',
-      'deleteImportJob',
-      'updateImportJob',
-      'validateImportJob',
-      'runImportJob',
-      'getImportDataFile',
-      'listImportDataFiles',
-      'createImportDataFile',
-      'deleteImportDataFile',
-      'listGroups',
-      'getGroup',
-      'createGroup',
-      'updateGroup',
-      'deleteGroup',
-      'addAssetsToGroup',
-      'removeAssetsFromGroup',
-      'listErrorFrames',
-      'getErrorFrame',
-      'listSources',
-      'getSource',
-      'createSource',
-      'updateSource',
-      'deleteSource',
-      'listPreferenceSets',
-      'getPreferenceSet',
-      'createPreferenceSet',
-      'updatePreferenceSet',
-      'deletePreferenceSet',
-      'getSettings',
-      'updateSettings',
-      'createReportConfig',
-      'getReportConfig',
-      'listReportConfigs',
-      'deleteReportConfig',
-      'createReport',
-      'getReport',
-      'listReports',
-      'deleteReport',
-    ];
+    const migrationCenterStubMethods =
+        ['listAssets', 'getAsset', 'updateAsset', 'batchUpdateAssets', 'deleteAsset', 'batchDeleteAssets', 'reportAssetFrames', 'aggregateAssetsValues', 'createImportJob', 'listImportJobs', 'getImportJob', 'deleteImportJob', 'updateImportJob', 'validateImportJob', 'runImportJob', 'getImportDataFile', 'listImportDataFiles', 'createImportDataFile', 'deleteImportDataFile', 'listGroups', 'getGroup', 'createGroup', 'updateGroup', 'deleteGroup', 'addAssetsToGroup', 'removeAssetsFromGroup', 'listErrorFrames', 'getErrorFrame', 'listSources', 'getSource', 'createSource', 'updateSource', 'deleteSource', 'listPreferenceSets', 'getPreferenceSet', 'createPreferenceSet', 'updatePreferenceSet', 'deletePreferenceSet', 'getSettings', 'updateSettings', 'createReportConfig', 'getReportConfig', 'listReportConfigs', 'deleteReportConfig', 'createReport', 'getReport', 'listReports', 'deleteReport'];
     for (const methodName of migrationCenterStubMethods) {
       const callPromise = this.migrationCenterStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -738,14 +527,8 @@ export class MigrationCenterClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'migrationcenter.googleapis.com';
   }
@@ -756,14 +539,8 @@ export class MigrationCenterClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'migrationcenter.googleapis.com';
   }
@@ -794,7 +571,9 @@ export class MigrationCenterClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -803,9 +582,8 @@ export class MigrationCenterClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -816,6474 +594,4561 @@ export class MigrationCenterClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets the details of an asset.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource.
-   * @param {google.cloud.migrationcenter.v1.AssetView} request.view
-   *   View of the assets. Defaults to BASIC.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.Asset|Asset}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.get_asset.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_GetAsset_async
-   */
+/**
+ * Gets the details of an asset.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource.
+ * @param {google.cloud.migrationcenter.v1.AssetView} request.view
+ *   View of the assets. Defaults to BASIC.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.Asset|Asset}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.get_asset.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_GetAsset_async
+ */
   getAsset(
-    request?: protos.google.cloud.migrationcenter.v1.IGetAssetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IAsset,
-      protos.google.cloud.migrationcenter.v1.IGetAssetRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IGetAssetRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IAsset,
+        protos.google.cloud.migrationcenter.v1.IGetAssetRequest|undefined, {}|undefined
+      ]>;
   getAsset(
-    request: protos.google.cloud.migrationcenter.v1.IGetAssetRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.migrationcenter.v1.IAsset,
-      | protos.google.cloud.migrationcenter.v1.IGetAssetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAsset(
-    request: protos.google.cloud.migrationcenter.v1.IGetAssetRequest,
-    callback: Callback<
-      protos.google.cloud.migrationcenter.v1.IAsset,
-      | protos.google.cloud.migrationcenter.v1.IGetAssetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAsset(
-    request?: protos.google.cloud.migrationcenter.v1.IGetAssetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.migrationcenter.v1.IGetAssetRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.migrationcenter.v1.IAsset,
-          | protos.google.cloud.migrationcenter.v1.IGetAssetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.migrationcenter.v1.IAsset,
-      | protos.google.cloud.migrationcenter.v1.IGetAssetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IAsset,
-      protos.google.cloud.migrationcenter.v1.IGetAssetRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.migrationcenter.v1.IGetAssetRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAsset(
+      request: protos.google.cloud.migrationcenter.v1.IGetAssetRequest,
+      callback: Callback<
+          protos.google.cloud.migrationcenter.v1.IAsset,
+          protos.google.cloud.migrationcenter.v1.IGetAssetRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAsset(
+      request?: protos.google.cloud.migrationcenter.v1.IGetAssetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.migrationcenter.v1.IAsset,
+          protos.google.cloud.migrationcenter.v1.IGetAssetRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.migrationcenter.v1.IAsset,
+          protos.google.cloud.migrationcenter.v1.IGetAssetRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IAsset,
+        protos.google.cloud.migrationcenter.v1.IGetAssetRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getAsset request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.migrationcenter.v1.IAsset,
-          | protos.google.cloud.migrationcenter.v1.IGetAssetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.migrationcenter.v1.IAsset,
+        protos.google.cloud.migrationcenter.v1.IGetAssetRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getAsset response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getAsset(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.migrationcenter.v1.IAsset,
-          protos.google.cloud.migrationcenter.v1.IGetAssetRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getAsset response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getAsset(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.migrationcenter.v1.IAsset,
+        protos.google.cloud.migrationcenter.v1.IGetAssetRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getAsset response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates the parameters of an asset.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Field mask is used to specify the fields to be overwritten in the
-   *   `Asset` resource by the update.
-   *   The values specified in the `update_mask` field are relative to the
-   *   resource, not the full request.
-   *   A field will be overwritten if it is in the mask.
-   *   A single * value in the mask lets you to overwrite all fields.
-   * @param {google.cloud.migrationcenter.v1.Asset} request.asset
-   *   Required. The resource being updated.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.Asset|Asset}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.update_asset.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_UpdateAsset_async
-   */
+/**
+ * Updates the parameters of an asset.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Field mask is used to specify the fields to be overwritten in the
+ *   `Asset` resource by the update.
+ *   The values specified in the `update_mask` field are relative to the
+ *   resource, not the full request.
+ *   A field will be overwritten if it is in the mask.
+ *   A single * value in the mask lets you to overwrite all fields.
+ * @param {google.cloud.migrationcenter.v1.Asset} request.asset
+ *   Required. The resource being updated.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.Asset|Asset}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.update_asset.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_UpdateAsset_async
+ */
   updateAsset(
-    request?: protos.google.cloud.migrationcenter.v1.IUpdateAssetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IAsset,
-      protos.google.cloud.migrationcenter.v1.IUpdateAssetRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IUpdateAssetRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IAsset,
+        protos.google.cloud.migrationcenter.v1.IUpdateAssetRequest|undefined, {}|undefined
+      ]>;
   updateAsset(
-    request: protos.google.cloud.migrationcenter.v1.IUpdateAssetRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.migrationcenter.v1.IAsset,
-      | protos.google.cloud.migrationcenter.v1.IUpdateAssetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateAsset(
-    request: protos.google.cloud.migrationcenter.v1.IUpdateAssetRequest,
-    callback: Callback<
-      protos.google.cloud.migrationcenter.v1.IAsset,
-      | protos.google.cloud.migrationcenter.v1.IUpdateAssetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateAsset(
-    request?: protos.google.cloud.migrationcenter.v1.IUpdateAssetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.migrationcenter.v1.IUpdateAssetRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.migrationcenter.v1.IAsset,
-          | protos.google.cloud.migrationcenter.v1.IUpdateAssetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.migrationcenter.v1.IAsset,
-      | protos.google.cloud.migrationcenter.v1.IUpdateAssetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IAsset,
-      protos.google.cloud.migrationcenter.v1.IUpdateAssetRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.migrationcenter.v1.IUpdateAssetRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateAsset(
+      request: protos.google.cloud.migrationcenter.v1.IUpdateAssetRequest,
+      callback: Callback<
+          protos.google.cloud.migrationcenter.v1.IAsset,
+          protos.google.cloud.migrationcenter.v1.IUpdateAssetRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateAsset(
+      request?: protos.google.cloud.migrationcenter.v1.IUpdateAssetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.migrationcenter.v1.IAsset,
+          protos.google.cloud.migrationcenter.v1.IUpdateAssetRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.migrationcenter.v1.IAsset,
+          protos.google.cloud.migrationcenter.v1.IUpdateAssetRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IAsset,
+        protos.google.cloud.migrationcenter.v1.IUpdateAssetRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'asset.name': request.asset!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'asset.name': request.asset!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateAsset request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.migrationcenter.v1.IAsset,
-          | protos.google.cloud.migrationcenter.v1.IUpdateAssetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.migrationcenter.v1.IAsset,
+        protos.google.cloud.migrationcenter.v1.IUpdateAssetRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateAsset response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateAsset(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.migrationcenter.v1.IAsset,
-          (
-            | protos.google.cloud.migrationcenter.v1.IUpdateAssetRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateAsset response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateAsset(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.migrationcenter.v1.IAsset,
+        protos.google.cloud.migrationcenter.v1.IUpdateAssetRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateAsset response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates the parameters of a list of assets.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for batch asset update.
-   * @param {number[]} request.requests
-   *   Required. The request message specifying the resources to update.
-   *   A maximum of 1000 assets can be modified in a batch.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.BatchUpdateAssetsResponse|BatchUpdateAssetsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.batch_update_assets.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_BatchUpdateAssets_async
-   */
+/**
+ * Updates the parameters of a list of assets.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for batch asset update.
+ * @param {number[]} request.requests
+ *   Required. The request message specifying the resources to update.
+ *   A maximum of 1000 assets can be modified in a batch.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.BatchUpdateAssetsResponse|BatchUpdateAssetsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.batch_update_assets.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_BatchUpdateAssets_async
+ */
   batchUpdateAssets(
-    request?: protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsResponse,
-      (
-        | protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsResponse,
+        protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsRequest|undefined, {}|undefined
+      ]>;
   batchUpdateAssets(
-    request: protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsResponse,
-      | protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchUpdateAssets(
-    request: protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsRequest,
-    callback: Callback<
-      protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsResponse,
-      | protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchUpdateAssets(
-    request?: protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsResponse,
-          | protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsResponse,
-      | protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsResponse,
-      (
-        | protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchUpdateAssets(
+      request: protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsRequest,
+      callback: Callback<
+          protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsResponse,
+          protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchUpdateAssets(
+      request?: protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsResponse,
+          protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsResponse,
+          protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsResponse,
+        protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('batchUpdateAssets request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsResponse,
-          | protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsResponse,
+        protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('batchUpdateAssets response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .batchUpdateAssets(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsResponse,
-          (
-            | protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('batchUpdateAssets response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.batchUpdateAssets(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsResponse,
+        protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('batchUpdateAssets response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes an asset.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.delete_asset.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_DeleteAsset_async
-   */
+/**
+ * Deletes an asset.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.delete_asset.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_DeleteAsset_async
+ */
   deleteAsset(
-    request?: protos.google.cloud.migrationcenter.v1.IDeleteAssetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.migrationcenter.v1.IDeleteAssetRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IDeleteAssetRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.migrationcenter.v1.IDeleteAssetRequest|undefined, {}|undefined
+      ]>;
   deleteAsset(
-    request: protos.google.cloud.migrationcenter.v1.IDeleteAssetRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.migrationcenter.v1.IDeleteAssetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteAsset(
-    request: protos.google.cloud.migrationcenter.v1.IDeleteAssetRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.migrationcenter.v1.IDeleteAssetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteAsset(
-    request?: protos.google.cloud.migrationcenter.v1.IDeleteAssetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.migrationcenter.v1.IDeleteAssetRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.migrationcenter.v1.IDeleteAssetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.migrationcenter.v1.IDeleteAssetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.migrationcenter.v1.IDeleteAssetRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.migrationcenter.v1.IDeleteAssetRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteAsset(
+      request: protos.google.cloud.migrationcenter.v1.IDeleteAssetRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.migrationcenter.v1.IDeleteAssetRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteAsset(
+      request?: protos.google.cloud.migrationcenter.v1.IDeleteAssetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.migrationcenter.v1.IDeleteAssetRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.migrationcenter.v1.IDeleteAssetRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.migrationcenter.v1.IDeleteAssetRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteAsset request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.migrationcenter.v1.IDeleteAssetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.migrationcenter.v1.IDeleteAssetRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteAsset response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteAsset(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.migrationcenter.v1.IDeleteAssetRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteAsset response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteAsset(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.migrationcenter.v1.IDeleteAssetRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteAsset response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes list of Assets.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for batch asset delete.
-   * @param {string[]} request.names
-   *   Required. The IDs of the assets to delete.
-   *   A maximum of 1000 assets can be deleted in a batch.
-   *   Format: projects/{project}/locations/{location}/assets/{name}.
-   * @param {boolean} [request.allowMissing]
-   *   Optional. When this value is set to `true` the request is a no-op for
-   *   non-existing assets. See https://google.aip.dev/135#delete-if-existing for
-   *   additional details. Default value is `false`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.batch_delete_assets.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_BatchDeleteAssets_async
-   */
+/**
+ * Deletes list of Assets.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for batch asset delete.
+ * @param {string[]} request.names
+ *   Required. The IDs of the assets to delete.
+ *   A maximum of 1000 assets can be deleted in a batch.
+ *   Format: projects/{project}/locations/{location}/assets/{name}.
+ * @param {boolean} [request.allowMissing]
+ *   Optional. When this value is set to `true` the request is a no-op for
+ *   non-existing assets. See https://google.aip.dev/135#delete-if-existing for
+ *   additional details. Default value is `false`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.batch_delete_assets.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_BatchDeleteAssets_async
+ */
   batchDeleteAssets(
-    request?: protos.google.cloud.migrationcenter.v1.IBatchDeleteAssetsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.migrationcenter.v1.IBatchDeleteAssetsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IBatchDeleteAssetsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.migrationcenter.v1.IBatchDeleteAssetsRequest|undefined, {}|undefined
+      ]>;
   batchDeleteAssets(
-    request: protos.google.cloud.migrationcenter.v1.IBatchDeleteAssetsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.migrationcenter.v1.IBatchDeleteAssetsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchDeleteAssets(
-    request: protos.google.cloud.migrationcenter.v1.IBatchDeleteAssetsRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.migrationcenter.v1.IBatchDeleteAssetsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchDeleteAssets(
-    request?: protos.google.cloud.migrationcenter.v1.IBatchDeleteAssetsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.migrationcenter.v1.IBatchDeleteAssetsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.migrationcenter.v1.IBatchDeleteAssetsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.migrationcenter.v1.IBatchDeleteAssetsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.migrationcenter.v1.IBatchDeleteAssetsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.migrationcenter.v1.IBatchDeleteAssetsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchDeleteAssets(
+      request: protos.google.cloud.migrationcenter.v1.IBatchDeleteAssetsRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.migrationcenter.v1.IBatchDeleteAssetsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchDeleteAssets(
+      request?: protos.google.cloud.migrationcenter.v1.IBatchDeleteAssetsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.migrationcenter.v1.IBatchDeleteAssetsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.migrationcenter.v1.IBatchDeleteAssetsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.migrationcenter.v1.IBatchDeleteAssetsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('batchDeleteAssets request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.migrationcenter.v1.IBatchDeleteAssetsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.migrationcenter.v1.IBatchDeleteAssetsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('batchDeleteAssets response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .batchDeleteAssets(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.migrationcenter.v1.IBatchDeleteAssetsRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('batchDeleteAssets response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.batchDeleteAssets(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.migrationcenter.v1.IBatchDeleteAssetsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('batchDeleteAssets response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Reports a set of frames.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent of the resource.
-   * @param {google.cloud.migrationcenter.v1.Frames} request.frames
-   *   Collection of frames data.
-   * @param {string} request.source
-   *   Required. Reference to a source.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.ReportAssetFramesResponse|ReportAssetFramesResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.report_asset_frames.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_ReportAssetFrames_async
-   */
+/**
+ * Reports a set of frames.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent of the resource.
+ * @param {google.cloud.migrationcenter.v1.Frames} request.frames
+ *   Collection of frames data.
+ * @param {string} request.source
+ *   Required. Reference to a source.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.ReportAssetFramesResponse|ReportAssetFramesResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.report_asset_frames.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_ReportAssetFrames_async
+ */
   reportAssetFrames(
-    request?: protos.google.cloud.migrationcenter.v1.IReportAssetFramesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IReportAssetFramesResponse,
-      (
-        | protos.google.cloud.migrationcenter.v1.IReportAssetFramesRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IReportAssetFramesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IReportAssetFramesResponse,
+        protos.google.cloud.migrationcenter.v1.IReportAssetFramesRequest|undefined, {}|undefined
+      ]>;
   reportAssetFrames(
-    request: protos.google.cloud.migrationcenter.v1.IReportAssetFramesRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.migrationcenter.v1.IReportAssetFramesResponse,
-      | protos.google.cloud.migrationcenter.v1.IReportAssetFramesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  reportAssetFrames(
-    request: protos.google.cloud.migrationcenter.v1.IReportAssetFramesRequest,
-    callback: Callback<
-      protos.google.cloud.migrationcenter.v1.IReportAssetFramesResponse,
-      | protos.google.cloud.migrationcenter.v1.IReportAssetFramesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  reportAssetFrames(
-    request?: protos.google.cloud.migrationcenter.v1.IReportAssetFramesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.migrationcenter.v1.IReportAssetFramesRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.migrationcenter.v1.IReportAssetFramesResponse,
-          | protos.google.cloud.migrationcenter.v1.IReportAssetFramesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.migrationcenter.v1.IReportAssetFramesResponse,
-      | protos.google.cloud.migrationcenter.v1.IReportAssetFramesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IReportAssetFramesResponse,
-      (
-        | protos.google.cloud.migrationcenter.v1.IReportAssetFramesRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.migrationcenter.v1.IReportAssetFramesRequest|null|undefined,
+          {}|null|undefined>): void;
+  reportAssetFrames(
+      request: protos.google.cloud.migrationcenter.v1.IReportAssetFramesRequest,
+      callback: Callback<
+          protos.google.cloud.migrationcenter.v1.IReportAssetFramesResponse,
+          protos.google.cloud.migrationcenter.v1.IReportAssetFramesRequest|null|undefined,
+          {}|null|undefined>): void;
+  reportAssetFrames(
+      request?: protos.google.cloud.migrationcenter.v1.IReportAssetFramesRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.migrationcenter.v1.IReportAssetFramesResponse,
+          protos.google.cloud.migrationcenter.v1.IReportAssetFramesRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.migrationcenter.v1.IReportAssetFramesResponse,
+          protos.google.cloud.migrationcenter.v1.IReportAssetFramesRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IReportAssetFramesResponse,
+        protos.google.cloud.migrationcenter.v1.IReportAssetFramesRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('reportAssetFrames request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.migrationcenter.v1.IReportAssetFramesResponse,
-          | protos.google.cloud.migrationcenter.v1.IReportAssetFramesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.migrationcenter.v1.IReportAssetFramesResponse,
+        protos.google.cloud.migrationcenter.v1.IReportAssetFramesRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('reportAssetFrames response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .reportAssetFrames(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.migrationcenter.v1.IReportAssetFramesResponse,
-          (
-            | protos.google.cloud.migrationcenter.v1.IReportAssetFramesRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('reportAssetFrames response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.reportAssetFrames(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.migrationcenter.v1.IReportAssetFramesResponse,
+        protos.google.cloud.migrationcenter.v1.IReportAssetFramesRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('reportAssetFrames response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Aggregates the requested fields based on provided function.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for `AggregateAssetsValuesRequest`.
-   * @param {number[]} request.aggregations
-   *   Array of aggregations to perform.
-   *   Up to 25 aggregations can be defined.
-   * @param {string} request.filter
-   *   The aggregation will be performed on assets that match the provided filter.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.AggregateAssetsValuesResponse|AggregateAssetsValuesResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.aggregate_assets_values.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_AggregateAssetsValues_async
-   */
+/**
+ * Aggregates the requested fields based on provided function.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for `AggregateAssetsValuesRequest`.
+ * @param {number[]} request.aggregations
+ *   Array of aggregations to perform.
+ *   Up to 25 aggregations can be defined.
+ * @param {string} request.filter
+ *   The aggregation will be performed on assets that match the provided filter.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.AggregateAssetsValuesResponse|AggregateAssetsValuesResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.aggregate_assets_values.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_AggregateAssetsValues_async
+ */
   aggregateAssetsValues(
-    request?: protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesResponse,
-      (
-        | protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesResponse,
+        protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesRequest|undefined, {}|undefined
+      ]>;
   aggregateAssetsValues(
-    request: protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesResponse,
-      | protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  aggregateAssetsValues(
-    request: protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesRequest,
-    callback: Callback<
-      protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesResponse,
-      | protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  aggregateAssetsValues(
-    request?: protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesResponse,
-          | protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesResponse,
-      | protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesResponse,
-      (
-        | protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesRequest|null|undefined,
+          {}|null|undefined>): void;
+  aggregateAssetsValues(
+      request: protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesRequest,
+      callback: Callback<
+          protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesResponse,
+          protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesRequest|null|undefined,
+          {}|null|undefined>): void;
+  aggregateAssetsValues(
+      request?: protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesResponse,
+          protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesResponse,
+          protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesResponse,
+        protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('aggregateAssetsValues request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesResponse,
-          | protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesResponse,
+        protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('aggregateAssetsValues response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .aggregateAssetsValues(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesResponse,
-          (
-            | protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('aggregateAssetsValues response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.aggregateAssetsValues(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesResponse,
+        protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('aggregateAssetsValues response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets the details of an import job.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource.
-   * @param {google.cloud.migrationcenter.v1.ImportJobView} [request.view]
-   *   Optional. The level of details of the import job.
-   *   Default value is FULL.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.ImportJob|ImportJob}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.get_import_job.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_GetImportJob_async
-   */
+/**
+ * Gets the details of an import job.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource.
+ * @param {google.cloud.migrationcenter.v1.ImportJobView} [request.view]
+ *   Optional. The level of details of the import job.
+ *   Default value is FULL.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.ImportJob|ImportJob}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.get_import_job.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_GetImportJob_async
+ */
   getImportJob(
-    request?: protos.google.cloud.migrationcenter.v1.IGetImportJobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IImportJob,
-      protos.google.cloud.migrationcenter.v1.IGetImportJobRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IGetImportJobRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IImportJob,
+        protos.google.cloud.migrationcenter.v1.IGetImportJobRequest|undefined, {}|undefined
+      ]>;
   getImportJob(
-    request: protos.google.cloud.migrationcenter.v1.IGetImportJobRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.migrationcenter.v1.IImportJob,
-      | protos.google.cloud.migrationcenter.v1.IGetImportJobRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getImportJob(
-    request: protos.google.cloud.migrationcenter.v1.IGetImportJobRequest,
-    callback: Callback<
-      protos.google.cloud.migrationcenter.v1.IImportJob,
-      | protos.google.cloud.migrationcenter.v1.IGetImportJobRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getImportJob(
-    request?: protos.google.cloud.migrationcenter.v1.IGetImportJobRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.migrationcenter.v1.IGetImportJobRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.migrationcenter.v1.IImportJob,
-          | protos.google.cloud.migrationcenter.v1.IGetImportJobRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.migrationcenter.v1.IImportJob,
-      | protos.google.cloud.migrationcenter.v1.IGetImportJobRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IImportJob,
-      protos.google.cloud.migrationcenter.v1.IGetImportJobRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.migrationcenter.v1.IGetImportJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  getImportJob(
+      request: protos.google.cloud.migrationcenter.v1.IGetImportJobRequest,
+      callback: Callback<
+          protos.google.cloud.migrationcenter.v1.IImportJob,
+          protos.google.cloud.migrationcenter.v1.IGetImportJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  getImportJob(
+      request?: protos.google.cloud.migrationcenter.v1.IGetImportJobRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.migrationcenter.v1.IImportJob,
+          protos.google.cloud.migrationcenter.v1.IGetImportJobRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.migrationcenter.v1.IImportJob,
+          protos.google.cloud.migrationcenter.v1.IGetImportJobRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IImportJob,
+        protos.google.cloud.migrationcenter.v1.IGetImportJobRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getImportJob request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.migrationcenter.v1.IImportJob,
-          | protos.google.cloud.migrationcenter.v1.IGetImportJobRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.migrationcenter.v1.IImportJob,
+        protos.google.cloud.migrationcenter.v1.IGetImportJobRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getImportJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getImportJob(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.migrationcenter.v1.IImportJob,
-          (
-            | protos.google.cloud.migrationcenter.v1.IGetImportJobRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getImportJob response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getImportJob(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.migrationcenter.v1.IImportJob,
+        protos.google.cloud.migrationcenter.v1.IGetImportJobRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getImportJob response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets an import data file.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the ImportDataFile.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.ImportDataFile|ImportDataFile}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.get_import_data_file.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_GetImportDataFile_async
-   */
+/**
+ * Gets an import data file.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the ImportDataFile.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.ImportDataFile|ImportDataFile}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.get_import_data_file.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_GetImportDataFile_async
+ */
   getImportDataFile(
-    request?: protos.google.cloud.migrationcenter.v1.IGetImportDataFileRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IImportDataFile,
-      (
-        | protos.google.cloud.migrationcenter.v1.IGetImportDataFileRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IGetImportDataFileRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IImportDataFile,
+        protos.google.cloud.migrationcenter.v1.IGetImportDataFileRequest|undefined, {}|undefined
+      ]>;
   getImportDataFile(
-    request: protos.google.cloud.migrationcenter.v1.IGetImportDataFileRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.migrationcenter.v1.IImportDataFile,
-      | protos.google.cloud.migrationcenter.v1.IGetImportDataFileRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getImportDataFile(
-    request: protos.google.cloud.migrationcenter.v1.IGetImportDataFileRequest,
-    callback: Callback<
-      protos.google.cloud.migrationcenter.v1.IImportDataFile,
-      | protos.google.cloud.migrationcenter.v1.IGetImportDataFileRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getImportDataFile(
-    request?: protos.google.cloud.migrationcenter.v1.IGetImportDataFileRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.migrationcenter.v1.IGetImportDataFileRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.migrationcenter.v1.IImportDataFile,
-          | protos.google.cloud.migrationcenter.v1.IGetImportDataFileRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.migrationcenter.v1.IImportDataFile,
-      | protos.google.cloud.migrationcenter.v1.IGetImportDataFileRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IImportDataFile,
-      (
-        | protos.google.cloud.migrationcenter.v1.IGetImportDataFileRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.migrationcenter.v1.IGetImportDataFileRequest|null|undefined,
+          {}|null|undefined>): void;
+  getImportDataFile(
+      request: protos.google.cloud.migrationcenter.v1.IGetImportDataFileRequest,
+      callback: Callback<
+          protos.google.cloud.migrationcenter.v1.IImportDataFile,
+          protos.google.cloud.migrationcenter.v1.IGetImportDataFileRequest|null|undefined,
+          {}|null|undefined>): void;
+  getImportDataFile(
+      request?: protos.google.cloud.migrationcenter.v1.IGetImportDataFileRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.migrationcenter.v1.IImportDataFile,
+          protos.google.cloud.migrationcenter.v1.IGetImportDataFileRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.migrationcenter.v1.IImportDataFile,
+          protos.google.cloud.migrationcenter.v1.IGetImportDataFileRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IImportDataFile,
+        protos.google.cloud.migrationcenter.v1.IGetImportDataFileRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getImportDataFile request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.migrationcenter.v1.IImportDataFile,
-          | protos.google.cloud.migrationcenter.v1.IGetImportDataFileRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.migrationcenter.v1.IImportDataFile,
+        protos.google.cloud.migrationcenter.v1.IGetImportDataFileRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getImportDataFile response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getImportDataFile(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.migrationcenter.v1.IImportDataFile,
-          (
-            | protos.google.cloud.migrationcenter.v1.IGetImportDataFileRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getImportDataFile response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getImportDataFile(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.migrationcenter.v1.IImportDataFile,
+        protos.google.cloud.migrationcenter.v1.IGetImportDataFileRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getImportDataFile response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets the details of a group.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.Group|Group}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.get_group.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_GetGroup_async
-   */
+/**
+ * Gets the details of a group.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.Group|Group}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.get_group.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_GetGroup_async
+ */
   getGroup(
-    request?: protos.google.cloud.migrationcenter.v1.IGetGroupRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IGroup,
-      protos.google.cloud.migrationcenter.v1.IGetGroupRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IGetGroupRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IGroup,
+        protos.google.cloud.migrationcenter.v1.IGetGroupRequest|undefined, {}|undefined
+      ]>;
   getGroup(
-    request: protos.google.cloud.migrationcenter.v1.IGetGroupRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.migrationcenter.v1.IGroup,
-      | protos.google.cloud.migrationcenter.v1.IGetGroupRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getGroup(
-    request: protos.google.cloud.migrationcenter.v1.IGetGroupRequest,
-    callback: Callback<
-      protos.google.cloud.migrationcenter.v1.IGroup,
-      | protos.google.cloud.migrationcenter.v1.IGetGroupRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getGroup(
-    request?: protos.google.cloud.migrationcenter.v1.IGetGroupRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.migrationcenter.v1.IGetGroupRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.migrationcenter.v1.IGroup,
-          | protos.google.cloud.migrationcenter.v1.IGetGroupRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.migrationcenter.v1.IGroup,
-      | protos.google.cloud.migrationcenter.v1.IGetGroupRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IGroup,
-      protos.google.cloud.migrationcenter.v1.IGetGroupRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.migrationcenter.v1.IGetGroupRequest|null|undefined,
+          {}|null|undefined>): void;
+  getGroup(
+      request: protos.google.cloud.migrationcenter.v1.IGetGroupRequest,
+      callback: Callback<
+          protos.google.cloud.migrationcenter.v1.IGroup,
+          protos.google.cloud.migrationcenter.v1.IGetGroupRequest|null|undefined,
+          {}|null|undefined>): void;
+  getGroup(
+      request?: protos.google.cloud.migrationcenter.v1.IGetGroupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.migrationcenter.v1.IGroup,
+          protos.google.cloud.migrationcenter.v1.IGetGroupRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.migrationcenter.v1.IGroup,
+          protos.google.cloud.migrationcenter.v1.IGetGroupRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IGroup,
+        protos.google.cloud.migrationcenter.v1.IGetGroupRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getGroup request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.migrationcenter.v1.IGroup,
-          | protos.google.cloud.migrationcenter.v1.IGetGroupRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.migrationcenter.v1.IGroup,
+        protos.google.cloud.migrationcenter.v1.IGetGroupRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getGroup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getGroup(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.migrationcenter.v1.IGroup,
-          protos.google.cloud.migrationcenter.v1.IGetGroupRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getGroup response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getGroup(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.migrationcenter.v1.IGroup,
+        protos.google.cloud.migrationcenter.v1.IGetGroupRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getGroup response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets the details of an error frame.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the frame to retrieve.
-   *   Format:
-   *   projects/{project}/locations/{location}/sources/{source}/errorFrames/{error_frame}
-   * @param {google.cloud.migrationcenter.v1.ErrorFrameView} [request.view]
-   *   Optional. An optional view mode to control the level of details for the
-   *   frame. The default is a basic frame view.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.ErrorFrame|ErrorFrame}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.get_error_frame.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_GetErrorFrame_async
-   */
+/**
+ * Gets the details of an error frame.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the frame to retrieve.
+ *   Format:
+ *   projects/{project}/locations/{location}/sources/{source}/errorFrames/{error_frame}
+ * @param {google.cloud.migrationcenter.v1.ErrorFrameView} [request.view]
+ *   Optional. An optional view mode to control the level of details for the
+ *   frame. The default is a basic frame view.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.ErrorFrame|ErrorFrame}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.get_error_frame.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_GetErrorFrame_async
+ */
   getErrorFrame(
-    request?: protos.google.cloud.migrationcenter.v1.IGetErrorFrameRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IErrorFrame,
-      protos.google.cloud.migrationcenter.v1.IGetErrorFrameRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IGetErrorFrameRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IErrorFrame,
+        protos.google.cloud.migrationcenter.v1.IGetErrorFrameRequest|undefined, {}|undefined
+      ]>;
   getErrorFrame(
-    request: protos.google.cloud.migrationcenter.v1.IGetErrorFrameRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.migrationcenter.v1.IErrorFrame,
-      | protos.google.cloud.migrationcenter.v1.IGetErrorFrameRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getErrorFrame(
-    request: protos.google.cloud.migrationcenter.v1.IGetErrorFrameRequest,
-    callback: Callback<
-      protos.google.cloud.migrationcenter.v1.IErrorFrame,
-      | protos.google.cloud.migrationcenter.v1.IGetErrorFrameRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getErrorFrame(
-    request?: protos.google.cloud.migrationcenter.v1.IGetErrorFrameRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.migrationcenter.v1.IGetErrorFrameRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.migrationcenter.v1.IErrorFrame,
-          | protos.google.cloud.migrationcenter.v1.IGetErrorFrameRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.migrationcenter.v1.IErrorFrame,
-      | protos.google.cloud.migrationcenter.v1.IGetErrorFrameRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IErrorFrame,
-      protos.google.cloud.migrationcenter.v1.IGetErrorFrameRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.migrationcenter.v1.IGetErrorFrameRequest|null|undefined,
+          {}|null|undefined>): void;
+  getErrorFrame(
+      request: protos.google.cloud.migrationcenter.v1.IGetErrorFrameRequest,
+      callback: Callback<
+          protos.google.cloud.migrationcenter.v1.IErrorFrame,
+          protos.google.cloud.migrationcenter.v1.IGetErrorFrameRequest|null|undefined,
+          {}|null|undefined>): void;
+  getErrorFrame(
+      request?: protos.google.cloud.migrationcenter.v1.IGetErrorFrameRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.migrationcenter.v1.IErrorFrame,
+          protos.google.cloud.migrationcenter.v1.IGetErrorFrameRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.migrationcenter.v1.IErrorFrame,
+          protos.google.cloud.migrationcenter.v1.IGetErrorFrameRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IErrorFrame,
+        protos.google.cloud.migrationcenter.v1.IGetErrorFrameRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getErrorFrame request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.migrationcenter.v1.IErrorFrame,
-          | protos.google.cloud.migrationcenter.v1.IGetErrorFrameRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.migrationcenter.v1.IErrorFrame,
+        protos.google.cloud.migrationcenter.v1.IGetErrorFrameRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getErrorFrame response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getErrorFrame(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.migrationcenter.v1.IErrorFrame,
-          (
-            | protos.google.cloud.migrationcenter.v1.IGetErrorFrameRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getErrorFrame response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getErrorFrame(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.migrationcenter.v1.IErrorFrame,
+        protos.google.cloud.migrationcenter.v1.IGetErrorFrameRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getErrorFrame response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets the details of a source.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.Source|Source}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.get_source.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_GetSource_async
-   */
+/**
+ * Gets the details of a source.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.Source|Source}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.get_source.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_GetSource_async
+ */
   getSource(
-    request?: protos.google.cloud.migrationcenter.v1.IGetSourceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.ISource,
-      protos.google.cloud.migrationcenter.v1.IGetSourceRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IGetSourceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.ISource,
+        protos.google.cloud.migrationcenter.v1.IGetSourceRequest|undefined, {}|undefined
+      ]>;
   getSource(
-    request: protos.google.cloud.migrationcenter.v1.IGetSourceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.migrationcenter.v1.ISource,
-      | protos.google.cloud.migrationcenter.v1.IGetSourceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getSource(
-    request: protos.google.cloud.migrationcenter.v1.IGetSourceRequest,
-    callback: Callback<
-      protos.google.cloud.migrationcenter.v1.ISource,
-      | protos.google.cloud.migrationcenter.v1.IGetSourceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getSource(
-    request?: protos.google.cloud.migrationcenter.v1.IGetSourceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.migrationcenter.v1.IGetSourceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.migrationcenter.v1.ISource,
-          | protos.google.cloud.migrationcenter.v1.IGetSourceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.migrationcenter.v1.ISource,
-      | protos.google.cloud.migrationcenter.v1.IGetSourceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.ISource,
-      protos.google.cloud.migrationcenter.v1.IGetSourceRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.migrationcenter.v1.IGetSourceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getSource(
+      request: protos.google.cloud.migrationcenter.v1.IGetSourceRequest,
+      callback: Callback<
+          protos.google.cloud.migrationcenter.v1.ISource,
+          protos.google.cloud.migrationcenter.v1.IGetSourceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getSource(
+      request?: protos.google.cloud.migrationcenter.v1.IGetSourceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.migrationcenter.v1.ISource,
+          protos.google.cloud.migrationcenter.v1.IGetSourceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.migrationcenter.v1.ISource,
+          protos.google.cloud.migrationcenter.v1.IGetSourceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.ISource,
+        protos.google.cloud.migrationcenter.v1.IGetSourceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getSource request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.migrationcenter.v1.ISource,
-          | protos.google.cloud.migrationcenter.v1.IGetSourceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.migrationcenter.v1.ISource,
+        protos.google.cloud.migrationcenter.v1.IGetSourceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getSource response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getSource(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.migrationcenter.v1.ISource,
-          protos.google.cloud.migrationcenter.v1.IGetSourceRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getSource response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getSource(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.migrationcenter.v1.ISource,
+        protos.google.cloud.migrationcenter.v1.IGetSourceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getSource response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets the details of a preference set.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.PreferenceSet|PreferenceSet}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.get_preference_set.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_GetPreferenceSet_async
-   */
+/**
+ * Gets the details of a preference set.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.PreferenceSet|PreferenceSet}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.get_preference_set.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_GetPreferenceSet_async
+ */
   getPreferenceSet(
-    request?: protos.google.cloud.migrationcenter.v1.IGetPreferenceSetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IPreferenceSet,
-      (
-        | protos.google.cloud.migrationcenter.v1.IGetPreferenceSetRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IGetPreferenceSetRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IPreferenceSet,
+        protos.google.cloud.migrationcenter.v1.IGetPreferenceSetRequest|undefined, {}|undefined
+      ]>;
   getPreferenceSet(
-    request: protos.google.cloud.migrationcenter.v1.IGetPreferenceSetRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.migrationcenter.v1.IPreferenceSet,
-      | protos.google.cloud.migrationcenter.v1.IGetPreferenceSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPreferenceSet(
-    request: protos.google.cloud.migrationcenter.v1.IGetPreferenceSetRequest,
-    callback: Callback<
-      protos.google.cloud.migrationcenter.v1.IPreferenceSet,
-      | protos.google.cloud.migrationcenter.v1.IGetPreferenceSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPreferenceSet(
-    request?: protos.google.cloud.migrationcenter.v1.IGetPreferenceSetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.migrationcenter.v1.IGetPreferenceSetRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.migrationcenter.v1.IPreferenceSet,
-          | protos.google.cloud.migrationcenter.v1.IGetPreferenceSetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.migrationcenter.v1.IPreferenceSet,
-      | protos.google.cloud.migrationcenter.v1.IGetPreferenceSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IPreferenceSet,
-      (
-        | protos.google.cloud.migrationcenter.v1.IGetPreferenceSetRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.migrationcenter.v1.IGetPreferenceSetRequest|null|undefined,
+          {}|null|undefined>): void;
+  getPreferenceSet(
+      request: protos.google.cloud.migrationcenter.v1.IGetPreferenceSetRequest,
+      callback: Callback<
+          protos.google.cloud.migrationcenter.v1.IPreferenceSet,
+          protos.google.cloud.migrationcenter.v1.IGetPreferenceSetRequest|null|undefined,
+          {}|null|undefined>): void;
+  getPreferenceSet(
+      request?: protos.google.cloud.migrationcenter.v1.IGetPreferenceSetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.migrationcenter.v1.IPreferenceSet,
+          protos.google.cloud.migrationcenter.v1.IGetPreferenceSetRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.migrationcenter.v1.IPreferenceSet,
+          protos.google.cloud.migrationcenter.v1.IGetPreferenceSetRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IPreferenceSet,
+        protos.google.cloud.migrationcenter.v1.IGetPreferenceSetRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getPreferenceSet request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.migrationcenter.v1.IPreferenceSet,
-          | protos.google.cloud.migrationcenter.v1.IGetPreferenceSetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.migrationcenter.v1.IPreferenceSet,
+        protos.google.cloud.migrationcenter.v1.IGetPreferenceSetRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getPreferenceSet response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getPreferenceSet(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.migrationcenter.v1.IPreferenceSet,
-          (
-            | protos.google.cloud.migrationcenter.v1.IGetPreferenceSetRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getPreferenceSet response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getPreferenceSet(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.migrationcenter.v1.IPreferenceSet,
+        protos.google.cloud.migrationcenter.v1.IGetPreferenceSetRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getPreferenceSet response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets the details of regional settings.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.Settings|Settings}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.get_settings.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_GetSettings_async
-   */
+/**
+ * Gets the details of regional settings.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.Settings|Settings}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.get_settings.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_GetSettings_async
+ */
   getSettings(
-    request?: protos.google.cloud.migrationcenter.v1.IGetSettingsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.ISettings,
-      protos.google.cloud.migrationcenter.v1.IGetSettingsRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IGetSettingsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.ISettings,
+        protos.google.cloud.migrationcenter.v1.IGetSettingsRequest|undefined, {}|undefined
+      ]>;
   getSettings(
-    request: protos.google.cloud.migrationcenter.v1.IGetSettingsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.migrationcenter.v1.ISettings,
-      | protos.google.cloud.migrationcenter.v1.IGetSettingsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getSettings(
-    request: protos.google.cloud.migrationcenter.v1.IGetSettingsRequest,
-    callback: Callback<
-      protos.google.cloud.migrationcenter.v1.ISettings,
-      | protos.google.cloud.migrationcenter.v1.IGetSettingsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getSettings(
-    request?: protos.google.cloud.migrationcenter.v1.IGetSettingsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.migrationcenter.v1.IGetSettingsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.migrationcenter.v1.ISettings,
-          | protos.google.cloud.migrationcenter.v1.IGetSettingsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.migrationcenter.v1.ISettings,
-      | protos.google.cloud.migrationcenter.v1.IGetSettingsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.ISettings,
-      protos.google.cloud.migrationcenter.v1.IGetSettingsRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.migrationcenter.v1.IGetSettingsRequest|null|undefined,
+          {}|null|undefined>): void;
+  getSettings(
+      request: protos.google.cloud.migrationcenter.v1.IGetSettingsRequest,
+      callback: Callback<
+          protos.google.cloud.migrationcenter.v1.ISettings,
+          protos.google.cloud.migrationcenter.v1.IGetSettingsRequest|null|undefined,
+          {}|null|undefined>): void;
+  getSettings(
+      request?: protos.google.cloud.migrationcenter.v1.IGetSettingsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.migrationcenter.v1.ISettings,
+          protos.google.cloud.migrationcenter.v1.IGetSettingsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.migrationcenter.v1.ISettings,
+          protos.google.cloud.migrationcenter.v1.IGetSettingsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.ISettings,
+        protos.google.cloud.migrationcenter.v1.IGetSettingsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getSettings request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.migrationcenter.v1.ISettings,
-          | protos.google.cloud.migrationcenter.v1.IGetSettingsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.migrationcenter.v1.ISettings,
+        protos.google.cloud.migrationcenter.v1.IGetSettingsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getSettings response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getSettings(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.migrationcenter.v1.ISettings,
-          (
-            | protos.google.cloud.migrationcenter.v1.IGetSettingsRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getSettings response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getSettings(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.migrationcenter.v1.ISettings,
+        protos.google.cloud.migrationcenter.v1.IGetSettingsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getSettings response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets details of a single ReportConfig.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.ReportConfig|ReportConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.get_report_config.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_GetReportConfig_async
-   */
+/**
+ * Gets details of a single ReportConfig.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.ReportConfig|ReportConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.get_report_config.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_GetReportConfig_async
+ */
   getReportConfig(
-    request?: protos.google.cloud.migrationcenter.v1.IGetReportConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IReportConfig,
-      (
-        | protos.google.cloud.migrationcenter.v1.IGetReportConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IGetReportConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IReportConfig,
+        protos.google.cloud.migrationcenter.v1.IGetReportConfigRequest|undefined, {}|undefined
+      ]>;
   getReportConfig(
-    request: protos.google.cloud.migrationcenter.v1.IGetReportConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.migrationcenter.v1.IReportConfig,
-      | protos.google.cloud.migrationcenter.v1.IGetReportConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getReportConfig(
-    request: protos.google.cloud.migrationcenter.v1.IGetReportConfigRequest,
-    callback: Callback<
-      protos.google.cloud.migrationcenter.v1.IReportConfig,
-      | protos.google.cloud.migrationcenter.v1.IGetReportConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getReportConfig(
-    request?: protos.google.cloud.migrationcenter.v1.IGetReportConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.migrationcenter.v1.IGetReportConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.migrationcenter.v1.IReportConfig,
-          | protos.google.cloud.migrationcenter.v1.IGetReportConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.migrationcenter.v1.IReportConfig,
-      | protos.google.cloud.migrationcenter.v1.IGetReportConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IReportConfig,
-      (
-        | protos.google.cloud.migrationcenter.v1.IGetReportConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.migrationcenter.v1.IGetReportConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getReportConfig(
+      request: protos.google.cloud.migrationcenter.v1.IGetReportConfigRequest,
+      callback: Callback<
+          protos.google.cloud.migrationcenter.v1.IReportConfig,
+          protos.google.cloud.migrationcenter.v1.IGetReportConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getReportConfig(
+      request?: protos.google.cloud.migrationcenter.v1.IGetReportConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.migrationcenter.v1.IReportConfig,
+          protos.google.cloud.migrationcenter.v1.IGetReportConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.migrationcenter.v1.IReportConfig,
+          protos.google.cloud.migrationcenter.v1.IGetReportConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IReportConfig,
+        protos.google.cloud.migrationcenter.v1.IGetReportConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getReportConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.migrationcenter.v1.IReportConfig,
-          | protos.google.cloud.migrationcenter.v1.IGetReportConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.migrationcenter.v1.IReportConfig,
+        protos.google.cloud.migrationcenter.v1.IGetReportConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getReportConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getReportConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.migrationcenter.v1.IReportConfig,
-          (
-            | protos.google.cloud.migrationcenter.v1.IGetReportConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getReportConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getReportConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.migrationcenter.v1.IReportConfig,
+        protos.google.cloud.migrationcenter.v1.IGetReportConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getReportConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets details of a single Report.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource.
-   * @param {google.cloud.migrationcenter.v1.ReportView} request.view
-   *   Determines what information to retrieve for the Report.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.Report|Report}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.get_report.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_GetReport_async
-   */
+/**
+ * Gets details of a single Report.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource.
+ * @param {google.cloud.migrationcenter.v1.ReportView} request.view
+ *   Determines what information to retrieve for the Report.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.Report|Report}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.get_report.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_GetReport_async
+ */
   getReport(
-    request?: protos.google.cloud.migrationcenter.v1.IGetReportRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IReport,
-      protos.google.cloud.migrationcenter.v1.IGetReportRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IGetReportRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IReport,
+        protos.google.cloud.migrationcenter.v1.IGetReportRequest|undefined, {}|undefined
+      ]>;
   getReport(
-    request: protos.google.cloud.migrationcenter.v1.IGetReportRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.migrationcenter.v1.IReport,
-      | protos.google.cloud.migrationcenter.v1.IGetReportRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getReport(
-    request: protos.google.cloud.migrationcenter.v1.IGetReportRequest,
-    callback: Callback<
-      protos.google.cloud.migrationcenter.v1.IReport,
-      | protos.google.cloud.migrationcenter.v1.IGetReportRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getReport(
-    request?: protos.google.cloud.migrationcenter.v1.IGetReportRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.migrationcenter.v1.IGetReportRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.migrationcenter.v1.IReport,
-          | protos.google.cloud.migrationcenter.v1.IGetReportRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.migrationcenter.v1.IReport,
-      | protos.google.cloud.migrationcenter.v1.IGetReportRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IReport,
-      protos.google.cloud.migrationcenter.v1.IGetReportRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.migrationcenter.v1.IGetReportRequest|null|undefined,
+          {}|null|undefined>): void;
+  getReport(
+      request: protos.google.cloud.migrationcenter.v1.IGetReportRequest,
+      callback: Callback<
+          protos.google.cloud.migrationcenter.v1.IReport,
+          protos.google.cloud.migrationcenter.v1.IGetReportRequest|null|undefined,
+          {}|null|undefined>): void;
+  getReport(
+      request?: protos.google.cloud.migrationcenter.v1.IGetReportRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.migrationcenter.v1.IReport,
+          protos.google.cloud.migrationcenter.v1.IGetReportRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.migrationcenter.v1.IReport,
+          protos.google.cloud.migrationcenter.v1.IGetReportRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IReport,
+        protos.google.cloud.migrationcenter.v1.IGetReportRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getReport request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.migrationcenter.v1.IReport,
-          | protos.google.cloud.migrationcenter.v1.IGetReportRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.migrationcenter.v1.IReport,
+        protos.google.cloud.migrationcenter.v1.IGetReportRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getReport response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getReport(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.migrationcenter.v1.IReport,
-          protos.google.cloud.migrationcenter.v1.IGetReportRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getReport response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getReport(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.migrationcenter.v1.IReport,
+        protos.google.cloud.migrationcenter.v1.IGetReportRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getReport response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Creates an import job.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Value for parent.
-   * @param {string} request.importJobId
-   *   Required. ID of the import job.
-   * @param {google.cloud.migrationcenter.v1.ImportJob} request.importJob
-   *   Required. The resource being created.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.create_import_job.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_CreateImportJob_async
-   */
+/**
+ * Creates an import job.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Value for parent.
+ * @param {string} request.importJobId
+ *   Required. ID of the import job.
+ * @param {google.cloud.migrationcenter.v1.ImportJob} request.importJob
+ *   Required. The resource being created.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.create_import_job.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_CreateImportJob_async
+ */
   createImportJob(
-    request?: protos.google.cloud.migrationcenter.v1.ICreateImportJobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IImportJob,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.ICreateImportJobRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.migrationcenter.v1.IImportJob, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createImportJob(
-    request: protos.google.cloud.migrationcenter.v1.ICreateImportJobRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IImportJob,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.ICreateImportJobRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IImportJob, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createImportJob(
-    request: protos.google.cloud.migrationcenter.v1.ICreateImportJobRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IImportJob,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.ICreateImportJobRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IImportJob, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createImportJob(
-    request?: protos.google.cloud.migrationcenter.v1.ICreateImportJobRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.IImportJob,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IImportJob,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IImportJob,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.migrationcenter.v1.ICreateImportJobRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IImportJob, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IImportJob, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.migrationcenter.v1.IImportJob, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.IImportJob,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IImportJob, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createImportJob response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createImportJob request %j', request);
-    return this.innerApiCalls
-      .createImportJob(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.IImportJob,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createImportJob response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createImportJob(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.migrationcenter.v1.IImportJob, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createImportJob response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createImportJob()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.create_import_job.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_CreateImportJob_async
-   */
-  async checkCreateImportJobProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.migrationcenter.v1.ImportJob,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createImportJob()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.create_import_job.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_CreateImportJob_async
+ */
+  async checkCreateImportJobProgress(name: string): Promise<LROperation<protos.google.cloud.migrationcenter.v1.ImportJob, protos.google.cloud.migrationcenter.v1.OperationMetadata>>{
     this._log.info('createImportJob long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createImportJob,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.migrationcenter.v1.ImportJob,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createImportJob, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.migrationcenter.v1.ImportJob, protos.google.cloud.migrationcenter.v1.OperationMetadata>;
   }
-  /**
-   * Deletes an import job.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {boolean} [request.force]
-   *   Optional. If set to `true`, any `ImportDataFiles` of this job will also be
-   *   deleted If set to `false`, the request only works if the job has no data
-   *   files.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.delete_import_job.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_DeleteImportJob_async
-   */
+/**
+ * Deletes an import job.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {boolean} [request.force]
+ *   Optional. If set to `true`, any `ImportDataFiles` of this job will also be
+ *   deleted If set to `false`, the request only works if the job has no data
+ *   files.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.delete_import_job.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_DeleteImportJob_async
+ */
   deleteImportJob(
-    request?: protos.google.cloud.migrationcenter.v1.IDeleteImportJobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IDeleteImportJobRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteImportJob(
-    request: protos.google.cloud.migrationcenter.v1.IDeleteImportJobRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.IDeleteImportJobRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteImportJob(
-    request: protos.google.cloud.migrationcenter.v1.IDeleteImportJobRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.IDeleteImportJobRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteImportJob(
-    request?: protos.google.cloud.migrationcenter.v1.IDeleteImportJobRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.migrationcenter.v1.IDeleteImportJobRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteImportJob response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteImportJob request %j', request);
-    return this.innerApiCalls
-      .deleteImportJob(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteImportJob response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteImportJob(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteImportJob response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteImportJob()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.delete_import_job.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_DeleteImportJob_async
-   */
-  async checkDeleteImportJobProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteImportJob()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.delete_import_job.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_DeleteImportJob_async
+ */
+  async checkDeleteImportJobProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.migrationcenter.v1.OperationMetadata>>{
     this._log.info('deleteImportJob long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteImportJob,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteImportJob, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.migrationcenter.v1.OperationMetadata>;
   }
-  /**
-   * Updates an import job.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Field mask is used to specify the fields to be overwritten in the
-   *   `Asset` resource by the update.
-   *   The values specified in the `update_mask` field are relative to the
-   *   resource, not the full request.
-   *   A field will be overwritten if it is in the mask.
-   *   A single * value in the mask lets you to overwrite all fields.
-   * @param {google.cloud.migrationcenter.v1.ImportJob} request.importJob
-   *   Required. The resource being updated
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.update_import_job.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_UpdateImportJob_async
-   */
+/**
+ * Updates an import job.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Field mask is used to specify the fields to be overwritten in the
+ *   `Asset` resource by the update.
+ *   The values specified in the `update_mask` field are relative to the
+ *   resource, not the full request.
+ *   A field will be overwritten if it is in the mask.
+ *   A single * value in the mask lets you to overwrite all fields.
+ * @param {google.cloud.migrationcenter.v1.ImportJob} request.importJob
+ *   Required. The resource being updated
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.update_import_job.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_UpdateImportJob_async
+ */
   updateImportJob(
-    request?: protos.google.cloud.migrationcenter.v1.IUpdateImportJobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IImportJob,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IUpdateImportJobRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.migrationcenter.v1.IImportJob, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateImportJob(
-    request: protos.google.cloud.migrationcenter.v1.IUpdateImportJobRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IImportJob,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.IUpdateImportJobRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IImportJob, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateImportJob(
-    request: protos.google.cloud.migrationcenter.v1.IUpdateImportJobRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IImportJob,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.IUpdateImportJobRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IImportJob, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateImportJob(
-    request?: protos.google.cloud.migrationcenter.v1.IUpdateImportJobRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.IImportJob,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IImportJob,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IImportJob,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.migrationcenter.v1.IUpdateImportJobRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IImportJob, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IImportJob, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.migrationcenter.v1.IImportJob, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'import_job.name': request.importJob!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'import_job.name': request.importJob!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.IImportJob,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IImportJob, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateImportJob response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateImportJob request %j', request);
-    return this.innerApiCalls
-      .updateImportJob(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.IImportJob,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateImportJob response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateImportJob(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.migrationcenter.v1.IImportJob, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateImportJob response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateImportJob()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.update_import_job.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_UpdateImportJob_async
-   */
-  async checkUpdateImportJobProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.migrationcenter.v1.ImportJob,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateImportJob()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.update_import_job.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_UpdateImportJob_async
+ */
+  async checkUpdateImportJobProgress(name: string): Promise<LROperation<protos.google.cloud.migrationcenter.v1.ImportJob, protos.google.cloud.migrationcenter.v1.OperationMetadata>>{
     this._log.info('updateImportJob long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateImportJob,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.migrationcenter.v1.ImportJob,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateImportJob, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.migrationcenter.v1.ImportJob, protos.google.cloud.migrationcenter.v1.OperationMetadata>;
   }
-  /**
-   * Validates an import job.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the import job to validate.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.validate_import_job.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_ValidateImportJob_async
-   */
+/**
+ * Validates an import job.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the import job to validate.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.validate_import_job.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_ValidateImportJob_async
+ */
   validateImportJob(
-    request?: protos.google.cloud.migrationcenter.v1.IValidateImportJobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IValidateImportJobRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   validateImportJob(
-    request: protos.google.cloud.migrationcenter.v1.IValidateImportJobRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.IValidateImportJobRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   validateImportJob(
-    request: protos.google.cloud.migrationcenter.v1.IValidateImportJobRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.IValidateImportJobRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   validateImportJob(
-    request?: protos.google.cloud.migrationcenter.v1.IValidateImportJobRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.migrationcenter.v1.IValidateImportJobRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('validateImportJob response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('validateImportJob request %j', request);
-    return this.innerApiCalls
-      .validateImportJob(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('validateImportJob response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.validateImportJob(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('validateImportJob response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `validateImportJob()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.validate_import_job.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_ValidateImportJob_async
-   */
-  async checkValidateImportJobProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `validateImportJob()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.validate_import_job.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_ValidateImportJob_async
+ */
+  async checkValidateImportJobProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.migrationcenter.v1.OperationMetadata>>{
     this._log.info('validateImportJob long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.validateImportJob,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.validateImportJob, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.migrationcenter.v1.OperationMetadata>;
   }
-  /**
-   * Runs an import job.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the import job to run.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.run_import_job.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_RunImportJob_async
-   */
+/**
+ * Runs an import job.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the import job to run.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.run_import_job.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_RunImportJob_async
+ */
   runImportJob(
-    request?: protos.google.cloud.migrationcenter.v1.IRunImportJobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IRunImportJobRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   runImportJob(
-    request: protos.google.cloud.migrationcenter.v1.IRunImportJobRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.IRunImportJobRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   runImportJob(
-    request: protos.google.cloud.migrationcenter.v1.IRunImportJobRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.IRunImportJobRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   runImportJob(
-    request?: protos.google.cloud.migrationcenter.v1.IRunImportJobRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.migrationcenter.v1.IRunImportJobRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('runImportJob response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('runImportJob request %j', request);
-    return this.innerApiCalls
-      .runImportJob(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('runImportJob response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.runImportJob(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('runImportJob response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `runImportJob()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.run_import_job.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_RunImportJob_async
-   */
-  async checkRunImportJobProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `runImportJob()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.run_import_job.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_RunImportJob_async
+ */
+  async checkRunImportJobProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.migrationcenter.v1.OperationMetadata>>{
     this._log.info('runImportJob long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.runImportJob,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.runImportJob, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.migrationcenter.v1.OperationMetadata>;
   }
-  /**
-   * Creates an import data file.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the parent of the ImportDataFile.
-   * @param {string} request.importDataFileId
-   *   Required. The ID of the new data file.
-   * @param {google.cloud.migrationcenter.v1.ImportDataFile} request.importDataFile
-   *   Required. The resource being created.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.create_import_data_file.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_CreateImportDataFile_async
-   */
+/**
+ * Creates an import data file.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the parent of the ImportDataFile.
+ * @param {string} request.importDataFileId
+ *   Required. The ID of the new data file.
+ * @param {google.cloud.migrationcenter.v1.ImportDataFile} request.importDataFile
+ *   Required. The resource being created.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.create_import_data_file.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_CreateImportDataFile_async
+ */
   createImportDataFile(
-    request?: protos.google.cloud.migrationcenter.v1.ICreateImportDataFileRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IImportDataFile,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.ICreateImportDataFileRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.migrationcenter.v1.IImportDataFile, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createImportDataFile(
-    request: protos.google.cloud.migrationcenter.v1.ICreateImportDataFileRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IImportDataFile,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.ICreateImportDataFileRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IImportDataFile, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createImportDataFile(
-    request: protos.google.cloud.migrationcenter.v1.ICreateImportDataFileRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IImportDataFile,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.ICreateImportDataFileRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IImportDataFile, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createImportDataFile(
-    request?: protos.google.cloud.migrationcenter.v1.ICreateImportDataFileRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.IImportDataFile,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IImportDataFile,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IImportDataFile,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.migrationcenter.v1.ICreateImportDataFileRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IImportDataFile, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IImportDataFile, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.migrationcenter.v1.IImportDataFile, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.IImportDataFile,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IImportDataFile, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createImportDataFile response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createImportDataFile request %j', request);
-    return this.innerApiCalls
-      .createImportDataFile(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.IImportDataFile,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createImportDataFile response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createImportDataFile(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.migrationcenter.v1.IImportDataFile, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createImportDataFile response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createImportDataFile()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.create_import_data_file.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_CreateImportDataFile_async
-   */
-  async checkCreateImportDataFileProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.migrationcenter.v1.ImportDataFile,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createImportDataFile()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.create_import_data_file.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_CreateImportDataFile_async
+ */
+  async checkCreateImportDataFileProgress(name: string): Promise<LROperation<protos.google.cloud.migrationcenter.v1.ImportDataFile, protos.google.cloud.migrationcenter.v1.OperationMetadata>>{
     this._log.info('createImportDataFile long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createImportDataFile,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.migrationcenter.v1.ImportDataFile,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createImportDataFile, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.migrationcenter.v1.ImportDataFile, protos.google.cloud.migrationcenter.v1.OperationMetadata>;
   }
-  /**
-   * Delete an import data file.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the ImportDataFile to delete.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.delete_import_data_file.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_DeleteImportDataFile_async
-   */
+/**
+ * Delete an import data file.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the ImportDataFile to delete.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.delete_import_data_file.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_DeleteImportDataFile_async
+ */
   deleteImportDataFile(
-    request?: protos.google.cloud.migrationcenter.v1.IDeleteImportDataFileRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IDeleteImportDataFileRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteImportDataFile(
-    request: protos.google.cloud.migrationcenter.v1.IDeleteImportDataFileRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.IDeleteImportDataFileRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteImportDataFile(
-    request: protos.google.cloud.migrationcenter.v1.IDeleteImportDataFileRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.IDeleteImportDataFileRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteImportDataFile(
-    request?: protos.google.cloud.migrationcenter.v1.IDeleteImportDataFileRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.migrationcenter.v1.IDeleteImportDataFileRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteImportDataFile response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteImportDataFile request %j', request);
-    return this.innerApiCalls
-      .deleteImportDataFile(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteImportDataFile response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteImportDataFile(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteImportDataFile response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteImportDataFile()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.delete_import_data_file.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_DeleteImportDataFile_async
-   */
-  async checkDeleteImportDataFileProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteImportDataFile()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.delete_import_data_file.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_DeleteImportDataFile_async
+ */
+  async checkDeleteImportDataFileProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.migrationcenter.v1.OperationMetadata>>{
     this._log.info('deleteImportDataFile long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteImportDataFile,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteImportDataFile, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.migrationcenter.v1.OperationMetadata>;
   }
-  /**
-   * Creates a new group in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Value for parent.
-   * @param {string} request.groupId
-   *   Required. User specified ID for the group. It will become the last
-   *   component of the group name. The ID must be unique within the project, must
-   *   conform with RFC-1034, is restricted to lower-cased letters, and has a
-   *   maximum length of 63 characters. The ID must match the regular expression:
-   *   `[a-z]([a-z0-9-]{0,61}[a-z0-9])?`.
-   * @param {google.cloud.migrationcenter.v1.Group} request.group
-   *   Required. The group resource being created.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.create_group.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_CreateGroup_async
-   */
+/**
+ * Creates a new group in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Value for parent.
+ * @param {string} request.groupId
+ *   Required. User specified ID for the group. It will become the last
+ *   component of the group name. The ID must be unique within the project, must
+ *   conform with RFC-1034, is restricted to lower-cased letters, and has a
+ *   maximum length of 63 characters. The ID must match the regular expression:
+ *   `[a-z]([a-z0-9-]{0,61}[a-z0-9])?`.
+ * @param {google.cloud.migrationcenter.v1.Group} request.group
+ *   Required. The group resource being created.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.create_group.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_CreateGroup_async
+ */
   createGroup(
-    request?: protos.google.cloud.migrationcenter.v1.ICreateGroupRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IGroup,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.ICreateGroupRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createGroup(
-    request: protos.google.cloud.migrationcenter.v1.ICreateGroupRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IGroup,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.ICreateGroupRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createGroup(
-    request: protos.google.cloud.migrationcenter.v1.ICreateGroupRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IGroup,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.ICreateGroupRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createGroup(
-    request?: protos.google.cloud.migrationcenter.v1.ICreateGroupRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.IGroup,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IGroup,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IGroup,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.migrationcenter.v1.ICreateGroupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.IGroup,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createGroup response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createGroup request %j', request);
-    return this.innerApiCalls
-      .createGroup(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.IGroup,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createGroup response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createGroup(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createGroup response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createGroup()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.create_group.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_CreateGroup_async
-   */
-  async checkCreateGroupProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.migrationcenter.v1.Group,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createGroup()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.create_group.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_CreateGroup_async
+ */
+  async checkCreateGroupProgress(name: string): Promise<LROperation<protos.google.cloud.migrationcenter.v1.Group, protos.google.cloud.migrationcenter.v1.OperationMetadata>>{
     this._log.info('createGroup long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createGroup,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.migrationcenter.v1.Group,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createGroup, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.migrationcenter.v1.Group, protos.google.cloud.migrationcenter.v1.OperationMetadata>;
   }
-  /**
-   * Updates the parameters of a group.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Field mask is used to specify the fields to be overwritten in the
-   *   `Group` resource by the update.
-   *   The values specified in the `update_mask` are relative to the resource, not
-   *   the full request. A field will be overwritten if it is in the mask.
-   *   A single * value in the mask lets you to overwrite all fields.
-   * @param {google.cloud.migrationcenter.v1.Group} request.group
-   *   Required. The group resource being updated.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.update_group.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_UpdateGroup_async
-   */
+/**
+ * Updates the parameters of a group.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Field mask is used to specify the fields to be overwritten in the
+ *   `Group` resource by the update.
+ *   The values specified in the `update_mask` are relative to the resource, not
+ *   the full request. A field will be overwritten if it is in the mask.
+ *   A single * value in the mask lets you to overwrite all fields.
+ * @param {google.cloud.migrationcenter.v1.Group} request.group
+ *   Required. The group resource being updated.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.update_group.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_UpdateGroup_async
+ */
   updateGroup(
-    request?: protos.google.cloud.migrationcenter.v1.IUpdateGroupRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IGroup,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IUpdateGroupRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateGroup(
-    request: protos.google.cloud.migrationcenter.v1.IUpdateGroupRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IGroup,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.IUpdateGroupRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateGroup(
-    request: protos.google.cloud.migrationcenter.v1.IUpdateGroupRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IGroup,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.IUpdateGroupRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateGroup(
-    request?: protos.google.cloud.migrationcenter.v1.IUpdateGroupRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.IGroup,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IGroup,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IGroup,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.migrationcenter.v1.IUpdateGroupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'group.name': request.group!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'group.name': request.group!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.IGroup,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateGroup response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateGroup request %j', request);
-    return this.innerApiCalls
-      .updateGroup(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.IGroup,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateGroup response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateGroup(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateGroup response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateGroup()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.update_group.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_UpdateGroup_async
-   */
-  async checkUpdateGroupProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.migrationcenter.v1.Group,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateGroup()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.update_group.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_UpdateGroup_async
+ */
+  async checkUpdateGroupProgress(name: string): Promise<LROperation<protos.google.cloud.migrationcenter.v1.Group, protos.google.cloud.migrationcenter.v1.OperationMetadata>>{
     this._log.info('updateGroup long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateGroup,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.migrationcenter.v1.Group,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateGroup, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.migrationcenter.v1.Group, protos.google.cloud.migrationcenter.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a group.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the group resource.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.delete_group.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_DeleteGroup_async
-   */
+/**
+ * Deletes a group.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the group resource.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.delete_group.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_DeleteGroup_async
+ */
   deleteGroup(
-    request?: protos.google.cloud.migrationcenter.v1.IDeleteGroupRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IDeleteGroupRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteGroup(
-    request: protos.google.cloud.migrationcenter.v1.IDeleteGroupRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.IDeleteGroupRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteGroup(
-    request: protos.google.cloud.migrationcenter.v1.IDeleteGroupRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.IDeleteGroupRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteGroup(
-    request?: protos.google.cloud.migrationcenter.v1.IDeleteGroupRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.migrationcenter.v1.IDeleteGroupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteGroup response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteGroup request %j', request);
-    return this.innerApiCalls
-      .deleteGroup(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteGroup response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteGroup(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteGroup response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteGroup()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.delete_group.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_DeleteGroup_async
-   */
-  async checkDeleteGroupProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteGroup()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.delete_group.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_DeleteGroup_async
+ */
+  async checkDeleteGroupProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.migrationcenter.v1.OperationMetadata>>{
     this._log.info('deleteGroup long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteGroup,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteGroup, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.migrationcenter.v1.OperationMetadata>;
   }
-  /**
-   * Adds assets to a group.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.group
-   *   Required. Group reference.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {google.cloud.migrationcenter.v1.AssetList} request.assets
-   *   Required. List of assets to be added.
-   *   The maximum number of assets that can be added in a single request is
-   *   1000.
-   * @param {boolean} [request.allowExisting]
-   *   Optional. When this value is set to `false` and one of the given assets is
-   *   already an existing member of the group, the operation fails with an
-   *   `Already Exists` error. When set to `true` this situation is silently
-   *   ignored by the server.
-   *
-   *   Default value is `false`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.add_assets_to_group.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_AddAssetsToGroup_async
-   */
+/**
+ * Adds assets to a group.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.group
+ *   Required. Group reference.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {google.cloud.migrationcenter.v1.AssetList} request.assets
+ *   Required. List of assets to be added.
+ *   The maximum number of assets that can be added in a single request is
+ *   1000.
+ * @param {boolean} [request.allowExisting]
+ *   Optional. When this value is set to `false` and one of the given assets is
+ *   already an existing member of the group, the operation fails with an
+ *   `Already Exists` error. When set to `true` this situation is silently
+ *   ignored by the server.
+ *
+ *   Default value is `false`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.add_assets_to_group.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_AddAssetsToGroup_async
+ */
   addAssetsToGroup(
-    request?: protos.google.cloud.migrationcenter.v1.IAddAssetsToGroupRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IGroup,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IAddAssetsToGroupRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   addAssetsToGroup(
-    request: protos.google.cloud.migrationcenter.v1.IAddAssetsToGroupRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IGroup,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.IAddAssetsToGroupRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   addAssetsToGroup(
-    request: protos.google.cloud.migrationcenter.v1.IAddAssetsToGroupRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IGroup,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.IAddAssetsToGroupRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   addAssetsToGroup(
-    request?: protos.google.cloud.migrationcenter.v1.IAddAssetsToGroupRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.IGroup,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IGroup,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IGroup,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.migrationcenter.v1.IAddAssetsToGroupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        group: request.group ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'group': request.group ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.IGroup,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('addAssetsToGroup response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('addAssetsToGroup request %j', request);
-    return this.innerApiCalls
-      .addAssetsToGroup(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.IGroup,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('addAssetsToGroup response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.addAssetsToGroup(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('addAssetsToGroup response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `addAssetsToGroup()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.add_assets_to_group.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_AddAssetsToGroup_async
-   */
-  async checkAddAssetsToGroupProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.migrationcenter.v1.Group,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `addAssetsToGroup()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.add_assets_to_group.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_AddAssetsToGroup_async
+ */
+  async checkAddAssetsToGroupProgress(name: string): Promise<LROperation<protos.google.cloud.migrationcenter.v1.Group, protos.google.cloud.migrationcenter.v1.OperationMetadata>>{
     this._log.info('addAssetsToGroup long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.addAssetsToGroup,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.migrationcenter.v1.Group,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.addAssetsToGroup, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.migrationcenter.v1.Group, protos.google.cloud.migrationcenter.v1.OperationMetadata>;
   }
-  /**
-   * Removes assets from a group.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.group
-   *   Required. Group reference.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {google.cloud.migrationcenter.v1.AssetList} request.assets
-   *   Required. List of assets to be removed.
-   *   The maximum number of assets that can be removed in a single request is
-   *   1000.
-   * @param {boolean} [request.allowMissing]
-   *   Optional. When this value is set to `false` and one of the given assets is
-   *   not an existing member of the group, the operation fails with a `Not Found`
-   *   error. When set to `true` this situation is silently ignored by the server.
-   *
-   *   Default value is `false`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.remove_assets_from_group.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_RemoveAssetsFromGroup_async
-   */
+/**
+ * Removes assets from a group.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.group
+ *   Required. Group reference.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {google.cloud.migrationcenter.v1.AssetList} request.assets
+ *   Required. List of assets to be removed.
+ *   The maximum number of assets that can be removed in a single request is
+ *   1000.
+ * @param {boolean} [request.allowMissing]
+ *   Optional. When this value is set to `false` and one of the given assets is
+ *   not an existing member of the group, the operation fails with a `Not Found`
+ *   error. When set to `true` this situation is silently ignored by the server.
+ *
+ *   Default value is `false`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.remove_assets_from_group.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_RemoveAssetsFromGroup_async
+ */
   removeAssetsFromGroup(
-    request?: protos.google.cloud.migrationcenter.v1.IRemoveAssetsFromGroupRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IGroup,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IRemoveAssetsFromGroupRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   removeAssetsFromGroup(
-    request: protos.google.cloud.migrationcenter.v1.IRemoveAssetsFromGroupRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IGroup,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.IRemoveAssetsFromGroupRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   removeAssetsFromGroup(
-    request: protos.google.cloud.migrationcenter.v1.IRemoveAssetsFromGroupRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IGroup,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.IRemoveAssetsFromGroupRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   removeAssetsFromGroup(
-    request?: protos.google.cloud.migrationcenter.v1.IRemoveAssetsFromGroupRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.IGroup,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IGroup,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IGroup,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.migrationcenter.v1.IRemoveAssetsFromGroupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        group: request.group ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'group': request.group ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.IGroup,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('removeAssetsFromGroup response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('removeAssetsFromGroup request %j', request);
-    return this.innerApiCalls
-      .removeAssetsFromGroup(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.IGroup,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('removeAssetsFromGroup response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.removeAssetsFromGroup(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('removeAssetsFromGroup response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `removeAssetsFromGroup()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.remove_assets_from_group.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_RemoveAssetsFromGroup_async
-   */
-  async checkRemoveAssetsFromGroupProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.migrationcenter.v1.Group,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `removeAssetsFromGroup()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.remove_assets_from_group.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_RemoveAssetsFromGroup_async
+ */
+  async checkRemoveAssetsFromGroupProgress(name: string): Promise<LROperation<protos.google.cloud.migrationcenter.v1.Group, protos.google.cloud.migrationcenter.v1.OperationMetadata>>{
     this._log.info('removeAssetsFromGroup long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.removeAssetsFromGroup,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.migrationcenter.v1.Group,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.removeAssetsFromGroup, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.migrationcenter.v1.Group, protos.google.cloud.migrationcenter.v1.OperationMetadata>;
   }
-  /**
-   * Creates a new source in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Value for parent.
-   * @param {string} request.sourceId
-   *   Required. User specified ID for the source. It will become the last
-   *   component of the source name. The ID must be unique within the project,
-   *   must conform with RFC-1034, is restricted to lower-cased letters, and has a
-   *   maximum length of 63 characters. The ID must match the regular expression:
-   *   `[a-z]([a-z0-9-]{0,61}[a-z0-9])?`.
-   * @param {google.cloud.migrationcenter.v1.Source} request.source
-   *   Required. The resource being created.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.create_source.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_CreateSource_async
-   */
+/**
+ * Creates a new source in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Value for parent.
+ * @param {string} request.sourceId
+ *   Required. User specified ID for the source. It will become the last
+ *   component of the source name. The ID must be unique within the project,
+ *   must conform with RFC-1034, is restricted to lower-cased letters, and has a
+ *   maximum length of 63 characters. The ID must match the regular expression:
+ *   `[a-z]([a-z0-9-]{0,61}[a-z0-9])?`.
+ * @param {google.cloud.migrationcenter.v1.Source} request.source
+ *   Required. The resource being created.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.create_source.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_CreateSource_async
+ */
   createSource(
-    request?: protos.google.cloud.migrationcenter.v1.ICreateSourceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.ISource,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.ICreateSourceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.migrationcenter.v1.ISource, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createSource(
-    request: protos.google.cloud.migrationcenter.v1.ICreateSourceRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.ISource,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.ICreateSourceRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.ISource, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createSource(
-    request: protos.google.cloud.migrationcenter.v1.ICreateSourceRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.ISource,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.ICreateSourceRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.ISource, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createSource(
-    request?: protos.google.cloud.migrationcenter.v1.ICreateSourceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.ISource,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.ISource,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.ISource,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.migrationcenter.v1.ICreateSourceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.ISource, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.ISource, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.migrationcenter.v1.ISource, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.ISource,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.ISource, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createSource response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createSource request %j', request);
-    return this.innerApiCalls
-      .createSource(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.ISource,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createSource response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createSource(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.migrationcenter.v1.ISource, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createSource response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createSource()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.create_source.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_CreateSource_async
-   */
-  async checkCreateSourceProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.migrationcenter.v1.Source,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createSource()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.create_source.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_CreateSource_async
+ */
+  async checkCreateSourceProgress(name: string): Promise<LROperation<protos.google.cloud.migrationcenter.v1.Source, protos.google.cloud.migrationcenter.v1.OperationMetadata>>{
     this._log.info('createSource long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createSource,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.migrationcenter.v1.Source,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createSource, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.migrationcenter.v1.Source, protos.google.cloud.migrationcenter.v1.OperationMetadata>;
   }
-  /**
-   * Updates the parameters of a source.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Field mask is used to specify the fields to be overwritten in the
-   *   `Source` resource by the update.
-   *   The values specified in the `update_mask` field are relative to the
-   *   resource, not the full request.
-   *   A field will be overwritten if it is in the mask.
-   *   A single * value in the mask lets you to overwrite all fields.
-   * @param {google.cloud.migrationcenter.v1.Source} request.source
-   *   Required. The resource being updated
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.update_source.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_UpdateSource_async
-   */
+/**
+ * Updates the parameters of a source.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Field mask is used to specify the fields to be overwritten in the
+ *   `Source` resource by the update.
+ *   The values specified in the `update_mask` field are relative to the
+ *   resource, not the full request.
+ *   A field will be overwritten if it is in the mask.
+ *   A single * value in the mask lets you to overwrite all fields.
+ * @param {google.cloud.migrationcenter.v1.Source} request.source
+ *   Required. The resource being updated
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.update_source.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_UpdateSource_async
+ */
   updateSource(
-    request?: protos.google.cloud.migrationcenter.v1.IUpdateSourceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.ISource,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IUpdateSourceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.migrationcenter.v1.ISource, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateSource(
-    request: protos.google.cloud.migrationcenter.v1.IUpdateSourceRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.ISource,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.IUpdateSourceRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.ISource, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateSource(
-    request: protos.google.cloud.migrationcenter.v1.IUpdateSourceRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.ISource,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.IUpdateSourceRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.ISource, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateSource(
-    request?: protos.google.cloud.migrationcenter.v1.IUpdateSourceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.ISource,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.ISource,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.ISource,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.migrationcenter.v1.IUpdateSourceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.ISource, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.ISource, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.migrationcenter.v1.ISource, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'source.name': request.source!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'source.name': request.source!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.ISource,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.ISource, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateSource response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateSource request %j', request);
-    return this.innerApiCalls
-      .updateSource(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.ISource,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateSource response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateSource(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.migrationcenter.v1.ISource, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateSource response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateSource()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.update_source.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_UpdateSource_async
-   */
-  async checkUpdateSourceProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.migrationcenter.v1.Source,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateSource()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.update_source.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_UpdateSource_async
+ */
+  async checkUpdateSourceProgress(name: string): Promise<LROperation<protos.google.cloud.migrationcenter.v1.Source, protos.google.cloud.migrationcenter.v1.OperationMetadata>>{
     this._log.info('updateSource long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateSource,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.migrationcenter.v1.Source,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateSource, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.migrationcenter.v1.Source, protos.google.cloud.migrationcenter.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a source.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.delete_source.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_DeleteSource_async
-   */
+/**
+ * Deletes a source.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.delete_source.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_DeleteSource_async
+ */
   deleteSource(
-    request?: protos.google.cloud.migrationcenter.v1.IDeleteSourceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IDeleteSourceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteSource(
-    request: protos.google.cloud.migrationcenter.v1.IDeleteSourceRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.IDeleteSourceRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteSource(
-    request: protos.google.cloud.migrationcenter.v1.IDeleteSourceRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.IDeleteSourceRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteSource(
-    request?: protos.google.cloud.migrationcenter.v1.IDeleteSourceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.migrationcenter.v1.IDeleteSourceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteSource response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteSource request %j', request);
-    return this.innerApiCalls
-      .deleteSource(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteSource response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteSource(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteSource response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteSource()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.delete_source.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_DeleteSource_async
-   */
-  async checkDeleteSourceProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteSource()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.delete_source.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_DeleteSource_async
+ */
+  async checkDeleteSourceProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.migrationcenter.v1.OperationMetadata>>{
     this._log.info('deleteSource long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteSource,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteSource, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.migrationcenter.v1.OperationMetadata>;
   }
-  /**
-   * Creates a new preference set in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Value for parent.
-   * @param {string} request.preferenceSetId
-   *   Required. User specified ID for the preference set. It will become the last
-   *   component of the preference set name. The ID must be unique within the
-   *   project, must conform with RFC-1034, is restricted to lower-cased letters,
-   *   and has a maximum length of 63 characters. The ID must match the regular
-   *   expression
-   *   `[a-z]([a-z0-9-]{0,61}[a-z0-9])?`.
-   * @param {google.cloud.migrationcenter.v1.PreferenceSet} request.preferenceSet
-   *   Required. The preference set resource being created.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.create_preference_set.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_CreatePreferenceSet_async
-   */
+/**
+ * Creates a new preference set in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Value for parent.
+ * @param {string} request.preferenceSetId
+ *   Required. User specified ID for the preference set. It will become the last
+ *   component of the preference set name. The ID must be unique within the
+ *   project, must conform with RFC-1034, is restricted to lower-cased letters,
+ *   and has a maximum length of 63 characters. The ID must match the regular
+ *   expression
+ *   `[a-z]([a-z0-9-]{0,61}[a-z0-9])?`.
+ * @param {google.cloud.migrationcenter.v1.PreferenceSet} request.preferenceSet
+ *   Required. The preference set resource being created.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.create_preference_set.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_CreatePreferenceSet_async
+ */
   createPreferenceSet(
-    request?: protos.google.cloud.migrationcenter.v1.ICreatePreferenceSetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IPreferenceSet,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.ICreatePreferenceSetRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.migrationcenter.v1.IPreferenceSet, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createPreferenceSet(
-    request: protos.google.cloud.migrationcenter.v1.ICreatePreferenceSetRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IPreferenceSet,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.ICreatePreferenceSetRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IPreferenceSet, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createPreferenceSet(
-    request: protos.google.cloud.migrationcenter.v1.ICreatePreferenceSetRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IPreferenceSet,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.ICreatePreferenceSetRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IPreferenceSet, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createPreferenceSet(
-    request?: protos.google.cloud.migrationcenter.v1.ICreatePreferenceSetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.IPreferenceSet,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IPreferenceSet,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IPreferenceSet,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.migrationcenter.v1.ICreatePreferenceSetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IPreferenceSet, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IPreferenceSet, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.migrationcenter.v1.IPreferenceSet, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.IPreferenceSet,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IPreferenceSet, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createPreferenceSet response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createPreferenceSet request %j', request);
-    return this.innerApiCalls
-      .createPreferenceSet(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.IPreferenceSet,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createPreferenceSet response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createPreferenceSet(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.migrationcenter.v1.IPreferenceSet, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createPreferenceSet response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createPreferenceSet()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.create_preference_set.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_CreatePreferenceSet_async
-   */
-  async checkCreatePreferenceSetProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.migrationcenter.v1.PreferenceSet,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createPreferenceSet()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.create_preference_set.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_CreatePreferenceSet_async
+ */
+  async checkCreatePreferenceSetProgress(name: string): Promise<LROperation<protos.google.cloud.migrationcenter.v1.PreferenceSet, protos.google.cloud.migrationcenter.v1.OperationMetadata>>{
     this._log.info('createPreferenceSet long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createPreferenceSet,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.migrationcenter.v1.PreferenceSet,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createPreferenceSet, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.migrationcenter.v1.PreferenceSet, protos.google.cloud.migrationcenter.v1.OperationMetadata>;
   }
-  /**
-   * Updates the parameters of a preference set.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Field mask is used to specify the fields to be overwritten in the
-   *   `PreferenceSet` resource by the update.
-   *   The values specified in the `update_mask` field are relative to the
-   *   resource, not the full request.
-   *   A field will be overwritten if it is in the mask.
-   *   A single * value in the mask lets you to overwrite all fields.
-   * @param {google.cloud.migrationcenter.v1.PreferenceSet} request.preferenceSet
-   *   Required. The preference set resource being updated.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.update_preference_set.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_UpdatePreferenceSet_async
-   */
+/**
+ * Updates the parameters of a preference set.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Field mask is used to specify the fields to be overwritten in the
+ *   `PreferenceSet` resource by the update.
+ *   The values specified in the `update_mask` field are relative to the
+ *   resource, not the full request.
+ *   A field will be overwritten if it is in the mask.
+ *   A single * value in the mask lets you to overwrite all fields.
+ * @param {google.cloud.migrationcenter.v1.PreferenceSet} request.preferenceSet
+ *   Required. The preference set resource being updated.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.update_preference_set.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_UpdatePreferenceSet_async
+ */
   updatePreferenceSet(
-    request?: protos.google.cloud.migrationcenter.v1.IUpdatePreferenceSetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IPreferenceSet,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IUpdatePreferenceSetRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.migrationcenter.v1.IPreferenceSet, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updatePreferenceSet(
-    request: protos.google.cloud.migrationcenter.v1.IUpdatePreferenceSetRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IPreferenceSet,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.IUpdatePreferenceSetRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IPreferenceSet, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updatePreferenceSet(
-    request: protos.google.cloud.migrationcenter.v1.IUpdatePreferenceSetRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IPreferenceSet,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.IUpdatePreferenceSetRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IPreferenceSet, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updatePreferenceSet(
-    request?: protos.google.cloud.migrationcenter.v1.IUpdatePreferenceSetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.IPreferenceSet,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IPreferenceSet,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IPreferenceSet,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.migrationcenter.v1.IUpdatePreferenceSetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IPreferenceSet, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IPreferenceSet, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.migrationcenter.v1.IPreferenceSet, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'preference_set.name': request.preferenceSet!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'preference_set.name': request.preferenceSet!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.IPreferenceSet,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IPreferenceSet, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updatePreferenceSet response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updatePreferenceSet request %j', request);
-    return this.innerApiCalls
-      .updatePreferenceSet(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.IPreferenceSet,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updatePreferenceSet response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updatePreferenceSet(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.migrationcenter.v1.IPreferenceSet, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updatePreferenceSet response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updatePreferenceSet()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.update_preference_set.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_UpdatePreferenceSet_async
-   */
-  async checkUpdatePreferenceSetProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.migrationcenter.v1.PreferenceSet,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updatePreferenceSet()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.update_preference_set.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_UpdatePreferenceSet_async
+ */
+  async checkUpdatePreferenceSetProgress(name: string): Promise<LROperation<protos.google.cloud.migrationcenter.v1.PreferenceSet, protos.google.cloud.migrationcenter.v1.OperationMetadata>>{
     this._log.info('updatePreferenceSet long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updatePreferenceSet,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.migrationcenter.v1.PreferenceSet,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updatePreferenceSet, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.migrationcenter.v1.PreferenceSet, protos.google.cloud.migrationcenter.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a preference set.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the group resource.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.delete_preference_set.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_DeletePreferenceSet_async
-   */
+/**
+ * Deletes a preference set.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the group resource.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.delete_preference_set.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_DeletePreferenceSet_async
+ */
   deletePreferenceSet(
-    request?: protos.google.cloud.migrationcenter.v1.IDeletePreferenceSetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IDeletePreferenceSetRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deletePreferenceSet(
-    request: protos.google.cloud.migrationcenter.v1.IDeletePreferenceSetRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.IDeletePreferenceSetRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deletePreferenceSet(
-    request: protos.google.cloud.migrationcenter.v1.IDeletePreferenceSetRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.IDeletePreferenceSetRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deletePreferenceSet(
-    request?: protos.google.cloud.migrationcenter.v1.IDeletePreferenceSetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.migrationcenter.v1.IDeletePreferenceSetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deletePreferenceSet response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deletePreferenceSet request %j', request);
-    return this.innerApiCalls
-      .deletePreferenceSet(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deletePreferenceSet response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deletePreferenceSet(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deletePreferenceSet response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deletePreferenceSet()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.delete_preference_set.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_DeletePreferenceSet_async
-   */
-  async checkDeletePreferenceSetProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deletePreferenceSet()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.delete_preference_set.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_DeletePreferenceSet_async
+ */
+  async checkDeletePreferenceSetProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.migrationcenter.v1.OperationMetadata>>{
     this._log.info('deletePreferenceSet long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deletePreferenceSet,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deletePreferenceSet, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.migrationcenter.v1.OperationMetadata>;
   }
-  /**
-   * Updates the regional-level project settings.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Field mask is used to specify the fields to be overwritten in the
-   *   `Settings` resource by the update.
-   *   The values specified in the `update_mask` field are relative to the
-   *   resource, not the full request.
-   *   A field will be overwritten if it is in the mask.
-   *   A single * value in the mask lets you to overwrite all fields.
-   * @param {google.cloud.migrationcenter.v1.Settings} request.settings
-   *   Required. The project settings resource being updated.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.update_settings.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_UpdateSettings_async
-   */
+/**
+ * Updates the regional-level project settings.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Field mask is used to specify the fields to be overwritten in the
+ *   `Settings` resource by the update.
+ *   The values specified in the `update_mask` field are relative to the
+ *   resource, not the full request.
+ *   A field will be overwritten if it is in the mask.
+ *   A single * value in the mask lets you to overwrite all fields.
+ * @param {google.cloud.migrationcenter.v1.Settings} request.settings
+ *   Required. The project settings resource being updated.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.update_settings.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_UpdateSettings_async
+ */
   updateSettings(
-    request?: protos.google.cloud.migrationcenter.v1.IUpdateSettingsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.ISettings,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IUpdateSettingsRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.migrationcenter.v1.ISettings, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateSettings(
-    request: protos.google.cloud.migrationcenter.v1.IUpdateSettingsRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.ISettings,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.IUpdateSettingsRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.ISettings, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateSettings(
-    request: protos.google.cloud.migrationcenter.v1.IUpdateSettingsRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.ISettings,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.IUpdateSettingsRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.ISettings, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateSettings(
-    request?: protos.google.cloud.migrationcenter.v1.IUpdateSettingsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.ISettings,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.ISettings,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.ISettings,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.migrationcenter.v1.IUpdateSettingsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.ISettings, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.ISettings, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.migrationcenter.v1.ISettings, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'settings.name': request.settings!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'settings.name': request.settings!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.ISettings,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.ISettings, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateSettings response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateSettings request %j', request);
-    return this.innerApiCalls
-      .updateSettings(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.ISettings,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateSettings response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateSettings(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.migrationcenter.v1.ISettings, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateSettings response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateSettings()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.update_settings.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_UpdateSettings_async
-   */
-  async checkUpdateSettingsProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.migrationcenter.v1.Settings,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateSettings()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.update_settings.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_UpdateSettings_async
+ */
+  async checkUpdateSettingsProgress(name: string): Promise<LROperation<protos.google.cloud.migrationcenter.v1.Settings, protos.google.cloud.migrationcenter.v1.OperationMetadata>>{
     this._log.info('updateSettings long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateSettings,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.migrationcenter.v1.Settings,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateSettings, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.migrationcenter.v1.Settings, protos.google.cloud.migrationcenter.v1.OperationMetadata>;
   }
-  /**
-   * Creates a report configuration.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Value for parent.
-   * @param {string} request.reportConfigId
-   *   Required. User specified ID for the report config. It will become the last
-   *   component of the report config name. The ID must be unique within the
-   *   project, must conform with RFC-1034, is restricted to lower-cased letters,
-   *   and has a maximum length of 63 characters. The ID must match the regular
-   *   expression: [a-z]([a-z0-9-]{0,61}[a-z0-9])?.
-   * @param {google.cloud.migrationcenter.v1.ReportConfig} request.reportConfig
-   *   Required. The report config set resource being created.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.create_report_config.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_CreateReportConfig_async
-   */
+/**
+ * Creates a report configuration.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Value for parent.
+ * @param {string} request.reportConfigId
+ *   Required. User specified ID for the report config. It will become the last
+ *   component of the report config name. The ID must be unique within the
+ *   project, must conform with RFC-1034, is restricted to lower-cased letters,
+ *   and has a maximum length of 63 characters. The ID must match the regular
+ *   expression: [a-z]([a-z0-9-]{0,61}[a-z0-9])?.
+ * @param {google.cloud.migrationcenter.v1.ReportConfig} request.reportConfig
+ *   Required. The report config set resource being created.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.create_report_config.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_CreateReportConfig_async
+ */
   createReportConfig(
-    request?: protos.google.cloud.migrationcenter.v1.ICreateReportConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IReportConfig,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.ICreateReportConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.migrationcenter.v1.IReportConfig, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createReportConfig(
-    request: protos.google.cloud.migrationcenter.v1.ICreateReportConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IReportConfig,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.ICreateReportConfigRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IReportConfig, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createReportConfig(
-    request: protos.google.cloud.migrationcenter.v1.ICreateReportConfigRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IReportConfig,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.ICreateReportConfigRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IReportConfig, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createReportConfig(
-    request?: protos.google.cloud.migrationcenter.v1.ICreateReportConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.IReportConfig,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IReportConfig,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IReportConfig,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.migrationcenter.v1.ICreateReportConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IReportConfig, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IReportConfig, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.migrationcenter.v1.IReportConfig, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.IReportConfig,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IReportConfig, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createReportConfig response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createReportConfig request %j', request);
-    return this.innerApiCalls
-      .createReportConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.IReportConfig,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createReportConfig response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createReportConfig(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.migrationcenter.v1.IReportConfig, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createReportConfig response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createReportConfig()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.create_report_config.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_CreateReportConfig_async
-   */
-  async checkCreateReportConfigProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.migrationcenter.v1.ReportConfig,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createReportConfig()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.create_report_config.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_CreateReportConfig_async
+ */
+  async checkCreateReportConfigProgress(name: string): Promise<LROperation<protos.google.cloud.migrationcenter.v1.ReportConfig, protos.google.cloud.migrationcenter.v1.OperationMetadata>>{
     this._log.info('createReportConfig long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createReportConfig,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.migrationcenter.v1.ReportConfig,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createReportConfig, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.migrationcenter.v1.ReportConfig, protos.google.cloud.migrationcenter.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a ReportConfig.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {boolean} [request.force]
-   *   Optional. If set to `true`, any child `Reports` of this entity will also be
-   *   deleted. If set to `false`, the request only works if the resource has no
-   *   children.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.delete_report_config.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_DeleteReportConfig_async
-   */
+/**
+ * Deletes a ReportConfig.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {boolean} [request.force]
+ *   Optional. If set to `true`, any child `Reports` of this entity will also be
+ *   deleted. If set to `false`, the request only works if the resource has no
+ *   children.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.delete_report_config.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_DeleteReportConfig_async
+ */
   deleteReportConfig(
-    request?: protos.google.cloud.migrationcenter.v1.IDeleteReportConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IDeleteReportConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteReportConfig(
-    request: protos.google.cloud.migrationcenter.v1.IDeleteReportConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.IDeleteReportConfigRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteReportConfig(
-    request: protos.google.cloud.migrationcenter.v1.IDeleteReportConfigRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.IDeleteReportConfigRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteReportConfig(
-    request?: protos.google.cloud.migrationcenter.v1.IDeleteReportConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.migrationcenter.v1.IDeleteReportConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteReportConfig response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteReportConfig request %j', request);
-    return this.innerApiCalls
-      .deleteReportConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteReportConfig response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteReportConfig(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteReportConfig response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteReportConfig()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.delete_report_config.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_DeleteReportConfig_async
-   */
-  async checkDeleteReportConfigProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteReportConfig()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.delete_report_config.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_DeleteReportConfig_async
+ */
+  async checkDeleteReportConfigProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.migrationcenter.v1.OperationMetadata>>{
     this._log.info('deleteReportConfig long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteReportConfig,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteReportConfig, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.migrationcenter.v1.OperationMetadata>;
   }
-  /**
-   * Creates a report.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Value for parent.
-   * @param {string} request.reportId
-   *   Required. User specified id for the report. It will become the last
-   *   component of the report name. The id must be unique within the project,
-   *   must conform with RFC-1034, is restricted to lower-cased letters, and has a
-   *   maximum length of 63 characters. The id must match the regular expression:
-   *   [a-z]([a-z0-9-]{0,61}[a-z0-9])?.
-   * @param {google.cloud.migrationcenter.v1.Report} request.report
-   *   Required. The report resource being created.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.create_report.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_CreateReport_async
-   */
+/**
+ * Creates a report.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Value for parent.
+ * @param {string} request.reportId
+ *   Required. User specified id for the report. It will become the last
+ *   component of the report name. The id must be unique within the project,
+ *   must conform with RFC-1034, is restricted to lower-cased letters, and has a
+ *   maximum length of 63 characters. The id must match the regular expression:
+ *   [a-z]([a-z0-9-]{0,61}[a-z0-9])?.
+ * @param {google.cloud.migrationcenter.v1.Report} request.report
+ *   Required. The report resource being created.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.create_report.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_CreateReport_async
+ */
   createReport(
-    request?: protos.google.cloud.migrationcenter.v1.ICreateReportRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IReport,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.ICreateReportRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.migrationcenter.v1.IReport, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createReport(
-    request: protos.google.cloud.migrationcenter.v1.ICreateReportRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IReport,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.ICreateReportRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IReport, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createReport(
-    request: protos.google.cloud.migrationcenter.v1.ICreateReportRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IReport,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.ICreateReportRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IReport, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createReport(
-    request?: protos.google.cloud.migrationcenter.v1.ICreateReportRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.IReport,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IReport,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.migrationcenter.v1.IReport,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.migrationcenter.v1.ICreateReportRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IReport, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IReport, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.migrationcenter.v1.IReport, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.IReport,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.migrationcenter.v1.IReport, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createReport response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createReport request %j', request);
-    return this.innerApiCalls
-      .createReport(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.migrationcenter.v1.IReport,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createReport response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createReport(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.migrationcenter.v1.IReport, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createReport response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createReport()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.create_report.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_CreateReport_async
-   */
-  async checkCreateReportProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.migrationcenter.v1.Report,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createReport()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.create_report.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_CreateReport_async
+ */
+  async checkCreateReportProgress(name: string): Promise<LROperation<protos.google.cloud.migrationcenter.v1.Report, protos.google.cloud.migrationcenter.v1.OperationMetadata>>{
     this._log.info('createReport long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createReport,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.migrationcenter.v1.Report,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createReport, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.migrationcenter.v1.Report, protos.google.cloud.migrationcenter.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a Report.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.delete_report.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_DeleteReport_async
-   */
+/**
+ * Deletes a Report.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.delete_report.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_DeleteReport_async
+ */
   deleteReport(
-    request?: protos.google.cloud.migrationcenter.v1.IDeleteReportRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IDeleteReportRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteReport(
-    request: protos.google.cloud.migrationcenter.v1.IDeleteReportRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.IDeleteReportRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteReport(
-    request: protos.google.cloud.migrationcenter.v1.IDeleteReportRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.migrationcenter.v1.IDeleteReportRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteReport(
-    request?: protos.google.cloud.migrationcenter.v1.IDeleteReportRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.migrationcenter.v1.IDeleteReportRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteReport response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteReport request %j', request);
-    return this.innerApiCalls
-      .deleteReport(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.migrationcenter.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteReport response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteReport(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteReport response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteReport()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.delete_report.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_DeleteReport_async
-   */
-  async checkDeleteReportProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteReport()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.delete_report.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_DeleteReport_async
+ */
+  async checkDeleteReportProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.migrationcenter.v1.OperationMetadata>>{
     this._log.info('deleteReport long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteReport,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.migrationcenter.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteReport, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.migrationcenter.v1.OperationMetadata>;
   }
-  /**
-   * Lists all the assets in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for `ListAssetsRequest`.
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results.
-   * @param {string} request.orderBy
-   *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
-   * @param {google.cloud.migrationcenter.v1.AssetView} request.view
-   *   View of the assets. Defaults to BASIC.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.migrationcenter.v1.Asset|Asset}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listAssetsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all the assets in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for `ListAssetsRequest`.
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results.
+ * @param {string} request.orderBy
+ *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
+ * @param {google.cloud.migrationcenter.v1.AssetView} request.view
+ *   View of the assets. Defaults to BASIC.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.migrationcenter.v1.Asset|Asset}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listAssetsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAssets(
-    request?: protos.google.cloud.migrationcenter.v1.IListAssetsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IAsset[],
-      protos.google.cloud.migrationcenter.v1.IListAssetsRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListAssetsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IListAssetsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IAsset[],
+        protos.google.cloud.migrationcenter.v1.IListAssetsRequest|null,
+        protos.google.cloud.migrationcenter.v1.IListAssetsResponse
+      ]>;
   listAssets(
-    request: protos.google.cloud.migrationcenter.v1.IListAssetsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.migrationcenter.v1.IListAssetsRequest,
-      | protos.google.cloud.migrationcenter.v1.IListAssetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.migrationcenter.v1.IAsset
-    >
-  ): void;
-  listAssets(
-    request: protos.google.cloud.migrationcenter.v1.IListAssetsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.migrationcenter.v1.IListAssetsRequest,
-      | protos.google.cloud.migrationcenter.v1.IListAssetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.migrationcenter.v1.IAsset
-    >
-  ): void;
-  listAssets(
-    request?: protos.google.cloud.migrationcenter.v1.IListAssetsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.migrationcenter.v1.IListAssetsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.migrationcenter.v1.IListAssetsRequest,
-          | protos.google.cloud.migrationcenter.v1.IListAssetsResponse
-          | null
-          | undefined,
-          protos.google.cloud.migrationcenter.v1.IAsset
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.migrationcenter.v1.IListAssetsRequest,
-      | protos.google.cloud.migrationcenter.v1.IListAssetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.migrationcenter.v1.IAsset
-    >
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IAsset[],
-      protos.google.cloud.migrationcenter.v1.IListAssetsRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListAssetsResponse,
-    ]
-  > | void {
+          protos.google.cloud.migrationcenter.v1.IListAssetsResponse|null|undefined,
+          protos.google.cloud.migrationcenter.v1.IAsset>): void;
+  listAssets(
+      request: protos.google.cloud.migrationcenter.v1.IListAssetsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.migrationcenter.v1.IListAssetsRequest,
+          protos.google.cloud.migrationcenter.v1.IListAssetsResponse|null|undefined,
+          protos.google.cloud.migrationcenter.v1.IAsset>): void;
+  listAssets(
+      request?: protos.google.cloud.migrationcenter.v1.IListAssetsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.migrationcenter.v1.IListAssetsRequest,
+          protos.google.cloud.migrationcenter.v1.IListAssetsResponse|null|undefined,
+          protos.google.cloud.migrationcenter.v1.IAsset>,
+      callback?: PaginationCallback<
+          protos.google.cloud.migrationcenter.v1.IListAssetsRequest,
+          protos.google.cloud.migrationcenter.v1.IListAssetsResponse|null|undefined,
+          protos.google.cloud.migrationcenter.v1.IAsset>):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IAsset[],
+        protos.google.cloud.migrationcenter.v1.IListAssetsRequest|null,
+        protos.google.cloud.migrationcenter.v1.IListAssetsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.migrationcenter.v1.IListAssetsRequest,
-          | protos.google.cloud.migrationcenter.v1.IListAssetsResponse
-          | null
-          | undefined,
-          protos.google.cloud.migrationcenter.v1.IAsset
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.migrationcenter.v1.IListAssetsRequest,
+      protos.google.cloud.migrationcenter.v1.IListAssetsResponse|null|undefined,
+      protos.google.cloud.migrationcenter.v1.IAsset>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listAssets values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -7292,63 +5157,60 @@ export class MigrationCenterClient {
     this._log.info('listAssets request %j', request);
     return this.innerApiCalls
       .listAssets(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.migrationcenter.v1.IAsset[],
-          protos.google.cloud.migrationcenter.v1.IListAssetsRequest | null,
-          protos.google.cloud.migrationcenter.v1.IListAssetsResponse,
-        ]) => {
-          this._log.info('listAssets values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.migrationcenter.v1.IAsset[],
+        protos.google.cloud.migrationcenter.v1.IListAssetsRequest|null,
+        protos.google.cloud.migrationcenter.v1.IListAssetsResponse
+      ]) => {
+        this._log.info('listAssets values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listAssets`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for `ListAssetsRequest`.
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results.
-   * @param {string} request.orderBy
-   *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
-   * @param {google.cloud.migrationcenter.v1.AssetView} request.view
-   *   View of the assets. Defaults to BASIC.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.migrationcenter.v1.Asset|Asset} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listAssetsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listAssets`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for `ListAssetsRequest`.
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results.
+ * @param {string} request.orderBy
+ *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
+ * @param {google.cloud.migrationcenter.v1.AssetView} request.view
+ *   View of the assets. Defaults to BASIC.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.migrationcenter.v1.Asset|Asset} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listAssetsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAssetsStream(
-    request?: protos.google.cloud.migrationcenter.v1.IListAssetsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.migrationcenter.v1.IListAssetsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAssets stream %j', request);
     return this.descriptors.page.listAssets.createStream(
       this.innerApiCalls.listAssets as GaxCall,
@@ -7357,54 +5219,53 @@ export class MigrationCenterClient {
     );
   }
 
-  /**
-   * Equivalent to `listAssets`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for `ListAssetsRequest`.
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results.
-   * @param {string} request.orderBy
-   *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
-   * @param {google.cloud.migrationcenter.v1.AssetView} request.view
-   *   View of the assets. Defaults to BASIC.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.migrationcenter.v1.Asset|Asset}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.list_assets.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_ListAssets_async
-   */
+/**
+ * Equivalent to `listAssets`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for `ListAssetsRequest`.
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results.
+ * @param {string} request.orderBy
+ *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
+ * @param {google.cloud.migrationcenter.v1.AssetView} request.view
+ *   View of the assets. Defaults to BASIC.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.migrationcenter.v1.Asset|Asset}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.list_assets.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_ListAssets_async
+ */
   listAssetsAsync(
-    request?: protos.google.cloud.migrationcenter.v1.IListAssetsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.migrationcenter.v1.IAsset> {
+      request?: protos.google.cloud.migrationcenter.v1.IListAssetsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.migrationcenter.v1.IAsset>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAssets iterate %j', request);
     return this.descriptors.page.listAssets.asyncIterate(
       this.innerApiCalls['listAssets'] as GaxCall,
@@ -7412,120 +5273,95 @@ export class MigrationCenterClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.migrationcenter.v1.IAsset>;
   }
-  /**
-   * Lists all import jobs.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for `ListImportJobsRequest`.
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results.
-   * @param {string} request.orderBy
-   *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
-   * @param {google.cloud.migrationcenter.v1.ImportJobView} [request.view]
-   *   Optional. The level of details of each import job.
-   *   Default value is BASIC.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.migrationcenter.v1.ImportJob|ImportJob}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listImportJobsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all import jobs.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for `ListImportJobsRequest`.
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results.
+ * @param {string} request.orderBy
+ *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
+ * @param {google.cloud.migrationcenter.v1.ImportJobView} [request.view]
+ *   Optional. The level of details of each import job.
+ *   Default value is BASIC.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.migrationcenter.v1.ImportJob|ImportJob}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listImportJobsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listImportJobs(
-    request?: protos.google.cloud.migrationcenter.v1.IListImportJobsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IImportJob[],
-      protos.google.cloud.migrationcenter.v1.IListImportJobsRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListImportJobsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IListImportJobsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IImportJob[],
+        protos.google.cloud.migrationcenter.v1.IListImportJobsRequest|null,
+        protos.google.cloud.migrationcenter.v1.IListImportJobsResponse
+      ]>;
   listImportJobs(
-    request: protos.google.cloud.migrationcenter.v1.IListImportJobsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.migrationcenter.v1.IListImportJobsRequest,
-      | protos.google.cloud.migrationcenter.v1.IListImportJobsResponse
-      | null
-      | undefined,
-      protos.google.cloud.migrationcenter.v1.IImportJob
-    >
-  ): void;
-  listImportJobs(
-    request: protos.google.cloud.migrationcenter.v1.IListImportJobsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.migrationcenter.v1.IListImportJobsRequest,
-      | protos.google.cloud.migrationcenter.v1.IListImportJobsResponse
-      | null
-      | undefined,
-      protos.google.cloud.migrationcenter.v1.IImportJob
-    >
-  ): void;
-  listImportJobs(
-    request?: protos.google.cloud.migrationcenter.v1.IListImportJobsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.migrationcenter.v1.IListImportJobsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.migrationcenter.v1.IListImportJobsRequest,
-          | protos.google.cloud.migrationcenter.v1.IListImportJobsResponse
-          | null
-          | undefined,
-          protos.google.cloud.migrationcenter.v1.IImportJob
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.migrationcenter.v1.IListImportJobsRequest,
-      | protos.google.cloud.migrationcenter.v1.IListImportJobsResponse
-      | null
-      | undefined,
-      protos.google.cloud.migrationcenter.v1.IImportJob
-    >
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IImportJob[],
-      protos.google.cloud.migrationcenter.v1.IListImportJobsRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListImportJobsResponse,
-    ]
-  > | void {
+          protos.google.cloud.migrationcenter.v1.IListImportJobsResponse|null|undefined,
+          protos.google.cloud.migrationcenter.v1.IImportJob>): void;
+  listImportJobs(
+      request: protos.google.cloud.migrationcenter.v1.IListImportJobsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.migrationcenter.v1.IListImportJobsRequest,
+          protos.google.cloud.migrationcenter.v1.IListImportJobsResponse|null|undefined,
+          protos.google.cloud.migrationcenter.v1.IImportJob>): void;
+  listImportJobs(
+      request?: protos.google.cloud.migrationcenter.v1.IListImportJobsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.migrationcenter.v1.IListImportJobsRequest,
+          protos.google.cloud.migrationcenter.v1.IListImportJobsResponse|null|undefined,
+          protos.google.cloud.migrationcenter.v1.IImportJob>,
+      callback?: PaginationCallback<
+          protos.google.cloud.migrationcenter.v1.IListImportJobsRequest,
+          protos.google.cloud.migrationcenter.v1.IListImportJobsResponse|null|undefined,
+          protos.google.cloud.migrationcenter.v1.IImportJob>):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IImportJob[],
+        protos.google.cloud.migrationcenter.v1.IListImportJobsRequest|null,
+        protos.google.cloud.migrationcenter.v1.IListImportJobsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.migrationcenter.v1.IListImportJobsRequest,
-          | protos.google.cloud.migrationcenter.v1.IListImportJobsResponse
-          | null
-          | undefined,
-          protos.google.cloud.migrationcenter.v1.IImportJob
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.migrationcenter.v1.IListImportJobsRequest,
+      protos.google.cloud.migrationcenter.v1.IListImportJobsResponse|null|undefined,
+      protos.google.cloud.migrationcenter.v1.IImportJob>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listImportJobs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -7534,64 +5370,61 @@ export class MigrationCenterClient {
     this._log.info('listImportJobs request %j', request);
     return this.innerApiCalls
       .listImportJobs(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.migrationcenter.v1.IImportJob[],
-          protos.google.cloud.migrationcenter.v1.IListImportJobsRequest | null,
-          protos.google.cloud.migrationcenter.v1.IListImportJobsResponse,
-        ]) => {
-          this._log.info('listImportJobs values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.migrationcenter.v1.IImportJob[],
+        protos.google.cloud.migrationcenter.v1.IListImportJobsRequest|null,
+        protos.google.cloud.migrationcenter.v1.IListImportJobsResponse
+      ]) => {
+        this._log.info('listImportJobs values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listImportJobs`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for `ListImportJobsRequest`.
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results.
-   * @param {string} request.orderBy
-   *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
-   * @param {google.cloud.migrationcenter.v1.ImportJobView} [request.view]
-   *   Optional. The level of details of each import job.
-   *   Default value is BASIC.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.migrationcenter.v1.ImportJob|ImportJob} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listImportJobsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listImportJobs`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for `ListImportJobsRequest`.
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results.
+ * @param {string} request.orderBy
+ *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
+ * @param {google.cloud.migrationcenter.v1.ImportJobView} [request.view]
+ *   Optional. The level of details of each import job.
+ *   Default value is BASIC.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.migrationcenter.v1.ImportJob|ImportJob} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listImportJobsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listImportJobsStream(
-    request?: protos.google.cloud.migrationcenter.v1.IListImportJobsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.migrationcenter.v1.IListImportJobsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listImportJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listImportJobs stream %j', request);
     return this.descriptors.page.listImportJobs.createStream(
       this.innerApiCalls.listImportJobs as GaxCall,
@@ -7600,55 +5433,54 @@ export class MigrationCenterClient {
     );
   }
 
-  /**
-   * Equivalent to `listImportJobs`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for `ListImportJobsRequest`.
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results.
-   * @param {string} request.orderBy
-   *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
-   * @param {google.cloud.migrationcenter.v1.ImportJobView} [request.view]
-   *   Optional. The level of details of each import job.
-   *   Default value is BASIC.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.migrationcenter.v1.ImportJob|ImportJob}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.list_import_jobs.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_ListImportJobs_async
-   */
+/**
+ * Equivalent to `listImportJobs`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for `ListImportJobsRequest`.
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results.
+ * @param {string} request.orderBy
+ *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
+ * @param {google.cloud.migrationcenter.v1.ImportJobView} [request.view]
+ *   Optional. The level of details of each import job.
+ *   Default value is BASIC.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.migrationcenter.v1.ImportJob|ImportJob}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.list_import_jobs.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_ListImportJobs_async
+ */
   listImportJobsAsync(
-    request?: protos.google.cloud.migrationcenter.v1.IListImportJobsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.migrationcenter.v1.IImportJob> {
+      request?: protos.google.cloud.migrationcenter.v1.IListImportJobsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.migrationcenter.v1.IImportJob>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listImportJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listImportJobs iterate %j', request);
     return this.descriptors.page.listImportJobs.asyncIterate(
       this.innerApiCalls['listImportJobs'] as GaxCall,
@@ -7656,123 +5488,98 @@ export class MigrationCenterClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.migrationcenter.v1.IImportJob>;
   }
-  /**
-   * List import data files.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the parent of the `ImportDataFiles` resource.
-   * @param {number} request.pageSize
-   *   The maximum number of data files to return. The service may return
-   *   fewer than this value. If unspecified, at most 500 data files will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListImportDataFiles` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListImportDataFiles`
-   *   must match the call that provided the page token.
-   * @param {string} request.filter
-   *   Filtering results.
-   * @param {string} request.orderBy
-   *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.migrationcenter.v1.ImportDataFile|ImportDataFile}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listImportDataFilesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * List import data files.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the parent of the `ImportDataFiles` resource.
+ * @param {number} request.pageSize
+ *   The maximum number of data files to return. The service may return
+ *   fewer than this value. If unspecified, at most 500 data files will be
+ *   returned. The maximum value is 1000; values above 1000 will be coerced to
+ *   1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListImportDataFiles` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListImportDataFiles`
+ *   must match the call that provided the page token.
+ * @param {string} request.filter
+ *   Filtering results.
+ * @param {string} request.orderBy
+ *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.migrationcenter.v1.ImportDataFile|ImportDataFile}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listImportDataFilesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listImportDataFiles(
-    request?: protos.google.cloud.migrationcenter.v1.IListImportDataFilesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IImportDataFile[],
-      protos.google.cloud.migrationcenter.v1.IListImportDataFilesRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListImportDataFilesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IListImportDataFilesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IImportDataFile[],
+        protos.google.cloud.migrationcenter.v1.IListImportDataFilesRequest|null,
+        protos.google.cloud.migrationcenter.v1.IListImportDataFilesResponse
+      ]>;
   listImportDataFiles(
-    request: protos.google.cloud.migrationcenter.v1.IListImportDataFilesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.migrationcenter.v1.IListImportDataFilesRequest,
-      | protos.google.cloud.migrationcenter.v1.IListImportDataFilesResponse
-      | null
-      | undefined,
-      protos.google.cloud.migrationcenter.v1.IImportDataFile
-    >
-  ): void;
-  listImportDataFiles(
-    request: protos.google.cloud.migrationcenter.v1.IListImportDataFilesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.migrationcenter.v1.IListImportDataFilesRequest,
-      | protos.google.cloud.migrationcenter.v1.IListImportDataFilesResponse
-      | null
-      | undefined,
-      protos.google.cloud.migrationcenter.v1.IImportDataFile
-    >
-  ): void;
-  listImportDataFiles(
-    request?: protos.google.cloud.migrationcenter.v1.IListImportDataFilesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.migrationcenter.v1.IListImportDataFilesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.migrationcenter.v1.IListImportDataFilesRequest,
-          | protos.google.cloud.migrationcenter.v1.IListImportDataFilesResponse
-          | null
-          | undefined,
-          protos.google.cloud.migrationcenter.v1.IImportDataFile
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.migrationcenter.v1.IListImportDataFilesRequest,
-      | protos.google.cloud.migrationcenter.v1.IListImportDataFilesResponse
-      | null
-      | undefined,
-      protos.google.cloud.migrationcenter.v1.IImportDataFile
-    >
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IImportDataFile[],
-      protos.google.cloud.migrationcenter.v1.IListImportDataFilesRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListImportDataFilesResponse,
-    ]
-  > | void {
+          protos.google.cloud.migrationcenter.v1.IListImportDataFilesResponse|null|undefined,
+          protos.google.cloud.migrationcenter.v1.IImportDataFile>): void;
+  listImportDataFiles(
+      request: protos.google.cloud.migrationcenter.v1.IListImportDataFilesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.migrationcenter.v1.IListImportDataFilesRequest,
+          protos.google.cloud.migrationcenter.v1.IListImportDataFilesResponse|null|undefined,
+          protos.google.cloud.migrationcenter.v1.IImportDataFile>): void;
+  listImportDataFiles(
+      request?: protos.google.cloud.migrationcenter.v1.IListImportDataFilesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.migrationcenter.v1.IListImportDataFilesRequest,
+          protos.google.cloud.migrationcenter.v1.IListImportDataFilesResponse|null|undefined,
+          protos.google.cloud.migrationcenter.v1.IImportDataFile>,
+      callback?: PaginationCallback<
+          protos.google.cloud.migrationcenter.v1.IListImportDataFilesRequest,
+          protos.google.cloud.migrationcenter.v1.IListImportDataFilesResponse|null|undefined,
+          protos.google.cloud.migrationcenter.v1.IImportDataFile>):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IImportDataFile[],
+        protos.google.cloud.migrationcenter.v1.IListImportDataFilesRequest|null,
+        protos.google.cloud.migrationcenter.v1.IListImportDataFilesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.migrationcenter.v1.IListImportDataFilesRequest,
-          | protos.google.cloud.migrationcenter.v1.IListImportDataFilesResponse
-          | null
-          | undefined,
-          protos.google.cloud.migrationcenter.v1.IImportDataFile
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.migrationcenter.v1.IListImportDataFilesRequest,
+      protos.google.cloud.migrationcenter.v1.IListImportDataFilesResponse|null|undefined,
+      protos.google.cloud.migrationcenter.v1.IImportDataFile>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listImportDataFiles values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -7781,67 +5588,64 @@ export class MigrationCenterClient {
     this._log.info('listImportDataFiles request %j', request);
     return this.innerApiCalls
       .listImportDataFiles(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.migrationcenter.v1.IImportDataFile[],
-          protos.google.cloud.migrationcenter.v1.IListImportDataFilesRequest | null,
-          protos.google.cloud.migrationcenter.v1.IListImportDataFilesResponse,
-        ]) => {
-          this._log.info('listImportDataFiles values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.migrationcenter.v1.IImportDataFile[],
+        protos.google.cloud.migrationcenter.v1.IListImportDataFilesRequest|null,
+        protos.google.cloud.migrationcenter.v1.IListImportDataFilesResponse
+      ]) => {
+        this._log.info('listImportDataFiles values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listImportDataFiles`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the parent of the `ImportDataFiles` resource.
-   * @param {number} request.pageSize
-   *   The maximum number of data files to return. The service may return
-   *   fewer than this value. If unspecified, at most 500 data files will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListImportDataFiles` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListImportDataFiles`
-   *   must match the call that provided the page token.
-   * @param {string} request.filter
-   *   Filtering results.
-   * @param {string} request.orderBy
-   *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.migrationcenter.v1.ImportDataFile|ImportDataFile} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listImportDataFilesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listImportDataFiles`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the parent of the `ImportDataFiles` resource.
+ * @param {number} request.pageSize
+ *   The maximum number of data files to return. The service may return
+ *   fewer than this value. If unspecified, at most 500 data files will be
+ *   returned. The maximum value is 1000; values above 1000 will be coerced to
+ *   1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListImportDataFiles` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListImportDataFiles`
+ *   must match the call that provided the page token.
+ * @param {string} request.filter
+ *   Filtering results.
+ * @param {string} request.orderBy
+ *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.migrationcenter.v1.ImportDataFile|ImportDataFile} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listImportDataFilesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listImportDataFilesStream(
-    request?: protos.google.cloud.migrationcenter.v1.IListImportDataFilesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.migrationcenter.v1.IListImportDataFilesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listImportDataFiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listImportDataFiles stream %j', request);
     return this.descriptors.page.listImportDataFiles.createStream(
       this.innerApiCalls.listImportDataFiles as GaxCall,
@@ -7850,58 +5654,57 @@ export class MigrationCenterClient {
     );
   }
 
-  /**
-   * Equivalent to `listImportDataFiles`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the parent of the `ImportDataFiles` resource.
-   * @param {number} request.pageSize
-   *   The maximum number of data files to return. The service may return
-   *   fewer than this value. If unspecified, at most 500 data files will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListImportDataFiles` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListImportDataFiles`
-   *   must match the call that provided the page token.
-   * @param {string} request.filter
-   *   Filtering results.
-   * @param {string} request.orderBy
-   *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.migrationcenter.v1.ImportDataFile|ImportDataFile}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.list_import_data_files.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_ListImportDataFiles_async
-   */
+/**
+ * Equivalent to `listImportDataFiles`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the parent of the `ImportDataFiles` resource.
+ * @param {number} request.pageSize
+ *   The maximum number of data files to return. The service may return
+ *   fewer than this value. If unspecified, at most 500 data files will be
+ *   returned. The maximum value is 1000; values above 1000 will be coerced to
+ *   1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListImportDataFiles` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListImportDataFiles`
+ *   must match the call that provided the page token.
+ * @param {string} request.filter
+ *   Filtering results.
+ * @param {string} request.orderBy
+ *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.migrationcenter.v1.ImportDataFile|ImportDataFile}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.list_import_data_files.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_ListImportDataFiles_async
+ */
   listImportDataFilesAsync(
-    request?: protos.google.cloud.migrationcenter.v1.IListImportDataFilesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.migrationcenter.v1.IImportDataFile> {
+      request?: protos.google.cloud.migrationcenter.v1.IListImportDataFilesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.migrationcenter.v1.IImportDataFile>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listImportDataFiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listImportDataFiles iterate %j', request);
     return this.descriptors.page.listImportDataFiles.asyncIterate(
       this.innerApiCalls['listImportDataFiles'] as GaxCall,
@@ -7909,117 +5712,92 @@ export class MigrationCenterClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.migrationcenter.v1.IImportDataFile>;
   }
-  /**
-   * Lists all groups in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for `ListGroupsRequest`.
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results.
-   * @param {string} request.orderBy
-   *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.migrationcenter.v1.Group|Group}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listGroupsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all groups in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for `ListGroupsRequest`.
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results.
+ * @param {string} request.orderBy
+ *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.migrationcenter.v1.Group|Group}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listGroupsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listGroups(
-    request?: protos.google.cloud.migrationcenter.v1.IListGroupsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IGroup[],
-      protos.google.cloud.migrationcenter.v1.IListGroupsRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListGroupsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IListGroupsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IGroup[],
+        protos.google.cloud.migrationcenter.v1.IListGroupsRequest|null,
+        protos.google.cloud.migrationcenter.v1.IListGroupsResponse
+      ]>;
   listGroups(
-    request: protos.google.cloud.migrationcenter.v1.IListGroupsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.migrationcenter.v1.IListGroupsRequest,
-      | protos.google.cloud.migrationcenter.v1.IListGroupsResponse
-      | null
-      | undefined,
-      protos.google.cloud.migrationcenter.v1.IGroup
-    >
-  ): void;
-  listGroups(
-    request: protos.google.cloud.migrationcenter.v1.IListGroupsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.migrationcenter.v1.IListGroupsRequest,
-      | protos.google.cloud.migrationcenter.v1.IListGroupsResponse
-      | null
-      | undefined,
-      protos.google.cloud.migrationcenter.v1.IGroup
-    >
-  ): void;
-  listGroups(
-    request?: protos.google.cloud.migrationcenter.v1.IListGroupsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.migrationcenter.v1.IListGroupsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.migrationcenter.v1.IListGroupsRequest,
-          | protos.google.cloud.migrationcenter.v1.IListGroupsResponse
-          | null
-          | undefined,
-          protos.google.cloud.migrationcenter.v1.IGroup
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.migrationcenter.v1.IListGroupsRequest,
-      | protos.google.cloud.migrationcenter.v1.IListGroupsResponse
-      | null
-      | undefined,
-      protos.google.cloud.migrationcenter.v1.IGroup
-    >
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IGroup[],
-      protos.google.cloud.migrationcenter.v1.IListGroupsRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListGroupsResponse,
-    ]
-  > | void {
+          protos.google.cloud.migrationcenter.v1.IListGroupsResponse|null|undefined,
+          protos.google.cloud.migrationcenter.v1.IGroup>): void;
+  listGroups(
+      request: protos.google.cloud.migrationcenter.v1.IListGroupsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.migrationcenter.v1.IListGroupsRequest,
+          protos.google.cloud.migrationcenter.v1.IListGroupsResponse|null|undefined,
+          protos.google.cloud.migrationcenter.v1.IGroup>): void;
+  listGroups(
+      request?: protos.google.cloud.migrationcenter.v1.IListGroupsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.migrationcenter.v1.IListGroupsRequest,
+          protos.google.cloud.migrationcenter.v1.IListGroupsResponse|null|undefined,
+          protos.google.cloud.migrationcenter.v1.IGroup>,
+      callback?: PaginationCallback<
+          protos.google.cloud.migrationcenter.v1.IListGroupsRequest,
+          protos.google.cloud.migrationcenter.v1.IListGroupsResponse|null|undefined,
+          protos.google.cloud.migrationcenter.v1.IGroup>):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IGroup[],
+        protos.google.cloud.migrationcenter.v1.IListGroupsRequest|null,
+        protos.google.cloud.migrationcenter.v1.IListGroupsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.migrationcenter.v1.IListGroupsRequest,
-          | protos.google.cloud.migrationcenter.v1.IListGroupsResponse
-          | null
-          | undefined,
-          protos.google.cloud.migrationcenter.v1.IGroup
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.migrationcenter.v1.IListGroupsRequest,
+      protos.google.cloud.migrationcenter.v1.IListGroupsResponse|null|undefined,
+      protos.google.cloud.migrationcenter.v1.IGroup>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listGroups values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -8028,61 +5806,58 @@ export class MigrationCenterClient {
     this._log.info('listGroups request %j', request);
     return this.innerApiCalls
       .listGroups(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.migrationcenter.v1.IGroup[],
-          protos.google.cloud.migrationcenter.v1.IListGroupsRequest | null,
-          protos.google.cloud.migrationcenter.v1.IListGroupsResponse,
-        ]) => {
-          this._log.info('listGroups values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.migrationcenter.v1.IGroup[],
+        protos.google.cloud.migrationcenter.v1.IListGroupsRequest|null,
+        protos.google.cloud.migrationcenter.v1.IListGroupsResponse
+      ]) => {
+        this._log.info('listGroups values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listGroups`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for `ListGroupsRequest`.
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results.
-   * @param {string} request.orderBy
-   *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.migrationcenter.v1.Group|Group} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listGroupsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listGroups`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for `ListGroupsRequest`.
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results.
+ * @param {string} request.orderBy
+ *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.migrationcenter.v1.Group|Group} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listGroupsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listGroupsStream(
-    request?: protos.google.cloud.migrationcenter.v1.IListGroupsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.migrationcenter.v1.IListGroupsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listGroups stream %j', request);
     return this.descriptors.page.listGroups.createStream(
       this.innerApiCalls.listGroups as GaxCall,
@@ -8091,52 +5866,51 @@ export class MigrationCenterClient {
     );
   }
 
-  /**
-   * Equivalent to `listGroups`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for `ListGroupsRequest`.
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results.
-   * @param {string} request.orderBy
-   *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.migrationcenter.v1.Group|Group}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.list_groups.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_ListGroups_async
-   */
+/**
+ * Equivalent to `listGroups`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for `ListGroupsRequest`.
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results.
+ * @param {string} request.orderBy
+ *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.migrationcenter.v1.Group|Group}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.list_groups.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_ListGroups_async
+ */
   listGroupsAsync(
-    request?: protos.google.cloud.migrationcenter.v1.IListGroupsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.migrationcenter.v1.IGroup> {
+      request?: protos.google.cloud.migrationcenter.v1.IListGroupsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.migrationcenter.v1.IGroup>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listGroups iterate %j', request);
     return this.descriptors.page.listGroups.asyncIterate(
       this.innerApiCalls['listGroups'] as GaxCall,
@@ -8144,116 +5918,91 @@ export class MigrationCenterClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.migrationcenter.v1.IGroup>;
   }
-  /**
-   * Lists all error frames in a given source and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value (the source) for `ListErrorFramesRequest`.
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {google.cloud.migrationcenter.v1.ErrorFrameView} [request.view]
-   *   Optional. An optional view mode to control the level of details of each
-   *   error frame. The default is a BASIC frame view.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.migrationcenter.v1.ErrorFrame|ErrorFrame}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listErrorFramesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all error frames in a given source and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value (the source) for `ListErrorFramesRequest`.
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {google.cloud.migrationcenter.v1.ErrorFrameView} [request.view]
+ *   Optional. An optional view mode to control the level of details of each
+ *   error frame. The default is a BASIC frame view.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.migrationcenter.v1.ErrorFrame|ErrorFrame}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listErrorFramesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listErrorFrames(
-    request?: protos.google.cloud.migrationcenter.v1.IListErrorFramesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IErrorFrame[],
-      protos.google.cloud.migrationcenter.v1.IListErrorFramesRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListErrorFramesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IListErrorFramesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IErrorFrame[],
+        protos.google.cloud.migrationcenter.v1.IListErrorFramesRequest|null,
+        protos.google.cloud.migrationcenter.v1.IListErrorFramesResponse
+      ]>;
   listErrorFrames(
-    request: protos.google.cloud.migrationcenter.v1.IListErrorFramesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.migrationcenter.v1.IListErrorFramesRequest,
-      | protos.google.cloud.migrationcenter.v1.IListErrorFramesResponse
-      | null
-      | undefined,
-      protos.google.cloud.migrationcenter.v1.IErrorFrame
-    >
-  ): void;
-  listErrorFrames(
-    request: protos.google.cloud.migrationcenter.v1.IListErrorFramesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.migrationcenter.v1.IListErrorFramesRequest,
-      | protos.google.cloud.migrationcenter.v1.IListErrorFramesResponse
-      | null
-      | undefined,
-      protos.google.cloud.migrationcenter.v1.IErrorFrame
-    >
-  ): void;
-  listErrorFrames(
-    request?: protos.google.cloud.migrationcenter.v1.IListErrorFramesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.migrationcenter.v1.IListErrorFramesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.migrationcenter.v1.IListErrorFramesRequest,
-          | protos.google.cloud.migrationcenter.v1.IListErrorFramesResponse
-          | null
-          | undefined,
-          protos.google.cloud.migrationcenter.v1.IErrorFrame
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.migrationcenter.v1.IListErrorFramesRequest,
-      | protos.google.cloud.migrationcenter.v1.IListErrorFramesResponse
-      | null
-      | undefined,
-      protos.google.cloud.migrationcenter.v1.IErrorFrame
-    >
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IErrorFrame[],
-      protos.google.cloud.migrationcenter.v1.IListErrorFramesRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListErrorFramesResponse,
-    ]
-  > | void {
+          protos.google.cloud.migrationcenter.v1.IListErrorFramesResponse|null|undefined,
+          protos.google.cloud.migrationcenter.v1.IErrorFrame>): void;
+  listErrorFrames(
+      request: protos.google.cloud.migrationcenter.v1.IListErrorFramesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.migrationcenter.v1.IListErrorFramesRequest,
+          protos.google.cloud.migrationcenter.v1.IListErrorFramesResponse|null|undefined,
+          protos.google.cloud.migrationcenter.v1.IErrorFrame>): void;
+  listErrorFrames(
+      request?: protos.google.cloud.migrationcenter.v1.IListErrorFramesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.migrationcenter.v1.IListErrorFramesRequest,
+          protos.google.cloud.migrationcenter.v1.IListErrorFramesResponse|null|undefined,
+          protos.google.cloud.migrationcenter.v1.IErrorFrame>,
+      callback?: PaginationCallback<
+          protos.google.cloud.migrationcenter.v1.IListErrorFramesRequest,
+          protos.google.cloud.migrationcenter.v1.IListErrorFramesResponse|null|undefined,
+          protos.google.cloud.migrationcenter.v1.IErrorFrame>):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IErrorFrame[],
+        protos.google.cloud.migrationcenter.v1.IListErrorFramesRequest|null,
+        protos.google.cloud.migrationcenter.v1.IListErrorFramesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.migrationcenter.v1.IListErrorFramesRequest,
-          | protos.google.cloud.migrationcenter.v1.IListErrorFramesResponse
-          | null
-          | undefined,
-          protos.google.cloud.migrationcenter.v1.IErrorFrame
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.migrationcenter.v1.IListErrorFramesRequest,
+      protos.google.cloud.migrationcenter.v1.IListErrorFramesResponse|null|undefined,
+      protos.google.cloud.migrationcenter.v1.IErrorFrame>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listErrorFrames values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -8262,60 +6011,57 @@ export class MigrationCenterClient {
     this._log.info('listErrorFrames request %j', request);
     return this.innerApiCalls
       .listErrorFrames(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.migrationcenter.v1.IErrorFrame[],
-          protos.google.cloud.migrationcenter.v1.IListErrorFramesRequest | null,
-          protos.google.cloud.migrationcenter.v1.IListErrorFramesResponse,
-        ]) => {
-          this._log.info('listErrorFrames values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.migrationcenter.v1.IErrorFrame[],
+        protos.google.cloud.migrationcenter.v1.IListErrorFramesRequest|null,
+        protos.google.cloud.migrationcenter.v1.IListErrorFramesResponse
+      ]) => {
+        this._log.info('listErrorFrames values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listErrorFrames`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value (the source) for `ListErrorFramesRequest`.
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {google.cloud.migrationcenter.v1.ErrorFrameView} [request.view]
-   *   Optional. An optional view mode to control the level of details of each
-   *   error frame. The default is a BASIC frame view.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.migrationcenter.v1.ErrorFrame|ErrorFrame} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listErrorFramesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listErrorFrames`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value (the source) for `ListErrorFramesRequest`.
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {google.cloud.migrationcenter.v1.ErrorFrameView} [request.view]
+ *   Optional. An optional view mode to control the level of details of each
+ *   error frame. The default is a BASIC frame view.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.migrationcenter.v1.ErrorFrame|ErrorFrame} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listErrorFramesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listErrorFramesStream(
-    request?: protos.google.cloud.migrationcenter.v1.IListErrorFramesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.migrationcenter.v1.IListErrorFramesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listErrorFrames'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listErrorFrames stream %j', request);
     return this.descriptors.page.listErrorFrames.createStream(
       this.innerApiCalls.listErrorFrames as GaxCall,
@@ -8324,51 +6070,50 @@ export class MigrationCenterClient {
     );
   }
 
-  /**
-   * Equivalent to `listErrorFrames`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value (the source) for `ListErrorFramesRequest`.
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {google.cloud.migrationcenter.v1.ErrorFrameView} [request.view]
-   *   Optional. An optional view mode to control the level of details of each
-   *   error frame. The default is a BASIC frame view.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.migrationcenter.v1.ErrorFrame|ErrorFrame}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.list_error_frames.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_ListErrorFrames_async
-   */
+/**
+ * Equivalent to `listErrorFrames`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value (the source) for `ListErrorFramesRequest`.
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {google.cloud.migrationcenter.v1.ErrorFrameView} [request.view]
+ *   Optional. An optional view mode to control the level of details of each
+ *   error frame. The default is a BASIC frame view.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.migrationcenter.v1.ErrorFrame|ErrorFrame}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.list_error_frames.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_ListErrorFrames_async
+ */
   listErrorFramesAsync(
-    request?: protos.google.cloud.migrationcenter.v1.IListErrorFramesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.migrationcenter.v1.IErrorFrame> {
+      request?: protos.google.cloud.migrationcenter.v1.IListErrorFramesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.migrationcenter.v1.IErrorFrame>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listErrorFrames'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listErrorFrames iterate %j', request);
     return this.descriptors.page.listErrorFrames.asyncIterate(
       this.innerApiCalls['listErrorFrames'] as GaxCall,
@@ -8376,117 +6121,92 @@ export class MigrationCenterClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.migrationcenter.v1.IErrorFrame>;
   }
-  /**
-   * Lists all the sources in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for `ListSourcesRequest`.
-   * @param {number} request.pageSize
-   *   Requested page size. The server may return fewer items than requested.
-   *   If unspecified, the server will pick an appropriate default value.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results that the server should return.
-   * @param {string} request.filter
-   *   Filtering results.
-   * @param {string} request.orderBy
-   *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.migrationcenter.v1.Source|Source}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listSourcesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all the sources in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for `ListSourcesRequest`.
+ * @param {number} request.pageSize
+ *   Requested page size. The server may return fewer items than requested.
+ *   If unspecified, the server will pick an appropriate default value.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results that the server should return.
+ * @param {string} request.filter
+ *   Filtering results.
+ * @param {string} request.orderBy
+ *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.migrationcenter.v1.Source|Source}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listSourcesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listSources(
-    request?: protos.google.cloud.migrationcenter.v1.IListSourcesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.ISource[],
-      protos.google.cloud.migrationcenter.v1.IListSourcesRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListSourcesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IListSourcesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.ISource[],
+        protos.google.cloud.migrationcenter.v1.IListSourcesRequest|null,
+        protos.google.cloud.migrationcenter.v1.IListSourcesResponse
+      ]>;
   listSources(
-    request: protos.google.cloud.migrationcenter.v1.IListSourcesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.migrationcenter.v1.IListSourcesRequest,
-      | protos.google.cloud.migrationcenter.v1.IListSourcesResponse
-      | null
-      | undefined,
-      protos.google.cloud.migrationcenter.v1.ISource
-    >
-  ): void;
-  listSources(
-    request: protos.google.cloud.migrationcenter.v1.IListSourcesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.migrationcenter.v1.IListSourcesRequest,
-      | protos.google.cloud.migrationcenter.v1.IListSourcesResponse
-      | null
-      | undefined,
-      protos.google.cloud.migrationcenter.v1.ISource
-    >
-  ): void;
-  listSources(
-    request?: protos.google.cloud.migrationcenter.v1.IListSourcesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.migrationcenter.v1.IListSourcesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.migrationcenter.v1.IListSourcesRequest,
-          | protos.google.cloud.migrationcenter.v1.IListSourcesResponse
-          | null
-          | undefined,
-          protos.google.cloud.migrationcenter.v1.ISource
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.migrationcenter.v1.IListSourcesRequest,
-      | protos.google.cloud.migrationcenter.v1.IListSourcesResponse
-      | null
-      | undefined,
-      protos.google.cloud.migrationcenter.v1.ISource
-    >
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.ISource[],
-      protos.google.cloud.migrationcenter.v1.IListSourcesRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListSourcesResponse,
-    ]
-  > | void {
+          protos.google.cloud.migrationcenter.v1.IListSourcesResponse|null|undefined,
+          protos.google.cloud.migrationcenter.v1.ISource>): void;
+  listSources(
+      request: protos.google.cloud.migrationcenter.v1.IListSourcesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.migrationcenter.v1.IListSourcesRequest,
+          protos.google.cloud.migrationcenter.v1.IListSourcesResponse|null|undefined,
+          protos.google.cloud.migrationcenter.v1.ISource>): void;
+  listSources(
+      request?: protos.google.cloud.migrationcenter.v1.IListSourcesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.migrationcenter.v1.IListSourcesRequest,
+          protos.google.cloud.migrationcenter.v1.IListSourcesResponse|null|undefined,
+          protos.google.cloud.migrationcenter.v1.ISource>,
+      callback?: PaginationCallback<
+          protos.google.cloud.migrationcenter.v1.IListSourcesRequest,
+          protos.google.cloud.migrationcenter.v1.IListSourcesResponse|null|undefined,
+          protos.google.cloud.migrationcenter.v1.ISource>):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.ISource[],
+        protos.google.cloud.migrationcenter.v1.IListSourcesRequest|null,
+        protos.google.cloud.migrationcenter.v1.IListSourcesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.migrationcenter.v1.IListSourcesRequest,
-          | protos.google.cloud.migrationcenter.v1.IListSourcesResponse
-          | null
-          | undefined,
-          protos.google.cloud.migrationcenter.v1.ISource
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.migrationcenter.v1.IListSourcesRequest,
+      protos.google.cloud.migrationcenter.v1.IListSourcesResponse|null|undefined,
+      protos.google.cloud.migrationcenter.v1.ISource>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listSources values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -8495,61 +6215,58 @@ export class MigrationCenterClient {
     this._log.info('listSources request %j', request);
     return this.innerApiCalls
       .listSources(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.migrationcenter.v1.ISource[],
-          protos.google.cloud.migrationcenter.v1.IListSourcesRequest | null,
-          protos.google.cloud.migrationcenter.v1.IListSourcesResponse,
-        ]) => {
-          this._log.info('listSources values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.migrationcenter.v1.ISource[],
+        protos.google.cloud.migrationcenter.v1.IListSourcesRequest|null,
+        protos.google.cloud.migrationcenter.v1.IListSourcesResponse
+      ]) => {
+        this._log.info('listSources values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listSources`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for `ListSourcesRequest`.
-   * @param {number} request.pageSize
-   *   Requested page size. The server may return fewer items than requested.
-   *   If unspecified, the server will pick an appropriate default value.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results that the server should return.
-   * @param {string} request.filter
-   *   Filtering results.
-   * @param {string} request.orderBy
-   *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.migrationcenter.v1.Source|Source} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listSourcesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listSources`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for `ListSourcesRequest`.
+ * @param {number} request.pageSize
+ *   Requested page size. The server may return fewer items than requested.
+ *   If unspecified, the server will pick an appropriate default value.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results that the server should return.
+ * @param {string} request.filter
+ *   Filtering results.
+ * @param {string} request.orderBy
+ *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.migrationcenter.v1.Source|Source} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listSourcesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listSourcesStream(
-    request?: protos.google.cloud.migrationcenter.v1.IListSourcesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.migrationcenter.v1.IListSourcesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listSources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listSources stream %j', request);
     return this.descriptors.page.listSources.createStream(
       this.innerApiCalls.listSources as GaxCall,
@@ -8558,52 +6275,51 @@ export class MigrationCenterClient {
     );
   }
 
-  /**
-   * Equivalent to `listSources`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for `ListSourcesRequest`.
-   * @param {number} request.pageSize
-   *   Requested page size. The server may return fewer items than requested.
-   *   If unspecified, the server will pick an appropriate default value.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results that the server should return.
-   * @param {string} request.filter
-   *   Filtering results.
-   * @param {string} request.orderBy
-   *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.migrationcenter.v1.Source|Source}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.list_sources.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_ListSources_async
-   */
+/**
+ * Equivalent to `listSources`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for `ListSourcesRequest`.
+ * @param {number} request.pageSize
+ *   Requested page size. The server may return fewer items than requested.
+ *   If unspecified, the server will pick an appropriate default value.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results that the server should return.
+ * @param {string} request.filter
+ *   Filtering results.
+ * @param {string} request.orderBy
+ *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.migrationcenter.v1.Source|Source}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.list_sources.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_ListSources_async
+ */
   listSourcesAsync(
-    request?: protos.google.cloud.migrationcenter.v1.IListSourcesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.migrationcenter.v1.ISource> {
+      request?: protos.google.cloud.migrationcenter.v1.IListSourcesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.migrationcenter.v1.ISource>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listSources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listSources iterate %j', request);
     return this.descriptors.page.listSources.asyncIterate(
       this.innerApiCalls['listSources'] as GaxCall,
@@ -8611,116 +6327,91 @@ export class MigrationCenterClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.migrationcenter.v1.ISource>;
   }
-  /**
-   * Lists all the preference sets in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for `ListPreferenceSetsRequest`.
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, at most 500 preference sets will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.orderBy
-   *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.migrationcenter.v1.PreferenceSet|PreferenceSet}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listPreferenceSetsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all the preference sets in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for `ListPreferenceSetsRequest`.
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, at most 500 preference sets will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.orderBy
+ *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.migrationcenter.v1.PreferenceSet|PreferenceSet}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listPreferenceSetsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listPreferenceSets(
-    request?: protos.google.cloud.migrationcenter.v1.IListPreferenceSetsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IPreferenceSet[],
-      protos.google.cloud.migrationcenter.v1.IListPreferenceSetsRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListPreferenceSetsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IListPreferenceSetsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IPreferenceSet[],
+        protos.google.cloud.migrationcenter.v1.IListPreferenceSetsRequest|null,
+        protos.google.cloud.migrationcenter.v1.IListPreferenceSetsResponse
+      ]>;
   listPreferenceSets(
-    request: protos.google.cloud.migrationcenter.v1.IListPreferenceSetsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.migrationcenter.v1.IListPreferenceSetsRequest,
-      | protos.google.cloud.migrationcenter.v1.IListPreferenceSetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.migrationcenter.v1.IPreferenceSet
-    >
-  ): void;
-  listPreferenceSets(
-    request: protos.google.cloud.migrationcenter.v1.IListPreferenceSetsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.migrationcenter.v1.IListPreferenceSetsRequest,
-      | protos.google.cloud.migrationcenter.v1.IListPreferenceSetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.migrationcenter.v1.IPreferenceSet
-    >
-  ): void;
-  listPreferenceSets(
-    request?: protos.google.cloud.migrationcenter.v1.IListPreferenceSetsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.migrationcenter.v1.IListPreferenceSetsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.migrationcenter.v1.IListPreferenceSetsRequest,
-          | protos.google.cloud.migrationcenter.v1.IListPreferenceSetsResponse
-          | null
-          | undefined,
-          protos.google.cloud.migrationcenter.v1.IPreferenceSet
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.migrationcenter.v1.IListPreferenceSetsRequest,
-      | protos.google.cloud.migrationcenter.v1.IListPreferenceSetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.migrationcenter.v1.IPreferenceSet
-    >
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IPreferenceSet[],
-      protos.google.cloud.migrationcenter.v1.IListPreferenceSetsRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListPreferenceSetsResponse,
-    ]
-  > | void {
+          protos.google.cloud.migrationcenter.v1.IListPreferenceSetsResponse|null|undefined,
+          protos.google.cloud.migrationcenter.v1.IPreferenceSet>): void;
+  listPreferenceSets(
+      request: protos.google.cloud.migrationcenter.v1.IListPreferenceSetsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.migrationcenter.v1.IListPreferenceSetsRequest,
+          protos.google.cloud.migrationcenter.v1.IListPreferenceSetsResponse|null|undefined,
+          protos.google.cloud.migrationcenter.v1.IPreferenceSet>): void;
+  listPreferenceSets(
+      request?: protos.google.cloud.migrationcenter.v1.IListPreferenceSetsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.migrationcenter.v1.IListPreferenceSetsRequest,
+          protos.google.cloud.migrationcenter.v1.IListPreferenceSetsResponse|null|undefined,
+          protos.google.cloud.migrationcenter.v1.IPreferenceSet>,
+      callback?: PaginationCallback<
+          protos.google.cloud.migrationcenter.v1.IListPreferenceSetsRequest,
+          protos.google.cloud.migrationcenter.v1.IListPreferenceSetsResponse|null|undefined,
+          protos.google.cloud.migrationcenter.v1.IPreferenceSet>):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IPreferenceSet[],
+        protos.google.cloud.migrationcenter.v1.IListPreferenceSetsRequest|null,
+        protos.google.cloud.migrationcenter.v1.IListPreferenceSetsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.migrationcenter.v1.IListPreferenceSetsRequest,
-          | protos.google.cloud.migrationcenter.v1.IListPreferenceSetsResponse
-          | null
-          | undefined,
-          protos.google.cloud.migrationcenter.v1.IPreferenceSet
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.migrationcenter.v1.IListPreferenceSetsRequest,
+      protos.google.cloud.migrationcenter.v1.IListPreferenceSetsResponse|null|undefined,
+      protos.google.cloud.migrationcenter.v1.IPreferenceSet>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listPreferenceSets values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -8729,60 +6420,57 @@ export class MigrationCenterClient {
     this._log.info('listPreferenceSets request %j', request);
     return this.innerApiCalls
       .listPreferenceSets(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.migrationcenter.v1.IPreferenceSet[],
-          protos.google.cloud.migrationcenter.v1.IListPreferenceSetsRequest | null,
-          protos.google.cloud.migrationcenter.v1.IListPreferenceSetsResponse,
-        ]) => {
-          this._log.info('listPreferenceSets values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.migrationcenter.v1.IPreferenceSet[],
+        protos.google.cloud.migrationcenter.v1.IListPreferenceSetsRequest|null,
+        protos.google.cloud.migrationcenter.v1.IListPreferenceSetsResponse
+      ]) => {
+        this._log.info('listPreferenceSets values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listPreferenceSets`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for `ListPreferenceSetsRequest`.
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, at most 500 preference sets will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.orderBy
-   *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.migrationcenter.v1.PreferenceSet|PreferenceSet} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listPreferenceSetsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listPreferenceSets`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for `ListPreferenceSetsRequest`.
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, at most 500 preference sets will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.orderBy
+ *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.migrationcenter.v1.PreferenceSet|PreferenceSet} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listPreferenceSetsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listPreferenceSetsStream(
-    request?: protos.google.cloud.migrationcenter.v1.IListPreferenceSetsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.migrationcenter.v1.IListPreferenceSetsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listPreferenceSets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listPreferenceSets stream %j', request);
     return this.descriptors.page.listPreferenceSets.createStream(
       this.innerApiCalls.listPreferenceSets as GaxCall,
@@ -8791,51 +6479,50 @@ export class MigrationCenterClient {
     );
   }
 
-  /**
-   * Equivalent to `listPreferenceSets`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for `ListPreferenceSetsRequest`.
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, at most 500 preference sets will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.orderBy
-   *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.migrationcenter.v1.PreferenceSet|PreferenceSet}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.list_preference_sets.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_ListPreferenceSets_async
-   */
+/**
+ * Equivalent to `listPreferenceSets`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for `ListPreferenceSetsRequest`.
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, at most 500 preference sets will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.orderBy
+ *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.migrationcenter.v1.PreferenceSet|PreferenceSet}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.list_preference_sets.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_ListPreferenceSets_async
+ */
   listPreferenceSetsAsync(
-    request?: protos.google.cloud.migrationcenter.v1.IListPreferenceSetsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.migrationcenter.v1.IPreferenceSet> {
+      request?: protos.google.cloud.migrationcenter.v1.IListPreferenceSetsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.migrationcenter.v1.IPreferenceSet>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listPreferenceSets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listPreferenceSets iterate %j', request);
     return this.descriptors.page.listPreferenceSets.asyncIterate(
       this.innerApiCalls['listPreferenceSets'] as GaxCall,
@@ -8843,117 +6530,92 @@ export class MigrationCenterClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.migrationcenter.v1.IPreferenceSet>;
   }
-  /**
-   * Lists ReportConfigs in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for `ListReportConfigsRequest`.
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results.
-   * @param {string} request.orderBy
-   *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.migrationcenter.v1.ReportConfig|ReportConfig}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listReportConfigsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists ReportConfigs in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for `ListReportConfigsRequest`.
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results.
+ * @param {string} request.orderBy
+ *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.migrationcenter.v1.ReportConfig|ReportConfig}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listReportConfigsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listReportConfigs(
-    request?: protos.google.cloud.migrationcenter.v1.IListReportConfigsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IReportConfig[],
-      protos.google.cloud.migrationcenter.v1.IListReportConfigsRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListReportConfigsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IListReportConfigsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IReportConfig[],
+        protos.google.cloud.migrationcenter.v1.IListReportConfigsRequest|null,
+        protos.google.cloud.migrationcenter.v1.IListReportConfigsResponse
+      ]>;
   listReportConfigs(
-    request: protos.google.cloud.migrationcenter.v1.IListReportConfigsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.migrationcenter.v1.IListReportConfigsRequest,
-      | protos.google.cloud.migrationcenter.v1.IListReportConfigsResponse
-      | null
-      | undefined,
-      protos.google.cloud.migrationcenter.v1.IReportConfig
-    >
-  ): void;
-  listReportConfigs(
-    request: protos.google.cloud.migrationcenter.v1.IListReportConfigsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.migrationcenter.v1.IListReportConfigsRequest,
-      | protos.google.cloud.migrationcenter.v1.IListReportConfigsResponse
-      | null
-      | undefined,
-      protos.google.cloud.migrationcenter.v1.IReportConfig
-    >
-  ): void;
-  listReportConfigs(
-    request?: protos.google.cloud.migrationcenter.v1.IListReportConfigsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.migrationcenter.v1.IListReportConfigsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.migrationcenter.v1.IListReportConfigsRequest,
-          | protos.google.cloud.migrationcenter.v1.IListReportConfigsResponse
-          | null
-          | undefined,
-          protos.google.cloud.migrationcenter.v1.IReportConfig
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.migrationcenter.v1.IListReportConfigsRequest,
-      | protos.google.cloud.migrationcenter.v1.IListReportConfigsResponse
-      | null
-      | undefined,
-      protos.google.cloud.migrationcenter.v1.IReportConfig
-    >
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IReportConfig[],
-      protos.google.cloud.migrationcenter.v1.IListReportConfigsRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListReportConfigsResponse,
-    ]
-  > | void {
+          protos.google.cloud.migrationcenter.v1.IListReportConfigsResponse|null|undefined,
+          protos.google.cloud.migrationcenter.v1.IReportConfig>): void;
+  listReportConfigs(
+      request: protos.google.cloud.migrationcenter.v1.IListReportConfigsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.migrationcenter.v1.IListReportConfigsRequest,
+          protos.google.cloud.migrationcenter.v1.IListReportConfigsResponse|null|undefined,
+          protos.google.cloud.migrationcenter.v1.IReportConfig>): void;
+  listReportConfigs(
+      request?: protos.google.cloud.migrationcenter.v1.IListReportConfigsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.migrationcenter.v1.IListReportConfigsRequest,
+          protos.google.cloud.migrationcenter.v1.IListReportConfigsResponse|null|undefined,
+          protos.google.cloud.migrationcenter.v1.IReportConfig>,
+      callback?: PaginationCallback<
+          protos.google.cloud.migrationcenter.v1.IListReportConfigsRequest,
+          protos.google.cloud.migrationcenter.v1.IListReportConfigsResponse|null|undefined,
+          protos.google.cloud.migrationcenter.v1.IReportConfig>):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IReportConfig[],
+        protos.google.cloud.migrationcenter.v1.IListReportConfigsRequest|null,
+        protos.google.cloud.migrationcenter.v1.IListReportConfigsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.migrationcenter.v1.IListReportConfigsRequest,
-          | protos.google.cloud.migrationcenter.v1.IListReportConfigsResponse
-          | null
-          | undefined,
-          protos.google.cloud.migrationcenter.v1.IReportConfig
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.migrationcenter.v1.IListReportConfigsRequest,
+      protos.google.cloud.migrationcenter.v1.IListReportConfigsResponse|null|undefined,
+      protos.google.cloud.migrationcenter.v1.IReportConfig>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listReportConfigs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -8962,61 +6624,58 @@ export class MigrationCenterClient {
     this._log.info('listReportConfigs request %j', request);
     return this.innerApiCalls
       .listReportConfigs(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.migrationcenter.v1.IReportConfig[],
-          protos.google.cloud.migrationcenter.v1.IListReportConfigsRequest | null,
-          protos.google.cloud.migrationcenter.v1.IListReportConfigsResponse,
-        ]) => {
-          this._log.info('listReportConfigs values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.migrationcenter.v1.IReportConfig[],
+        protos.google.cloud.migrationcenter.v1.IListReportConfigsRequest|null,
+        protos.google.cloud.migrationcenter.v1.IListReportConfigsResponse
+      ]) => {
+        this._log.info('listReportConfigs values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listReportConfigs`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for `ListReportConfigsRequest`.
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results.
-   * @param {string} request.orderBy
-   *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.migrationcenter.v1.ReportConfig|ReportConfig} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listReportConfigsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listReportConfigs`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for `ListReportConfigsRequest`.
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results.
+ * @param {string} request.orderBy
+ *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.migrationcenter.v1.ReportConfig|ReportConfig} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listReportConfigsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listReportConfigsStream(
-    request?: protos.google.cloud.migrationcenter.v1.IListReportConfigsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.migrationcenter.v1.IListReportConfigsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listReportConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listReportConfigs stream %j', request);
     return this.descriptors.page.listReportConfigs.createStream(
       this.innerApiCalls.listReportConfigs as GaxCall,
@@ -9025,52 +6684,51 @@ export class MigrationCenterClient {
     );
   }
 
-  /**
-   * Equivalent to `listReportConfigs`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for `ListReportConfigsRequest`.
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results.
-   * @param {string} request.orderBy
-   *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.migrationcenter.v1.ReportConfig|ReportConfig}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.list_report_configs.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_ListReportConfigs_async
-   */
+/**
+ * Equivalent to `listReportConfigs`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for `ListReportConfigsRequest`.
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results.
+ * @param {string} request.orderBy
+ *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.migrationcenter.v1.ReportConfig|ReportConfig}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.list_report_configs.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_ListReportConfigs_async
+ */
   listReportConfigsAsync(
-    request?: protos.google.cloud.migrationcenter.v1.IListReportConfigsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.migrationcenter.v1.IReportConfig> {
+      request?: protos.google.cloud.migrationcenter.v1.IListReportConfigsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.migrationcenter.v1.IReportConfig>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listReportConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listReportConfigs iterate %j', request);
     return this.descriptors.page.listReportConfigs.asyncIterate(
       this.innerApiCalls['listReportConfigs'] as GaxCall,
@@ -9078,119 +6736,94 @@ export class MigrationCenterClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.migrationcenter.v1.IReportConfig>;
   }
-  /**
-   * Lists Reports in a given ReportConfig.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for `ListReportsRequest`.
-   * @param {number} request.pageSize
-   *   Requested page size. The server may return fewer items than requested.
-   *   If unspecified, the server will pick an appropriate default value.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results that the server should return.
-   * @param {string} request.filter
-   *   Filtering results.
-   * @param {string} request.orderBy
-   *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
-   * @param {google.cloud.migrationcenter.v1.ReportView} request.view
-   *   Determines what information to retrieve for each Report.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.migrationcenter.v1.Report|Report}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listReportsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists Reports in a given ReportConfig.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for `ListReportsRequest`.
+ * @param {number} request.pageSize
+ *   Requested page size. The server may return fewer items than requested.
+ *   If unspecified, the server will pick an appropriate default value.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results that the server should return.
+ * @param {string} request.filter
+ *   Filtering results.
+ * @param {string} request.orderBy
+ *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
+ * @param {google.cloud.migrationcenter.v1.ReportView} request.view
+ *   Determines what information to retrieve for each Report.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.migrationcenter.v1.Report|Report}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listReportsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listReports(
-    request?: protos.google.cloud.migrationcenter.v1.IListReportsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IReport[],
-      protos.google.cloud.migrationcenter.v1.IListReportsRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListReportsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.migrationcenter.v1.IListReportsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IReport[],
+        protos.google.cloud.migrationcenter.v1.IListReportsRequest|null,
+        protos.google.cloud.migrationcenter.v1.IListReportsResponse
+      ]>;
   listReports(
-    request: protos.google.cloud.migrationcenter.v1.IListReportsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.migrationcenter.v1.IListReportsRequest,
-      | protos.google.cloud.migrationcenter.v1.IListReportsResponse
-      | null
-      | undefined,
-      protos.google.cloud.migrationcenter.v1.IReport
-    >
-  ): void;
-  listReports(
-    request: protos.google.cloud.migrationcenter.v1.IListReportsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.migrationcenter.v1.IListReportsRequest,
-      | protos.google.cloud.migrationcenter.v1.IListReportsResponse
-      | null
-      | undefined,
-      protos.google.cloud.migrationcenter.v1.IReport
-    >
-  ): void;
-  listReports(
-    request?: protos.google.cloud.migrationcenter.v1.IListReportsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.migrationcenter.v1.IListReportsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.migrationcenter.v1.IListReportsRequest,
-          | protos.google.cloud.migrationcenter.v1.IListReportsResponse
-          | null
-          | undefined,
-          protos.google.cloud.migrationcenter.v1.IReport
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.migrationcenter.v1.IListReportsRequest,
-      | protos.google.cloud.migrationcenter.v1.IListReportsResponse
-      | null
-      | undefined,
-      protos.google.cloud.migrationcenter.v1.IReport
-    >
-  ): Promise<
-    [
-      protos.google.cloud.migrationcenter.v1.IReport[],
-      protos.google.cloud.migrationcenter.v1.IListReportsRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListReportsResponse,
-    ]
-  > | void {
+          protos.google.cloud.migrationcenter.v1.IListReportsResponse|null|undefined,
+          protos.google.cloud.migrationcenter.v1.IReport>): void;
+  listReports(
+      request: protos.google.cloud.migrationcenter.v1.IListReportsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.migrationcenter.v1.IListReportsRequest,
+          protos.google.cloud.migrationcenter.v1.IListReportsResponse|null|undefined,
+          protos.google.cloud.migrationcenter.v1.IReport>): void;
+  listReports(
+      request?: protos.google.cloud.migrationcenter.v1.IListReportsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.migrationcenter.v1.IListReportsRequest,
+          protos.google.cloud.migrationcenter.v1.IListReportsResponse|null|undefined,
+          protos.google.cloud.migrationcenter.v1.IReport>,
+      callback?: PaginationCallback<
+          protos.google.cloud.migrationcenter.v1.IListReportsRequest,
+          protos.google.cloud.migrationcenter.v1.IListReportsResponse|null|undefined,
+          protos.google.cloud.migrationcenter.v1.IReport>):
+      Promise<[
+        protos.google.cloud.migrationcenter.v1.IReport[],
+        protos.google.cloud.migrationcenter.v1.IListReportsRequest|null,
+        protos.google.cloud.migrationcenter.v1.IListReportsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.migrationcenter.v1.IListReportsRequest,
-          | protos.google.cloud.migrationcenter.v1.IListReportsResponse
-          | null
-          | undefined,
-          protos.google.cloud.migrationcenter.v1.IReport
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.migrationcenter.v1.IListReportsRequest,
+      protos.google.cloud.migrationcenter.v1.IListReportsResponse|null|undefined,
+      protos.google.cloud.migrationcenter.v1.IReport>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listReports values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -9199,63 +6832,60 @@ export class MigrationCenterClient {
     this._log.info('listReports request %j', request);
     return this.innerApiCalls
       .listReports(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.migrationcenter.v1.IReport[],
-          protos.google.cloud.migrationcenter.v1.IListReportsRequest | null,
-          protos.google.cloud.migrationcenter.v1.IListReportsResponse,
-        ]) => {
-          this._log.info('listReports values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.migrationcenter.v1.IReport[],
+        protos.google.cloud.migrationcenter.v1.IListReportsRequest|null,
+        protos.google.cloud.migrationcenter.v1.IListReportsResponse
+      ]) => {
+        this._log.info('listReports values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listReports`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for `ListReportsRequest`.
-   * @param {number} request.pageSize
-   *   Requested page size. The server may return fewer items than requested.
-   *   If unspecified, the server will pick an appropriate default value.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results that the server should return.
-   * @param {string} request.filter
-   *   Filtering results.
-   * @param {string} request.orderBy
-   *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
-   * @param {google.cloud.migrationcenter.v1.ReportView} request.view
-   *   Determines what information to retrieve for each Report.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.migrationcenter.v1.Report|Report} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listReportsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listReports`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for `ListReportsRequest`.
+ * @param {number} request.pageSize
+ *   Requested page size. The server may return fewer items than requested.
+ *   If unspecified, the server will pick an appropriate default value.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results that the server should return.
+ * @param {string} request.filter
+ *   Filtering results.
+ * @param {string} request.orderBy
+ *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
+ * @param {google.cloud.migrationcenter.v1.ReportView} request.view
+ *   Determines what information to retrieve for each Report.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.migrationcenter.v1.Report|Report} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listReportsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listReportsStream(
-    request?: protos.google.cloud.migrationcenter.v1.IListReportsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.migrationcenter.v1.IListReportsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listReports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listReports stream %j', request);
     return this.descriptors.page.listReports.createStream(
       this.innerApiCalls.listReports as GaxCall,
@@ -9264,54 +6894,53 @@ export class MigrationCenterClient {
     );
   }
 
-  /**
-   * Equivalent to `listReports`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for `ListReportsRequest`.
-   * @param {number} request.pageSize
-   *   Requested page size. The server may return fewer items than requested.
-   *   If unspecified, the server will pick an appropriate default value.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results that the server should return.
-   * @param {string} request.filter
-   *   Filtering results.
-   * @param {string} request.orderBy
-   *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
-   * @param {google.cloud.migrationcenter.v1.ReportView} request.view
-   *   Determines what information to retrieve for each Report.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.migrationcenter.v1.Report|Report}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/migration_center.list_reports.js</caption>
-   * region_tag:migrationcenter_v1_generated_MigrationCenter_ListReports_async
-   */
+/**
+ * Equivalent to `listReports`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for `ListReportsRequest`.
+ * @param {number} request.pageSize
+ *   Requested page size. The server may return fewer items than requested.
+ *   If unspecified, the server will pick an appropriate default value.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results that the server should return.
+ * @param {string} request.filter
+ *   Filtering results.
+ * @param {string} request.orderBy
+ *   Field to sort by. See https://google.aip.dev/132#ordering for more details.
+ * @param {google.cloud.migrationcenter.v1.ReportView} request.view
+ *   Determines what information to retrieve for each Report.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.migrationcenter.v1.Report|Report}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/migration_center.list_reports.js</caption>
+ * region_tag:migrationcenter_v1_generated_MigrationCenter_ListReports_async
+ */
   listReportsAsync(
-    request?: protos.google.cloud.migrationcenter.v1.IListReportsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.migrationcenter.v1.IReport> {
+      request?: protos.google.cloud.migrationcenter.v1.IListReportsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.migrationcenter.v1.IReport>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listReports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listReports iterate %j', request);
     return this.descriptors.page.listReports.asyncIterate(
       this.innerApiCalls['listReports'] as GaxCall,
@@ -9319,7 +6948,7 @@ export class MigrationCenterClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.migrationcenter.v1.IReport>;
   }
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -9359,7 +6988,7 @@ export class MigrationCenterClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -9397,7 +7026,7 @@ export class MigrationCenterClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -9442,20 +7071,20 @@ export class MigrationCenterClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -9492,13 +7121,13 @@ export class MigrationCenterClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -9532,7 +7161,7 @@ export class MigrationCenterClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -9547,20 +7176,20 @@ export class MigrationCenterClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -9604,20 +7233,20 @@ export class MigrationCenterClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -9633,7 +7262,7 @@ export class MigrationCenterClient {
    * @param {string} asset
    * @returns {string} Resource name string.
    */
-  assetPath(project: string, location: string, asset: string) {
+  assetPath(project:string,location:string,asset:string) {
     return this.pathTemplates.assetPathTemplate.render({
       project: project,
       location: location,
@@ -9683,12 +7312,7 @@ export class MigrationCenterClient {
    * @param {string} error_frame
    * @returns {string} Resource name string.
    */
-  errorFramePath(
-    project: string,
-    location: string,
-    source: string,
-    errorFrame: string
-  ) {
+  errorFramePath(project:string,location:string,source:string,errorFrame:string) {
     return this.pathTemplates.errorFramePathTemplate.render({
       project: project,
       location: location,
@@ -9705,8 +7329,7 @@ export class MigrationCenterClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromErrorFrameName(errorFrameName: string) {
-    return this.pathTemplates.errorFramePathTemplate.match(errorFrameName)
-      .project;
+    return this.pathTemplates.errorFramePathTemplate.match(errorFrameName).project;
   }
 
   /**
@@ -9717,8 +7340,7 @@ export class MigrationCenterClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromErrorFrameName(errorFrameName: string) {
-    return this.pathTemplates.errorFramePathTemplate.match(errorFrameName)
-      .location;
+    return this.pathTemplates.errorFramePathTemplate.match(errorFrameName).location;
   }
 
   /**
@@ -9729,8 +7351,7 @@ export class MigrationCenterClient {
    * @returns {string} A string representing the source.
    */
   matchSourceFromErrorFrameName(errorFrameName: string) {
-    return this.pathTemplates.errorFramePathTemplate.match(errorFrameName)
-      .source;
+    return this.pathTemplates.errorFramePathTemplate.match(errorFrameName).source;
   }
 
   /**
@@ -9741,8 +7362,7 @@ export class MigrationCenterClient {
    * @returns {string} A string representing the error_frame.
    */
   matchErrorFrameFromErrorFrameName(errorFrameName: string) {
-    return this.pathTemplates.errorFramePathTemplate.match(errorFrameName)
-      .error_frame;
+    return this.pathTemplates.errorFramePathTemplate.match(errorFrameName).error_frame;
   }
 
   /**
@@ -9753,7 +7373,7 @@ export class MigrationCenterClient {
    * @param {string} group
    * @returns {string} Resource name string.
    */
-  groupPath(project: string, location: string, group: string) {
+  groupPath(project:string,location:string,group:string) {
     return this.pathTemplates.groupPathTemplate.render({
       project: project,
       location: location,
@@ -9803,12 +7423,7 @@ export class MigrationCenterClient {
    * @param {string} import_data_file
    * @returns {string} Resource name string.
    */
-  importDataFilePath(
-    project: string,
-    location: string,
-    importJob: string,
-    importDataFile: string
-  ) {
+  importDataFilePath(project:string,location:string,importJob:string,importDataFile:string) {
     return this.pathTemplates.importDataFilePathTemplate.render({
       project: project,
       location: location,
@@ -9825,9 +7440,7 @@ export class MigrationCenterClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromImportDataFileName(importDataFileName: string) {
-    return this.pathTemplates.importDataFilePathTemplate.match(
-      importDataFileName
-    ).project;
+    return this.pathTemplates.importDataFilePathTemplate.match(importDataFileName).project;
   }
 
   /**
@@ -9838,9 +7451,7 @@ export class MigrationCenterClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromImportDataFileName(importDataFileName: string) {
-    return this.pathTemplates.importDataFilePathTemplate.match(
-      importDataFileName
-    ).location;
+    return this.pathTemplates.importDataFilePathTemplate.match(importDataFileName).location;
   }
 
   /**
@@ -9851,9 +7462,7 @@ export class MigrationCenterClient {
    * @returns {string} A string representing the import_job.
    */
   matchImportJobFromImportDataFileName(importDataFileName: string) {
-    return this.pathTemplates.importDataFilePathTemplate.match(
-      importDataFileName
-    ).import_job;
+    return this.pathTemplates.importDataFilePathTemplate.match(importDataFileName).import_job;
   }
 
   /**
@@ -9864,9 +7473,7 @@ export class MigrationCenterClient {
    * @returns {string} A string representing the import_data_file.
    */
   matchImportDataFileFromImportDataFileName(importDataFileName: string) {
-    return this.pathTemplates.importDataFilePathTemplate.match(
-      importDataFileName
-    ).import_data_file;
+    return this.pathTemplates.importDataFilePathTemplate.match(importDataFileName).import_data_file;
   }
 
   /**
@@ -9877,7 +7484,7 @@ export class MigrationCenterClient {
    * @param {string} import_job
    * @returns {string} Resource name string.
    */
-  importJobPath(project: string, location: string, importJob: string) {
+  importJobPath(project:string,location:string,importJob:string) {
     return this.pathTemplates.importJobPathTemplate.render({
       project: project,
       location: location,
@@ -9893,8 +7500,7 @@ export class MigrationCenterClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromImportJobName(importJobName: string) {
-    return this.pathTemplates.importJobPathTemplate.match(importJobName)
-      .project;
+    return this.pathTemplates.importJobPathTemplate.match(importJobName).project;
   }
 
   /**
@@ -9905,8 +7511,7 @@ export class MigrationCenterClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromImportJobName(importJobName: string) {
-    return this.pathTemplates.importJobPathTemplate.match(importJobName)
-      .location;
+    return this.pathTemplates.importJobPathTemplate.match(importJobName).location;
   }
 
   /**
@@ -9917,8 +7522,7 @@ export class MigrationCenterClient {
    * @returns {string} A string representing the import_job.
    */
   matchImportJobFromImportJobName(importJobName: string) {
-    return this.pathTemplates.importJobPathTemplate.match(importJobName)
-      .import_job;
+    return this.pathTemplates.importJobPathTemplate.match(importJobName).import_job;
   }
 
   /**
@@ -9928,7 +7532,7 @@ export class MigrationCenterClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -9965,7 +7569,7 @@ export class MigrationCenterClient {
    * @param {string} preference_set
    * @returns {string} Resource name string.
    */
-  preferenceSetPath(project: string, location: string, preferenceSet: string) {
+  preferenceSetPath(project:string,location:string,preferenceSet:string) {
     return this.pathTemplates.preferenceSetPathTemplate.render({
       project: project,
       location: location,
@@ -9981,8 +7585,7 @@ export class MigrationCenterClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromPreferenceSetName(preferenceSetName: string) {
-    return this.pathTemplates.preferenceSetPathTemplate.match(preferenceSetName)
-      .project;
+    return this.pathTemplates.preferenceSetPathTemplate.match(preferenceSetName).project;
   }
 
   /**
@@ -9993,8 +7596,7 @@ export class MigrationCenterClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromPreferenceSetName(preferenceSetName: string) {
-    return this.pathTemplates.preferenceSetPathTemplate.match(preferenceSetName)
-      .location;
+    return this.pathTemplates.preferenceSetPathTemplate.match(preferenceSetName).location;
   }
 
   /**
@@ -10005,8 +7607,7 @@ export class MigrationCenterClient {
    * @returns {string} A string representing the preference_set.
    */
   matchPreferenceSetFromPreferenceSetName(preferenceSetName: string) {
-    return this.pathTemplates.preferenceSetPathTemplate.match(preferenceSetName)
-      .preference_set;
+    return this.pathTemplates.preferenceSetPathTemplate.match(preferenceSetName).preference_set;
   }
 
   /**
@@ -10015,7 +7616,7 @@ export class MigrationCenterClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -10041,12 +7642,7 @@ export class MigrationCenterClient {
    * @param {string} report
    * @returns {string} Resource name string.
    */
-  reportPath(
-    project: string,
-    location: string,
-    reportConfig: string,
-    report: string
-  ) {
+  reportPath(project:string,location:string,reportConfig:string,report:string) {
     return this.pathTemplates.reportPathTemplate.render({
       project: project,
       location: location,
@@ -10085,8 +7681,7 @@ export class MigrationCenterClient {
    * @returns {string} A string representing the report_config.
    */
   matchReportConfigFromReportName(reportName: string) {
-    return this.pathTemplates.reportPathTemplate.match(reportName)
-      .report_config;
+    return this.pathTemplates.reportPathTemplate.match(reportName).report_config;
   }
 
   /**
@@ -10108,7 +7703,7 @@ export class MigrationCenterClient {
    * @param {string} report_config
    * @returns {string} Resource name string.
    */
-  reportConfigPath(project: string, location: string, reportConfig: string) {
+  reportConfigPath(project:string,location:string,reportConfig:string) {
     return this.pathTemplates.reportConfigPathTemplate.render({
       project: project,
       location: location,
@@ -10124,8 +7719,7 @@ export class MigrationCenterClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromReportConfigName(reportConfigName: string) {
-    return this.pathTemplates.reportConfigPathTemplate.match(reportConfigName)
-      .project;
+    return this.pathTemplates.reportConfigPathTemplate.match(reportConfigName).project;
   }
 
   /**
@@ -10136,8 +7730,7 @@ export class MigrationCenterClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromReportConfigName(reportConfigName: string) {
-    return this.pathTemplates.reportConfigPathTemplate.match(reportConfigName)
-      .location;
+    return this.pathTemplates.reportConfigPathTemplate.match(reportConfigName).location;
   }
 
   /**
@@ -10148,8 +7741,7 @@ export class MigrationCenterClient {
    * @returns {string} A string representing the report_config.
    */
   matchReportConfigFromReportConfigName(reportConfigName: string) {
-    return this.pathTemplates.reportConfigPathTemplate.match(reportConfigName)
-      .report_config;
+    return this.pathTemplates.reportConfigPathTemplate.match(reportConfigName).report_config;
   }
 
   /**
@@ -10159,7 +7751,7 @@ export class MigrationCenterClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  settingsPath(project: string, location: string) {
+  settingsPath(project:string,location:string) {
     return this.pathTemplates.settingsPathTemplate.render({
       project: project,
       location: location,
@@ -10196,7 +7788,7 @@ export class MigrationCenterClient {
    * @param {string} source
    * @returns {string} Resource name string.
    */
-  sourcePath(project: string, location: string, source: string) {
+  sourcePath(project:string,location:string,source:string) {
     return this.pathTemplates.sourcePathTemplate.render({
       project: project,
       location: location,
@@ -10249,9 +7841,7 @@ export class MigrationCenterClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.locationsClient.close().catch(err => {throw err});
         void this.operationsClient.close();
       });
     }

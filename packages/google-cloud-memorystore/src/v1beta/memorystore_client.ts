@@ -18,22 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -113,36 +102,17 @@ export class MemorystoreClient {
    *     const client = new MemorystoreClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof MemorystoreClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'memorystore.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
     // Implicitly enable HTTP transport for the APIs that use REST as transport (e.g. Google Cloud Compute).
@@ -151,9 +121,7 @@ export class MemorystoreClient {
     } else {
       opts.fallback = opts.fallback ?? true;
     }
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -179,7 +147,7 @@ export class MemorystoreClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -195,9 +163,13 @@ export class MemorystoreClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -245,97 +217,55 @@ export class MemorystoreClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listInstances: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'instances'
-      ),
+      listInstances:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'instances')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v1beta/{name=projects/*/locations/*}',
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v1beta/{name=projects/*}/locations',
-        },
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v1beta/{name=projects/*/locations/*/operations/*}:cancel',
-        },
-        {
-          selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1beta/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1beta/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1beta/{name=projects/*/locations/*}/operations',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1beta/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1beta/{name=projects/*}/locations',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1beta/{name=projects/*/locations/*/operations/*}:cancel',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1beta/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1beta/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1beta/{name=projects/*/locations/*}/operations',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createInstanceResponse = protoFilesRoot.lookup(
-      '.google.cloud.memorystore.v1beta.Instance'
-    ) as gax.protobuf.Type;
+      '.google.cloud.memorystore.v1beta.Instance') as gax.protobuf.Type;
     const createInstanceMetadata = protoFilesRoot.lookup(
-      '.google.cloud.memorystore.v1beta.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.memorystore.v1beta.OperationMetadata') as gax.protobuf.Type;
     const updateInstanceResponse = protoFilesRoot.lookup(
-      '.google.cloud.memorystore.v1beta.Instance'
-    ) as gax.protobuf.Type;
+      '.google.cloud.memorystore.v1beta.Instance') as gax.protobuf.Type;
     const updateInstanceMetadata = protoFilesRoot.lookup(
-      '.google.cloud.memorystore.v1beta.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.memorystore.v1beta.OperationMetadata') as gax.protobuf.Type;
     const deleteInstanceResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteInstanceMetadata = protoFilesRoot.lookup(
-      '.google.cloud.memorystore.v1beta.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.memorystore.v1beta.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createInstance: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createInstanceResponse.decode.bind(createInstanceResponse),
-        createInstanceMetadata.decode.bind(createInstanceMetadata)
-      ),
+        createInstanceMetadata.decode.bind(createInstanceMetadata)),
       updateInstance: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateInstanceResponse.decode.bind(updateInstanceResponse),
-        updateInstanceMetadata.decode.bind(updateInstanceMetadata)
-      ),
+        updateInstanceMetadata.decode.bind(updateInstanceMetadata)),
       deleteInstance: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteInstanceResponse.decode.bind(deleteInstanceResponse),
-        deleteInstanceMetadata.decode.bind(deleteInstanceMetadata)
-      ),
+        deleteInstanceMetadata.decode.bind(deleteInstanceMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.memorystore.v1beta.Memorystore',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.memorystore.v1beta.Memorystore', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -366,40 +296,28 @@ export class MemorystoreClient {
     // Put together the "service stub" for
     // google.cloud.memorystore.v1beta.Memorystore.
     this.memorystoreStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.memorystore.v1beta.Memorystore'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.memorystore.v1beta.Memorystore') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.memorystore.v1beta.Memorystore,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const memorystoreStubMethods = [
-      'listInstances',
-      'getInstance',
-      'createInstance',
-      'updateInstance',
-      'deleteInstance',
-      'getCertificateAuthority',
-    ];
+    const memorystoreStubMethods =
+        ['listInstances', 'getInstance', 'createInstance', 'updateInstance', 'deleteInstance', 'getCertificateAuthority'];
     for (const methodName of memorystoreStubMethods) {
       const callPromise = this.memorystoreStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -424,14 +342,8 @@ export class MemorystoreClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'memorystore.googleapis.com';
   }
@@ -442,14 +354,8 @@ export class MemorystoreClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'memorystore.googleapis.com';
   }
@@ -480,7 +386,9 @@ export class MemorystoreClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -489,9 +397,8 @@ export class MemorystoreClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -502,938 +409,667 @@ export class MemorystoreClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets details of a single Instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the instance to retrieve.
-   *   Format: projects/{project}/locations/{location}/instances/{instance}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.memorystore.v1beta.Instance|Instance}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/memorystore.get_instance.js</caption>
-   * region_tag:memorystore_v1beta_generated_Memorystore_GetInstance_async
-   */
+/**
+ * Gets details of a single Instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the instance to retrieve.
+ *   Format: projects/{project}/locations/{location}/instances/{instance}
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.memorystore.v1beta.Instance|Instance}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/memorystore.get_instance.js</caption>
+ * region_tag:memorystore_v1beta_generated_Memorystore_GetInstance_async
+ */
   getInstance(
-    request?: protos.google.cloud.memorystore.v1beta.IGetInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.memorystore.v1beta.IInstance,
-      protos.google.cloud.memorystore.v1beta.IGetInstanceRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.memorystore.v1beta.IGetInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.memorystore.v1beta.IInstance,
+        protos.google.cloud.memorystore.v1beta.IGetInstanceRequest|undefined, {}|undefined
+      ]>;
   getInstance(
-    request: protos.google.cloud.memorystore.v1beta.IGetInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.memorystore.v1beta.IInstance,
-      | protos.google.cloud.memorystore.v1beta.IGetInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getInstance(
-    request: protos.google.cloud.memorystore.v1beta.IGetInstanceRequest,
-    callback: Callback<
-      protos.google.cloud.memorystore.v1beta.IInstance,
-      | protos.google.cloud.memorystore.v1beta.IGetInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getInstance(
-    request?: protos.google.cloud.memorystore.v1beta.IGetInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.memorystore.v1beta.IGetInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.memorystore.v1beta.IInstance,
-          | protos.google.cloud.memorystore.v1beta.IGetInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.memorystore.v1beta.IInstance,
-      | protos.google.cloud.memorystore.v1beta.IGetInstanceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.memorystore.v1beta.IInstance,
-      protos.google.cloud.memorystore.v1beta.IGetInstanceRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.memorystore.v1beta.IGetInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getInstance(
+      request: protos.google.cloud.memorystore.v1beta.IGetInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.memorystore.v1beta.IInstance,
+          protos.google.cloud.memorystore.v1beta.IGetInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getInstance(
+      request?: protos.google.cloud.memorystore.v1beta.IGetInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.memorystore.v1beta.IInstance,
+          protos.google.cloud.memorystore.v1beta.IGetInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.memorystore.v1beta.IInstance,
+          protos.google.cloud.memorystore.v1beta.IGetInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.memorystore.v1beta.IInstance,
+        protos.google.cloud.memorystore.v1beta.IGetInstanceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getInstance request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.memorystore.v1beta.IInstance,
-          | protos.google.cloud.memorystore.v1beta.IGetInstanceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.memorystore.v1beta.IInstance,
+        protos.google.cloud.memorystore.v1beta.IGetInstanceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getInstance response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getInstance(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.memorystore.v1beta.IInstance,
-          (
-            | protos.google.cloud.memorystore.v1beta.IGetInstanceRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getInstance response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getInstance(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.memorystore.v1beta.IInstance,
+        protos.google.cloud.memorystore.v1beta.IGetInstanceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getInstance response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets details about the certificate authority for an Instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the certificate authority.
-   *   Format:
-   *   projects/{project}/locations/{location}/instances/{instance}/certificateAuthority
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.memorystore.v1beta.CertificateAuthority|CertificateAuthority}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/memorystore.get_certificate_authority.js</caption>
-   * region_tag:memorystore_v1beta_generated_Memorystore_GetCertificateAuthority_async
-   */
+/**
+ * Gets details about the certificate authority for an Instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the certificate authority.
+ *   Format:
+ *   projects/{project}/locations/{location}/instances/{instance}/certificateAuthority
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.memorystore.v1beta.CertificateAuthority|CertificateAuthority}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/memorystore.get_certificate_authority.js</caption>
+ * region_tag:memorystore_v1beta_generated_Memorystore_GetCertificateAuthority_async
+ */
   getCertificateAuthority(
-    request?: protos.google.cloud.memorystore.v1beta.IGetCertificateAuthorityRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.memorystore.v1beta.ICertificateAuthority,
-      (
-        | protos.google.cloud.memorystore.v1beta.IGetCertificateAuthorityRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.memorystore.v1beta.IGetCertificateAuthorityRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.memorystore.v1beta.ICertificateAuthority,
+        protos.google.cloud.memorystore.v1beta.IGetCertificateAuthorityRequest|undefined, {}|undefined
+      ]>;
   getCertificateAuthority(
-    request: protos.google.cloud.memorystore.v1beta.IGetCertificateAuthorityRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.memorystore.v1beta.ICertificateAuthority,
-      | protos.google.cloud.memorystore.v1beta.IGetCertificateAuthorityRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCertificateAuthority(
-    request: protos.google.cloud.memorystore.v1beta.IGetCertificateAuthorityRequest,
-    callback: Callback<
-      protos.google.cloud.memorystore.v1beta.ICertificateAuthority,
-      | protos.google.cloud.memorystore.v1beta.IGetCertificateAuthorityRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCertificateAuthority(
-    request?: protos.google.cloud.memorystore.v1beta.IGetCertificateAuthorityRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.memorystore.v1beta.IGetCertificateAuthorityRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.memorystore.v1beta.ICertificateAuthority,
-          | protos.google.cloud.memorystore.v1beta.IGetCertificateAuthorityRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.memorystore.v1beta.ICertificateAuthority,
-      | protos.google.cloud.memorystore.v1beta.IGetCertificateAuthorityRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.memorystore.v1beta.ICertificateAuthority,
-      (
-        | protos.google.cloud.memorystore.v1beta.IGetCertificateAuthorityRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.memorystore.v1beta.IGetCertificateAuthorityRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCertificateAuthority(
+      request: protos.google.cloud.memorystore.v1beta.IGetCertificateAuthorityRequest,
+      callback: Callback<
+          protos.google.cloud.memorystore.v1beta.ICertificateAuthority,
+          protos.google.cloud.memorystore.v1beta.IGetCertificateAuthorityRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCertificateAuthority(
+      request?: protos.google.cloud.memorystore.v1beta.IGetCertificateAuthorityRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.memorystore.v1beta.ICertificateAuthority,
+          protos.google.cloud.memorystore.v1beta.IGetCertificateAuthorityRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.memorystore.v1beta.ICertificateAuthority,
+          protos.google.cloud.memorystore.v1beta.IGetCertificateAuthorityRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.memorystore.v1beta.ICertificateAuthority,
+        protos.google.cloud.memorystore.v1beta.IGetCertificateAuthorityRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getCertificateAuthority request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.memorystore.v1beta.ICertificateAuthority,
-          | protos.google.cloud.memorystore.v1beta.IGetCertificateAuthorityRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.memorystore.v1beta.ICertificateAuthority,
+        protos.google.cloud.memorystore.v1beta.IGetCertificateAuthorityRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getCertificateAuthority response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getCertificateAuthority(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.memorystore.v1beta.ICertificateAuthority,
-          (
-            | protos.google.cloud.memorystore.v1beta.IGetCertificateAuthorityRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getCertificateAuthority response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getCertificateAuthority(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.memorystore.v1beta.ICertificateAuthority,
+        protos.google.cloud.memorystore.v1beta.IGetCertificateAuthorityRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getCertificateAuthority response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Creates a new Instance in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource where this instance will be created.
-   *   Format: projects/{project}/locations/{location}
-   * @param {string} request.instanceId
-   *   Required. The ID to use for the instance, which will become the final
-   *   component of the instance's resource name.
-   *
-   *   This value is subject to the following restrictions:
-   *
-   *   * Must be 4-63 characters in length
-   *   * Must begin with a letter or digit
-   *   * Must contain only lowercase letters, digits, and hyphens
-   *   * Must not end with a hyphen
-   *   * Must be unique within a location
-   * @param {google.cloud.memorystore.v1beta.Instance} request.instance
-   *   Required. The instance to create.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/memorystore.create_instance.js</caption>
-   * region_tag:memorystore_v1beta_generated_Memorystore_CreateInstance_async
-   */
+/**
+ * Creates a new Instance in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource where this instance will be created.
+ *   Format: projects/{project}/locations/{location}
+ * @param {string} request.instanceId
+ *   Required. The ID to use for the instance, which will become the final
+ *   component of the instance's resource name.
+ *
+ *   This value is subject to the following restrictions:
+ *
+ *   * Must be 4-63 characters in length
+ *   * Must begin with a letter or digit
+ *   * Must contain only lowercase letters, digits, and hyphens
+ *   * Must not end with a hyphen
+ *   * Must be unique within a location
+ * @param {google.cloud.memorystore.v1beta.Instance} request.instance
+ *   Required. The instance to create.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/memorystore.create_instance.js</caption>
+ * region_tag:memorystore_v1beta_generated_Memorystore_CreateInstance_async
+ */
   createInstance(
-    request?: protos.google.cloud.memorystore.v1beta.ICreateInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.memorystore.v1beta.IInstance,
-        protos.google.cloud.memorystore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.memorystore.v1beta.ICreateInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.memorystore.v1beta.IInstance, protos.google.cloud.memorystore.v1beta.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createInstance(
-    request: protos.google.cloud.memorystore.v1beta.ICreateInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.memorystore.v1beta.IInstance,
-        protos.google.cloud.memorystore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.memorystore.v1beta.ICreateInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.memorystore.v1beta.IInstance, protos.google.cloud.memorystore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createInstance(
-    request: protos.google.cloud.memorystore.v1beta.ICreateInstanceRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.memorystore.v1beta.IInstance,
-        protos.google.cloud.memorystore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.memorystore.v1beta.ICreateInstanceRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.memorystore.v1beta.IInstance, protos.google.cloud.memorystore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createInstance(
-    request?: protos.google.cloud.memorystore.v1beta.ICreateInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.memorystore.v1beta.IInstance,
-            protos.google.cloud.memorystore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.memorystore.v1beta.IInstance,
-        protos.google.cloud.memorystore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.memorystore.v1beta.IInstance,
-        protos.google.cloud.memorystore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.memorystore.v1beta.ICreateInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.memorystore.v1beta.IInstance, protos.google.cloud.memorystore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.memorystore.v1beta.IInstance, protos.google.cloud.memorystore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.memorystore.v1beta.IInstance, protos.google.cloud.memorystore.v1beta.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.memorystore.v1beta.IInstance,
-            protos.google.cloud.memorystore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.memorystore.v1beta.IInstance, protos.google.cloud.memorystore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createInstance response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createInstance request %j', request);
-    return this.innerApiCalls
-      .createInstance(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.memorystore.v1beta.IInstance,
-            protos.google.cloud.memorystore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createInstance response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createInstance(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.memorystore.v1beta.IInstance, protos.google.cloud.memorystore.v1beta.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createInstance response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createInstance()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/memorystore.create_instance.js</caption>
-   * region_tag:memorystore_v1beta_generated_Memorystore_CreateInstance_async
-   */
-  async checkCreateInstanceProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.memorystore.v1beta.Instance,
-      protos.google.cloud.memorystore.v1beta.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createInstance()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/memorystore.create_instance.js</caption>
+ * region_tag:memorystore_v1beta_generated_Memorystore_CreateInstance_async
+ */
+  async checkCreateInstanceProgress(name: string): Promise<LROperation<protos.google.cloud.memorystore.v1beta.Instance, protos.google.cloud.memorystore.v1beta.OperationMetadata>>{
     this._log.info('createInstance long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createInstance,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.memorystore.v1beta.Instance,
-      protos.google.cloud.memorystore.v1beta.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createInstance, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.memorystore.v1beta.Instance, protos.google.cloud.memorystore.v1beta.OperationMetadata>;
   }
-  /**
-   * Updates the parameters of a single Instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. The list of fields to be updated on the instance. At least one
-   *   field must be specified.
-   * @param {google.cloud.memorystore.v1beta.Instance} request.instance
-   *   Required. The instance to update.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/memorystore.update_instance.js</caption>
-   * region_tag:memorystore_v1beta_generated_Memorystore_UpdateInstance_async
-   */
+/**
+ * Updates the parameters of a single Instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. The list of fields to be updated on the instance. At least one
+ *   field must be specified.
+ * @param {google.cloud.memorystore.v1beta.Instance} request.instance
+ *   Required. The instance to update.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/memorystore.update_instance.js</caption>
+ * region_tag:memorystore_v1beta_generated_Memorystore_UpdateInstance_async
+ */
   updateInstance(
-    request?: protos.google.cloud.memorystore.v1beta.IUpdateInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.memorystore.v1beta.IInstance,
-        protos.google.cloud.memorystore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.memorystore.v1beta.IUpdateInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.memorystore.v1beta.IInstance, protos.google.cloud.memorystore.v1beta.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateInstance(
-    request: protos.google.cloud.memorystore.v1beta.IUpdateInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.memorystore.v1beta.IInstance,
-        protos.google.cloud.memorystore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.memorystore.v1beta.IUpdateInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.memorystore.v1beta.IInstance, protos.google.cloud.memorystore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateInstance(
-    request: protos.google.cloud.memorystore.v1beta.IUpdateInstanceRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.memorystore.v1beta.IInstance,
-        protos.google.cloud.memorystore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.memorystore.v1beta.IUpdateInstanceRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.memorystore.v1beta.IInstance, protos.google.cloud.memorystore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateInstance(
-    request?: protos.google.cloud.memorystore.v1beta.IUpdateInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.memorystore.v1beta.IInstance,
-            protos.google.cloud.memorystore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.memorystore.v1beta.IInstance,
-        protos.google.cloud.memorystore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.memorystore.v1beta.IInstance,
-        protos.google.cloud.memorystore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.memorystore.v1beta.IUpdateInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.memorystore.v1beta.IInstance, protos.google.cloud.memorystore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.memorystore.v1beta.IInstance, protos.google.cloud.memorystore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.memorystore.v1beta.IInstance, protos.google.cloud.memorystore.v1beta.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'instance.name': request.instance!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'instance.name': request.instance!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.memorystore.v1beta.IInstance,
-            protos.google.cloud.memorystore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.memorystore.v1beta.IInstance, protos.google.cloud.memorystore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateInstance response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateInstance request %j', request);
-    return this.innerApiCalls
-      .updateInstance(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.memorystore.v1beta.IInstance,
-            protos.google.cloud.memorystore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateInstance response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateInstance(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.memorystore.v1beta.IInstance, protos.google.cloud.memorystore.v1beta.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateInstance response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateInstance()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/memorystore.update_instance.js</caption>
-   * region_tag:memorystore_v1beta_generated_Memorystore_UpdateInstance_async
-   */
-  async checkUpdateInstanceProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.memorystore.v1beta.Instance,
-      protos.google.cloud.memorystore.v1beta.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateInstance()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/memorystore.update_instance.js</caption>
+ * region_tag:memorystore_v1beta_generated_Memorystore_UpdateInstance_async
+ */
+  async checkUpdateInstanceProgress(name: string): Promise<LROperation<protos.google.cloud.memorystore.v1beta.Instance, protos.google.cloud.memorystore.v1beta.OperationMetadata>>{
     this._log.info('updateInstance long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateInstance,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.memorystore.v1beta.Instance,
-      protos.google.cloud.memorystore.v1beta.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateInstance, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.memorystore.v1beta.Instance, protos.google.cloud.memorystore.v1beta.OperationMetadata>;
   }
-  /**
-   * Deletes a single Instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the instance to delete.
-   *   Format: projects/{project}/locations/{location}/instances/{instance}
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/memorystore.delete_instance.js</caption>
-   * region_tag:memorystore_v1beta_generated_Memorystore_DeleteInstance_async
-   */
+/**
+ * Deletes a single Instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the instance to delete.
+ *   Format: projects/{project}/locations/{location}/instances/{instance}
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/memorystore.delete_instance.js</caption>
+ * region_tag:memorystore_v1beta_generated_Memorystore_DeleteInstance_async
+ */
   deleteInstance(
-    request?: protos.google.cloud.memorystore.v1beta.IDeleteInstanceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.memorystore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.memorystore.v1beta.IDeleteInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.memorystore.v1beta.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteInstance(
-    request: protos.google.cloud.memorystore.v1beta.IDeleteInstanceRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.memorystore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.memorystore.v1beta.IDeleteInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.memorystore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteInstance(
-    request: protos.google.cloud.memorystore.v1beta.IDeleteInstanceRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.memorystore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.memorystore.v1beta.IDeleteInstanceRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.memorystore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteInstance(
-    request?: protos.google.cloud.memorystore.v1beta.IDeleteInstanceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.memorystore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.memorystore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.memorystore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.memorystore.v1beta.IDeleteInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.memorystore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.memorystore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.memorystore.v1beta.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.memorystore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.memorystore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteInstance response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteInstance request %j', request);
-    return this.innerApiCalls
-      .deleteInstance(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.memorystore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteInstance response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteInstance(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.memorystore.v1beta.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteInstance response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteInstance()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/memorystore.delete_instance.js</caption>
-   * region_tag:memorystore_v1beta_generated_Memorystore_DeleteInstance_async
-   */
-  async checkDeleteInstanceProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.memorystore.v1beta.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteInstance()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/memorystore.delete_instance.js</caption>
+ * region_tag:memorystore_v1beta_generated_Memorystore_DeleteInstance_async
+ */
+  async checkDeleteInstanceProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.memorystore.v1beta.OperationMetadata>>{
     this._log.info('deleteInstance long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteInstance,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.memorystore.v1beta.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteInstance, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.memorystore.v1beta.OperationMetadata>;
   }
-  /**
-   * Lists Instances in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent to list instances from.
-   *   Format: projects/{project}/locations/{location}
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Expression for filtering results.
-   * @param {string} [request.orderBy]
-   *   Optional. Sort results by a defined order. Supported values: "name",
-   *   "create_time".
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.memorystore.v1beta.Instance|Instance}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listInstancesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists Instances in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent to list instances from.
+ *   Format: projects/{project}/locations/{location}
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Expression for filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Sort results by a defined order. Supported values: "name",
+ *   "create_time".
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.memorystore.v1beta.Instance|Instance}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listInstancesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listInstances(
-    request?: protos.google.cloud.memorystore.v1beta.IListInstancesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.memorystore.v1beta.IInstance[],
-      protos.google.cloud.memorystore.v1beta.IListInstancesRequest | null,
-      protos.google.cloud.memorystore.v1beta.IListInstancesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.memorystore.v1beta.IListInstancesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.memorystore.v1beta.IInstance[],
+        protos.google.cloud.memorystore.v1beta.IListInstancesRequest|null,
+        protos.google.cloud.memorystore.v1beta.IListInstancesResponse
+      ]>;
   listInstances(
-    request: protos.google.cloud.memorystore.v1beta.IListInstancesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.memorystore.v1beta.IListInstancesRequest,
-      | protos.google.cloud.memorystore.v1beta.IListInstancesResponse
-      | null
-      | undefined,
-      protos.google.cloud.memorystore.v1beta.IInstance
-    >
-  ): void;
-  listInstances(
-    request: protos.google.cloud.memorystore.v1beta.IListInstancesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.memorystore.v1beta.IListInstancesRequest,
-      | protos.google.cloud.memorystore.v1beta.IListInstancesResponse
-      | null
-      | undefined,
-      protos.google.cloud.memorystore.v1beta.IInstance
-    >
-  ): void;
-  listInstances(
-    request?: protos.google.cloud.memorystore.v1beta.IListInstancesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.memorystore.v1beta.IListInstancesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.memorystore.v1beta.IListInstancesRequest,
-          | protos.google.cloud.memorystore.v1beta.IListInstancesResponse
-          | null
-          | undefined,
-          protos.google.cloud.memorystore.v1beta.IInstance
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.memorystore.v1beta.IListInstancesRequest,
-      | protos.google.cloud.memorystore.v1beta.IListInstancesResponse
-      | null
-      | undefined,
-      protos.google.cloud.memorystore.v1beta.IInstance
-    >
-  ): Promise<
-    [
-      protos.google.cloud.memorystore.v1beta.IInstance[],
-      protos.google.cloud.memorystore.v1beta.IListInstancesRequest | null,
-      protos.google.cloud.memorystore.v1beta.IListInstancesResponse,
-    ]
-  > | void {
+          protos.google.cloud.memorystore.v1beta.IListInstancesResponse|null|undefined,
+          protos.google.cloud.memorystore.v1beta.IInstance>): void;
+  listInstances(
+      request: protos.google.cloud.memorystore.v1beta.IListInstancesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.memorystore.v1beta.IListInstancesRequest,
+          protos.google.cloud.memorystore.v1beta.IListInstancesResponse|null|undefined,
+          protos.google.cloud.memorystore.v1beta.IInstance>): void;
+  listInstances(
+      request?: protos.google.cloud.memorystore.v1beta.IListInstancesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.memorystore.v1beta.IListInstancesRequest,
+          protos.google.cloud.memorystore.v1beta.IListInstancesResponse|null|undefined,
+          protos.google.cloud.memorystore.v1beta.IInstance>,
+      callback?: PaginationCallback<
+          protos.google.cloud.memorystore.v1beta.IListInstancesRequest,
+          protos.google.cloud.memorystore.v1beta.IListInstancesResponse|null|undefined,
+          protos.google.cloud.memorystore.v1beta.IInstance>):
+      Promise<[
+        protos.google.cloud.memorystore.v1beta.IInstance[],
+        protos.google.cloud.memorystore.v1beta.IListInstancesRequest|null,
+        protos.google.cloud.memorystore.v1beta.IListInstancesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.memorystore.v1beta.IListInstancesRequest,
-          | protos.google.cloud.memorystore.v1beta.IListInstancesResponse
-          | null
-          | undefined,
-          protos.google.cloud.memorystore.v1beta.IInstance
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.memorystore.v1beta.IListInstancesRequest,
+      protos.google.cloud.memorystore.v1beta.IListInstancesResponse|null|undefined,
+      protos.google.cloud.memorystore.v1beta.IInstance>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listInstances values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1442,63 +1078,60 @@ export class MemorystoreClient {
     this._log.info('listInstances request %j', request);
     return this.innerApiCalls
       .listInstances(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.memorystore.v1beta.IInstance[],
-          protos.google.cloud.memorystore.v1beta.IListInstancesRequest | null,
-          protos.google.cloud.memorystore.v1beta.IListInstancesResponse,
-        ]) => {
-          this._log.info('listInstances values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.memorystore.v1beta.IInstance[],
+        protos.google.cloud.memorystore.v1beta.IListInstancesRequest|null,
+        protos.google.cloud.memorystore.v1beta.IListInstancesResponse
+      ]) => {
+        this._log.info('listInstances values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listInstances`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent to list instances from.
-   *   Format: projects/{project}/locations/{location}
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Expression for filtering results.
-   * @param {string} [request.orderBy]
-   *   Optional. Sort results by a defined order. Supported values: "name",
-   *   "create_time".
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.memorystore.v1beta.Instance|Instance} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listInstancesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listInstances`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent to list instances from.
+ *   Format: projects/{project}/locations/{location}
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Expression for filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Sort results by a defined order. Supported values: "name",
+ *   "create_time".
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.memorystore.v1beta.Instance|Instance} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listInstancesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listInstancesStream(
-    request?: protos.google.cloud.memorystore.v1beta.IListInstancesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.memorystore.v1beta.IListInstancesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listInstances'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listInstances stream %j', request);
     return this.descriptors.page.listInstances.createStream(
       this.innerApiCalls.listInstances as GaxCall,
@@ -1507,54 +1140,53 @@ export class MemorystoreClient {
     );
   }
 
-  /**
-   * Equivalent to `listInstances`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent to list instances from.
-   *   Format: projects/{project}/locations/{location}
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Expression for filtering results.
-   * @param {string} [request.orderBy]
-   *   Optional. Sort results by a defined order. Supported values: "name",
-   *   "create_time".
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.memorystore.v1beta.Instance|Instance}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/memorystore.list_instances.js</caption>
-   * region_tag:memorystore_v1beta_generated_Memorystore_ListInstances_async
-   */
+/**
+ * Equivalent to `listInstances`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent to list instances from.
+ *   Format: projects/{project}/locations/{location}
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Expression for filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Sort results by a defined order. Supported values: "name",
+ *   "create_time".
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.memorystore.v1beta.Instance|Instance}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/memorystore.list_instances.js</caption>
+ * region_tag:memorystore_v1beta_generated_Memorystore_ListInstances_async
+ */
   listInstancesAsync(
-    request?: protos.google.cloud.memorystore.v1beta.IListInstancesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.memorystore.v1beta.IInstance> {
+      request?: protos.google.cloud.memorystore.v1beta.IListInstancesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.memorystore.v1beta.IInstance>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listInstances'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listInstances iterate %j', request);
     return this.descriptors.page.listInstances.asyncIterate(
       this.innerApiCalls['listInstances'] as GaxCall,
@@ -1562,7 +1194,7 @@ export class MemorystoreClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.memorystore.v1beta.IInstance>;
   }
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1602,7 +1234,7 @@ export class MemorystoreClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1640,7 +1272,7 @@ export class MemorystoreClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1685,20 +1317,20 @@ export class MemorystoreClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1735,13 +1367,13 @@ export class MemorystoreClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1775,7 +1407,7 @@ export class MemorystoreClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -1790,20 +1422,20 @@ export class MemorystoreClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1847,20 +1479,20 @@ export class MemorystoreClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -1876,11 +1508,7 @@ export class MemorystoreClient {
    * @param {string} instance
    * @returns {string} Resource name string.
    */
-  certificateAuthorityPath(
-    project: string,
-    location: string,
-    instance: string
-  ) {
+  certificateAuthorityPath(project:string,location:string,instance:string) {
     return this.pathTemplates.certificateAuthorityPathTemplate.render({
       project: project,
       location: location,
@@ -1896,9 +1524,7 @@ export class MemorystoreClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCertificateAuthorityName(certificateAuthorityName: string) {
-    return this.pathTemplates.certificateAuthorityPathTemplate.match(
-      certificateAuthorityName
-    ).project;
+    return this.pathTemplates.certificateAuthorityPathTemplate.match(certificateAuthorityName).project;
   }
 
   /**
@@ -1909,9 +1535,7 @@ export class MemorystoreClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCertificateAuthorityName(certificateAuthorityName: string) {
-    return this.pathTemplates.certificateAuthorityPathTemplate.match(
-      certificateAuthorityName
-    ).location;
+    return this.pathTemplates.certificateAuthorityPathTemplate.match(certificateAuthorityName).location;
   }
 
   /**
@@ -1922,9 +1546,7 @@ export class MemorystoreClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromCertificateAuthorityName(certificateAuthorityName: string) {
-    return this.pathTemplates.certificateAuthorityPathTemplate.match(
-      certificateAuthorityName
-    ).instance;
+    return this.pathTemplates.certificateAuthorityPathTemplate.match(certificateAuthorityName).instance;
   }
 
   /**
@@ -1935,7 +1557,7 @@ export class MemorystoreClient {
    * @param {string} forwarding_rule
    * @returns {string} Resource name string.
    */
-  forwardingRulePath(project: string, region: string, forwardingRule: string) {
+  forwardingRulePath(project:string,region:string,forwardingRule:string) {
     return this.pathTemplates.forwardingRulePathTemplate.render({
       project: project,
       region: region,
@@ -1951,9 +1573,7 @@ export class MemorystoreClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromForwardingRuleName(forwardingRuleName: string) {
-    return this.pathTemplates.forwardingRulePathTemplate.match(
-      forwardingRuleName
-    ).project;
+    return this.pathTemplates.forwardingRulePathTemplate.match(forwardingRuleName).project;
   }
 
   /**
@@ -1964,9 +1584,7 @@ export class MemorystoreClient {
    * @returns {string} A string representing the region.
    */
   matchRegionFromForwardingRuleName(forwardingRuleName: string) {
-    return this.pathTemplates.forwardingRulePathTemplate.match(
-      forwardingRuleName
-    ).region;
+    return this.pathTemplates.forwardingRulePathTemplate.match(forwardingRuleName).region;
   }
 
   /**
@@ -1977,9 +1595,7 @@ export class MemorystoreClient {
    * @returns {string} A string representing the forwarding_rule.
    */
   matchForwardingRuleFromForwardingRuleName(forwardingRuleName: string) {
-    return this.pathTemplates.forwardingRulePathTemplate.match(
-      forwardingRuleName
-    ).forwarding_rule;
+    return this.pathTemplates.forwardingRulePathTemplate.match(forwardingRuleName).forwarding_rule;
   }
 
   /**
@@ -1990,7 +1606,7 @@ export class MemorystoreClient {
    * @param {string} instance
    * @returns {string} Resource name string.
    */
-  instancePath(project: string, location: string, instance: string) {
+  instancePath(project:string,location:string,instance:string) {
     return this.pathTemplates.instancePathTemplate.render({
       project: project,
       location: location,
@@ -2038,7 +1654,7 @@ export class MemorystoreClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -2074,7 +1690,7 @@ export class MemorystoreClient {
    * @param {string} network
    * @returns {string} Resource name string.
    */
-  networkPath(project: string, network: string) {
+  networkPath(project:string,network:string) {
     return this.pathTemplates.networkPathTemplate.render({
       project: project,
       network: network,
@@ -2109,7 +1725,7 @@ export class MemorystoreClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -2134,11 +1750,7 @@ export class MemorystoreClient {
    * @param {string} service_attachment
    * @returns {string} Resource name string.
    */
-  serviceAttachmentPath(
-    project: string,
-    region: string,
-    serviceAttachment: string
-  ) {
+  serviceAttachmentPath(project:string,region:string,serviceAttachment:string) {
     return this.pathTemplates.serviceAttachmentPathTemplate.render({
       project: project,
       region: region,
@@ -2154,9 +1766,7 @@ export class MemorystoreClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromServiceAttachmentName(serviceAttachmentName: string) {
-    return this.pathTemplates.serviceAttachmentPathTemplate.match(
-      serviceAttachmentName
-    ).project;
+    return this.pathTemplates.serviceAttachmentPathTemplate.match(serviceAttachmentName).project;
   }
 
   /**
@@ -2167,9 +1777,7 @@ export class MemorystoreClient {
    * @returns {string} A string representing the region.
    */
   matchRegionFromServiceAttachmentName(serviceAttachmentName: string) {
-    return this.pathTemplates.serviceAttachmentPathTemplate.match(
-      serviceAttachmentName
-    ).region;
+    return this.pathTemplates.serviceAttachmentPathTemplate.match(serviceAttachmentName).region;
   }
 
   /**
@@ -2179,12 +1787,8 @@ export class MemorystoreClient {
    *   A fully-qualified path representing ServiceAttachment resource.
    * @returns {string} A string representing the service_attachment.
    */
-  matchServiceAttachmentFromServiceAttachmentName(
-    serviceAttachmentName: string
-  ) {
-    return this.pathTemplates.serviceAttachmentPathTemplate.match(
-      serviceAttachmentName
-    ).service_attachment;
+  matchServiceAttachmentFromServiceAttachmentName(serviceAttachmentName: string) {
+    return this.pathTemplates.serviceAttachmentPathTemplate.match(serviceAttachmentName).service_attachment;
   }
 
   /**
@@ -2199,9 +1803,7 @@ export class MemorystoreClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.locationsClient.close().catch(err => {throw err});
         void this.operationsClient.close();
       });
     }

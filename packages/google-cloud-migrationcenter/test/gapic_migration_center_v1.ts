@@ -25,11127 +25,8720 @@ import * as migrationcenterModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {
-  protobuf,
-  LROperation,
-  operationsProtos,
-  LocationProtos,
-} from 'google-gax';
+import {protobuf, LROperation, operationsProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubLongRunningCall<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().rejects(callError)
-    : sinon.stub().resolves([mockOperation]);
+function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
 }
 
-function stubLongRunningCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().callsArgWith(2, callError)
-    : sinon.stub().callsArgWith(2, null, mockOperation);
+function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.MigrationCenterClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'migrationcenter.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          migrationcenterModule.v1.MigrationCenterClient.servicePath;
-        assert.strictEqual(servicePath, 'migrationcenter.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          migrationcenterModule.v1.MigrationCenterClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'migrationcenter.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'migrationcenter.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'migrationcenter.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new migrationcenterModule.v1.MigrationCenterClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'migrationcenter.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'migrationcenter.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new migrationcenterModule.v1.MigrationCenterClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'migrationcenter.configured.example.com'
-          );
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new migrationcenterModule.v1.MigrationCenterClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = migrationcenterModule.v1.MigrationCenterClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
-
-    it('should create a client with no option', () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.migrationCenterStub, undefined);
-      await client.initialize();
-      assert(client.migrationCenterStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.migrationCenterStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.migrationCenterStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('getAsset', () => {
-    it('invokes getAsset without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetAssetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetAssetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.Asset()
-      );
-      client.innerApiCalls.getAsset = stubSimpleCall(expectedResponse);
-      const [response] = await client.getAsset(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getAsset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAsset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAsset without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetAssetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetAssetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.Asset()
-      );
-      client.innerApiCalls.getAsset =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getAsset(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.migrationcenter.v1.IAsset | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getAsset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAsset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAsset with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetAssetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetAssetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getAsset = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getAsset(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getAsset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAsset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAsset with closed client', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetAssetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetAssetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getAsset(request), expectedError);
-    });
-  });
-
-  describe('updateAsset', () => {
-    it('invokes updateAsset without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.UpdateAssetRequest()
-      );
-      request.asset ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.UpdateAssetRequest',
-        ['asset', 'name']
-      );
-      request.asset.name = defaultValue1;
-      const expectedHeaderRequestParams = `asset.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.Asset()
-      );
-      client.innerApiCalls.updateAsset = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateAsset(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateAsset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAsset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateAsset without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.UpdateAssetRequest()
-      );
-      request.asset ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.UpdateAssetRequest',
-        ['asset', 'name']
-      );
-      request.asset.name = defaultValue1;
-      const expectedHeaderRequestParams = `asset.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.Asset()
-      );
-      client.innerApiCalls.updateAsset =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateAsset(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.migrationcenter.v1.IAsset | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateAsset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAsset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateAsset with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.UpdateAssetRequest()
-      );
-      request.asset ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.UpdateAssetRequest',
-        ['asset', 'name']
-      );
-      request.asset.name = defaultValue1;
-      const expectedHeaderRequestParams = `asset.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateAsset = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateAsset(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateAsset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAsset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateAsset with closed client', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.UpdateAssetRequest()
-      );
-      request.asset ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.UpdateAssetRequest',
-        ['asset', 'name']
-      );
-      request.asset.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updateAsset(request), expectedError);
-    });
-  });
-
-  describe('batchUpdateAssets', () => {
-    it('invokes batchUpdateAssets without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.BatchUpdateAssetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.BatchUpdateAssetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.BatchUpdateAssetsResponse()
-      );
-      client.innerApiCalls.batchUpdateAssets = stubSimpleCall(expectedResponse);
-      const [response] = await client.batchUpdateAssets(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.batchUpdateAssets as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.batchUpdateAssets as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes batchUpdateAssets without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.BatchUpdateAssetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.BatchUpdateAssetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.BatchUpdateAssetsResponse()
-      );
-      client.innerApiCalls.batchUpdateAssets =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.batchUpdateAssets(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.batchUpdateAssets as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.batchUpdateAssets as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes batchUpdateAssets with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.BatchUpdateAssetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.BatchUpdateAssetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.batchUpdateAssets = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.batchUpdateAssets(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.batchUpdateAssets as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.batchUpdateAssets as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes batchUpdateAssets with closed client', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.BatchUpdateAssetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.BatchUpdateAssetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.batchUpdateAssets(request), expectedError);
-    });
-  });
-
-  describe('deleteAsset', () => {
-    it('invokes deleteAsset without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.DeleteAssetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.DeleteAssetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteAsset = stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteAsset(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteAsset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAsset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteAsset without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.DeleteAssetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.DeleteAssetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteAsset =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteAsset(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteAsset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAsset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteAsset with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.DeleteAssetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.DeleteAssetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteAsset = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteAsset(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteAsset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAsset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteAsset with closed client', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.DeleteAssetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.DeleteAssetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.deleteAsset(request), expectedError);
-    });
-  });
-
-  describe('batchDeleteAssets', () => {
-    it('invokes batchDeleteAssets without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.BatchDeleteAssetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.BatchDeleteAssetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.batchDeleteAssets = stubSimpleCall(expectedResponse);
-      const [response] = await client.batchDeleteAssets(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.batchDeleteAssets as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.batchDeleteAssets as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes batchDeleteAssets without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.BatchDeleteAssetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.BatchDeleteAssetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.batchDeleteAssets =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.batchDeleteAssets(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.batchDeleteAssets as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.batchDeleteAssets as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes batchDeleteAssets with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.BatchDeleteAssetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.BatchDeleteAssetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.batchDeleteAssets = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.batchDeleteAssets(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.batchDeleteAssets as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.batchDeleteAssets as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes batchDeleteAssets with closed client', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.BatchDeleteAssetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.BatchDeleteAssetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.batchDeleteAssets(request), expectedError);
-    });
-  });
-
-  describe('reportAssetFrames', () => {
-    it('invokes reportAssetFrames without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ReportAssetFramesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ReportAssetFramesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ReportAssetFramesResponse()
-      );
-      client.innerApiCalls.reportAssetFrames = stubSimpleCall(expectedResponse);
-      const [response] = await client.reportAssetFrames(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.reportAssetFrames as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.reportAssetFrames as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes reportAssetFrames without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ReportAssetFramesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ReportAssetFramesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ReportAssetFramesResponse()
-      );
-      client.innerApiCalls.reportAssetFrames =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.reportAssetFrames(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.migrationcenter.v1.IReportAssetFramesResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.reportAssetFrames as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.reportAssetFrames as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes reportAssetFrames with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ReportAssetFramesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ReportAssetFramesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.reportAssetFrames = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.reportAssetFrames(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.reportAssetFrames as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.reportAssetFrames as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes reportAssetFrames with closed client', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ReportAssetFramesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ReportAssetFramesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.reportAssetFrames(request), expectedError);
-    });
-  });
-
-  describe('aggregateAssetsValues', () => {
-    it('invokes aggregateAssetsValues without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.AggregateAssetsValuesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.AggregateAssetsValuesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.AggregateAssetsValuesResponse()
-      );
-      client.innerApiCalls.aggregateAssetsValues =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.aggregateAssetsValues(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.aggregateAssetsValues as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.aggregateAssetsValues as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes aggregateAssetsValues without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.AggregateAssetsValuesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.AggregateAssetsValuesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.AggregateAssetsValuesResponse()
-      );
-      client.innerApiCalls.aggregateAssetsValues =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.aggregateAssetsValues(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.aggregateAssetsValues as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.aggregateAssetsValues as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes aggregateAssetsValues with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.AggregateAssetsValuesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.AggregateAssetsValuesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.aggregateAssetsValues = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.aggregateAssetsValues(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.aggregateAssetsValues as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.aggregateAssetsValues as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes aggregateAssetsValues with closed client', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.AggregateAssetsValuesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.AggregateAssetsValuesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.aggregateAssetsValues(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('getImportJob', () => {
-    it('invokes getImportJob without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetImportJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetImportJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ImportJob()
-      );
-      client.innerApiCalls.getImportJob = stubSimpleCall(expectedResponse);
-      const [response] = await client.getImportJob(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getImportJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getImportJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getImportJob without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetImportJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetImportJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ImportJob()
-      );
-      client.innerApiCalls.getImportJob =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getImportJob(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.migrationcenter.v1.IImportJob | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getImportJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getImportJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getImportJob with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetImportJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetImportJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getImportJob = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getImportJob(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getImportJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getImportJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getImportJob with closed client', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetImportJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetImportJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getImportJob(request), expectedError);
-    });
-  });
-
-  describe('getImportDataFile', () => {
-    it('invokes getImportDataFile without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetImportDataFileRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetImportDataFileRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ImportDataFile()
-      );
-      client.innerApiCalls.getImportDataFile = stubSimpleCall(expectedResponse);
-      const [response] = await client.getImportDataFile(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getImportDataFile as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getImportDataFile as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getImportDataFile without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetImportDataFileRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetImportDataFileRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ImportDataFile()
-      );
-      client.innerApiCalls.getImportDataFile =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getImportDataFile(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.migrationcenter.v1.IImportDataFile | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getImportDataFile as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getImportDataFile as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getImportDataFile with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetImportDataFileRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetImportDataFileRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getImportDataFile = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getImportDataFile(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getImportDataFile as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getImportDataFile as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getImportDataFile with closed client', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetImportDataFileRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetImportDataFileRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getImportDataFile(request), expectedError);
-    });
-  });
-
-  describe('getGroup', () => {
-    it('invokes getGroup without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetGroupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.Group()
-      );
-      client.innerApiCalls.getGroup = stubSimpleCall(expectedResponse);
-      const [response] = await client.getGroup(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getGroup without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetGroupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.Group()
-      );
-      client.innerApiCalls.getGroup =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getGroup(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.migrationcenter.v1.IGroup | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getGroup with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetGroupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getGroup = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getGroup(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getGroup with closed client', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetGroupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getGroup(request), expectedError);
-    });
-  });
-
-  describe('getErrorFrame', () => {
-    it('invokes getErrorFrame without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetErrorFrameRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetErrorFrameRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ErrorFrame()
-      );
-      client.innerApiCalls.getErrorFrame = stubSimpleCall(expectedResponse);
-      const [response] = await client.getErrorFrame(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getErrorFrame as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getErrorFrame as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getErrorFrame without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetErrorFrameRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetErrorFrameRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ErrorFrame()
-      );
-      client.innerApiCalls.getErrorFrame =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getErrorFrame(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.migrationcenter.v1.IErrorFrame | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getErrorFrame as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getErrorFrame as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getErrorFrame with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetErrorFrameRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetErrorFrameRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getErrorFrame = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getErrorFrame(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getErrorFrame as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getErrorFrame as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getErrorFrame with closed client', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetErrorFrameRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetErrorFrameRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getErrorFrame(request), expectedError);
-    });
-  });
-
-  describe('getSource', () => {
-    it('invokes getSource without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetSourceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetSourceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.Source()
-      );
-      client.innerApiCalls.getSource = stubSimpleCall(expectedResponse);
-      const [response] = await client.getSource(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getSource as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getSource as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getSource without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetSourceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetSourceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.Source()
-      );
-      client.innerApiCalls.getSource =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getSource(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.migrationcenter.v1.ISource | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getSource as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getSource as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getSource with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetSourceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetSourceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getSource = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getSource(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getSource as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getSource as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getSource with closed client', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetSourceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetSourceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getSource(request), expectedError);
-    });
-  });
-
-  describe('getPreferenceSet', () => {
-    it('invokes getPreferenceSet without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetPreferenceSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetPreferenceSetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.PreferenceSet()
-      );
-      client.innerApiCalls.getPreferenceSet = stubSimpleCall(expectedResponse);
-      const [response] = await client.getPreferenceSet(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getPreferenceSet as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getPreferenceSet as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getPreferenceSet without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetPreferenceSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetPreferenceSetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.PreferenceSet()
-      );
-      client.innerApiCalls.getPreferenceSet =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getPreferenceSet(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.migrationcenter.v1.IPreferenceSet | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getPreferenceSet as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getPreferenceSet as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getPreferenceSet with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetPreferenceSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetPreferenceSetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getPreferenceSet = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getPreferenceSet(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getPreferenceSet as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getPreferenceSet as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getPreferenceSet with closed client', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetPreferenceSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetPreferenceSetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getPreferenceSet(request), expectedError);
-    });
-  });
-
-  describe('getSettings', () => {
-    it('invokes getSettings without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetSettingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetSettingsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.Settings()
-      );
-      client.innerApiCalls.getSettings = stubSimpleCall(expectedResponse);
-      const [response] = await client.getSettings(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getSettings as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getSettings as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getSettings without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetSettingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetSettingsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.Settings()
-      );
-      client.innerApiCalls.getSettings =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getSettings(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.migrationcenter.v1.ISettings | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getSettings as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getSettings as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getSettings with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetSettingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetSettingsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getSettings = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getSettings(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getSettings as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getSettings as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getSettings with closed client', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetSettingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetSettingsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getSettings(request), expectedError);
-    });
-  });
-
-  describe('getReportConfig', () => {
-    it('invokes getReportConfig without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetReportConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetReportConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ReportConfig()
-      );
-      client.innerApiCalls.getReportConfig = stubSimpleCall(expectedResponse);
-      const [response] = await client.getReportConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getReportConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getReportConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getReportConfig without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetReportConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetReportConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ReportConfig()
-      );
-      client.innerApiCalls.getReportConfig =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getReportConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.migrationcenter.v1.IReportConfig | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getReportConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getReportConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getReportConfig with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetReportConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetReportConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getReportConfig = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getReportConfig(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getReportConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getReportConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getReportConfig with closed client', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetReportConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetReportConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getReportConfig(request), expectedError);
-    });
-  });
-
-  describe('getReport', () => {
-    it('invokes getReport without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetReportRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetReportRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.Report()
-      );
-      client.innerApiCalls.getReport = stubSimpleCall(expectedResponse);
-      const [response] = await client.getReport(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getReport as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getReport as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getReport without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetReportRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetReportRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.Report()
-      );
-      client.innerApiCalls.getReport =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getReport(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.migrationcenter.v1.IReport | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getReport as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getReport as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getReport with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetReportRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetReportRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getReport = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getReport(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getReport as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getReport as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getReport with closed client', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.GetReportRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.GetReportRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getReport(request), expectedError);
-    });
-  });
-
-  describe('createImportJob', () => {
-    it('invokes createImportJob without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.CreateImportJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.CreateImportJobRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createImportJob =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createImportJob(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createImportJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createImportJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createImportJob without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.CreateImportJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.CreateImportJobRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createImportJob =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createImportJob(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.migrationcenter.v1.IImportJob,
-              protos.google.cloud.migrationcenter.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.migrationcenter.v1.IImportJob,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createImportJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createImportJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createImportJob with call error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.CreateImportJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.CreateImportJobRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createImportJob = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createImportJob(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createImportJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createImportJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createImportJob with LRO error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.CreateImportJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.CreateImportJobRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createImportJob = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createImportJob(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createImportJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createImportJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateImportJobProgress without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateImportJobProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateImportJobProgress with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateImportJobProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteImportJob', () => {
-    it('invokes deleteImportJob without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.DeleteImportJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.DeleteImportJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteImportJob =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteImportJob(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteImportJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteImportJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteImportJob without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.DeleteImportJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.DeleteImportJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteImportJob =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteImportJob(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.migrationcenter.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteImportJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteImportJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteImportJob with call error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.DeleteImportJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.DeleteImportJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteImportJob = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteImportJob(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteImportJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteImportJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteImportJob with LRO error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.DeleteImportJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.DeleteImportJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteImportJob = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteImportJob(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteImportJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteImportJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteImportJobProgress without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteImportJobProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteImportJobProgress with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteImportJobProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateImportJob', () => {
-    it('invokes updateImportJob without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.UpdateImportJobRequest()
-      );
-      request.importJob ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.UpdateImportJobRequest',
-        ['importJob', 'name']
-      );
-      request.importJob.name = defaultValue1;
-      const expectedHeaderRequestParams = `import_job.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateImportJob =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateImportJob(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateImportJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateImportJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateImportJob without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.UpdateImportJobRequest()
-      );
-      request.importJob ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.UpdateImportJobRequest',
-        ['importJob', 'name']
-      );
-      request.importJob.name = defaultValue1;
-      const expectedHeaderRequestParams = `import_job.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateImportJob =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateImportJob(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.migrationcenter.v1.IImportJob,
-              protos.google.cloud.migrationcenter.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.migrationcenter.v1.IImportJob,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateImportJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateImportJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateImportJob with call error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.UpdateImportJobRequest()
-      );
-      request.importJob ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.UpdateImportJobRequest',
-        ['importJob', 'name']
-      );
-      request.importJob.name = defaultValue1;
-      const expectedHeaderRequestParams = `import_job.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateImportJob = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateImportJob(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateImportJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateImportJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateImportJob with LRO error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.UpdateImportJobRequest()
-      );
-      request.importJob ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.UpdateImportJobRequest',
-        ['importJob', 'name']
-      );
-      request.importJob.name = defaultValue1;
-      const expectedHeaderRequestParams = `import_job.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateImportJob = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateImportJob(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateImportJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateImportJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateImportJobProgress without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateImportJobProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateImportJobProgress with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateImportJobProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('validateImportJob', () => {
-    it('invokes validateImportJob without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ValidateImportJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ValidateImportJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.validateImportJob =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.validateImportJob(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.validateImportJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.validateImportJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes validateImportJob without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ValidateImportJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ValidateImportJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.validateImportJob =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.validateImportJob(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.migrationcenter.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.validateImportJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.validateImportJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes validateImportJob with call error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ValidateImportJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ValidateImportJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.validateImportJob = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.validateImportJob(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.validateImportJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.validateImportJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes validateImportJob with LRO error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ValidateImportJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ValidateImportJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.validateImportJob = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.validateImportJob(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.validateImportJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.validateImportJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkValidateImportJobProgress without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkValidateImportJobProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkValidateImportJobProgress with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkValidateImportJobProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('runImportJob', () => {
-    it('invokes runImportJob without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.RunImportJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.RunImportJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.runImportJob = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.runImportJob(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.runImportJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.runImportJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes runImportJob without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.RunImportJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.RunImportJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.runImportJob =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.runImportJob(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.migrationcenter.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.runImportJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.runImportJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes runImportJob with call error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.RunImportJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.RunImportJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.runImportJob = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.runImportJob(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.runImportJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.runImportJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes runImportJob with LRO error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.RunImportJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.RunImportJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.runImportJob = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.runImportJob(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.runImportJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.runImportJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkRunImportJobProgress without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkRunImportJobProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkRunImportJobProgress with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkRunImportJobProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createImportDataFile', () => {
-    it('invokes createImportDataFile without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.CreateImportDataFileRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.CreateImportDataFileRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createImportDataFile =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createImportDataFile(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createImportDataFile as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createImportDataFile as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createImportDataFile without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.CreateImportDataFileRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.CreateImportDataFileRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createImportDataFile =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createImportDataFile(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.migrationcenter.v1.IImportDataFile,
-              protos.google.cloud.migrationcenter.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.migrationcenter.v1.IImportDataFile,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createImportDataFile as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createImportDataFile as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createImportDataFile with call error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.CreateImportDataFileRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.CreateImportDataFileRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createImportDataFile = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createImportDataFile(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createImportDataFile as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createImportDataFile as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createImportDataFile with LRO error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.CreateImportDataFileRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.CreateImportDataFileRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createImportDataFile = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createImportDataFile(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createImportDataFile as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createImportDataFile as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateImportDataFileProgress without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateImportDataFileProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateImportDataFileProgress with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateImportDataFileProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteImportDataFile', () => {
-    it('invokes deleteImportDataFile without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.DeleteImportDataFileRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.DeleteImportDataFileRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteImportDataFile =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteImportDataFile(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteImportDataFile as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteImportDataFile as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteImportDataFile without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.DeleteImportDataFileRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.DeleteImportDataFileRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteImportDataFile =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteImportDataFile(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.migrationcenter.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteImportDataFile as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteImportDataFile as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteImportDataFile with call error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.DeleteImportDataFileRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.DeleteImportDataFileRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteImportDataFile = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteImportDataFile(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteImportDataFile as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteImportDataFile as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteImportDataFile with LRO error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.DeleteImportDataFileRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.DeleteImportDataFileRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteImportDataFile = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteImportDataFile(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteImportDataFile as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteImportDataFile as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteImportDataFileProgress without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteImportDataFileProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteImportDataFileProgress with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteImportDataFileProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createGroup', () => {
-    it('invokes createGroup without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.CreateGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.CreateGroupRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createGroup = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createGroup(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createGroup without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.CreateGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.CreateGroupRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createGroup =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createGroup(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.migrationcenter.v1.IGroup,
-              protos.google.cloud.migrationcenter.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.migrationcenter.v1.IGroup,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createGroup with call error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.CreateGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.CreateGroupRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createGroup = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createGroup(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createGroup with LRO error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.CreateGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.CreateGroupRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createGroup = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createGroup(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateGroupProgress without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateGroupProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateGroupProgress with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkCreateGroupProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateGroup', () => {
-    it('invokes updateGroup without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.UpdateGroupRequest()
-      );
-      request.group ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.UpdateGroupRequest',
-        ['group', 'name']
-      );
-      request.group.name = defaultValue1;
-      const expectedHeaderRequestParams = `group.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateGroup = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateGroup(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateGroup without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.UpdateGroupRequest()
-      );
-      request.group ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.UpdateGroupRequest',
-        ['group', 'name']
-      );
-      request.group.name = defaultValue1;
-      const expectedHeaderRequestParams = `group.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateGroup =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateGroup(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.migrationcenter.v1.IGroup,
-              protos.google.cloud.migrationcenter.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.migrationcenter.v1.IGroup,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateGroup with call error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.UpdateGroupRequest()
-      );
-      request.group ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.UpdateGroupRequest',
-        ['group', 'name']
-      );
-      request.group.name = defaultValue1;
-      const expectedHeaderRequestParams = `group.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateGroup = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateGroup(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateGroup with LRO error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.UpdateGroupRequest()
-      );
-      request.group ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.UpdateGroupRequest',
-        ['group', 'name']
-      );
-      request.group.name = defaultValue1;
-      const expectedHeaderRequestParams = `group.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateGroup = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateGroup(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateGroupProgress without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateGroupProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateGroupProgress with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkUpdateGroupProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteGroup', () => {
-    it('invokes deleteGroup without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.DeleteGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.DeleteGroupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteGroup = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteGroup(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteGroup without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.DeleteGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.DeleteGroupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteGroup =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteGroup(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.migrationcenter.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteGroup with call error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.DeleteGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.DeleteGroupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteGroup = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteGroup(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteGroup with LRO error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.DeleteGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.DeleteGroupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteGroup = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteGroup(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteGroupProgress without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteGroupProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteGroupProgress with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkDeleteGroupProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('addAssetsToGroup', () => {
-    it('invokes addAssetsToGroup without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.AddAssetsToGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.AddAssetsToGroupRequest',
-        ['group']
-      );
-      request.group = defaultValue1;
-      const expectedHeaderRequestParams = `group=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.addAssetsToGroup =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.addAssetsToGroup(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.addAssetsToGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.addAssetsToGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes addAssetsToGroup without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.AddAssetsToGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.AddAssetsToGroupRequest',
-        ['group']
-      );
-      request.group = defaultValue1;
-      const expectedHeaderRequestParams = `group=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.addAssetsToGroup =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.addAssetsToGroup(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.migrationcenter.v1.IGroup,
-              protos.google.cloud.migrationcenter.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.migrationcenter.v1.IGroup,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.addAssetsToGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.addAssetsToGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes addAssetsToGroup with call error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.AddAssetsToGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.AddAssetsToGroupRequest',
-        ['group']
-      );
-      request.group = defaultValue1;
-      const expectedHeaderRequestParams = `group=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.addAssetsToGroup = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.addAssetsToGroup(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.addAssetsToGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.addAssetsToGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes addAssetsToGroup with LRO error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.AddAssetsToGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.AddAssetsToGroupRequest',
-        ['group']
-      );
-      request.group = defaultValue1;
-      const expectedHeaderRequestParams = `group=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.addAssetsToGroup = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.addAssetsToGroup(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.addAssetsToGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.addAssetsToGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkAddAssetsToGroupProgress without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkAddAssetsToGroupProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkAddAssetsToGroupProgress with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkAddAssetsToGroupProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('removeAssetsFromGroup', () => {
-    it('invokes removeAssetsFromGroup without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.RemoveAssetsFromGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.RemoveAssetsFromGroupRequest',
-        ['group']
-      );
-      request.group = defaultValue1;
-      const expectedHeaderRequestParams = `group=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.removeAssetsFromGroup =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.removeAssetsFromGroup(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.removeAssetsFromGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.removeAssetsFromGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes removeAssetsFromGroup without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.RemoveAssetsFromGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.RemoveAssetsFromGroupRequest',
-        ['group']
-      );
-      request.group = defaultValue1;
-      const expectedHeaderRequestParams = `group=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.removeAssetsFromGroup =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.removeAssetsFromGroup(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.migrationcenter.v1.IGroup,
-              protos.google.cloud.migrationcenter.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.migrationcenter.v1.IGroup,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.removeAssetsFromGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.removeAssetsFromGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes removeAssetsFromGroup with call error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.RemoveAssetsFromGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.RemoveAssetsFromGroupRequest',
-        ['group']
-      );
-      request.group = defaultValue1;
-      const expectedHeaderRequestParams = `group=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.removeAssetsFromGroup = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.removeAssetsFromGroup(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.removeAssetsFromGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.removeAssetsFromGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes removeAssetsFromGroup with LRO error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.RemoveAssetsFromGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.RemoveAssetsFromGroupRequest',
-        ['group']
-      );
-      request.group = defaultValue1;
-      const expectedHeaderRequestParams = `group=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.removeAssetsFromGroup = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.removeAssetsFromGroup(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.removeAssetsFromGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.removeAssetsFromGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkRemoveAssetsFromGroupProgress without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkRemoveAssetsFromGroupProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkRemoveAssetsFromGroupProgress with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkRemoveAssetsFromGroupProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createSource', () => {
-    it('invokes createSource without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.CreateSourceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.CreateSourceRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createSource = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createSource(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createSource as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createSource as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createSource without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.CreateSourceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.CreateSourceRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createSource =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createSource(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.migrationcenter.v1.ISource,
-              protos.google.cloud.migrationcenter.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.migrationcenter.v1.ISource,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createSource as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createSource as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createSource with call error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.CreateSourceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.CreateSourceRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createSource = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createSource(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createSource as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createSource as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createSource with LRO error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.CreateSourceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.CreateSourceRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createSource = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createSource(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createSource as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createSource as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateSourceProgress without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateSourceProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateSourceProgress with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkCreateSourceProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateSource', () => {
-    it('invokes updateSource without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.UpdateSourceRequest()
-      );
-      request.source ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.UpdateSourceRequest',
-        ['source', 'name']
-      );
-      request.source.name = defaultValue1;
-      const expectedHeaderRequestParams = `source.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateSource = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateSource(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateSource as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSource as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateSource without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.UpdateSourceRequest()
-      );
-      request.source ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.UpdateSourceRequest',
-        ['source', 'name']
-      );
-      request.source.name = defaultValue1;
-      const expectedHeaderRequestParams = `source.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateSource =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateSource(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.migrationcenter.v1.ISource,
-              protos.google.cloud.migrationcenter.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.migrationcenter.v1.ISource,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateSource as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSource as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateSource with call error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.UpdateSourceRequest()
-      );
-      request.source ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.UpdateSourceRequest',
-        ['source', 'name']
-      );
-      request.source.name = defaultValue1;
-      const expectedHeaderRequestParams = `source.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateSource = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateSource(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateSource as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSource as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateSource with LRO error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.UpdateSourceRequest()
-      );
-      request.source ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.UpdateSourceRequest',
-        ['source', 'name']
-      );
-      request.source.name = defaultValue1;
-      const expectedHeaderRequestParams = `source.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateSource = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateSource(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateSource as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSource as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateSourceProgress without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateSourceProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateSourceProgress with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkUpdateSourceProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteSource', () => {
-    it('invokes deleteSource without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.DeleteSourceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.DeleteSourceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteSource = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteSource(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteSource as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteSource as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteSource without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.DeleteSourceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.DeleteSourceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteSource =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteSource(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.migrationcenter.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteSource as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteSource as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteSource with call error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.DeleteSourceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.DeleteSourceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteSource = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteSource(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteSource as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteSource as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteSource with LRO error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.DeleteSourceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.DeleteSourceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteSource = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteSource(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteSource as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteSource as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteSourceProgress without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteSourceProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteSourceProgress with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkDeleteSourceProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createPreferenceSet', () => {
-    it('invokes createPreferenceSet without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.CreatePreferenceSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.CreatePreferenceSetRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createPreferenceSet =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createPreferenceSet(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createPreferenceSet as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createPreferenceSet as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createPreferenceSet without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.CreatePreferenceSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.CreatePreferenceSetRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createPreferenceSet =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createPreferenceSet(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.migrationcenter.v1.IPreferenceSet,
-              protos.google.cloud.migrationcenter.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.migrationcenter.v1.IPreferenceSet,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createPreferenceSet as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createPreferenceSet as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createPreferenceSet with call error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.CreatePreferenceSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.CreatePreferenceSetRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createPreferenceSet = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createPreferenceSet(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createPreferenceSet as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createPreferenceSet as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createPreferenceSet with LRO error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.CreatePreferenceSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.CreatePreferenceSetRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createPreferenceSet = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createPreferenceSet(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createPreferenceSet as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createPreferenceSet as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreatePreferenceSetProgress without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreatePreferenceSetProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreatePreferenceSetProgress with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreatePreferenceSetProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updatePreferenceSet', () => {
-    it('invokes updatePreferenceSet without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.UpdatePreferenceSetRequest()
-      );
-      request.preferenceSet ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.UpdatePreferenceSetRequest',
-        ['preferenceSet', 'name']
-      );
-      request.preferenceSet.name = defaultValue1;
-      const expectedHeaderRequestParams = `preference_set.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updatePreferenceSet =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updatePreferenceSet(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updatePreferenceSet as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updatePreferenceSet as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updatePreferenceSet without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.UpdatePreferenceSetRequest()
-      );
-      request.preferenceSet ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.UpdatePreferenceSetRequest',
-        ['preferenceSet', 'name']
-      );
-      request.preferenceSet.name = defaultValue1;
-      const expectedHeaderRequestParams = `preference_set.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updatePreferenceSet =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updatePreferenceSet(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.migrationcenter.v1.IPreferenceSet,
-              protos.google.cloud.migrationcenter.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.migrationcenter.v1.IPreferenceSet,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updatePreferenceSet as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updatePreferenceSet as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updatePreferenceSet with call error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.UpdatePreferenceSetRequest()
-      );
-      request.preferenceSet ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.UpdatePreferenceSetRequest',
-        ['preferenceSet', 'name']
-      );
-      request.preferenceSet.name = defaultValue1;
-      const expectedHeaderRequestParams = `preference_set.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updatePreferenceSet = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updatePreferenceSet(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updatePreferenceSet as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updatePreferenceSet as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updatePreferenceSet with LRO error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.UpdatePreferenceSetRequest()
-      );
-      request.preferenceSet ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.UpdatePreferenceSetRequest',
-        ['preferenceSet', 'name']
-      );
-      request.preferenceSet.name = defaultValue1;
-      const expectedHeaderRequestParams = `preference_set.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updatePreferenceSet = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updatePreferenceSet(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updatePreferenceSet as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updatePreferenceSet as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdatePreferenceSetProgress without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdatePreferenceSetProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdatePreferenceSetProgress with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdatePreferenceSetProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deletePreferenceSet', () => {
-    it('invokes deletePreferenceSet without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.DeletePreferenceSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.DeletePreferenceSetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deletePreferenceSet =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deletePreferenceSet(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deletePreferenceSet as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deletePreferenceSet as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deletePreferenceSet without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.DeletePreferenceSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.DeletePreferenceSetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deletePreferenceSet =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deletePreferenceSet(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.migrationcenter.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deletePreferenceSet as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deletePreferenceSet as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deletePreferenceSet with call error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.DeletePreferenceSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.DeletePreferenceSetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deletePreferenceSet = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deletePreferenceSet(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deletePreferenceSet as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deletePreferenceSet as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deletePreferenceSet with LRO error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.DeletePreferenceSetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.DeletePreferenceSetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deletePreferenceSet = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deletePreferenceSet(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deletePreferenceSet as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deletePreferenceSet as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeletePreferenceSetProgress without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeletePreferenceSetProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeletePreferenceSetProgress with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeletePreferenceSetProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateSettings', () => {
-    it('invokes updateSettings without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.UpdateSettingsRequest()
-      );
-      request.settings ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.UpdateSettingsRequest',
-        ['settings', 'name']
-      );
-      request.settings.name = defaultValue1;
-      const expectedHeaderRequestParams = `settings.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateSettings =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateSettings(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateSettings as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSettings as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateSettings without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.UpdateSettingsRequest()
-      );
-      request.settings ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.UpdateSettingsRequest',
-        ['settings', 'name']
-      );
-      request.settings.name = defaultValue1;
-      const expectedHeaderRequestParams = `settings.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateSettings =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateSettings(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.migrationcenter.v1.ISettings,
-              protos.google.cloud.migrationcenter.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.migrationcenter.v1.ISettings,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateSettings as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSettings as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateSettings with call error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.UpdateSettingsRequest()
-      );
-      request.settings ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.UpdateSettingsRequest',
-        ['settings', 'name']
-      );
-      request.settings.name = defaultValue1;
-      const expectedHeaderRequestParams = `settings.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateSettings = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateSettings(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateSettings as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSettings as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateSettings with LRO error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.UpdateSettingsRequest()
-      );
-      request.settings ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.UpdateSettingsRequest',
-        ['settings', 'name']
-      );
-      request.settings.name = defaultValue1;
-      const expectedHeaderRequestParams = `settings.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateSettings = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateSettings(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateSettings as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSettings as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateSettingsProgress without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateSettingsProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateSettingsProgress with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateSettingsProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createReportConfig', () => {
-    it('invokes createReportConfig without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.CreateReportConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.CreateReportConfigRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createReportConfig =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createReportConfig(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createReportConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createReportConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createReportConfig without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.CreateReportConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.CreateReportConfigRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createReportConfig =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createReportConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.migrationcenter.v1.IReportConfig,
-              protos.google.cloud.migrationcenter.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.migrationcenter.v1.IReportConfig,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createReportConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createReportConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createReportConfig with call error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.CreateReportConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.CreateReportConfigRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createReportConfig = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createReportConfig(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createReportConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createReportConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createReportConfig with LRO error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.CreateReportConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.CreateReportConfigRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createReportConfig = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createReportConfig(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createReportConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createReportConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateReportConfigProgress without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateReportConfigProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateReportConfigProgress with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateReportConfigProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteReportConfig', () => {
-    it('invokes deleteReportConfig without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.DeleteReportConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.DeleteReportConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteReportConfig =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteReportConfig(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteReportConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteReportConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteReportConfig without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.DeleteReportConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.DeleteReportConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteReportConfig =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteReportConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.migrationcenter.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteReportConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteReportConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteReportConfig with call error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.DeleteReportConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.DeleteReportConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteReportConfig = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteReportConfig(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteReportConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteReportConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteReportConfig with LRO error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.DeleteReportConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.DeleteReportConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteReportConfig = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteReportConfig(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteReportConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteReportConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteReportConfigProgress without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteReportConfigProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteReportConfigProgress with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteReportConfigProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createReport', () => {
-    it('invokes createReport without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.CreateReportRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.CreateReportRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createReport = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createReport(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createReport as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createReport as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createReport without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.CreateReportRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.CreateReportRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createReport =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createReport(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.migrationcenter.v1.IReport,
-              protos.google.cloud.migrationcenter.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.migrationcenter.v1.IReport,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createReport as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createReport as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createReport with call error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.CreateReportRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.CreateReportRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createReport = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createReport(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createReport as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createReport as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createReport with LRO error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.CreateReportRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.CreateReportRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createReport = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createReport(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createReport as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createReport as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateReportProgress without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateReportProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateReportProgress with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkCreateReportProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteReport', () => {
-    it('invokes deleteReport without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.DeleteReportRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.DeleteReportRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteReport = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteReport(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteReport as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteReport as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteReport without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.DeleteReportRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.DeleteReportRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteReport =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteReport(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.migrationcenter.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.migrationcenter.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteReport as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteReport as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteReport with call error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.DeleteReportRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.DeleteReportRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteReport = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteReport(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteReport as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteReport as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteReport with LRO error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.DeleteReportRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.DeleteReportRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteReport = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteReport(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteReport as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteReport as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteReportProgress without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteReportProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteReportProgress with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkDeleteReportProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('listAssets', () => {
-    it('invokes listAssets without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListAssetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListAssetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Asset()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Asset()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Asset()
-        ),
-      ];
-      client.innerApiCalls.listAssets = stubSimpleCall(expectedResponse);
-      const [response] = await client.listAssets(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listAssets as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAssets as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAssets without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListAssetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListAssetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Asset()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Asset()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Asset()
-        ),
-      ];
-      client.innerApiCalls.listAssets =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listAssets(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.migrationcenter.v1.IAsset[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listAssets as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAssets as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAssets with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListAssetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListAssetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listAssets = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listAssets(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listAssets as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAssets as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAssetsStream without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListAssetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListAssetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Asset()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Asset()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Asset()
-        ),
-      ];
-      client.descriptors.page.listAssets.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listAssetsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.migrationcenter.v1.Asset[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.migrationcenter.v1.Asset) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listAssets.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listAssets, request)
-      );
-      assert(
-        (client.descriptors.page.listAssets.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listAssetsStream with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListAssetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListAssetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listAssets.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listAssetsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.migrationcenter.v1.Asset[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.migrationcenter.v1.Asset) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listAssets.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listAssets, request)
-      );
-      assert(
-        (client.descriptors.page.listAssets.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listAssets without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListAssetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListAssetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Asset()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Asset()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Asset()
-        ),
-      ];
-      client.descriptors.page.listAssets.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.migrationcenter.v1.IAsset[] = [];
-      const iterable = client.listAssetsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listAssets.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listAssets.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listAssets with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListAssetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListAssetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listAssets.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listAssetsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.migrationcenter.v1.IAsset[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = migrationcenterModule.v1.MigrationCenterClient.servicePath;
+                assert.strictEqual(servicePath, 'migrationcenter.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = migrationcenterModule.v1.MigrationCenterClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'migrationcenter.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listAssets.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listAssets.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('listImportJobs', () => {
-    it('invokes listImportJobs without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListImportJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListImportJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ImportJob()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ImportJob()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ImportJob()
-        ),
-      ];
-      client.innerApiCalls.listImportJobs = stubSimpleCall(expectedResponse);
-      const [response] = await client.listImportJobs(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listImportJobs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listImportJobs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listImportJobs without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListImportJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListImportJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ImportJob()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ImportJob()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ImportJob()
-        ),
-      ];
-      client.innerApiCalls.listImportJobs =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listImportJobs(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.migrationcenter.v1.IImportJob[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listImportJobs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listImportJobs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listImportJobs with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListImportJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListImportJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listImportJobs = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listImportJobs(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listImportJobs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listImportJobs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listImportJobsStream without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListImportJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListImportJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ImportJob()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ImportJob()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ImportJob()
-        ),
-      ];
-      client.descriptors.page.listImportJobs.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listImportJobsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.migrationcenter.v1.ImportJob[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.migrationcenter.v1.ImportJob) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'migrationcenter.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listImportJobs.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listImportJobs, request)
-      );
-      assert(
-        (client.descriptors.page.listImportJobs.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('invokes listImportJobsStream with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListImportJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListImportJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listImportJobs.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listImportJobsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.migrationcenter.v1.ImportJob[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.migrationcenter.v1.ImportJob) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'migrationcenter.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listImportJobs.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listImportJobs, request)
-      );
-      assert(
-        (client.descriptors.page.listImportJobs.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listImportJobs without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListImportJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListImportJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ImportJob()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ImportJob()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ImportJob()
-        ),
-      ];
-      client.descriptors.page.listImportJobs.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.migrationcenter.v1.IImportJob[] = [];
-      const iterable = client.listImportJobsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listImportJobs.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listImportJobs.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new migrationcenterModule.v1.MigrationCenterClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'migrationcenter.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('uses async iteration with listImportJobs with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListImportJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListImportJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listImportJobs.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listImportJobsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.migrationcenter.v1.IImportJob[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new migrationcenterModule.v1.MigrationCenterClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'migrationcenter.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listImportJobs.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listImportJobs.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new migrationcenterModule.v1.MigrationCenterClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-  describe('listImportDataFiles', () => {
-    it('invokes listImportDataFiles without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListImportDataFilesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListImportDataFilesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ImportDataFile()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ImportDataFile()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ImportDataFile()
-        ),
-      ];
-      client.innerApiCalls.listImportDataFiles =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listImportDataFiles(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listImportDataFiles as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listImportDataFiles as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        it('has port', () => {
+            const port = migrationcenterModule.v1.MigrationCenterClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.migrationCenterStub, undefined);
+            await client.initialize();
+            assert(client.migrationCenterStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.migrationCenterStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.migrationCenterStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    it('invokes listImportDataFiles without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListImportDataFilesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListImportDataFilesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ImportDataFile()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ImportDataFile()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ImportDataFile()
-        ),
-      ];
-      client.innerApiCalls.listImportDataFiles =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listImportDataFiles(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.migrationcenter.v1.IImportDataFile[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('getAsset', () => {
+        it('invokes getAsset without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetAssetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetAssetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.Asset()
+            );
+            client.innerApiCalls.getAsset = stubSimpleCall(expectedResponse);
+            const [response] = await client.getAsset(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAsset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAsset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAsset without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetAssetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetAssetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.Asset()
+            );
+            client.innerApiCalls.getAsset = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getAsset(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.migrationcenter.v1.IAsset|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAsset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAsset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAsset with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetAssetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetAssetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getAsset = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getAsset(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getAsset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAsset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAsset with closed client', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetAssetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetAssetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getAsset(request), expectedError);
+        });
+    });
+
+    describe('updateAsset', () => {
+        it('invokes updateAsset without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.UpdateAssetRequest()
+            );
+            request.asset ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.UpdateAssetRequest', ['asset', 'name']);
+            request.asset.name = defaultValue1;
+            const expectedHeaderRequestParams = `asset.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.Asset()
+            );
+            client.innerApiCalls.updateAsset = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateAsset(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateAsset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAsset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAsset without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.UpdateAssetRequest()
+            );
+            request.asset ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.UpdateAssetRequest', ['asset', 'name']);
+            request.asset.name = defaultValue1;
+            const expectedHeaderRequestParams = `asset.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.Asset()
+            );
+            client.innerApiCalls.updateAsset = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateAsset(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.migrationcenter.v1.IAsset|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateAsset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAsset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAsset with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.UpdateAssetRequest()
+            );
+            request.asset ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.UpdateAssetRequest', ['asset', 'name']);
+            request.asset.name = defaultValue1;
+            const expectedHeaderRequestParams = `asset.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateAsset = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateAsset(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateAsset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAsset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAsset with closed client', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.UpdateAssetRequest()
+            );
+            request.asset ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.UpdateAssetRequest', ['asset', 'name']);
+            request.asset.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateAsset(request), expectedError);
+        });
+    });
+
+    describe('batchUpdateAssets', () => {
+        it('invokes batchUpdateAssets without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.BatchUpdateAssetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.BatchUpdateAssetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.BatchUpdateAssetsResponse()
+            );
+            client.innerApiCalls.batchUpdateAssets = stubSimpleCall(expectedResponse);
+            const [response] = await client.batchUpdateAssets(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchUpdateAssets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchUpdateAssets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchUpdateAssets without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.BatchUpdateAssetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.BatchUpdateAssetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.BatchUpdateAssetsResponse()
+            );
+            client.innerApiCalls.batchUpdateAssets = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.batchUpdateAssets(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchUpdateAssets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchUpdateAssets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchUpdateAssets with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.BatchUpdateAssetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.BatchUpdateAssetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchUpdateAssets = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.batchUpdateAssets(request), expectedError);
+            const actualRequest = (client.innerApiCalls.batchUpdateAssets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchUpdateAssets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchUpdateAssets with closed client', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.BatchUpdateAssetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.BatchUpdateAssetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.batchUpdateAssets(request), expectedError);
+        });
+    });
+
+    describe('deleteAsset', () => {
+        it('invokes deleteAsset without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.DeleteAssetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.DeleteAssetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteAsset = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteAsset(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteAsset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAsset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAsset without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.DeleteAssetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.DeleteAssetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteAsset = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteAsset(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteAsset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAsset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAsset with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.DeleteAssetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.DeleteAssetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteAsset = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteAsset(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteAsset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAsset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAsset with closed client', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.DeleteAssetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.DeleteAssetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteAsset(request), expectedError);
+        });
+    });
+
+    describe('batchDeleteAssets', () => {
+        it('invokes batchDeleteAssets without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.BatchDeleteAssetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.BatchDeleteAssetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.batchDeleteAssets = stubSimpleCall(expectedResponse);
+            const [response] = await client.batchDeleteAssets(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchDeleteAssets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchDeleteAssets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchDeleteAssets without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.BatchDeleteAssetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.BatchDeleteAssetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.batchDeleteAssets = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.batchDeleteAssets(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchDeleteAssets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchDeleteAssets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchDeleteAssets with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.BatchDeleteAssetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.BatchDeleteAssetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchDeleteAssets = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.batchDeleteAssets(request), expectedError);
+            const actualRequest = (client.innerApiCalls.batchDeleteAssets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchDeleteAssets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchDeleteAssets with closed client', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.BatchDeleteAssetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.BatchDeleteAssetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.batchDeleteAssets(request), expectedError);
+        });
+    });
+
+    describe('reportAssetFrames', () => {
+        it('invokes reportAssetFrames without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ReportAssetFramesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ReportAssetFramesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ReportAssetFramesResponse()
+            );
+            client.innerApiCalls.reportAssetFrames = stubSimpleCall(expectedResponse);
+            const [response] = await client.reportAssetFrames(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.reportAssetFrames as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.reportAssetFrames as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes reportAssetFrames without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ReportAssetFramesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ReportAssetFramesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ReportAssetFramesResponse()
+            );
+            client.innerApiCalls.reportAssetFrames = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.reportAssetFrames(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.migrationcenter.v1.IReportAssetFramesResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.reportAssetFrames as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.reportAssetFrames as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes reportAssetFrames with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ReportAssetFramesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ReportAssetFramesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.reportAssetFrames = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.reportAssetFrames(request), expectedError);
+            const actualRequest = (client.innerApiCalls.reportAssetFrames as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.reportAssetFrames as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes reportAssetFrames with closed client', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ReportAssetFramesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ReportAssetFramesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.reportAssetFrames(request), expectedError);
+        });
+    });
+
+    describe('aggregateAssetsValues', () => {
+        it('invokes aggregateAssetsValues without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.AggregateAssetsValuesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.AggregateAssetsValuesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.AggregateAssetsValuesResponse()
+            );
+            client.innerApiCalls.aggregateAssetsValues = stubSimpleCall(expectedResponse);
+            const [response] = await client.aggregateAssetsValues(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.aggregateAssetsValues as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.aggregateAssetsValues as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes aggregateAssetsValues without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.AggregateAssetsValuesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.AggregateAssetsValuesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.AggregateAssetsValuesResponse()
+            );
+            client.innerApiCalls.aggregateAssetsValues = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.aggregateAssetsValues(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.aggregateAssetsValues as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.aggregateAssetsValues as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes aggregateAssetsValues with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.AggregateAssetsValuesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.AggregateAssetsValuesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.aggregateAssetsValues = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.aggregateAssetsValues(request), expectedError);
+            const actualRequest = (client.innerApiCalls.aggregateAssetsValues as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.aggregateAssetsValues as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes aggregateAssetsValues with closed client', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.AggregateAssetsValuesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.AggregateAssetsValuesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.aggregateAssetsValues(request), expectedError);
+        });
+    });
+
+    describe('getImportJob', () => {
+        it('invokes getImportJob without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetImportJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetImportJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ImportJob()
+            );
+            client.innerApiCalls.getImportJob = stubSimpleCall(expectedResponse);
+            const [response] = await client.getImportJob(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getImportJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getImportJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getImportJob without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetImportJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetImportJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ImportJob()
+            );
+            client.innerApiCalls.getImportJob = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getImportJob(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.migrationcenter.v1.IImportJob|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getImportJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getImportJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getImportJob with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetImportJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetImportJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getImportJob = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getImportJob(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getImportJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getImportJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getImportJob with closed client', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetImportJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetImportJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getImportJob(request), expectedError);
+        });
+    });
+
+    describe('getImportDataFile', () => {
+        it('invokes getImportDataFile without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetImportDataFileRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetImportDataFileRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ImportDataFile()
+            );
+            client.innerApiCalls.getImportDataFile = stubSimpleCall(expectedResponse);
+            const [response] = await client.getImportDataFile(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getImportDataFile as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getImportDataFile as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getImportDataFile without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetImportDataFileRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetImportDataFileRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ImportDataFile()
+            );
+            client.innerApiCalls.getImportDataFile = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getImportDataFile(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.migrationcenter.v1.IImportDataFile|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getImportDataFile as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getImportDataFile as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getImportDataFile with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetImportDataFileRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetImportDataFileRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getImportDataFile = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getImportDataFile(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getImportDataFile as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getImportDataFile as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getImportDataFile with closed client', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetImportDataFileRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetImportDataFileRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getImportDataFile(request), expectedError);
+        });
+    });
+
+    describe('getGroup', () => {
+        it('invokes getGroup without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.Group()
+            );
+            client.innerApiCalls.getGroup = stubSimpleCall(expectedResponse);
+            const [response] = await client.getGroup(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getGroup without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.Group()
+            );
+            client.innerApiCalls.getGroup = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getGroup(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.migrationcenter.v1.IGroup|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getGroup with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getGroup = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getGroup(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getGroup with closed client', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getGroup(request), expectedError);
+        });
+    });
+
+    describe('getErrorFrame', () => {
+        it('invokes getErrorFrame without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetErrorFrameRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetErrorFrameRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ErrorFrame()
+            );
+            client.innerApiCalls.getErrorFrame = stubSimpleCall(expectedResponse);
+            const [response] = await client.getErrorFrame(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getErrorFrame as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getErrorFrame as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getErrorFrame without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetErrorFrameRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetErrorFrameRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ErrorFrame()
+            );
+            client.innerApiCalls.getErrorFrame = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getErrorFrame(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.migrationcenter.v1.IErrorFrame|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getErrorFrame as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getErrorFrame as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getErrorFrame with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetErrorFrameRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetErrorFrameRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getErrorFrame = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getErrorFrame(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getErrorFrame as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getErrorFrame as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getErrorFrame with closed client', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetErrorFrameRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetErrorFrameRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getErrorFrame(request), expectedError);
+        });
+    });
+
+    describe('getSource', () => {
+        it('invokes getSource without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetSourceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetSourceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.Source()
+            );
+            client.innerApiCalls.getSource = stubSimpleCall(expectedResponse);
+            const [response] = await client.getSource(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getSource as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSource as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getSource without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetSourceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetSourceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.Source()
+            );
+            client.innerApiCalls.getSource = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getSource(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.migrationcenter.v1.ISource|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getSource as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSource as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getSource with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetSourceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetSourceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getSource = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getSource(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getSource as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSource as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getSource with closed client', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetSourceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetSourceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getSource(request), expectedError);
+        });
+    });
+
+    describe('getPreferenceSet', () => {
+        it('invokes getPreferenceSet without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetPreferenceSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetPreferenceSetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.PreferenceSet()
+            );
+            client.innerApiCalls.getPreferenceSet = stubSimpleCall(expectedResponse);
+            const [response] = await client.getPreferenceSet(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getPreferenceSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPreferenceSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPreferenceSet without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetPreferenceSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetPreferenceSetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.PreferenceSet()
+            );
+            client.innerApiCalls.getPreferenceSet = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getPreferenceSet(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.migrationcenter.v1.IPreferenceSet|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getPreferenceSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPreferenceSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPreferenceSet with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetPreferenceSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetPreferenceSetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getPreferenceSet = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getPreferenceSet(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getPreferenceSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPreferenceSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPreferenceSet with closed client', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetPreferenceSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetPreferenceSetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getPreferenceSet(request), expectedError);
+        });
+    });
+
+    describe('getSettings', () => {
+        it('invokes getSettings without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetSettingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetSettingsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.Settings()
+            );
+            client.innerApiCalls.getSettings = stubSimpleCall(expectedResponse);
+            const [response] = await client.getSettings(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getSettings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSettings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getSettings without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetSettingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetSettingsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.Settings()
+            );
+            client.innerApiCalls.getSettings = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getSettings(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.migrationcenter.v1.ISettings|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getSettings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSettings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getSettings with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetSettingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetSettingsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getSettings = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getSettings(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getSettings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSettings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getSettings with closed client', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetSettingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetSettingsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getSettings(request), expectedError);
+        });
+    });
+
+    describe('getReportConfig', () => {
+        it('invokes getReportConfig without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetReportConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetReportConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ReportConfig()
+            );
+            client.innerApiCalls.getReportConfig = stubSimpleCall(expectedResponse);
+            const [response] = await client.getReportConfig(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getReportConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getReportConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getReportConfig without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetReportConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetReportConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ReportConfig()
+            );
+            client.innerApiCalls.getReportConfig = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getReportConfig(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.migrationcenter.v1.IReportConfig|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getReportConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getReportConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getReportConfig with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetReportConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetReportConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getReportConfig = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getReportConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getReportConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getReportConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getReportConfig with closed client', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetReportConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetReportConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getReportConfig(request), expectedError);
+        });
+    });
+
+    describe('getReport', () => {
+        it('invokes getReport without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetReportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetReportRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.Report()
+            );
+            client.innerApiCalls.getReport = stubSimpleCall(expectedResponse);
+            const [response] = await client.getReport(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getReport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getReport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getReport without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetReportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetReportRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.Report()
+            );
+            client.innerApiCalls.getReport = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getReport(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.migrationcenter.v1.IReport|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getReport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getReport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getReport with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetReportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetReportRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getReport = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getReport(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getReport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getReport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getReport with closed client', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.GetReportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.GetReportRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getReport(request), expectedError);
+        });
+    });
+
+    describe('createImportJob', () => {
+        it('invokes createImportJob without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.CreateImportJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.CreateImportJobRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createImportJob = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createImportJob(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createImportJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createImportJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createImportJob without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.CreateImportJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.CreateImportJobRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createImportJob = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createImportJob(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.migrationcenter.v1.IImportJob, protos.google.cloud.migrationcenter.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.migrationcenter.v1.IImportJob, protos.google.cloud.migrationcenter.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createImportJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createImportJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createImportJob with call error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.CreateImportJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.CreateImportJobRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createImportJob = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createImportJob(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createImportJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createImportJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createImportJob with LRO error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.CreateImportJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.CreateImportJobRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createImportJob = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createImportJob(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createImportJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createImportJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateImportJobProgress without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateImportJobProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateImportJobProgress with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateImportJobProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteImportJob', () => {
+        it('invokes deleteImportJob without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.DeleteImportJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.DeleteImportJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteImportJob = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteImportJob(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteImportJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteImportJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteImportJob without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.DeleteImportJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.DeleteImportJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteImportJob = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteImportJob(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteImportJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteImportJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteImportJob with call error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.DeleteImportJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.DeleteImportJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteImportJob = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteImportJob(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteImportJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteImportJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteImportJob with LRO error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.DeleteImportJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.DeleteImportJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteImportJob = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteImportJob(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteImportJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteImportJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteImportJobProgress without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteImportJobProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteImportJobProgress with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteImportJobProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateImportJob', () => {
+        it('invokes updateImportJob without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.UpdateImportJobRequest()
+            );
+            request.importJob ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.UpdateImportJobRequest', ['importJob', 'name']);
+            request.importJob.name = defaultValue1;
+            const expectedHeaderRequestParams = `import_job.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateImportJob = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateImportJob(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateImportJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateImportJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateImportJob without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.UpdateImportJobRequest()
+            );
+            request.importJob ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.UpdateImportJobRequest', ['importJob', 'name']);
+            request.importJob.name = defaultValue1;
+            const expectedHeaderRequestParams = `import_job.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateImportJob = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateImportJob(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.migrationcenter.v1.IImportJob, protos.google.cloud.migrationcenter.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.migrationcenter.v1.IImportJob, protos.google.cloud.migrationcenter.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateImportJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateImportJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateImportJob with call error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.UpdateImportJobRequest()
+            );
+            request.importJob ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.UpdateImportJobRequest', ['importJob', 'name']);
+            request.importJob.name = defaultValue1;
+            const expectedHeaderRequestParams = `import_job.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateImportJob = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateImportJob(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateImportJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateImportJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateImportJob with LRO error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.UpdateImportJobRequest()
+            );
+            request.importJob ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.UpdateImportJobRequest', ['importJob', 'name']);
+            request.importJob.name = defaultValue1;
+            const expectedHeaderRequestParams = `import_job.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateImportJob = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateImportJob(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateImportJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateImportJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateImportJobProgress without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateImportJobProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateImportJobProgress with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateImportJobProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('validateImportJob', () => {
+        it('invokes validateImportJob without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ValidateImportJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ValidateImportJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.validateImportJob = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.validateImportJob(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.validateImportJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.validateImportJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes validateImportJob without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ValidateImportJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ValidateImportJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.validateImportJob = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.validateImportJob(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.validateImportJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.validateImportJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes validateImportJob with call error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ValidateImportJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ValidateImportJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.validateImportJob = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.validateImportJob(request), expectedError);
+            const actualRequest = (client.innerApiCalls.validateImportJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.validateImportJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes validateImportJob with LRO error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ValidateImportJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ValidateImportJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.validateImportJob = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.validateImportJob(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.validateImportJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.validateImportJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkValidateImportJobProgress without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkValidateImportJobProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkValidateImportJobProgress with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkValidateImportJobProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('runImportJob', () => {
+        it('invokes runImportJob without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.RunImportJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.RunImportJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.runImportJob = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.runImportJob(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.runImportJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.runImportJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes runImportJob without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.RunImportJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.RunImportJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.runImportJob = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.runImportJob(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.runImportJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.runImportJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes runImportJob with call error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.RunImportJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.RunImportJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.runImportJob = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.runImportJob(request), expectedError);
+            const actualRequest = (client.innerApiCalls.runImportJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.runImportJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes runImportJob with LRO error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.RunImportJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.RunImportJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.runImportJob = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.runImportJob(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.runImportJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.runImportJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkRunImportJobProgress without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkRunImportJobProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkRunImportJobProgress with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkRunImportJobProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createImportDataFile', () => {
+        it('invokes createImportDataFile without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.CreateImportDataFileRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.CreateImportDataFileRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createImportDataFile = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createImportDataFile(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createImportDataFile as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createImportDataFile as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createImportDataFile without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.CreateImportDataFileRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.CreateImportDataFileRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createImportDataFile = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createImportDataFile(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.migrationcenter.v1.IImportDataFile, protos.google.cloud.migrationcenter.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.migrationcenter.v1.IImportDataFile, protos.google.cloud.migrationcenter.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createImportDataFile as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createImportDataFile as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createImportDataFile with call error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.CreateImportDataFileRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.CreateImportDataFileRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createImportDataFile = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createImportDataFile(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createImportDataFile as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createImportDataFile as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createImportDataFile with LRO error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.CreateImportDataFileRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.CreateImportDataFileRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createImportDataFile = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createImportDataFile(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createImportDataFile as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createImportDataFile as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateImportDataFileProgress without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateImportDataFileProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateImportDataFileProgress with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateImportDataFileProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteImportDataFile', () => {
+        it('invokes deleteImportDataFile without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.DeleteImportDataFileRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.DeleteImportDataFileRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteImportDataFile = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteImportDataFile(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteImportDataFile as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteImportDataFile as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteImportDataFile without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.DeleteImportDataFileRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.DeleteImportDataFileRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteImportDataFile = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteImportDataFile(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteImportDataFile as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteImportDataFile as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteImportDataFile with call error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.DeleteImportDataFileRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.DeleteImportDataFileRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteImportDataFile = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteImportDataFile(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteImportDataFile as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteImportDataFile as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteImportDataFile with LRO error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.DeleteImportDataFileRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.DeleteImportDataFileRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteImportDataFile = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteImportDataFile(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteImportDataFile as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteImportDataFile as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteImportDataFileProgress without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteImportDataFileProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteImportDataFileProgress with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteImportDataFileProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createGroup', () => {
+        it('invokes createGroup without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.CreateGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.CreateGroupRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createGroup = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createGroup(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createGroup without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.CreateGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.CreateGroupRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createGroup = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createGroup(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createGroup with call error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.CreateGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.CreateGroupRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createGroup = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createGroup(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createGroup with LRO error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.CreateGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.CreateGroupRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createGroup = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createGroup(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateGroupProgress without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateGroupProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateGroupProgress with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateGroupProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateGroup', () => {
+        it('invokes updateGroup without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.UpdateGroupRequest()
+            );
+            request.group ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.UpdateGroupRequest', ['group', 'name']);
+            request.group.name = defaultValue1;
+            const expectedHeaderRequestParams = `group.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateGroup = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateGroup(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateGroup without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.UpdateGroupRequest()
+            );
+            request.group ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.UpdateGroupRequest', ['group', 'name']);
+            request.group.name = defaultValue1;
+            const expectedHeaderRequestParams = `group.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateGroup = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateGroup(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateGroup with call error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.UpdateGroupRequest()
+            );
+            request.group ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.UpdateGroupRequest', ['group', 'name']);
+            request.group.name = defaultValue1;
+            const expectedHeaderRequestParams = `group.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateGroup = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateGroup(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateGroup with LRO error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.UpdateGroupRequest()
+            );
+            request.group ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.UpdateGroupRequest', ['group', 'name']);
+            request.group.name = defaultValue1;
+            const expectedHeaderRequestParams = `group.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateGroup = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateGroup(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateGroupProgress without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateGroupProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateGroupProgress with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateGroupProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteGroup', () => {
+        it('invokes deleteGroup without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.DeleteGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.DeleteGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteGroup = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteGroup(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteGroup without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.DeleteGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.DeleteGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteGroup = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteGroup(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteGroup with call error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.DeleteGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.DeleteGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteGroup = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteGroup(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteGroup with LRO error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.DeleteGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.DeleteGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteGroup = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteGroup(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteGroupProgress without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteGroupProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteGroupProgress with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteGroupProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('addAssetsToGroup', () => {
+        it('invokes addAssetsToGroup without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.AddAssetsToGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.AddAssetsToGroupRequest', ['group']);
+            request.group = defaultValue1;
+            const expectedHeaderRequestParams = `group=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.addAssetsToGroup = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.addAssetsToGroup(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.addAssetsToGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.addAssetsToGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes addAssetsToGroup without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.AddAssetsToGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.AddAssetsToGroupRequest', ['group']);
+            request.group = defaultValue1;
+            const expectedHeaderRequestParams = `group=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.addAssetsToGroup = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.addAssetsToGroup(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.addAssetsToGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.addAssetsToGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes addAssetsToGroup with call error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.AddAssetsToGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.AddAssetsToGroupRequest', ['group']);
+            request.group = defaultValue1;
+            const expectedHeaderRequestParams = `group=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.addAssetsToGroup = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.addAssetsToGroup(request), expectedError);
+            const actualRequest = (client.innerApiCalls.addAssetsToGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.addAssetsToGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes addAssetsToGroup with LRO error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.AddAssetsToGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.AddAssetsToGroupRequest', ['group']);
+            request.group = defaultValue1;
+            const expectedHeaderRequestParams = `group=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.addAssetsToGroup = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.addAssetsToGroup(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.addAssetsToGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.addAssetsToGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkAddAssetsToGroupProgress without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkAddAssetsToGroupProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkAddAssetsToGroupProgress with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkAddAssetsToGroupProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('removeAssetsFromGroup', () => {
+        it('invokes removeAssetsFromGroup without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.RemoveAssetsFromGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.RemoveAssetsFromGroupRequest', ['group']);
+            request.group = defaultValue1;
+            const expectedHeaderRequestParams = `group=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.removeAssetsFromGroup = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.removeAssetsFromGroup(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.removeAssetsFromGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.removeAssetsFromGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes removeAssetsFromGroup without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.RemoveAssetsFromGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.RemoveAssetsFromGroupRequest', ['group']);
+            request.group = defaultValue1;
+            const expectedHeaderRequestParams = `group=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.removeAssetsFromGroup = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.removeAssetsFromGroup(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.migrationcenter.v1.IGroup, protos.google.cloud.migrationcenter.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.removeAssetsFromGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.removeAssetsFromGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes removeAssetsFromGroup with call error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.RemoveAssetsFromGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.RemoveAssetsFromGroupRequest', ['group']);
+            request.group = defaultValue1;
+            const expectedHeaderRequestParams = `group=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.removeAssetsFromGroup = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.removeAssetsFromGroup(request), expectedError);
+            const actualRequest = (client.innerApiCalls.removeAssetsFromGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.removeAssetsFromGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes removeAssetsFromGroup with LRO error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.RemoveAssetsFromGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.RemoveAssetsFromGroupRequest', ['group']);
+            request.group = defaultValue1;
+            const expectedHeaderRequestParams = `group=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.removeAssetsFromGroup = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.removeAssetsFromGroup(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.removeAssetsFromGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.removeAssetsFromGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkRemoveAssetsFromGroupProgress without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkRemoveAssetsFromGroupProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkRemoveAssetsFromGroupProgress with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkRemoveAssetsFromGroupProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createSource', () => {
+        it('invokes createSource without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.CreateSourceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.CreateSourceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createSource = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createSource(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createSource as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createSource as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createSource without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.CreateSourceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.CreateSourceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createSource = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createSource(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.migrationcenter.v1.ISource, protos.google.cloud.migrationcenter.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.migrationcenter.v1.ISource, protos.google.cloud.migrationcenter.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createSource as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createSource as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createSource with call error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.CreateSourceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.CreateSourceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createSource = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createSource(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createSource as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createSource as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createSource with LRO error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.CreateSourceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.CreateSourceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createSource = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createSource(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createSource as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createSource as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateSourceProgress without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateSourceProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateSourceProgress with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateSourceProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateSource', () => {
+        it('invokes updateSource without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.UpdateSourceRequest()
+            );
+            request.source ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.UpdateSourceRequest', ['source', 'name']);
+            request.source.name = defaultValue1;
+            const expectedHeaderRequestParams = `source.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateSource = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateSource(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateSource as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSource as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateSource without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.UpdateSourceRequest()
+            );
+            request.source ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.UpdateSourceRequest', ['source', 'name']);
+            request.source.name = defaultValue1;
+            const expectedHeaderRequestParams = `source.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateSource = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateSource(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.migrationcenter.v1.ISource, protos.google.cloud.migrationcenter.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.migrationcenter.v1.ISource, protos.google.cloud.migrationcenter.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateSource as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSource as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateSource with call error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.UpdateSourceRequest()
+            );
+            request.source ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.UpdateSourceRequest', ['source', 'name']);
+            request.source.name = defaultValue1;
+            const expectedHeaderRequestParams = `source.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateSource = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateSource(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateSource as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSource as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateSource with LRO error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.UpdateSourceRequest()
+            );
+            request.source ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.UpdateSourceRequest', ['source', 'name']);
+            request.source.name = defaultValue1;
+            const expectedHeaderRequestParams = `source.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateSource = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateSource(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateSource as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSource as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateSourceProgress without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateSourceProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateSourceProgress with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateSourceProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteSource', () => {
+        it('invokes deleteSource without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.DeleteSourceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.DeleteSourceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteSource = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteSource(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteSource as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteSource as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteSource without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.DeleteSourceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.DeleteSourceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteSource = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteSource(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteSource as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteSource as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteSource with call error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.DeleteSourceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.DeleteSourceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteSource = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteSource(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteSource as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteSource as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteSource with LRO error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.DeleteSourceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.DeleteSourceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteSource = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteSource(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteSource as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteSource as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteSourceProgress without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteSourceProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteSourceProgress with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteSourceProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createPreferenceSet', () => {
+        it('invokes createPreferenceSet without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.CreatePreferenceSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.CreatePreferenceSetRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createPreferenceSet = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createPreferenceSet(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createPreferenceSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPreferenceSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createPreferenceSet without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.CreatePreferenceSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.CreatePreferenceSetRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createPreferenceSet = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createPreferenceSet(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.migrationcenter.v1.IPreferenceSet, protos.google.cloud.migrationcenter.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.migrationcenter.v1.IPreferenceSet, protos.google.cloud.migrationcenter.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createPreferenceSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPreferenceSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createPreferenceSet with call error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.CreatePreferenceSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.CreatePreferenceSetRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createPreferenceSet = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createPreferenceSet(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createPreferenceSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPreferenceSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createPreferenceSet with LRO error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.CreatePreferenceSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.CreatePreferenceSetRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createPreferenceSet = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createPreferenceSet(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createPreferenceSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPreferenceSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreatePreferenceSetProgress without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreatePreferenceSetProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreatePreferenceSetProgress with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreatePreferenceSetProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updatePreferenceSet', () => {
+        it('invokes updatePreferenceSet without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.UpdatePreferenceSetRequest()
+            );
+            request.preferenceSet ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.UpdatePreferenceSetRequest', ['preferenceSet', 'name']);
+            request.preferenceSet.name = defaultValue1;
+            const expectedHeaderRequestParams = `preference_set.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updatePreferenceSet = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updatePreferenceSet(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updatePreferenceSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updatePreferenceSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updatePreferenceSet without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.UpdatePreferenceSetRequest()
+            );
+            request.preferenceSet ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.UpdatePreferenceSetRequest', ['preferenceSet', 'name']);
+            request.preferenceSet.name = defaultValue1;
+            const expectedHeaderRequestParams = `preference_set.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updatePreferenceSet = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updatePreferenceSet(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.migrationcenter.v1.IPreferenceSet, protos.google.cloud.migrationcenter.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.migrationcenter.v1.IPreferenceSet, protos.google.cloud.migrationcenter.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updatePreferenceSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updatePreferenceSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updatePreferenceSet with call error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.UpdatePreferenceSetRequest()
+            );
+            request.preferenceSet ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.UpdatePreferenceSetRequest', ['preferenceSet', 'name']);
+            request.preferenceSet.name = defaultValue1;
+            const expectedHeaderRequestParams = `preference_set.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updatePreferenceSet = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updatePreferenceSet(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updatePreferenceSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updatePreferenceSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updatePreferenceSet with LRO error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.UpdatePreferenceSetRequest()
+            );
+            request.preferenceSet ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.UpdatePreferenceSetRequest', ['preferenceSet', 'name']);
+            request.preferenceSet.name = defaultValue1;
+            const expectedHeaderRequestParams = `preference_set.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updatePreferenceSet = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updatePreferenceSet(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updatePreferenceSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updatePreferenceSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdatePreferenceSetProgress without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdatePreferenceSetProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdatePreferenceSetProgress with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdatePreferenceSetProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deletePreferenceSet', () => {
+        it('invokes deletePreferenceSet without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.DeletePreferenceSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.DeletePreferenceSetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deletePreferenceSet = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deletePreferenceSet(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deletePreferenceSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deletePreferenceSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deletePreferenceSet without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.DeletePreferenceSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.DeletePreferenceSetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deletePreferenceSet = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deletePreferenceSet(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deletePreferenceSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deletePreferenceSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deletePreferenceSet with call error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.DeletePreferenceSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.DeletePreferenceSetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deletePreferenceSet = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deletePreferenceSet(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deletePreferenceSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deletePreferenceSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deletePreferenceSet with LRO error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.DeletePreferenceSetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.DeletePreferenceSetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deletePreferenceSet = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deletePreferenceSet(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deletePreferenceSet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deletePreferenceSet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeletePreferenceSetProgress without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeletePreferenceSetProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeletePreferenceSetProgress with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeletePreferenceSetProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateSettings', () => {
+        it('invokes updateSettings without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.UpdateSettingsRequest()
+            );
+            request.settings ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.UpdateSettingsRequest', ['settings', 'name']);
+            request.settings.name = defaultValue1;
+            const expectedHeaderRequestParams = `settings.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateSettings = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateSettings(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateSettings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSettings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateSettings without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.UpdateSettingsRequest()
+            );
+            request.settings ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.UpdateSettingsRequest', ['settings', 'name']);
+            request.settings.name = defaultValue1;
+            const expectedHeaderRequestParams = `settings.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateSettings = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateSettings(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.migrationcenter.v1.ISettings, protos.google.cloud.migrationcenter.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.migrationcenter.v1.ISettings, protos.google.cloud.migrationcenter.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateSettings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSettings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateSettings with call error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.UpdateSettingsRequest()
+            );
+            request.settings ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.UpdateSettingsRequest', ['settings', 'name']);
+            request.settings.name = defaultValue1;
+            const expectedHeaderRequestParams = `settings.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateSettings = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateSettings(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateSettings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSettings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateSettings with LRO error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.UpdateSettingsRequest()
+            );
+            request.settings ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.UpdateSettingsRequest', ['settings', 'name']);
+            request.settings.name = defaultValue1;
+            const expectedHeaderRequestParams = `settings.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateSettings = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateSettings(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateSettings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSettings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateSettingsProgress without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateSettingsProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateSettingsProgress with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateSettingsProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createReportConfig', () => {
+        it('invokes createReportConfig without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.CreateReportConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.CreateReportConfigRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createReportConfig = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createReportConfig(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createReportConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createReportConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createReportConfig without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.CreateReportConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.CreateReportConfigRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createReportConfig = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createReportConfig(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.migrationcenter.v1.IReportConfig, protos.google.cloud.migrationcenter.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.migrationcenter.v1.IReportConfig, protos.google.cloud.migrationcenter.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createReportConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createReportConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createReportConfig with call error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.CreateReportConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.CreateReportConfigRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createReportConfig = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createReportConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createReportConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createReportConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createReportConfig with LRO error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.CreateReportConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.CreateReportConfigRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createReportConfig = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createReportConfig(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createReportConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createReportConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateReportConfigProgress without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateReportConfigProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateReportConfigProgress with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateReportConfigProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteReportConfig', () => {
+        it('invokes deleteReportConfig without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.DeleteReportConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.DeleteReportConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteReportConfig = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteReportConfig(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteReportConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteReportConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteReportConfig without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.DeleteReportConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.DeleteReportConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteReportConfig = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteReportConfig(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteReportConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteReportConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteReportConfig with call error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.DeleteReportConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.DeleteReportConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteReportConfig = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteReportConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteReportConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteReportConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteReportConfig with LRO error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.DeleteReportConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.DeleteReportConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteReportConfig = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteReportConfig(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteReportConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteReportConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteReportConfigProgress without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteReportConfigProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteReportConfigProgress with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteReportConfigProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createReport', () => {
+        it('invokes createReport without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.CreateReportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.CreateReportRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createReport = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createReport(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createReport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createReport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createReport without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.CreateReportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.CreateReportRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createReport = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createReport(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.migrationcenter.v1.IReport, protos.google.cloud.migrationcenter.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.migrationcenter.v1.IReport, protos.google.cloud.migrationcenter.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createReport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createReport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createReport with call error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.CreateReportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.CreateReportRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createReport = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createReport(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createReport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createReport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createReport with LRO error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.CreateReportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.CreateReportRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createReport = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createReport(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createReport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createReport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateReportProgress without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateReportProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateReportProgress with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateReportProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteReport', () => {
+        it('invokes deleteReport without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.DeleteReportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.DeleteReportRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteReport = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteReport(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteReport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteReport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteReport without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.DeleteReportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.DeleteReportRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteReport = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteReport(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.migrationcenter.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteReport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteReport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteReport with call error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.DeleteReportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.DeleteReportRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteReport = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteReport(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteReport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteReport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteReport with LRO error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.DeleteReportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.DeleteReportRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteReport = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteReport(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteReport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteReport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteReportProgress without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteReportProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteReportProgress with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteReportProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('listAssets', () => {
+        it('invokes listAssets without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListAssetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListAssetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Asset()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Asset()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Asset()),
+            ];
+            client.innerApiCalls.listAssets = stubSimpleCall(expectedResponse);
+            const [response] = await client.listAssets(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listAssets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAssets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listAssets without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListAssetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListAssetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Asset()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Asset()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Asset()),
+            ];
+            client.innerApiCalls.listAssets = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listAssets(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.migrationcenter.v1.IAsset[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listAssets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAssets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listAssets with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListAssetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListAssetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listAssets = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listAssets(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listAssets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAssets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listAssetsStream without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListAssetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListAssetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Asset()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Asset()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Asset()),
+            ];
+            client.descriptors.page.listAssets.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listAssetsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.migrationcenter.v1.Asset[] = [];
+                stream.on('data', (response: protos.google.cloud.migrationcenter.v1.Asset) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listAssets.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAssets, request));
+            assert(
+                (client.descriptors.page.listAssets.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listAssetsStream with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListAssetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListAssetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listAssets.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listAssetsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.migrationcenter.v1.Asset[] = [];
+                stream.on('data', (response: protos.google.cloud.migrationcenter.v1.Asset) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listAssets.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAssets, request));
+            assert(
+                (client.descriptors.page.listAssets.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listAssets without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListAssetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListAssetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Asset()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Asset()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Asset()),
+            ];
+            client.descriptors.page.listAssets.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.migrationcenter.v1.IAsset[] = [];
+            const iterable = client.listAssetsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listImportDataFiles as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listImportDataFiles as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listImportDataFiles with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListImportDataFilesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListImportDataFilesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listImportDataFiles = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listImportDataFiles(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listImportDataFiles as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listImportDataFiles as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listImportDataFilesStream without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListImportDataFilesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListImportDataFilesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ImportDataFile()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ImportDataFile()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ImportDataFile()
-        ),
-      ];
-      client.descriptors.page.listImportDataFiles.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listImportDataFilesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.migrationcenter.v1.ImportDataFile[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.migrationcenter.v1.ImportDataFile) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listAssets.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listAssets.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listAssets with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListAssetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListAssetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listAssets.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listAssetsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.migrationcenter.v1.IAsset[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listAssets.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listAssets.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listImportDataFiles.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listImportDataFiles, request)
-      );
-      assert(
-        (client.descriptors.page.listImportDataFiles.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listImportDataFilesStream with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListImportDataFilesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListImportDataFilesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listImportDataFiles.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listImportDataFilesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.migrationcenter.v1.ImportDataFile[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.migrationcenter.v1.ImportDataFile) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listImportJobs', () => {
+        it('invokes listImportJobs without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListImportJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListImportJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ImportJob()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ImportJob()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ImportJob()),
+            ];
+            client.innerApiCalls.listImportJobs = stubSimpleCall(expectedResponse);
+            const [response] = await client.listImportJobs(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listImportJobs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listImportJobs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listImportJobs without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListImportJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListImportJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ImportJob()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ImportJob()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ImportJob()),
+            ];
+            client.innerApiCalls.listImportJobs = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listImportJobs(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.migrationcenter.v1.IImportJob[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listImportJobs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listImportJobs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listImportDataFiles.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listImportDataFiles, request)
-      );
-      assert(
-        (client.descriptors.page.listImportDataFiles.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listImportDataFiles without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListImportDataFilesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListImportDataFilesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ImportDataFile()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ImportDataFile()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ImportDataFile()
-        ),
-      ];
-      client.descriptors.page.listImportDataFiles.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.migrationcenter.v1.IImportDataFile[] =
-        [];
-      const iterable = client.listImportDataFilesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listImportDataFiles.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listImportDataFiles.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listImportJobs with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListImportJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListImportJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listImportJobs = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listImportJobs(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listImportJobs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listImportJobs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listImportDataFiles with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListImportDataFilesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListImportDataFilesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listImportDataFiles.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listImportDataFilesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.migrationcenter.v1.IImportDataFile[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listImportDataFiles.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listImportDataFiles.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listImportJobsStream without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListImportJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListImportJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ImportJob()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ImportJob()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ImportJob()),
+            ];
+            client.descriptors.page.listImportJobs.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listImportJobsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.migrationcenter.v1.ImportJob[] = [];
+                stream.on('data', (response: protos.google.cloud.migrationcenter.v1.ImportJob) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listImportJobs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listImportJobs, request));
+            assert(
+                (client.descriptors.page.listImportJobs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listGroups', () => {
-    it('invokes listGroups without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListGroupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListGroupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Group()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Group()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Group()
-        ),
-      ];
-      client.innerApiCalls.listGroups = stubSimpleCall(expectedResponse);
-      const [response] = await client.listGroups(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listGroups as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listGroups as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listImportJobsStream with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListImportJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListImportJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listImportJobs.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listImportJobsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.migrationcenter.v1.ImportJob[] = [];
+                stream.on('data', (response: protos.google.cloud.migrationcenter.v1.ImportJob) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listImportJobs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listImportJobs, request));
+            assert(
+                (client.descriptors.page.listImportJobs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listGroups without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListGroupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListGroupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Group()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Group()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Group()
-        ),
-      ];
-      client.innerApiCalls.listGroups =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listGroups(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.migrationcenter.v1.IGroup[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listImportJobs without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListImportJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListImportJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ImportJob()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ImportJob()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ImportJob()),
+            ];
+            client.descriptors.page.listImportJobs.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.migrationcenter.v1.IImportJob[] = [];
+            const iterable = client.listImportJobsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listGroups as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listGroups as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listGroups with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListGroupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListGroupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listGroups = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listGroups(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listGroups as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listGroups as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listGroupsStream without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListGroupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListGroupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Group()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Group()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Group()
-        ),
-      ];
-      client.descriptors.page.listGroups.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listGroupsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.migrationcenter.v1.Group[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.migrationcenter.v1.Group) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listImportJobs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listImportJobs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listImportJobs with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListImportJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListImportJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listImportJobs.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listImportJobsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.migrationcenter.v1.IImportJob[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listImportJobs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listImportJobs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listGroups.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listGroups, request)
-      );
-      assert(
-        (client.descriptors.page.listGroups.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listGroupsStream with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListGroupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListGroupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listGroups.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listGroupsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.migrationcenter.v1.Group[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.migrationcenter.v1.Group) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listImportDataFiles', () => {
+        it('invokes listImportDataFiles without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListImportDataFilesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListImportDataFilesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ImportDataFile()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ImportDataFile()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ImportDataFile()),
+            ];
+            client.innerApiCalls.listImportDataFiles = stubSimpleCall(expectedResponse);
+            const [response] = await client.listImportDataFiles(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listImportDataFiles as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listImportDataFiles as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listImportDataFiles without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListImportDataFilesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListImportDataFilesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ImportDataFile()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ImportDataFile()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ImportDataFile()),
+            ];
+            client.innerApiCalls.listImportDataFiles = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listImportDataFiles(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.migrationcenter.v1.IImportDataFile[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listImportDataFiles as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listImportDataFiles as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listGroups.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listGroups, request)
-      );
-      assert(
-        (client.descriptors.page.listGroups.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listGroups without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListGroupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListGroupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Group()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Group()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Group()
-        ),
-      ];
-      client.descriptors.page.listGroups.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.migrationcenter.v1.IGroup[] = [];
-      const iterable = client.listGroupsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listGroups.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listGroups.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listImportDataFiles with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListImportDataFilesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListImportDataFilesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listImportDataFiles = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listImportDataFiles(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listImportDataFiles as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listImportDataFiles as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listGroups with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListGroupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListGroupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listGroups.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listGroupsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.migrationcenter.v1.IGroup[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listGroups.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listGroups.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listImportDataFilesStream without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListImportDataFilesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListImportDataFilesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ImportDataFile()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ImportDataFile()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ImportDataFile()),
+            ];
+            client.descriptors.page.listImportDataFiles.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listImportDataFilesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.migrationcenter.v1.ImportDataFile[] = [];
+                stream.on('data', (response: protos.google.cloud.migrationcenter.v1.ImportDataFile) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listImportDataFiles.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listImportDataFiles, request));
+            assert(
+                (client.descriptors.page.listImportDataFiles.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listErrorFrames', () => {
-    it('invokes listErrorFrames without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListErrorFramesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListErrorFramesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ErrorFrame()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ErrorFrame()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ErrorFrame()
-        ),
-      ];
-      client.innerApiCalls.listErrorFrames = stubSimpleCall(expectedResponse);
-      const [response] = await client.listErrorFrames(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listErrorFrames as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listErrorFrames as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listImportDataFilesStream with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListImportDataFilesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListImportDataFilesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listImportDataFiles.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listImportDataFilesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.migrationcenter.v1.ImportDataFile[] = [];
+                stream.on('data', (response: protos.google.cloud.migrationcenter.v1.ImportDataFile) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listImportDataFiles.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listImportDataFiles, request));
+            assert(
+                (client.descriptors.page.listImportDataFiles.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listErrorFrames without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListErrorFramesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListErrorFramesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ErrorFrame()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ErrorFrame()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ErrorFrame()
-        ),
-      ];
-      client.innerApiCalls.listErrorFrames =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listErrorFrames(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.migrationcenter.v1.IErrorFrame[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listImportDataFiles without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListImportDataFilesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListImportDataFilesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ImportDataFile()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ImportDataFile()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ImportDataFile()),
+            ];
+            client.descriptors.page.listImportDataFiles.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.migrationcenter.v1.IImportDataFile[] = [];
+            const iterable = client.listImportDataFilesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listErrorFrames as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listErrorFrames as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listErrorFrames with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListErrorFramesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListErrorFramesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listErrorFrames = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listErrorFrames(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listErrorFrames as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listErrorFrames as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listErrorFramesStream without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListErrorFramesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListErrorFramesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ErrorFrame()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ErrorFrame()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ErrorFrame()
-        ),
-      ];
-      client.descriptors.page.listErrorFrames.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listErrorFramesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.migrationcenter.v1.ErrorFrame[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.migrationcenter.v1.ErrorFrame) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listImportDataFiles.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listImportDataFiles.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listImportDataFiles with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListImportDataFilesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListImportDataFilesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listImportDataFiles.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listImportDataFilesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.migrationcenter.v1.IImportDataFile[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listImportDataFiles.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listImportDataFiles.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listErrorFrames.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listErrorFrames, request)
-      );
-      assert(
-        (client.descriptors.page.listErrorFrames.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listErrorFramesStream with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListErrorFramesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListErrorFramesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listErrorFrames.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listErrorFramesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.migrationcenter.v1.ErrorFrame[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.migrationcenter.v1.ErrorFrame) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listGroups', () => {
+        it('invokes listGroups without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListGroupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListGroupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Group()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Group()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Group()),
+            ];
+            client.innerApiCalls.listGroups = stubSimpleCall(expectedResponse);
+            const [response] = await client.listGroups(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listGroups as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listGroups as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listGroups without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListGroupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListGroupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Group()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Group()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Group()),
+            ];
+            client.innerApiCalls.listGroups = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listGroups(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.migrationcenter.v1.IGroup[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listGroups as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listGroups as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listErrorFrames.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listErrorFrames, request)
-      );
-      assert(
-        (client.descriptors.page.listErrorFrames.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listErrorFrames without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListErrorFramesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListErrorFramesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ErrorFrame()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ErrorFrame()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ErrorFrame()
-        ),
-      ];
-      client.descriptors.page.listErrorFrames.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.migrationcenter.v1.IErrorFrame[] =
-        [];
-      const iterable = client.listErrorFramesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listErrorFrames.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listErrorFrames.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listGroups with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListGroupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListGroupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listGroups = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listGroups(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listGroups as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listGroups as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listErrorFrames with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListErrorFramesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListErrorFramesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listErrorFrames.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listErrorFramesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.migrationcenter.v1.IErrorFrame[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listErrorFrames.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listErrorFrames.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listGroupsStream without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListGroupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListGroupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Group()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Group()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Group()),
+            ];
+            client.descriptors.page.listGroups.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listGroupsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.migrationcenter.v1.Group[] = [];
+                stream.on('data', (response: protos.google.cloud.migrationcenter.v1.Group) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listGroups.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listGroups, request));
+            assert(
+                (client.descriptors.page.listGroups.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listSources', () => {
-    it('invokes listSources without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListSourcesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListSourcesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Source()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Source()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Source()
-        ),
-      ];
-      client.innerApiCalls.listSources = stubSimpleCall(expectedResponse);
-      const [response] = await client.listSources(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listSources as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listSources as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listGroupsStream with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListGroupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListGroupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listGroups.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listGroupsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.migrationcenter.v1.Group[] = [];
+                stream.on('data', (response: protos.google.cloud.migrationcenter.v1.Group) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listGroups.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listGroups, request));
+            assert(
+                (client.descriptors.page.listGroups.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listSources without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListSourcesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListSourcesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Source()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Source()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Source()
-        ),
-      ];
-      client.innerApiCalls.listSources =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listSources(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.migrationcenter.v1.ISource[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listGroups without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListGroupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListGroupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Group()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Group()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Group()),
+            ];
+            client.descriptors.page.listGroups.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.migrationcenter.v1.IGroup[] = [];
+            const iterable = client.listGroupsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listSources as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listSources as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listSources with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListSourcesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListSourcesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listSources = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listSources(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listSources as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listSources as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listSourcesStream without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListSourcesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListSourcesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Source()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Source()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Source()
-        ),
-      ];
-      client.descriptors.page.listSources.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listSourcesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.migrationcenter.v1.Source[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.migrationcenter.v1.Source) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listGroups.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listGroups.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listGroups with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListGroupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListGroupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listGroups.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listGroupsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.migrationcenter.v1.IGroup[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listGroups.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listGroups.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listSources.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listSources, request)
-      );
-      assert(
-        (client.descriptors.page.listSources.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listSourcesStream with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListSourcesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListSourcesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listSources.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listSourcesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.migrationcenter.v1.Source[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.migrationcenter.v1.Source) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listErrorFrames', () => {
+        it('invokes listErrorFrames without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListErrorFramesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListErrorFramesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ErrorFrame()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ErrorFrame()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ErrorFrame()),
+            ];
+            client.innerApiCalls.listErrorFrames = stubSimpleCall(expectedResponse);
+            const [response] = await client.listErrorFrames(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listErrorFrames as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listErrorFrames as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listErrorFrames without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListErrorFramesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListErrorFramesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ErrorFrame()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ErrorFrame()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ErrorFrame()),
+            ];
+            client.innerApiCalls.listErrorFrames = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listErrorFrames(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.migrationcenter.v1.IErrorFrame[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listErrorFrames as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listErrorFrames as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listSources.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listSources, request)
-      );
-      assert(
-        (client.descriptors.page.listSources.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listSources without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListSourcesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListSourcesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Source()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Source()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Source()
-        ),
-      ];
-      client.descriptors.page.listSources.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.migrationcenter.v1.ISource[] = [];
-      const iterable = client.listSourcesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listSources.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listSources.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listErrorFrames with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListErrorFramesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListErrorFramesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listErrorFrames = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listErrorFrames(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listErrorFrames as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listErrorFrames as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listSources with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListSourcesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListSourcesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listSources.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listSourcesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.migrationcenter.v1.ISource[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listSources.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listSources.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listErrorFramesStream without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListErrorFramesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListErrorFramesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ErrorFrame()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ErrorFrame()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ErrorFrame()),
+            ];
+            client.descriptors.page.listErrorFrames.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listErrorFramesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.migrationcenter.v1.ErrorFrame[] = [];
+                stream.on('data', (response: protos.google.cloud.migrationcenter.v1.ErrorFrame) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listErrorFrames.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listErrorFrames, request));
+            assert(
+                (client.descriptors.page.listErrorFrames.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listPreferenceSets', () => {
-    it('invokes listPreferenceSets without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListPreferenceSetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListPreferenceSetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.PreferenceSet()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.PreferenceSet()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.PreferenceSet()
-        ),
-      ];
-      client.innerApiCalls.listPreferenceSets =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listPreferenceSets(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listPreferenceSets as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listPreferenceSets as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listErrorFramesStream with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListErrorFramesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListErrorFramesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listErrorFrames.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listErrorFramesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.migrationcenter.v1.ErrorFrame[] = [];
+                stream.on('data', (response: protos.google.cloud.migrationcenter.v1.ErrorFrame) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listErrorFrames.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listErrorFrames, request));
+            assert(
+                (client.descriptors.page.listErrorFrames.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listPreferenceSets without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListPreferenceSetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListPreferenceSetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.PreferenceSet()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.PreferenceSet()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.PreferenceSet()
-        ),
-      ];
-      client.innerApiCalls.listPreferenceSets =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listPreferenceSets(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.migrationcenter.v1.IPreferenceSet[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listErrorFrames without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListErrorFramesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListErrorFramesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ErrorFrame()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ErrorFrame()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ErrorFrame()),
+            ];
+            client.descriptors.page.listErrorFrames.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.migrationcenter.v1.IErrorFrame[] = [];
+            const iterable = client.listErrorFramesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listPreferenceSets as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listPreferenceSets as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listPreferenceSets with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListPreferenceSetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListPreferenceSetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listPreferenceSets = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listPreferenceSets(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listPreferenceSets as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listPreferenceSets as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listPreferenceSetsStream without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListPreferenceSetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListPreferenceSetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.PreferenceSet()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.PreferenceSet()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.PreferenceSet()
-        ),
-      ];
-      client.descriptors.page.listPreferenceSets.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listPreferenceSetsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.migrationcenter.v1.PreferenceSet[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.migrationcenter.v1.PreferenceSet) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listErrorFrames.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listErrorFrames.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listErrorFrames with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListErrorFramesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListErrorFramesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listErrorFrames.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listErrorFramesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.migrationcenter.v1.IErrorFrame[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listErrorFrames.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listErrorFrames.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listPreferenceSets.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listPreferenceSets, request)
-      );
-      assert(
-        (client.descriptors.page.listPreferenceSets.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listPreferenceSetsStream with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListPreferenceSetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListPreferenceSetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listPreferenceSets.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listPreferenceSetsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.migrationcenter.v1.PreferenceSet[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.migrationcenter.v1.PreferenceSet) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listSources', () => {
+        it('invokes listSources without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListSourcesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListSourcesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Source()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Source()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Source()),
+            ];
+            client.innerApiCalls.listSources = stubSimpleCall(expectedResponse);
+            const [response] = await client.listSources(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listSources as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listSources as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listSources without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListSourcesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListSourcesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Source()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Source()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Source()),
+            ];
+            client.innerApiCalls.listSources = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listSources(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.migrationcenter.v1.ISource[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listSources as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listSources as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listPreferenceSets.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listPreferenceSets, request)
-      );
-      assert(
-        (client.descriptors.page.listPreferenceSets.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listPreferenceSets without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListPreferenceSetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListPreferenceSetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.PreferenceSet()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.PreferenceSet()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.PreferenceSet()
-        ),
-      ];
-      client.descriptors.page.listPreferenceSets.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.migrationcenter.v1.IPreferenceSet[] =
-        [];
-      const iterable = client.listPreferenceSetsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listPreferenceSets.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listPreferenceSets.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listSources with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListSourcesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListSourcesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listSources = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listSources(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listSources as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listSources as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listPreferenceSets with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListPreferenceSetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListPreferenceSetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listPreferenceSets.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listPreferenceSetsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.migrationcenter.v1.IPreferenceSet[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listPreferenceSets.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listPreferenceSets.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listSourcesStream without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListSourcesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListSourcesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Source()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Source()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Source()),
+            ];
+            client.descriptors.page.listSources.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listSourcesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.migrationcenter.v1.Source[] = [];
+                stream.on('data', (response: protos.google.cloud.migrationcenter.v1.Source) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listSources.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listSources, request));
+            assert(
+                (client.descriptors.page.listSources.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listReportConfigs', () => {
-    it('invokes listReportConfigs without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListReportConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListReportConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ReportConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ReportConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ReportConfig()
-        ),
-      ];
-      client.innerApiCalls.listReportConfigs = stubSimpleCall(expectedResponse);
-      const [response] = await client.listReportConfigs(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listReportConfigs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listReportConfigs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listSourcesStream with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListSourcesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListSourcesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listSources.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listSourcesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.migrationcenter.v1.Source[] = [];
+                stream.on('data', (response: protos.google.cloud.migrationcenter.v1.Source) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listSources.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listSources, request));
+            assert(
+                (client.descriptors.page.listSources.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listReportConfigs without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListReportConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListReportConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ReportConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ReportConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ReportConfig()
-        ),
-      ];
-      client.innerApiCalls.listReportConfigs =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listReportConfigs(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.migrationcenter.v1.IReportConfig[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listSources without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListSourcesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListSourcesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Source()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Source()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Source()),
+            ];
+            client.descriptors.page.listSources.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.migrationcenter.v1.ISource[] = [];
+            const iterable = client.listSourcesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listReportConfigs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listReportConfigs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listReportConfigs with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListReportConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListReportConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listReportConfigs = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listReportConfigs(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listReportConfigs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listReportConfigs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listReportConfigsStream without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListReportConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListReportConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ReportConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ReportConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ReportConfig()
-        ),
-      ];
-      client.descriptors.page.listReportConfigs.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listReportConfigsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.migrationcenter.v1.ReportConfig[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.migrationcenter.v1.ReportConfig) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listSources.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listSources.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listSources with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListSourcesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListSourcesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listSources.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listSourcesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.migrationcenter.v1.ISource[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listSources.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listSources.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listReportConfigs.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listReportConfigs, request)
-      );
-      assert(
-        (client.descriptors.page.listReportConfigs.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listReportConfigsStream with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListReportConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListReportConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listReportConfigs.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listReportConfigsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.migrationcenter.v1.ReportConfig[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.migrationcenter.v1.ReportConfig) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listPreferenceSets', () => {
+        it('invokes listPreferenceSets without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListPreferenceSetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListPreferenceSetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.PreferenceSet()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.PreferenceSet()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.PreferenceSet()),
+            ];
+            client.innerApiCalls.listPreferenceSets = stubSimpleCall(expectedResponse);
+            const [response] = await client.listPreferenceSets(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listPreferenceSets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPreferenceSets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listPreferenceSets without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListPreferenceSetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListPreferenceSetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.PreferenceSet()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.PreferenceSet()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.PreferenceSet()),
+            ];
+            client.innerApiCalls.listPreferenceSets = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listPreferenceSets(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.migrationcenter.v1.IPreferenceSet[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listPreferenceSets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPreferenceSets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listReportConfigs.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listReportConfigs, request)
-      );
-      assert(
-        (client.descriptors.page.listReportConfigs.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listReportConfigs without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListReportConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListReportConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ReportConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ReportConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.ReportConfig()
-        ),
-      ];
-      client.descriptors.page.listReportConfigs.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.migrationcenter.v1.IReportConfig[] =
-        [];
-      const iterable = client.listReportConfigsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listReportConfigs.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listReportConfigs.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listPreferenceSets with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListPreferenceSetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListPreferenceSetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listPreferenceSets = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listPreferenceSets(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listPreferenceSets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPreferenceSets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listReportConfigs with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListReportConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListReportConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listReportConfigs.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listReportConfigsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.migrationcenter.v1.IReportConfig[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listReportConfigs.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listReportConfigs.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listPreferenceSetsStream without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListPreferenceSetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListPreferenceSetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.PreferenceSet()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.PreferenceSet()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.PreferenceSet()),
+            ];
+            client.descriptors.page.listPreferenceSets.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listPreferenceSetsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.migrationcenter.v1.PreferenceSet[] = [];
+                stream.on('data', (response: protos.google.cloud.migrationcenter.v1.PreferenceSet) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listPreferenceSets.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listPreferenceSets, request));
+            assert(
+                (client.descriptors.page.listPreferenceSets.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listReports', () => {
-    it('invokes listReports without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListReportsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListReportsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Report()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Report()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Report()
-        ),
-      ];
-      client.innerApiCalls.listReports = stubSimpleCall(expectedResponse);
-      const [response] = await client.listReports(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listReports as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listReports as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listPreferenceSetsStream with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListPreferenceSetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListPreferenceSetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listPreferenceSets.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listPreferenceSetsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.migrationcenter.v1.PreferenceSet[] = [];
+                stream.on('data', (response: protos.google.cloud.migrationcenter.v1.PreferenceSet) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listPreferenceSets.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listPreferenceSets, request));
+            assert(
+                (client.descriptors.page.listPreferenceSets.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listReports without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListReportsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListReportsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Report()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Report()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Report()
-        ),
-      ];
-      client.innerApiCalls.listReports =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listReports(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.migrationcenter.v1.IReport[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listPreferenceSets without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListPreferenceSetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListPreferenceSetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.PreferenceSet()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.PreferenceSet()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.PreferenceSet()),
+            ];
+            client.descriptors.page.listPreferenceSets.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.migrationcenter.v1.IPreferenceSet[] = [];
+            const iterable = client.listPreferenceSetsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listReports as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listReports as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listReports with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListReportsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListReportsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listReports = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listReports(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listReports as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listReports as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listReportsStream without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListReportsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListReportsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Report()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Report()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Report()
-        ),
-      ];
-      client.descriptors.page.listReports.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listReportsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.migrationcenter.v1.Report[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.migrationcenter.v1.Report) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listPreferenceSets.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listPreferenceSets.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listPreferenceSets with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListPreferenceSetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListPreferenceSetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listPreferenceSets.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listPreferenceSetsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.migrationcenter.v1.IPreferenceSet[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listPreferenceSets.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listPreferenceSets.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listReports.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listReports, request)
-      );
-      assert(
-        (client.descriptors.page.listReports.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listReportsStream with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListReportsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListReportsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listReports.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listReportsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.migrationcenter.v1.Report[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.migrationcenter.v1.Report) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listReportConfigs', () => {
+        it('invokes listReportConfigs without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListReportConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListReportConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ReportConfig()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ReportConfig()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ReportConfig()),
+            ];
+            client.innerApiCalls.listReportConfigs = stubSimpleCall(expectedResponse);
+            const [response] = await client.listReportConfigs(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listReportConfigs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listReportConfigs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listReportConfigs without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListReportConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListReportConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ReportConfig()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ReportConfig()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ReportConfig()),
+            ];
+            client.innerApiCalls.listReportConfigs = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listReportConfigs(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.migrationcenter.v1.IReportConfig[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listReportConfigs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listReportConfigs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listReports.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listReports, request)
-      );
-      assert(
-        (client.descriptors.page.listReports.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listReports without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListReportsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListReportsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Report()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Report()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.migrationcenter.v1.Report()
-        ),
-      ];
-      client.descriptors.page.listReports.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.migrationcenter.v1.IReport[] = [];
-      const iterable = client.listReportsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listReports.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listReports.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listReportConfigs with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListReportConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListReportConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listReportConfigs = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listReportConfigs(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listReportConfigs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listReportConfigs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listReports with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.migrationcenter.v1.ListReportsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.migrationcenter.v1.ListReportsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listReports.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listReportsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.migrationcenter.v1.IReport[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listReports.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listReports.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-  describe('getLocation', () => {
-    it('invokes getLocation without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
-      const response = await client.getLocation(request, expectedOptions);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-    it('invokes getLocation without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getLocation(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: LocationProtos.google.cloud.location.ILocation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('invokes listReportConfigsStream without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListReportConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListReportConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ReportConfig()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ReportConfig()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ReportConfig()),
+            ];
+            client.descriptors.page.listReportConfigs.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listReportConfigsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.migrationcenter.v1.ReportConfig[] = [];
+                stream.on('data', (response: protos.google.cloud.migrationcenter.v1.ReportConfig) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listReportConfigs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listReportConfigs, request));
+            assert(
+                (client.descriptors.page.listReportConfigs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listReportConfigsStream with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListReportConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListReportConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listReportConfigs.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listReportConfigsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.migrationcenter.v1.ReportConfig[] = [];
+                stream.on('data', (response: protos.google.cloud.migrationcenter.v1.ReportConfig) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listReportConfigs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listReportConfigs, request));
+            assert(
+                (client.descriptors.page.listReportConfigs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listReportConfigs without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListReportConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListReportConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ReportConfig()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ReportConfig()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.ReportConfig()),
+            ];
+            client.descriptors.page.listReportConfigs.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.migrationcenter.v1.IReportConfig[] = [];
+            const iterable = client.listReportConfigsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.locationsClient.getLocation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listReportConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listReportConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listReportConfigs with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListReportConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListReportConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listReportConfigs.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listReportConfigsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.migrationcenter.v1.IReportConfig[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listReportConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listReportConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes getLocation with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.locationsClient.getLocation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getLocation(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-  describe('listLocationsAsync', () => {
-    it('uses async iteration with listLocations without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedResponse = [
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-      ];
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-      const iterable = client.listLocationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-    it('uses async iteration with listLocations with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedError = new Error('expected');
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listLocationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
-  describe('getOperation', () => {
-    it('invokes getOperation without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const response = await client.getOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes getOperation without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .getOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: operationsProtos.google.longrunning.Operation | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+
+    describe('listReports', () => {
+        it('invokes listReports without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListReportsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListReportsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Report()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Report()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Report()),
+            ];
+            client.innerApiCalls.listReports = stubSimpleCall(expectedResponse);
+            const [response] = await client.listReports(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listReports as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listReports as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listReports without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListReportsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListReportsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Report()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Report()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Report()),
+            ];
+            client.innerApiCalls.listReports = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listReports(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.migrationcenter.v1.IReport[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listReports as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listReports as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listReports with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListReportsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListReportsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listReports = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listReports(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listReports as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listReports as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listReportsStream without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListReportsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListReportsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Report()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Report()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Report()),
+            ];
+            client.descriptors.page.listReports.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listReportsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.migrationcenter.v1.Report[] = [];
+                stream.on('data', (response: protos.google.cloud.migrationcenter.v1.Report) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listReports.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listReports, request));
+            assert(
+                (client.descriptors.page.listReports.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listReportsStream with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListReportsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListReportsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listReports.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listReportsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.migrationcenter.v1.Report[] = [];
+                stream.on('data', (response: protos.google.cloud.migrationcenter.v1.Report) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listReports.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listReports, request));
+            assert(
+                (client.descriptors.page.listReports.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listReports without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListReportsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListReportsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Report()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Report()),
+              generateSampleMessage(new protos.google.cloud.migrationcenter.v1.Report()),
+            ];
+            client.descriptors.page.listReports.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.migrationcenter.v1.IReport[] = [];
+            const iterable = client.listReportsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listReports.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listReports.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listReports with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.migrationcenter.v1.ListReportsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.migrationcenter.v1.ListReportsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listReports.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listReportsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.migrationcenter.v1.IReport[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listReports.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listReports.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes getOperation with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.getOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('getLocation', () => {
+        it('invokes getLocation without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
+            const response = await client.getLocation(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+        it('invokes getLocation without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getLocation(
+                    request,
+                    expectedOptions,
+                    (
+                        err?: Error | null,
+                        result?: LocationProtos.google.cloud.location.ILocation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getLocation with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.locationsClient.getLocation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getLocation(request, expectedOptions), expectedError);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
     });
-  });
-  describe('cancelOperation', () => {
-    it('invokes cancelOperation without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.cancelOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes cancelOperation without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .cancelOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+    describe('listLocationsAsync', () => {
+        it('uses async iteration with listLocations without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+                new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedResponse = [
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+            ];
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+            const iterable = client.listLocationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+        it('uses async iteration with listLocations with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedError = new Error('expected');
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listLocationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes cancelOperation with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.cancelOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.cancelOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('getOperation', () => {
+        it('invokes getOperation without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const response = await client.getOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes getOperation without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.getOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: operationsProtos.google.longrunning.Operation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getOperation with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.getOperation(request)}, expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-  });
-  describe('deleteOperation', () => {
-    it('invokes deleteOperation without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.deleteOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('cancelOperation', () => {
+        it('invokes cancelOperation without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = stubSimpleCall(expectedResponse);
+            const response = await client.cancelOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes cancelOperation without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.cancelOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes cancelOperation with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.cancelOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.cancelOperation(request)}, expectedError);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-    it('invokes deleteOperation without error using callback', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .deleteOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+    describe('deleteOperation', () => {
+        it('invokes deleteOperation without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = stubSimpleCall(expectedResponse);
+            const response = await client.deleteOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes deleteOperation without error using callback', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.deleteOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes deleteOperation with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.deleteOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.deleteOperation(request)}, expectedError);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('listOperationsAsync', () => {
+        it('uses async iteration with listOperations without error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedResponse = [
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+            ];
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: operationsProtos.google.longrunning.IOperation[] = [];
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
-    });
-    it('invokes deleteOperation with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.deleteOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.deleteOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('listOperationsAsync', () => {
-    it('uses async iteration with listOperations without error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-      ];
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.IOperation[] = [];
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-    it('uses async iteration with listOperations with error', async () => {
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.IOperation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-  });
-
-  describe('Path templates', () => {
-    describe('asset', async () => {
-      const fakePath = '/rendered/path/asset';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        asset: 'assetValue',
-      };
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.assetPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.assetPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('assetPath', () => {
-        const result = client.assetPath(
-          'projectValue',
-          'locationValue',
-          'assetValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.assetPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromAssetName', () => {
-        const result = client.matchProjectFromAssetName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.assetPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromAssetName', () => {
-        const result = client.matchLocationFromAssetName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.assetPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAssetFromAssetName', () => {
-        const result = client.matchAssetFromAssetName(fakePath);
-        assert.strictEqual(result, 'assetValue');
-        assert(
-          (client.pathTemplates.assetPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+        it('uses async iteration with listOperations with error', async () => {
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: operationsProtos.google.longrunning.IOperation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
     });
 
-    describe('errorFrame', async () => {
-      const fakePath = '/rendered/path/errorFrame';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        source: 'sourceValue',
-        error_frame: 'errorFrameValue',
-      };
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.errorFramePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.errorFramePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('Path templates', () => {
 
-      it('errorFramePath', () => {
-        const result = client.errorFramePath(
-          'projectValue',
-          'locationValue',
-          'sourceValue',
-          'errorFrameValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.errorFramePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('asset', async () => {
+            const fakePath = "/rendered/path/asset";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                asset: "assetValue",
+            };
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.assetPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.assetPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromErrorFrameName', () => {
-        const result = client.matchProjectFromErrorFrameName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.errorFramePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('assetPath', () => {
+                const result = client.assetPath("projectValue", "locationValue", "assetValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.assetPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromErrorFrameName', () => {
-        const result = client.matchLocationFromErrorFrameName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.errorFramePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchProjectFromAssetName', () => {
+                const result = client.matchProjectFromAssetName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.assetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchSourceFromErrorFrameName', () => {
-        const result = client.matchSourceFromErrorFrameName(fakePath);
-        assert.strictEqual(result, 'sourceValue');
-        assert(
-          (client.pathTemplates.errorFramePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchLocationFromAssetName', () => {
+                const result = client.matchLocationFromAssetName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.assetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchErrorFrameFromErrorFrameName', () => {
-        const result = client.matchErrorFrameFromErrorFrameName(fakePath);
-        assert.strictEqual(result, 'errorFrameValue');
-        assert(
-          (client.pathTemplates.errorFramePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchAssetFromAssetName', () => {
+                const result = client.matchAssetFromAssetName(fakePath);
+                assert.strictEqual(result, "assetValue");
+                assert((client.pathTemplates.assetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('errorFrame', async () => {
+            const fakePath = "/rendered/path/errorFrame";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                source: "sourceValue",
+                error_frame: "errorFrameValue",
+            };
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.errorFramePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.errorFramePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('errorFramePath', () => {
+                const result = client.errorFramePath("projectValue", "locationValue", "sourceValue", "errorFrameValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.errorFramePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromErrorFrameName', () => {
+                const result = client.matchProjectFromErrorFrameName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.errorFramePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromErrorFrameName', () => {
+                const result = client.matchLocationFromErrorFrameName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.errorFramePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSourceFromErrorFrameName', () => {
+                const result = client.matchSourceFromErrorFrameName(fakePath);
+                assert.strictEqual(result, "sourceValue");
+                assert((client.pathTemplates.errorFramePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchErrorFrameFromErrorFrameName', () => {
+                const result = client.matchErrorFrameFromErrorFrameName(fakePath);
+                assert.strictEqual(result, "errorFrameValue");
+                assert((client.pathTemplates.errorFramePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('group', async () => {
+            const fakePath = "/rendered/path/group";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                group: "groupValue",
+            };
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.groupPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.groupPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('groupPath', () => {
+                const result = client.groupPath("projectValue", "locationValue", "groupValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.groupPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromGroupName', () => {
+                const result = client.matchProjectFromGroupName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.groupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromGroupName', () => {
+                const result = client.matchLocationFromGroupName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.groupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchGroupFromGroupName', () => {
+                const result = client.matchGroupFromGroupName(fakePath);
+                assert.strictEqual(result, "groupValue");
+                assert((client.pathTemplates.groupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('importDataFile', async () => {
+            const fakePath = "/rendered/path/importDataFile";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                import_job: "importJobValue",
+                import_data_file: "importDataFileValue",
+            };
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.importDataFilePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.importDataFilePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('importDataFilePath', () => {
+                const result = client.importDataFilePath("projectValue", "locationValue", "importJobValue", "importDataFileValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.importDataFilePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromImportDataFileName', () => {
+                const result = client.matchProjectFromImportDataFileName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.importDataFilePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromImportDataFileName', () => {
+                const result = client.matchLocationFromImportDataFileName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.importDataFilePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchImportJobFromImportDataFileName', () => {
+                const result = client.matchImportJobFromImportDataFileName(fakePath);
+                assert.strictEqual(result, "importJobValue");
+                assert((client.pathTemplates.importDataFilePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchImportDataFileFromImportDataFileName', () => {
+                const result = client.matchImportDataFileFromImportDataFileName(fakePath);
+                assert.strictEqual(result, "importDataFileValue");
+                assert((client.pathTemplates.importDataFilePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('importJob', async () => {
+            const fakePath = "/rendered/path/importJob";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                import_job: "importJobValue",
+            };
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.importJobPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.importJobPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('importJobPath', () => {
+                const result = client.importJobPath("projectValue", "locationValue", "importJobValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.importJobPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromImportJobName', () => {
+                const result = client.matchProjectFromImportJobName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.importJobPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromImportJobName', () => {
+                const result = client.matchLocationFromImportJobName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.importJobPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchImportJobFromImportJobName', () => {
+                const result = client.matchImportJobFromImportJobName(fakePath);
+                assert.strictEqual(result, "importJobValue");
+                assert((client.pathTemplates.importJobPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('location', async () => {
+            const fakePath = "/rendered/path/location";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.locationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.locationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('locationPath', () => {
+                const result = client.locationPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.locationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromLocationName', () => {
+                const result = client.matchProjectFromLocationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromLocationName', () => {
+                const result = client.matchLocationFromLocationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('preferenceSet', async () => {
+            const fakePath = "/rendered/path/preferenceSet";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                preference_set: "preferenceSetValue",
+            };
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.preferenceSetPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.preferenceSetPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('preferenceSetPath', () => {
+                const result = client.preferenceSetPath("projectValue", "locationValue", "preferenceSetValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.preferenceSetPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromPreferenceSetName', () => {
+                const result = client.matchProjectFromPreferenceSetName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.preferenceSetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromPreferenceSetName', () => {
+                const result = client.matchLocationFromPreferenceSetName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.preferenceSetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchPreferenceSetFromPreferenceSetName', () => {
+                const result = client.matchPreferenceSetFromPreferenceSetName(fakePath);
+                assert.strictEqual(result, "preferenceSetValue");
+                assert((client.pathTemplates.preferenceSetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('project', async () => {
+            const fakePath = "/rendered/path/project";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectPath', () => {
+                const result = client.projectPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectName', () => {
+                const result = client.matchProjectFromProjectName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('report', async () => {
+            const fakePath = "/rendered/path/report";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                report_config: "reportConfigValue",
+                report: "reportValue",
+            };
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.reportPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.reportPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('reportPath', () => {
+                const result = client.reportPath("projectValue", "locationValue", "reportConfigValue", "reportValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.reportPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromReportName', () => {
+                const result = client.matchProjectFromReportName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.reportPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromReportName', () => {
+                const result = client.matchLocationFromReportName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.reportPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchReportConfigFromReportName', () => {
+                const result = client.matchReportConfigFromReportName(fakePath);
+                assert.strictEqual(result, "reportConfigValue");
+                assert((client.pathTemplates.reportPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchReportFromReportName', () => {
+                const result = client.matchReportFromReportName(fakePath);
+                assert.strictEqual(result, "reportValue");
+                assert((client.pathTemplates.reportPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('reportConfig', async () => {
+            const fakePath = "/rendered/path/reportConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                report_config: "reportConfigValue",
+            };
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.reportConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.reportConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('reportConfigPath', () => {
+                const result = client.reportConfigPath("projectValue", "locationValue", "reportConfigValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.reportConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromReportConfigName', () => {
+                const result = client.matchProjectFromReportConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.reportConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromReportConfigName', () => {
+                const result = client.matchLocationFromReportConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.reportConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchReportConfigFromReportConfigName', () => {
+                const result = client.matchReportConfigFromReportConfigName(fakePath);
+                assert.strictEqual(result, "reportConfigValue");
+                assert((client.pathTemplates.reportConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('settings', async () => {
+            const fakePath = "/rendered/path/settings";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.settingsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.settingsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('settingsPath', () => {
+                const result = client.settingsPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.settingsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromSettingsName', () => {
+                const result = client.matchProjectFromSettingsName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.settingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromSettingsName', () => {
+                const result = client.matchLocationFromSettingsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.settingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('source', async () => {
+            const fakePath = "/rendered/path/source";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                source: "sourceValue",
+            };
+            const client = new migrationcenterModule.v1.MigrationCenterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.sourcePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.sourcePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('sourcePath', () => {
+                const result = client.sourcePath("projectValue", "locationValue", "sourceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.sourcePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromSourceName', () => {
+                const result = client.matchProjectFromSourceName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.sourcePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromSourceName', () => {
+                const result = client.matchLocationFromSourceName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.sourcePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSourceFromSourceName', () => {
+                const result = client.matchSourceFromSourceName(fakePath);
+                assert.strictEqual(result, "sourceValue");
+                assert((client.pathTemplates.sourcePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-
-    describe('group', async () => {
-      const fakePath = '/rendered/path/group';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        group: 'groupValue',
-      };
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.groupPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.groupPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('groupPath', () => {
-        const result = client.groupPath(
-          'projectValue',
-          'locationValue',
-          'groupValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.groupPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromGroupName', () => {
-        const result = client.matchProjectFromGroupName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.groupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromGroupName', () => {
-        const result = client.matchLocationFromGroupName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.groupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchGroupFromGroupName', () => {
-        const result = client.matchGroupFromGroupName(fakePath);
-        assert.strictEqual(result, 'groupValue');
-        assert(
-          (client.pathTemplates.groupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('importDataFile', async () => {
-      const fakePath = '/rendered/path/importDataFile';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        import_job: 'importJobValue',
-        import_data_file: 'importDataFileValue',
-      };
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.importDataFilePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.importDataFilePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('importDataFilePath', () => {
-        const result = client.importDataFilePath(
-          'projectValue',
-          'locationValue',
-          'importJobValue',
-          'importDataFileValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.importDataFilePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromImportDataFileName', () => {
-        const result = client.matchProjectFromImportDataFileName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.importDataFilePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromImportDataFileName', () => {
-        const result = client.matchLocationFromImportDataFileName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.importDataFilePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchImportJobFromImportDataFileName', () => {
-        const result = client.matchImportJobFromImportDataFileName(fakePath);
-        assert.strictEqual(result, 'importJobValue');
-        assert(
-          (client.pathTemplates.importDataFilePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchImportDataFileFromImportDataFileName', () => {
-        const result =
-          client.matchImportDataFileFromImportDataFileName(fakePath);
-        assert.strictEqual(result, 'importDataFileValue');
-        assert(
-          (client.pathTemplates.importDataFilePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('importJob', async () => {
-      const fakePath = '/rendered/path/importJob';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        import_job: 'importJobValue',
-      };
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.importJobPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.importJobPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('importJobPath', () => {
-        const result = client.importJobPath(
-          'projectValue',
-          'locationValue',
-          'importJobValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.importJobPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromImportJobName', () => {
-        const result = client.matchProjectFromImportJobName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.importJobPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromImportJobName', () => {
-        const result = client.matchLocationFromImportJobName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.importJobPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchImportJobFromImportJobName', () => {
-        const result = client.matchImportJobFromImportJobName(fakePath);
-        assert.strictEqual(result, 'importJobValue');
-        assert(
-          (client.pathTemplates.importJobPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('location', async () => {
-      const fakePath = '/rendered/path/location';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-      };
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.locationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.locationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('locationPath', () => {
-        const result = client.locationPath('projectValue', 'locationValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.locationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromLocationName', () => {
-        const result = client.matchProjectFromLocationName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromLocationName', () => {
-        const result = client.matchLocationFromLocationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('preferenceSet', async () => {
-      const fakePath = '/rendered/path/preferenceSet';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        preference_set: 'preferenceSetValue',
-      };
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.preferenceSetPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.preferenceSetPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('preferenceSetPath', () => {
-        const result = client.preferenceSetPath(
-          'projectValue',
-          'locationValue',
-          'preferenceSetValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.preferenceSetPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromPreferenceSetName', () => {
-        const result = client.matchProjectFromPreferenceSetName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.preferenceSetPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromPreferenceSetName', () => {
-        const result = client.matchLocationFromPreferenceSetName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.preferenceSetPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchPreferenceSetFromPreferenceSetName', () => {
-        const result = client.matchPreferenceSetFromPreferenceSetName(fakePath);
-        assert.strictEqual(result, 'preferenceSetValue');
-        assert(
-          (client.pathTemplates.preferenceSetPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('project', async () => {
-      const fakePath = '/rendered/path/project';
-      const expectedParameters = {
-        project: 'projectValue',
-      };
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectPath', () => {
-        const result = client.projectPath('projectValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectName', () => {
-        const result = client.matchProjectFromProjectName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('report', async () => {
-      const fakePath = '/rendered/path/report';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        report_config: 'reportConfigValue',
-        report: 'reportValue',
-      };
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.reportPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.reportPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('reportPath', () => {
-        const result = client.reportPath(
-          'projectValue',
-          'locationValue',
-          'reportConfigValue',
-          'reportValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.reportPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromReportName', () => {
-        const result = client.matchProjectFromReportName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.reportPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromReportName', () => {
-        const result = client.matchLocationFromReportName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.reportPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchReportConfigFromReportName', () => {
-        const result = client.matchReportConfigFromReportName(fakePath);
-        assert.strictEqual(result, 'reportConfigValue');
-        assert(
-          (client.pathTemplates.reportPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchReportFromReportName', () => {
-        const result = client.matchReportFromReportName(fakePath);
-        assert.strictEqual(result, 'reportValue');
-        assert(
-          (client.pathTemplates.reportPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('reportConfig', async () => {
-      const fakePath = '/rendered/path/reportConfig';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        report_config: 'reportConfigValue',
-      };
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.reportConfigPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.reportConfigPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('reportConfigPath', () => {
-        const result = client.reportConfigPath(
-          'projectValue',
-          'locationValue',
-          'reportConfigValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.reportConfigPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromReportConfigName', () => {
-        const result = client.matchProjectFromReportConfigName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.reportConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromReportConfigName', () => {
-        const result = client.matchLocationFromReportConfigName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.reportConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchReportConfigFromReportConfigName', () => {
-        const result = client.matchReportConfigFromReportConfigName(fakePath);
-        assert.strictEqual(result, 'reportConfigValue');
-        assert(
-          (client.pathTemplates.reportConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('settings', async () => {
-      const fakePath = '/rendered/path/settings';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-      };
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.settingsPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.settingsPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('settingsPath', () => {
-        const result = client.settingsPath('projectValue', 'locationValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.settingsPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromSettingsName', () => {
-        const result = client.matchProjectFromSettingsName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.settingsPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromSettingsName', () => {
-        const result = client.matchLocationFromSettingsName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.settingsPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('source', async () => {
-      const fakePath = '/rendered/path/source';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        source: 'sourceValue',
-      };
-      const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.sourcePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.sourcePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('sourcePath', () => {
-        const result = client.sourcePath(
-          'projectValue',
-          'locationValue',
-          'sourceValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.sourcePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromSourceName', () => {
-        const result = client.matchProjectFromSourceName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.sourcePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromSourceName', () => {
-        const result = client.matchLocationFromSourceName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.sourcePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSourceFromSourceName', () => {
-        const result = client.matchSourceFromSourceName(fakePath);
-        assert.strictEqual(result, 'sourceValue');
-        assert(
-          (client.pathTemplates.sourcePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

@@ -594,9 +594,6 @@ export namespace google {
                     /** FloorSetting enableFloorSettingEnforcement. */
                     public enableFloorSettingEnforcement?: (boolean|null);
 
-                    /** FloorSetting _enableFloorSettingEnforcement. */
-                    public _enableFloorSettingEnforcement?: "enableFloorSettingEnforcement";
-
                     /**
                      * Creates a new FloorSetting instance using the specified properties.
                      * @param [properties] Properties to set
@@ -3713,7 +3710,7 @@ export namespace google {
                     byteDataType?: (google.cloud.modelarmor.v1.ByteDataItem.ByteItemType|keyof typeof google.cloud.modelarmor.v1.ByteDataItem.ByteItemType|null);
 
                     /** ByteDataItem byteData */
-                    byteData?: (Uint8Array|string|null);
+                    byteData?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents a ByteDataItem. */
@@ -3729,7 +3726,7 @@ export namespace google {
                     public byteDataType: (google.cloud.modelarmor.v1.ByteDataItem.ByteItemType|keyof typeof google.cloud.modelarmor.v1.ByteDataItem.ByteItemType);
 
                     /** ByteDataItem byteData. */
-                    public byteData: (Uint8Array|string);
+                    public byteData: (Uint8Array|Buffer|string);
 
                     /**
                      * Creates a new ByteDataItem instance using the specified properties.
@@ -4549,9 +4546,6 @@ export namespace google {
                     /** VirusScanFilterResult virusDetails. */
                     public virusDetails: google.cloud.modelarmor.v1.IVirusDetail[];
 
-                    /** VirusScanFilterResult _scannedSize. */
-                    public _scannedSize?: "scannedSize";
-
                     /**
                      * Creates a new VirusScanFilterResult instance using the specified properties.
                      * @param [properties] Properties to set
@@ -5010,12 +5004,6 @@ export namespace google {
 
                     /** RangeInfo end. */
                     public end?: (number|Long|string|null);
-
-                    /** RangeInfo _start. */
-                    public _start?: "start";
-
-                    /** RangeInfo _end. */
-                    public _end?: "end";
 
                     /**
                      * Creates a new RangeInfo instance using the specified properties.
@@ -5666,9 +5654,6 @@ export namespace google {
 
                     /** FloorSetting enableFloorSettingEnforcement. */
                     public enableFloorSettingEnforcement?: (boolean|null);
-
-                    /** FloorSetting _enableFloorSettingEnforcement. */
-                    public _enableFloorSettingEnforcement?: "enableFloorSettingEnforcement";
 
                     /**
                      * Creates a new FloorSetting instance using the specified properties.
@@ -8883,7 +8868,7 @@ export namespace google {
                     byteDataType?: (google.cloud.modelarmor.v1beta.ByteDataItem.ByteItemType|keyof typeof google.cloud.modelarmor.v1beta.ByteDataItem.ByteItemType|null);
 
                     /** ByteDataItem byteData */
-                    byteData?: (Uint8Array|string|null);
+                    byteData?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents a ByteDataItem. */
@@ -8899,7 +8884,7 @@ export namespace google {
                     public byteDataType: (google.cloud.modelarmor.v1beta.ByteDataItem.ByteItemType|keyof typeof google.cloud.modelarmor.v1beta.ByteDataItem.ByteItemType);
 
                     /** ByteDataItem byteData. */
-                    public byteData: (Uint8Array|string);
+                    public byteData: (Uint8Array|Buffer|string);
 
                     /**
                      * Creates a new ByteDataItem instance using the specified properties.
@@ -9721,9 +9706,6 @@ export namespace google {
                     /** VirusScanFilterResult virusDetails. */
                     public virusDetails: google.cloud.modelarmor.v1beta.IVirusDetail[];
 
-                    /** VirusScanFilterResult _scannedSize. */
-                    public _scannedSize?: "scannedSize";
-
                     /**
                      * Creates a new VirusScanFilterResult instance using the specified properties.
                      * @param [properties] Properties to set
@@ -10182,12 +10164,6 @@ export namespace google {
 
                     /** RangeInfo end. */
                     public end?: (number|Long|string|null);
-
-                    /** RangeInfo _start. */
-                    public _start?: "start";
-
-                    /** RangeInfo _end. */
-                    public _end?: "end";
 
                     /**
                      * Creates a new RangeInfo instance using the specified properties.
@@ -10925,6 +10901,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -10965,6 +10944,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -15295,6 +15277,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -15543,7 +15528,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -15574,7 +15559,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;

@@ -18,24 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-  IamClient,
-  IamProtos,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, IamClient, IamProtos, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -132,41 +119,20 @@ export class DataprocMetastoreClient {
    *     const client = new DataprocMetastoreClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof DataprocMetastoreClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'metastore.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -192,7 +158,7 @@ export class DataprocMetastoreClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -205,14 +171,18 @@ export class DataprocMetastoreClient {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
-
+  
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -263,275 +233,134 @@ export class DataprocMetastoreClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listServices: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'services'
-      ),
-      listMetadataImports: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'metadataImports'
-      ),
-      listBackups: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'backups'
-      ),
+      listServices:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'services'),
+      listMetadataImports:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'metadataImports'),
+      listBackups:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'backups')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v1beta/{name=projects/*/locations/*}',
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v1beta/{name=projects/*}/locations',
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
-          get: '/v1beta/{resource=projects/*/locations/*/services/*}:getIamPolicy',
-          additional_bindings: [
-            {
-              get: '/v1beta/{resource=projects/*/locations/*/services/*/backups/*}:getIamPolicy',
-            },
-            {
-              get: '/v1beta/{resource=projects/*/locations/*/services/*/databases/*}:getIamPolicy',
-            },
-            {
-              get: '/v1beta/{resource=projects/*/locations/*/services/*/databases/*/tables/*}:getIamPolicy',
-            },
-            {
-              get: '/v1beta/{resource=projects/*/locations/*/federations/*}:getIamPolicy',
-            },
-          ],
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
-          post: '/v1beta/{resource=projects/*/locations/*/services/*}:setIamPolicy',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1beta/{resource=projects/*/locations/*/services/*/backups/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1beta/{resource=projects/*/locations/*/services/*/databases/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1beta/{resource=projects/*/locations/*/services/*/databases/*/tables/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1beta/{resource=projects/*/locations/*/federations/*}:setIamPolicy',
-              body: '*',
-            },
-          ],
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
-          post: '/v1beta/{resource=projects/*/locations/*/services/*}:testIamPermissions',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1beta/{resource=projects/*/locations/*/services/*/backups/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1beta/{resource=projects/*/locations/*/services/*/databases/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1beta/{resource=projects/*/locations/*/services/*/databases/*/tables/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1beta/{resource=projects/*/locations/*/federations/*}:testIamPermissions',
-              body: '*',
-            },
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v1beta/{name=projects/*/locations/*/operations/*}:cancel',
-          body: '*',
-        },
-        {
-          selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1beta/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1beta/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1beta/{name=projects/*/locations/*}/operations',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1beta/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1beta/{name=projects/*}/locations',},{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1beta/{resource=projects/*/locations/*/services/*}:getIamPolicy',additional_bindings: [{get: '/v1beta/{resource=projects/*/locations/*/services/*/backups/*}:getIamPolicy',},{get: '/v1beta/{resource=projects/*/locations/*/services/*/databases/*}:getIamPolicy',},{get: '/v1beta/{resource=projects/*/locations/*/services/*/databases/*/tables/*}:getIamPolicy',},{get: '/v1beta/{resource=projects/*/locations/*/federations/*}:getIamPolicy',}],
+      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1beta/{resource=projects/*/locations/*/services/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1beta/{resource=projects/*/locations/*/services/*/backups/*}:setIamPolicy',body: '*',},{post: '/v1beta/{resource=projects/*/locations/*/services/*/databases/*}:setIamPolicy',body: '*',},{post: '/v1beta/{resource=projects/*/locations/*/services/*/databases/*/tables/*}:setIamPolicy',body: '*',},{post: '/v1beta/{resource=projects/*/locations/*/federations/*}:setIamPolicy',body: '*',}],
+      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1beta/{resource=projects/*/locations/*/services/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1beta/{resource=projects/*/locations/*/services/*/backups/*}:testIamPermissions',body: '*',},{post: '/v1beta/{resource=projects/*/locations/*/services/*/databases/*}:testIamPermissions',body: '*',},{post: '/v1beta/{resource=projects/*/locations/*/services/*/databases/*/tables/*}:testIamPermissions',body: '*',},{post: '/v1beta/{resource=projects/*/locations/*/federations/*}:testIamPermissions',body: '*',}],
+      },{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1beta/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1beta/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1beta/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1beta/{name=projects/*/locations/*}/operations',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createServiceResponse = protoFilesRoot.lookup(
-      '.google.cloud.metastore.v1beta.Service'
-    ) as gax.protobuf.Type;
+      '.google.cloud.metastore.v1beta.Service') as gax.protobuf.Type;
     const createServiceMetadata = protoFilesRoot.lookup(
-      '.google.cloud.metastore.v1beta.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.metastore.v1beta.OperationMetadata') as gax.protobuf.Type;
     const updateServiceResponse = protoFilesRoot.lookup(
-      '.google.cloud.metastore.v1beta.Service'
-    ) as gax.protobuf.Type;
+      '.google.cloud.metastore.v1beta.Service') as gax.protobuf.Type;
     const updateServiceMetadata = protoFilesRoot.lookup(
-      '.google.cloud.metastore.v1beta.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.metastore.v1beta.OperationMetadata') as gax.protobuf.Type;
     const deleteServiceResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteServiceMetadata = protoFilesRoot.lookup(
-      '.google.cloud.metastore.v1beta.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.metastore.v1beta.OperationMetadata') as gax.protobuf.Type;
     const createMetadataImportResponse = protoFilesRoot.lookup(
-      '.google.cloud.metastore.v1beta.MetadataImport'
-    ) as gax.protobuf.Type;
+      '.google.cloud.metastore.v1beta.MetadataImport') as gax.protobuf.Type;
     const createMetadataImportMetadata = protoFilesRoot.lookup(
-      '.google.cloud.metastore.v1beta.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.metastore.v1beta.OperationMetadata') as gax.protobuf.Type;
     const updateMetadataImportResponse = protoFilesRoot.lookup(
-      '.google.cloud.metastore.v1beta.MetadataImport'
-    ) as gax.protobuf.Type;
+      '.google.cloud.metastore.v1beta.MetadataImport') as gax.protobuf.Type;
     const updateMetadataImportMetadata = protoFilesRoot.lookup(
-      '.google.cloud.metastore.v1beta.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.metastore.v1beta.OperationMetadata') as gax.protobuf.Type;
     const exportMetadataResponse = protoFilesRoot.lookup(
-      '.google.cloud.metastore.v1beta.MetadataExport'
-    ) as gax.protobuf.Type;
+      '.google.cloud.metastore.v1beta.MetadataExport') as gax.protobuf.Type;
     const exportMetadataMetadata = protoFilesRoot.lookup(
-      '.google.cloud.metastore.v1beta.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.metastore.v1beta.OperationMetadata') as gax.protobuf.Type;
     const restoreServiceResponse = protoFilesRoot.lookup(
-      '.google.cloud.metastore.v1beta.Restore'
-    ) as gax.protobuf.Type;
+      '.google.cloud.metastore.v1beta.Restore') as gax.protobuf.Type;
     const restoreServiceMetadata = protoFilesRoot.lookup(
-      '.google.cloud.metastore.v1beta.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.metastore.v1beta.OperationMetadata') as gax.protobuf.Type;
     const createBackupResponse = protoFilesRoot.lookup(
-      '.google.cloud.metastore.v1beta.Backup'
-    ) as gax.protobuf.Type;
+      '.google.cloud.metastore.v1beta.Backup') as gax.protobuf.Type;
     const createBackupMetadata = protoFilesRoot.lookup(
-      '.google.cloud.metastore.v1beta.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.metastore.v1beta.OperationMetadata') as gax.protobuf.Type;
     const deleteBackupResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteBackupMetadata = protoFilesRoot.lookup(
-      '.google.cloud.metastore.v1beta.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.metastore.v1beta.OperationMetadata') as gax.protobuf.Type;
     const queryMetadataResponse = protoFilesRoot.lookup(
-      '.google.cloud.metastore.v1beta.QueryMetadataResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.metastore.v1beta.QueryMetadataResponse') as gax.protobuf.Type;
     const queryMetadataMetadata = protoFilesRoot.lookup(
-      '.google.cloud.metastore.v1beta.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.metastore.v1beta.OperationMetadata') as gax.protobuf.Type;
     const moveTableToDatabaseResponse = protoFilesRoot.lookup(
-      '.google.cloud.metastore.v1beta.MoveTableToDatabaseResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.metastore.v1beta.MoveTableToDatabaseResponse') as gax.protobuf.Type;
     const moveTableToDatabaseMetadata = protoFilesRoot.lookup(
-      '.google.cloud.metastore.v1beta.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.metastore.v1beta.OperationMetadata') as gax.protobuf.Type;
     const alterMetadataResourceLocationResponse = protoFilesRoot.lookup(
-      '.google.cloud.metastore.v1beta.AlterMetadataResourceLocationResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.metastore.v1beta.AlterMetadataResourceLocationResponse') as gax.protobuf.Type;
     const alterMetadataResourceLocationMetadata = protoFilesRoot.lookup(
-      '.google.cloud.metastore.v1beta.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.metastore.v1beta.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createService: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createServiceResponse.decode.bind(createServiceResponse),
-        createServiceMetadata.decode.bind(createServiceMetadata)
-      ),
+        createServiceMetadata.decode.bind(createServiceMetadata)),
       updateService: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateServiceResponse.decode.bind(updateServiceResponse),
-        updateServiceMetadata.decode.bind(updateServiceMetadata)
-      ),
+        updateServiceMetadata.decode.bind(updateServiceMetadata)),
       deleteService: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteServiceResponse.decode.bind(deleteServiceResponse),
-        deleteServiceMetadata.decode.bind(deleteServiceMetadata)
-      ),
+        deleteServiceMetadata.decode.bind(deleteServiceMetadata)),
       createMetadataImport: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createMetadataImportResponse.decode.bind(createMetadataImportResponse),
-        createMetadataImportMetadata.decode.bind(createMetadataImportMetadata)
-      ),
+        createMetadataImportMetadata.decode.bind(createMetadataImportMetadata)),
       updateMetadataImport: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateMetadataImportResponse.decode.bind(updateMetadataImportResponse),
-        updateMetadataImportMetadata.decode.bind(updateMetadataImportMetadata)
-      ),
+        updateMetadataImportMetadata.decode.bind(updateMetadataImportMetadata)),
       exportMetadata: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         exportMetadataResponse.decode.bind(exportMetadataResponse),
-        exportMetadataMetadata.decode.bind(exportMetadataMetadata)
-      ),
+        exportMetadataMetadata.decode.bind(exportMetadataMetadata)),
       restoreService: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         restoreServiceResponse.decode.bind(restoreServiceResponse),
-        restoreServiceMetadata.decode.bind(restoreServiceMetadata)
-      ),
+        restoreServiceMetadata.decode.bind(restoreServiceMetadata)),
       createBackup: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createBackupResponse.decode.bind(createBackupResponse),
-        createBackupMetadata.decode.bind(createBackupMetadata)
-      ),
+        createBackupMetadata.decode.bind(createBackupMetadata)),
       deleteBackup: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteBackupResponse.decode.bind(deleteBackupResponse),
-        deleteBackupMetadata.decode.bind(deleteBackupMetadata)
-      ),
+        deleteBackupMetadata.decode.bind(deleteBackupMetadata)),
       queryMetadata: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         queryMetadataResponse.decode.bind(queryMetadataResponse),
-        queryMetadataMetadata.decode.bind(queryMetadataMetadata)
-      ),
+        queryMetadataMetadata.decode.bind(queryMetadataMetadata)),
       moveTableToDatabase: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         moveTableToDatabaseResponse.decode.bind(moveTableToDatabaseResponse),
-        moveTableToDatabaseMetadata.decode.bind(moveTableToDatabaseMetadata)
-      ),
+        moveTableToDatabaseMetadata.decode.bind(moveTableToDatabaseMetadata)),
       alterMetadataResourceLocation: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        alterMetadataResourceLocationResponse.decode.bind(
-          alterMetadataResourceLocationResponse
-        ),
-        alterMetadataResourceLocationMetadata.decode.bind(
-          alterMetadataResourceLocationMetadata
-        )
-      ),
+        alterMetadataResourceLocationResponse.decode.bind(alterMetadataResourceLocationResponse),
+        alterMetadataResourceLocationMetadata.decode.bind(alterMetadataResourceLocationMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.metastore.v1beta.DataprocMetastore',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.metastore.v1beta.DataprocMetastore', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -562,53 +391,28 @@ export class DataprocMetastoreClient {
     // Put together the "service stub" for
     // google.cloud.metastore.v1beta.DataprocMetastore.
     this.dataprocMetastoreStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.metastore.v1beta.DataprocMetastore'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.metastore.v1beta.DataprocMetastore') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.metastore.v1beta.DataprocMetastore,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const dataprocMetastoreStubMethods = [
-      'listServices',
-      'getService',
-      'createService',
-      'updateService',
-      'deleteService',
-      'listMetadataImports',
-      'getMetadataImport',
-      'createMetadataImport',
-      'updateMetadataImport',
-      'exportMetadata',
-      'restoreService',
-      'listBackups',
-      'getBackup',
-      'createBackup',
-      'deleteBackup',
-      'removeIamPolicy',
-      'queryMetadata',
-      'moveTableToDatabase',
-      'alterMetadataResourceLocation',
-    ];
+    const dataprocMetastoreStubMethods =
+        ['listServices', 'getService', 'createService', 'updateService', 'deleteService', 'listMetadataImports', 'getMetadataImport', 'createMetadataImport', 'updateMetadataImport', 'exportMetadata', 'restoreService', 'listBackups', 'getBackup', 'createBackup', 'deleteBackup', 'removeIamPolicy', 'queryMetadata', 'moveTableToDatabase', 'alterMetadataResourceLocation'];
     for (const methodName of dataprocMetastoreStubMethods) {
       const callPromise = this.dataprocMetastoreStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -633,14 +437,8 @@ export class DataprocMetastoreClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'metastore.googleapis.com';
   }
@@ -651,14 +449,8 @@ export class DataprocMetastoreClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'metastore.googleapis.com';
   }
@@ -689,7 +481,9 @@ export class DataprocMetastoreClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -698,9 +492,8 @@ export class DataprocMetastoreClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -711,2896 +504,2019 @@ export class DataprocMetastoreClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets the details of a single service.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The relative resource name of the metastore service to retrieve,
-   *   in the following form:
-   *
-   *   `projects/{project_number}/locations/{location_id}/services/{service_id}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.metastore.v1beta.Service|Service}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/dataproc_metastore.get_service.js</caption>
-   * region_tag:metastore_v1beta_generated_DataprocMetastore_GetService_async
-   */
+/**
+ * Gets the details of a single service.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The relative resource name of the metastore service to retrieve,
+ *   in the following form:
+ *
+ *   `projects/{project_number}/locations/{location_id}/services/{service_id}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.metastore.v1beta.Service|Service}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/dataproc_metastore.get_service.js</caption>
+ * region_tag:metastore_v1beta_generated_DataprocMetastore_GetService_async
+ */
   getService(
-    request?: protos.google.cloud.metastore.v1beta.IGetServiceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.metastore.v1beta.IService,
-      protos.google.cloud.metastore.v1beta.IGetServiceRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.metastore.v1beta.IGetServiceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.metastore.v1beta.IService,
+        protos.google.cloud.metastore.v1beta.IGetServiceRequest|undefined, {}|undefined
+      ]>;
   getService(
-    request: protos.google.cloud.metastore.v1beta.IGetServiceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.metastore.v1beta.IService,
-      | protos.google.cloud.metastore.v1beta.IGetServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getService(
-    request: protos.google.cloud.metastore.v1beta.IGetServiceRequest,
-    callback: Callback<
-      protos.google.cloud.metastore.v1beta.IService,
-      | protos.google.cloud.metastore.v1beta.IGetServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getService(
-    request?: protos.google.cloud.metastore.v1beta.IGetServiceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.metastore.v1beta.IGetServiceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.metastore.v1beta.IService,
-          | protos.google.cloud.metastore.v1beta.IGetServiceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.metastore.v1beta.IService,
-      | protos.google.cloud.metastore.v1beta.IGetServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.metastore.v1beta.IService,
-      protos.google.cloud.metastore.v1beta.IGetServiceRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.metastore.v1beta.IGetServiceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getService(
+      request: protos.google.cloud.metastore.v1beta.IGetServiceRequest,
+      callback: Callback<
+          protos.google.cloud.metastore.v1beta.IService,
+          protos.google.cloud.metastore.v1beta.IGetServiceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getService(
+      request?: protos.google.cloud.metastore.v1beta.IGetServiceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.metastore.v1beta.IService,
+          protos.google.cloud.metastore.v1beta.IGetServiceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.metastore.v1beta.IService,
+          protos.google.cloud.metastore.v1beta.IGetServiceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.metastore.v1beta.IService,
+        protos.google.cloud.metastore.v1beta.IGetServiceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getService request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.metastore.v1beta.IService,
-          | protos.google.cloud.metastore.v1beta.IGetServiceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.metastore.v1beta.IService,
+        protos.google.cloud.metastore.v1beta.IGetServiceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getService response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getService(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.metastore.v1beta.IService,
-          protos.google.cloud.metastore.v1beta.IGetServiceRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getService response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getService(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.metastore.v1beta.IService,
+        protos.google.cloud.metastore.v1beta.IGetServiceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getService response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets details of a single import.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The relative resource name of the metadata import to retrieve, in
-   *   the following form:
-   *
-   *   `projects/{project_number}/locations/{location_id}/services/{service_id}/metadataImports/{import_id}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.metastore.v1beta.MetadataImport|MetadataImport}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/dataproc_metastore.get_metadata_import.js</caption>
-   * region_tag:metastore_v1beta_generated_DataprocMetastore_GetMetadataImport_async
-   */
+/**
+ * Gets details of a single import.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The relative resource name of the metadata import to retrieve, in
+ *   the following form:
+ *
+ *   `projects/{project_number}/locations/{location_id}/services/{service_id}/metadataImports/{import_id}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.metastore.v1beta.MetadataImport|MetadataImport}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/dataproc_metastore.get_metadata_import.js</caption>
+ * region_tag:metastore_v1beta_generated_DataprocMetastore_GetMetadataImport_async
+ */
   getMetadataImport(
-    request?: protos.google.cloud.metastore.v1beta.IGetMetadataImportRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.metastore.v1beta.IMetadataImport,
-      (
-        | protos.google.cloud.metastore.v1beta.IGetMetadataImportRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.metastore.v1beta.IGetMetadataImportRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.metastore.v1beta.IMetadataImport,
+        protos.google.cloud.metastore.v1beta.IGetMetadataImportRequest|undefined, {}|undefined
+      ]>;
   getMetadataImport(
-    request: protos.google.cloud.metastore.v1beta.IGetMetadataImportRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.metastore.v1beta.IMetadataImport,
-      | protos.google.cloud.metastore.v1beta.IGetMetadataImportRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getMetadataImport(
-    request: protos.google.cloud.metastore.v1beta.IGetMetadataImportRequest,
-    callback: Callback<
-      protos.google.cloud.metastore.v1beta.IMetadataImport,
-      | protos.google.cloud.metastore.v1beta.IGetMetadataImportRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getMetadataImport(
-    request?: protos.google.cloud.metastore.v1beta.IGetMetadataImportRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.metastore.v1beta.IGetMetadataImportRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.metastore.v1beta.IMetadataImport,
-          | protos.google.cloud.metastore.v1beta.IGetMetadataImportRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.metastore.v1beta.IMetadataImport,
-      | protos.google.cloud.metastore.v1beta.IGetMetadataImportRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.metastore.v1beta.IMetadataImport,
-      (
-        | protos.google.cloud.metastore.v1beta.IGetMetadataImportRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.metastore.v1beta.IGetMetadataImportRequest|null|undefined,
+          {}|null|undefined>): void;
+  getMetadataImport(
+      request: protos.google.cloud.metastore.v1beta.IGetMetadataImportRequest,
+      callback: Callback<
+          protos.google.cloud.metastore.v1beta.IMetadataImport,
+          protos.google.cloud.metastore.v1beta.IGetMetadataImportRequest|null|undefined,
+          {}|null|undefined>): void;
+  getMetadataImport(
+      request?: protos.google.cloud.metastore.v1beta.IGetMetadataImportRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.metastore.v1beta.IMetadataImport,
+          protos.google.cloud.metastore.v1beta.IGetMetadataImportRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.metastore.v1beta.IMetadataImport,
+          protos.google.cloud.metastore.v1beta.IGetMetadataImportRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.metastore.v1beta.IMetadataImport,
+        protos.google.cloud.metastore.v1beta.IGetMetadataImportRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getMetadataImport request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.metastore.v1beta.IMetadataImport,
-          | protos.google.cloud.metastore.v1beta.IGetMetadataImportRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.metastore.v1beta.IMetadataImport,
+        protos.google.cloud.metastore.v1beta.IGetMetadataImportRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getMetadataImport response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getMetadataImport(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.metastore.v1beta.IMetadataImport,
-          (
-            | protos.google.cloud.metastore.v1beta.IGetMetadataImportRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getMetadataImport response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getMetadataImport(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.metastore.v1beta.IMetadataImport,
+        protos.google.cloud.metastore.v1beta.IGetMetadataImportRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getMetadataImport response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets details of a single backup.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The relative resource name of the backup to retrieve, in the
-   *   following form:
-   *
-   *   `projects/{project_number}/locations/{location_id}/services/{service_id}/backups/{backup_id}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.metastore.v1beta.Backup|Backup}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/dataproc_metastore.get_backup.js</caption>
-   * region_tag:metastore_v1beta_generated_DataprocMetastore_GetBackup_async
-   */
+/**
+ * Gets details of a single backup.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The relative resource name of the backup to retrieve, in the
+ *   following form:
+ *
+ *   `projects/{project_number}/locations/{location_id}/services/{service_id}/backups/{backup_id}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.metastore.v1beta.Backup|Backup}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/dataproc_metastore.get_backup.js</caption>
+ * region_tag:metastore_v1beta_generated_DataprocMetastore_GetBackup_async
+ */
   getBackup(
-    request?: protos.google.cloud.metastore.v1beta.IGetBackupRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.metastore.v1beta.IBackup,
-      protos.google.cloud.metastore.v1beta.IGetBackupRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.metastore.v1beta.IGetBackupRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.metastore.v1beta.IBackup,
+        protos.google.cloud.metastore.v1beta.IGetBackupRequest|undefined, {}|undefined
+      ]>;
   getBackup(
-    request: protos.google.cloud.metastore.v1beta.IGetBackupRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.metastore.v1beta.IBackup,
-      protos.google.cloud.metastore.v1beta.IGetBackupRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getBackup(
-    request: protos.google.cloud.metastore.v1beta.IGetBackupRequest,
-    callback: Callback<
-      protos.google.cloud.metastore.v1beta.IBackup,
-      protos.google.cloud.metastore.v1beta.IGetBackupRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getBackup(
-    request?: protos.google.cloud.metastore.v1beta.IGetBackupRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.metastore.v1beta.IGetBackupRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.metastore.v1beta.IBackup,
-          | protos.google.cloud.metastore.v1beta.IGetBackupRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.metastore.v1beta.IBackup,
-      protos.google.cloud.metastore.v1beta.IGetBackupRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.metastore.v1beta.IBackup,
-      protos.google.cloud.metastore.v1beta.IGetBackupRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.metastore.v1beta.IGetBackupRequest|null|undefined,
+          {}|null|undefined>): void;
+  getBackup(
+      request: protos.google.cloud.metastore.v1beta.IGetBackupRequest,
+      callback: Callback<
+          protos.google.cloud.metastore.v1beta.IBackup,
+          protos.google.cloud.metastore.v1beta.IGetBackupRequest|null|undefined,
+          {}|null|undefined>): void;
+  getBackup(
+      request?: protos.google.cloud.metastore.v1beta.IGetBackupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.metastore.v1beta.IBackup,
+          protos.google.cloud.metastore.v1beta.IGetBackupRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.metastore.v1beta.IBackup,
+          protos.google.cloud.metastore.v1beta.IGetBackupRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.metastore.v1beta.IBackup,
+        protos.google.cloud.metastore.v1beta.IGetBackupRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getBackup request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.metastore.v1beta.IBackup,
-          | protos.google.cloud.metastore.v1beta.IGetBackupRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.metastore.v1beta.IBackup,
+        protos.google.cloud.metastore.v1beta.IGetBackupRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getBackup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getBackup(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.metastore.v1beta.IBackup,
-          protos.google.cloud.metastore.v1beta.IGetBackupRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getBackup response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getBackup(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.metastore.v1beta.IBackup,
+        protos.google.cloud.metastore.v1beta.IGetBackupRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getBackup response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Removes the attached IAM policies for a resource
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   Required. The relative resource name of the dataplane resource to remove
-   *   IAM policy, in the following form:
-   *
-   *   `projects/{project_id}/locations/{location_id}/services/{service_id}/databases/{database_id}`
-   *   or
-   *   `projects/{project_id}/locations/{location_id}/services/{service_id}/databases/{database_id}/tables/{table_id}`.
-   * @param {boolean} [request.asynchronous]
-   *   Optional. Removes IAM policy attached to database or table asynchronously
-   *   when it is set. The default is false.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.metastore.v1beta.RemoveIamPolicyResponse|RemoveIamPolicyResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/dataproc_metastore.remove_iam_policy.js</caption>
-   * region_tag:metastore_v1beta_generated_DataprocMetastore_RemoveIamPolicy_async
-   */
+/**
+ * Removes the attached IAM policies for a resource
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   Required. The relative resource name of the dataplane resource to remove
+ *   IAM policy, in the following form:
+ *
+ *   `projects/{project_id}/locations/{location_id}/services/{service_id}/databases/{database_id}`
+ *   or
+ *   `projects/{project_id}/locations/{location_id}/services/{service_id}/databases/{database_id}/tables/{table_id}`.
+ * @param {boolean} [request.asynchronous]
+ *   Optional. Removes IAM policy attached to database or table asynchronously
+ *   when it is set. The default is false.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.metastore.v1beta.RemoveIamPolicyResponse|RemoveIamPolicyResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/dataproc_metastore.remove_iam_policy.js</caption>
+ * region_tag:metastore_v1beta_generated_DataprocMetastore_RemoveIamPolicy_async
+ */
   removeIamPolicy(
-    request?: protos.google.cloud.metastore.v1beta.IRemoveIamPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.metastore.v1beta.IRemoveIamPolicyResponse,
-      protos.google.cloud.metastore.v1beta.IRemoveIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.metastore.v1beta.IRemoveIamPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.metastore.v1beta.IRemoveIamPolicyResponse,
+        protos.google.cloud.metastore.v1beta.IRemoveIamPolicyRequest|undefined, {}|undefined
+      ]>;
   removeIamPolicy(
-    request: protos.google.cloud.metastore.v1beta.IRemoveIamPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.metastore.v1beta.IRemoveIamPolicyResponse,
-      | protos.google.cloud.metastore.v1beta.IRemoveIamPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  removeIamPolicy(
-    request: protos.google.cloud.metastore.v1beta.IRemoveIamPolicyRequest,
-    callback: Callback<
-      protos.google.cloud.metastore.v1beta.IRemoveIamPolicyResponse,
-      | protos.google.cloud.metastore.v1beta.IRemoveIamPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  removeIamPolicy(
-    request?: protos.google.cloud.metastore.v1beta.IRemoveIamPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.metastore.v1beta.IRemoveIamPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.metastore.v1beta.IRemoveIamPolicyResponse,
-          | protos.google.cloud.metastore.v1beta.IRemoveIamPolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.metastore.v1beta.IRemoveIamPolicyResponse,
-      | protos.google.cloud.metastore.v1beta.IRemoveIamPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.metastore.v1beta.IRemoveIamPolicyResponse,
-      protos.google.cloud.metastore.v1beta.IRemoveIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.metastore.v1beta.IRemoveIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  removeIamPolicy(
+      request: protos.google.cloud.metastore.v1beta.IRemoveIamPolicyRequest,
+      callback: Callback<
+          protos.google.cloud.metastore.v1beta.IRemoveIamPolicyResponse,
+          protos.google.cloud.metastore.v1beta.IRemoveIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  removeIamPolicy(
+      request?: protos.google.cloud.metastore.v1beta.IRemoveIamPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.metastore.v1beta.IRemoveIamPolicyResponse,
+          protos.google.cloud.metastore.v1beta.IRemoveIamPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.metastore.v1beta.IRemoveIamPolicyResponse,
+          protos.google.cloud.metastore.v1beta.IRemoveIamPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.metastore.v1beta.IRemoveIamPolicyResponse,
+        protos.google.cloud.metastore.v1beta.IRemoveIamPolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('removeIamPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.metastore.v1beta.IRemoveIamPolicyResponse,
-          | protos.google.cloud.metastore.v1beta.IRemoveIamPolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.metastore.v1beta.IRemoveIamPolicyResponse,
+        protos.google.cloud.metastore.v1beta.IRemoveIamPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('removeIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .removeIamPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.metastore.v1beta.IRemoveIamPolicyResponse,
-          (
-            | protos.google.cloud.metastore.v1beta.IRemoveIamPolicyRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('removeIamPolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.removeIamPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.metastore.v1beta.IRemoveIamPolicyResponse,
+        protos.google.cloud.metastore.v1beta.IRemoveIamPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('removeIamPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Creates a metastore service in a project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The relative resource name of the location in which to create a
-   *   metastore service, in the following form:
-   *
-   *   `projects/{project_number}/locations/{location_id}`.
-   * @param {string} request.serviceId
-   *   Required. The ID of the metastore service, which is used as the final
-   *   component of the metastore service's name.
-   *
-   *   This value must be between 2 and 63 characters long inclusive, begin with a
-   *   letter, end with a letter or number, and consist of alpha-numeric
-   *   ASCII characters or hyphens.
-   * @param {google.cloud.metastore.v1beta.Service} request.service
-   *   Required. The Metastore service to create. The `name` field is
-   *   ignored. The ID of the created metastore service must be provided in
-   *   the request's `service_id` field.
-   * @param {string} [request.requestId]
-   *   Optional. A request ID. Specify a unique request ID to allow the server to
-   *   ignore the request if it has completed. The server will ignore subsequent
-   *   requests that provide a duplicate request ID for at least 60 minutes after
-   *   the first request.
-   *
-   *   For example, if an initial request times out, followed by another request
-   *   with the same request ID, the server ignores the second request to prevent
-   *   the creation of duplicate commitments.
-   *
-   *   The request ID must be a valid
-   *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Format)
-   *   A zero UUID (00000000-0000-0000-0000-000000000000) is not supported.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/dataproc_metastore.create_service.js</caption>
-   * region_tag:metastore_v1beta_generated_DataprocMetastore_CreateService_async
-   */
+/**
+ * Creates a metastore service in a project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The relative resource name of the location in which to create a
+ *   metastore service, in the following form:
+ *
+ *   `projects/{project_number}/locations/{location_id}`.
+ * @param {string} request.serviceId
+ *   Required. The ID of the metastore service, which is used as the final
+ *   component of the metastore service's name.
+ *
+ *   This value must be between 2 and 63 characters long inclusive, begin with a
+ *   letter, end with a letter or number, and consist of alpha-numeric
+ *   ASCII characters or hyphens.
+ * @param {google.cloud.metastore.v1beta.Service} request.service
+ *   Required. The Metastore service to create. The `name` field is
+ *   ignored. The ID of the created metastore service must be provided in
+ *   the request's `service_id` field.
+ * @param {string} [request.requestId]
+ *   Optional. A request ID. Specify a unique request ID to allow the server to
+ *   ignore the request if it has completed. The server will ignore subsequent
+ *   requests that provide a duplicate request ID for at least 60 minutes after
+ *   the first request.
+ *
+ *   For example, if an initial request times out, followed by another request
+ *   with the same request ID, the server ignores the second request to prevent
+ *   the creation of duplicate commitments.
+ *
+ *   The request ID must be a valid
+ *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Format)
+ *   A zero UUID (00000000-0000-0000-0000-000000000000) is not supported.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/dataproc_metastore.create_service.js</caption>
+ * region_tag:metastore_v1beta_generated_DataprocMetastore_CreateService_async
+ */
   createService(
-    request?: protos.google.cloud.metastore.v1beta.ICreateServiceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IService,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.metastore.v1beta.ICreateServiceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.metastore.v1beta.IService, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createService(
-    request: protos.google.cloud.metastore.v1beta.ICreateServiceRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IService,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.metastore.v1beta.ICreateServiceRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IService, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createService(
-    request: protos.google.cloud.metastore.v1beta.ICreateServiceRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IService,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.metastore.v1beta.ICreateServiceRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IService, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createService(
-    request?: protos.google.cloud.metastore.v1beta.ICreateServiceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.metastore.v1beta.IService,
-            protos.google.cloud.metastore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IService,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IService,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.metastore.v1beta.ICreateServiceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IService, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IService, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.metastore.v1beta.IService, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.metastore.v1beta.IService,
-            protos.google.cloud.metastore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IService, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createService response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createService request %j', request);
-    return this.innerApiCalls
-      .createService(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.metastore.v1beta.IService,
-            protos.google.cloud.metastore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createService response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createService(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.metastore.v1beta.IService, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createService response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createService()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/dataproc_metastore.create_service.js</caption>
-   * region_tag:metastore_v1beta_generated_DataprocMetastore_CreateService_async
-   */
-  async checkCreateServiceProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.metastore.v1beta.Service,
-      protos.google.cloud.metastore.v1beta.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createService()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/dataproc_metastore.create_service.js</caption>
+ * region_tag:metastore_v1beta_generated_DataprocMetastore_CreateService_async
+ */
+  async checkCreateServiceProgress(name: string): Promise<LROperation<protos.google.cloud.metastore.v1beta.Service, protos.google.cloud.metastore.v1beta.OperationMetadata>>{
     this._log.info('createService long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createService,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.metastore.v1beta.Service,
-      protos.google.cloud.metastore.v1beta.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createService, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.metastore.v1beta.Service, protos.google.cloud.metastore.v1beta.OperationMetadata>;
   }
-  /**
-   * Updates the parameters of a single service.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. A field mask used to specify the fields to be overwritten in the
-   *   metastore service resource by the update.
-   *   Fields specified in the `update_mask` are relative to the resource (not
-   *   to the full request). A field is overwritten if it is in the mask.
-   * @param {google.cloud.metastore.v1beta.Service} request.service
-   *   Required. The metastore service to update. The server only merges fields
-   *   in the service if they are specified in `update_mask`.
-   *
-   *   The metastore service's `name` field is used to identify the metastore
-   *   service to be updated.
-   * @param {string} [request.requestId]
-   *   Optional. A request ID. Specify a unique request ID to allow the server to
-   *   ignore the request if it has completed. The server will ignore subsequent
-   *   requests that provide a duplicate request ID for at least 60 minutes after
-   *   the first request.
-   *
-   *   For example, if an initial request times out, followed by another request
-   *   with the same request ID, the server ignores the second request to prevent
-   *   the creation of duplicate commitments.
-   *
-   *   The request ID must be a valid
-   *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Format)
-   *   A zero UUID (00000000-0000-0000-0000-000000000000) is not supported.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/dataproc_metastore.update_service.js</caption>
-   * region_tag:metastore_v1beta_generated_DataprocMetastore_UpdateService_async
-   */
+/**
+ * Updates the parameters of a single service.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. A field mask used to specify the fields to be overwritten in the
+ *   metastore service resource by the update.
+ *   Fields specified in the `update_mask` are relative to the resource (not
+ *   to the full request). A field is overwritten if it is in the mask.
+ * @param {google.cloud.metastore.v1beta.Service} request.service
+ *   Required. The metastore service to update. The server only merges fields
+ *   in the service if they are specified in `update_mask`.
+ *
+ *   The metastore service's `name` field is used to identify the metastore
+ *   service to be updated.
+ * @param {string} [request.requestId]
+ *   Optional. A request ID. Specify a unique request ID to allow the server to
+ *   ignore the request if it has completed. The server will ignore subsequent
+ *   requests that provide a duplicate request ID for at least 60 minutes after
+ *   the first request.
+ *
+ *   For example, if an initial request times out, followed by another request
+ *   with the same request ID, the server ignores the second request to prevent
+ *   the creation of duplicate commitments.
+ *
+ *   The request ID must be a valid
+ *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Format)
+ *   A zero UUID (00000000-0000-0000-0000-000000000000) is not supported.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/dataproc_metastore.update_service.js</caption>
+ * region_tag:metastore_v1beta_generated_DataprocMetastore_UpdateService_async
+ */
   updateService(
-    request?: protos.google.cloud.metastore.v1beta.IUpdateServiceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IService,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.metastore.v1beta.IUpdateServiceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.metastore.v1beta.IService, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateService(
-    request: protos.google.cloud.metastore.v1beta.IUpdateServiceRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IService,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.metastore.v1beta.IUpdateServiceRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IService, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateService(
-    request: protos.google.cloud.metastore.v1beta.IUpdateServiceRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IService,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.metastore.v1beta.IUpdateServiceRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IService, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateService(
-    request?: protos.google.cloud.metastore.v1beta.IUpdateServiceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.metastore.v1beta.IService,
-            protos.google.cloud.metastore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IService,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IService,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.metastore.v1beta.IUpdateServiceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IService, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IService, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.metastore.v1beta.IService, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'service.name': request.service!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'service.name': request.service!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.metastore.v1beta.IService,
-            protos.google.cloud.metastore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IService, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateService response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateService request %j', request);
-    return this.innerApiCalls
-      .updateService(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.metastore.v1beta.IService,
-            protos.google.cloud.metastore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateService response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateService(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.metastore.v1beta.IService, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateService response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateService()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/dataproc_metastore.update_service.js</caption>
-   * region_tag:metastore_v1beta_generated_DataprocMetastore_UpdateService_async
-   */
-  async checkUpdateServiceProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.metastore.v1beta.Service,
-      protos.google.cloud.metastore.v1beta.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateService()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/dataproc_metastore.update_service.js</caption>
+ * region_tag:metastore_v1beta_generated_DataprocMetastore_UpdateService_async
+ */
+  async checkUpdateServiceProgress(name: string): Promise<LROperation<protos.google.cloud.metastore.v1beta.Service, protos.google.cloud.metastore.v1beta.OperationMetadata>>{
     this._log.info('updateService long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateService,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.metastore.v1beta.Service,
-      protos.google.cloud.metastore.v1beta.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateService, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.metastore.v1beta.Service, protos.google.cloud.metastore.v1beta.OperationMetadata>;
   }
-  /**
-   * Deletes a single service.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The relative resource name of the metastore service to delete, in
-   *   the following form:
-   *
-   *   `projects/{project_number}/locations/{location_id}/services/{service_id}`.
-   * @param {string} [request.requestId]
-   *   Optional. A request ID. Specify a unique request ID to allow the server to
-   *   ignore the request if it has completed. The server will ignore subsequent
-   *   requests that provide a duplicate request ID for at least 60 minutes after
-   *   the first request.
-   *
-   *   For example, if an initial request times out, followed by another request
-   *   with the same request ID, the server ignores the second request to prevent
-   *   the creation of duplicate commitments.
-   *
-   *   The request ID must be a valid
-   *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Format)
-   *   A zero UUID (00000000-0000-0000-0000-000000000000) is not supported.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/dataproc_metastore.delete_service.js</caption>
-   * region_tag:metastore_v1beta_generated_DataprocMetastore_DeleteService_async
-   */
+/**
+ * Deletes a single service.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The relative resource name of the metastore service to delete, in
+ *   the following form:
+ *
+ *   `projects/{project_number}/locations/{location_id}/services/{service_id}`.
+ * @param {string} [request.requestId]
+ *   Optional. A request ID. Specify a unique request ID to allow the server to
+ *   ignore the request if it has completed. The server will ignore subsequent
+ *   requests that provide a duplicate request ID for at least 60 minutes after
+ *   the first request.
+ *
+ *   For example, if an initial request times out, followed by another request
+ *   with the same request ID, the server ignores the second request to prevent
+ *   the creation of duplicate commitments.
+ *
+ *   The request ID must be a valid
+ *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Format)
+ *   A zero UUID (00000000-0000-0000-0000-000000000000) is not supported.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/dataproc_metastore.delete_service.js</caption>
+ * region_tag:metastore_v1beta_generated_DataprocMetastore_DeleteService_async
+ */
   deleteService(
-    request?: protos.google.cloud.metastore.v1beta.IDeleteServiceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.metastore.v1beta.IDeleteServiceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteService(
-    request: protos.google.cloud.metastore.v1beta.IDeleteServiceRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.metastore.v1beta.IDeleteServiceRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteService(
-    request: protos.google.cloud.metastore.v1beta.IDeleteServiceRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.metastore.v1beta.IDeleteServiceRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteService(
-    request?: protos.google.cloud.metastore.v1beta.IDeleteServiceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.metastore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.metastore.v1beta.IDeleteServiceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.metastore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteService response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteService request %j', request);
-    return this.innerApiCalls
-      .deleteService(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.metastore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteService response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteService(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteService response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteService()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/dataproc_metastore.delete_service.js</caption>
-   * region_tag:metastore_v1beta_generated_DataprocMetastore_DeleteService_async
-   */
-  async checkDeleteServiceProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.metastore.v1beta.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteService()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/dataproc_metastore.delete_service.js</caption>
+ * region_tag:metastore_v1beta_generated_DataprocMetastore_DeleteService_async
+ */
+  async checkDeleteServiceProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.metastore.v1beta.OperationMetadata>>{
     this._log.info('deleteService long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteService,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.metastore.v1beta.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteService, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.metastore.v1beta.OperationMetadata>;
   }
-  /**
-   * Creates a new MetadataImport in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The relative resource name of the service in which to create a
-   *   metastore import, in the following form:
-   *
-   *   `projects/{project_number}/locations/{location_id}/services/{service_id}`.
-   * @param {string} request.metadataImportId
-   *   Required. The ID of the metadata import, which is used as the final
-   *   component of the metadata import's name.
-   *
-   *   This value must be between 1 and 64 characters long, begin with a letter,
-   *   end with a letter or number, and consist of alpha-numeric ASCII characters
-   *   or hyphens.
-   * @param {google.cloud.metastore.v1beta.MetadataImport} request.metadataImport
-   *   Required. The metadata import to create. The `name` field is ignored. The
-   *   ID of the created metadata import must be provided in the request's
-   *   `metadata_import_id` field.
-   * @param {string} [request.requestId]
-   *   Optional. A request ID. Specify a unique request ID to allow the server to
-   *   ignore the request if it has completed. The server will ignore subsequent
-   *   requests that provide a duplicate request ID for at least 60 minutes after
-   *   the first request.
-   *
-   *   For example, if an initial request times out, followed by another request
-   *   with the same request ID, the server ignores the second request to prevent
-   *   the creation of duplicate commitments.
-   *
-   *   The request ID must be a valid
-   *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Format)
-   *   A zero UUID (00000000-0000-0000-0000-000000000000) is not supported.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/dataproc_metastore.create_metadata_import.js</caption>
-   * region_tag:metastore_v1beta_generated_DataprocMetastore_CreateMetadataImport_async
-   */
+/**
+ * Creates a new MetadataImport in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The relative resource name of the service in which to create a
+ *   metastore import, in the following form:
+ *
+ *   `projects/{project_number}/locations/{location_id}/services/{service_id}`.
+ * @param {string} request.metadataImportId
+ *   Required. The ID of the metadata import, which is used as the final
+ *   component of the metadata import's name.
+ *
+ *   This value must be between 1 and 64 characters long, begin with a letter,
+ *   end with a letter or number, and consist of alpha-numeric ASCII characters
+ *   or hyphens.
+ * @param {google.cloud.metastore.v1beta.MetadataImport} request.metadataImport
+ *   Required. The metadata import to create. The `name` field is ignored. The
+ *   ID of the created metadata import must be provided in the request's
+ *   `metadata_import_id` field.
+ * @param {string} [request.requestId]
+ *   Optional. A request ID. Specify a unique request ID to allow the server to
+ *   ignore the request if it has completed. The server will ignore subsequent
+ *   requests that provide a duplicate request ID for at least 60 minutes after
+ *   the first request.
+ *
+ *   For example, if an initial request times out, followed by another request
+ *   with the same request ID, the server ignores the second request to prevent
+ *   the creation of duplicate commitments.
+ *
+ *   The request ID must be a valid
+ *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Format)
+ *   A zero UUID (00000000-0000-0000-0000-000000000000) is not supported.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/dataproc_metastore.create_metadata_import.js</caption>
+ * region_tag:metastore_v1beta_generated_DataprocMetastore_CreateMetadataImport_async
+ */
   createMetadataImport(
-    request?: protos.google.cloud.metastore.v1beta.ICreateMetadataImportRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IMetadataImport,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.metastore.v1beta.ICreateMetadataImportRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.metastore.v1beta.IMetadataImport, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createMetadataImport(
-    request: protos.google.cloud.metastore.v1beta.ICreateMetadataImportRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IMetadataImport,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.metastore.v1beta.ICreateMetadataImportRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IMetadataImport, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createMetadataImport(
-    request: protos.google.cloud.metastore.v1beta.ICreateMetadataImportRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IMetadataImport,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.metastore.v1beta.ICreateMetadataImportRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IMetadataImport, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createMetadataImport(
-    request?: protos.google.cloud.metastore.v1beta.ICreateMetadataImportRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.metastore.v1beta.IMetadataImport,
-            protos.google.cloud.metastore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IMetadataImport,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IMetadataImport,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.metastore.v1beta.ICreateMetadataImportRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IMetadataImport, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IMetadataImport, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.metastore.v1beta.IMetadataImport, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.metastore.v1beta.IMetadataImport,
-            protos.google.cloud.metastore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IMetadataImport, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createMetadataImport response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createMetadataImport request %j', request);
-    return this.innerApiCalls
-      .createMetadataImport(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.metastore.v1beta.IMetadataImport,
-            protos.google.cloud.metastore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createMetadataImport response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createMetadataImport(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.metastore.v1beta.IMetadataImport, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createMetadataImport response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createMetadataImport()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/dataproc_metastore.create_metadata_import.js</caption>
-   * region_tag:metastore_v1beta_generated_DataprocMetastore_CreateMetadataImport_async
-   */
-  async checkCreateMetadataImportProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.metastore.v1beta.MetadataImport,
-      protos.google.cloud.metastore.v1beta.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createMetadataImport()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/dataproc_metastore.create_metadata_import.js</caption>
+ * region_tag:metastore_v1beta_generated_DataprocMetastore_CreateMetadataImport_async
+ */
+  async checkCreateMetadataImportProgress(name: string): Promise<LROperation<protos.google.cloud.metastore.v1beta.MetadataImport, protos.google.cloud.metastore.v1beta.OperationMetadata>>{
     this._log.info('createMetadataImport long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createMetadataImport,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.metastore.v1beta.MetadataImport,
-      protos.google.cloud.metastore.v1beta.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createMetadataImport, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.metastore.v1beta.MetadataImport, protos.google.cloud.metastore.v1beta.OperationMetadata>;
   }
-  /**
-   * Updates a single import.
-   * Only the description field of MetadataImport is supported to be updated.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. A field mask used to specify the fields to be overwritten in the
-   *   metadata import resource by the update.
-   *   Fields specified in the `update_mask` are relative to the resource (not
-   *   to the full request). A field is overwritten if it is in the mask.
-   * @param {google.cloud.metastore.v1beta.MetadataImport} request.metadataImport
-   *   Required. The metadata import to update. The server only merges fields
-   *   in the import if they are specified in `update_mask`.
-   *
-   *   The metadata import's `name` field is used to identify the metastore
-   *   import to be updated.
-   * @param {string} [request.requestId]
-   *   Optional. A request ID. Specify a unique request ID to allow the server to
-   *   ignore the request if it has completed. The server will ignore subsequent
-   *   requests that provide a duplicate request ID for at least 60 minutes after
-   *   the first request.
-   *
-   *   For example, if an initial request times out, followed by another request
-   *   with the same request ID, the server ignores the second request to prevent
-   *   the creation of duplicate commitments.
-   *
-   *   The request ID must be a valid
-   *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Format)
-   *   A zero UUID (00000000-0000-0000-0000-000000000000) is not supported.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/dataproc_metastore.update_metadata_import.js</caption>
-   * region_tag:metastore_v1beta_generated_DataprocMetastore_UpdateMetadataImport_async
-   */
+/**
+ * Updates a single import.
+ * Only the description field of MetadataImport is supported to be updated.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. A field mask used to specify the fields to be overwritten in the
+ *   metadata import resource by the update.
+ *   Fields specified in the `update_mask` are relative to the resource (not
+ *   to the full request). A field is overwritten if it is in the mask.
+ * @param {google.cloud.metastore.v1beta.MetadataImport} request.metadataImport
+ *   Required. The metadata import to update. The server only merges fields
+ *   in the import if they are specified in `update_mask`.
+ *
+ *   The metadata import's `name` field is used to identify the metastore
+ *   import to be updated.
+ * @param {string} [request.requestId]
+ *   Optional. A request ID. Specify a unique request ID to allow the server to
+ *   ignore the request if it has completed. The server will ignore subsequent
+ *   requests that provide a duplicate request ID for at least 60 minutes after
+ *   the first request.
+ *
+ *   For example, if an initial request times out, followed by another request
+ *   with the same request ID, the server ignores the second request to prevent
+ *   the creation of duplicate commitments.
+ *
+ *   The request ID must be a valid
+ *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Format)
+ *   A zero UUID (00000000-0000-0000-0000-000000000000) is not supported.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/dataproc_metastore.update_metadata_import.js</caption>
+ * region_tag:metastore_v1beta_generated_DataprocMetastore_UpdateMetadataImport_async
+ */
   updateMetadataImport(
-    request?: protos.google.cloud.metastore.v1beta.IUpdateMetadataImportRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IMetadataImport,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.metastore.v1beta.IUpdateMetadataImportRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.metastore.v1beta.IMetadataImport, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateMetadataImport(
-    request: protos.google.cloud.metastore.v1beta.IUpdateMetadataImportRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IMetadataImport,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.metastore.v1beta.IUpdateMetadataImportRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IMetadataImport, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateMetadataImport(
-    request: protos.google.cloud.metastore.v1beta.IUpdateMetadataImportRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IMetadataImport,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.metastore.v1beta.IUpdateMetadataImportRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IMetadataImport, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateMetadataImport(
-    request?: protos.google.cloud.metastore.v1beta.IUpdateMetadataImportRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.metastore.v1beta.IMetadataImport,
-            protos.google.cloud.metastore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IMetadataImport,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IMetadataImport,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.metastore.v1beta.IUpdateMetadataImportRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IMetadataImport, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IMetadataImport, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.metastore.v1beta.IMetadataImport, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'metadata_import.name': request.metadataImport!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'metadata_import.name': request.metadataImport!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.metastore.v1beta.IMetadataImport,
-            protos.google.cloud.metastore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IMetadataImport, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateMetadataImport response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateMetadataImport request %j', request);
-    return this.innerApiCalls
-      .updateMetadataImport(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.metastore.v1beta.IMetadataImport,
-            protos.google.cloud.metastore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateMetadataImport response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateMetadataImport(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.metastore.v1beta.IMetadataImport, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateMetadataImport response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateMetadataImport()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/dataproc_metastore.update_metadata_import.js</caption>
-   * region_tag:metastore_v1beta_generated_DataprocMetastore_UpdateMetadataImport_async
-   */
-  async checkUpdateMetadataImportProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.metastore.v1beta.MetadataImport,
-      protos.google.cloud.metastore.v1beta.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateMetadataImport()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/dataproc_metastore.update_metadata_import.js</caption>
+ * region_tag:metastore_v1beta_generated_DataprocMetastore_UpdateMetadataImport_async
+ */
+  async checkUpdateMetadataImportProgress(name: string): Promise<LROperation<protos.google.cloud.metastore.v1beta.MetadataImport, protos.google.cloud.metastore.v1beta.OperationMetadata>>{
     this._log.info('updateMetadataImport long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateMetadataImport,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.metastore.v1beta.MetadataImport,
-      protos.google.cloud.metastore.v1beta.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateMetadataImport, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.metastore.v1beta.MetadataImport, protos.google.cloud.metastore.v1beta.OperationMetadata>;
   }
-  /**
-   * Exports metadata from a service.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.destinationGcsFolder
-   *   A Cloud Storage URI of a folder, in the format
-   *   `gs://<bucket_name>/<path_inside_bucket>`. A sub-folder
-   *   `<export_folder>` containing exported files will be created below it.
-   * @param {string} request.service
-   *   Required. The relative resource name of the metastore service to run
-   *   export, in the following form:
-   *
-   *   `projects/{project_id}/locations/{location_id}/services/{service_id}`.
-   * @param {string} [request.requestId]
-   *   Optional. A request ID. Specify a unique request ID to allow the server to
-   *   ignore the request if it has completed. The server will ignore subsequent
-   *   requests that provide a duplicate request ID for at least 60 minutes after
-   *   the first request.
-   *
-   *   For example, if an initial request times out, followed by another request
-   *   with the same request ID, the server ignores the second request to prevent
-   *   the creation of duplicate commitments.
-   *
-   *   The request ID must be a valid
-   *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Format).
-   *   A zero UUID (00000000-0000-0000-0000-000000000000) is not supported.
-   * @param {google.cloud.metastore.v1beta.DatabaseDumpSpec.Type} [request.databaseDumpType]
-   *   Optional. The type of the database dump. If unspecified, defaults to
-   *   `MYSQL`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/dataproc_metastore.export_metadata.js</caption>
-   * region_tag:metastore_v1beta_generated_DataprocMetastore_ExportMetadata_async
-   */
+/**
+ * Exports metadata from a service.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.destinationGcsFolder
+ *   A Cloud Storage URI of a folder, in the format
+ *   `gs://<bucket_name>/<path_inside_bucket>`. A sub-folder
+ *   `<export_folder>` containing exported files will be created below it.
+ * @param {string} request.service
+ *   Required. The relative resource name of the metastore service to run
+ *   export, in the following form:
+ *
+ *   `projects/{project_id}/locations/{location_id}/services/{service_id}`.
+ * @param {string} [request.requestId]
+ *   Optional. A request ID. Specify a unique request ID to allow the server to
+ *   ignore the request if it has completed. The server will ignore subsequent
+ *   requests that provide a duplicate request ID for at least 60 minutes after
+ *   the first request.
+ *
+ *   For example, if an initial request times out, followed by another request
+ *   with the same request ID, the server ignores the second request to prevent
+ *   the creation of duplicate commitments.
+ *
+ *   The request ID must be a valid
+ *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Format).
+ *   A zero UUID (00000000-0000-0000-0000-000000000000) is not supported.
+ * @param {google.cloud.metastore.v1beta.DatabaseDumpSpec.Type} [request.databaseDumpType]
+ *   Optional. The type of the database dump. If unspecified, defaults to
+ *   `MYSQL`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/dataproc_metastore.export_metadata.js</caption>
+ * region_tag:metastore_v1beta_generated_DataprocMetastore_ExportMetadata_async
+ */
   exportMetadata(
-    request?: protos.google.cloud.metastore.v1beta.IExportMetadataRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IMetadataExport,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.metastore.v1beta.IExportMetadataRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.metastore.v1beta.IMetadataExport, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   exportMetadata(
-    request: protos.google.cloud.metastore.v1beta.IExportMetadataRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IMetadataExport,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.metastore.v1beta.IExportMetadataRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IMetadataExport, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   exportMetadata(
-    request: protos.google.cloud.metastore.v1beta.IExportMetadataRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IMetadataExport,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.metastore.v1beta.IExportMetadataRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IMetadataExport, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   exportMetadata(
-    request?: protos.google.cloud.metastore.v1beta.IExportMetadataRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.metastore.v1beta.IMetadataExport,
-            protos.google.cloud.metastore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IMetadataExport,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IMetadataExport,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.metastore.v1beta.IExportMetadataRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IMetadataExport, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IMetadataExport, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.metastore.v1beta.IMetadataExport, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        service: request.service ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'service': request.service ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.metastore.v1beta.IMetadataExport,
-            protos.google.cloud.metastore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IMetadataExport, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('exportMetadata response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('exportMetadata request %j', request);
-    return this.innerApiCalls
-      .exportMetadata(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.metastore.v1beta.IMetadataExport,
-            protos.google.cloud.metastore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('exportMetadata response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.exportMetadata(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.metastore.v1beta.IMetadataExport, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('exportMetadata response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `exportMetadata()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/dataproc_metastore.export_metadata.js</caption>
-   * region_tag:metastore_v1beta_generated_DataprocMetastore_ExportMetadata_async
-   */
-  async checkExportMetadataProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.metastore.v1beta.MetadataExport,
-      protos.google.cloud.metastore.v1beta.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `exportMetadata()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/dataproc_metastore.export_metadata.js</caption>
+ * region_tag:metastore_v1beta_generated_DataprocMetastore_ExportMetadata_async
+ */
+  async checkExportMetadataProgress(name: string): Promise<LROperation<protos.google.cloud.metastore.v1beta.MetadataExport, protos.google.cloud.metastore.v1beta.OperationMetadata>>{
     this._log.info('exportMetadata long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.exportMetadata,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.metastore.v1beta.MetadataExport,
-      protos.google.cloud.metastore.v1beta.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.exportMetadata, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.metastore.v1beta.MetadataExport, protos.google.cloud.metastore.v1beta.OperationMetadata>;
   }
-  /**
-   * Restores a service from a backup.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.service
-   *   Required. The relative resource name of the metastore service to run
-   *   restore, in the following form:
-   *
-   *   `projects/{project_id}/locations/{location_id}/services/{service_id}`.
-   * @param {string} request.backup
-   *   Required. The relative resource name of the metastore service backup to
-   *   restore from, in the following form:
-   *
-   *   `projects/{project_id}/locations/{location_id}/services/{service_id}/backups/{backup_id}`.
-   * @param {google.cloud.metastore.v1beta.Restore.RestoreType} [request.restoreType]
-   *   Optional. The type of restore. If unspecified, defaults to `METADATA_ONLY`.
-   * @param {string} [request.requestId]
-   *   Optional. A request ID. Specify a unique request ID to allow the server to
-   *   ignore the request if it has completed. The server will ignore subsequent
-   *   requests that provide a duplicate request ID for at least 60 minutes after
-   *   the first request.
-   *
-   *   For example, if an initial request times out, followed by another request
-   *   with the same request ID, the server ignores the second request to prevent
-   *   the creation of duplicate commitments.
-   *
-   *   The request ID must be a valid
-   *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Format).
-   *   A zero UUID (00000000-0000-0000-0000-000000000000) is not supported.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/dataproc_metastore.restore_service.js</caption>
-   * region_tag:metastore_v1beta_generated_DataprocMetastore_RestoreService_async
-   */
+/**
+ * Restores a service from a backup.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.service
+ *   Required. The relative resource name of the metastore service to run
+ *   restore, in the following form:
+ *
+ *   `projects/{project_id}/locations/{location_id}/services/{service_id}`.
+ * @param {string} request.backup
+ *   Required. The relative resource name of the metastore service backup to
+ *   restore from, in the following form:
+ *
+ *   `projects/{project_id}/locations/{location_id}/services/{service_id}/backups/{backup_id}`.
+ * @param {google.cloud.metastore.v1beta.Restore.RestoreType} [request.restoreType]
+ *   Optional. The type of restore. If unspecified, defaults to `METADATA_ONLY`.
+ * @param {string} [request.requestId]
+ *   Optional. A request ID. Specify a unique request ID to allow the server to
+ *   ignore the request if it has completed. The server will ignore subsequent
+ *   requests that provide a duplicate request ID for at least 60 minutes after
+ *   the first request.
+ *
+ *   For example, if an initial request times out, followed by another request
+ *   with the same request ID, the server ignores the second request to prevent
+ *   the creation of duplicate commitments.
+ *
+ *   The request ID must be a valid
+ *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Format).
+ *   A zero UUID (00000000-0000-0000-0000-000000000000) is not supported.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/dataproc_metastore.restore_service.js</caption>
+ * region_tag:metastore_v1beta_generated_DataprocMetastore_RestoreService_async
+ */
   restoreService(
-    request?: protos.google.cloud.metastore.v1beta.IRestoreServiceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IRestore,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.metastore.v1beta.IRestoreServiceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.metastore.v1beta.IRestore, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   restoreService(
-    request: protos.google.cloud.metastore.v1beta.IRestoreServiceRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IRestore,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.metastore.v1beta.IRestoreServiceRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IRestore, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   restoreService(
-    request: protos.google.cloud.metastore.v1beta.IRestoreServiceRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IRestore,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.metastore.v1beta.IRestoreServiceRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IRestore, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   restoreService(
-    request?: protos.google.cloud.metastore.v1beta.IRestoreServiceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.metastore.v1beta.IRestore,
-            protos.google.cloud.metastore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IRestore,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IRestore,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.metastore.v1beta.IRestoreServiceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IRestore, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IRestore, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.metastore.v1beta.IRestore, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        service: request.service ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'service': request.service ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.metastore.v1beta.IRestore,
-            protos.google.cloud.metastore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IRestore, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('restoreService response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('restoreService request %j', request);
-    return this.innerApiCalls
-      .restoreService(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.metastore.v1beta.IRestore,
-            protos.google.cloud.metastore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('restoreService response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.restoreService(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.metastore.v1beta.IRestore, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('restoreService response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `restoreService()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/dataproc_metastore.restore_service.js</caption>
-   * region_tag:metastore_v1beta_generated_DataprocMetastore_RestoreService_async
-   */
-  async checkRestoreServiceProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.metastore.v1beta.Restore,
-      protos.google.cloud.metastore.v1beta.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `restoreService()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/dataproc_metastore.restore_service.js</caption>
+ * region_tag:metastore_v1beta_generated_DataprocMetastore_RestoreService_async
+ */
+  async checkRestoreServiceProgress(name: string): Promise<LROperation<protos.google.cloud.metastore.v1beta.Restore, protos.google.cloud.metastore.v1beta.OperationMetadata>>{
     this._log.info('restoreService long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.restoreService,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.metastore.v1beta.Restore,
-      protos.google.cloud.metastore.v1beta.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.restoreService, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.metastore.v1beta.Restore, protos.google.cloud.metastore.v1beta.OperationMetadata>;
   }
-  /**
-   * Creates a new backup in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The relative resource name of the service in which to create a
-   *   backup of the following form:
-   *
-   *   `projects/{project_number}/locations/{location_id}/services/{service_id}`.
-   * @param {string} request.backupId
-   *   Required. The ID of the backup, which is used as the final component of the
-   *   backup's name.
-   *
-   *   This value must be between 1 and 64 characters long, begin with a letter,
-   *   end with a letter or number, and consist of alpha-numeric ASCII characters
-   *   or hyphens.
-   * @param {google.cloud.metastore.v1beta.Backup} request.backup
-   *   Required. The backup to create. The `name` field is ignored. The ID of the
-   *   created backup must be provided in the request's `backup_id` field.
-   * @param {string} [request.requestId]
-   *   Optional. A request ID. Specify a unique request ID to allow the server to
-   *   ignore the request if it has completed. The server will ignore subsequent
-   *   requests that provide a duplicate request ID for at least 60 minutes after
-   *   the first request.
-   *
-   *   For example, if an initial request times out, followed by another request
-   *   with the same request ID, the server ignores the second request to prevent
-   *   the creation of duplicate commitments.
-   *
-   *   The request ID must be a valid
-   *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Format)
-   *   A zero UUID (00000000-0000-0000-0000-000000000000) is not supported.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/dataproc_metastore.create_backup.js</caption>
-   * region_tag:metastore_v1beta_generated_DataprocMetastore_CreateBackup_async
-   */
+/**
+ * Creates a new backup in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The relative resource name of the service in which to create a
+ *   backup of the following form:
+ *
+ *   `projects/{project_number}/locations/{location_id}/services/{service_id}`.
+ * @param {string} request.backupId
+ *   Required. The ID of the backup, which is used as the final component of the
+ *   backup's name.
+ *
+ *   This value must be between 1 and 64 characters long, begin with a letter,
+ *   end with a letter or number, and consist of alpha-numeric ASCII characters
+ *   or hyphens.
+ * @param {google.cloud.metastore.v1beta.Backup} request.backup
+ *   Required. The backup to create. The `name` field is ignored. The ID of the
+ *   created backup must be provided in the request's `backup_id` field.
+ * @param {string} [request.requestId]
+ *   Optional. A request ID. Specify a unique request ID to allow the server to
+ *   ignore the request if it has completed. The server will ignore subsequent
+ *   requests that provide a duplicate request ID for at least 60 minutes after
+ *   the first request.
+ *
+ *   For example, if an initial request times out, followed by another request
+ *   with the same request ID, the server ignores the second request to prevent
+ *   the creation of duplicate commitments.
+ *
+ *   The request ID must be a valid
+ *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Format)
+ *   A zero UUID (00000000-0000-0000-0000-000000000000) is not supported.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/dataproc_metastore.create_backup.js</caption>
+ * region_tag:metastore_v1beta_generated_DataprocMetastore_CreateBackup_async
+ */
   createBackup(
-    request?: protos.google.cloud.metastore.v1beta.ICreateBackupRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IBackup,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.metastore.v1beta.ICreateBackupRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.metastore.v1beta.IBackup, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createBackup(
-    request: protos.google.cloud.metastore.v1beta.ICreateBackupRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IBackup,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.metastore.v1beta.ICreateBackupRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IBackup, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createBackup(
-    request: protos.google.cloud.metastore.v1beta.ICreateBackupRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IBackup,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.metastore.v1beta.ICreateBackupRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IBackup, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createBackup(
-    request?: protos.google.cloud.metastore.v1beta.ICreateBackupRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.metastore.v1beta.IBackup,
-            protos.google.cloud.metastore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IBackup,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IBackup,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.metastore.v1beta.ICreateBackupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IBackup, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IBackup, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.metastore.v1beta.IBackup, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.metastore.v1beta.IBackup,
-            protos.google.cloud.metastore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IBackup, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createBackup response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createBackup request %j', request);
-    return this.innerApiCalls
-      .createBackup(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.metastore.v1beta.IBackup,
-            protos.google.cloud.metastore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createBackup response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createBackup(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.metastore.v1beta.IBackup, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createBackup response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createBackup()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/dataproc_metastore.create_backup.js</caption>
-   * region_tag:metastore_v1beta_generated_DataprocMetastore_CreateBackup_async
-   */
-  async checkCreateBackupProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.metastore.v1beta.Backup,
-      protos.google.cloud.metastore.v1beta.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createBackup()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/dataproc_metastore.create_backup.js</caption>
+ * region_tag:metastore_v1beta_generated_DataprocMetastore_CreateBackup_async
+ */
+  async checkCreateBackupProgress(name: string): Promise<LROperation<protos.google.cloud.metastore.v1beta.Backup, protos.google.cloud.metastore.v1beta.OperationMetadata>>{
     this._log.info('createBackup long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createBackup,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.metastore.v1beta.Backup,
-      protos.google.cloud.metastore.v1beta.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createBackup, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.metastore.v1beta.Backup, protos.google.cloud.metastore.v1beta.OperationMetadata>;
   }
-  /**
-   * Deletes a single backup.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The relative resource name of the backup to delete, in the
-   *   following form:
-   *
-   *   `projects/{project_number}/locations/{location_id}/services/{service_id}/backups/{backup_id}`.
-   * @param {string} [request.requestId]
-   *   Optional. A request ID. Specify a unique request ID to allow the server to
-   *   ignore the request if it has completed. The server will ignore subsequent
-   *   requests that provide a duplicate request ID for at least 60 minutes after
-   *   the first request.
-   *
-   *   For example, if an initial request times out, followed by another request
-   *   with the same request ID, the server ignores the second request to prevent
-   *   the creation of duplicate commitments.
-   *
-   *   The request ID must be a valid
-   *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Format)
-   *   A zero UUID (00000000-0000-0000-0000-000000000000) is not supported.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/dataproc_metastore.delete_backup.js</caption>
-   * region_tag:metastore_v1beta_generated_DataprocMetastore_DeleteBackup_async
-   */
+/**
+ * Deletes a single backup.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The relative resource name of the backup to delete, in the
+ *   following form:
+ *
+ *   `projects/{project_number}/locations/{location_id}/services/{service_id}/backups/{backup_id}`.
+ * @param {string} [request.requestId]
+ *   Optional. A request ID. Specify a unique request ID to allow the server to
+ *   ignore the request if it has completed. The server will ignore subsequent
+ *   requests that provide a duplicate request ID for at least 60 minutes after
+ *   the first request.
+ *
+ *   For example, if an initial request times out, followed by another request
+ *   with the same request ID, the server ignores the second request to prevent
+ *   the creation of duplicate commitments.
+ *
+ *   The request ID must be a valid
+ *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Format)
+ *   A zero UUID (00000000-0000-0000-0000-000000000000) is not supported.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/dataproc_metastore.delete_backup.js</caption>
+ * region_tag:metastore_v1beta_generated_DataprocMetastore_DeleteBackup_async
+ */
   deleteBackup(
-    request?: protos.google.cloud.metastore.v1beta.IDeleteBackupRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.metastore.v1beta.IDeleteBackupRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteBackup(
-    request: protos.google.cloud.metastore.v1beta.IDeleteBackupRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.metastore.v1beta.IDeleteBackupRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteBackup(
-    request: protos.google.cloud.metastore.v1beta.IDeleteBackupRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.metastore.v1beta.IDeleteBackupRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteBackup(
-    request?: protos.google.cloud.metastore.v1beta.IDeleteBackupRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.metastore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.metastore.v1beta.IDeleteBackupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.metastore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteBackup response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteBackup request %j', request);
-    return this.innerApiCalls
-      .deleteBackup(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.metastore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteBackup response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteBackup(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteBackup response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteBackup()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/dataproc_metastore.delete_backup.js</caption>
-   * region_tag:metastore_v1beta_generated_DataprocMetastore_DeleteBackup_async
-   */
-  async checkDeleteBackupProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.metastore.v1beta.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteBackup()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/dataproc_metastore.delete_backup.js</caption>
+ * region_tag:metastore_v1beta_generated_DataprocMetastore_DeleteBackup_async
+ */
+  async checkDeleteBackupProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.metastore.v1beta.OperationMetadata>>{
     this._log.info('deleteBackup long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteBackup,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.metastore.v1beta.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteBackup, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.metastore.v1beta.OperationMetadata>;
   }
-  /**
-   * Query DPMS metadata.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.service
-   *   Required. The relative resource name of the metastore service to query
-   *   metadata, in the following format:
-   *
-   *   `projects/{project_id}/locations/{location_id}/services/{service_id}`.
-   * @param {string} request.query
-   *   Required. A read-only SQL query to execute against the metadata database.
-   *   The query cannot change or mutate the data.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/dataproc_metastore.query_metadata.js</caption>
-   * region_tag:metastore_v1beta_generated_DataprocMetastore_QueryMetadata_async
-   */
+/**
+ * Query DPMS metadata.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.service
+ *   Required. The relative resource name of the metastore service to query
+ *   metadata, in the following format:
+ *
+ *   `projects/{project_id}/locations/{location_id}/services/{service_id}`.
+ * @param {string} request.query
+ *   Required. A read-only SQL query to execute against the metadata database.
+ *   The query cannot change or mutate the data.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/dataproc_metastore.query_metadata.js</caption>
+ * region_tag:metastore_v1beta_generated_DataprocMetastore_QueryMetadata_async
+ */
   queryMetadata(
-    request?: protos.google.cloud.metastore.v1beta.IQueryMetadataRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IQueryMetadataResponse,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.metastore.v1beta.IQueryMetadataRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.metastore.v1beta.IQueryMetadataResponse, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   queryMetadata(
-    request: protos.google.cloud.metastore.v1beta.IQueryMetadataRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IQueryMetadataResponse,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.metastore.v1beta.IQueryMetadataRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IQueryMetadataResponse, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   queryMetadata(
-    request: protos.google.cloud.metastore.v1beta.IQueryMetadataRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IQueryMetadataResponse,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.metastore.v1beta.IQueryMetadataRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IQueryMetadataResponse, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   queryMetadata(
-    request?: protos.google.cloud.metastore.v1beta.IQueryMetadataRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.metastore.v1beta.IQueryMetadataResponse,
-            protos.google.cloud.metastore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IQueryMetadataResponse,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IQueryMetadataResponse,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.metastore.v1beta.IQueryMetadataRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IQueryMetadataResponse, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IQueryMetadataResponse, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.metastore.v1beta.IQueryMetadataResponse, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        service: request.service ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'service': request.service ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.metastore.v1beta.IQueryMetadataResponse,
-            protos.google.cloud.metastore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IQueryMetadataResponse, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('queryMetadata response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('queryMetadata request %j', request);
-    return this.innerApiCalls
-      .queryMetadata(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.metastore.v1beta.IQueryMetadataResponse,
-            protos.google.cloud.metastore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('queryMetadata response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.queryMetadata(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.metastore.v1beta.IQueryMetadataResponse, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('queryMetadata response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `queryMetadata()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/dataproc_metastore.query_metadata.js</caption>
-   * region_tag:metastore_v1beta_generated_DataprocMetastore_QueryMetadata_async
-   */
-  async checkQueryMetadataProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.metastore.v1beta.QueryMetadataResponse,
-      protos.google.cloud.metastore.v1beta.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `queryMetadata()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/dataproc_metastore.query_metadata.js</caption>
+ * region_tag:metastore_v1beta_generated_DataprocMetastore_QueryMetadata_async
+ */
+  async checkQueryMetadataProgress(name: string): Promise<LROperation<protos.google.cloud.metastore.v1beta.QueryMetadataResponse, protos.google.cloud.metastore.v1beta.OperationMetadata>>{
     this._log.info('queryMetadata long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.queryMetadata,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.metastore.v1beta.QueryMetadataResponse,
-      protos.google.cloud.metastore.v1beta.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.queryMetadata, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.metastore.v1beta.QueryMetadataResponse, protos.google.cloud.metastore.v1beta.OperationMetadata>;
   }
-  /**
-   * Move a table to another database.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.service
-   *   Required. The relative resource name of the metastore service to mutate
-   *   metadata, in the following format:
-   *
-   *   `projects/{project_id}/locations/{location_id}/services/{service_id}`.
-   * @param {string} request.tableName
-   *   Required. The name of the table to be moved.
-   * @param {string} request.dbName
-   *   Required. The name of the database where the table resides.
-   * @param {string} request.destinationDbName
-   *   Required. The name of the database where the table should be moved.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/dataproc_metastore.move_table_to_database.js</caption>
-   * region_tag:metastore_v1beta_generated_DataprocMetastore_MoveTableToDatabase_async
-   */
+/**
+ * Move a table to another database.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.service
+ *   Required. The relative resource name of the metastore service to mutate
+ *   metadata, in the following format:
+ *
+ *   `projects/{project_id}/locations/{location_id}/services/{service_id}`.
+ * @param {string} request.tableName
+ *   Required. The name of the table to be moved.
+ * @param {string} request.dbName
+ *   Required. The name of the database where the table resides.
+ * @param {string} request.destinationDbName
+ *   Required. The name of the database where the table should be moved.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/dataproc_metastore.move_table_to_database.js</caption>
+ * region_tag:metastore_v1beta_generated_DataprocMetastore_MoveTableToDatabase_async
+ */
   moveTableToDatabase(
-    request?: protos.google.cloud.metastore.v1beta.IMoveTableToDatabaseRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IMoveTableToDatabaseResponse,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.metastore.v1beta.IMoveTableToDatabaseRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.metastore.v1beta.IMoveTableToDatabaseResponse, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   moveTableToDatabase(
-    request: protos.google.cloud.metastore.v1beta.IMoveTableToDatabaseRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IMoveTableToDatabaseResponse,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.metastore.v1beta.IMoveTableToDatabaseRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IMoveTableToDatabaseResponse, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   moveTableToDatabase(
-    request: protos.google.cloud.metastore.v1beta.IMoveTableToDatabaseRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IMoveTableToDatabaseResponse,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.metastore.v1beta.IMoveTableToDatabaseRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IMoveTableToDatabaseResponse, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   moveTableToDatabase(
-    request?: protos.google.cloud.metastore.v1beta.IMoveTableToDatabaseRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.metastore.v1beta.IMoveTableToDatabaseResponse,
-            protos.google.cloud.metastore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IMoveTableToDatabaseResponse,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IMoveTableToDatabaseResponse,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.metastore.v1beta.IMoveTableToDatabaseRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IMoveTableToDatabaseResponse, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IMoveTableToDatabaseResponse, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.metastore.v1beta.IMoveTableToDatabaseResponse, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        service: request.service ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'service': request.service ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.metastore.v1beta.IMoveTableToDatabaseResponse,
-            protos.google.cloud.metastore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IMoveTableToDatabaseResponse, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('moveTableToDatabase response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('moveTableToDatabase request %j', request);
-    return this.innerApiCalls
-      .moveTableToDatabase(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.metastore.v1beta.IMoveTableToDatabaseResponse,
-            protos.google.cloud.metastore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('moveTableToDatabase response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.moveTableToDatabase(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.metastore.v1beta.IMoveTableToDatabaseResponse, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('moveTableToDatabase response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `moveTableToDatabase()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/dataproc_metastore.move_table_to_database.js</caption>
-   * region_tag:metastore_v1beta_generated_DataprocMetastore_MoveTableToDatabase_async
-   */
-  async checkMoveTableToDatabaseProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.metastore.v1beta.MoveTableToDatabaseResponse,
-      protos.google.cloud.metastore.v1beta.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `moveTableToDatabase()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/dataproc_metastore.move_table_to_database.js</caption>
+ * region_tag:metastore_v1beta_generated_DataprocMetastore_MoveTableToDatabase_async
+ */
+  async checkMoveTableToDatabaseProgress(name: string): Promise<LROperation<protos.google.cloud.metastore.v1beta.MoveTableToDatabaseResponse, protos.google.cloud.metastore.v1beta.OperationMetadata>>{
     this._log.info('moveTableToDatabase long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.moveTableToDatabase,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.metastore.v1beta.MoveTableToDatabaseResponse,
-      protos.google.cloud.metastore.v1beta.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.moveTableToDatabase, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.metastore.v1beta.MoveTableToDatabaseResponse, protos.google.cloud.metastore.v1beta.OperationMetadata>;
   }
-  /**
-   * Alter metadata resource location. The metadata resource can be a database,
-   * table, or partition. This functionality only updates the parent directory
-   * for the respective metadata resource and does not transfer any existing
-   * data to the new location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.service
-   *   Required. The relative resource name of the metastore service to mutate
-   *   metadata, in the following format:
-   *
-   *   `projects/{project_id}/locations/{location_id}/services/{service_id}`.
-   * @param {string} request.resourceName
-   *   Required. The relative metadata resource name in the following format.
-   *
-   *   `databases/{database_id}`
-   *   or
-   *   `databases/{database_id}/tables/{table_id}`
-   *   or
-   *   `databases/{database_id}/tables/{table_id}/partitions/{partition_id}`
-   * @param {string} request.locationUri
-   *   Required. The new location URI for the metadata resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/dataproc_metastore.alter_metadata_resource_location.js</caption>
-   * region_tag:metastore_v1beta_generated_DataprocMetastore_AlterMetadataResourceLocation_async
-   */
+/**
+ * Alter metadata resource location. The metadata resource can be a database,
+ * table, or partition. This functionality only updates the parent directory
+ * for the respective metadata resource and does not transfer any existing
+ * data to the new location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.service
+ *   Required. The relative resource name of the metastore service to mutate
+ *   metadata, in the following format:
+ *
+ *   `projects/{project_id}/locations/{location_id}/services/{service_id}`.
+ * @param {string} request.resourceName
+ *   Required. The relative metadata resource name in the following format.
+ *
+ *   `databases/{database_id}`
+ *   or
+ *   `databases/{database_id}/tables/{table_id}`
+ *   or
+ *   `databases/{database_id}/tables/{table_id}/partitions/{partition_id}`
+ * @param {string} request.locationUri
+ *   Required. The new location URI for the metadata resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/dataproc_metastore.alter_metadata_resource_location.js</caption>
+ * region_tag:metastore_v1beta_generated_DataprocMetastore_AlterMetadataResourceLocation_async
+ */
   alterMetadataResourceLocation(
-    request?: protos.google.cloud.metastore.v1beta.IAlterMetadataResourceLocationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IAlterMetadataResourceLocationResponse,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.metastore.v1beta.IAlterMetadataResourceLocationRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.metastore.v1beta.IAlterMetadataResourceLocationResponse, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   alterMetadataResourceLocation(
-    request: protos.google.cloud.metastore.v1beta.IAlterMetadataResourceLocationRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IAlterMetadataResourceLocationResponse,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.metastore.v1beta.IAlterMetadataResourceLocationRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IAlterMetadataResourceLocationResponse, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   alterMetadataResourceLocation(
-    request: protos.google.cloud.metastore.v1beta.IAlterMetadataResourceLocationRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IAlterMetadataResourceLocationResponse,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.metastore.v1beta.IAlterMetadataResourceLocationRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IAlterMetadataResourceLocationResponse, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   alterMetadataResourceLocation(
-    request?: protos.google.cloud.metastore.v1beta.IAlterMetadataResourceLocationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.metastore.v1beta.IAlterMetadataResourceLocationResponse,
-            protos.google.cloud.metastore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IAlterMetadataResourceLocationResponse,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.metastore.v1beta.IAlterMetadataResourceLocationResponse,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.metastore.v1beta.IAlterMetadataResourceLocationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IAlterMetadataResourceLocationResponse, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IAlterMetadataResourceLocationResponse, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.metastore.v1beta.IAlterMetadataResourceLocationResponse, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        service: request.service ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'service': request.service ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.metastore.v1beta.IAlterMetadataResourceLocationResponse,
-            protos.google.cloud.metastore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.metastore.v1beta.IAlterMetadataResourceLocationResponse, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
-            'alterMetadataResourceLocation response %j',
-            rawResponse
-          );
+          this._log.info('alterMetadataResourceLocation response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('alterMetadataResourceLocation request %j', request);
-    return this.innerApiCalls
-      .alterMetadataResourceLocation(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.metastore.v1beta.IAlterMetadataResourceLocationResponse,
-            protos.google.cloud.metastore.v1beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info(
-            'alterMetadataResourceLocation response %j',
-            rawResponse
-          );
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.alterMetadataResourceLocation(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.metastore.v1beta.IAlterMetadataResourceLocationResponse, protos.google.cloud.metastore.v1beta.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('alterMetadataResourceLocation response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `alterMetadataResourceLocation()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/dataproc_metastore.alter_metadata_resource_location.js</caption>
-   * region_tag:metastore_v1beta_generated_DataprocMetastore_AlterMetadataResourceLocation_async
-   */
-  async checkAlterMetadataResourceLocationProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.metastore.v1beta.AlterMetadataResourceLocationResponse,
-      protos.google.cloud.metastore.v1beta.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `alterMetadataResourceLocation()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/dataproc_metastore.alter_metadata_resource_location.js</caption>
+ * region_tag:metastore_v1beta_generated_DataprocMetastore_AlterMetadataResourceLocation_async
+ */
+  async checkAlterMetadataResourceLocationProgress(name: string): Promise<LROperation<protos.google.cloud.metastore.v1beta.AlterMetadataResourceLocationResponse, protos.google.cloud.metastore.v1beta.OperationMetadata>>{
     this._log.info('alterMetadataResourceLocation long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.alterMetadataResourceLocation,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.metastore.v1beta.AlterMetadataResourceLocationResponse,
-      protos.google.cloud.metastore.v1beta.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.alterMetadataResourceLocation, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.metastore.v1beta.AlterMetadataResourceLocationResponse, protos.google.cloud.metastore.v1beta.OperationMetadata>;
   }
-  /**
-   * Lists services in a project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The relative resource name of the location of metastore services
-   *   to list, in the following form:
-   *
-   *   `projects/{project_number}/locations/{location_id}`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of services to return. The response may
-   *   contain less than the maximum number. If unspecified, no more than 500
-   *   services are returned. The maximum value is 1000; values above 1000 are
-   *   changed to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous
-   *   {@link protos.google.cloud.metastore.v1beta.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
-   *   call. Provide this token to retrieve the subsequent page.
-   *
-   *   To retrieve the first page, supply an empty page token.
-   *
-   *   When paginating, other parameters provided to
-   *   {@link protos.google.cloud.metastore.v1beta.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
-   *   must match the call that provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. The filter to apply to list results.
-   * @param {string} [request.orderBy]
-   *   Optional. Specify the ordering of results as described in [Sorting
-   *   Order](https://cloud.google.com/apis/design/design_patterns#sorting_order).
-   *   If not specified, the results will be sorted in the default order.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.metastore.v1beta.Service|Service}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listServicesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists services in a project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The relative resource name of the location of metastore services
+ *   to list, in the following form:
+ *
+ *   `projects/{project_number}/locations/{location_id}`.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of services to return. The response may
+ *   contain less than the maximum number. If unspecified, no more than 500
+ *   services are returned. The maximum value is 1000; values above 1000 are
+ *   changed to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous
+ *   {@link protos.google.cloud.metastore.v1beta.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
+ *   call. Provide this token to retrieve the subsequent page.
+ *
+ *   To retrieve the first page, supply an empty page token.
+ *
+ *   When paginating, other parameters provided to
+ *   {@link protos.google.cloud.metastore.v1beta.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
+ *   must match the call that provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. The filter to apply to list results.
+ * @param {string} [request.orderBy]
+ *   Optional. Specify the ordering of results as described in [Sorting
+ *   Order](https://cloud.google.com/apis/design/design_patterns#sorting_order).
+ *   If not specified, the results will be sorted in the default order.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.metastore.v1beta.Service|Service}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listServicesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listServices(
-    request?: protos.google.cloud.metastore.v1beta.IListServicesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.metastore.v1beta.IService[],
-      protos.google.cloud.metastore.v1beta.IListServicesRequest | null,
-      protos.google.cloud.metastore.v1beta.IListServicesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.metastore.v1beta.IListServicesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.metastore.v1beta.IService[],
+        protos.google.cloud.metastore.v1beta.IListServicesRequest|null,
+        protos.google.cloud.metastore.v1beta.IListServicesResponse
+      ]>;
   listServices(
-    request: protos.google.cloud.metastore.v1beta.IListServicesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.metastore.v1beta.IListServicesRequest,
-      | protos.google.cloud.metastore.v1beta.IListServicesResponse
-      | null
-      | undefined,
-      protos.google.cloud.metastore.v1beta.IService
-    >
-  ): void;
-  listServices(
-    request: protos.google.cloud.metastore.v1beta.IListServicesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.metastore.v1beta.IListServicesRequest,
-      | protos.google.cloud.metastore.v1beta.IListServicesResponse
-      | null
-      | undefined,
-      protos.google.cloud.metastore.v1beta.IService
-    >
-  ): void;
-  listServices(
-    request?: protos.google.cloud.metastore.v1beta.IListServicesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.metastore.v1beta.IListServicesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.metastore.v1beta.IListServicesRequest,
-          | protos.google.cloud.metastore.v1beta.IListServicesResponse
-          | null
-          | undefined,
-          protos.google.cloud.metastore.v1beta.IService
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.metastore.v1beta.IListServicesRequest,
-      | protos.google.cloud.metastore.v1beta.IListServicesResponse
-      | null
-      | undefined,
-      protos.google.cloud.metastore.v1beta.IService
-    >
-  ): Promise<
-    [
-      protos.google.cloud.metastore.v1beta.IService[],
-      protos.google.cloud.metastore.v1beta.IListServicesRequest | null,
-      protos.google.cloud.metastore.v1beta.IListServicesResponse,
-    ]
-  > | void {
+          protos.google.cloud.metastore.v1beta.IListServicesResponse|null|undefined,
+          protos.google.cloud.metastore.v1beta.IService>): void;
+  listServices(
+      request: protos.google.cloud.metastore.v1beta.IListServicesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.metastore.v1beta.IListServicesRequest,
+          protos.google.cloud.metastore.v1beta.IListServicesResponse|null|undefined,
+          protos.google.cloud.metastore.v1beta.IService>): void;
+  listServices(
+      request?: protos.google.cloud.metastore.v1beta.IListServicesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.metastore.v1beta.IListServicesRequest,
+          protos.google.cloud.metastore.v1beta.IListServicesResponse|null|undefined,
+          protos.google.cloud.metastore.v1beta.IService>,
+      callback?: PaginationCallback<
+          protos.google.cloud.metastore.v1beta.IListServicesRequest,
+          protos.google.cloud.metastore.v1beta.IListServicesResponse|null|undefined,
+          protos.google.cloud.metastore.v1beta.IService>):
+      Promise<[
+        protos.google.cloud.metastore.v1beta.IService[],
+        protos.google.cloud.metastore.v1beta.IListServicesRequest|null,
+        protos.google.cloud.metastore.v1beta.IListServicesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.metastore.v1beta.IListServicesRequest,
-          | protos.google.cloud.metastore.v1beta.IListServicesResponse
-          | null
-          | undefined,
-          protos.google.cloud.metastore.v1beta.IService
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.metastore.v1beta.IListServicesRequest,
+      protos.google.cloud.metastore.v1beta.IListServicesResponse|null|undefined,
+      protos.google.cloud.metastore.v1beta.IService>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listServices values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3609,76 +2525,73 @@ export class DataprocMetastoreClient {
     this._log.info('listServices request %j', request);
     return this.innerApiCalls
       .listServices(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.metastore.v1beta.IService[],
-          protos.google.cloud.metastore.v1beta.IListServicesRequest | null,
-          protos.google.cloud.metastore.v1beta.IListServicesResponse,
-        ]) => {
-          this._log.info('listServices values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.metastore.v1beta.IService[],
+        protos.google.cloud.metastore.v1beta.IListServicesRequest|null,
+        protos.google.cloud.metastore.v1beta.IListServicesResponse
+      ]) => {
+        this._log.info('listServices values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listServices`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The relative resource name of the location of metastore services
-   *   to list, in the following form:
-   *
-   *   `projects/{project_number}/locations/{location_id}`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of services to return. The response may
-   *   contain less than the maximum number. If unspecified, no more than 500
-   *   services are returned. The maximum value is 1000; values above 1000 are
-   *   changed to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous
-   *   {@link protos.google.cloud.metastore.v1beta.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
-   *   call. Provide this token to retrieve the subsequent page.
-   *
-   *   To retrieve the first page, supply an empty page token.
-   *
-   *   When paginating, other parameters provided to
-   *   {@link protos.google.cloud.metastore.v1beta.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
-   *   must match the call that provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. The filter to apply to list results.
-   * @param {string} [request.orderBy]
-   *   Optional. Specify the ordering of results as described in [Sorting
-   *   Order](https://cloud.google.com/apis/design/design_patterns#sorting_order).
-   *   If not specified, the results will be sorted in the default order.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.metastore.v1beta.Service|Service} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listServicesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listServices`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The relative resource name of the location of metastore services
+ *   to list, in the following form:
+ *
+ *   `projects/{project_number}/locations/{location_id}`.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of services to return. The response may
+ *   contain less than the maximum number. If unspecified, no more than 500
+ *   services are returned. The maximum value is 1000; values above 1000 are
+ *   changed to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous
+ *   {@link protos.google.cloud.metastore.v1beta.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
+ *   call. Provide this token to retrieve the subsequent page.
+ *
+ *   To retrieve the first page, supply an empty page token.
+ *
+ *   When paginating, other parameters provided to
+ *   {@link protos.google.cloud.metastore.v1beta.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
+ *   must match the call that provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. The filter to apply to list results.
+ * @param {string} [request.orderBy]
+ *   Optional. Specify the ordering of results as described in [Sorting
+ *   Order](https://cloud.google.com/apis/design/design_patterns#sorting_order).
+ *   If not specified, the results will be sorted in the default order.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.metastore.v1beta.Service|Service} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listServicesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listServicesStream(
-    request?: protos.google.cloud.metastore.v1beta.IListServicesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.metastore.v1beta.IListServicesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listServices stream %j', request);
     return this.descriptors.page.listServices.createStream(
       this.innerApiCalls.listServices as GaxCall,
@@ -3687,67 +2600,66 @@ export class DataprocMetastoreClient {
     );
   }
 
-  /**
-   * Equivalent to `listServices`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The relative resource name of the location of metastore services
-   *   to list, in the following form:
-   *
-   *   `projects/{project_number}/locations/{location_id}`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of services to return. The response may
-   *   contain less than the maximum number. If unspecified, no more than 500
-   *   services are returned. The maximum value is 1000; values above 1000 are
-   *   changed to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous
-   *   {@link protos.google.cloud.metastore.v1beta.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
-   *   call. Provide this token to retrieve the subsequent page.
-   *
-   *   To retrieve the first page, supply an empty page token.
-   *
-   *   When paginating, other parameters provided to
-   *   {@link protos.google.cloud.metastore.v1beta.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
-   *   must match the call that provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. The filter to apply to list results.
-   * @param {string} [request.orderBy]
-   *   Optional. Specify the ordering of results as described in [Sorting
-   *   Order](https://cloud.google.com/apis/design/design_patterns#sorting_order).
-   *   If not specified, the results will be sorted in the default order.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.metastore.v1beta.Service|Service}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/dataproc_metastore.list_services.js</caption>
-   * region_tag:metastore_v1beta_generated_DataprocMetastore_ListServices_async
-   */
+/**
+ * Equivalent to `listServices`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The relative resource name of the location of metastore services
+ *   to list, in the following form:
+ *
+ *   `projects/{project_number}/locations/{location_id}`.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of services to return. The response may
+ *   contain less than the maximum number. If unspecified, no more than 500
+ *   services are returned. The maximum value is 1000; values above 1000 are
+ *   changed to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous
+ *   {@link protos.google.cloud.metastore.v1beta.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
+ *   call. Provide this token to retrieve the subsequent page.
+ *
+ *   To retrieve the first page, supply an empty page token.
+ *
+ *   When paginating, other parameters provided to
+ *   {@link protos.google.cloud.metastore.v1beta.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
+ *   must match the call that provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. The filter to apply to list results.
+ * @param {string} [request.orderBy]
+ *   Optional. Specify the ordering of results as described in [Sorting
+ *   Order](https://cloud.google.com/apis/design/design_patterns#sorting_order).
+ *   If not specified, the results will be sorted in the default order.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.metastore.v1beta.Service|Service}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/dataproc_metastore.list_services.js</caption>
+ * region_tag:metastore_v1beta_generated_DataprocMetastore_ListServices_async
+ */
   listServicesAsync(
-    request?: protos.google.cloud.metastore.v1beta.IListServicesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.metastore.v1beta.IService> {
+      request?: protos.google.cloud.metastore.v1beta.IListServicesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.metastore.v1beta.IService>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listServices iterate %j', request);
     return this.descriptors.page.listServices.asyncIterate(
       this.innerApiCalls['listServices'] as GaxCall,
@@ -3755,131 +2667,106 @@ export class DataprocMetastoreClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.metastore.v1beta.IService>;
   }
-  /**
-   * Lists imports in a service.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The relative resource name of the service whose metadata imports
-   *   to list, in the following form:
-   *
-   *   `projects/{project_number}/locations/{location_id}/services/{service_id}/metadataImports`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of imports to return. The response may contain
-   *   less than the maximum number. If unspecified, no more than 500 imports are
-   *   returned. The maximum value is 1000; values above 1000 are changed to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous
-   *   {@link protos.google.cloud.metastore.v1beta.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
-   *   call. Provide this token to retrieve the subsequent page.
-   *
-   *   To retrieve the first page, supply an empty page token.
-   *
-   *   When paginating, other parameters provided to
-   *   {@link protos.google.cloud.metastore.v1beta.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
-   *   must match the call that provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. The filter to apply to list results.
-   * @param {string} [request.orderBy]
-   *   Optional. Specify the ordering of results as described in [Sorting
-   *   Order](https://cloud.google.com/apis/design/design_patterns#sorting_order).
-   *   If not specified, the results will be sorted in the default order.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.metastore.v1beta.MetadataImport|MetadataImport}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listMetadataImportsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists imports in a service.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The relative resource name of the service whose metadata imports
+ *   to list, in the following form:
+ *
+ *   `projects/{project_number}/locations/{location_id}/services/{service_id}/metadataImports`.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of imports to return. The response may contain
+ *   less than the maximum number. If unspecified, no more than 500 imports are
+ *   returned. The maximum value is 1000; values above 1000 are changed to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous
+ *   {@link protos.google.cloud.metastore.v1beta.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
+ *   call. Provide this token to retrieve the subsequent page.
+ *
+ *   To retrieve the first page, supply an empty page token.
+ *
+ *   When paginating, other parameters provided to
+ *   {@link protos.google.cloud.metastore.v1beta.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
+ *   must match the call that provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. The filter to apply to list results.
+ * @param {string} [request.orderBy]
+ *   Optional. Specify the ordering of results as described in [Sorting
+ *   Order](https://cloud.google.com/apis/design/design_patterns#sorting_order).
+ *   If not specified, the results will be sorted in the default order.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.metastore.v1beta.MetadataImport|MetadataImport}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listMetadataImportsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listMetadataImports(
-    request?: protos.google.cloud.metastore.v1beta.IListMetadataImportsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.metastore.v1beta.IMetadataImport[],
-      protos.google.cloud.metastore.v1beta.IListMetadataImportsRequest | null,
-      protos.google.cloud.metastore.v1beta.IListMetadataImportsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.metastore.v1beta.IListMetadataImportsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.metastore.v1beta.IMetadataImport[],
+        protos.google.cloud.metastore.v1beta.IListMetadataImportsRequest|null,
+        protos.google.cloud.metastore.v1beta.IListMetadataImportsResponse
+      ]>;
   listMetadataImports(
-    request: protos.google.cloud.metastore.v1beta.IListMetadataImportsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.metastore.v1beta.IListMetadataImportsRequest,
-      | protos.google.cloud.metastore.v1beta.IListMetadataImportsResponse
-      | null
-      | undefined,
-      protos.google.cloud.metastore.v1beta.IMetadataImport
-    >
-  ): void;
-  listMetadataImports(
-    request: protos.google.cloud.metastore.v1beta.IListMetadataImportsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.metastore.v1beta.IListMetadataImportsRequest,
-      | protos.google.cloud.metastore.v1beta.IListMetadataImportsResponse
-      | null
-      | undefined,
-      protos.google.cloud.metastore.v1beta.IMetadataImport
-    >
-  ): void;
-  listMetadataImports(
-    request?: protos.google.cloud.metastore.v1beta.IListMetadataImportsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.metastore.v1beta.IListMetadataImportsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.metastore.v1beta.IListMetadataImportsRequest,
-          | protos.google.cloud.metastore.v1beta.IListMetadataImportsResponse
-          | null
-          | undefined,
-          protos.google.cloud.metastore.v1beta.IMetadataImport
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.metastore.v1beta.IListMetadataImportsRequest,
-      | protos.google.cloud.metastore.v1beta.IListMetadataImportsResponse
-      | null
-      | undefined,
-      protos.google.cloud.metastore.v1beta.IMetadataImport
-    >
-  ): Promise<
-    [
-      protos.google.cloud.metastore.v1beta.IMetadataImport[],
-      protos.google.cloud.metastore.v1beta.IListMetadataImportsRequest | null,
-      protos.google.cloud.metastore.v1beta.IListMetadataImportsResponse,
-    ]
-  > | void {
+          protos.google.cloud.metastore.v1beta.IListMetadataImportsResponse|null|undefined,
+          protos.google.cloud.metastore.v1beta.IMetadataImport>): void;
+  listMetadataImports(
+      request: protos.google.cloud.metastore.v1beta.IListMetadataImportsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.metastore.v1beta.IListMetadataImportsRequest,
+          protos.google.cloud.metastore.v1beta.IListMetadataImportsResponse|null|undefined,
+          protos.google.cloud.metastore.v1beta.IMetadataImport>): void;
+  listMetadataImports(
+      request?: protos.google.cloud.metastore.v1beta.IListMetadataImportsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.metastore.v1beta.IListMetadataImportsRequest,
+          protos.google.cloud.metastore.v1beta.IListMetadataImportsResponse|null|undefined,
+          protos.google.cloud.metastore.v1beta.IMetadataImport>,
+      callback?: PaginationCallback<
+          protos.google.cloud.metastore.v1beta.IListMetadataImportsRequest,
+          protos.google.cloud.metastore.v1beta.IListMetadataImportsResponse|null|undefined,
+          protos.google.cloud.metastore.v1beta.IMetadataImport>):
+      Promise<[
+        protos.google.cloud.metastore.v1beta.IMetadataImport[],
+        protos.google.cloud.metastore.v1beta.IListMetadataImportsRequest|null,
+        protos.google.cloud.metastore.v1beta.IListMetadataImportsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.metastore.v1beta.IListMetadataImportsRequest,
-          | protos.google.cloud.metastore.v1beta.IListMetadataImportsResponse
-          | null
-          | undefined,
-          protos.google.cloud.metastore.v1beta.IMetadataImport
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.metastore.v1beta.IListMetadataImportsRequest,
+      protos.google.cloud.metastore.v1beta.IListMetadataImportsResponse|null|undefined,
+      protos.google.cloud.metastore.v1beta.IMetadataImport>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listMetadataImports values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3888,75 +2775,72 @@ export class DataprocMetastoreClient {
     this._log.info('listMetadataImports request %j', request);
     return this.innerApiCalls
       .listMetadataImports(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.metastore.v1beta.IMetadataImport[],
-          protos.google.cloud.metastore.v1beta.IListMetadataImportsRequest | null,
-          protos.google.cloud.metastore.v1beta.IListMetadataImportsResponse,
-        ]) => {
-          this._log.info('listMetadataImports values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.metastore.v1beta.IMetadataImport[],
+        protos.google.cloud.metastore.v1beta.IListMetadataImportsRequest|null,
+        protos.google.cloud.metastore.v1beta.IListMetadataImportsResponse
+      ]) => {
+        this._log.info('listMetadataImports values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listMetadataImports`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The relative resource name of the service whose metadata imports
-   *   to list, in the following form:
-   *
-   *   `projects/{project_number}/locations/{location_id}/services/{service_id}/metadataImports`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of imports to return. The response may contain
-   *   less than the maximum number. If unspecified, no more than 500 imports are
-   *   returned. The maximum value is 1000; values above 1000 are changed to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous
-   *   {@link protos.google.cloud.metastore.v1beta.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
-   *   call. Provide this token to retrieve the subsequent page.
-   *
-   *   To retrieve the first page, supply an empty page token.
-   *
-   *   When paginating, other parameters provided to
-   *   {@link protos.google.cloud.metastore.v1beta.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
-   *   must match the call that provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. The filter to apply to list results.
-   * @param {string} [request.orderBy]
-   *   Optional. Specify the ordering of results as described in [Sorting
-   *   Order](https://cloud.google.com/apis/design/design_patterns#sorting_order).
-   *   If not specified, the results will be sorted in the default order.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.metastore.v1beta.MetadataImport|MetadataImport} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listMetadataImportsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listMetadataImports`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The relative resource name of the service whose metadata imports
+ *   to list, in the following form:
+ *
+ *   `projects/{project_number}/locations/{location_id}/services/{service_id}/metadataImports`.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of imports to return. The response may contain
+ *   less than the maximum number. If unspecified, no more than 500 imports are
+ *   returned. The maximum value is 1000; values above 1000 are changed to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous
+ *   {@link protos.google.cloud.metastore.v1beta.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
+ *   call. Provide this token to retrieve the subsequent page.
+ *
+ *   To retrieve the first page, supply an empty page token.
+ *
+ *   When paginating, other parameters provided to
+ *   {@link protos.google.cloud.metastore.v1beta.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
+ *   must match the call that provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. The filter to apply to list results.
+ * @param {string} [request.orderBy]
+ *   Optional. Specify the ordering of results as described in [Sorting
+ *   Order](https://cloud.google.com/apis/design/design_patterns#sorting_order).
+ *   If not specified, the results will be sorted in the default order.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.metastore.v1beta.MetadataImport|MetadataImport} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listMetadataImportsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listMetadataImportsStream(
-    request?: protos.google.cloud.metastore.v1beta.IListMetadataImportsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.metastore.v1beta.IListMetadataImportsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listMetadataImports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listMetadataImports stream %j', request);
     return this.descriptors.page.listMetadataImports.createStream(
       this.innerApiCalls.listMetadataImports as GaxCall,
@@ -3965,66 +2849,65 @@ export class DataprocMetastoreClient {
     );
   }
 
-  /**
-   * Equivalent to `listMetadataImports`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The relative resource name of the service whose metadata imports
-   *   to list, in the following form:
-   *
-   *   `projects/{project_number}/locations/{location_id}/services/{service_id}/metadataImports`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of imports to return. The response may contain
-   *   less than the maximum number. If unspecified, no more than 500 imports are
-   *   returned. The maximum value is 1000; values above 1000 are changed to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous
-   *   {@link protos.google.cloud.metastore.v1beta.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
-   *   call. Provide this token to retrieve the subsequent page.
-   *
-   *   To retrieve the first page, supply an empty page token.
-   *
-   *   When paginating, other parameters provided to
-   *   {@link protos.google.cloud.metastore.v1beta.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
-   *   must match the call that provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. The filter to apply to list results.
-   * @param {string} [request.orderBy]
-   *   Optional. Specify the ordering of results as described in [Sorting
-   *   Order](https://cloud.google.com/apis/design/design_patterns#sorting_order).
-   *   If not specified, the results will be sorted in the default order.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.metastore.v1beta.MetadataImport|MetadataImport}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/dataproc_metastore.list_metadata_imports.js</caption>
-   * region_tag:metastore_v1beta_generated_DataprocMetastore_ListMetadataImports_async
-   */
+/**
+ * Equivalent to `listMetadataImports`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The relative resource name of the service whose metadata imports
+ *   to list, in the following form:
+ *
+ *   `projects/{project_number}/locations/{location_id}/services/{service_id}/metadataImports`.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of imports to return. The response may contain
+ *   less than the maximum number. If unspecified, no more than 500 imports are
+ *   returned. The maximum value is 1000; values above 1000 are changed to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous
+ *   {@link protos.google.cloud.metastore.v1beta.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
+ *   call. Provide this token to retrieve the subsequent page.
+ *
+ *   To retrieve the first page, supply an empty page token.
+ *
+ *   When paginating, other parameters provided to
+ *   {@link protos.google.cloud.metastore.v1beta.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
+ *   must match the call that provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. The filter to apply to list results.
+ * @param {string} [request.orderBy]
+ *   Optional. Specify the ordering of results as described in [Sorting
+ *   Order](https://cloud.google.com/apis/design/design_patterns#sorting_order).
+ *   If not specified, the results will be sorted in the default order.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.metastore.v1beta.MetadataImport|MetadataImport}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/dataproc_metastore.list_metadata_imports.js</caption>
+ * region_tag:metastore_v1beta_generated_DataprocMetastore_ListMetadataImports_async
+ */
   listMetadataImportsAsync(
-    request?: protos.google.cloud.metastore.v1beta.IListMetadataImportsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.metastore.v1beta.IMetadataImport> {
+      request?: protos.google.cloud.metastore.v1beta.IListMetadataImportsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.metastore.v1beta.IMetadataImport>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listMetadataImports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listMetadataImports iterate %j', request);
     return this.descriptors.page.listMetadataImports.asyncIterate(
       this.innerApiCalls['listMetadataImports'] as GaxCall,
@@ -4032,131 +2915,106 @@ export class DataprocMetastoreClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.metastore.v1beta.IMetadataImport>;
   }
-  /**
-   * Lists backups in a service.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The relative resource name of the service whose backups to
-   *   list, in the following form:
-   *
-   *   `projects/{project_number}/locations/{location_id}/services/{service_id}/backups`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of backups to return. The response may contain
-   *   less than the maximum number. If unspecified, no more than 500 backups are
-   *   returned. The maximum value is 1000; values above 1000 are changed to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous
-   *   {@link protos.google.cloud.metastore.v1beta.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups}
-   *   call. Provide this token to retrieve the subsequent page.
-   *
-   *   To retrieve the first page, supply an empty page token.
-   *
-   *   When paginating, other parameters provided to
-   *   {@link protos.google.cloud.metastore.v1beta.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups}
-   *   must match the call that provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. The filter to apply to list results.
-   * @param {string} [request.orderBy]
-   *   Optional. Specify the ordering of results as described in [Sorting
-   *   Order](https://cloud.google.com/apis/design/design_patterns#sorting_order).
-   *   If not specified, the results will be sorted in the default order.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.metastore.v1beta.Backup|Backup}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listBackupsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists backups in a service.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The relative resource name of the service whose backups to
+ *   list, in the following form:
+ *
+ *   `projects/{project_number}/locations/{location_id}/services/{service_id}/backups`.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of backups to return. The response may contain
+ *   less than the maximum number. If unspecified, no more than 500 backups are
+ *   returned. The maximum value is 1000; values above 1000 are changed to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous
+ *   {@link protos.google.cloud.metastore.v1beta.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups}
+ *   call. Provide this token to retrieve the subsequent page.
+ *
+ *   To retrieve the first page, supply an empty page token.
+ *
+ *   When paginating, other parameters provided to
+ *   {@link protos.google.cloud.metastore.v1beta.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups}
+ *   must match the call that provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. The filter to apply to list results.
+ * @param {string} [request.orderBy]
+ *   Optional. Specify the ordering of results as described in [Sorting
+ *   Order](https://cloud.google.com/apis/design/design_patterns#sorting_order).
+ *   If not specified, the results will be sorted in the default order.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.metastore.v1beta.Backup|Backup}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listBackupsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listBackups(
-    request?: protos.google.cloud.metastore.v1beta.IListBackupsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.metastore.v1beta.IBackup[],
-      protos.google.cloud.metastore.v1beta.IListBackupsRequest | null,
-      protos.google.cloud.metastore.v1beta.IListBackupsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.metastore.v1beta.IListBackupsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.metastore.v1beta.IBackup[],
+        protos.google.cloud.metastore.v1beta.IListBackupsRequest|null,
+        protos.google.cloud.metastore.v1beta.IListBackupsResponse
+      ]>;
   listBackups(
-    request: protos.google.cloud.metastore.v1beta.IListBackupsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.metastore.v1beta.IListBackupsRequest,
-      | protos.google.cloud.metastore.v1beta.IListBackupsResponse
-      | null
-      | undefined,
-      protos.google.cloud.metastore.v1beta.IBackup
-    >
-  ): void;
-  listBackups(
-    request: protos.google.cloud.metastore.v1beta.IListBackupsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.metastore.v1beta.IListBackupsRequest,
-      | protos.google.cloud.metastore.v1beta.IListBackupsResponse
-      | null
-      | undefined,
-      protos.google.cloud.metastore.v1beta.IBackup
-    >
-  ): void;
-  listBackups(
-    request?: protos.google.cloud.metastore.v1beta.IListBackupsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.metastore.v1beta.IListBackupsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.metastore.v1beta.IListBackupsRequest,
-          | protos.google.cloud.metastore.v1beta.IListBackupsResponse
-          | null
-          | undefined,
-          protos.google.cloud.metastore.v1beta.IBackup
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.metastore.v1beta.IListBackupsRequest,
-      | protos.google.cloud.metastore.v1beta.IListBackupsResponse
-      | null
-      | undefined,
-      protos.google.cloud.metastore.v1beta.IBackup
-    >
-  ): Promise<
-    [
-      protos.google.cloud.metastore.v1beta.IBackup[],
-      protos.google.cloud.metastore.v1beta.IListBackupsRequest | null,
-      protos.google.cloud.metastore.v1beta.IListBackupsResponse,
-    ]
-  > | void {
+          protos.google.cloud.metastore.v1beta.IListBackupsResponse|null|undefined,
+          protos.google.cloud.metastore.v1beta.IBackup>): void;
+  listBackups(
+      request: protos.google.cloud.metastore.v1beta.IListBackupsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.metastore.v1beta.IListBackupsRequest,
+          protos.google.cloud.metastore.v1beta.IListBackupsResponse|null|undefined,
+          protos.google.cloud.metastore.v1beta.IBackup>): void;
+  listBackups(
+      request?: protos.google.cloud.metastore.v1beta.IListBackupsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.metastore.v1beta.IListBackupsRequest,
+          protos.google.cloud.metastore.v1beta.IListBackupsResponse|null|undefined,
+          protos.google.cloud.metastore.v1beta.IBackup>,
+      callback?: PaginationCallback<
+          protos.google.cloud.metastore.v1beta.IListBackupsRequest,
+          protos.google.cloud.metastore.v1beta.IListBackupsResponse|null|undefined,
+          protos.google.cloud.metastore.v1beta.IBackup>):
+      Promise<[
+        protos.google.cloud.metastore.v1beta.IBackup[],
+        protos.google.cloud.metastore.v1beta.IListBackupsRequest|null,
+        protos.google.cloud.metastore.v1beta.IListBackupsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.metastore.v1beta.IListBackupsRequest,
-          | protos.google.cloud.metastore.v1beta.IListBackupsResponse
-          | null
-          | undefined,
-          protos.google.cloud.metastore.v1beta.IBackup
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.metastore.v1beta.IListBackupsRequest,
+      protos.google.cloud.metastore.v1beta.IListBackupsResponse|null|undefined,
+      protos.google.cloud.metastore.v1beta.IBackup>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listBackups values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4165,75 +3023,72 @@ export class DataprocMetastoreClient {
     this._log.info('listBackups request %j', request);
     return this.innerApiCalls
       .listBackups(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.metastore.v1beta.IBackup[],
-          protos.google.cloud.metastore.v1beta.IListBackupsRequest | null,
-          protos.google.cloud.metastore.v1beta.IListBackupsResponse,
-        ]) => {
-          this._log.info('listBackups values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.metastore.v1beta.IBackup[],
+        protos.google.cloud.metastore.v1beta.IListBackupsRequest|null,
+        protos.google.cloud.metastore.v1beta.IListBackupsResponse
+      ]) => {
+        this._log.info('listBackups values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listBackups`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The relative resource name of the service whose backups to
-   *   list, in the following form:
-   *
-   *   `projects/{project_number}/locations/{location_id}/services/{service_id}/backups`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of backups to return. The response may contain
-   *   less than the maximum number. If unspecified, no more than 500 backups are
-   *   returned. The maximum value is 1000; values above 1000 are changed to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous
-   *   {@link protos.google.cloud.metastore.v1beta.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups}
-   *   call. Provide this token to retrieve the subsequent page.
-   *
-   *   To retrieve the first page, supply an empty page token.
-   *
-   *   When paginating, other parameters provided to
-   *   {@link protos.google.cloud.metastore.v1beta.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups}
-   *   must match the call that provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. The filter to apply to list results.
-   * @param {string} [request.orderBy]
-   *   Optional. Specify the ordering of results as described in [Sorting
-   *   Order](https://cloud.google.com/apis/design/design_patterns#sorting_order).
-   *   If not specified, the results will be sorted in the default order.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.metastore.v1beta.Backup|Backup} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listBackupsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listBackups`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The relative resource name of the service whose backups to
+ *   list, in the following form:
+ *
+ *   `projects/{project_number}/locations/{location_id}/services/{service_id}/backups`.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of backups to return. The response may contain
+ *   less than the maximum number. If unspecified, no more than 500 backups are
+ *   returned. The maximum value is 1000; values above 1000 are changed to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous
+ *   {@link protos.google.cloud.metastore.v1beta.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups}
+ *   call. Provide this token to retrieve the subsequent page.
+ *
+ *   To retrieve the first page, supply an empty page token.
+ *
+ *   When paginating, other parameters provided to
+ *   {@link protos.google.cloud.metastore.v1beta.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups}
+ *   must match the call that provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. The filter to apply to list results.
+ * @param {string} [request.orderBy]
+ *   Optional. Specify the ordering of results as described in [Sorting
+ *   Order](https://cloud.google.com/apis/design/design_patterns#sorting_order).
+ *   If not specified, the results will be sorted in the default order.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.metastore.v1beta.Backup|Backup} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listBackupsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listBackupsStream(
-    request?: protos.google.cloud.metastore.v1beta.IListBackupsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.metastore.v1beta.IListBackupsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listBackups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listBackups stream %j', request);
     return this.descriptors.page.listBackups.createStream(
       this.innerApiCalls.listBackups as GaxCall,
@@ -4242,66 +3097,65 @@ export class DataprocMetastoreClient {
     );
   }
 
-  /**
-   * Equivalent to `listBackups`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The relative resource name of the service whose backups to
-   *   list, in the following form:
-   *
-   *   `projects/{project_number}/locations/{location_id}/services/{service_id}/backups`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of backups to return. The response may contain
-   *   less than the maximum number. If unspecified, no more than 500 backups are
-   *   returned. The maximum value is 1000; values above 1000 are changed to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous
-   *   {@link protos.google.cloud.metastore.v1beta.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups}
-   *   call. Provide this token to retrieve the subsequent page.
-   *
-   *   To retrieve the first page, supply an empty page token.
-   *
-   *   When paginating, other parameters provided to
-   *   {@link protos.google.cloud.metastore.v1beta.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups}
-   *   must match the call that provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. The filter to apply to list results.
-   * @param {string} [request.orderBy]
-   *   Optional. Specify the ordering of results as described in [Sorting
-   *   Order](https://cloud.google.com/apis/design/design_patterns#sorting_order).
-   *   If not specified, the results will be sorted in the default order.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.metastore.v1beta.Backup|Backup}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/dataproc_metastore.list_backups.js</caption>
-   * region_tag:metastore_v1beta_generated_DataprocMetastore_ListBackups_async
-   */
+/**
+ * Equivalent to `listBackups`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The relative resource name of the service whose backups to
+ *   list, in the following form:
+ *
+ *   `projects/{project_number}/locations/{location_id}/services/{service_id}/backups`.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of backups to return. The response may contain
+ *   less than the maximum number. If unspecified, no more than 500 backups are
+ *   returned. The maximum value is 1000; values above 1000 are changed to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous
+ *   {@link protos.google.cloud.metastore.v1beta.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups}
+ *   call. Provide this token to retrieve the subsequent page.
+ *
+ *   To retrieve the first page, supply an empty page token.
+ *
+ *   When paginating, other parameters provided to
+ *   {@link protos.google.cloud.metastore.v1beta.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups}
+ *   must match the call that provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. The filter to apply to list results.
+ * @param {string} [request.orderBy]
+ *   Optional. Specify the ordering of results as described in [Sorting
+ *   Order](https://cloud.google.com/apis/design/design_patterns#sorting_order).
+ *   If not specified, the results will be sorted in the default order.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.metastore.v1beta.Backup|Backup}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/dataproc_metastore.list_backups.js</caption>
+ * region_tag:metastore_v1beta_generated_DataprocMetastore_ListBackups_async
+ */
   listBackupsAsync(
-    request?: protos.google.cloud.metastore.v1beta.IListBackupsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.metastore.v1beta.IBackup> {
+      request?: protos.google.cloud.metastore.v1beta.IListBackupsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.metastore.v1beta.IBackup>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listBackups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listBackups iterate %j', request);
     return this.descriptors.page.listBackups.asyncIterate(
       this.innerApiCalls['listBackups'] as GaxCall,
@@ -4309,31 +3163,31 @@ export class DataprocMetastoreClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.metastore.v1beta.IBackup>;
   }
-  /**
-   * Gets the access control policy for a resource. Returns an empty policy
-   * if the resource exists and does not have a policy set.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {Object} [request.options]
-   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`. This field is only used by Cloud IAM.
-   *
-   *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
+/**
+ * Gets the access control policy for a resource. Returns an empty policy
+ * if the resource exists and does not have a policy set.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {Object} [request.options]
+ *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+ *   `GetIamPolicy`. This field is only used by Cloud IAM.
+ *
+ *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ */
   getIamPolicy(
     request: IamProtos.google.iam.v1.GetIamPolicyRequest,
     options?:
@@ -4348,39 +3202,39 @@ export class DataprocMetastoreClient {
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.Policy]> {
+  ):Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
-  /**
-   * Returns permissions that a caller has on the specified resource. If the
-   * resource does not exist, this will return an empty set of
-   * permissions, not a NOT_FOUND error.
-   *
-   * Note: This operation is designed to be used for building
-   * permission-aware UIs and command-line tools, not for authorization
-   * checking. This operation may "fail open" without warning.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
+/**
+ * Returns permissions that a caller has on the specified resource. If the
+ * resource does not exist, this will return an empty set of
+ * permissions, not a NOT_FOUND error.
+ *
+ * Note: This operation is designed to be used for building
+ * permission-aware UIs and command-line tools, not for authorization
+ * checking. This operation may "fail open" without warning.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ */
   setIamPolicy(
     request: IamProtos.google.iam.v1.SetIamPolicyRequest,
     options?:
@@ -4395,40 +3249,40 @@ export class DataprocMetastoreClient {
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.Policy]> {
+  ):Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
-  /**
-   * Returns permissions that a caller has on the specified resource. If the
-   * resource does not exist, this will return an empty set of
-   * permissions, not a NOT_FOUND error.
-   *
-   * Note: This operation is designed to be used for building
-   * permission-aware UIs and command-line tools, not for authorization
-   * checking. This operation may "fail open" without warning.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   *
-   */
+/**
+ * Returns permissions that a caller has on the specified resource. If the
+ * resource does not exist, this will return an empty set of
+ * permissions, not a NOT_FOUND error.
+ *
+ * Note: This operation is designed to be used for building
+ * permission-aware UIs and command-line tools, not for authorization
+ * checking. This operation may "fail open" without warning.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ *
+ */
   testIamPermissions(
     request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
     options?:
@@ -4443,11 +3297,11 @@ export class DataprocMetastoreClient {
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
+  ):Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -4487,7 +3341,7 @@ export class DataprocMetastoreClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -4525,7 +3379,7 @@ export class DataprocMetastoreClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -4570,20 +3424,20 @@ export class DataprocMetastoreClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -4620,13 +3474,13 @@ export class DataprocMetastoreClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -4660,7 +3514,7 @@ export class DataprocMetastoreClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -4675,20 +3529,20 @@ export class DataprocMetastoreClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -4732,20 +3586,20 @@ export class DataprocMetastoreClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -4762,12 +3616,7 @@ export class DataprocMetastoreClient {
    * @param {string} backup
    * @returns {string} Resource name string.
    */
-  backupPath(
-    project: string,
-    location: string,
-    service: string,
-    backup: string
-  ) {
+  backupPath(project:string,location:string,service:string,backup:string) {
     return this.pathTemplates.backupPathTemplate.render({
       project: project,
       location: location,
@@ -4828,7 +3677,7 @@ export class DataprocMetastoreClient {
    * @param {string} federation
    * @returns {string} Resource name string.
    */
-  federationPath(project: string, location: string, federation: string) {
+  federationPath(project:string,location:string,federation:string) {
     return this.pathTemplates.federationPathTemplate.render({
       project: project,
       location: location,
@@ -4844,8 +3693,7 @@ export class DataprocMetastoreClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromFederationName(federationName: string) {
-    return this.pathTemplates.federationPathTemplate.match(federationName)
-      .project;
+    return this.pathTemplates.federationPathTemplate.match(federationName).project;
   }
 
   /**
@@ -4856,8 +3704,7 @@ export class DataprocMetastoreClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromFederationName(federationName: string) {
-    return this.pathTemplates.federationPathTemplate.match(federationName)
-      .location;
+    return this.pathTemplates.federationPathTemplate.match(federationName).location;
   }
 
   /**
@@ -4868,8 +3715,7 @@ export class DataprocMetastoreClient {
    * @returns {string} A string representing the federation.
    */
   matchFederationFromFederationName(federationName: string) {
-    return this.pathTemplates.federationPathTemplate.match(federationName)
-      .federation;
+    return this.pathTemplates.federationPathTemplate.match(federationName).federation;
   }
 
   /**
@@ -4880,7 +3726,7 @@ export class DataprocMetastoreClient {
    * @param {string} lake
    * @returns {string} Resource name string.
    */
-  lakePath(project: string, location: string, lake: string) {
+  lakePath(project:string,location:string,lake:string) {
     return this.pathTemplates.lakePathTemplate.render({
       project: project,
       location: location,
@@ -4928,7 +3774,7 @@ export class DataprocMetastoreClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -4966,12 +3812,7 @@ export class DataprocMetastoreClient {
    * @param {string} metadata_import
    * @returns {string} Resource name string.
    */
-  metadataImportPath(
-    project: string,
-    location: string,
-    service: string,
-    metadataImport: string
-  ) {
+  metadataImportPath(project:string,location:string,service:string,metadataImport:string) {
     return this.pathTemplates.metadataImportPathTemplate.render({
       project: project,
       location: location,
@@ -4988,9 +3829,7 @@ export class DataprocMetastoreClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromMetadataImportName(metadataImportName: string) {
-    return this.pathTemplates.metadataImportPathTemplate.match(
-      metadataImportName
-    ).project;
+    return this.pathTemplates.metadataImportPathTemplate.match(metadataImportName).project;
   }
 
   /**
@@ -5001,9 +3840,7 @@ export class DataprocMetastoreClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromMetadataImportName(metadataImportName: string) {
-    return this.pathTemplates.metadataImportPathTemplate.match(
-      metadataImportName
-    ).location;
+    return this.pathTemplates.metadataImportPathTemplate.match(metadataImportName).location;
   }
 
   /**
@@ -5014,9 +3851,7 @@ export class DataprocMetastoreClient {
    * @returns {string} A string representing the service.
    */
   matchServiceFromMetadataImportName(metadataImportName: string) {
-    return this.pathTemplates.metadataImportPathTemplate.match(
-      metadataImportName
-    ).service;
+    return this.pathTemplates.metadataImportPathTemplate.match(metadataImportName).service;
   }
 
   /**
@@ -5027,9 +3862,7 @@ export class DataprocMetastoreClient {
    * @returns {string} A string representing the metadata_import.
    */
   matchMetadataImportFromMetadataImportName(metadataImportName: string) {
-    return this.pathTemplates.metadataImportPathTemplate.match(
-      metadataImportName
-    ).metadata_import;
+    return this.pathTemplates.metadataImportPathTemplate.match(metadataImportName).metadata_import;
   }
 
   /**
@@ -5039,7 +3872,7 @@ export class DataprocMetastoreClient {
    * @param {string} network
    * @returns {string} Resource name string.
    */
-  networkPath(project: string, network: string) {
+  networkPath(project:string,network:string) {
     return this.pathTemplates.networkPathTemplate.render({
       project: project,
       network: network,
@@ -5074,7 +3907,7 @@ export class DataprocMetastoreClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -5099,7 +3932,7 @@ export class DataprocMetastoreClient {
    * @param {string} service
    * @returns {string} Resource name string.
    */
-  servicePath(project: string, location: string, service: string) {
+  servicePath(project:string,location:string,service:string) {
     return this.pathTemplates.servicePathTemplate.render({
       project: project,
       location: location,
@@ -5152,12 +3985,8 @@ export class DataprocMetastoreClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch(err => {
-          throw err;
-        });
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.iamClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch(err => {throw err});
         void this.operationsClient.close();
       });
     }
