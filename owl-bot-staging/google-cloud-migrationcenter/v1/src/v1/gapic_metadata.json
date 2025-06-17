@@ -1,0 +1,539 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.migrationcenter.v1",
+  "libraryPackage": "@google-cloud/migrationcenter",
+  "services": {
+    "MigrationCenter": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "MigrationCenterClient",
+          "rpcs": {
+            "GetAsset": {
+              "methods": [
+                "getAsset"
+              ]
+            },
+            "UpdateAsset": {
+              "methods": [
+                "updateAsset"
+              ]
+            },
+            "BatchUpdateAssets": {
+              "methods": [
+                "batchUpdateAssets"
+              ]
+            },
+            "DeleteAsset": {
+              "methods": [
+                "deleteAsset"
+              ]
+            },
+            "BatchDeleteAssets": {
+              "methods": [
+                "batchDeleteAssets"
+              ]
+            },
+            "ReportAssetFrames": {
+              "methods": [
+                "reportAssetFrames"
+              ]
+            },
+            "AggregateAssetsValues": {
+              "methods": [
+                "aggregateAssetsValues"
+              ]
+            },
+            "GetImportJob": {
+              "methods": [
+                "getImportJob"
+              ]
+            },
+            "GetImportDataFile": {
+              "methods": [
+                "getImportDataFile"
+              ]
+            },
+            "GetGroup": {
+              "methods": [
+                "getGroup"
+              ]
+            },
+            "GetErrorFrame": {
+              "methods": [
+                "getErrorFrame"
+              ]
+            },
+            "GetSource": {
+              "methods": [
+                "getSource"
+              ]
+            },
+            "GetPreferenceSet": {
+              "methods": [
+                "getPreferenceSet"
+              ]
+            },
+            "GetSettings": {
+              "methods": [
+                "getSettings"
+              ]
+            },
+            "GetReportConfig": {
+              "methods": [
+                "getReportConfig"
+              ]
+            },
+            "GetReport": {
+              "methods": [
+                "getReport"
+              ]
+            },
+            "CreateImportJob": {
+              "methods": [
+                "createImportJob"
+              ]
+            },
+            "DeleteImportJob": {
+              "methods": [
+                "deleteImportJob"
+              ]
+            },
+            "UpdateImportJob": {
+              "methods": [
+                "updateImportJob"
+              ]
+            },
+            "ValidateImportJob": {
+              "methods": [
+                "validateImportJob"
+              ]
+            },
+            "RunImportJob": {
+              "methods": [
+                "runImportJob"
+              ]
+            },
+            "CreateImportDataFile": {
+              "methods": [
+                "createImportDataFile"
+              ]
+            },
+            "DeleteImportDataFile": {
+              "methods": [
+                "deleteImportDataFile"
+              ]
+            },
+            "CreateGroup": {
+              "methods": [
+                "createGroup"
+              ]
+            },
+            "UpdateGroup": {
+              "methods": [
+                "updateGroup"
+              ]
+            },
+            "DeleteGroup": {
+              "methods": [
+                "deleteGroup"
+              ]
+            },
+            "AddAssetsToGroup": {
+              "methods": [
+                "addAssetsToGroup"
+              ]
+            },
+            "RemoveAssetsFromGroup": {
+              "methods": [
+                "removeAssetsFromGroup"
+              ]
+            },
+            "CreateSource": {
+              "methods": [
+                "createSource"
+              ]
+            },
+            "UpdateSource": {
+              "methods": [
+                "updateSource"
+              ]
+            },
+            "DeleteSource": {
+              "methods": [
+                "deleteSource"
+              ]
+            },
+            "CreatePreferenceSet": {
+              "methods": [
+                "createPreferenceSet"
+              ]
+            },
+            "UpdatePreferenceSet": {
+              "methods": [
+                "updatePreferenceSet"
+              ]
+            },
+            "DeletePreferenceSet": {
+              "methods": [
+                "deletePreferenceSet"
+              ]
+            },
+            "UpdateSettings": {
+              "methods": [
+                "updateSettings"
+              ]
+            },
+            "CreateReportConfig": {
+              "methods": [
+                "createReportConfig"
+              ]
+            },
+            "DeleteReportConfig": {
+              "methods": [
+                "deleteReportConfig"
+              ]
+            },
+            "CreateReport": {
+              "methods": [
+                "createReport"
+              ]
+            },
+            "DeleteReport": {
+              "methods": [
+                "deleteReport"
+              ]
+            },
+            "ListAssets": {
+              "methods": [
+                "listAssets",
+                "listAssetsStream",
+                "listAssetsAsync"
+              ]
+            },
+            "ListImportJobs": {
+              "methods": [
+                "listImportJobs",
+                "listImportJobsStream",
+                "listImportJobsAsync"
+              ]
+            },
+            "ListImportDataFiles": {
+              "methods": [
+                "listImportDataFiles",
+                "listImportDataFilesStream",
+                "listImportDataFilesAsync"
+              ]
+            },
+            "ListGroups": {
+              "methods": [
+                "listGroups",
+                "listGroupsStream",
+                "listGroupsAsync"
+              ]
+            },
+            "ListErrorFrames": {
+              "methods": [
+                "listErrorFrames",
+                "listErrorFramesStream",
+                "listErrorFramesAsync"
+              ]
+            },
+            "ListSources": {
+              "methods": [
+                "listSources",
+                "listSourcesStream",
+                "listSourcesAsync"
+              ]
+            },
+            "ListPreferenceSets": {
+              "methods": [
+                "listPreferenceSets",
+                "listPreferenceSetsStream",
+                "listPreferenceSetsAsync"
+              ]
+            },
+            "ListReportConfigs": {
+              "methods": [
+                "listReportConfigs",
+                "listReportConfigsStream",
+                "listReportConfigsAsync"
+              ]
+            },
+            "ListReports": {
+              "methods": [
+                "listReports",
+                "listReportsStream",
+                "listReportsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "MigrationCenterClient",
+          "rpcs": {
+            "GetAsset": {
+              "methods": [
+                "getAsset"
+              ]
+            },
+            "UpdateAsset": {
+              "methods": [
+                "updateAsset"
+              ]
+            },
+            "BatchUpdateAssets": {
+              "methods": [
+                "batchUpdateAssets"
+              ]
+            },
+            "DeleteAsset": {
+              "methods": [
+                "deleteAsset"
+              ]
+            },
+            "BatchDeleteAssets": {
+              "methods": [
+                "batchDeleteAssets"
+              ]
+            },
+            "ReportAssetFrames": {
+              "methods": [
+                "reportAssetFrames"
+              ]
+            },
+            "AggregateAssetsValues": {
+              "methods": [
+                "aggregateAssetsValues"
+              ]
+            },
+            "GetImportJob": {
+              "methods": [
+                "getImportJob"
+              ]
+            },
+            "GetImportDataFile": {
+              "methods": [
+                "getImportDataFile"
+              ]
+            },
+            "GetGroup": {
+              "methods": [
+                "getGroup"
+              ]
+            },
+            "GetErrorFrame": {
+              "methods": [
+                "getErrorFrame"
+              ]
+            },
+            "GetSource": {
+              "methods": [
+                "getSource"
+              ]
+            },
+            "GetPreferenceSet": {
+              "methods": [
+                "getPreferenceSet"
+              ]
+            },
+            "GetSettings": {
+              "methods": [
+                "getSettings"
+              ]
+            },
+            "GetReportConfig": {
+              "methods": [
+                "getReportConfig"
+              ]
+            },
+            "GetReport": {
+              "methods": [
+                "getReport"
+              ]
+            },
+            "CreateImportJob": {
+              "methods": [
+                "createImportJob"
+              ]
+            },
+            "DeleteImportJob": {
+              "methods": [
+                "deleteImportJob"
+              ]
+            },
+            "UpdateImportJob": {
+              "methods": [
+                "updateImportJob"
+              ]
+            },
+            "ValidateImportJob": {
+              "methods": [
+                "validateImportJob"
+              ]
+            },
+            "RunImportJob": {
+              "methods": [
+                "runImportJob"
+              ]
+            },
+            "CreateImportDataFile": {
+              "methods": [
+                "createImportDataFile"
+              ]
+            },
+            "DeleteImportDataFile": {
+              "methods": [
+                "deleteImportDataFile"
+              ]
+            },
+            "CreateGroup": {
+              "methods": [
+                "createGroup"
+              ]
+            },
+            "UpdateGroup": {
+              "methods": [
+                "updateGroup"
+              ]
+            },
+            "DeleteGroup": {
+              "methods": [
+                "deleteGroup"
+              ]
+            },
+            "AddAssetsToGroup": {
+              "methods": [
+                "addAssetsToGroup"
+              ]
+            },
+            "RemoveAssetsFromGroup": {
+              "methods": [
+                "removeAssetsFromGroup"
+              ]
+            },
+            "CreateSource": {
+              "methods": [
+                "createSource"
+              ]
+            },
+            "UpdateSource": {
+              "methods": [
+                "updateSource"
+              ]
+            },
+            "DeleteSource": {
+              "methods": [
+                "deleteSource"
+              ]
+            },
+            "CreatePreferenceSet": {
+              "methods": [
+                "createPreferenceSet"
+              ]
+            },
+            "UpdatePreferenceSet": {
+              "methods": [
+                "updatePreferenceSet"
+              ]
+            },
+            "DeletePreferenceSet": {
+              "methods": [
+                "deletePreferenceSet"
+              ]
+            },
+            "UpdateSettings": {
+              "methods": [
+                "updateSettings"
+              ]
+            },
+            "CreateReportConfig": {
+              "methods": [
+                "createReportConfig"
+              ]
+            },
+            "DeleteReportConfig": {
+              "methods": [
+                "deleteReportConfig"
+              ]
+            },
+            "CreateReport": {
+              "methods": [
+                "createReport"
+              ]
+            },
+            "DeleteReport": {
+              "methods": [
+                "deleteReport"
+              ]
+            },
+            "ListAssets": {
+              "methods": [
+                "listAssets",
+                "listAssetsStream",
+                "listAssetsAsync"
+              ]
+            },
+            "ListImportJobs": {
+              "methods": [
+                "listImportJobs",
+                "listImportJobsStream",
+                "listImportJobsAsync"
+              ]
+            },
+            "ListImportDataFiles": {
+              "methods": [
+                "listImportDataFiles",
+                "listImportDataFilesStream",
+                "listImportDataFilesAsync"
+              ]
+            },
+            "ListGroups": {
+              "methods": [
+                "listGroups",
+                "listGroupsStream",
+                "listGroupsAsync"
+              ]
+            },
+            "ListErrorFrames": {
+              "methods": [
+                "listErrorFrames",
+                "listErrorFramesStream",
+                "listErrorFramesAsync"
+              ]
+            },
+            "ListSources": {
+              "methods": [
+                "listSources",
+                "listSourcesStream",
+                "listSourcesAsync"
+              ]
+            },
+            "ListPreferenceSets": {
+              "methods": [
+                "listPreferenceSets",
+                "listPreferenceSetsStream",
+                "listPreferenceSetsAsync"
+              ]
+            },
+            "ListReportConfigs": {
+              "methods": [
+                "listReportConfigs",
+                "listReportConfigsStream",
+                "listReportConfigsAsync"
+              ]
+            },
+            "ListReports": {
+              "methods": [
+                "listReports",
+                "listReportsStream",
+                "listReportsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
