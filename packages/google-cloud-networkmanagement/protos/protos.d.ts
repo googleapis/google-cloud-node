@@ -328,15 +328,6 @@ export namespace google {
                     /** Endpoint projectId. */
                     public projectId: string;
 
-                    /** Endpoint _forwardingRuleTarget. */
-                    public _forwardingRuleTarget?: "forwardingRuleTarget";
-
-                    /** Endpoint _loadBalancerId. */
-                    public _loadBalancerId?: "loadBalancerId";
-
-                    /** Endpoint _loadBalancerType. */
-                    public _loadBalancerType?: "loadBalancerType";
-
                     /**
                      * Creates a new Endpoint instance using the specified properties.
                      * @param [properties] Properties to set
@@ -2353,18 +2344,6 @@ export namespace google {
 
                     /** RouteInfo nccHubRouteUri. */
                     public nccHubRouteUri: string;
-
-                    /** RouteInfo _nccHubUri. */
-                    public _nccHubUri?: "nccHubUri";
-
-                    /** RouteInfo _nccSpokeUri. */
-                    public _nccSpokeUri?: "nccSpokeUri";
-
-                    /** RouteInfo _advertisedRouteSourceRouterUri. */
-                    public _advertisedRouteSourceRouterUri?: "advertisedRouteSourceRouterUri";
-
-                    /** RouteInfo _advertisedRouteNextHopUri. */
-                    public _advertisedRouteNextHopUri?: "advertisedRouteNextHopUri";
 
                     /**
                      * Creates a new RouteInfo instance using the specified properties.
@@ -7863,27 +7842,6 @@ export namespace google {
                     /** VpcFlowLogsConfig updateTime. */
                     public updateTime?: (google.protobuf.ITimestamp|null);
 
-                    /** VpcFlowLogsConfig _description. */
-                    public _description?: "description";
-
-                    /** VpcFlowLogsConfig _state. */
-                    public _state?: "state";
-
-                    /** VpcFlowLogsConfig _aggregationInterval. */
-                    public _aggregationInterval?: "aggregationInterval";
-
-                    /** VpcFlowLogsConfig _flowSampling. */
-                    public _flowSampling?: "flowSampling";
-
-                    /** VpcFlowLogsConfig _metadata. */
-                    public _metadata?: "metadata";
-
-                    /** VpcFlowLogsConfig _filterExpr. */
-                    public _filterExpr?: "filterExpr";
-
-                    /** VpcFlowLogsConfig _targetResourceState. */
-                    public _targetResourceState?: "targetResourceState";
-
                     /** VpcFlowLogsConfig targetResource. */
                     public targetResource?: ("interconnectAttachment"|"vpnTunnel");
 
@@ -8306,15 +8264,6 @@ export namespace google {
 
                     /** Endpoint projectId. */
                     public projectId: string;
-
-                    /** Endpoint _forwardingRuleTarget. */
-                    public _forwardingRuleTarget?: "forwardingRuleTarget";
-
-                    /** Endpoint _loadBalancerId. */
-                    public _loadBalancerId?: "loadBalancerId";
-
-                    /** Endpoint _loadBalancerType. */
-                    public _loadBalancerType?: "loadBalancerType";
 
                     /**
                      * Creates a new Endpoint instance using the specified properties.
@@ -10332,18 +10281,6 @@ export namespace google {
 
                     /** RouteInfo nccHubRouteUri. */
                     public nccHubRouteUri: string;
-
-                    /** RouteInfo _nccHubUri. */
-                    public _nccHubUri?: "nccHubUri";
-
-                    /** RouteInfo _nccSpokeUri. */
-                    public _nccSpokeUri?: "nccSpokeUri";
-
-                    /** RouteInfo _advertisedRouteSourceRouterUri. */
-                    public _advertisedRouteSourceRouterUri?: "advertisedRouteSourceRouterUri";
-
-                    /** RouteInfo _advertisedRouteNextHopUri. */
-                    public _advertisedRouteNextHopUri?: "advertisedRouteNextHopUri";
 
                     /**
                      * Creates a new RouteInfo instance using the specified properties.
@@ -15836,24 +15773,6 @@ export namespace google {
                     /** VpcFlowLogsConfig updateTime. */
                     public updateTime?: (google.protobuf.ITimestamp|null);
 
-                    /** VpcFlowLogsConfig _description. */
-                    public _description?: "description";
-
-                    /** VpcFlowLogsConfig _state. */
-                    public _state?: "state";
-
-                    /** VpcFlowLogsConfig _aggregationInterval. */
-                    public _aggregationInterval?: "aggregationInterval";
-
-                    /** VpcFlowLogsConfig _flowSampling. */
-                    public _flowSampling?: "flowSampling";
-
-                    /** VpcFlowLogsConfig _metadata. */
-                    public _metadata?: "metadata";
-
-                    /** VpcFlowLogsConfig _filterExpr. */
-                    public _filterExpr?: "filterExpr";
-
                     /** VpcFlowLogsConfig targetResource. */
                     public targetResource?: ("interconnectAttachment"|"vpnTunnel");
 
@@ -16996,6 +16915,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -17036,6 +16958,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -20992,6 +20917,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -21243,7 +21171,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -21274,7 +21202,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -22413,7 +22341,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -22429,7 +22357,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.

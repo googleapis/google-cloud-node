@@ -18,22 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -113,41 +102,20 @@ export class OracleDatabaseClient {
    *     const client = new OracleDatabaseClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof OracleDatabaseClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'oracledatabase.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -173,7 +141,7 @@ export class OracleDatabaseClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -189,9 +157,13 @@ export class OracleDatabaseClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -218,10 +190,9 @@ export class OracleDatabaseClient {
       autonomousDatabaseBackupPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/autonomousDatabaseBackups/{autonomous_database_backup}'
       ),
-      autonomousDatabaseCharacterSetPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/autonomousDatabaseCharacterSets/{autonomous_database_character_set}'
-        ),
+      autonomousDatabaseCharacterSetPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/autonomousDatabaseCharacterSets/{autonomous_database_character_set}'
+      ),
       autonomousDbVersionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/autonomousDbVersions/{autonomous_db_version}'
       ),
@@ -258,259 +229,131 @@ export class OracleDatabaseClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listCloudExadataInfrastructures: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'cloudExadataInfrastructures'
-      ),
-      listCloudVmClusters: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'cloudVmClusters'
-      ),
-      listEntitlements: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'entitlements'
-      ),
-      listDbServers: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'dbServers'
-      ),
-      listDbNodes: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'dbNodes'
-      ),
-      listGiVersions: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'giVersions'
-      ),
-      listDbSystemShapes: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'dbSystemShapes'
-      ),
-      listAutonomousDatabases: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'autonomousDatabases'
-      ),
-      listAutonomousDbVersions: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'autonomousDbVersions'
-      ),
-      listAutonomousDatabaseCharacterSets: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'autonomousDatabaseCharacterSets'
-      ),
-      listAutonomousDatabaseBackups: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'autonomousDatabaseBackups'
-      ),
+      listCloudExadataInfrastructures:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'cloudExadataInfrastructures'),
+      listCloudVmClusters:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'cloudVmClusters'),
+      listEntitlements:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'entitlements'),
+      listDbServers:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'dbServers'),
+      listDbNodes:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'dbNodes'),
+      listGiVersions:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'giVersions'),
+      listDbSystemShapes:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'dbSystemShapes'),
+      listAutonomousDatabases:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'autonomousDatabases'),
+      listAutonomousDbVersions:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'autonomousDbVersions'),
+      listAutonomousDatabaseCharacterSets:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'autonomousDatabaseCharacterSets'),
+      listAutonomousDatabaseBackups:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'autonomousDatabaseBackups')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v1/{name=projects/*/locations/*}',
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v1/{name=projects/*}/locations',
-        },
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
-          body: '*',
-        },
-        {
-          selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1/{name=projects/*/locations/*}/operations',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createCloudExadataInfrastructureResponse = protoFilesRoot.lookup(
-      '.google.cloud.oracledatabase.v1.CloudExadataInfrastructure'
-    ) as gax.protobuf.Type;
+      '.google.cloud.oracledatabase.v1.CloudExadataInfrastructure') as gax.protobuf.Type;
     const createCloudExadataInfrastructureMetadata = protoFilesRoot.lookup(
-      '.google.cloud.oracledatabase.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.oracledatabase.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteCloudExadataInfrastructureResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteCloudExadataInfrastructureMetadata = protoFilesRoot.lookup(
-      '.google.cloud.oracledatabase.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.oracledatabase.v1.OperationMetadata') as gax.protobuf.Type;
     const createCloudVmClusterResponse = protoFilesRoot.lookup(
-      '.google.cloud.oracledatabase.v1.CloudVmCluster'
-    ) as gax.protobuf.Type;
+      '.google.cloud.oracledatabase.v1.CloudVmCluster') as gax.protobuf.Type;
     const createCloudVmClusterMetadata = protoFilesRoot.lookup(
-      '.google.cloud.oracledatabase.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.oracledatabase.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteCloudVmClusterResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteCloudVmClusterMetadata = protoFilesRoot.lookup(
-      '.google.cloud.oracledatabase.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.oracledatabase.v1.OperationMetadata') as gax.protobuf.Type;
     const createAutonomousDatabaseResponse = protoFilesRoot.lookup(
-      '.google.cloud.oracledatabase.v1.AutonomousDatabase'
-    ) as gax.protobuf.Type;
+      '.google.cloud.oracledatabase.v1.AutonomousDatabase') as gax.protobuf.Type;
     const createAutonomousDatabaseMetadata = protoFilesRoot.lookup(
-      '.google.cloud.oracledatabase.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.oracledatabase.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteAutonomousDatabaseResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteAutonomousDatabaseMetadata = protoFilesRoot.lookup(
-      '.google.cloud.oracledatabase.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.oracledatabase.v1.OperationMetadata') as gax.protobuf.Type;
     const restoreAutonomousDatabaseResponse = protoFilesRoot.lookup(
-      '.google.cloud.oracledatabase.v1.AutonomousDatabase'
-    ) as gax.protobuf.Type;
+      '.google.cloud.oracledatabase.v1.AutonomousDatabase') as gax.protobuf.Type;
     const restoreAutonomousDatabaseMetadata = protoFilesRoot.lookup(
-      '.google.cloud.oracledatabase.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.oracledatabase.v1.OperationMetadata') as gax.protobuf.Type;
     const stopAutonomousDatabaseResponse = protoFilesRoot.lookup(
-      '.google.cloud.oracledatabase.v1.AutonomousDatabase'
-    ) as gax.protobuf.Type;
+      '.google.cloud.oracledatabase.v1.AutonomousDatabase') as gax.protobuf.Type;
     const stopAutonomousDatabaseMetadata = protoFilesRoot.lookup(
-      '.google.cloud.oracledatabase.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.oracledatabase.v1.OperationMetadata') as gax.protobuf.Type;
     const startAutonomousDatabaseResponse = protoFilesRoot.lookup(
-      '.google.cloud.oracledatabase.v1.AutonomousDatabase'
-    ) as gax.protobuf.Type;
+      '.google.cloud.oracledatabase.v1.AutonomousDatabase') as gax.protobuf.Type;
     const startAutonomousDatabaseMetadata = protoFilesRoot.lookup(
-      '.google.cloud.oracledatabase.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.oracledatabase.v1.OperationMetadata') as gax.protobuf.Type;
     const restartAutonomousDatabaseResponse = protoFilesRoot.lookup(
-      '.google.cloud.oracledatabase.v1.AutonomousDatabase'
-    ) as gax.protobuf.Type;
+      '.google.cloud.oracledatabase.v1.AutonomousDatabase') as gax.protobuf.Type;
     const restartAutonomousDatabaseMetadata = protoFilesRoot.lookup(
-      '.google.cloud.oracledatabase.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.oracledatabase.v1.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
-      createCloudExadataInfrastructure:
-        new this._gaxModule.LongrunningDescriptor(
-          this.operationsClient,
-          createCloudExadataInfrastructureResponse.decode.bind(
-            createCloudExadataInfrastructureResponse
-          ),
-          createCloudExadataInfrastructureMetadata.decode.bind(
-            createCloudExadataInfrastructureMetadata
-          )
-        ),
-      deleteCloudExadataInfrastructure:
-        new this._gaxModule.LongrunningDescriptor(
-          this.operationsClient,
-          deleteCloudExadataInfrastructureResponse.decode.bind(
-            deleteCloudExadataInfrastructureResponse
-          ),
-          deleteCloudExadataInfrastructureMetadata.decode.bind(
-            deleteCloudExadataInfrastructureMetadata
-          )
-        ),
+      createCloudExadataInfrastructure: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createCloudExadataInfrastructureResponse.decode.bind(createCloudExadataInfrastructureResponse),
+        createCloudExadataInfrastructureMetadata.decode.bind(createCloudExadataInfrastructureMetadata)),
+      deleteCloudExadataInfrastructure: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteCloudExadataInfrastructureResponse.decode.bind(deleteCloudExadataInfrastructureResponse),
+        deleteCloudExadataInfrastructureMetadata.decode.bind(deleteCloudExadataInfrastructureMetadata)),
       createCloudVmCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createCloudVmClusterResponse.decode.bind(createCloudVmClusterResponse),
-        createCloudVmClusterMetadata.decode.bind(createCloudVmClusterMetadata)
-      ),
+        createCloudVmClusterMetadata.decode.bind(createCloudVmClusterMetadata)),
       deleteCloudVmCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteCloudVmClusterResponse.decode.bind(deleteCloudVmClusterResponse),
-        deleteCloudVmClusterMetadata.decode.bind(deleteCloudVmClusterMetadata)
-      ),
+        deleteCloudVmClusterMetadata.decode.bind(deleteCloudVmClusterMetadata)),
       createAutonomousDatabase: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createAutonomousDatabaseResponse.decode.bind(
-          createAutonomousDatabaseResponse
-        ),
-        createAutonomousDatabaseMetadata.decode.bind(
-          createAutonomousDatabaseMetadata
-        )
-      ),
+        createAutonomousDatabaseResponse.decode.bind(createAutonomousDatabaseResponse),
+        createAutonomousDatabaseMetadata.decode.bind(createAutonomousDatabaseMetadata)),
       deleteAutonomousDatabase: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deleteAutonomousDatabaseResponse.decode.bind(
-          deleteAutonomousDatabaseResponse
-        ),
-        deleteAutonomousDatabaseMetadata.decode.bind(
-          deleteAutonomousDatabaseMetadata
-        )
-      ),
+        deleteAutonomousDatabaseResponse.decode.bind(deleteAutonomousDatabaseResponse),
+        deleteAutonomousDatabaseMetadata.decode.bind(deleteAutonomousDatabaseMetadata)),
       restoreAutonomousDatabase: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        restoreAutonomousDatabaseResponse.decode.bind(
-          restoreAutonomousDatabaseResponse
-        ),
-        restoreAutonomousDatabaseMetadata.decode.bind(
-          restoreAutonomousDatabaseMetadata
-        )
-      ),
+        restoreAutonomousDatabaseResponse.decode.bind(restoreAutonomousDatabaseResponse),
+        restoreAutonomousDatabaseMetadata.decode.bind(restoreAutonomousDatabaseMetadata)),
       stopAutonomousDatabase: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        stopAutonomousDatabaseResponse.decode.bind(
-          stopAutonomousDatabaseResponse
-        ),
-        stopAutonomousDatabaseMetadata.decode.bind(
-          stopAutonomousDatabaseMetadata
-        )
-      ),
+        stopAutonomousDatabaseResponse.decode.bind(stopAutonomousDatabaseResponse),
+        stopAutonomousDatabaseMetadata.decode.bind(stopAutonomousDatabaseMetadata)),
       startAutonomousDatabase: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        startAutonomousDatabaseResponse.decode.bind(
-          startAutonomousDatabaseResponse
-        ),
-        startAutonomousDatabaseMetadata.decode.bind(
-          startAutonomousDatabaseMetadata
-        )
-      ),
+        startAutonomousDatabaseResponse.decode.bind(startAutonomousDatabaseResponse),
+        startAutonomousDatabaseMetadata.decode.bind(startAutonomousDatabaseMetadata)),
       restartAutonomousDatabase: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        restartAutonomousDatabaseResponse.decode.bind(
-          restartAutonomousDatabaseResponse
-        ),
-        restartAutonomousDatabaseMetadata.decode.bind(
-          restartAutonomousDatabaseMetadata
-        )
-      ),
+        restartAutonomousDatabaseResponse.decode.bind(restartAutonomousDatabaseResponse),
+        restartAutonomousDatabaseMetadata.decode.bind(restartAutonomousDatabaseMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.oracledatabase.v1.OracleDatabase',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.oracledatabase.v1.OracleDatabase', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -541,59 +384,28 @@ export class OracleDatabaseClient {
     // Put together the "service stub" for
     // google.cloud.oracledatabase.v1.OracleDatabase.
     this.oracleDatabaseStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.oracledatabase.v1.OracleDatabase'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.oracledatabase.v1.OracleDatabase') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.oracledatabase.v1.OracleDatabase,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const oracleDatabaseStubMethods = [
-      'listCloudExadataInfrastructures',
-      'getCloudExadataInfrastructure',
-      'createCloudExadataInfrastructure',
-      'deleteCloudExadataInfrastructure',
-      'listCloudVmClusters',
-      'getCloudVmCluster',
-      'createCloudVmCluster',
-      'deleteCloudVmCluster',
-      'listEntitlements',
-      'listDbServers',
-      'listDbNodes',
-      'listGiVersions',
-      'listDbSystemShapes',
-      'listAutonomousDatabases',
-      'getAutonomousDatabase',
-      'createAutonomousDatabase',
-      'deleteAutonomousDatabase',
-      'restoreAutonomousDatabase',
-      'generateAutonomousDatabaseWallet',
-      'listAutonomousDbVersions',
-      'listAutonomousDatabaseCharacterSets',
-      'listAutonomousDatabaseBackups',
-      'stopAutonomousDatabase',
-      'startAutonomousDatabase',
-      'restartAutonomousDatabase',
-    ];
+    const oracleDatabaseStubMethods =
+        ['listCloudExadataInfrastructures', 'getCloudExadataInfrastructure', 'createCloudExadataInfrastructure', 'deleteCloudExadataInfrastructure', 'listCloudVmClusters', 'getCloudVmCluster', 'createCloudVmCluster', 'deleteCloudVmCluster', 'listEntitlements', 'listDbServers', 'listDbNodes', 'listGiVersions', 'listDbSystemShapes', 'listAutonomousDatabases', 'getAutonomousDatabase', 'createAutonomousDatabase', 'deleteAutonomousDatabase', 'restoreAutonomousDatabase', 'generateAutonomousDatabaseWallet', 'listAutonomousDbVersions', 'listAutonomousDatabaseCharacterSets', 'listAutonomousDatabaseBackups', 'stopAutonomousDatabase', 'startAutonomousDatabase', 'restartAutonomousDatabase'];
     for (const methodName of oracleDatabaseStubMethods) {
       const callPromise = this.oracleDatabaseStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -618,14 +430,8 @@ export class OracleDatabaseClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'oracledatabase.googleapis.com';
   }
@@ -636,14 +442,8 @@ export class OracleDatabaseClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'oracledatabase.googleapis.com';
   }
@@ -674,7 +474,9 @@ export class OracleDatabaseClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -683,9 +485,8 @@ export class OracleDatabaseClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -696,2442 +497,1647 @@ export class OracleDatabaseClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets details of a single Exadata Infrastructure.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the Cloud Exadata Infrastructure in the following
-   *   format:
-   *   projects/{project}/locations/{location}/cloudExadataInfrastructures/{cloud_exadata_infrastructure}.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.oracledatabase.v1.CloudExadataInfrastructure|CloudExadataInfrastructure}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/oracle_database.get_cloud_exadata_infrastructure.js</caption>
-   * region_tag:oracledatabase_v1_generated_OracleDatabase_GetCloudExadataInfrastructure_async
-   */
+/**
+ * Gets details of a single Exadata Infrastructure.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the Cloud Exadata Infrastructure in the following
+ *   format:
+ *   projects/{project}/locations/{location}/cloudExadataInfrastructures/{cloud_exadata_infrastructure}.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.oracledatabase.v1.CloudExadataInfrastructure|CloudExadataInfrastructure}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/oracle_database.get_cloud_exadata_infrastructure.js</caption>
+ * region_tag:oracledatabase_v1_generated_OracleDatabase_GetCloudExadataInfrastructure_async
+ */
   getCloudExadataInfrastructure(
-    request?: protos.google.cloud.oracledatabase.v1.IGetCloudExadataInfrastructureRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure,
-      (
-        | protos.google.cloud.oracledatabase.v1.IGetCloudExadataInfrastructureRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.oracledatabase.v1.IGetCloudExadataInfrastructureRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure,
+        protos.google.cloud.oracledatabase.v1.IGetCloudExadataInfrastructureRequest|undefined, {}|undefined
+      ]>;
   getCloudExadataInfrastructure(
-    request: protos.google.cloud.oracledatabase.v1.IGetCloudExadataInfrastructureRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure,
-      | protos.google.cloud.oracledatabase.v1.IGetCloudExadataInfrastructureRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCloudExadataInfrastructure(
-    request: protos.google.cloud.oracledatabase.v1.IGetCloudExadataInfrastructureRequest,
-    callback: Callback<
-      protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure,
-      | protos.google.cloud.oracledatabase.v1.IGetCloudExadataInfrastructureRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCloudExadataInfrastructure(
-    request?: protos.google.cloud.oracledatabase.v1.IGetCloudExadataInfrastructureRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.oracledatabase.v1.IGetCloudExadataInfrastructureRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure,
-          | protos.google.cloud.oracledatabase.v1.IGetCloudExadataInfrastructureRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure,
-      | protos.google.cloud.oracledatabase.v1.IGetCloudExadataInfrastructureRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure,
-      (
-        | protos.google.cloud.oracledatabase.v1.IGetCloudExadataInfrastructureRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.oracledatabase.v1.IGetCloudExadataInfrastructureRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCloudExadataInfrastructure(
+      request: protos.google.cloud.oracledatabase.v1.IGetCloudExadataInfrastructureRequest,
+      callback: Callback<
+          protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure,
+          protos.google.cloud.oracledatabase.v1.IGetCloudExadataInfrastructureRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCloudExadataInfrastructure(
+      request?: protos.google.cloud.oracledatabase.v1.IGetCloudExadataInfrastructureRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure,
+          protos.google.cloud.oracledatabase.v1.IGetCloudExadataInfrastructureRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure,
+          protos.google.cloud.oracledatabase.v1.IGetCloudExadataInfrastructureRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure,
+        protos.google.cloud.oracledatabase.v1.IGetCloudExadataInfrastructureRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getCloudExadataInfrastructure request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure,
-          | protos.google.cloud.oracledatabase.v1.IGetCloudExadataInfrastructureRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure,
+        protos.google.cloud.oracledatabase.v1.IGetCloudExadataInfrastructureRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getCloudExadataInfrastructure response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getCloudExadataInfrastructure(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure,
-          (
-            | protos.google.cloud.oracledatabase.v1.IGetCloudExadataInfrastructureRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getCloudExadataInfrastructure response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getCloudExadataInfrastructure(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure,
+        protos.google.cloud.oracledatabase.v1.IGetCloudExadataInfrastructureRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getCloudExadataInfrastructure response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets details of a single VM Cluster.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the Cloud VM Cluster in the following format:
-   *   projects/{project}/locations/{location}/cloudVmClusters/{cloud_vm_cluster}.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.oracledatabase.v1.CloudVmCluster|CloudVmCluster}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/oracle_database.get_cloud_vm_cluster.js</caption>
-   * region_tag:oracledatabase_v1_generated_OracleDatabase_GetCloudVmCluster_async
-   */
+/**
+ * Gets details of a single VM Cluster.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the Cloud VM Cluster in the following format:
+ *   projects/{project}/locations/{location}/cloudVmClusters/{cloud_vm_cluster}.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.oracledatabase.v1.CloudVmCluster|CloudVmCluster}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/oracle_database.get_cloud_vm_cluster.js</caption>
+ * region_tag:oracledatabase_v1_generated_OracleDatabase_GetCloudVmCluster_async
+ */
   getCloudVmCluster(
-    request?: protos.google.cloud.oracledatabase.v1.IGetCloudVmClusterRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.oracledatabase.v1.ICloudVmCluster,
-      (
-        | protos.google.cloud.oracledatabase.v1.IGetCloudVmClusterRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.oracledatabase.v1.IGetCloudVmClusterRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.oracledatabase.v1.ICloudVmCluster,
+        protos.google.cloud.oracledatabase.v1.IGetCloudVmClusterRequest|undefined, {}|undefined
+      ]>;
   getCloudVmCluster(
-    request: protos.google.cloud.oracledatabase.v1.IGetCloudVmClusterRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.oracledatabase.v1.ICloudVmCluster,
-      | protos.google.cloud.oracledatabase.v1.IGetCloudVmClusterRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCloudVmCluster(
-    request: protos.google.cloud.oracledatabase.v1.IGetCloudVmClusterRequest,
-    callback: Callback<
-      protos.google.cloud.oracledatabase.v1.ICloudVmCluster,
-      | protos.google.cloud.oracledatabase.v1.IGetCloudVmClusterRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCloudVmCluster(
-    request?: protos.google.cloud.oracledatabase.v1.IGetCloudVmClusterRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.oracledatabase.v1.IGetCloudVmClusterRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.oracledatabase.v1.ICloudVmCluster,
-          | protos.google.cloud.oracledatabase.v1.IGetCloudVmClusterRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.oracledatabase.v1.ICloudVmCluster,
-      | protos.google.cloud.oracledatabase.v1.IGetCloudVmClusterRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.oracledatabase.v1.ICloudVmCluster,
-      (
-        | protos.google.cloud.oracledatabase.v1.IGetCloudVmClusterRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.oracledatabase.v1.IGetCloudVmClusterRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCloudVmCluster(
+      request: protos.google.cloud.oracledatabase.v1.IGetCloudVmClusterRequest,
+      callback: Callback<
+          protos.google.cloud.oracledatabase.v1.ICloudVmCluster,
+          protos.google.cloud.oracledatabase.v1.IGetCloudVmClusterRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCloudVmCluster(
+      request?: protos.google.cloud.oracledatabase.v1.IGetCloudVmClusterRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.oracledatabase.v1.ICloudVmCluster,
+          protos.google.cloud.oracledatabase.v1.IGetCloudVmClusterRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.oracledatabase.v1.ICloudVmCluster,
+          protos.google.cloud.oracledatabase.v1.IGetCloudVmClusterRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.oracledatabase.v1.ICloudVmCluster,
+        protos.google.cloud.oracledatabase.v1.IGetCloudVmClusterRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getCloudVmCluster request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.oracledatabase.v1.ICloudVmCluster,
-          | protos.google.cloud.oracledatabase.v1.IGetCloudVmClusterRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.oracledatabase.v1.ICloudVmCluster,
+        protos.google.cloud.oracledatabase.v1.IGetCloudVmClusterRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getCloudVmCluster response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getCloudVmCluster(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.oracledatabase.v1.ICloudVmCluster,
-          (
-            | protos.google.cloud.oracledatabase.v1.IGetCloudVmClusterRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getCloudVmCluster response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getCloudVmCluster(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.oracledatabase.v1.ICloudVmCluster,
+        protos.google.cloud.oracledatabase.v1.IGetCloudVmClusterRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getCloudVmCluster response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets the details of a single Autonomous Database.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the Autonomous Database in the following format:
-   *   projects/{project}/locations/{location}/autonomousDatabases/{autonomous_database}.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.oracledatabase.v1.AutonomousDatabase|AutonomousDatabase}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/oracle_database.get_autonomous_database.js</caption>
-   * region_tag:oracledatabase_v1_generated_OracleDatabase_GetAutonomousDatabase_async
-   */
+/**
+ * Gets the details of a single Autonomous Database.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the Autonomous Database in the following format:
+ *   projects/{project}/locations/{location}/autonomousDatabases/{autonomous_database}.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.oracledatabase.v1.AutonomousDatabase|AutonomousDatabase}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/oracle_database.get_autonomous_database.js</caption>
+ * region_tag:oracledatabase_v1_generated_OracleDatabase_GetAutonomousDatabase_async
+ */
   getAutonomousDatabase(
-    request?: protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-      (
-        | protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+        protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRequest|undefined, {}|undefined
+      ]>;
   getAutonomousDatabase(
-    request: protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-      | protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAutonomousDatabase(
-    request: protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRequest,
-    callback: Callback<
-      protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-      | protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAutonomousDatabase(
-    request?: protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-          | protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-      | protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-      (
-        | protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAutonomousDatabase(
+      request: protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRequest,
+      callback: Callback<
+          protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+          protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAutonomousDatabase(
+      request?: protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+          protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+          protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+        protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getAutonomousDatabase request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-          | protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+        protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getAutonomousDatabase response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getAutonomousDatabase(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-          (
-            | protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getAutonomousDatabase response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getAutonomousDatabase(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+        protos.google.cloud.oracledatabase.v1.IGetAutonomousDatabaseRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getAutonomousDatabase response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Generates a wallet for an Autonomous Database.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the Autonomous Database in the following format:
-   *   projects/{project}/locations/{location}/autonomousDatabases/{autonomous_database}.
-   * @param {google.cloud.oracledatabase.v1.GenerateType} [request.type]
-   *   Optional. The type of wallet generation for the Autonomous Database. The
-   *   default value is SINGLE.
-   * @param {boolean} [request.isRegional]
-   *   Optional. True when requesting regional connection strings in PDB connect
-   *   info, applicable to cross-region Data Guard only.
-   * @param {string} request.password
-   *   Required. The password used to encrypt the keys inside the wallet. The
-   *   password must be a minimum of 8 characters.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.oracledatabase.v1.GenerateAutonomousDatabaseWalletResponse|GenerateAutonomousDatabaseWalletResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/oracle_database.generate_autonomous_database_wallet.js</caption>
-   * region_tag:oracledatabase_v1_generated_OracleDatabase_GenerateAutonomousDatabaseWallet_async
-   */
+/**
+ * Generates a wallet for an Autonomous Database.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the Autonomous Database in the following format:
+ *   projects/{project}/locations/{location}/autonomousDatabases/{autonomous_database}.
+ * @param {google.cloud.oracledatabase.v1.GenerateType} [request.type]
+ *   Optional. The type of wallet generation for the Autonomous Database. The
+ *   default value is SINGLE.
+ * @param {boolean} [request.isRegional]
+ *   Optional. True when requesting regional connection strings in PDB connect
+ *   info, applicable to cross-region Data Guard only.
+ * @param {string} request.password
+ *   Required. The password used to encrypt the keys inside the wallet. The
+ *   password must be a minimum of 8 characters.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.oracledatabase.v1.GenerateAutonomousDatabaseWalletResponse|GenerateAutonomousDatabaseWalletResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/oracle_database.generate_autonomous_database_wallet.js</caption>
+ * region_tag:oracledatabase_v1_generated_OracleDatabase_GenerateAutonomousDatabaseWallet_async
+ */
   generateAutonomousDatabaseWallet(
-    request?: protos.google.cloud.oracledatabase.v1.IGenerateAutonomousDatabaseWalletRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.oracledatabase.v1.IGenerateAutonomousDatabaseWalletResponse,
-      (
-        | protos.google.cloud.oracledatabase.v1.IGenerateAutonomousDatabaseWalletRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.oracledatabase.v1.IGenerateAutonomousDatabaseWalletRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.oracledatabase.v1.IGenerateAutonomousDatabaseWalletResponse,
+        protos.google.cloud.oracledatabase.v1.IGenerateAutonomousDatabaseWalletRequest|undefined, {}|undefined
+      ]>;
   generateAutonomousDatabaseWallet(
-    request: protos.google.cloud.oracledatabase.v1.IGenerateAutonomousDatabaseWalletRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.oracledatabase.v1.IGenerateAutonomousDatabaseWalletResponse,
-      | protos.google.cloud.oracledatabase.v1.IGenerateAutonomousDatabaseWalletRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  generateAutonomousDatabaseWallet(
-    request: protos.google.cloud.oracledatabase.v1.IGenerateAutonomousDatabaseWalletRequest,
-    callback: Callback<
-      protos.google.cloud.oracledatabase.v1.IGenerateAutonomousDatabaseWalletResponse,
-      | protos.google.cloud.oracledatabase.v1.IGenerateAutonomousDatabaseWalletRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  generateAutonomousDatabaseWallet(
-    request?: protos.google.cloud.oracledatabase.v1.IGenerateAutonomousDatabaseWalletRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.oracledatabase.v1.IGenerateAutonomousDatabaseWalletRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.oracledatabase.v1.IGenerateAutonomousDatabaseWalletResponse,
-          | protos.google.cloud.oracledatabase.v1.IGenerateAutonomousDatabaseWalletRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.oracledatabase.v1.IGenerateAutonomousDatabaseWalletResponse,
-      | protos.google.cloud.oracledatabase.v1.IGenerateAutonomousDatabaseWalletRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.oracledatabase.v1.IGenerateAutonomousDatabaseWalletResponse,
-      (
-        | protos.google.cloud.oracledatabase.v1.IGenerateAutonomousDatabaseWalletRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.oracledatabase.v1.IGenerateAutonomousDatabaseWalletRequest|null|undefined,
+          {}|null|undefined>): void;
+  generateAutonomousDatabaseWallet(
+      request: protos.google.cloud.oracledatabase.v1.IGenerateAutonomousDatabaseWalletRequest,
+      callback: Callback<
+          protos.google.cloud.oracledatabase.v1.IGenerateAutonomousDatabaseWalletResponse,
+          protos.google.cloud.oracledatabase.v1.IGenerateAutonomousDatabaseWalletRequest|null|undefined,
+          {}|null|undefined>): void;
+  generateAutonomousDatabaseWallet(
+      request?: protos.google.cloud.oracledatabase.v1.IGenerateAutonomousDatabaseWalletRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.oracledatabase.v1.IGenerateAutonomousDatabaseWalletResponse,
+          protos.google.cloud.oracledatabase.v1.IGenerateAutonomousDatabaseWalletRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.oracledatabase.v1.IGenerateAutonomousDatabaseWalletResponse,
+          protos.google.cloud.oracledatabase.v1.IGenerateAutonomousDatabaseWalletRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.oracledatabase.v1.IGenerateAutonomousDatabaseWalletResponse,
+        protos.google.cloud.oracledatabase.v1.IGenerateAutonomousDatabaseWalletRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('generateAutonomousDatabaseWallet request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.oracledatabase.v1.IGenerateAutonomousDatabaseWalletResponse,
-          | protos.google.cloud.oracledatabase.v1.IGenerateAutonomousDatabaseWalletRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.oracledatabase.v1.IGenerateAutonomousDatabaseWalletResponse,
+        protos.google.cloud.oracledatabase.v1.IGenerateAutonomousDatabaseWalletRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
-            'generateAutonomousDatabaseWallet response %j',
-            response
-          );
+          this._log.info('generateAutonomousDatabaseWallet response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .generateAutonomousDatabaseWallet(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.oracledatabase.v1.IGenerateAutonomousDatabaseWalletResponse,
-          (
-            | protos.google.cloud.oracledatabase.v1.IGenerateAutonomousDatabaseWalletRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info(
-            'generateAutonomousDatabaseWallet response %j',
-            response
-          );
-          return [response, options, rawResponse];
+    return this.innerApiCalls.generateAutonomousDatabaseWallet(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.oracledatabase.v1.IGenerateAutonomousDatabaseWalletResponse,
+        protos.google.cloud.oracledatabase.v1.IGenerateAutonomousDatabaseWalletRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('generateAutonomousDatabaseWallet response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Creates a new Exadata Infrastructure in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent value for CloudExadataInfrastructure in the following
-   *   format: projects/{project}/locations/{location}.
-   * @param {string} request.cloudExadataInfrastructureId
-   *   Required. The ID of the Exadata Infrastructure to create. This value is
-   *   restricted to (^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$) and must be a maximum of
-   *   63 characters in length. The value must start with a letter and end with a
-   *   letter or a number.
-   * @param {google.cloud.oracledatabase.v1.CloudExadataInfrastructure} request.cloudExadataInfrastructure
-   *   Required. Details of the Exadata Infrastructure instance to create.
-   * @param {string} [request.requestId]
-   *   Optional. An optional ID to identify the request. This value is used to
-   *   identify duplicate requests. If you make a request with the same request ID
-   *   and the original request is still in progress or completed, the server
-   *   ignores the second request. This prevents clients from
-   *   accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/oracle_database.create_cloud_exadata_infrastructure.js</caption>
-   * region_tag:oracledatabase_v1_generated_OracleDatabase_CreateCloudExadataInfrastructure_async
-   */
+/**
+ * Creates a new Exadata Infrastructure in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent value for CloudExadataInfrastructure in the following
+ *   format: projects/{project}/locations/{location}.
+ * @param {string} request.cloudExadataInfrastructureId
+ *   Required. The ID of the Exadata Infrastructure to create. This value is
+ *   restricted to (^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$) and must be a maximum of
+ *   63 characters in length. The value must start with a letter and end with a
+ *   letter or a number.
+ * @param {google.cloud.oracledatabase.v1.CloudExadataInfrastructure} request.cloudExadataInfrastructure
+ *   Required. Details of the Exadata Infrastructure instance to create.
+ * @param {string} [request.requestId]
+ *   Optional. An optional ID to identify the request. This value is used to
+ *   identify duplicate requests. If you make a request with the same request ID
+ *   and the original request is still in progress or completed, the server
+ *   ignores the second request. This prevents clients from
+ *   accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/oracle_database.create_cloud_exadata_infrastructure.js</caption>
+ * region_tag:oracledatabase_v1_generated_OracleDatabase_CreateCloudExadataInfrastructure_async
+ */
   createCloudExadataInfrastructure(
-    request?: protos.google.cloud.oracledatabase.v1.ICreateCloudExadataInfrastructureRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.oracledatabase.v1.ICreateCloudExadataInfrastructureRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createCloudExadataInfrastructure(
-    request: protos.google.cloud.oracledatabase.v1.ICreateCloudExadataInfrastructureRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.oracledatabase.v1.ICreateCloudExadataInfrastructureRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createCloudExadataInfrastructure(
-    request: protos.google.cloud.oracledatabase.v1.ICreateCloudExadataInfrastructureRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.oracledatabase.v1.ICreateCloudExadataInfrastructureRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createCloudExadataInfrastructure(
-    request?: protos.google.cloud.oracledatabase.v1.ICreateCloudExadataInfrastructureRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure,
-            protos.google.cloud.oracledatabase.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.oracledatabase.v1.ICreateCloudExadataInfrastructureRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure,
-            protos.google.cloud.oracledatabase.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
-            'createCloudExadataInfrastructure response %j',
-            rawResponse
-          );
+          this._log.info('createCloudExadataInfrastructure response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createCloudExadataInfrastructure request %j', request);
-    return this.innerApiCalls
-      .createCloudExadataInfrastructure(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure,
-            protos.google.cloud.oracledatabase.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info(
-            'createCloudExadataInfrastructure response %j',
-            rawResponse
-          );
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createCloudExadataInfrastructure(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createCloudExadataInfrastructure response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createCloudExadataInfrastructure()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/oracle_database.create_cloud_exadata_infrastructure.js</caption>
-   * region_tag:oracledatabase_v1_generated_OracleDatabase_CreateCloudExadataInfrastructure_async
-   */
-  async checkCreateCloudExadataInfrastructureProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.oracledatabase.v1.CloudExadataInfrastructure,
-      protos.google.cloud.oracledatabase.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createCloudExadataInfrastructure()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/oracle_database.create_cloud_exadata_infrastructure.js</caption>
+ * region_tag:oracledatabase_v1_generated_OracleDatabase_CreateCloudExadataInfrastructure_async
+ */
+  async checkCreateCloudExadataInfrastructureProgress(name: string): Promise<LROperation<protos.google.cloud.oracledatabase.v1.CloudExadataInfrastructure, protos.google.cloud.oracledatabase.v1.OperationMetadata>>{
     this._log.info('createCloudExadataInfrastructure long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createCloudExadataInfrastructure,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.oracledatabase.v1.CloudExadataInfrastructure,
-      protos.google.cloud.oracledatabase.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createCloudExadataInfrastructure, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.oracledatabase.v1.CloudExadataInfrastructure, protos.google.cloud.oracledatabase.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a single Exadata Infrastructure.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the Cloud Exadata Infrastructure in the following
-   *   format:
-   *   projects/{project}/locations/{location}/cloudExadataInfrastructures/{cloud_exadata_infrastructure}.
-   * @param {string} [request.requestId]
-   *   Optional. An optional ID to identify the request. This value is used to
-   *   identify duplicate requests. If you make a request with the same request ID
-   *   and the original request is still in progress or completed, the server
-   *   ignores the second request. This prevents clients from
-   *   accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {boolean} [request.force]
-   *   Optional. If set to true, all VM clusters for this Exadata Infrastructure
-   *   will be deleted. An Exadata Infrastructure can only be deleted once all its
-   *   VM clusters have been deleted.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/oracle_database.delete_cloud_exadata_infrastructure.js</caption>
-   * region_tag:oracledatabase_v1_generated_OracleDatabase_DeleteCloudExadataInfrastructure_async
-   */
+/**
+ * Deletes a single Exadata Infrastructure.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the Cloud Exadata Infrastructure in the following
+ *   format:
+ *   projects/{project}/locations/{location}/cloudExadataInfrastructures/{cloud_exadata_infrastructure}.
+ * @param {string} [request.requestId]
+ *   Optional. An optional ID to identify the request. This value is used to
+ *   identify duplicate requests. If you make a request with the same request ID
+ *   and the original request is still in progress or completed, the server
+ *   ignores the second request. This prevents clients from
+ *   accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {boolean} [request.force]
+ *   Optional. If set to true, all VM clusters for this Exadata Infrastructure
+ *   will be deleted. An Exadata Infrastructure can only be deleted once all its
+ *   VM clusters have been deleted.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/oracle_database.delete_cloud_exadata_infrastructure.js</caption>
+ * region_tag:oracledatabase_v1_generated_OracleDatabase_DeleteCloudExadataInfrastructure_async
+ */
   deleteCloudExadataInfrastructure(
-    request?: protos.google.cloud.oracledatabase.v1.IDeleteCloudExadataInfrastructureRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.oracledatabase.v1.IDeleteCloudExadataInfrastructureRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteCloudExadataInfrastructure(
-    request: protos.google.cloud.oracledatabase.v1.IDeleteCloudExadataInfrastructureRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.oracledatabase.v1.IDeleteCloudExadataInfrastructureRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteCloudExadataInfrastructure(
-    request: protos.google.cloud.oracledatabase.v1.IDeleteCloudExadataInfrastructureRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.oracledatabase.v1.IDeleteCloudExadataInfrastructureRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteCloudExadataInfrastructure(
-    request?: protos.google.cloud.oracledatabase.v1.IDeleteCloudExadataInfrastructureRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.oracledatabase.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.oracledatabase.v1.IDeleteCloudExadataInfrastructureRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.oracledatabase.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
-            'deleteCloudExadataInfrastructure response %j',
-            rawResponse
-          );
+          this._log.info('deleteCloudExadataInfrastructure response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteCloudExadataInfrastructure request %j', request);
-    return this.innerApiCalls
-      .deleteCloudExadataInfrastructure(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.oracledatabase.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info(
-            'deleteCloudExadataInfrastructure response %j',
-            rawResponse
-          );
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteCloudExadataInfrastructure(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteCloudExadataInfrastructure response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteCloudExadataInfrastructure()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/oracle_database.delete_cloud_exadata_infrastructure.js</caption>
-   * region_tag:oracledatabase_v1_generated_OracleDatabase_DeleteCloudExadataInfrastructure_async
-   */
-  async checkDeleteCloudExadataInfrastructureProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.oracledatabase.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteCloudExadataInfrastructure()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/oracle_database.delete_cloud_exadata_infrastructure.js</caption>
+ * region_tag:oracledatabase_v1_generated_OracleDatabase_DeleteCloudExadataInfrastructure_async
+ */
+  async checkDeleteCloudExadataInfrastructureProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.oracledatabase.v1.OperationMetadata>>{
     this._log.info('deleteCloudExadataInfrastructure long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteCloudExadataInfrastructure,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.oracledatabase.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteCloudExadataInfrastructure, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.oracledatabase.v1.OperationMetadata>;
   }
-  /**
-   * Creates a new VM Cluster in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent in the following format:
-   *   projects/{project}/locations/{location}.
-   * @param {string} request.cloudVmClusterId
-   *   Required. The ID of the VM Cluster to create. This value is restricted
-   *   to (^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$) and must be a maximum of 63
-   *   characters in length. The value must start with a letter and end with
-   *   a letter or a number.
-   * @param {google.cloud.oracledatabase.v1.CloudVmCluster} request.cloudVmCluster
-   *   Required. The resource being created
-   * @param {string} [request.requestId]
-   *   Optional. An optional ID to identify the request. This value is used to
-   *   identify duplicate requests. If you make a request with the same request ID
-   *   and the original request is still in progress or completed, the server
-   *   ignores the second request. This prevents clients from
-   *   accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/oracle_database.create_cloud_vm_cluster.js</caption>
-   * region_tag:oracledatabase_v1_generated_OracleDatabase_CreateCloudVmCluster_async
-   */
+/**
+ * Creates a new VM Cluster in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent in the following format:
+ *   projects/{project}/locations/{location}.
+ * @param {string} request.cloudVmClusterId
+ *   Required. The ID of the VM Cluster to create. This value is restricted
+ *   to (^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$) and must be a maximum of 63
+ *   characters in length. The value must start with a letter and end with
+ *   a letter or a number.
+ * @param {google.cloud.oracledatabase.v1.CloudVmCluster} request.cloudVmCluster
+ *   Required. The resource being created
+ * @param {string} [request.requestId]
+ *   Optional. An optional ID to identify the request. This value is used to
+ *   identify duplicate requests. If you make a request with the same request ID
+ *   and the original request is still in progress or completed, the server
+ *   ignores the second request. This prevents clients from
+ *   accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/oracle_database.create_cloud_vm_cluster.js</caption>
+ * region_tag:oracledatabase_v1_generated_OracleDatabase_CreateCloudVmCluster_async
+ */
   createCloudVmCluster(
-    request?: protos.google.cloud.oracledatabase.v1.ICreateCloudVmClusterRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.oracledatabase.v1.ICloudVmCluster,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.oracledatabase.v1.ICreateCloudVmClusterRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.oracledatabase.v1.ICloudVmCluster, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createCloudVmCluster(
-    request: protos.google.cloud.oracledatabase.v1.ICreateCloudVmClusterRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.oracledatabase.v1.ICloudVmCluster,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.oracledatabase.v1.ICreateCloudVmClusterRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.oracledatabase.v1.ICloudVmCluster, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createCloudVmCluster(
-    request: protos.google.cloud.oracledatabase.v1.ICreateCloudVmClusterRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.oracledatabase.v1.ICloudVmCluster,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.oracledatabase.v1.ICreateCloudVmClusterRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.oracledatabase.v1.ICloudVmCluster, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createCloudVmCluster(
-    request?: protos.google.cloud.oracledatabase.v1.ICreateCloudVmClusterRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.oracledatabase.v1.ICloudVmCluster,
-            protos.google.cloud.oracledatabase.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.oracledatabase.v1.ICloudVmCluster,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.oracledatabase.v1.ICloudVmCluster,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.oracledatabase.v1.ICreateCloudVmClusterRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.oracledatabase.v1.ICloudVmCluster, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.oracledatabase.v1.ICloudVmCluster, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.oracledatabase.v1.ICloudVmCluster, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.oracledatabase.v1.ICloudVmCluster,
-            protos.google.cloud.oracledatabase.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.oracledatabase.v1.ICloudVmCluster, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createCloudVmCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createCloudVmCluster request %j', request);
-    return this.innerApiCalls
-      .createCloudVmCluster(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.oracledatabase.v1.ICloudVmCluster,
-            protos.google.cloud.oracledatabase.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createCloudVmCluster response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createCloudVmCluster(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.oracledatabase.v1.ICloudVmCluster, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createCloudVmCluster response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createCloudVmCluster()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/oracle_database.create_cloud_vm_cluster.js</caption>
-   * region_tag:oracledatabase_v1_generated_OracleDatabase_CreateCloudVmCluster_async
-   */
-  async checkCreateCloudVmClusterProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.oracledatabase.v1.CloudVmCluster,
-      protos.google.cloud.oracledatabase.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createCloudVmCluster()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/oracle_database.create_cloud_vm_cluster.js</caption>
+ * region_tag:oracledatabase_v1_generated_OracleDatabase_CreateCloudVmCluster_async
+ */
+  async checkCreateCloudVmClusterProgress(name: string): Promise<LROperation<protos.google.cloud.oracledatabase.v1.CloudVmCluster, protos.google.cloud.oracledatabase.v1.OperationMetadata>>{
     this._log.info('createCloudVmCluster long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createCloudVmCluster,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.oracledatabase.v1.CloudVmCluster,
-      protos.google.cloud.oracledatabase.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createCloudVmCluster, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.oracledatabase.v1.CloudVmCluster, protos.google.cloud.oracledatabase.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a single VM Cluster.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the Cloud VM Cluster in the following format:
-   *   projects/{project}/locations/{location}/cloudVmClusters/{cloud_vm_cluster}.
-   * @param {string} [request.requestId]
-   *   Optional. An optional ID to identify the request. This value is used to
-   *   identify duplicate requests. If you make a request with the same request ID
-   *   and the original request is still in progress or completed, the server
-   *   ignores the second request. This prevents clients from
-   *   accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {boolean} [request.force]
-   *   Optional. If set to true, all child resources for the VM Cluster will be
-   *   deleted. A VM Cluster can only be deleted once all its child resources have
-   *   been deleted.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/oracle_database.delete_cloud_vm_cluster.js</caption>
-   * region_tag:oracledatabase_v1_generated_OracleDatabase_DeleteCloudVmCluster_async
-   */
+/**
+ * Deletes a single VM Cluster.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the Cloud VM Cluster in the following format:
+ *   projects/{project}/locations/{location}/cloudVmClusters/{cloud_vm_cluster}.
+ * @param {string} [request.requestId]
+ *   Optional. An optional ID to identify the request. This value is used to
+ *   identify duplicate requests. If you make a request with the same request ID
+ *   and the original request is still in progress or completed, the server
+ *   ignores the second request. This prevents clients from
+ *   accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {boolean} [request.force]
+ *   Optional. If set to true, all child resources for the VM Cluster will be
+ *   deleted. A VM Cluster can only be deleted once all its child resources have
+ *   been deleted.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/oracle_database.delete_cloud_vm_cluster.js</caption>
+ * region_tag:oracledatabase_v1_generated_OracleDatabase_DeleteCloudVmCluster_async
+ */
   deleteCloudVmCluster(
-    request?: protos.google.cloud.oracledatabase.v1.IDeleteCloudVmClusterRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.oracledatabase.v1.IDeleteCloudVmClusterRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteCloudVmCluster(
-    request: protos.google.cloud.oracledatabase.v1.IDeleteCloudVmClusterRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.oracledatabase.v1.IDeleteCloudVmClusterRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteCloudVmCluster(
-    request: protos.google.cloud.oracledatabase.v1.IDeleteCloudVmClusterRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.oracledatabase.v1.IDeleteCloudVmClusterRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteCloudVmCluster(
-    request?: protos.google.cloud.oracledatabase.v1.IDeleteCloudVmClusterRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.oracledatabase.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.oracledatabase.v1.IDeleteCloudVmClusterRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.oracledatabase.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteCloudVmCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteCloudVmCluster request %j', request);
-    return this.innerApiCalls
-      .deleteCloudVmCluster(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.oracledatabase.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteCloudVmCluster response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteCloudVmCluster(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteCloudVmCluster response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteCloudVmCluster()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/oracle_database.delete_cloud_vm_cluster.js</caption>
-   * region_tag:oracledatabase_v1_generated_OracleDatabase_DeleteCloudVmCluster_async
-   */
-  async checkDeleteCloudVmClusterProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.oracledatabase.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteCloudVmCluster()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/oracle_database.delete_cloud_vm_cluster.js</caption>
+ * region_tag:oracledatabase_v1_generated_OracleDatabase_DeleteCloudVmCluster_async
+ */
+  async checkDeleteCloudVmClusterProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.oracledatabase.v1.OperationMetadata>>{
     this._log.info('deleteCloudVmCluster long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteCloudVmCluster,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.oracledatabase.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteCloudVmCluster, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.oracledatabase.v1.OperationMetadata>;
   }
-  /**
-   * Creates a new Autonomous Database in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent in the following format:
-   *   projects/{project}/locations/{location}.
-   * @param {string} request.autonomousDatabaseId
-   *   Required. The ID of the Autonomous Database to create. This value is
-   *   restricted to (^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$) and must be a maximum of
-   *   63 characters in length. The value must start with a letter and end with a
-   *   letter or a number.
-   * @param {google.cloud.oracledatabase.v1.AutonomousDatabase} request.autonomousDatabase
-   *   Required. The Autonomous Database being created.
-   * @param {string} [request.requestId]
-   *   Optional. An optional ID to identify the request. This value is used to
-   *   identify duplicate requests. If you make a request with the same request ID
-   *   and the original request is still in progress or completed, the server
-   *   ignores the second request. This prevents clients from
-   *   accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/oracle_database.create_autonomous_database.js</caption>
-   * region_tag:oracledatabase_v1_generated_OracleDatabase_CreateAutonomousDatabase_async
-   */
+/**
+ * Creates a new Autonomous Database in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent in the following format:
+ *   projects/{project}/locations/{location}.
+ * @param {string} request.autonomousDatabaseId
+ *   Required. The ID of the Autonomous Database to create. This value is
+ *   restricted to (^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$) and must be a maximum of
+ *   63 characters in length. The value must start with a letter and end with a
+ *   letter or a number.
+ * @param {google.cloud.oracledatabase.v1.AutonomousDatabase} request.autonomousDatabase
+ *   Required. The Autonomous Database being created.
+ * @param {string} [request.requestId]
+ *   Optional. An optional ID to identify the request. This value is used to
+ *   identify duplicate requests. If you make a request with the same request ID
+ *   and the original request is still in progress or completed, the server
+ *   ignores the second request. This prevents clients from
+ *   accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/oracle_database.create_autonomous_database.js</caption>
+ * region_tag:oracledatabase_v1_generated_OracleDatabase_CreateAutonomousDatabase_async
+ */
   createAutonomousDatabase(
-    request?: protos.google.cloud.oracledatabase.v1.ICreateAutonomousDatabaseRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.oracledatabase.v1.ICreateAutonomousDatabaseRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createAutonomousDatabase(
-    request: protos.google.cloud.oracledatabase.v1.ICreateAutonomousDatabaseRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.oracledatabase.v1.ICreateAutonomousDatabaseRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createAutonomousDatabase(
-    request: protos.google.cloud.oracledatabase.v1.ICreateAutonomousDatabaseRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.oracledatabase.v1.ICreateAutonomousDatabaseRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createAutonomousDatabase(
-    request?: protos.google.cloud.oracledatabase.v1.ICreateAutonomousDatabaseRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-            protos.google.cloud.oracledatabase.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.oracledatabase.v1.ICreateAutonomousDatabaseRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-            protos.google.cloud.oracledatabase.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createAutonomousDatabase response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createAutonomousDatabase request %j', request);
-    return this.innerApiCalls
-      .createAutonomousDatabase(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-            protos.google.cloud.oracledatabase.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createAutonomousDatabase response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createAutonomousDatabase(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createAutonomousDatabase response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createAutonomousDatabase()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/oracle_database.create_autonomous_database.js</caption>
-   * region_tag:oracledatabase_v1_generated_OracleDatabase_CreateAutonomousDatabase_async
-   */
-  async checkCreateAutonomousDatabaseProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.oracledatabase.v1.AutonomousDatabase,
-      protos.google.cloud.oracledatabase.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createAutonomousDatabase()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/oracle_database.create_autonomous_database.js</caption>
+ * region_tag:oracledatabase_v1_generated_OracleDatabase_CreateAutonomousDatabase_async
+ */
+  async checkCreateAutonomousDatabaseProgress(name: string): Promise<LROperation<protos.google.cloud.oracledatabase.v1.AutonomousDatabase, protos.google.cloud.oracledatabase.v1.OperationMetadata>>{
     this._log.info('createAutonomousDatabase long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createAutonomousDatabase,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.oracledatabase.v1.AutonomousDatabase,
-      protos.google.cloud.oracledatabase.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createAutonomousDatabase, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.oracledatabase.v1.AutonomousDatabase, protos.google.cloud.oracledatabase.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a single Autonomous Database.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the resource in the following format:
-   *   projects/{project}/locations/{location}/autonomousDatabases/{autonomous_database}.
-   * @param {string} [request.requestId]
-   *   Optional. An optional ID to identify the request. This value is used to
-   *   identify duplicate requests. If you make a request with the same request ID
-   *   and the original request is still in progress or completed, the server
-   *   ignores the second request. This prevents clients from
-   *   accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/oracle_database.delete_autonomous_database.js</caption>
-   * region_tag:oracledatabase_v1_generated_OracleDatabase_DeleteAutonomousDatabase_async
-   */
+/**
+ * Deletes a single Autonomous Database.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the resource in the following format:
+ *   projects/{project}/locations/{location}/autonomousDatabases/{autonomous_database}.
+ * @param {string} [request.requestId]
+ *   Optional. An optional ID to identify the request. This value is used to
+ *   identify duplicate requests. If you make a request with the same request ID
+ *   and the original request is still in progress or completed, the server
+ *   ignores the second request. This prevents clients from
+ *   accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/oracle_database.delete_autonomous_database.js</caption>
+ * region_tag:oracledatabase_v1_generated_OracleDatabase_DeleteAutonomousDatabase_async
+ */
   deleteAutonomousDatabase(
-    request?: protos.google.cloud.oracledatabase.v1.IDeleteAutonomousDatabaseRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.oracledatabase.v1.IDeleteAutonomousDatabaseRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteAutonomousDatabase(
-    request: protos.google.cloud.oracledatabase.v1.IDeleteAutonomousDatabaseRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.oracledatabase.v1.IDeleteAutonomousDatabaseRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteAutonomousDatabase(
-    request: protos.google.cloud.oracledatabase.v1.IDeleteAutonomousDatabaseRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.oracledatabase.v1.IDeleteAutonomousDatabaseRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteAutonomousDatabase(
-    request?: protos.google.cloud.oracledatabase.v1.IDeleteAutonomousDatabaseRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.oracledatabase.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.oracledatabase.v1.IDeleteAutonomousDatabaseRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.oracledatabase.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteAutonomousDatabase response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteAutonomousDatabase request %j', request);
-    return this.innerApiCalls
-      .deleteAutonomousDatabase(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.oracledatabase.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteAutonomousDatabase response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteAutonomousDatabase(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteAutonomousDatabase response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteAutonomousDatabase()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/oracle_database.delete_autonomous_database.js</caption>
-   * region_tag:oracledatabase_v1_generated_OracleDatabase_DeleteAutonomousDatabase_async
-   */
-  async checkDeleteAutonomousDatabaseProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.oracledatabase.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteAutonomousDatabase()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/oracle_database.delete_autonomous_database.js</caption>
+ * region_tag:oracledatabase_v1_generated_OracleDatabase_DeleteAutonomousDatabase_async
+ */
+  async checkDeleteAutonomousDatabaseProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.oracledatabase.v1.OperationMetadata>>{
     this._log.info('deleteAutonomousDatabase long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteAutonomousDatabase,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.oracledatabase.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteAutonomousDatabase, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.oracledatabase.v1.OperationMetadata>;
   }
-  /**
-   * Restores a single Autonomous Database.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the Autonomous Database in the following format:
-   *   projects/{project}/locations/{location}/autonomousDatabases/{autonomous_database}.
-   * @param {google.protobuf.Timestamp} request.restoreTime
-   *   Required. The time and date to restore the database to.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/oracle_database.restore_autonomous_database.js</caption>
-   * region_tag:oracledatabase_v1_generated_OracleDatabase_RestoreAutonomousDatabase_async
-   */
+/**
+ * Restores a single Autonomous Database.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the Autonomous Database in the following format:
+ *   projects/{project}/locations/{location}/autonomousDatabases/{autonomous_database}.
+ * @param {google.protobuf.Timestamp} request.restoreTime
+ *   Required. The time and date to restore the database to.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/oracle_database.restore_autonomous_database.js</caption>
+ * region_tag:oracledatabase_v1_generated_OracleDatabase_RestoreAutonomousDatabase_async
+ */
   restoreAutonomousDatabase(
-    request?: protos.google.cloud.oracledatabase.v1.IRestoreAutonomousDatabaseRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.oracledatabase.v1.IRestoreAutonomousDatabaseRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   restoreAutonomousDatabase(
-    request: protos.google.cloud.oracledatabase.v1.IRestoreAutonomousDatabaseRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.oracledatabase.v1.IRestoreAutonomousDatabaseRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   restoreAutonomousDatabase(
-    request: protos.google.cloud.oracledatabase.v1.IRestoreAutonomousDatabaseRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.oracledatabase.v1.IRestoreAutonomousDatabaseRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   restoreAutonomousDatabase(
-    request?: protos.google.cloud.oracledatabase.v1.IRestoreAutonomousDatabaseRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-            protos.google.cloud.oracledatabase.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.oracledatabase.v1.IRestoreAutonomousDatabaseRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-            protos.google.cloud.oracledatabase.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('restoreAutonomousDatabase response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('restoreAutonomousDatabase request %j', request);
-    return this.innerApiCalls
-      .restoreAutonomousDatabase(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-            protos.google.cloud.oracledatabase.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('restoreAutonomousDatabase response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.restoreAutonomousDatabase(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('restoreAutonomousDatabase response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `restoreAutonomousDatabase()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/oracle_database.restore_autonomous_database.js</caption>
-   * region_tag:oracledatabase_v1_generated_OracleDatabase_RestoreAutonomousDatabase_async
-   */
-  async checkRestoreAutonomousDatabaseProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.oracledatabase.v1.AutonomousDatabase,
-      protos.google.cloud.oracledatabase.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `restoreAutonomousDatabase()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/oracle_database.restore_autonomous_database.js</caption>
+ * region_tag:oracledatabase_v1_generated_OracleDatabase_RestoreAutonomousDatabase_async
+ */
+  async checkRestoreAutonomousDatabaseProgress(name: string): Promise<LROperation<protos.google.cloud.oracledatabase.v1.AutonomousDatabase, protos.google.cloud.oracledatabase.v1.OperationMetadata>>{
     this._log.info('restoreAutonomousDatabase long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.restoreAutonomousDatabase,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.oracledatabase.v1.AutonomousDatabase,
-      protos.google.cloud.oracledatabase.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.restoreAutonomousDatabase, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.oracledatabase.v1.AutonomousDatabase, protos.google.cloud.oracledatabase.v1.OperationMetadata>;
   }
-  /**
-   * Stops an Autonomous Database.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the Autonomous Database in the following format:
-   *   projects/{project}/locations/{location}/autonomousDatabases/{autonomous_database}.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/oracle_database.stop_autonomous_database.js</caption>
-   * region_tag:oracledatabase_v1_generated_OracleDatabase_StopAutonomousDatabase_async
-   */
+/**
+ * Stops an Autonomous Database.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the Autonomous Database in the following format:
+ *   projects/{project}/locations/{location}/autonomousDatabases/{autonomous_database}.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/oracle_database.stop_autonomous_database.js</caption>
+ * region_tag:oracledatabase_v1_generated_OracleDatabase_StopAutonomousDatabase_async
+ */
   stopAutonomousDatabase(
-    request?: protos.google.cloud.oracledatabase.v1.IStopAutonomousDatabaseRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.oracledatabase.v1.IStopAutonomousDatabaseRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   stopAutonomousDatabase(
-    request: protos.google.cloud.oracledatabase.v1.IStopAutonomousDatabaseRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.oracledatabase.v1.IStopAutonomousDatabaseRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   stopAutonomousDatabase(
-    request: protos.google.cloud.oracledatabase.v1.IStopAutonomousDatabaseRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.oracledatabase.v1.IStopAutonomousDatabaseRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   stopAutonomousDatabase(
-    request?: protos.google.cloud.oracledatabase.v1.IStopAutonomousDatabaseRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-            protos.google.cloud.oracledatabase.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.oracledatabase.v1.IStopAutonomousDatabaseRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-            protos.google.cloud.oracledatabase.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('stopAutonomousDatabase response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('stopAutonomousDatabase request %j', request);
-    return this.innerApiCalls
-      .stopAutonomousDatabase(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-            protos.google.cloud.oracledatabase.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('stopAutonomousDatabase response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.stopAutonomousDatabase(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('stopAutonomousDatabase response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `stopAutonomousDatabase()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/oracle_database.stop_autonomous_database.js</caption>
-   * region_tag:oracledatabase_v1_generated_OracleDatabase_StopAutonomousDatabase_async
-   */
-  async checkStopAutonomousDatabaseProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.oracledatabase.v1.AutonomousDatabase,
-      protos.google.cloud.oracledatabase.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `stopAutonomousDatabase()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/oracle_database.stop_autonomous_database.js</caption>
+ * region_tag:oracledatabase_v1_generated_OracleDatabase_StopAutonomousDatabase_async
+ */
+  async checkStopAutonomousDatabaseProgress(name: string): Promise<LROperation<protos.google.cloud.oracledatabase.v1.AutonomousDatabase, protos.google.cloud.oracledatabase.v1.OperationMetadata>>{
     this._log.info('stopAutonomousDatabase long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.stopAutonomousDatabase,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.oracledatabase.v1.AutonomousDatabase,
-      protos.google.cloud.oracledatabase.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.stopAutonomousDatabase, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.oracledatabase.v1.AutonomousDatabase, protos.google.cloud.oracledatabase.v1.OperationMetadata>;
   }
-  /**
-   * Starts an Autonomous Database.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the Autonomous Database in the following format:
-   *   projects/{project}/locations/{location}/autonomousDatabases/{autonomous_database}.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/oracle_database.start_autonomous_database.js</caption>
-   * region_tag:oracledatabase_v1_generated_OracleDatabase_StartAutonomousDatabase_async
-   */
+/**
+ * Starts an Autonomous Database.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the Autonomous Database in the following format:
+ *   projects/{project}/locations/{location}/autonomousDatabases/{autonomous_database}.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/oracle_database.start_autonomous_database.js</caption>
+ * region_tag:oracledatabase_v1_generated_OracleDatabase_StartAutonomousDatabase_async
+ */
   startAutonomousDatabase(
-    request?: protos.google.cloud.oracledatabase.v1.IStartAutonomousDatabaseRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.oracledatabase.v1.IStartAutonomousDatabaseRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   startAutonomousDatabase(
-    request: protos.google.cloud.oracledatabase.v1.IStartAutonomousDatabaseRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.oracledatabase.v1.IStartAutonomousDatabaseRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   startAutonomousDatabase(
-    request: protos.google.cloud.oracledatabase.v1.IStartAutonomousDatabaseRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.oracledatabase.v1.IStartAutonomousDatabaseRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   startAutonomousDatabase(
-    request?: protos.google.cloud.oracledatabase.v1.IStartAutonomousDatabaseRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-            protos.google.cloud.oracledatabase.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.oracledatabase.v1.IStartAutonomousDatabaseRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-            protos.google.cloud.oracledatabase.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('startAutonomousDatabase response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('startAutonomousDatabase request %j', request);
-    return this.innerApiCalls
-      .startAutonomousDatabase(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-            protos.google.cloud.oracledatabase.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('startAutonomousDatabase response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.startAutonomousDatabase(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('startAutonomousDatabase response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `startAutonomousDatabase()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/oracle_database.start_autonomous_database.js</caption>
-   * region_tag:oracledatabase_v1_generated_OracleDatabase_StartAutonomousDatabase_async
-   */
-  async checkStartAutonomousDatabaseProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.oracledatabase.v1.AutonomousDatabase,
-      protos.google.cloud.oracledatabase.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `startAutonomousDatabase()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/oracle_database.start_autonomous_database.js</caption>
+ * region_tag:oracledatabase_v1_generated_OracleDatabase_StartAutonomousDatabase_async
+ */
+  async checkStartAutonomousDatabaseProgress(name: string): Promise<LROperation<protos.google.cloud.oracledatabase.v1.AutonomousDatabase, protos.google.cloud.oracledatabase.v1.OperationMetadata>>{
     this._log.info('startAutonomousDatabase long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.startAutonomousDatabase,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.oracledatabase.v1.AutonomousDatabase,
-      protos.google.cloud.oracledatabase.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.startAutonomousDatabase, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.oracledatabase.v1.AutonomousDatabase, protos.google.cloud.oracledatabase.v1.OperationMetadata>;
   }
-  /**
-   * Restarts an Autonomous Database.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the Autonomous Database in the following format:
-   *   projects/{project}/locations/{location}/autonomousDatabases/{autonomous_database}.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/oracle_database.restart_autonomous_database.js</caption>
-   * region_tag:oracledatabase_v1_generated_OracleDatabase_RestartAutonomousDatabase_async
-   */
+/**
+ * Restarts an Autonomous Database.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the Autonomous Database in the following format:
+ *   projects/{project}/locations/{location}/autonomousDatabases/{autonomous_database}.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/oracle_database.restart_autonomous_database.js</caption>
+ * region_tag:oracledatabase_v1_generated_OracleDatabase_RestartAutonomousDatabase_async
+ */
   restartAutonomousDatabase(
-    request?: protos.google.cloud.oracledatabase.v1.IRestartAutonomousDatabaseRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.oracledatabase.v1.IRestartAutonomousDatabaseRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   restartAutonomousDatabase(
-    request: protos.google.cloud.oracledatabase.v1.IRestartAutonomousDatabaseRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.oracledatabase.v1.IRestartAutonomousDatabaseRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   restartAutonomousDatabase(
-    request: protos.google.cloud.oracledatabase.v1.IRestartAutonomousDatabaseRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.oracledatabase.v1.IRestartAutonomousDatabaseRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   restartAutonomousDatabase(
-    request?: protos.google.cloud.oracledatabase.v1.IRestartAutonomousDatabaseRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-            protos.google.cloud.oracledatabase.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-        protos.google.cloud.oracledatabase.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.oracledatabase.v1.IRestartAutonomousDatabaseRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-            protos.google.cloud.oracledatabase.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('restartAutonomousDatabase response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('restartAutonomousDatabase request %j', request);
-    return this.innerApiCalls
-      .restartAutonomousDatabase(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
-            protos.google.cloud.oracledatabase.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('restartAutonomousDatabase response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.restartAutonomousDatabase(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase, protos.google.cloud.oracledatabase.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('restartAutonomousDatabase response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `restartAutonomousDatabase()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/oracle_database.restart_autonomous_database.js</caption>
-   * region_tag:oracledatabase_v1_generated_OracleDatabase_RestartAutonomousDatabase_async
-   */
-  async checkRestartAutonomousDatabaseProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.oracledatabase.v1.AutonomousDatabase,
-      protos.google.cloud.oracledatabase.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `restartAutonomousDatabase()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/oracle_database.restart_autonomous_database.js</caption>
+ * region_tag:oracledatabase_v1_generated_OracleDatabase_RestartAutonomousDatabase_async
+ */
+  async checkRestartAutonomousDatabaseProgress(name: string): Promise<LROperation<protos.google.cloud.oracledatabase.v1.AutonomousDatabase, protos.google.cloud.oracledatabase.v1.OperationMetadata>>{
     this._log.info('restartAutonomousDatabase long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.restartAutonomousDatabase,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.oracledatabase.v1.AutonomousDatabase,
-      protos.google.cloud.oracledatabase.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.restartAutonomousDatabase, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.oracledatabase.v1.AutonomousDatabase, protos.google.cloud.oracledatabase.v1.OperationMetadata>;
   }
-  /**
-   * Lists Exadata Infrastructures in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent value for CloudExadataInfrastructure in the following
-   *   format: projects/{project}/locations/{location}.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   *   If unspecified, at most 50 Exadata infrastructures will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.oracledatabase.v1.CloudExadataInfrastructure|CloudExadataInfrastructure}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listCloudExadataInfrastructuresAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists Exadata Infrastructures in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent value for CloudExadataInfrastructure in the following
+ *   format: projects/{project}/locations/{location}.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ *   If unspecified, at most 50 Exadata infrastructures will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.oracledatabase.v1.CloudExadataInfrastructure|CloudExadataInfrastructure}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listCloudExadataInfrastructuresAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCloudExadataInfrastructures(
-    request?: protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure[],
-      protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresRequest | null,
-      protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresResponse,
-    ]
-  >;
+      request?: protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure[],
+        protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresRequest|null,
+        protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresResponse
+      ]>;
   listCloudExadataInfrastructures(
-    request: protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresRequest,
-      | protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresResponse
-      | null
-      | undefined,
-      protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure
-    >
-  ): void;
-  listCloudExadataInfrastructures(
-    request: protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresRequest,
-      | protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresResponse
-      | null
-      | undefined,
-      protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure
-    >
-  ): void;
-  listCloudExadataInfrastructures(
-    request?: protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresRequest,
-          | protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresResponse
-          | null
-          | undefined,
-          protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresRequest,
-      | protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresResponse
-      | null
-      | undefined,
-      protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure
-    >
-  ): Promise<
-    [
-      protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure[],
-      protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresRequest | null,
-      protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresResponse,
-    ]
-  > | void {
+          protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure>): void;
+  listCloudExadataInfrastructures(
+      request: protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresRequest,
+          protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure>): void;
+  listCloudExadataInfrastructures(
+      request?: protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresRequest,
+          protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure>,
+      callback?: PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresRequest,
+          protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure>):
+      Promise<[
+        protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure[],
+        protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresRequest|null,
+        protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresRequest,
-          | protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresResponse
-          | null
-          | undefined,
-          protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresRequest,
+      protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresResponse|null|undefined,
+      protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listCloudExadataInfrastructures values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3140,60 +2146,56 @@ export class OracleDatabaseClient {
     this._log.info('listCloudExadataInfrastructures request %j', request);
     return this.innerApiCalls
       .listCloudExadataInfrastructures(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure[],
-          protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresRequest | null,
-          protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresResponse,
-        ]) => {
-          this._log.info('listCloudExadataInfrastructures values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure[],
+        protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresRequest|null,
+        protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresResponse
+      ]) => {
+        this._log.info('listCloudExadataInfrastructures values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listCloudExadataInfrastructures`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent value for CloudExadataInfrastructure in the following
-   *   format: projects/{project}/locations/{location}.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   *   If unspecified, at most 50 Exadata infrastructures will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.oracledatabase.v1.CloudExadataInfrastructure|CloudExadataInfrastructure} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listCloudExadataInfrastructuresAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listCloudExadataInfrastructures`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent value for CloudExadataInfrastructure in the following
+ *   format: projects/{project}/locations/{location}.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ *   If unspecified, at most 50 Exadata infrastructures will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.oracledatabase.v1.CloudExadataInfrastructure|CloudExadataInfrastructure} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listCloudExadataInfrastructuresAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCloudExadataInfrastructuresStream(
-    request?: protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    const defaultCallSettings =
-      this._defaults['listCloudExadataInfrastructures'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    const defaultCallSettings = this._defaults['listCloudExadataInfrastructures'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
     this._log.info('listCloudExadataInfrastructures stream %j', request);
     return this.descriptors.page.listCloudExadataInfrastructures.createStream(
       this.innerApiCalls.listCloudExadataInfrastructures as GaxCall,
@@ -3202,51 +2204,49 @@ export class OracleDatabaseClient {
     );
   }
 
-  /**
-   * Equivalent to `listCloudExadataInfrastructures`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent value for CloudExadataInfrastructure in the following
-   *   format: projects/{project}/locations/{location}.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   *   If unspecified, at most 50 Exadata infrastructures will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.oracledatabase.v1.CloudExadataInfrastructure|CloudExadataInfrastructure}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/oracle_database.list_cloud_exadata_infrastructures.js</caption>
-   * region_tag:oracledatabase_v1_generated_OracleDatabase_ListCloudExadataInfrastructures_async
-   */
+/**
+ * Equivalent to `listCloudExadataInfrastructures`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent value for CloudExadataInfrastructure in the following
+ *   format: projects/{project}/locations/{location}.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ *   If unspecified, at most 50 Exadata infrastructures will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.oracledatabase.v1.CloudExadataInfrastructure|CloudExadataInfrastructure}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/oracle_database.list_cloud_exadata_infrastructures.js</caption>
+ * region_tag:oracledatabase_v1_generated_OracleDatabase_ListCloudExadataInfrastructures_async
+ */
   listCloudExadataInfrastructuresAsync(
-    request?: protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure> {
+      request?: protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    const defaultCallSettings =
-      this._defaults['listCloudExadataInfrastructures'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    const defaultCallSettings = this._defaults['listCloudExadataInfrastructures'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
     this._log.info('listCloudExadataInfrastructures iterate %j', request);
     return this.descriptors.page.listCloudExadataInfrastructures.asyncIterate(
       this.innerApiCalls['listCloudExadataInfrastructures'] as GaxCall,
@@ -3254,117 +2254,92 @@ export class OracleDatabaseClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure>;
   }
-  /**
-   * Lists the VM Clusters in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent in the following format:
-   *   projects/{project}/locations/{location}.
-   * @param {number} [request.pageSize]
-   *   Optional. The number of VM clusters to return.
-   *   If unspecified, at most 50 VM clusters will be returned.
-   *   The maximum value is 1,000.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying the page of results the server returns.
-   * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.oracledatabase.v1.CloudVmCluster|CloudVmCluster}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listCloudVmClustersAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists the VM Clusters in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent in the following format:
+ *   projects/{project}/locations/{location}.
+ * @param {number} [request.pageSize]
+ *   Optional. The number of VM clusters to return.
+ *   If unspecified, at most 50 VM clusters will be returned.
+ *   The maximum value is 1,000.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying the page of results the server returns.
+ * @param {string} [request.filter]
+ *   Optional. An expression for filtering the results of the request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.oracledatabase.v1.CloudVmCluster|CloudVmCluster}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listCloudVmClustersAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCloudVmClusters(
-    request?: protos.google.cloud.oracledatabase.v1.IListCloudVmClustersRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.oracledatabase.v1.ICloudVmCluster[],
-      protos.google.cloud.oracledatabase.v1.IListCloudVmClustersRequest | null,
-      protos.google.cloud.oracledatabase.v1.IListCloudVmClustersResponse,
-    ]
-  >;
+      request?: protos.google.cloud.oracledatabase.v1.IListCloudVmClustersRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.oracledatabase.v1.ICloudVmCluster[],
+        protos.google.cloud.oracledatabase.v1.IListCloudVmClustersRequest|null,
+        protos.google.cloud.oracledatabase.v1.IListCloudVmClustersResponse
+      ]>;
   listCloudVmClusters(
-    request: protos.google.cloud.oracledatabase.v1.IListCloudVmClustersRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.oracledatabase.v1.IListCloudVmClustersRequest,
-      | protos.google.cloud.oracledatabase.v1.IListCloudVmClustersResponse
-      | null
-      | undefined,
-      protos.google.cloud.oracledatabase.v1.ICloudVmCluster
-    >
-  ): void;
-  listCloudVmClusters(
-    request: protos.google.cloud.oracledatabase.v1.IListCloudVmClustersRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.oracledatabase.v1.IListCloudVmClustersRequest,
-      | protos.google.cloud.oracledatabase.v1.IListCloudVmClustersResponse
-      | null
-      | undefined,
-      protos.google.cloud.oracledatabase.v1.ICloudVmCluster
-    >
-  ): void;
-  listCloudVmClusters(
-    request?: protos.google.cloud.oracledatabase.v1.IListCloudVmClustersRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.oracledatabase.v1.IListCloudVmClustersRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.oracledatabase.v1.IListCloudVmClustersRequest,
-          | protos.google.cloud.oracledatabase.v1.IListCloudVmClustersResponse
-          | null
-          | undefined,
-          protos.google.cloud.oracledatabase.v1.ICloudVmCluster
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.oracledatabase.v1.IListCloudVmClustersRequest,
-      | protos.google.cloud.oracledatabase.v1.IListCloudVmClustersResponse
-      | null
-      | undefined,
-      protos.google.cloud.oracledatabase.v1.ICloudVmCluster
-    >
-  ): Promise<
-    [
-      protos.google.cloud.oracledatabase.v1.ICloudVmCluster[],
-      protos.google.cloud.oracledatabase.v1.IListCloudVmClustersRequest | null,
-      protos.google.cloud.oracledatabase.v1.IListCloudVmClustersResponse,
-    ]
-  > | void {
+          protos.google.cloud.oracledatabase.v1.IListCloudVmClustersResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.ICloudVmCluster>): void;
+  listCloudVmClusters(
+      request: protos.google.cloud.oracledatabase.v1.IListCloudVmClustersRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListCloudVmClustersRequest,
+          protos.google.cloud.oracledatabase.v1.IListCloudVmClustersResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.ICloudVmCluster>): void;
+  listCloudVmClusters(
+      request?: protos.google.cloud.oracledatabase.v1.IListCloudVmClustersRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListCloudVmClustersRequest,
+          protos.google.cloud.oracledatabase.v1.IListCloudVmClustersResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.ICloudVmCluster>,
+      callback?: PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListCloudVmClustersRequest,
+          protos.google.cloud.oracledatabase.v1.IListCloudVmClustersResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.ICloudVmCluster>):
+      Promise<[
+        protos.google.cloud.oracledatabase.v1.ICloudVmCluster[],
+        protos.google.cloud.oracledatabase.v1.IListCloudVmClustersRequest|null,
+        protos.google.cloud.oracledatabase.v1.IListCloudVmClustersResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.oracledatabase.v1.IListCloudVmClustersRequest,
-          | protos.google.cloud.oracledatabase.v1.IListCloudVmClustersResponse
-          | null
-          | undefined,
-          protos.google.cloud.oracledatabase.v1.ICloudVmCluster
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.oracledatabase.v1.IListCloudVmClustersRequest,
+      protos.google.cloud.oracledatabase.v1.IListCloudVmClustersResponse|null|undefined,
+      protos.google.cloud.oracledatabase.v1.ICloudVmCluster>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listCloudVmClusters values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3373,61 +2348,58 @@ export class OracleDatabaseClient {
     this._log.info('listCloudVmClusters request %j', request);
     return this.innerApiCalls
       .listCloudVmClusters(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.oracledatabase.v1.ICloudVmCluster[],
-          protos.google.cloud.oracledatabase.v1.IListCloudVmClustersRequest | null,
-          protos.google.cloud.oracledatabase.v1.IListCloudVmClustersResponse,
-        ]) => {
-          this._log.info('listCloudVmClusters values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.oracledatabase.v1.ICloudVmCluster[],
+        protos.google.cloud.oracledatabase.v1.IListCloudVmClustersRequest|null,
+        protos.google.cloud.oracledatabase.v1.IListCloudVmClustersResponse
+      ]) => {
+        this._log.info('listCloudVmClusters values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listCloudVmClusters`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent in the following format:
-   *   projects/{project}/locations/{location}.
-   * @param {number} [request.pageSize]
-   *   Optional. The number of VM clusters to return.
-   *   If unspecified, at most 50 VM clusters will be returned.
-   *   The maximum value is 1,000.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying the page of results the server returns.
-   * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.oracledatabase.v1.CloudVmCluster|CloudVmCluster} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listCloudVmClustersAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listCloudVmClusters`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent in the following format:
+ *   projects/{project}/locations/{location}.
+ * @param {number} [request.pageSize]
+ *   Optional. The number of VM clusters to return.
+ *   If unspecified, at most 50 VM clusters will be returned.
+ *   The maximum value is 1,000.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying the page of results the server returns.
+ * @param {string} [request.filter]
+ *   Optional. An expression for filtering the results of the request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.oracledatabase.v1.CloudVmCluster|CloudVmCluster} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listCloudVmClustersAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCloudVmClustersStream(
-    request?: protos.google.cloud.oracledatabase.v1.IListCloudVmClustersRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.oracledatabase.v1.IListCloudVmClustersRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listCloudVmClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listCloudVmClusters stream %j', request);
     return this.descriptors.page.listCloudVmClusters.createStream(
       this.innerApiCalls.listCloudVmClusters as GaxCall,
@@ -3436,52 +2408,51 @@ export class OracleDatabaseClient {
     );
   }
 
-  /**
-   * Equivalent to `listCloudVmClusters`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent in the following format:
-   *   projects/{project}/locations/{location}.
-   * @param {number} [request.pageSize]
-   *   Optional. The number of VM clusters to return.
-   *   If unspecified, at most 50 VM clusters will be returned.
-   *   The maximum value is 1,000.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying the page of results the server returns.
-   * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.oracledatabase.v1.CloudVmCluster|CloudVmCluster}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/oracle_database.list_cloud_vm_clusters.js</caption>
-   * region_tag:oracledatabase_v1_generated_OracleDatabase_ListCloudVmClusters_async
-   */
+/**
+ * Equivalent to `listCloudVmClusters`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent in the following format:
+ *   projects/{project}/locations/{location}.
+ * @param {number} [request.pageSize]
+ *   Optional. The number of VM clusters to return.
+ *   If unspecified, at most 50 VM clusters will be returned.
+ *   The maximum value is 1,000.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying the page of results the server returns.
+ * @param {string} [request.filter]
+ *   Optional. An expression for filtering the results of the request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.oracledatabase.v1.CloudVmCluster|CloudVmCluster}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/oracle_database.list_cloud_vm_clusters.js</caption>
+ * region_tag:oracledatabase_v1_generated_OracleDatabase_ListCloudVmClusters_async
+ */
   listCloudVmClustersAsync(
-    request?: protos.google.cloud.oracledatabase.v1.IListCloudVmClustersRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.oracledatabase.v1.ICloudVmCluster> {
+      request?: protos.google.cloud.oracledatabase.v1.IListCloudVmClustersRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.oracledatabase.v1.ICloudVmCluster>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listCloudVmClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listCloudVmClusters iterate %j', request);
     return this.descriptors.page.listCloudVmClusters.asyncIterate(
       this.innerApiCalls['listCloudVmClusters'] as GaxCall,
@@ -3489,115 +2460,90 @@ export class OracleDatabaseClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.oracledatabase.v1.ICloudVmCluster>;
   }
-  /**
-   * Lists the entitlements in a given project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent value for the entitlement in the following format:
-   *   projects/{project}/locations/{location}.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   *   If unspecified, a maximum of 50 entitlements will be returned.
-   *   The maximum value is 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.oracledatabase.v1.Entitlement|Entitlement}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listEntitlementsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists the entitlements in a given project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent value for the entitlement in the following format:
+ *   projects/{project}/locations/{location}.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ *   If unspecified, a maximum of 50 entitlements will be returned.
+ *   The maximum value is 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.oracledatabase.v1.Entitlement|Entitlement}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listEntitlementsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listEntitlements(
-    request?: protos.google.cloud.oracledatabase.v1.IListEntitlementsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.oracledatabase.v1.IEntitlement[],
-      protos.google.cloud.oracledatabase.v1.IListEntitlementsRequest | null,
-      protos.google.cloud.oracledatabase.v1.IListEntitlementsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.oracledatabase.v1.IListEntitlementsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.oracledatabase.v1.IEntitlement[],
+        protos.google.cloud.oracledatabase.v1.IListEntitlementsRequest|null,
+        protos.google.cloud.oracledatabase.v1.IListEntitlementsResponse
+      ]>;
   listEntitlements(
-    request: protos.google.cloud.oracledatabase.v1.IListEntitlementsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.oracledatabase.v1.IListEntitlementsRequest,
-      | protos.google.cloud.oracledatabase.v1.IListEntitlementsResponse
-      | null
-      | undefined,
-      protos.google.cloud.oracledatabase.v1.IEntitlement
-    >
-  ): void;
-  listEntitlements(
-    request: protos.google.cloud.oracledatabase.v1.IListEntitlementsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.oracledatabase.v1.IListEntitlementsRequest,
-      | protos.google.cloud.oracledatabase.v1.IListEntitlementsResponse
-      | null
-      | undefined,
-      protos.google.cloud.oracledatabase.v1.IEntitlement
-    >
-  ): void;
-  listEntitlements(
-    request?: protos.google.cloud.oracledatabase.v1.IListEntitlementsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.oracledatabase.v1.IListEntitlementsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.oracledatabase.v1.IListEntitlementsRequest,
-          | protos.google.cloud.oracledatabase.v1.IListEntitlementsResponse
-          | null
-          | undefined,
-          protos.google.cloud.oracledatabase.v1.IEntitlement
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.oracledatabase.v1.IListEntitlementsRequest,
-      | protos.google.cloud.oracledatabase.v1.IListEntitlementsResponse
-      | null
-      | undefined,
-      protos.google.cloud.oracledatabase.v1.IEntitlement
-    >
-  ): Promise<
-    [
-      protos.google.cloud.oracledatabase.v1.IEntitlement[],
-      protos.google.cloud.oracledatabase.v1.IListEntitlementsRequest | null,
-      protos.google.cloud.oracledatabase.v1.IListEntitlementsResponse,
-    ]
-  > | void {
+          protos.google.cloud.oracledatabase.v1.IListEntitlementsResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.IEntitlement>): void;
+  listEntitlements(
+      request: protos.google.cloud.oracledatabase.v1.IListEntitlementsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListEntitlementsRequest,
+          protos.google.cloud.oracledatabase.v1.IListEntitlementsResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.IEntitlement>): void;
+  listEntitlements(
+      request?: protos.google.cloud.oracledatabase.v1.IListEntitlementsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListEntitlementsRequest,
+          protos.google.cloud.oracledatabase.v1.IListEntitlementsResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.IEntitlement>,
+      callback?: PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListEntitlementsRequest,
+          protos.google.cloud.oracledatabase.v1.IListEntitlementsResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.IEntitlement>):
+      Promise<[
+        protos.google.cloud.oracledatabase.v1.IEntitlement[],
+        protos.google.cloud.oracledatabase.v1.IListEntitlementsRequest|null,
+        protos.google.cloud.oracledatabase.v1.IListEntitlementsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.oracledatabase.v1.IListEntitlementsRequest,
-          | protos.google.cloud.oracledatabase.v1.IListEntitlementsResponse
-          | null
-          | undefined,
-          protos.google.cloud.oracledatabase.v1.IEntitlement
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.oracledatabase.v1.IListEntitlementsRequest,
+      protos.google.cloud.oracledatabase.v1.IListEntitlementsResponse|null|undefined,
+      protos.google.cloud.oracledatabase.v1.IEntitlement>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listEntitlements values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3606,59 +2552,56 @@ export class OracleDatabaseClient {
     this._log.info('listEntitlements request %j', request);
     return this.innerApiCalls
       .listEntitlements(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.oracledatabase.v1.IEntitlement[],
-          protos.google.cloud.oracledatabase.v1.IListEntitlementsRequest | null,
-          protos.google.cloud.oracledatabase.v1.IListEntitlementsResponse,
-        ]) => {
-          this._log.info('listEntitlements values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.oracledatabase.v1.IEntitlement[],
+        protos.google.cloud.oracledatabase.v1.IListEntitlementsRequest|null,
+        protos.google.cloud.oracledatabase.v1.IListEntitlementsResponse
+      ]) => {
+        this._log.info('listEntitlements values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listEntitlements`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent value for the entitlement in the following format:
-   *   projects/{project}/locations/{location}.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   *   If unspecified, a maximum of 50 entitlements will be returned.
-   *   The maximum value is 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.oracledatabase.v1.Entitlement|Entitlement} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listEntitlementsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listEntitlements`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent value for the entitlement in the following format:
+ *   projects/{project}/locations/{location}.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ *   If unspecified, a maximum of 50 entitlements will be returned.
+ *   The maximum value is 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.oracledatabase.v1.Entitlement|Entitlement} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listEntitlementsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listEntitlementsStream(
-    request?: protos.google.cloud.oracledatabase.v1.IListEntitlementsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.oracledatabase.v1.IListEntitlementsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listEntitlements'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listEntitlements stream %j', request);
     return this.descriptors.page.listEntitlements.createStream(
       this.innerApiCalls.listEntitlements as GaxCall,
@@ -3667,50 +2610,49 @@ export class OracleDatabaseClient {
     );
   }
 
-  /**
-   * Equivalent to `listEntitlements`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent value for the entitlement in the following format:
-   *   projects/{project}/locations/{location}.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   *   If unspecified, a maximum of 50 entitlements will be returned.
-   *   The maximum value is 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.oracledatabase.v1.Entitlement|Entitlement}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/oracle_database.list_entitlements.js</caption>
-   * region_tag:oracledatabase_v1_generated_OracleDatabase_ListEntitlements_async
-   */
+/**
+ * Equivalent to `listEntitlements`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent value for the entitlement in the following format:
+ *   projects/{project}/locations/{location}.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ *   If unspecified, a maximum of 50 entitlements will be returned.
+ *   The maximum value is 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.oracledatabase.v1.Entitlement|Entitlement}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/oracle_database.list_entitlements.js</caption>
+ * region_tag:oracledatabase_v1_generated_OracleDatabase_ListEntitlements_async
+ */
   listEntitlementsAsync(
-    request?: protos.google.cloud.oracledatabase.v1.IListEntitlementsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.oracledatabase.v1.IEntitlement> {
+      request?: protos.google.cloud.oracledatabase.v1.IListEntitlementsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.oracledatabase.v1.IEntitlement>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listEntitlements'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listEntitlements iterate %j', request);
     return this.descriptors.page.listEntitlements.asyncIterate(
       this.innerApiCalls['listEntitlements'] as GaxCall,
@@ -3718,115 +2660,90 @@ export class OracleDatabaseClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.oracledatabase.v1.IEntitlement>;
   }
-  /**
-   * Lists the database servers of an Exadata Infrastructure instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent value for database server in the following format:
-   *   projects/{project}/locations/{location}/cloudExadataInfrastructures/{cloudExadataInfrastructure}.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   *   If unspecified, a maximum of 50 db servers will be returned.
-   *   The maximum value is 1000; values above 1000 will be reset to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.oracledatabase.v1.DbServer|DbServer}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listDbServersAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists the database servers of an Exadata Infrastructure instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent value for database server in the following format:
+ *   projects/{project}/locations/{location}/cloudExadataInfrastructures/{cloudExadataInfrastructure}.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ *   If unspecified, a maximum of 50 db servers will be returned.
+ *   The maximum value is 1000; values above 1000 will be reset to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.oracledatabase.v1.DbServer|DbServer}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listDbServersAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDbServers(
-    request?: protos.google.cloud.oracledatabase.v1.IListDbServersRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.oracledatabase.v1.IDbServer[],
-      protos.google.cloud.oracledatabase.v1.IListDbServersRequest | null,
-      protos.google.cloud.oracledatabase.v1.IListDbServersResponse,
-    ]
-  >;
+      request?: protos.google.cloud.oracledatabase.v1.IListDbServersRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.oracledatabase.v1.IDbServer[],
+        protos.google.cloud.oracledatabase.v1.IListDbServersRequest|null,
+        protos.google.cloud.oracledatabase.v1.IListDbServersResponse
+      ]>;
   listDbServers(
-    request: protos.google.cloud.oracledatabase.v1.IListDbServersRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.oracledatabase.v1.IListDbServersRequest,
-      | protos.google.cloud.oracledatabase.v1.IListDbServersResponse
-      | null
-      | undefined,
-      protos.google.cloud.oracledatabase.v1.IDbServer
-    >
-  ): void;
-  listDbServers(
-    request: protos.google.cloud.oracledatabase.v1.IListDbServersRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.oracledatabase.v1.IListDbServersRequest,
-      | protos.google.cloud.oracledatabase.v1.IListDbServersResponse
-      | null
-      | undefined,
-      protos.google.cloud.oracledatabase.v1.IDbServer
-    >
-  ): void;
-  listDbServers(
-    request?: protos.google.cloud.oracledatabase.v1.IListDbServersRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.oracledatabase.v1.IListDbServersRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.oracledatabase.v1.IListDbServersRequest,
-          | protos.google.cloud.oracledatabase.v1.IListDbServersResponse
-          | null
-          | undefined,
-          protos.google.cloud.oracledatabase.v1.IDbServer
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.oracledatabase.v1.IListDbServersRequest,
-      | protos.google.cloud.oracledatabase.v1.IListDbServersResponse
-      | null
-      | undefined,
-      protos.google.cloud.oracledatabase.v1.IDbServer
-    >
-  ): Promise<
-    [
-      protos.google.cloud.oracledatabase.v1.IDbServer[],
-      protos.google.cloud.oracledatabase.v1.IListDbServersRequest | null,
-      protos.google.cloud.oracledatabase.v1.IListDbServersResponse,
-    ]
-  > | void {
+          protos.google.cloud.oracledatabase.v1.IListDbServersResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.IDbServer>): void;
+  listDbServers(
+      request: protos.google.cloud.oracledatabase.v1.IListDbServersRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListDbServersRequest,
+          protos.google.cloud.oracledatabase.v1.IListDbServersResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.IDbServer>): void;
+  listDbServers(
+      request?: protos.google.cloud.oracledatabase.v1.IListDbServersRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListDbServersRequest,
+          protos.google.cloud.oracledatabase.v1.IListDbServersResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.IDbServer>,
+      callback?: PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListDbServersRequest,
+          protos.google.cloud.oracledatabase.v1.IListDbServersResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.IDbServer>):
+      Promise<[
+        protos.google.cloud.oracledatabase.v1.IDbServer[],
+        protos.google.cloud.oracledatabase.v1.IListDbServersRequest|null,
+        protos.google.cloud.oracledatabase.v1.IListDbServersResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.oracledatabase.v1.IListDbServersRequest,
-          | protos.google.cloud.oracledatabase.v1.IListDbServersResponse
-          | null
-          | undefined,
-          protos.google.cloud.oracledatabase.v1.IDbServer
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.oracledatabase.v1.IListDbServersRequest,
+      protos.google.cloud.oracledatabase.v1.IListDbServersResponse|null|undefined,
+      protos.google.cloud.oracledatabase.v1.IDbServer>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDbServers values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3835,59 +2752,56 @@ export class OracleDatabaseClient {
     this._log.info('listDbServers request %j', request);
     return this.innerApiCalls
       .listDbServers(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.oracledatabase.v1.IDbServer[],
-          protos.google.cloud.oracledatabase.v1.IListDbServersRequest | null,
-          protos.google.cloud.oracledatabase.v1.IListDbServersResponse,
-        ]) => {
-          this._log.info('listDbServers values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.oracledatabase.v1.IDbServer[],
+        protos.google.cloud.oracledatabase.v1.IListDbServersRequest|null,
+        protos.google.cloud.oracledatabase.v1.IListDbServersResponse
+      ]) => {
+        this._log.info('listDbServers values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listDbServers`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent value for database server in the following format:
-   *   projects/{project}/locations/{location}/cloudExadataInfrastructures/{cloudExadataInfrastructure}.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   *   If unspecified, a maximum of 50 db servers will be returned.
-   *   The maximum value is 1000; values above 1000 will be reset to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.oracledatabase.v1.DbServer|DbServer} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listDbServersAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listDbServers`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent value for database server in the following format:
+ *   projects/{project}/locations/{location}/cloudExadataInfrastructures/{cloudExadataInfrastructure}.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ *   If unspecified, a maximum of 50 db servers will be returned.
+ *   The maximum value is 1000; values above 1000 will be reset to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.oracledatabase.v1.DbServer|DbServer} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listDbServersAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDbServersStream(
-    request?: protos.google.cloud.oracledatabase.v1.IListDbServersRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.oracledatabase.v1.IListDbServersRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDbServers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDbServers stream %j', request);
     return this.descriptors.page.listDbServers.createStream(
       this.innerApiCalls.listDbServers as GaxCall,
@@ -3896,50 +2810,49 @@ export class OracleDatabaseClient {
     );
   }
 
-  /**
-   * Equivalent to `listDbServers`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent value for database server in the following format:
-   *   projects/{project}/locations/{location}/cloudExadataInfrastructures/{cloudExadataInfrastructure}.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   *   If unspecified, a maximum of 50 db servers will be returned.
-   *   The maximum value is 1000; values above 1000 will be reset to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.oracledatabase.v1.DbServer|DbServer}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/oracle_database.list_db_servers.js</caption>
-   * region_tag:oracledatabase_v1_generated_OracleDatabase_ListDbServers_async
-   */
+/**
+ * Equivalent to `listDbServers`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent value for database server in the following format:
+ *   projects/{project}/locations/{location}/cloudExadataInfrastructures/{cloudExadataInfrastructure}.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ *   If unspecified, a maximum of 50 db servers will be returned.
+ *   The maximum value is 1000; values above 1000 will be reset to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.oracledatabase.v1.DbServer|DbServer}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/oracle_database.list_db_servers.js</caption>
+ * region_tag:oracledatabase_v1_generated_OracleDatabase_ListDbServers_async
+ */
   listDbServersAsync(
-    request?: protos.google.cloud.oracledatabase.v1.IListDbServersRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.oracledatabase.v1.IDbServer> {
+      request?: protos.google.cloud.oracledatabase.v1.IListDbServersRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.oracledatabase.v1.IDbServer>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDbServers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDbServers iterate %j', request);
     return this.descriptors.page.listDbServers.asyncIterate(
       this.innerApiCalls['listDbServers'] as GaxCall,
@@ -3947,115 +2860,90 @@ export class OracleDatabaseClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.oracledatabase.v1.IDbServer>;
   }
-  /**
-   * Lists the database nodes of a VM Cluster.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent value for database node in the following format:
-   *   projects/{project}/locations/{location}/cloudVmClusters/{cloudVmCluster}.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   *   If unspecified, at most 50 db nodes will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the node should return.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.oracledatabase.v1.DbNode|DbNode}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listDbNodesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists the database nodes of a VM Cluster.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent value for database node in the following format:
+ *   projects/{project}/locations/{location}/cloudVmClusters/{cloudVmCluster}.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ *   If unspecified, at most 50 db nodes will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the node should return.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.oracledatabase.v1.DbNode|DbNode}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listDbNodesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDbNodes(
-    request?: protos.google.cloud.oracledatabase.v1.IListDbNodesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.oracledatabase.v1.IDbNode[],
-      protos.google.cloud.oracledatabase.v1.IListDbNodesRequest | null,
-      protos.google.cloud.oracledatabase.v1.IListDbNodesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.oracledatabase.v1.IListDbNodesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.oracledatabase.v1.IDbNode[],
+        protos.google.cloud.oracledatabase.v1.IListDbNodesRequest|null,
+        protos.google.cloud.oracledatabase.v1.IListDbNodesResponse
+      ]>;
   listDbNodes(
-    request: protos.google.cloud.oracledatabase.v1.IListDbNodesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.oracledatabase.v1.IListDbNodesRequest,
-      | protos.google.cloud.oracledatabase.v1.IListDbNodesResponse
-      | null
-      | undefined,
-      protos.google.cloud.oracledatabase.v1.IDbNode
-    >
-  ): void;
-  listDbNodes(
-    request: protos.google.cloud.oracledatabase.v1.IListDbNodesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.oracledatabase.v1.IListDbNodesRequest,
-      | protos.google.cloud.oracledatabase.v1.IListDbNodesResponse
-      | null
-      | undefined,
-      protos.google.cloud.oracledatabase.v1.IDbNode
-    >
-  ): void;
-  listDbNodes(
-    request?: protos.google.cloud.oracledatabase.v1.IListDbNodesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.oracledatabase.v1.IListDbNodesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.oracledatabase.v1.IListDbNodesRequest,
-          | protos.google.cloud.oracledatabase.v1.IListDbNodesResponse
-          | null
-          | undefined,
-          protos.google.cloud.oracledatabase.v1.IDbNode
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.oracledatabase.v1.IListDbNodesRequest,
-      | protos.google.cloud.oracledatabase.v1.IListDbNodesResponse
-      | null
-      | undefined,
-      protos.google.cloud.oracledatabase.v1.IDbNode
-    >
-  ): Promise<
-    [
-      protos.google.cloud.oracledatabase.v1.IDbNode[],
-      protos.google.cloud.oracledatabase.v1.IListDbNodesRequest | null,
-      protos.google.cloud.oracledatabase.v1.IListDbNodesResponse,
-    ]
-  > | void {
+          protos.google.cloud.oracledatabase.v1.IListDbNodesResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.IDbNode>): void;
+  listDbNodes(
+      request: protos.google.cloud.oracledatabase.v1.IListDbNodesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListDbNodesRequest,
+          protos.google.cloud.oracledatabase.v1.IListDbNodesResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.IDbNode>): void;
+  listDbNodes(
+      request?: protos.google.cloud.oracledatabase.v1.IListDbNodesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListDbNodesRequest,
+          protos.google.cloud.oracledatabase.v1.IListDbNodesResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.IDbNode>,
+      callback?: PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListDbNodesRequest,
+          protos.google.cloud.oracledatabase.v1.IListDbNodesResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.IDbNode>):
+      Promise<[
+        protos.google.cloud.oracledatabase.v1.IDbNode[],
+        protos.google.cloud.oracledatabase.v1.IListDbNodesRequest|null,
+        protos.google.cloud.oracledatabase.v1.IListDbNodesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.oracledatabase.v1.IListDbNodesRequest,
-          | protos.google.cloud.oracledatabase.v1.IListDbNodesResponse
-          | null
-          | undefined,
-          protos.google.cloud.oracledatabase.v1.IDbNode
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.oracledatabase.v1.IListDbNodesRequest,
+      protos.google.cloud.oracledatabase.v1.IListDbNodesResponse|null|undefined,
+      protos.google.cloud.oracledatabase.v1.IDbNode>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDbNodes values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4064,59 +2952,56 @@ export class OracleDatabaseClient {
     this._log.info('listDbNodes request %j', request);
     return this.innerApiCalls
       .listDbNodes(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.oracledatabase.v1.IDbNode[],
-          protos.google.cloud.oracledatabase.v1.IListDbNodesRequest | null,
-          protos.google.cloud.oracledatabase.v1.IListDbNodesResponse,
-        ]) => {
-          this._log.info('listDbNodes values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.oracledatabase.v1.IDbNode[],
+        protos.google.cloud.oracledatabase.v1.IListDbNodesRequest|null,
+        protos.google.cloud.oracledatabase.v1.IListDbNodesResponse
+      ]) => {
+        this._log.info('listDbNodes values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listDbNodes`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent value for database node in the following format:
-   *   projects/{project}/locations/{location}/cloudVmClusters/{cloudVmCluster}.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   *   If unspecified, at most 50 db nodes will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the node should return.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.oracledatabase.v1.DbNode|DbNode} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listDbNodesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listDbNodes`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent value for database node in the following format:
+ *   projects/{project}/locations/{location}/cloudVmClusters/{cloudVmCluster}.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ *   If unspecified, at most 50 db nodes will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the node should return.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.oracledatabase.v1.DbNode|DbNode} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listDbNodesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDbNodesStream(
-    request?: protos.google.cloud.oracledatabase.v1.IListDbNodesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.oracledatabase.v1.IListDbNodesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDbNodes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDbNodes stream %j', request);
     return this.descriptors.page.listDbNodes.createStream(
       this.innerApiCalls.listDbNodes as GaxCall,
@@ -4125,50 +3010,49 @@ export class OracleDatabaseClient {
     );
   }
 
-  /**
-   * Equivalent to `listDbNodes`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent value for database node in the following format:
-   *   projects/{project}/locations/{location}/cloudVmClusters/{cloudVmCluster}.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   *   If unspecified, at most 50 db nodes will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the node should return.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.oracledatabase.v1.DbNode|DbNode}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/oracle_database.list_db_nodes.js</caption>
-   * region_tag:oracledatabase_v1_generated_OracleDatabase_ListDbNodes_async
-   */
+/**
+ * Equivalent to `listDbNodes`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent value for database node in the following format:
+ *   projects/{project}/locations/{location}/cloudVmClusters/{cloudVmCluster}.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ *   If unspecified, at most 50 db nodes will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the node should return.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.oracledatabase.v1.DbNode|DbNode}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/oracle_database.list_db_nodes.js</caption>
+ * region_tag:oracledatabase_v1_generated_OracleDatabase_ListDbNodes_async
+ */
   listDbNodesAsync(
-    request?: protos.google.cloud.oracledatabase.v1.IListDbNodesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.oracledatabase.v1.IDbNode> {
+      request?: protos.google.cloud.oracledatabase.v1.IListDbNodesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.oracledatabase.v1.IDbNode>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDbNodes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDbNodes iterate %j', request);
     return this.descriptors.page.listDbNodes.asyncIterate(
       this.innerApiCalls['listDbNodes'] as GaxCall,
@@ -4176,117 +3060,92 @@ export class OracleDatabaseClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.oracledatabase.v1.IDbNode>;
   }
-  /**
-   * Lists all the valid Oracle Grid Infrastructure (GI) versions for the given
-   * project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent value for Grid Infrastructure Version in the following
-   *   format: Format: projects/{project}/locations/{location}.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   *   If unspecified, a maximum of 50 Oracle Grid Infrastructure (GI) versions
-   *   will be returned. The maximum value is 1000; values above 1000 will be
-   *   reset to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.oracledatabase.v1.GiVersion|GiVersion}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listGiVersionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all the valid Oracle Grid Infrastructure (GI) versions for the given
+ * project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent value for Grid Infrastructure Version in the following
+ *   format: Format: projects/{project}/locations/{location}.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ *   If unspecified, a maximum of 50 Oracle Grid Infrastructure (GI) versions
+ *   will be returned. The maximum value is 1000; values above 1000 will be
+ *   reset to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.oracledatabase.v1.GiVersion|GiVersion}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listGiVersionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listGiVersions(
-    request?: protos.google.cloud.oracledatabase.v1.IListGiVersionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.oracledatabase.v1.IGiVersion[],
-      protos.google.cloud.oracledatabase.v1.IListGiVersionsRequest | null,
-      protos.google.cloud.oracledatabase.v1.IListGiVersionsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.oracledatabase.v1.IListGiVersionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.oracledatabase.v1.IGiVersion[],
+        protos.google.cloud.oracledatabase.v1.IListGiVersionsRequest|null,
+        protos.google.cloud.oracledatabase.v1.IListGiVersionsResponse
+      ]>;
   listGiVersions(
-    request: protos.google.cloud.oracledatabase.v1.IListGiVersionsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.oracledatabase.v1.IListGiVersionsRequest,
-      | protos.google.cloud.oracledatabase.v1.IListGiVersionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.oracledatabase.v1.IGiVersion
-    >
-  ): void;
-  listGiVersions(
-    request: protos.google.cloud.oracledatabase.v1.IListGiVersionsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.oracledatabase.v1.IListGiVersionsRequest,
-      | protos.google.cloud.oracledatabase.v1.IListGiVersionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.oracledatabase.v1.IGiVersion
-    >
-  ): void;
-  listGiVersions(
-    request?: protos.google.cloud.oracledatabase.v1.IListGiVersionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.oracledatabase.v1.IListGiVersionsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.oracledatabase.v1.IListGiVersionsRequest,
-          | protos.google.cloud.oracledatabase.v1.IListGiVersionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.oracledatabase.v1.IGiVersion
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.oracledatabase.v1.IListGiVersionsRequest,
-      | protos.google.cloud.oracledatabase.v1.IListGiVersionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.oracledatabase.v1.IGiVersion
-    >
-  ): Promise<
-    [
-      protos.google.cloud.oracledatabase.v1.IGiVersion[],
-      protos.google.cloud.oracledatabase.v1.IListGiVersionsRequest | null,
-      protos.google.cloud.oracledatabase.v1.IListGiVersionsResponse,
-    ]
-  > | void {
+          protos.google.cloud.oracledatabase.v1.IListGiVersionsResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.IGiVersion>): void;
+  listGiVersions(
+      request: protos.google.cloud.oracledatabase.v1.IListGiVersionsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListGiVersionsRequest,
+          protos.google.cloud.oracledatabase.v1.IListGiVersionsResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.IGiVersion>): void;
+  listGiVersions(
+      request?: protos.google.cloud.oracledatabase.v1.IListGiVersionsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListGiVersionsRequest,
+          protos.google.cloud.oracledatabase.v1.IListGiVersionsResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.IGiVersion>,
+      callback?: PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListGiVersionsRequest,
+          protos.google.cloud.oracledatabase.v1.IListGiVersionsResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.IGiVersion>):
+      Promise<[
+        protos.google.cloud.oracledatabase.v1.IGiVersion[],
+        protos.google.cloud.oracledatabase.v1.IListGiVersionsRequest|null,
+        protos.google.cloud.oracledatabase.v1.IListGiVersionsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.oracledatabase.v1.IListGiVersionsRequest,
-          | protos.google.cloud.oracledatabase.v1.IListGiVersionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.oracledatabase.v1.IGiVersion
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.oracledatabase.v1.IListGiVersionsRequest,
+      protos.google.cloud.oracledatabase.v1.IListGiVersionsResponse|null|undefined,
+      protos.google.cloud.oracledatabase.v1.IGiVersion>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listGiVersions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4295,60 +3154,57 @@ export class OracleDatabaseClient {
     this._log.info('listGiVersions request %j', request);
     return this.innerApiCalls
       .listGiVersions(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.oracledatabase.v1.IGiVersion[],
-          protos.google.cloud.oracledatabase.v1.IListGiVersionsRequest | null,
-          protos.google.cloud.oracledatabase.v1.IListGiVersionsResponse,
-        ]) => {
-          this._log.info('listGiVersions values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.oracledatabase.v1.IGiVersion[],
+        protos.google.cloud.oracledatabase.v1.IListGiVersionsRequest|null,
+        protos.google.cloud.oracledatabase.v1.IListGiVersionsResponse
+      ]) => {
+        this._log.info('listGiVersions values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listGiVersions`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent value for Grid Infrastructure Version in the following
-   *   format: Format: projects/{project}/locations/{location}.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   *   If unspecified, a maximum of 50 Oracle Grid Infrastructure (GI) versions
-   *   will be returned. The maximum value is 1000; values above 1000 will be
-   *   reset to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.oracledatabase.v1.GiVersion|GiVersion} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listGiVersionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listGiVersions`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent value for Grid Infrastructure Version in the following
+ *   format: Format: projects/{project}/locations/{location}.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ *   If unspecified, a maximum of 50 Oracle Grid Infrastructure (GI) versions
+ *   will be returned. The maximum value is 1000; values above 1000 will be
+ *   reset to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.oracledatabase.v1.GiVersion|GiVersion} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listGiVersionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listGiVersionsStream(
-    request?: protos.google.cloud.oracledatabase.v1.IListGiVersionsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.oracledatabase.v1.IListGiVersionsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listGiVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listGiVersions stream %j', request);
     return this.descriptors.page.listGiVersions.createStream(
       this.innerApiCalls.listGiVersions as GaxCall,
@@ -4357,51 +3213,50 @@ export class OracleDatabaseClient {
     );
   }
 
-  /**
-   * Equivalent to `listGiVersions`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent value for Grid Infrastructure Version in the following
-   *   format: Format: projects/{project}/locations/{location}.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   *   If unspecified, a maximum of 50 Oracle Grid Infrastructure (GI) versions
-   *   will be returned. The maximum value is 1000; values above 1000 will be
-   *   reset to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.oracledatabase.v1.GiVersion|GiVersion}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/oracle_database.list_gi_versions.js</caption>
-   * region_tag:oracledatabase_v1_generated_OracleDatabase_ListGiVersions_async
-   */
+/**
+ * Equivalent to `listGiVersions`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent value for Grid Infrastructure Version in the following
+ *   format: Format: projects/{project}/locations/{location}.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ *   If unspecified, a maximum of 50 Oracle Grid Infrastructure (GI) versions
+ *   will be returned. The maximum value is 1000; values above 1000 will be
+ *   reset to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.oracledatabase.v1.GiVersion|GiVersion}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/oracle_database.list_gi_versions.js</caption>
+ * region_tag:oracledatabase_v1_generated_OracleDatabase_ListGiVersions_async
+ */
   listGiVersionsAsync(
-    request?: protos.google.cloud.oracledatabase.v1.IListGiVersionsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.oracledatabase.v1.IGiVersion> {
+      request?: protos.google.cloud.oracledatabase.v1.IListGiVersionsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.oracledatabase.v1.IGiVersion>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listGiVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listGiVersions iterate %j', request);
     return this.descriptors.page.listGiVersions.asyncIterate(
       this.innerApiCalls['listGiVersions'] as GaxCall,
@@ -4409,115 +3264,90 @@ export class OracleDatabaseClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.oracledatabase.v1.IGiVersion>;
   }
-  /**
-   * Lists the database system shapes available for the project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent value for Database System Shapes in the following
-   *   format: projects/{project}/locations/{location}.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   *   If unspecified, at most 50 database system shapes will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.oracledatabase.v1.DbSystemShape|DbSystemShape}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listDbSystemShapesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists the database system shapes available for the project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent value for Database System Shapes in the following
+ *   format: projects/{project}/locations/{location}.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ *   If unspecified, at most 50 database system shapes will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.oracledatabase.v1.DbSystemShape|DbSystemShape}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listDbSystemShapesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDbSystemShapes(
-    request?: protos.google.cloud.oracledatabase.v1.IListDbSystemShapesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.oracledatabase.v1.IDbSystemShape[],
-      protos.google.cloud.oracledatabase.v1.IListDbSystemShapesRequest | null,
-      protos.google.cloud.oracledatabase.v1.IListDbSystemShapesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.oracledatabase.v1.IListDbSystemShapesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.oracledatabase.v1.IDbSystemShape[],
+        protos.google.cloud.oracledatabase.v1.IListDbSystemShapesRequest|null,
+        protos.google.cloud.oracledatabase.v1.IListDbSystemShapesResponse
+      ]>;
   listDbSystemShapes(
-    request: protos.google.cloud.oracledatabase.v1.IListDbSystemShapesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.oracledatabase.v1.IListDbSystemShapesRequest,
-      | protos.google.cloud.oracledatabase.v1.IListDbSystemShapesResponse
-      | null
-      | undefined,
-      protos.google.cloud.oracledatabase.v1.IDbSystemShape
-    >
-  ): void;
-  listDbSystemShapes(
-    request: protos.google.cloud.oracledatabase.v1.IListDbSystemShapesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.oracledatabase.v1.IListDbSystemShapesRequest,
-      | protos.google.cloud.oracledatabase.v1.IListDbSystemShapesResponse
-      | null
-      | undefined,
-      protos.google.cloud.oracledatabase.v1.IDbSystemShape
-    >
-  ): void;
-  listDbSystemShapes(
-    request?: protos.google.cloud.oracledatabase.v1.IListDbSystemShapesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.oracledatabase.v1.IListDbSystemShapesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.oracledatabase.v1.IListDbSystemShapesRequest,
-          | protos.google.cloud.oracledatabase.v1.IListDbSystemShapesResponse
-          | null
-          | undefined,
-          protos.google.cloud.oracledatabase.v1.IDbSystemShape
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.oracledatabase.v1.IListDbSystemShapesRequest,
-      | protos.google.cloud.oracledatabase.v1.IListDbSystemShapesResponse
-      | null
-      | undefined,
-      protos.google.cloud.oracledatabase.v1.IDbSystemShape
-    >
-  ): Promise<
-    [
-      protos.google.cloud.oracledatabase.v1.IDbSystemShape[],
-      protos.google.cloud.oracledatabase.v1.IListDbSystemShapesRequest | null,
-      protos.google.cloud.oracledatabase.v1.IListDbSystemShapesResponse,
-    ]
-  > | void {
+          protos.google.cloud.oracledatabase.v1.IListDbSystemShapesResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.IDbSystemShape>): void;
+  listDbSystemShapes(
+      request: protos.google.cloud.oracledatabase.v1.IListDbSystemShapesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListDbSystemShapesRequest,
+          protos.google.cloud.oracledatabase.v1.IListDbSystemShapesResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.IDbSystemShape>): void;
+  listDbSystemShapes(
+      request?: protos.google.cloud.oracledatabase.v1.IListDbSystemShapesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListDbSystemShapesRequest,
+          protos.google.cloud.oracledatabase.v1.IListDbSystemShapesResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.IDbSystemShape>,
+      callback?: PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListDbSystemShapesRequest,
+          protos.google.cloud.oracledatabase.v1.IListDbSystemShapesResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.IDbSystemShape>):
+      Promise<[
+        protos.google.cloud.oracledatabase.v1.IDbSystemShape[],
+        protos.google.cloud.oracledatabase.v1.IListDbSystemShapesRequest|null,
+        protos.google.cloud.oracledatabase.v1.IListDbSystemShapesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.oracledatabase.v1.IListDbSystemShapesRequest,
-          | protos.google.cloud.oracledatabase.v1.IListDbSystemShapesResponse
-          | null
-          | undefined,
-          protos.google.cloud.oracledatabase.v1.IDbSystemShape
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.oracledatabase.v1.IListDbSystemShapesRequest,
+      protos.google.cloud.oracledatabase.v1.IListDbSystemShapesResponse|null|undefined,
+      protos.google.cloud.oracledatabase.v1.IDbSystemShape>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDbSystemShapes values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4526,59 +3356,56 @@ export class OracleDatabaseClient {
     this._log.info('listDbSystemShapes request %j', request);
     return this.innerApiCalls
       .listDbSystemShapes(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.oracledatabase.v1.IDbSystemShape[],
-          protos.google.cloud.oracledatabase.v1.IListDbSystemShapesRequest | null,
-          protos.google.cloud.oracledatabase.v1.IListDbSystemShapesResponse,
-        ]) => {
-          this._log.info('listDbSystemShapes values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.oracledatabase.v1.IDbSystemShape[],
+        protos.google.cloud.oracledatabase.v1.IListDbSystemShapesRequest|null,
+        protos.google.cloud.oracledatabase.v1.IListDbSystemShapesResponse
+      ]) => {
+        this._log.info('listDbSystemShapes values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listDbSystemShapes`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent value for Database System Shapes in the following
-   *   format: projects/{project}/locations/{location}.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   *   If unspecified, at most 50 database system shapes will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.oracledatabase.v1.DbSystemShape|DbSystemShape} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listDbSystemShapesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listDbSystemShapes`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent value for Database System Shapes in the following
+ *   format: projects/{project}/locations/{location}.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ *   If unspecified, at most 50 database system shapes will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.oracledatabase.v1.DbSystemShape|DbSystemShape} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listDbSystemShapesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDbSystemShapesStream(
-    request?: protos.google.cloud.oracledatabase.v1.IListDbSystemShapesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.oracledatabase.v1.IListDbSystemShapesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDbSystemShapes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDbSystemShapes stream %j', request);
     return this.descriptors.page.listDbSystemShapes.createStream(
       this.innerApiCalls.listDbSystemShapes as GaxCall,
@@ -4587,50 +3414,49 @@ export class OracleDatabaseClient {
     );
   }
 
-  /**
-   * Equivalent to `listDbSystemShapes`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent value for Database System Shapes in the following
-   *   format: projects/{project}/locations/{location}.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   *   If unspecified, at most 50 database system shapes will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.oracledatabase.v1.DbSystemShape|DbSystemShape}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/oracle_database.list_db_system_shapes.js</caption>
-   * region_tag:oracledatabase_v1_generated_OracleDatabase_ListDbSystemShapes_async
-   */
+/**
+ * Equivalent to `listDbSystemShapes`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent value for Database System Shapes in the following
+ *   format: projects/{project}/locations/{location}.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ *   If unspecified, at most 50 database system shapes will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.oracledatabase.v1.DbSystemShape|DbSystemShape}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/oracle_database.list_db_system_shapes.js</caption>
+ * region_tag:oracledatabase_v1_generated_OracleDatabase_ListDbSystemShapes_async
+ */
   listDbSystemShapesAsync(
-    request?: protos.google.cloud.oracledatabase.v1.IListDbSystemShapesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.oracledatabase.v1.IDbSystemShape> {
+      request?: protos.google.cloud.oracledatabase.v1.IListDbSystemShapesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.oracledatabase.v1.IDbSystemShape>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDbSystemShapes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDbSystemShapes iterate %j', request);
     return this.descriptors.page.listDbSystemShapes.asyncIterate(
       this.innerApiCalls['listDbSystemShapes'] as GaxCall,
@@ -4638,119 +3464,94 @@ export class OracleDatabaseClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.oracledatabase.v1.IDbSystemShape>;
   }
-  /**
-   * Lists the Autonomous Databases in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent value for the Autonomous Database in the following
-   *   format: projects/{project}/locations/{location}.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   *   If unspecified, at most 50 Autonomous Database will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request.
-   * @param {string} [request.orderBy]
-   *   Optional. An expression for ordering the results of the request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.oracledatabase.v1.AutonomousDatabase|AutonomousDatabase}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listAutonomousDatabasesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists the Autonomous Databases in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent value for the Autonomous Database in the following
+ *   format: projects/{project}/locations/{location}.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ *   If unspecified, at most 50 Autonomous Database will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. An expression for filtering the results of the request.
+ * @param {string} [request.orderBy]
+ *   Optional. An expression for ordering the results of the request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.oracledatabase.v1.AutonomousDatabase|AutonomousDatabase}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listAutonomousDatabasesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAutonomousDatabases(
-    request?: protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.oracledatabase.v1.IAutonomousDatabase[],
-      protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesRequest | null,
-      protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase[],
+        protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesRequest|null,
+        protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesResponse
+      ]>;
   listAutonomousDatabases(
-    request: protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesRequest,
-      | protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesResponse
-      | null
-      | undefined,
-      protos.google.cloud.oracledatabase.v1.IAutonomousDatabase
-    >
-  ): void;
-  listAutonomousDatabases(
-    request: protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesRequest,
-      | protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesResponse
-      | null
-      | undefined,
-      protos.google.cloud.oracledatabase.v1.IAutonomousDatabase
-    >
-  ): void;
-  listAutonomousDatabases(
-    request?: protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesRequest,
-          | protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesResponse
-          | null
-          | undefined,
-          protos.google.cloud.oracledatabase.v1.IAutonomousDatabase
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesRequest,
-      | protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesResponse
-      | null
-      | undefined,
-      protos.google.cloud.oracledatabase.v1.IAutonomousDatabase
-    >
-  ): Promise<
-    [
-      protos.google.cloud.oracledatabase.v1.IAutonomousDatabase[],
-      protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesRequest | null,
-      protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesResponse,
-    ]
-  > | void {
+          protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.IAutonomousDatabase>): void;
+  listAutonomousDatabases(
+      request: protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesRequest,
+          protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.IAutonomousDatabase>): void;
+  listAutonomousDatabases(
+      request?: protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesRequest,
+          protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.IAutonomousDatabase>,
+      callback?: PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesRequest,
+          protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.IAutonomousDatabase>):
+      Promise<[
+        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase[],
+        protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesRequest|null,
+        protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesRequest,
-          | protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesResponse
-          | null
-          | undefined,
-          protos.google.cloud.oracledatabase.v1.IAutonomousDatabase
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesRequest,
+      protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesResponse|null|undefined,
+      protos.google.cloud.oracledatabase.v1.IAutonomousDatabase>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listAutonomousDatabases values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4759,63 +3560,60 @@ export class OracleDatabaseClient {
     this._log.info('listAutonomousDatabases request %j', request);
     return this.innerApiCalls
       .listAutonomousDatabases(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.oracledatabase.v1.IAutonomousDatabase[],
-          protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesRequest | null,
-          protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesResponse,
-        ]) => {
-          this._log.info('listAutonomousDatabases values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase[],
+        protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesRequest|null,
+        protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesResponse
+      ]) => {
+        this._log.info('listAutonomousDatabases values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listAutonomousDatabases`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent value for the Autonomous Database in the following
-   *   format: projects/{project}/locations/{location}.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   *   If unspecified, at most 50 Autonomous Database will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request.
-   * @param {string} [request.orderBy]
-   *   Optional. An expression for ordering the results of the request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.oracledatabase.v1.AutonomousDatabase|AutonomousDatabase} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listAutonomousDatabasesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listAutonomousDatabases`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent value for the Autonomous Database in the following
+ *   format: projects/{project}/locations/{location}.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ *   If unspecified, at most 50 Autonomous Database will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. An expression for filtering the results of the request.
+ * @param {string} [request.orderBy]
+ *   Optional. An expression for ordering the results of the request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.oracledatabase.v1.AutonomousDatabase|AutonomousDatabase} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listAutonomousDatabasesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAutonomousDatabasesStream(
-    request?: protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listAutonomousDatabases'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAutonomousDatabases stream %j', request);
     return this.descriptors.page.listAutonomousDatabases.createStream(
       this.innerApiCalls.listAutonomousDatabases as GaxCall,
@@ -4824,54 +3622,53 @@ export class OracleDatabaseClient {
     );
   }
 
-  /**
-   * Equivalent to `listAutonomousDatabases`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent value for the Autonomous Database in the following
-   *   format: projects/{project}/locations/{location}.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   *   If unspecified, at most 50 Autonomous Database will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request.
-   * @param {string} [request.orderBy]
-   *   Optional. An expression for ordering the results of the request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.oracledatabase.v1.AutonomousDatabase|AutonomousDatabase}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/oracle_database.list_autonomous_databases.js</caption>
-   * region_tag:oracledatabase_v1_generated_OracleDatabase_ListAutonomousDatabases_async
-   */
+/**
+ * Equivalent to `listAutonomousDatabases`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent value for the Autonomous Database in the following
+ *   format: projects/{project}/locations/{location}.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ *   If unspecified, at most 50 Autonomous Database will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. An expression for filtering the results of the request.
+ * @param {string} [request.orderBy]
+ *   Optional. An expression for ordering the results of the request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.oracledatabase.v1.AutonomousDatabase|AutonomousDatabase}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/oracle_database.list_autonomous_databases.js</caption>
+ * region_tag:oracledatabase_v1_generated_OracleDatabase_ListAutonomousDatabases_async
+ */
   listAutonomousDatabasesAsync(
-    request?: protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase> {
+      request?: protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listAutonomousDatabases'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAutonomousDatabases iterate %j', request);
     return this.descriptors.page.listAutonomousDatabases.asyncIterate(
       this.innerApiCalls['listAutonomousDatabases'] as GaxCall,
@@ -4879,116 +3676,91 @@ export class OracleDatabaseClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.oracledatabase.v1.IAutonomousDatabase>;
   }
-  /**
-   * Lists all the available Autonomous Database versions for a project and
-   * location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent value for the Autonomous Database in the following
-   *   format: projects/{project}/locations/{location}.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   *   If unspecified, at most 50 Autonomous DB Versions will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.oracledatabase.v1.AutonomousDbVersion|AutonomousDbVersion}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listAutonomousDbVersionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all the available Autonomous Database versions for a project and
+ * location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent value for the Autonomous Database in the following
+ *   format: projects/{project}/locations/{location}.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ *   If unspecified, at most 50 Autonomous DB Versions will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.oracledatabase.v1.AutonomousDbVersion|AutonomousDbVersion}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listAutonomousDbVersionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAutonomousDbVersions(
-    request?: protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.oracledatabase.v1.IAutonomousDbVersion[],
-      protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsRequest | null,
-      protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.oracledatabase.v1.IAutonomousDbVersion[],
+        protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsRequest|null,
+        protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsResponse
+      ]>;
   listAutonomousDbVersions(
-    request: protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsRequest,
-      | protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.oracledatabase.v1.IAutonomousDbVersion
-    >
-  ): void;
-  listAutonomousDbVersions(
-    request: protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsRequest,
-      | protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.oracledatabase.v1.IAutonomousDbVersion
-    >
-  ): void;
-  listAutonomousDbVersions(
-    request?: protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsRequest,
-          | protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.oracledatabase.v1.IAutonomousDbVersion
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsRequest,
-      | protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.oracledatabase.v1.IAutonomousDbVersion
-    >
-  ): Promise<
-    [
-      protos.google.cloud.oracledatabase.v1.IAutonomousDbVersion[],
-      protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsRequest | null,
-      protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsResponse,
-    ]
-  > | void {
+          protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.IAutonomousDbVersion>): void;
+  listAutonomousDbVersions(
+      request: protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsRequest,
+          protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.IAutonomousDbVersion>): void;
+  listAutonomousDbVersions(
+      request?: protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsRequest,
+          protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.IAutonomousDbVersion>,
+      callback?: PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsRequest,
+          protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.IAutonomousDbVersion>):
+      Promise<[
+        protos.google.cloud.oracledatabase.v1.IAutonomousDbVersion[],
+        protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsRequest|null,
+        protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsRequest,
-          | protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.oracledatabase.v1.IAutonomousDbVersion
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsRequest,
+      protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsResponse|null|undefined,
+      protos.google.cloud.oracledatabase.v1.IAutonomousDbVersion>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listAutonomousDbVersions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4997,59 +3769,56 @@ export class OracleDatabaseClient {
     this._log.info('listAutonomousDbVersions request %j', request);
     return this.innerApiCalls
       .listAutonomousDbVersions(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.oracledatabase.v1.IAutonomousDbVersion[],
-          protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsRequest | null,
-          protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsResponse,
-        ]) => {
-          this._log.info('listAutonomousDbVersions values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.oracledatabase.v1.IAutonomousDbVersion[],
+        protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsRequest|null,
+        protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsResponse
+      ]) => {
+        this._log.info('listAutonomousDbVersions values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listAutonomousDbVersions`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent value for the Autonomous Database in the following
-   *   format: projects/{project}/locations/{location}.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   *   If unspecified, at most 50 Autonomous DB Versions will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.oracledatabase.v1.AutonomousDbVersion|AutonomousDbVersion} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listAutonomousDbVersionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listAutonomousDbVersions`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent value for the Autonomous Database in the following
+ *   format: projects/{project}/locations/{location}.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ *   If unspecified, at most 50 Autonomous DB Versions will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.oracledatabase.v1.AutonomousDbVersion|AutonomousDbVersion} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listAutonomousDbVersionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAutonomousDbVersionsStream(
-    request?: protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listAutonomousDbVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAutonomousDbVersions stream %j', request);
     return this.descriptors.page.listAutonomousDbVersions.createStream(
       this.innerApiCalls.listAutonomousDbVersions as GaxCall,
@@ -5058,50 +3827,49 @@ export class OracleDatabaseClient {
     );
   }
 
-  /**
-   * Equivalent to `listAutonomousDbVersions`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent value for the Autonomous Database in the following
-   *   format: projects/{project}/locations/{location}.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   *   If unspecified, at most 50 Autonomous DB Versions will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.oracledatabase.v1.AutonomousDbVersion|AutonomousDbVersion}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/oracle_database.list_autonomous_db_versions.js</caption>
-   * region_tag:oracledatabase_v1_generated_OracleDatabase_ListAutonomousDbVersions_async
-   */
+/**
+ * Equivalent to `listAutonomousDbVersions`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent value for the Autonomous Database in the following
+ *   format: projects/{project}/locations/{location}.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ *   If unspecified, at most 50 Autonomous DB Versions will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.oracledatabase.v1.AutonomousDbVersion|AutonomousDbVersion}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/oracle_database.list_autonomous_db_versions.js</caption>
+ * region_tag:oracledatabase_v1_generated_OracleDatabase_ListAutonomousDbVersions_async
+ */
   listAutonomousDbVersionsAsync(
-    request?: protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.oracledatabase.v1.IAutonomousDbVersion> {
+      request?: protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.oracledatabase.v1.IAutonomousDbVersion>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listAutonomousDbVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAutonomousDbVersions iterate %j', request);
     return this.descriptors.page.listAutonomousDbVersions.asyncIterate(
       this.innerApiCalls['listAutonomousDbVersions'] as GaxCall,
@@ -5109,193 +3877,158 @@ export class OracleDatabaseClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.oracledatabase.v1.IAutonomousDbVersion>;
   }
-  /**
-   * Lists Autonomous Database Character Sets in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent value for the Autonomous Database in the following
-   *   format: projects/{project}/locations/{location}.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   *   If unspecified, at most 50 Autonomous DB Character Sets will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request. Only the
-   *   **character_set_type** field is supported in the following format:
-   *   `character_set_type="{characterSetType}"`. Accepted values include
-   *   `DATABASE` and `NATIONAL`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.oracledatabase.v1.AutonomousDatabaseCharacterSet|AutonomousDatabaseCharacterSet}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listAutonomousDatabaseCharacterSetsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists Autonomous Database Character Sets in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent value for the Autonomous Database in the following
+ *   format: projects/{project}/locations/{location}.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ *   If unspecified, at most 50 Autonomous DB Character Sets will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. An expression for filtering the results of the request. Only the
+ *   **character_set_type** field is supported in the following format:
+ *   `character_set_type="{characterSetType}"`. Accepted values include
+ *   `DATABASE` and `NATIONAL`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.oracledatabase.v1.AutonomousDatabaseCharacterSet|AutonomousDatabaseCharacterSet}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listAutonomousDatabaseCharacterSetsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAutonomousDatabaseCharacterSets(
-    request?: protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseCharacterSet[],
-      protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsRequest | null,
-      protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseCharacterSet[],
+        protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsRequest|null,
+        protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsResponse
+      ]>;
   listAutonomousDatabaseCharacterSets(
-    request: protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsRequest,
-      | protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseCharacterSet
-    >
-  ): void;
-  listAutonomousDatabaseCharacterSets(
-    request: protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsRequest,
-      | protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseCharacterSet
-    >
-  ): void;
-  listAutonomousDatabaseCharacterSets(
-    request?: protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsRequest,
-          | protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsResponse
-          | null
-          | undefined,
-          protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseCharacterSet
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsRequest,
-      | protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseCharacterSet
-    >
-  ): Promise<
-    [
-      protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseCharacterSet[],
-      protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsRequest | null,
-      protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsResponse,
-    ]
-  > | void {
+          protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseCharacterSet>): void;
+  listAutonomousDatabaseCharacterSets(
+      request: protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsRequest,
+          protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseCharacterSet>): void;
+  listAutonomousDatabaseCharacterSets(
+      request?: protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsRequest,
+          protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseCharacterSet>,
+      callback?: PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsRequest,
+          protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseCharacterSet>):
+      Promise<[
+        protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseCharacterSet[],
+        protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsRequest|null,
+        protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsRequest,
-          | protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsResponse
-          | null
-          | undefined,
-          protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseCharacterSet
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsRequest,
+      protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsResponse|null|undefined,
+      protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseCharacterSet>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info(
-            'listAutonomousDatabaseCharacterSets values %j',
-            values
-          );
+          this._log.info('listAutonomousDatabaseCharacterSets values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
     this._log.info('listAutonomousDatabaseCharacterSets request %j', request);
     return this.innerApiCalls
       .listAutonomousDatabaseCharacterSets(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseCharacterSet[],
-          protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsRequest | null,
-          protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsResponse,
-        ]) => {
-          this._log.info(
-            'listAutonomousDatabaseCharacterSets values %j',
-            response
-          );
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseCharacterSet[],
+        protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsRequest|null,
+        protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsResponse
+      ]) => {
+        this._log.info('listAutonomousDatabaseCharacterSets values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listAutonomousDatabaseCharacterSets`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent value for the Autonomous Database in the following
-   *   format: projects/{project}/locations/{location}.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   *   If unspecified, at most 50 Autonomous DB Character Sets will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request. Only the
-   *   **character_set_type** field is supported in the following format:
-   *   `character_set_type="{characterSetType}"`. Accepted values include
-   *   `DATABASE` and `NATIONAL`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.oracledatabase.v1.AutonomousDatabaseCharacterSet|AutonomousDatabaseCharacterSet} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listAutonomousDatabaseCharacterSetsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listAutonomousDatabaseCharacterSets`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent value for the Autonomous Database in the following
+ *   format: projects/{project}/locations/{location}.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ *   If unspecified, at most 50 Autonomous DB Character Sets will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. An expression for filtering the results of the request. Only the
+ *   **character_set_type** field is supported in the following format:
+ *   `character_set_type="{characterSetType}"`. Accepted values include
+ *   `DATABASE` and `NATIONAL`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.oracledatabase.v1.AutonomousDatabaseCharacterSet|AutonomousDatabaseCharacterSet} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listAutonomousDatabaseCharacterSetsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAutonomousDatabaseCharacterSetsStream(
-    request?: protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    const defaultCallSettings =
-      this._defaults['listAutonomousDatabaseCharacterSets'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    const defaultCallSettings = this._defaults['listAutonomousDatabaseCharacterSets'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
     this._log.info('listAutonomousDatabaseCharacterSets stream %j', request);
     return this.descriptors.page.listAutonomousDatabaseCharacterSets.createStream(
       this.innerApiCalls.listAutonomousDatabaseCharacterSets as GaxCall,
@@ -5304,56 +4037,54 @@ export class OracleDatabaseClient {
     );
   }
 
-  /**
-   * Equivalent to `listAutonomousDatabaseCharacterSets`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent value for the Autonomous Database in the following
-   *   format: projects/{project}/locations/{location}.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   *   If unspecified, at most 50 Autonomous DB Character Sets will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request. Only the
-   *   **character_set_type** field is supported in the following format:
-   *   `character_set_type="{characterSetType}"`. Accepted values include
-   *   `DATABASE` and `NATIONAL`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.oracledatabase.v1.AutonomousDatabaseCharacterSet|AutonomousDatabaseCharacterSet}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/oracle_database.list_autonomous_database_character_sets.js</caption>
-   * region_tag:oracledatabase_v1_generated_OracleDatabase_ListAutonomousDatabaseCharacterSets_async
-   */
+/**
+ * Equivalent to `listAutonomousDatabaseCharacterSets`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent value for the Autonomous Database in the following
+ *   format: projects/{project}/locations/{location}.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ *   If unspecified, at most 50 Autonomous DB Character Sets will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. An expression for filtering the results of the request. Only the
+ *   **character_set_type** field is supported in the following format:
+ *   `character_set_type="{characterSetType}"`. Accepted values include
+ *   `DATABASE` and `NATIONAL`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.oracledatabase.v1.AutonomousDatabaseCharacterSet|AutonomousDatabaseCharacterSet}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/oracle_database.list_autonomous_database_character_sets.js</caption>
+ * region_tag:oracledatabase_v1_generated_OracleDatabase_ListAutonomousDatabaseCharacterSets_async
+ */
   listAutonomousDatabaseCharacterSetsAsync(
-    request?: protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseCharacterSet> {
+      request?: protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseCharacterSet>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    const defaultCallSettings =
-      this._defaults['listAutonomousDatabaseCharacterSets'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    const defaultCallSettings = this._defaults['listAutonomousDatabaseCharacterSets'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
     this._log.info('listAutonomousDatabaseCharacterSets iterate %j', request);
     return this.descriptors.page.listAutonomousDatabaseCharacterSets.asyncIterate(
       this.innerApiCalls['listAutonomousDatabaseCharacterSets'] as GaxCall,
@@ -5361,123 +4092,98 @@ export class OracleDatabaseClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseCharacterSet>;
   }
-  /**
-   * Lists the long-term and automatic backups of an Autonomous Database.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent value for ListAutonomousDatabaseBackups in the
-   *   following format: projects/{project}/locations/{location}.
-   * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request. Only the
-   *   **autonomous_database_id** field is supported in the following format:
-   *   `autonomous_database_id="{autonomous_database_id}"`. The accepted values
-   *   must be a valid Autonomous Database ID, limited to the naming
-   *   restrictions of the ID: ^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$).
-   *   The ID must start with a letter, end with a letter or a number, and be
-   *   a maximum of 63 characters.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   *   If unspecified, at most 50 Autonomous DB Backups will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.oracledatabase.v1.AutonomousDatabaseBackup|AutonomousDatabaseBackup}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listAutonomousDatabaseBackupsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists the long-term and automatic backups of an Autonomous Database.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent value for ListAutonomousDatabaseBackups in the
+ *   following format: projects/{project}/locations/{location}.
+ * @param {string} [request.filter]
+ *   Optional. An expression for filtering the results of the request. Only the
+ *   **autonomous_database_id** field is supported in the following format:
+ *   `autonomous_database_id="{autonomous_database_id}"`. The accepted values
+ *   must be a valid Autonomous Database ID, limited to the naming
+ *   restrictions of the ID: ^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$).
+ *   The ID must start with a letter, end with a letter or a number, and be
+ *   a maximum of 63 characters.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ *   If unspecified, at most 50 Autonomous DB Backups will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.oracledatabase.v1.AutonomousDatabaseBackup|AutonomousDatabaseBackup}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listAutonomousDatabaseBackupsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAutonomousDatabaseBackups(
-    request?: protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseBackup[],
-      protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsRequest | null,
-      protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseBackup[],
+        protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsRequest|null,
+        protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsResponse
+      ]>;
   listAutonomousDatabaseBackups(
-    request: protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsRequest,
-      | protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsResponse
-      | null
-      | undefined,
-      protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseBackup
-    >
-  ): void;
-  listAutonomousDatabaseBackups(
-    request: protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsRequest,
-      | protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsResponse
-      | null
-      | undefined,
-      protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseBackup
-    >
-  ): void;
-  listAutonomousDatabaseBackups(
-    request?: protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsRequest,
-          | protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsResponse
-          | null
-          | undefined,
-          protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseBackup
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsRequest,
-      | protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsResponse
-      | null
-      | undefined,
-      protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseBackup
-    >
-  ): Promise<
-    [
-      protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseBackup[],
-      protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsRequest | null,
-      protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsResponse,
-    ]
-  > | void {
+          protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseBackup>): void;
+  listAutonomousDatabaseBackups(
+      request: protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsRequest,
+          protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseBackup>): void;
+  listAutonomousDatabaseBackups(
+      request?: protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsRequest,
+          protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseBackup>,
+      callback?: PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsRequest,
+          protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsResponse|null|undefined,
+          protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseBackup>):
+      Promise<[
+        protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseBackup[],
+        protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsRequest|null,
+        protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsRequest,
-          | protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsResponse
-          | null
-          | undefined,
-          protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseBackup
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsRequest,
+      protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsResponse|null|undefined,
+      protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseBackup>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listAutonomousDatabaseBackups values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5486,67 +4192,64 @@ export class OracleDatabaseClient {
     this._log.info('listAutonomousDatabaseBackups request %j', request);
     return this.innerApiCalls
       .listAutonomousDatabaseBackups(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseBackup[],
-          protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsRequest | null,
-          protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsResponse,
-        ]) => {
-          this._log.info('listAutonomousDatabaseBackups values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseBackup[],
+        protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsRequest|null,
+        protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsResponse
+      ]) => {
+        this._log.info('listAutonomousDatabaseBackups values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listAutonomousDatabaseBackups`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent value for ListAutonomousDatabaseBackups in the
-   *   following format: projects/{project}/locations/{location}.
-   * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request. Only the
-   *   **autonomous_database_id** field is supported in the following format:
-   *   `autonomous_database_id="{autonomous_database_id}"`. The accepted values
-   *   must be a valid Autonomous Database ID, limited to the naming
-   *   restrictions of the ID: ^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$).
-   *   The ID must start with a letter, end with a letter or a number, and be
-   *   a maximum of 63 characters.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   *   If unspecified, at most 50 Autonomous DB Backups will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.oracledatabase.v1.AutonomousDatabaseBackup|AutonomousDatabaseBackup} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listAutonomousDatabaseBackupsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listAutonomousDatabaseBackups`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent value for ListAutonomousDatabaseBackups in the
+ *   following format: projects/{project}/locations/{location}.
+ * @param {string} [request.filter]
+ *   Optional. An expression for filtering the results of the request. Only the
+ *   **autonomous_database_id** field is supported in the following format:
+ *   `autonomous_database_id="{autonomous_database_id}"`. The accepted values
+ *   must be a valid Autonomous Database ID, limited to the naming
+ *   restrictions of the ID: ^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$).
+ *   The ID must start with a letter, end with a letter or a number, and be
+ *   a maximum of 63 characters.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ *   If unspecified, at most 50 Autonomous DB Backups will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.oracledatabase.v1.AutonomousDatabaseBackup|AutonomousDatabaseBackup} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listAutonomousDatabaseBackupsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAutonomousDatabaseBackupsStream(
-    request?: protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listAutonomousDatabaseBackups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAutonomousDatabaseBackups stream %j', request);
     return this.descriptors.page.listAutonomousDatabaseBackups.createStream(
       this.innerApiCalls.listAutonomousDatabaseBackups as GaxCall,
@@ -5555,58 +4258,57 @@ export class OracleDatabaseClient {
     );
   }
 
-  /**
-   * Equivalent to `listAutonomousDatabaseBackups`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent value for ListAutonomousDatabaseBackups in the
-   *   following format: projects/{project}/locations/{location}.
-   * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request. Only the
-   *   **autonomous_database_id** field is supported in the following format:
-   *   `autonomous_database_id="{autonomous_database_id}"`. The accepted values
-   *   must be a valid Autonomous Database ID, limited to the naming
-   *   restrictions of the ID: ^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$).
-   *   The ID must start with a letter, end with a letter or a number, and be
-   *   a maximum of 63 characters.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   *   If unspecified, at most 50 Autonomous DB Backups will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.oracledatabase.v1.AutonomousDatabaseBackup|AutonomousDatabaseBackup}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/oracle_database.list_autonomous_database_backups.js</caption>
-   * region_tag:oracledatabase_v1_generated_OracleDatabase_ListAutonomousDatabaseBackups_async
-   */
+/**
+ * Equivalent to `listAutonomousDatabaseBackups`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent value for ListAutonomousDatabaseBackups in the
+ *   following format: projects/{project}/locations/{location}.
+ * @param {string} [request.filter]
+ *   Optional. An expression for filtering the results of the request. Only the
+ *   **autonomous_database_id** field is supported in the following format:
+ *   `autonomous_database_id="{autonomous_database_id}"`. The accepted values
+ *   must be a valid Autonomous Database ID, limited to the naming
+ *   restrictions of the ID: ^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$).
+ *   The ID must start with a letter, end with a letter or a number, and be
+ *   a maximum of 63 characters.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ *   If unspecified, at most 50 Autonomous DB Backups will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.oracledatabase.v1.AutonomousDatabaseBackup|AutonomousDatabaseBackup}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/oracle_database.list_autonomous_database_backups.js</caption>
+ * region_tag:oracledatabase_v1_generated_OracleDatabase_ListAutonomousDatabaseBackups_async
+ */
   listAutonomousDatabaseBackupsAsync(
-    request?: protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseBackup> {
+      request?: protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseBackup>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listAutonomousDatabaseBackups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAutonomousDatabaseBackups iterate %j', request);
     return this.descriptors.page.listAutonomousDatabaseBackups.asyncIterate(
       this.innerApiCalls['listAutonomousDatabaseBackups'] as GaxCall,
@@ -5614,7 +4316,7 @@ export class OracleDatabaseClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.oracledatabase.v1.IAutonomousDatabaseBackup>;
   }
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -5654,7 +4356,7 @@ export class OracleDatabaseClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -5692,7 +4394,7 @@ export class OracleDatabaseClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -5737,20 +4439,20 @@ export class OracleDatabaseClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -5787,13 +4489,13 @@ export class OracleDatabaseClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -5827,7 +4529,7 @@ export class OracleDatabaseClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -5842,20 +4544,20 @@ export class OracleDatabaseClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -5899,20 +4601,20 @@ export class OracleDatabaseClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -5928,11 +4630,7 @@ export class OracleDatabaseClient {
    * @param {string} autonomous_database
    * @returns {string} Resource name string.
    */
-  autonomousDatabasePath(
-    project: string,
-    location: string,
-    autonomousDatabase: string
-  ) {
+  autonomousDatabasePath(project:string,location:string,autonomousDatabase:string) {
     return this.pathTemplates.autonomousDatabasePathTemplate.render({
       project: project,
       location: location,
@@ -5948,9 +4646,7 @@ export class OracleDatabaseClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAutonomousDatabaseName(autonomousDatabaseName: string) {
-    return this.pathTemplates.autonomousDatabasePathTemplate.match(
-      autonomousDatabaseName
-    ).project;
+    return this.pathTemplates.autonomousDatabasePathTemplate.match(autonomousDatabaseName).project;
   }
 
   /**
@@ -5961,9 +4657,7 @@ export class OracleDatabaseClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAutonomousDatabaseName(autonomousDatabaseName: string) {
-    return this.pathTemplates.autonomousDatabasePathTemplate.match(
-      autonomousDatabaseName
-    ).location;
+    return this.pathTemplates.autonomousDatabasePathTemplate.match(autonomousDatabaseName).location;
   }
 
   /**
@@ -5973,12 +4667,8 @@ export class OracleDatabaseClient {
    *   A fully-qualified path representing AutonomousDatabase resource.
    * @returns {string} A string representing the autonomous_database.
    */
-  matchAutonomousDatabaseFromAutonomousDatabaseName(
-    autonomousDatabaseName: string
-  ) {
-    return this.pathTemplates.autonomousDatabasePathTemplate.match(
-      autonomousDatabaseName
-    ).autonomous_database;
+  matchAutonomousDatabaseFromAutonomousDatabaseName(autonomousDatabaseName: string) {
+    return this.pathTemplates.autonomousDatabasePathTemplate.match(autonomousDatabaseName).autonomous_database;
   }
 
   /**
@@ -5989,11 +4679,7 @@ export class OracleDatabaseClient {
    * @param {string} autonomous_database_backup
    * @returns {string} Resource name string.
    */
-  autonomousDatabaseBackupPath(
-    project: string,
-    location: string,
-    autonomousDatabaseBackup: string
-  ) {
+  autonomousDatabaseBackupPath(project:string,location:string,autonomousDatabaseBackup:string) {
     return this.pathTemplates.autonomousDatabaseBackupPathTemplate.render({
       project: project,
       location: location,
@@ -6008,12 +4694,8 @@ export class OracleDatabaseClient {
    *   A fully-qualified path representing AutonomousDatabaseBackup resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromAutonomousDatabaseBackupName(
-    autonomousDatabaseBackupName: string
-  ) {
-    return this.pathTemplates.autonomousDatabaseBackupPathTemplate.match(
-      autonomousDatabaseBackupName
-    ).project;
+  matchProjectFromAutonomousDatabaseBackupName(autonomousDatabaseBackupName: string) {
+    return this.pathTemplates.autonomousDatabaseBackupPathTemplate.match(autonomousDatabaseBackupName).project;
   }
 
   /**
@@ -6023,12 +4705,8 @@ export class OracleDatabaseClient {
    *   A fully-qualified path representing AutonomousDatabaseBackup resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromAutonomousDatabaseBackupName(
-    autonomousDatabaseBackupName: string
-  ) {
-    return this.pathTemplates.autonomousDatabaseBackupPathTemplate.match(
-      autonomousDatabaseBackupName
-    ).location;
+  matchLocationFromAutonomousDatabaseBackupName(autonomousDatabaseBackupName: string) {
+    return this.pathTemplates.autonomousDatabaseBackupPathTemplate.match(autonomousDatabaseBackupName).location;
   }
 
   /**
@@ -6038,12 +4716,8 @@ export class OracleDatabaseClient {
    *   A fully-qualified path representing AutonomousDatabaseBackup resource.
    * @returns {string} A string representing the autonomous_database_backup.
    */
-  matchAutonomousDatabaseBackupFromAutonomousDatabaseBackupName(
-    autonomousDatabaseBackupName: string
-  ) {
-    return this.pathTemplates.autonomousDatabaseBackupPathTemplate.match(
-      autonomousDatabaseBackupName
-    ).autonomous_database_backup;
+  matchAutonomousDatabaseBackupFromAutonomousDatabaseBackupName(autonomousDatabaseBackupName: string) {
+    return this.pathTemplates.autonomousDatabaseBackupPathTemplate.match(autonomousDatabaseBackupName).autonomous_database_backup;
   }
 
   /**
@@ -6054,18 +4728,12 @@ export class OracleDatabaseClient {
    * @param {string} autonomous_database_character_set
    * @returns {string} Resource name string.
    */
-  autonomousDatabaseCharacterSetPath(
-    project: string,
-    location: string,
-    autonomousDatabaseCharacterSet: string
-  ) {
-    return this.pathTemplates.autonomousDatabaseCharacterSetPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        autonomous_database_character_set: autonomousDatabaseCharacterSet,
-      }
-    );
+  autonomousDatabaseCharacterSetPath(project:string,location:string,autonomousDatabaseCharacterSet:string) {
+    return this.pathTemplates.autonomousDatabaseCharacterSetPathTemplate.render({
+      project: project,
+      location: location,
+      autonomous_database_character_set: autonomousDatabaseCharacterSet,
+    });
   }
 
   /**
@@ -6075,12 +4743,8 @@ export class OracleDatabaseClient {
    *   A fully-qualified path representing AutonomousDatabaseCharacterSet resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromAutonomousDatabaseCharacterSetName(
-    autonomousDatabaseCharacterSetName: string
-  ) {
-    return this.pathTemplates.autonomousDatabaseCharacterSetPathTemplate.match(
-      autonomousDatabaseCharacterSetName
-    ).project;
+  matchProjectFromAutonomousDatabaseCharacterSetName(autonomousDatabaseCharacterSetName: string) {
+    return this.pathTemplates.autonomousDatabaseCharacterSetPathTemplate.match(autonomousDatabaseCharacterSetName).project;
   }
 
   /**
@@ -6090,12 +4754,8 @@ export class OracleDatabaseClient {
    *   A fully-qualified path representing AutonomousDatabaseCharacterSet resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromAutonomousDatabaseCharacterSetName(
-    autonomousDatabaseCharacterSetName: string
-  ) {
-    return this.pathTemplates.autonomousDatabaseCharacterSetPathTemplate.match(
-      autonomousDatabaseCharacterSetName
-    ).location;
+  matchLocationFromAutonomousDatabaseCharacterSetName(autonomousDatabaseCharacterSetName: string) {
+    return this.pathTemplates.autonomousDatabaseCharacterSetPathTemplate.match(autonomousDatabaseCharacterSetName).location;
   }
 
   /**
@@ -6105,12 +4765,8 @@ export class OracleDatabaseClient {
    *   A fully-qualified path representing AutonomousDatabaseCharacterSet resource.
    * @returns {string} A string representing the autonomous_database_character_set.
    */
-  matchAutonomousDatabaseCharacterSetFromAutonomousDatabaseCharacterSetName(
-    autonomousDatabaseCharacterSetName: string
-  ) {
-    return this.pathTemplates.autonomousDatabaseCharacterSetPathTemplate.match(
-      autonomousDatabaseCharacterSetName
-    ).autonomous_database_character_set;
+  matchAutonomousDatabaseCharacterSetFromAutonomousDatabaseCharacterSetName(autonomousDatabaseCharacterSetName: string) {
+    return this.pathTemplates.autonomousDatabaseCharacterSetPathTemplate.match(autonomousDatabaseCharacterSetName).autonomous_database_character_set;
   }
 
   /**
@@ -6121,11 +4777,7 @@ export class OracleDatabaseClient {
    * @param {string} autonomous_db_version
    * @returns {string} Resource name string.
    */
-  autonomousDbVersionPath(
-    project: string,
-    location: string,
-    autonomousDbVersion: string
-  ) {
+  autonomousDbVersionPath(project:string,location:string,autonomousDbVersion:string) {
     return this.pathTemplates.autonomousDbVersionPathTemplate.render({
       project: project,
       location: location,
@@ -6141,9 +4793,7 @@ export class OracleDatabaseClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAutonomousDbVersionName(autonomousDbVersionName: string) {
-    return this.pathTemplates.autonomousDbVersionPathTemplate.match(
-      autonomousDbVersionName
-    ).project;
+    return this.pathTemplates.autonomousDbVersionPathTemplate.match(autonomousDbVersionName).project;
   }
 
   /**
@@ -6154,9 +4804,7 @@ export class OracleDatabaseClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAutonomousDbVersionName(autonomousDbVersionName: string) {
-    return this.pathTemplates.autonomousDbVersionPathTemplate.match(
-      autonomousDbVersionName
-    ).location;
+    return this.pathTemplates.autonomousDbVersionPathTemplate.match(autonomousDbVersionName).location;
   }
 
   /**
@@ -6166,12 +4814,8 @@ export class OracleDatabaseClient {
    *   A fully-qualified path representing AutonomousDbVersion resource.
    * @returns {string} A string representing the autonomous_db_version.
    */
-  matchAutonomousDbVersionFromAutonomousDbVersionName(
-    autonomousDbVersionName: string
-  ) {
-    return this.pathTemplates.autonomousDbVersionPathTemplate.match(
-      autonomousDbVersionName
-    ).autonomous_db_version;
+  matchAutonomousDbVersionFromAutonomousDbVersionName(autonomousDbVersionName: string) {
+    return this.pathTemplates.autonomousDbVersionPathTemplate.match(autonomousDbVersionName).autonomous_db_version;
   }
 
   /**
@@ -6182,11 +4826,7 @@ export class OracleDatabaseClient {
    * @param {string} cloud_exadata_infrastructure
    * @returns {string} Resource name string.
    */
-  cloudExadataInfrastructurePath(
-    project: string,
-    location: string,
-    cloudExadataInfrastructure: string
-  ) {
+  cloudExadataInfrastructurePath(project:string,location:string,cloudExadataInfrastructure:string) {
     return this.pathTemplates.cloudExadataInfrastructurePathTemplate.render({
       project: project,
       location: location,
@@ -6201,12 +4841,8 @@ export class OracleDatabaseClient {
    *   A fully-qualified path representing CloudExadataInfrastructure resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromCloudExadataInfrastructureName(
-    cloudExadataInfrastructureName: string
-  ) {
-    return this.pathTemplates.cloudExadataInfrastructurePathTemplate.match(
-      cloudExadataInfrastructureName
-    ).project;
+  matchProjectFromCloudExadataInfrastructureName(cloudExadataInfrastructureName: string) {
+    return this.pathTemplates.cloudExadataInfrastructurePathTemplate.match(cloudExadataInfrastructureName).project;
   }
 
   /**
@@ -6216,12 +4852,8 @@ export class OracleDatabaseClient {
    *   A fully-qualified path representing CloudExadataInfrastructure resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromCloudExadataInfrastructureName(
-    cloudExadataInfrastructureName: string
-  ) {
-    return this.pathTemplates.cloudExadataInfrastructurePathTemplate.match(
-      cloudExadataInfrastructureName
-    ).location;
+  matchLocationFromCloudExadataInfrastructureName(cloudExadataInfrastructureName: string) {
+    return this.pathTemplates.cloudExadataInfrastructurePathTemplate.match(cloudExadataInfrastructureName).location;
   }
 
   /**
@@ -6231,12 +4863,8 @@ export class OracleDatabaseClient {
    *   A fully-qualified path representing CloudExadataInfrastructure resource.
    * @returns {string} A string representing the cloud_exadata_infrastructure.
    */
-  matchCloudExadataInfrastructureFromCloudExadataInfrastructureName(
-    cloudExadataInfrastructureName: string
-  ) {
-    return this.pathTemplates.cloudExadataInfrastructurePathTemplate.match(
-      cloudExadataInfrastructureName
-    ).cloud_exadata_infrastructure;
+  matchCloudExadataInfrastructureFromCloudExadataInfrastructureName(cloudExadataInfrastructureName: string) {
+    return this.pathTemplates.cloudExadataInfrastructurePathTemplate.match(cloudExadataInfrastructureName).cloud_exadata_infrastructure;
   }
 
   /**
@@ -6247,11 +4875,7 @@ export class OracleDatabaseClient {
    * @param {string} cloud_vm_cluster
    * @returns {string} Resource name string.
    */
-  cloudVmClusterPath(
-    project: string,
-    location: string,
-    cloudVmCluster: string
-  ) {
+  cloudVmClusterPath(project:string,location:string,cloudVmCluster:string) {
     return this.pathTemplates.cloudVmClusterPathTemplate.render({
       project: project,
       location: location,
@@ -6267,9 +4891,7 @@ export class OracleDatabaseClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCloudVmClusterName(cloudVmClusterName: string) {
-    return this.pathTemplates.cloudVmClusterPathTemplate.match(
-      cloudVmClusterName
-    ).project;
+    return this.pathTemplates.cloudVmClusterPathTemplate.match(cloudVmClusterName).project;
   }
 
   /**
@@ -6280,9 +4902,7 @@ export class OracleDatabaseClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCloudVmClusterName(cloudVmClusterName: string) {
-    return this.pathTemplates.cloudVmClusterPathTemplate.match(
-      cloudVmClusterName
-    ).location;
+    return this.pathTemplates.cloudVmClusterPathTemplate.match(cloudVmClusterName).location;
   }
 
   /**
@@ -6293,9 +4913,7 @@ export class OracleDatabaseClient {
    * @returns {string} A string representing the cloud_vm_cluster.
    */
   matchCloudVmClusterFromCloudVmClusterName(cloudVmClusterName: string) {
-    return this.pathTemplates.cloudVmClusterPathTemplate.match(
-      cloudVmClusterName
-    ).cloud_vm_cluster;
+    return this.pathTemplates.cloudVmClusterPathTemplate.match(cloudVmClusterName).cloud_vm_cluster;
   }
 
   /**
@@ -6307,12 +4925,7 @@ export class OracleDatabaseClient {
    * @param {string} db_node
    * @returns {string} Resource name string.
    */
-  dbNodePath(
-    project: string,
-    location: string,
-    cloudVmCluster: string,
-    dbNode: string
-  ) {
+  dbNodePath(project:string,location:string,cloudVmCluster:string,dbNode:string) {
     return this.pathTemplates.dbNodePathTemplate.render({
       project: project,
       location: location,
@@ -6351,8 +4964,7 @@ export class OracleDatabaseClient {
    * @returns {string} A string representing the cloud_vm_cluster.
    */
   matchCloudVmClusterFromDbNodeName(dbNodeName: string) {
-    return this.pathTemplates.dbNodePathTemplate.match(dbNodeName)
-      .cloud_vm_cluster;
+    return this.pathTemplates.dbNodePathTemplate.match(dbNodeName).cloud_vm_cluster;
   }
 
   /**
@@ -6375,12 +4987,7 @@ export class OracleDatabaseClient {
    * @param {string} db_server
    * @returns {string} Resource name string.
    */
-  dbServerPath(
-    project: string,
-    location: string,
-    cloudExadataInfrastructure: string,
-    dbServer: string
-  ) {
+  dbServerPath(project:string,location:string,cloudExadataInfrastructure:string,dbServer:string) {
     return this.pathTemplates.dbServerPathTemplate.render({
       project: project,
       location: location,
@@ -6419,8 +5026,7 @@ export class OracleDatabaseClient {
    * @returns {string} A string representing the cloud_exadata_infrastructure.
    */
   matchCloudExadataInfrastructureFromDbServerName(dbServerName: string) {
-    return this.pathTemplates.dbServerPathTemplate.match(dbServerName)
-      .cloud_exadata_infrastructure;
+    return this.pathTemplates.dbServerPathTemplate.match(dbServerName).cloud_exadata_infrastructure;
   }
 
   /**
@@ -6431,8 +5037,7 @@ export class OracleDatabaseClient {
    * @returns {string} A string representing the db_server.
    */
   matchDbServerFromDbServerName(dbServerName: string) {
-    return this.pathTemplates.dbServerPathTemplate.match(dbServerName)
-      .db_server;
+    return this.pathTemplates.dbServerPathTemplate.match(dbServerName).db_server;
   }
 
   /**
@@ -6443,7 +5048,7 @@ export class OracleDatabaseClient {
    * @param {string} db_system_shape
    * @returns {string} Resource name string.
    */
-  dbSystemShapePath(project: string, location: string, dbSystemShape: string) {
+  dbSystemShapePath(project:string,location:string,dbSystemShape:string) {
     return this.pathTemplates.dbSystemShapePathTemplate.render({
       project: project,
       location: location,
@@ -6459,8 +5064,7 @@ export class OracleDatabaseClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDbSystemShapeName(dbSystemShapeName: string) {
-    return this.pathTemplates.dbSystemShapePathTemplate.match(dbSystemShapeName)
-      .project;
+    return this.pathTemplates.dbSystemShapePathTemplate.match(dbSystemShapeName).project;
   }
 
   /**
@@ -6471,8 +5075,7 @@ export class OracleDatabaseClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDbSystemShapeName(dbSystemShapeName: string) {
-    return this.pathTemplates.dbSystemShapePathTemplate.match(dbSystemShapeName)
-      .location;
+    return this.pathTemplates.dbSystemShapePathTemplate.match(dbSystemShapeName).location;
   }
 
   /**
@@ -6483,8 +5086,7 @@ export class OracleDatabaseClient {
    * @returns {string} A string representing the db_system_shape.
    */
   matchDbSystemShapeFromDbSystemShapeName(dbSystemShapeName: string) {
-    return this.pathTemplates.dbSystemShapePathTemplate.match(dbSystemShapeName)
-      .db_system_shape;
+    return this.pathTemplates.dbSystemShapePathTemplate.match(dbSystemShapeName).db_system_shape;
   }
 
   /**
@@ -6495,7 +5097,7 @@ export class OracleDatabaseClient {
    * @param {string} entitlement
    * @returns {string} Resource name string.
    */
-  entitlementPath(project: string, location: string, entitlement: string) {
+  entitlementPath(project:string,location:string,entitlement:string) {
     return this.pathTemplates.entitlementPathTemplate.render({
       project: project,
       location: location,
@@ -6511,8 +5113,7 @@ export class OracleDatabaseClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEntitlementName(entitlementName: string) {
-    return this.pathTemplates.entitlementPathTemplate.match(entitlementName)
-      .project;
+    return this.pathTemplates.entitlementPathTemplate.match(entitlementName).project;
   }
 
   /**
@@ -6523,8 +5124,7 @@ export class OracleDatabaseClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEntitlementName(entitlementName: string) {
-    return this.pathTemplates.entitlementPathTemplate.match(entitlementName)
-      .location;
+    return this.pathTemplates.entitlementPathTemplate.match(entitlementName).location;
   }
 
   /**
@@ -6535,8 +5135,7 @@ export class OracleDatabaseClient {
    * @returns {string} A string representing the entitlement.
    */
   matchEntitlementFromEntitlementName(entitlementName: string) {
-    return this.pathTemplates.entitlementPathTemplate.match(entitlementName)
-      .entitlement;
+    return this.pathTemplates.entitlementPathTemplate.match(entitlementName).entitlement;
   }
 
   /**
@@ -6547,7 +5146,7 @@ export class OracleDatabaseClient {
    * @param {string} gi_version
    * @returns {string} Resource name string.
    */
-  giVersionPath(project: string, location: string, giVersion: string) {
+  giVersionPath(project:string,location:string,giVersion:string) {
     return this.pathTemplates.giVersionPathTemplate.render({
       project: project,
       location: location,
@@ -6563,8 +5162,7 @@ export class OracleDatabaseClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromGiVersionName(giVersionName: string) {
-    return this.pathTemplates.giVersionPathTemplate.match(giVersionName)
-      .project;
+    return this.pathTemplates.giVersionPathTemplate.match(giVersionName).project;
   }
 
   /**
@@ -6575,8 +5173,7 @@ export class OracleDatabaseClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromGiVersionName(giVersionName: string) {
-    return this.pathTemplates.giVersionPathTemplate.match(giVersionName)
-      .location;
+    return this.pathTemplates.giVersionPathTemplate.match(giVersionName).location;
   }
 
   /**
@@ -6587,8 +5184,7 @@ export class OracleDatabaseClient {
    * @returns {string} A string representing the gi_version.
    */
   matchGiVersionFromGiVersionName(giVersionName: string) {
-    return this.pathTemplates.giVersionPathTemplate.match(giVersionName)
-      .gi_version;
+    return this.pathTemplates.giVersionPathTemplate.match(giVersionName).gi_version;
   }
 
   /**
@@ -6598,7 +5194,7 @@ export class OracleDatabaseClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -6633,7 +5229,7 @@ export class OracleDatabaseClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -6662,9 +5258,7 @@ export class OracleDatabaseClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.locationsClient.close().catch(err => {throw err});
         void this.operationsClient.close();
       });
     }

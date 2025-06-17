@@ -29,2918 +29,2215 @@ import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.OsConfigServiceClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'osconfig.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          osconfigserviceModule.v1.OsConfigServiceClient.servicePath;
-        assert.strictEqual(servicePath, 'osconfig.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          osconfigserviceModule.v1.OsConfigServiceClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'osconfig.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'osconfig.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'osconfig.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new osconfigserviceModule.v1.OsConfigServiceClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'osconfig.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'osconfig.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'osconfig.configured.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new osconfigserviceModule.v1.OsConfigServiceClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = osconfigserviceModule.v1.OsConfigServiceClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = osconfigserviceModule.v1.OsConfigServiceClient.servicePath;
+                assert.strictEqual(servicePath, 'osconfig.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
 
-    it('should create a client with no option', () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.osConfigServiceStub, undefined);
-      await client.initialize();
-      assert(client.osConfigServiceStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.osConfigServiceStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.osConfigServiceStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('executePatchJob', () => {
-    it('invokes executePatchJob without error', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.ExecutePatchJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.ExecutePatchJobRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.PatchJob()
-      );
-      client.innerApiCalls.executePatchJob = stubSimpleCall(expectedResponse);
-      const [response] = await client.executePatchJob(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.executePatchJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.executePatchJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes executePatchJob without error using callback', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.ExecutePatchJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.ExecutePatchJobRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.PatchJob()
-      );
-      client.innerApiCalls.executePatchJob =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.executePatchJob(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.osconfig.v1.IPatchJob | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.executePatchJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.executePatchJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes executePatchJob with error', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.ExecutePatchJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.ExecutePatchJobRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.executePatchJob = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.executePatchJob(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.executePatchJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.executePatchJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes executePatchJob with closed client', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.ExecutePatchJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.ExecutePatchJobRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.executePatchJob(request), expectedError);
-    });
-  });
-
-  describe('getPatchJob', () => {
-    it('invokes getPatchJob without error', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.GetPatchJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.GetPatchJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.PatchJob()
-      );
-      client.innerApiCalls.getPatchJob = stubSimpleCall(expectedResponse);
-      const [response] = await client.getPatchJob(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getPatchJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getPatchJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getPatchJob without error using callback', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.GetPatchJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.GetPatchJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.PatchJob()
-      );
-      client.innerApiCalls.getPatchJob =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getPatchJob(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.osconfig.v1.IPatchJob | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getPatchJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getPatchJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getPatchJob with error', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.GetPatchJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.GetPatchJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getPatchJob = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getPatchJob(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getPatchJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getPatchJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getPatchJob with closed client', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.GetPatchJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.GetPatchJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getPatchJob(request), expectedError);
-    });
-  });
-
-  describe('cancelPatchJob', () => {
-    it('invokes cancelPatchJob without error', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.CancelPatchJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.CancelPatchJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.PatchJob()
-      );
-      client.innerApiCalls.cancelPatchJob = stubSimpleCall(expectedResponse);
-      const [response] = await client.cancelPatchJob(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.cancelPatchJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.cancelPatchJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes cancelPatchJob without error using callback', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.CancelPatchJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.CancelPatchJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.PatchJob()
-      );
-      client.innerApiCalls.cancelPatchJob =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.cancelPatchJob(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.osconfig.v1.IPatchJob | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.cancelPatchJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.cancelPatchJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes cancelPatchJob with error', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.CancelPatchJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.CancelPatchJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.cancelPatchJob = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.cancelPatchJob(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.cancelPatchJob as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.cancelPatchJob as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes cancelPatchJob with closed client', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.CancelPatchJobRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.CancelPatchJobRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.cancelPatchJob(request), expectedError);
-    });
-  });
-
-  describe('createPatchDeployment', () => {
-    it('invokes createPatchDeployment without error', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.CreatePatchDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.CreatePatchDeploymentRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.PatchDeployment()
-      );
-      client.innerApiCalls.createPatchDeployment =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.createPatchDeployment(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createPatchDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createPatchDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createPatchDeployment without error using callback', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.CreatePatchDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.CreatePatchDeploymentRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.PatchDeployment()
-      );
-      client.innerApiCalls.createPatchDeployment =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createPatchDeployment(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.osconfig.v1.IPatchDeployment | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createPatchDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createPatchDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createPatchDeployment with error', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.CreatePatchDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.CreatePatchDeploymentRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createPatchDeployment = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.createPatchDeployment(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.createPatchDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createPatchDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createPatchDeployment with closed client', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.CreatePatchDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.CreatePatchDeploymentRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.createPatchDeployment(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('getPatchDeployment', () => {
-    it('invokes getPatchDeployment without error', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.GetPatchDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.GetPatchDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.PatchDeployment()
-      );
-      client.innerApiCalls.getPatchDeployment =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getPatchDeployment(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getPatchDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getPatchDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getPatchDeployment without error using callback', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.GetPatchDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.GetPatchDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.PatchDeployment()
-      );
-      client.innerApiCalls.getPatchDeployment =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getPatchDeployment(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.osconfig.v1.IPatchDeployment | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getPatchDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getPatchDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getPatchDeployment with error', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.GetPatchDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.GetPatchDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getPatchDeployment = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getPatchDeployment(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getPatchDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getPatchDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getPatchDeployment with closed client', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.GetPatchDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.GetPatchDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getPatchDeployment(request), expectedError);
-    });
-  });
-
-  describe('deletePatchDeployment', () => {
-    it('invokes deletePatchDeployment without error', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.DeletePatchDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.DeletePatchDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deletePatchDeployment =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.deletePatchDeployment(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deletePatchDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deletePatchDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deletePatchDeployment without error using callback', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.DeletePatchDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.DeletePatchDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deletePatchDeployment =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deletePatchDeployment(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deletePatchDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deletePatchDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deletePatchDeployment with error', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.DeletePatchDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.DeletePatchDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deletePatchDeployment = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.deletePatchDeployment(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.deletePatchDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deletePatchDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deletePatchDeployment with closed client', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.DeletePatchDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.DeletePatchDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.deletePatchDeployment(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('updatePatchDeployment', () => {
-    it('invokes updatePatchDeployment without error', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.UpdatePatchDeploymentRequest()
-      );
-      request.patchDeployment ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.UpdatePatchDeploymentRequest',
-        ['patchDeployment', 'name']
-      );
-      request.patchDeployment.name = defaultValue1;
-      const expectedHeaderRequestParams = `patch_deployment.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.PatchDeployment()
-      );
-      client.innerApiCalls.updatePatchDeployment =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.updatePatchDeployment(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updatePatchDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updatePatchDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updatePatchDeployment without error using callback', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.UpdatePatchDeploymentRequest()
-      );
-      request.patchDeployment ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.UpdatePatchDeploymentRequest',
-        ['patchDeployment', 'name']
-      );
-      request.patchDeployment.name = defaultValue1;
-      const expectedHeaderRequestParams = `patch_deployment.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.PatchDeployment()
-      );
-      client.innerApiCalls.updatePatchDeployment =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updatePatchDeployment(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.osconfig.v1.IPatchDeployment | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updatePatchDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updatePatchDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updatePatchDeployment with error', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.UpdatePatchDeploymentRequest()
-      );
-      request.patchDeployment ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.UpdatePatchDeploymentRequest',
-        ['patchDeployment', 'name']
-      );
-      request.patchDeployment.name = defaultValue1;
-      const expectedHeaderRequestParams = `patch_deployment.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updatePatchDeployment = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.updatePatchDeployment(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.updatePatchDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updatePatchDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updatePatchDeployment with closed client', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.UpdatePatchDeploymentRequest()
-      );
-      request.patchDeployment ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.UpdatePatchDeploymentRequest',
-        ['patchDeployment', 'name']
-      );
-      request.patchDeployment.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.updatePatchDeployment(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('pausePatchDeployment', () => {
-    it('invokes pausePatchDeployment without error', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.PausePatchDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.PausePatchDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.PatchDeployment()
-      );
-      client.innerApiCalls.pausePatchDeployment =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.pausePatchDeployment(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.pausePatchDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.pausePatchDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes pausePatchDeployment without error using callback', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.PausePatchDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.PausePatchDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.PatchDeployment()
-      );
-      client.innerApiCalls.pausePatchDeployment =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.pausePatchDeployment(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.osconfig.v1.IPatchDeployment | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.pausePatchDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.pausePatchDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes pausePatchDeployment with error', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.PausePatchDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.PausePatchDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.pausePatchDeployment = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.pausePatchDeployment(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.pausePatchDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.pausePatchDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes pausePatchDeployment with closed client', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.PausePatchDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.PausePatchDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.pausePatchDeployment(request), expectedError);
-    });
-  });
-
-  describe('resumePatchDeployment', () => {
-    it('invokes resumePatchDeployment without error', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.ResumePatchDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.ResumePatchDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.PatchDeployment()
-      );
-      client.innerApiCalls.resumePatchDeployment =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.resumePatchDeployment(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.resumePatchDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.resumePatchDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes resumePatchDeployment without error using callback', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.ResumePatchDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.ResumePatchDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.PatchDeployment()
-      );
-      client.innerApiCalls.resumePatchDeployment =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.resumePatchDeployment(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.osconfig.v1.IPatchDeployment | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.resumePatchDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.resumePatchDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes resumePatchDeployment with error', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.ResumePatchDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.ResumePatchDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.resumePatchDeployment = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.resumePatchDeployment(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.resumePatchDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.resumePatchDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes resumePatchDeployment with closed client', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.ResumePatchDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.ResumePatchDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.resumePatchDeployment(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('listPatchJobs', () => {
-    it('invokes listPatchJobs without error', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.ListPatchJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.ListPatchJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJob()),
-        generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJob()),
-        generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJob()),
-      ];
-      client.innerApiCalls.listPatchJobs = stubSimpleCall(expectedResponse);
-      const [response] = await client.listPatchJobs(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listPatchJobs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listPatchJobs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listPatchJobs without error using callback', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.ListPatchJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.ListPatchJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJob()),
-        generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJob()),
-        generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJob()),
-      ];
-      client.innerApiCalls.listPatchJobs =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listPatchJobs(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.osconfig.v1.IPatchJob[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listPatchJobs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listPatchJobs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listPatchJobs with error', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.ListPatchJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.ListPatchJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listPatchJobs = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listPatchJobs(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listPatchJobs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listPatchJobs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listPatchJobsStream without error', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.ListPatchJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.ListPatchJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJob()),
-        generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJob()),
-        generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJob()),
-      ];
-      client.descriptors.page.listPatchJobs.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listPatchJobsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.osconfig.v1.PatchJob[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.osconfig.v1.PatchJob) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listPatchJobs.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listPatchJobs, request)
-      );
-      assert(
-        (client.descriptors.page.listPatchJobs.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listPatchJobsStream with error', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.ListPatchJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.ListPatchJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listPatchJobs.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listPatchJobsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.osconfig.v1.PatchJob[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.osconfig.v1.PatchJob) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listPatchJobs.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listPatchJobs, request)
-      );
-      assert(
-        (client.descriptors.page.listPatchJobs.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listPatchJobs without error', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.ListPatchJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.ListPatchJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJob()),
-        generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJob()),
-        generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJob()),
-      ];
-      client.descriptors.page.listPatchJobs.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.osconfig.v1.IPatchJob[] = [];
-      const iterable = client.listPatchJobsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listPatchJobs.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listPatchJobs.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listPatchJobs with error', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.ListPatchJobsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.ListPatchJobsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listPatchJobs.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listPatchJobsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.osconfig.v1.IPatchJob[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = osconfigserviceModule.v1.OsConfigServiceClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'osconfig.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listPatchJobs.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listPatchJobs.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('listPatchJobInstanceDetails', () => {
-    it('invokes listPatchJobInstanceDetails without error', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.osconfig.v1.PatchJobInstanceDetails()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.osconfig.v1.PatchJobInstanceDetails()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.osconfig.v1.PatchJobInstanceDetails()
-        ),
-      ];
-      client.innerApiCalls.listPatchJobInstanceDetails =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listPatchJobInstanceDetails(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listPatchJobInstanceDetails as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listPatchJobInstanceDetails as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listPatchJobInstanceDetails without error using callback', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.osconfig.v1.PatchJobInstanceDetails()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.osconfig.v1.PatchJobInstanceDetails()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.osconfig.v1.PatchJobInstanceDetails()
-        ),
-      ];
-      client.innerApiCalls.listPatchJobInstanceDetails =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listPatchJobInstanceDetails(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.osconfig.v1.IPatchJobInstanceDetails[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listPatchJobInstanceDetails as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listPatchJobInstanceDetails as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listPatchJobInstanceDetails with error', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listPatchJobInstanceDetails = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.listPatchJobInstanceDetails(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.listPatchJobInstanceDetails as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listPatchJobInstanceDetails as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listPatchJobInstanceDetailsStream without error', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.osconfig.v1.PatchJobInstanceDetails()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.osconfig.v1.PatchJobInstanceDetails()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.osconfig.v1.PatchJobInstanceDetails()
-        ),
-      ];
-      client.descriptors.page.listPatchJobInstanceDetails.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listPatchJobInstanceDetailsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.osconfig.v1.PatchJobInstanceDetails[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.osconfig.v1.PatchJobInstanceDetails
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'osconfig.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.listPatchJobInstanceDetails
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listPatchJobInstanceDetails, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listPatchJobInstanceDetails
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
 
-    it('invokes listPatchJobInstanceDetailsStream with error', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listPatchJobInstanceDetails.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listPatchJobInstanceDetailsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.osconfig.v1.PatchJobInstanceDetails[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.osconfig.v1.PatchJobInstanceDetails
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'osconfig.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.listPatchJobInstanceDetails
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listPatchJobInstanceDetails, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listPatchJobInstanceDetails
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
 
-    it('uses async iteration with listPatchJobInstanceDetails without error', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.osconfig.v1.PatchJobInstanceDetails()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.osconfig.v1.PatchJobInstanceDetails()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.osconfig.v1.PatchJobInstanceDetails()
-        ),
-      ];
-      client.descriptors.page.listPatchJobInstanceDetails.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.osconfig.v1.IPatchJobInstanceDetails[] =
-        [];
-      const iterable = client.listPatchJobInstanceDetailsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listPatchJobInstanceDetails
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listPatchJobInstanceDetails
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new osconfigserviceModule.v1.OsConfigServiceClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'osconfig.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('uses async iteration with listPatchJobInstanceDetails with error', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listPatchJobInstanceDetails.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listPatchJobInstanceDetailsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.osconfig.v1.IPatchJobInstanceDetails[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new osconfigserviceModule.v1.OsConfigServiceClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'osconfig.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listPatchJobInstanceDetails
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listPatchJobInstanceDetails
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new osconfigserviceModule.v1.OsConfigServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-  describe('listPatchDeployments', () => {
-    it('invokes listPatchDeployments without error', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.ListPatchDeploymentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.ListPatchDeploymentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.osconfig.v1.PatchDeployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.osconfig.v1.PatchDeployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.osconfig.v1.PatchDeployment()
-        ),
-      ];
-      client.innerApiCalls.listPatchDeployments =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listPatchDeployments(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listPatchDeployments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listPatchDeployments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        it('has port', () => {
+            const port = osconfigserviceModule.v1.OsConfigServiceClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.osConfigServiceStub, undefined);
+            await client.initialize();
+            assert(client.osConfigServiceStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.osConfigServiceStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.osConfigServiceStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    it('invokes listPatchDeployments without error using callback', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.ListPatchDeploymentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.ListPatchDeploymentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.osconfig.v1.PatchDeployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.osconfig.v1.PatchDeployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.osconfig.v1.PatchDeployment()
-        ),
-      ];
-      client.innerApiCalls.listPatchDeployments =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listPatchDeployments(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.osconfig.v1.IPatchDeployment[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('executePatchJob', () => {
+        it('invokes executePatchJob without error', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.ExecutePatchJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.ExecutePatchJobRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.PatchJob()
+            );
+            client.innerApiCalls.executePatchJob = stubSimpleCall(expectedResponse);
+            const [response] = await client.executePatchJob(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.executePatchJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.executePatchJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes executePatchJob without error using callback', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.ExecutePatchJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.ExecutePatchJobRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.PatchJob()
+            );
+            client.innerApiCalls.executePatchJob = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.executePatchJob(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.osconfig.v1.IPatchJob|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.executePatchJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.executePatchJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes executePatchJob with error', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.ExecutePatchJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.ExecutePatchJobRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.executePatchJob = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.executePatchJob(request), expectedError);
+            const actualRequest = (client.innerApiCalls.executePatchJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.executePatchJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes executePatchJob with closed client', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.ExecutePatchJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.ExecutePatchJobRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.executePatchJob(request), expectedError);
+        });
+    });
+
+    describe('getPatchJob', () => {
+        it('invokes getPatchJob without error', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.GetPatchJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.GetPatchJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.PatchJob()
+            );
+            client.innerApiCalls.getPatchJob = stubSimpleCall(expectedResponse);
+            const [response] = await client.getPatchJob(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getPatchJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPatchJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPatchJob without error using callback', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.GetPatchJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.GetPatchJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.PatchJob()
+            );
+            client.innerApiCalls.getPatchJob = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getPatchJob(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.osconfig.v1.IPatchJob|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getPatchJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPatchJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPatchJob with error', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.GetPatchJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.GetPatchJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getPatchJob = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getPatchJob(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getPatchJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPatchJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPatchJob with closed client', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.GetPatchJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.GetPatchJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getPatchJob(request), expectedError);
+        });
+    });
+
+    describe('cancelPatchJob', () => {
+        it('invokes cancelPatchJob without error', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.CancelPatchJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.CancelPatchJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.PatchJob()
+            );
+            client.innerApiCalls.cancelPatchJob = stubSimpleCall(expectedResponse);
+            const [response] = await client.cancelPatchJob(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.cancelPatchJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.cancelPatchJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes cancelPatchJob without error using callback', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.CancelPatchJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.CancelPatchJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.PatchJob()
+            );
+            client.innerApiCalls.cancelPatchJob = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.cancelPatchJob(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.osconfig.v1.IPatchJob|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.cancelPatchJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.cancelPatchJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes cancelPatchJob with error', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.CancelPatchJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.CancelPatchJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.cancelPatchJob = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.cancelPatchJob(request), expectedError);
+            const actualRequest = (client.innerApiCalls.cancelPatchJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.cancelPatchJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes cancelPatchJob with closed client', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.CancelPatchJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.CancelPatchJobRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.cancelPatchJob(request), expectedError);
+        });
+    });
+
+    describe('createPatchDeployment', () => {
+        it('invokes createPatchDeployment without error', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.CreatePatchDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.CreatePatchDeploymentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.PatchDeployment()
+            );
+            client.innerApiCalls.createPatchDeployment = stubSimpleCall(expectedResponse);
+            const [response] = await client.createPatchDeployment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createPatchDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPatchDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createPatchDeployment without error using callback', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.CreatePatchDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.CreatePatchDeploymentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.PatchDeployment()
+            );
+            client.innerApiCalls.createPatchDeployment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createPatchDeployment(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.osconfig.v1.IPatchDeployment|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createPatchDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPatchDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createPatchDeployment with error', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.CreatePatchDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.CreatePatchDeploymentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createPatchDeployment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createPatchDeployment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createPatchDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPatchDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createPatchDeployment with closed client', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.CreatePatchDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.CreatePatchDeploymentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createPatchDeployment(request), expectedError);
+        });
+    });
+
+    describe('getPatchDeployment', () => {
+        it('invokes getPatchDeployment without error', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.GetPatchDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.GetPatchDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.PatchDeployment()
+            );
+            client.innerApiCalls.getPatchDeployment = stubSimpleCall(expectedResponse);
+            const [response] = await client.getPatchDeployment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getPatchDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPatchDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPatchDeployment without error using callback', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.GetPatchDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.GetPatchDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.PatchDeployment()
+            );
+            client.innerApiCalls.getPatchDeployment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getPatchDeployment(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.osconfig.v1.IPatchDeployment|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getPatchDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPatchDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPatchDeployment with error', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.GetPatchDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.GetPatchDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getPatchDeployment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getPatchDeployment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getPatchDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPatchDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPatchDeployment with closed client', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.GetPatchDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.GetPatchDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getPatchDeployment(request), expectedError);
+        });
+    });
+
+    describe('deletePatchDeployment', () => {
+        it('invokes deletePatchDeployment without error', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.DeletePatchDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.DeletePatchDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deletePatchDeployment = stubSimpleCall(expectedResponse);
+            const [response] = await client.deletePatchDeployment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deletePatchDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deletePatchDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deletePatchDeployment without error using callback', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.DeletePatchDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.DeletePatchDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deletePatchDeployment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deletePatchDeployment(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deletePatchDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deletePatchDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deletePatchDeployment with error', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.DeletePatchDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.DeletePatchDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deletePatchDeployment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deletePatchDeployment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deletePatchDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deletePatchDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deletePatchDeployment with closed client', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.DeletePatchDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.DeletePatchDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deletePatchDeployment(request), expectedError);
+        });
+    });
+
+    describe('updatePatchDeployment', () => {
+        it('invokes updatePatchDeployment without error', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.UpdatePatchDeploymentRequest()
+            );
+            request.patchDeployment ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.UpdatePatchDeploymentRequest', ['patchDeployment', 'name']);
+            request.patchDeployment.name = defaultValue1;
+            const expectedHeaderRequestParams = `patch_deployment.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.PatchDeployment()
+            );
+            client.innerApiCalls.updatePatchDeployment = stubSimpleCall(expectedResponse);
+            const [response] = await client.updatePatchDeployment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updatePatchDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updatePatchDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updatePatchDeployment without error using callback', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.UpdatePatchDeploymentRequest()
+            );
+            request.patchDeployment ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.UpdatePatchDeploymentRequest', ['patchDeployment', 'name']);
+            request.patchDeployment.name = defaultValue1;
+            const expectedHeaderRequestParams = `patch_deployment.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.PatchDeployment()
+            );
+            client.innerApiCalls.updatePatchDeployment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updatePatchDeployment(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.osconfig.v1.IPatchDeployment|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updatePatchDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updatePatchDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updatePatchDeployment with error', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.UpdatePatchDeploymentRequest()
+            );
+            request.patchDeployment ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.UpdatePatchDeploymentRequest', ['patchDeployment', 'name']);
+            request.patchDeployment.name = defaultValue1;
+            const expectedHeaderRequestParams = `patch_deployment.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updatePatchDeployment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updatePatchDeployment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updatePatchDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updatePatchDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updatePatchDeployment with closed client', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.UpdatePatchDeploymentRequest()
+            );
+            request.patchDeployment ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.UpdatePatchDeploymentRequest', ['patchDeployment', 'name']);
+            request.patchDeployment.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updatePatchDeployment(request), expectedError);
+        });
+    });
+
+    describe('pausePatchDeployment', () => {
+        it('invokes pausePatchDeployment without error', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.PausePatchDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.PausePatchDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.PatchDeployment()
+            );
+            client.innerApiCalls.pausePatchDeployment = stubSimpleCall(expectedResponse);
+            const [response] = await client.pausePatchDeployment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.pausePatchDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.pausePatchDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes pausePatchDeployment without error using callback', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.PausePatchDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.PausePatchDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.PatchDeployment()
+            );
+            client.innerApiCalls.pausePatchDeployment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.pausePatchDeployment(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.osconfig.v1.IPatchDeployment|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.pausePatchDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.pausePatchDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes pausePatchDeployment with error', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.PausePatchDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.PausePatchDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.pausePatchDeployment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.pausePatchDeployment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.pausePatchDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.pausePatchDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes pausePatchDeployment with closed client', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.PausePatchDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.PausePatchDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.pausePatchDeployment(request), expectedError);
+        });
+    });
+
+    describe('resumePatchDeployment', () => {
+        it('invokes resumePatchDeployment without error', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.ResumePatchDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.ResumePatchDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.PatchDeployment()
+            );
+            client.innerApiCalls.resumePatchDeployment = stubSimpleCall(expectedResponse);
+            const [response] = await client.resumePatchDeployment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.resumePatchDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.resumePatchDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes resumePatchDeployment without error using callback', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.ResumePatchDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.ResumePatchDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.PatchDeployment()
+            );
+            client.innerApiCalls.resumePatchDeployment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.resumePatchDeployment(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.osconfig.v1.IPatchDeployment|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.resumePatchDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.resumePatchDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes resumePatchDeployment with error', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.ResumePatchDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.ResumePatchDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.resumePatchDeployment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.resumePatchDeployment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.resumePatchDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.resumePatchDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes resumePatchDeployment with closed client', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.ResumePatchDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.ResumePatchDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.resumePatchDeployment(request), expectedError);
+        });
+    });
+
+    describe('listPatchJobs', () => {
+        it('invokes listPatchJobs without error', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.ListPatchJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.ListPatchJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJob()),
+              generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJob()),
+              generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJob()),
+            ];
+            client.innerApiCalls.listPatchJobs = stubSimpleCall(expectedResponse);
+            const [response] = await client.listPatchJobs(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listPatchJobs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPatchJobs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listPatchJobs without error using callback', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.ListPatchJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.ListPatchJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJob()),
+              generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJob()),
+              generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJob()),
+            ];
+            client.innerApiCalls.listPatchJobs = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listPatchJobs(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.osconfig.v1.IPatchJob[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listPatchJobs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPatchJobs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listPatchJobs with error', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.ListPatchJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.ListPatchJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listPatchJobs = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listPatchJobs(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listPatchJobs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPatchJobs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listPatchJobsStream without error', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.ListPatchJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.ListPatchJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJob()),
+              generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJob()),
+              generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJob()),
+            ];
+            client.descriptors.page.listPatchJobs.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listPatchJobsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.osconfig.v1.PatchJob[] = [];
+                stream.on('data', (response: protos.google.cloud.osconfig.v1.PatchJob) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listPatchJobs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listPatchJobs, request));
+            assert(
+                (client.descriptors.page.listPatchJobs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listPatchJobsStream with error', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.ListPatchJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.ListPatchJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listPatchJobs.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listPatchJobsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.osconfig.v1.PatchJob[] = [];
+                stream.on('data', (response: protos.google.cloud.osconfig.v1.PatchJob) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listPatchJobs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listPatchJobs, request));
+            assert(
+                (client.descriptors.page.listPatchJobs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listPatchJobs without error', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.ListPatchJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.ListPatchJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJob()),
+              generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJob()),
+              generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJob()),
+            ];
+            client.descriptors.page.listPatchJobs.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.osconfig.v1.IPatchJob[] = [];
+            const iterable = client.listPatchJobsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listPatchDeployments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listPatchDeployments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listPatchDeployments with error', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.ListPatchDeploymentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.ListPatchDeploymentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listPatchDeployments = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listPatchDeployments(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listPatchDeployments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listPatchDeployments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listPatchDeploymentsStream without error', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.ListPatchDeploymentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.ListPatchDeploymentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.osconfig.v1.PatchDeployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.osconfig.v1.PatchDeployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.osconfig.v1.PatchDeployment()
-        ),
-      ];
-      client.descriptors.page.listPatchDeployments.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listPatchDeploymentsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.osconfig.v1.PatchDeployment[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.osconfig.v1.PatchDeployment) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listPatchJobs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listPatchJobs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listPatchJobs with error', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.ListPatchJobsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.ListPatchJobsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listPatchJobs.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listPatchJobsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.osconfig.v1.IPatchJob[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listPatchJobs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listPatchJobs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listPatchDeployments.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listPatchDeployments, request)
-      );
-      assert(
-        (client.descriptors.page.listPatchDeployments.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listPatchDeploymentsStream with error', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.ListPatchDeploymentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.ListPatchDeploymentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listPatchDeployments.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listPatchDeploymentsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.osconfig.v1.PatchDeployment[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.osconfig.v1.PatchDeployment) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listPatchJobInstanceDetails', () => {
+        it('invokes listPatchJobInstanceDetails without error', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJobInstanceDetails()),
+              generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJobInstanceDetails()),
+              generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJobInstanceDetails()),
+            ];
+            client.innerApiCalls.listPatchJobInstanceDetails = stubSimpleCall(expectedResponse);
+            const [response] = await client.listPatchJobInstanceDetails(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listPatchJobInstanceDetails as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPatchJobInstanceDetails as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listPatchJobInstanceDetails without error using callback', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJobInstanceDetails()),
+              generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJobInstanceDetails()),
+              generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJobInstanceDetails()),
+            ];
+            client.innerApiCalls.listPatchJobInstanceDetails = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listPatchJobInstanceDetails(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.osconfig.v1.IPatchJobInstanceDetails[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listPatchJobInstanceDetails as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPatchJobInstanceDetails as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listPatchDeployments.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listPatchDeployments, request)
-      );
-      assert(
-        (client.descriptors.page.listPatchDeployments.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
+
+        it('invokes listPatchJobInstanceDetails with error', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listPatchJobInstanceDetails = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listPatchJobInstanceDetails(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listPatchJobInstanceDetails as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPatchJobInstanceDetails as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listPatchJobInstanceDetailsStream without error', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJobInstanceDetails()),
+              generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJobInstanceDetails()),
+              generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJobInstanceDetails()),
+            ];
+            client.descriptors.page.listPatchJobInstanceDetails.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listPatchJobInstanceDetailsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.osconfig.v1.PatchJobInstanceDetails[] = [];
+                stream.on('data', (response: protos.google.cloud.osconfig.v1.PatchJobInstanceDetails) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listPatchJobInstanceDetails.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listPatchJobInstanceDetails, request));
+            assert(
+                (client.descriptors.page.listPatchJobInstanceDetails.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listPatchJobInstanceDetailsStream with error', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listPatchJobInstanceDetails.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listPatchJobInstanceDetailsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.osconfig.v1.PatchJobInstanceDetails[] = [];
+                stream.on('data', (response: protos.google.cloud.osconfig.v1.PatchJobInstanceDetails) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listPatchJobInstanceDetails.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listPatchJobInstanceDetails, request));
+            assert(
+                (client.descriptors.page.listPatchJobInstanceDetails.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listPatchJobInstanceDetails without error', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJobInstanceDetails()),
+              generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJobInstanceDetails()),
+              generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJobInstanceDetails()),
+            ];
+            client.descriptors.page.listPatchJobInstanceDetails.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.osconfig.v1.IPatchJobInstanceDetails[] = [];
+            const iterable = client.listPatchJobInstanceDetailsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listPatchJobInstanceDetails.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listPatchJobInstanceDetails.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listPatchJobInstanceDetails with error', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listPatchJobInstanceDetails.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listPatchJobInstanceDetailsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.osconfig.v1.IPatchJobInstanceDetails[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listPatchJobInstanceDetails.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listPatchJobInstanceDetails.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    it('uses async iteration with listPatchDeployments without error', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.ListPatchDeploymentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.ListPatchDeploymentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.osconfig.v1.PatchDeployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.osconfig.v1.PatchDeployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.osconfig.v1.PatchDeployment()
-        ),
-      ];
-      client.descriptors.page.listPatchDeployments.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.osconfig.v1.IPatchDeployment[] = [];
-      const iterable = client.listPatchDeploymentsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listPatchDeployments.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listPatchDeployments.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
+    describe('listPatchDeployments', () => {
+        it('invokes listPatchDeployments without error', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.ListPatchDeploymentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.ListPatchDeploymentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchDeployment()),
+              generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchDeployment()),
+              generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchDeployment()),
+            ];
+            client.innerApiCalls.listPatchDeployments = stubSimpleCall(expectedResponse);
+            const [response] = await client.listPatchDeployments(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listPatchDeployments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPatchDeployments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listPatchDeployments without error using callback', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.ListPatchDeploymentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.ListPatchDeploymentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchDeployment()),
+              generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchDeployment()),
+              generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchDeployment()),
+            ];
+            client.innerApiCalls.listPatchDeployments = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listPatchDeployments(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.osconfig.v1.IPatchDeployment[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listPatchDeployments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPatchDeployments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listPatchDeployments with error', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.ListPatchDeploymentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.ListPatchDeploymentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listPatchDeployments = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listPatchDeployments(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listPatchDeployments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPatchDeployments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listPatchDeploymentsStream without error', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.ListPatchDeploymentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.ListPatchDeploymentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchDeployment()),
+              generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchDeployment()),
+              generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchDeployment()),
+            ];
+            client.descriptors.page.listPatchDeployments.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listPatchDeploymentsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.osconfig.v1.PatchDeployment[] = [];
+                stream.on('data', (response: protos.google.cloud.osconfig.v1.PatchDeployment) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listPatchDeployments.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listPatchDeployments, request));
+            assert(
+                (client.descriptors.page.listPatchDeployments.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listPatchDeploymentsStream with error', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.ListPatchDeploymentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.ListPatchDeploymentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listPatchDeployments.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listPatchDeploymentsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.osconfig.v1.PatchDeployment[] = [];
+                stream.on('data', (response: protos.google.cloud.osconfig.v1.PatchDeployment) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listPatchDeployments.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listPatchDeployments, request));
+            assert(
+                (client.descriptors.page.listPatchDeployments.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listPatchDeployments without error', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.ListPatchDeploymentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.ListPatchDeploymentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchDeployment()),
+              generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchDeployment()),
+              generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchDeployment()),
+            ];
+            client.descriptors.page.listPatchDeployments.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.osconfig.v1.IPatchDeployment[] = [];
+            const iterable = client.listPatchDeploymentsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listPatchDeployments.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listPatchDeployments.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listPatchDeployments with error', async () => {
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.osconfig.v1.ListPatchDeploymentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.osconfig.v1.ListPatchDeploymentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listPatchDeployments.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listPatchDeploymentsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.osconfig.v1.IPatchDeployment[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listPatchDeployments.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listPatchDeployments.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    it('uses async iteration with listPatchDeployments with error', async () => {
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.osconfig.v1.ListPatchDeploymentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.osconfig.v1.ListPatchDeploymentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listPatchDeployments.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listPatchDeploymentsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.osconfig.v1.IPatchDeployment[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listPatchDeployments.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listPatchDeployments.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
+    describe('Path templates', () => {
+
+        describe('inventory', async () => {
+            const fakePath = "/rendered/path/inventory";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                instance: "instanceValue",
+            };
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.inventoryPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.inventoryPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('inventoryPath', () => {
+                const result = client.inventoryPath("projectValue", "locationValue", "instanceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.inventoryPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromInventoryName', () => {
+                const result = client.matchProjectFromInventoryName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.inventoryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromInventoryName', () => {
+                const result = client.matchLocationFromInventoryName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.inventoryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInstanceFromInventoryName', () => {
+                const result = client.matchInstanceFromInventoryName(fakePath);
+                assert.strictEqual(result, "instanceValue");
+                assert((client.pathTemplates.inventoryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('oSPolicyAssignment', async () => {
+            const fakePath = "/rendered/path/oSPolicyAssignment";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                os_policy_assignment: "osPolicyAssignmentValue",
+            };
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.oSPolicyAssignmentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.oSPolicyAssignmentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('oSPolicyAssignmentPath', () => {
+                const result = client.oSPolicyAssignmentPath("projectValue", "locationValue", "osPolicyAssignmentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.oSPolicyAssignmentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromOSPolicyAssignmentName', () => {
+                const result = client.matchProjectFromOSPolicyAssignmentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.oSPolicyAssignmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOSPolicyAssignmentName', () => {
+                const result = client.matchLocationFromOSPolicyAssignmentName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.oSPolicyAssignmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchOsPolicyAssignmentFromOSPolicyAssignmentName', () => {
+                const result = client.matchOsPolicyAssignmentFromOSPolicyAssignmentName(fakePath);
+                assert.strictEqual(result, "osPolicyAssignmentValue");
+                assert((client.pathTemplates.oSPolicyAssignmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('oSPolicyAssignmentReport', async () => {
+            const fakePath = "/rendered/path/oSPolicyAssignmentReport";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                instance: "instanceValue",
+                assignment: "assignmentValue",
+            };
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.oSPolicyAssignmentReportPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.oSPolicyAssignmentReportPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('oSPolicyAssignmentReportPath', () => {
+                const result = client.oSPolicyAssignmentReportPath("projectValue", "locationValue", "instanceValue", "assignmentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.oSPolicyAssignmentReportPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromOSPolicyAssignmentReportName', () => {
+                const result = client.matchProjectFromOSPolicyAssignmentReportName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.oSPolicyAssignmentReportPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOSPolicyAssignmentReportName', () => {
+                const result = client.matchLocationFromOSPolicyAssignmentReportName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.oSPolicyAssignmentReportPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInstanceFromOSPolicyAssignmentReportName', () => {
+                const result = client.matchInstanceFromOSPolicyAssignmentReportName(fakePath);
+                assert.strictEqual(result, "instanceValue");
+                assert((client.pathTemplates.oSPolicyAssignmentReportPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAssignmentFromOSPolicyAssignmentReportName', () => {
+                const result = client.matchAssignmentFromOSPolicyAssignmentReportName(fakePath);
+                assert.strictEqual(result, "assignmentValue");
+                assert((client.pathTemplates.oSPolicyAssignmentReportPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('patchDeployment', async () => {
+            const fakePath = "/rendered/path/patchDeployment";
+            const expectedParameters = {
+                project: "projectValue",
+                patch_deployment: "patchDeploymentValue",
+            };
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.patchDeploymentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.patchDeploymentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('patchDeploymentPath', () => {
+                const result = client.patchDeploymentPath("projectValue", "patchDeploymentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.patchDeploymentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromPatchDeploymentName', () => {
+                const result = client.matchProjectFromPatchDeploymentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.patchDeploymentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchPatchDeploymentFromPatchDeploymentName', () => {
+                const result = client.matchPatchDeploymentFromPatchDeploymentName(fakePath);
+                assert.strictEqual(result, "patchDeploymentValue");
+                assert((client.pathTemplates.patchDeploymentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('patchJob', async () => {
+            const fakePath = "/rendered/path/patchJob";
+            const expectedParameters = {
+                project: "projectValue",
+                patch_job: "patchJobValue",
+            };
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.patchJobPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.patchJobPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('patchJobPath', () => {
+                const result = client.patchJobPath("projectValue", "patchJobValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.patchJobPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromPatchJobName', () => {
+                const result = client.matchProjectFromPatchJobName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.patchJobPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchPatchJobFromPatchJobName', () => {
+                const result = client.matchPatchJobFromPatchJobName(fakePath);
+                assert.strictEqual(result, "patchJobValue");
+                assert((client.pathTemplates.patchJobPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('vulnerabilityReport', async () => {
+            const fakePath = "/rendered/path/vulnerabilityReport";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                instance: "instanceValue",
+            };
+            const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.vulnerabilityReportPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.vulnerabilityReportPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('vulnerabilityReportPath', () => {
+                const result = client.vulnerabilityReportPath("projectValue", "locationValue", "instanceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.vulnerabilityReportPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromVulnerabilityReportName', () => {
+                const result = client.matchProjectFromVulnerabilityReportName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.vulnerabilityReportPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromVulnerabilityReportName', () => {
+                const result = client.matchLocationFromVulnerabilityReportName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.vulnerabilityReportPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInstanceFromVulnerabilityReportName', () => {
+                const result = client.matchInstanceFromVulnerabilityReportName(fakePath);
+                assert.strictEqual(result, "instanceValue");
+                assert((client.pathTemplates.vulnerabilityReportPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-  });
-
-  describe('Path templates', () => {
-    describe('inventory', async () => {
-      const fakePath = '/rendered/path/inventory';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        instance: 'instanceValue',
-      };
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.inventoryPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.inventoryPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('inventoryPath', () => {
-        const result = client.inventoryPath(
-          'projectValue',
-          'locationValue',
-          'instanceValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.inventoryPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromInventoryName', () => {
-        const result = client.matchProjectFromInventoryName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.inventoryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromInventoryName', () => {
-        const result = client.matchLocationFromInventoryName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.inventoryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchInstanceFromInventoryName', () => {
-        const result = client.matchInstanceFromInventoryName(fakePath);
-        assert.strictEqual(result, 'instanceValue');
-        assert(
-          (client.pathTemplates.inventoryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('oSPolicyAssignment', async () => {
-      const fakePath = '/rendered/path/oSPolicyAssignment';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        os_policy_assignment: 'osPolicyAssignmentValue',
-      };
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.oSPolicyAssignmentPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.oSPolicyAssignmentPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('oSPolicyAssignmentPath', () => {
-        const result = client.oSPolicyAssignmentPath(
-          'projectValue',
-          'locationValue',
-          'osPolicyAssignmentValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.oSPolicyAssignmentPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromOSPolicyAssignmentName', () => {
-        const result = client.matchProjectFromOSPolicyAssignmentName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.oSPolicyAssignmentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromOSPolicyAssignmentName', () => {
-        const result = client.matchLocationFromOSPolicyAssignmentName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.oSPolicyAssignmentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchOsPolicyAssignmentFromOSPolicyAssignmentName', () => {
-        const result =
-          client.matchOsPolicyAssignmentFromOSPolicyAssignmentName(fakePath);
-        assert.strictEqual(result, 'osPolicyAssignmentValue');
-        assert(
-          (
-            client.pathTemplates.oSPolicyAssignmentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('oSPolicyAssignmentReport', async () => {
-      const fakePath = '/rendered/path/oSPolicyAssignmentReport';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        instance: 'instanceValue',
-        assignment: 'assignmentValue',
-      };
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.oSPolicyAssignmentReportPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.oSPolicyAssignmentReportPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('oSPolicyAssignmentReportPath', () => {
-        const result = client.oSPolicyAssignmentReportPath(
-          'projectValue',
-          'locationValue',
-          'instanceValue',
-          'assignmentValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.oSPolicyAssignmentReportPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromOSPolicyAssignmentReportName', () => {
-        const result =
-          client.matchProjectFromOSPolicyAssignmentReportName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.oSPolicyAssignmentReportPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromOSPolicyAssignmentReportName', () => {
-        const result =
-          client.matchLocationFromOSPolicyAssignmentReportName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.oSPolicyAssignmentReportPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchInstanceFromOSPolicyAssignmentReportName', () => {
-        const result =
-          client.matchInstanceFromOSPolicyAssignmentReportName(fakePath);
-        assert.strictEqual(result, 'instanceValue');
-        assert(
-          (
-            client.pathTemplates.oSPolicyAssignmentReportPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAssignmentFromOSPolicyAssignmentReportName', () => {
-        const result =
-          client.matchAssignmentFromOSPolicyAssignmentReportName(fakePath);
-        assert.strictEqual(result, 'assignmentValue');
-        assert(
-          (
-            client.pathTemplates.oSPolicyAssignmentReportPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('patchDeployment', async () => {
-      const fakePath = '/rendered/path/patchDeployment';
-      const expectedParameters = {
-        project: 'projectValue',
-        patch_deployment: 'patchDeploymentValue',
-      };
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.patchDeploymentPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.patchDeploymentPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('patchDeploymentPath', () => {
-        const result = client.patchDeploymentPath(
-          'projectValue',
-          'patchDeploymentValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.patchDeploymentPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromPatchDeploymentName', () => {
-        const result = client.matchProjectFromPatchDeploymentName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.patchDeploymentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchPatchDeploymentFromPatchDeploymentName', () => {
-        const result =
-          client.matchPatchDeploymentFromPatchDeploymentName(fakePath);
-        assert.strictEqual(result, 'patchDeploymentValue');
-        assert(
-          (client.pathTemplates.patchDeploymentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('patchJob', async () => {
-      const fakePath = '/rendered/path/patchJob';
-      const expectedParameters = {
-        project: 'projectValue',
-        patch_job: 'patchJobValue',
-      };
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.patchJobPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.patchJobPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('patchJobPath', () => {
-        const result = client.patchJobPath('projectValue', 'patchJobValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.patchJobPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromPatchJobName', () => {
-        const result = client.matchProjectFromPatchJobName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.patchJobPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchPatchJobFromPatchJobName', () => {
-        const result = client.matchPatchJobFromPatchJobName(fakePath);
-        assert.strictEqual(result, 'patchJobValue');
-        assert(
-          (client.pathTemplates.patchJobPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('vulnerabilityReport', async () => {
-      const fakePath = '/rendered/path/vulnerabilityReport';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        instance: 'instanceValue',
-      };
-      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.vulnerabilityReportPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.vulnerabilityReportPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('vulnerabilityReportPath', () => {
-        const result = client.vulnerabilityReportPath(
-          'projectValue',
-          'locationValue',
-          'instanceValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.vulnerabilityReportPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromVulnerabilityReportName', () => {
-        const result = client.matchProjectFromVulnerabilityReportName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.vulnerabilityReportPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromVulnerabilityReportName', () => {
-        const result =
-          client.matchLocationFromVulnerabilityReportName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.vulnerabilityReportPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchInstanceFromVulnerabilityReportName', () => {
-        const result =
-          client.matchInstanceFromVulnerabilityReportName(fakePath);
-        assert.strictEqual(result, 'instanceValue');
-        assert(
-          (
-            client.pathTemplates.vulnerabilityReportPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

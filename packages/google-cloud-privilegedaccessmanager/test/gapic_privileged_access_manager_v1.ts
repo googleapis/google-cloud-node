@@ -25,4505 +25,3293 @@ import * as privilegedaccessmanagerModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {
-  protobuf,
-  LROperation,
-  operationsProtos,
-  LocationProtos,
-} from 'google-gax';
+import {protobuf, LROperation, operationsProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubLongRunningCall<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().rejects(callError)
-    : sinon.stub().resolves([mockOperation]);
+function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
 }
 
-function stubLongRunningCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().callsArgWith(2, callError)
-    : sinon.stub().callsArgWith(2, null, mockOperation);
+function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.PrivilegedAccessManagerClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'privilegedaccessmanager.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient
-            .servicePath;
-        assert.strictEqual(
-          servicePath,
-          'privilegedaccessmanager.googleapis.com'
-        );
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient
-            .apiEndpoint;
-        assert.strictEqual(
-          apiEndpoint,
-          'privilegedaccessmanager.googleapis.com'
-        );
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          universeDomain: 'example.com',
-        });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'privilegedaccessmanager.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          universe_domain: 'example.com',
-        });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'privilegedaccessmanager.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'privilegedaccessmanager.example.com'
-          );
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'privilegedaccessmanager.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-              universeDomain: 'configured.example.com',
+        it('has universeDomain', () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
+        });
+
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient.servicePath;
+                assert.strictEqual(servicePath, 'privilegedaccessmanager.googleapis.com');
+                assert(stub.called);
+                stub.restore();
             });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'privilegedaccessmanager.configured.example.com'
-          );
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
-        });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port =
-        privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
-
-    it('should create a client with no option', () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          fallback: true,
-        });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      assert.strictEqual(client.privilegedAccessManagerStub, undefined);
-      await client.initialize();
-      assert(client.privilegedAccessManagerStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.privilegedAccessManagerStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      assert.strictEqual(client.privilegedAccessManagerStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('checkOnboardingStatus', () => {
-    it('invokes checkOnboardingStatus without error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.CheckOnboardingStatusRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.CheckOnboardingStatusRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.CheckOnboardingStatusResponse()
-      );
-      client.innerApiCalls.checkOnboardingStatus =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.checkOnboardingStatus(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.checkOnboardingStatus as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.checkOnboardingStatus as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkOnboardingStatus without error using callback', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.CheckOnboardingStatusRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.CheckOnboardingStatusRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.CheckOnboardingStatusResponse()
-      );
-      client.innerApiCalls.checkOnboardingStatus =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.checkOnboardingStatus(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.checkOnboardingStatus as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.checkOnboardingStatus as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkOnboardingStatus with error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.CheckOnboardingStatusRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.CheckOnboardingStatusRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.checkOnboardingStatus = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkOnboardingStatus(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.checkOnboardingStatus as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.checkOnboardingStatus as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkOnboardingStatus with closed client', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.CheckOnboardingStatusRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.CheckOnboardingStatusRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.checkOnboardingStatus(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('getEntitlement', () => {
-    it('invokes getEntitlement without error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.GetEntitlementRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.GetEntitlementRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()
-      );
-      client.innerApiCalls.getEntitlement = stubSimpleCall(expectedResponse);
-      const [response] = await client.getEntitlement(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getEntitlement as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getEntitlement as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getEntitlement without error using callback', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.GetEntitlementRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.GetEntitlementRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()
-      );
-      client.innerApiCalls.getEntitlement =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getEntitlement(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.privilegedaccessmanager.v1.IEntitlement | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getEntitlement as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getEntitlement as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getEntitlement with error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.GetEntitlementRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.GetEntitlementRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getEntitlement = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getEntitlement(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getEntitlement as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getEntitlement as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getEntitlement with closed client', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.GetEntitlementRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.GetEntitlementRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getEntitlement(request), expectedError);
-    });
-  });
-
-  describe('getGrant', () => {
-    it('invokes getGrant without error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.GetGrantRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.GetGrantRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.Grant()
-      );
-      client.innerApiCalls.getGrant = stubSimpleCall(expectedResponse);
-      const [response] = await client.getGrant(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getGrant as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getGrant as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getGrant without error using callback', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.GetGrantRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.GetGrantRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.Grant()
-      );
-      client.innerApiCalls.getGrant =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getGrant(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.privilegedaccessmanager.v1.IGrant | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getGrant as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getGrant as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getGrant with error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.GetGrantRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.GetGrantRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getGrant = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getGrant(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getGrant as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getGrant as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getGrant with closed client', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.GetGrantRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.GetGrantRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getGrant(request), expectedError);
-    });
-  });
-
-  describe('createGrant', () => {
-    it('invokes createGrant without error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.CreateGrantRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.CreateGrantRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.Grant()
-      );
-      client.innerApiCalls.createGrant = stubSimpleCall(expectedResponse);
-      const [response] = await client.createGrant(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createGrant as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createGrant as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createGrant without error using callback', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.CreateGrantRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.CreateGrantRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.Grant()
-      );
-      client.innerApiCalls.createGrant =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createGrant(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.privilegedaccessmanager.v1.IGrant | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createGrant as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createGrant as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createGrant with error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.CreateGrantRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.CreateGrantRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createGrant = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createGrant(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createGrant as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createGrant as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createGrant with closed client', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.CreateGrantRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.CreateGrantRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createGrant(request), expectedError);
-    });
-  });
-
-  describe('approveGrant', () => {
-    it('invokes approveGrant without error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.ApproveGrantRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.ApproveGrantRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.Grant()
-      );
-      client.innerApiCalls.approveGrant = stubSimpleCall(expectedResponse);
-      const [response] = await client.approveGrant(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.approveGrant as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.approveGrant as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes approveGrant without error using callback', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.ApproveGrantRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.ApproveGrantRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.Grant()
-      );
-      client.innerApiCalls.approveGrant =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.approveGrant(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.privilegedaccessmanager.v1.IGrant | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.approveGrant as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.approveGrant as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes approveGrant with error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.ApproveGrantRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.ApproveGrantRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.approveGrant = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.approveGrant(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.approveGrant as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.approveGrant as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes approveGrant with closed client', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.ApproveGrantRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.ApproveGrantRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.approveGrant(request), expectedError);
-    });
-  });
-
-  describe('denyGrant', () => {
-    it('invokes denyGrant without error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.DenyGrantRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.DenyGrantRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.Grant()
-      );
-      client.innerApiCalls.denyGrant = stubSimpleCall(expectedResponse);
-      const [response] = await client.denyGrant(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.denyGrant as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.denyGrant as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes denyGrant without error using callback', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.DenyGrantRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.DenyGrantRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.Grant()
-      );
-      client.innerApiCalls.denyGrant =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.denyGrant(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.privilegedaccessmanager.v1.IGrant | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.denyGrant as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.denyGrant as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes denyGrant with error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.DenyGrantRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.DenyGrantRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.denyGrant = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.denyGrant(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.denyGrant as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.denyGrant as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes denyGrant with closed client', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.DenyGrantRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.DenyGrantRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.denyGrant(request), expectedError);
-    });
-  });
-
-  describe('createEntitlement', () => {
-    it('invokes createEntitlement without error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.CreateEntitlementRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.CreateEntitlementRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createEntitlement =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createEntitlement(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createEntitlement as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createEntitlement as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createEntitlement without error using callback', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.CreateEntitlementRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.CreateEntitlementRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createEntitlement =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createEntitlement(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
-              protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
-        protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createEntitlement as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createEntitlement as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createEntitlement with call error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.CreateEntitlementRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.CreateEntitlementRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createEntitlement = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createEntitlement(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createEntitlement as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createEntitlement as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createEntitlement with LRO error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.CreateEntitlementRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.CreateEntitlementRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createEntitlement = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createEntitlement(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createEntitlement as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createEntitlement as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateEntitlementProgress without error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateEntitlementProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateEntitlementProgress with error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateEntitlementProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteEntitlement', () => {
-    it('invokes deleteEntitlement without error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.DeleteEntitlementRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.DeleteEntitlementRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteEntitlement =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteEntitlement(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteEntitlement as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteEntitlement as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteEntitlement without error using callback', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.DeleteEntitlementRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.DeleteEntitlementRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteEntitlement =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteEntitlement(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
-              protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
-        protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteEntitlement as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteEntitlement as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteEntitlement with call error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.DeleteEntitlementRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.DeleteEntitlementRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteEntitlement = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteEntitlement(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteEntitlement as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteEntitlement as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteEntitlement with LRO error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.DeleteEntitlementRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.DeleteEntitlementRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteEntitlement = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteEntitlement(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteEntitlement as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteEntitlement as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteEntitlementProgress without error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteEntitlementProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteEntitlementProgress with error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteEntitlementProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateEntitlement', () => {
-    it('invokes updateEntitlement without error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.UpdateEntitlementRequest()
-      );
-      request.entitlement ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.UpdateEntitlementRequest',
-        ['entitlement', 'name']
-      );
-      request.entitlement.name = defaultValue1;
-      const expectedHeaderRequestParams = `entitlement.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateEntitlement =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateEntitlement(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateEntitlement as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateEntitlement as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateEntitlement without error using callback', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.UpdateEntitlementRequest()
-      );
-      request.entitlement ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.UpdateEntitlementRequest',
-        ['entitlement', 'name']
-      );
-      request.entitlement.name = defaultValue1;
-      const expectedHeaderRequestParams = `entitlement.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateEntitlement =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateEntitlement(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
-              protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
-        protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateEntitlement as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateEntitlement as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateEntitlement with call error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.UpdateEntitlementRequest()
-      );
-      request.entitlement ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.UpdateEntitlementRequest',
-        ['entitlement', 'name']
-      );
-      request.entitlement.name = defaultValue1;
-      const expectedHeaderRequestParams = `entitlement.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateEntitlement = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateEntitlement(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateEntitlement as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateEntitlement as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateEntitlement with LRO error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.UpdateEntitlementRequest()
-      );
-      request.entitlement ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.UpdateEntitlementRequest',
-        ['entitlement', 'name']
-      );
-      request.entitlement.name = defaultValue1;
-      const expectedHeaderRequestParams = `entitlement.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateEntitlement = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateEntitlement(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateEntitlement as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateEntitlement as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateEntitlementProgress without error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateEntitlementProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateEntitlementProgress with error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateEntitlementProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('revokeGrant', () => {
-    it('invokes revokeGrant without error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.RevokeGrantRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.RevokeGrantRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.revokeGrant = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.revokeGrant(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.revokeGrant as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.revokeGrant as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes revokeGrant without error using callback', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.RevokeGrantRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.RevokeGrantRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.revokeGrant =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.revokeGrant(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-              protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-        protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.revokeGrant as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.revokeGrant as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes revokeGrant with call error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.RevokeGrantRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.RevokeGrantRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.revokeGrant = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.revokeGrant(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.revokeGrant as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.revokeGrant as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes revokeGrant with LRO error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.RevokeGrantRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.RevokeGrantRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.revokeGrant = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.revokeGrant(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.revokeGrant as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.revokeGrant as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkRevokeGrantProgress without error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkRevokeGrantProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkRevokeGrantProgress with error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkRevokeGrantProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('listEntitlements', () => {
-    it('invokes listEntitlements without error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.ListEntitlementsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.ListEntitlementsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()
-        ),
-      ];
-      client.innerApiCalls.listEntitlements = stubSimpleCall(expectedResponse);
-      const [response] = await client.listEntitlements(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listEntitlements as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listEntitlements as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listEntitlements without error using callback', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.ListEntitlementsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.ListEntitlementsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()
-        ),
-      ];
-      client.innerApiCalls.listEntitlements =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listEntitlements(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.privilegedaccessmanager.v1.IEntitlement[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listEntitlements as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listEntitlements as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listEntitlements with error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.ListEntitlementsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.ListEntitlementsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listEntitlements = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listEntitlements(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listEntitlements as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listEntitlements as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listEntitlementsStream without error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.ListEntitlementsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.ListEntitlementsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()
-        ),
-      ];
-      client.descriptors.page.listEntitlements.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listEntitlementsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.privilegedaccessmanager.v1.Entitlement[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.privilegedaccessmanager.v1.Entitlement
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listEntitlements.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listEntitlements, request)
-      );
-      assert(
-        (client.descriptors.page.listEntitlements.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listEntitlementsStream with error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.ListEntitlementsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.ListEntitlementsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listEntitlements.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listEntitlementsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.privilegedaccessmanager.v1.Entitlement[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.privilegedaccessmanager.v1.Entitlement
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listEntitlements.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listEntitlements, request)
-      );
-      assert(
-        (client.descriptors.page.listEntitlements.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listEntitlements without error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.ListEntitlementsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.ListEntitlementsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()
-        ),
-      ];
-      client.descriptors.page.listEntitlements.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.privilegedaccessmanager.v1.IEntitlement[] =
-        [];
-      const iterable = client.listEntitlementsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listEntitlements.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listEntitlements.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listEntitlements with error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.ListEntitlementsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.ListEntitlementsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listEntitlements.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listEntitlementsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.privilegedaccessmanager.v1.IEntitlement[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'privilegedaccessmanager.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listEntitlements.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listEntitlements.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'privilegedaccessmanager.example.com');
+        });
 
-  describe('searchEntitlements', () => {
-    it('invokes searchEntitlements without error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'privilegedaccessmanager.example.com');
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()
-        ),
-      ];
-      client.innerApiCalls.searchEntitlements =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.searchEntitlements(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.searchEntitlements as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.searchEntitlements as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
 
-    it('invokes searchEntitlements without error using callback', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()
-        ),
-      ];
-      client.innerApiCalls.searchEntitlements =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.searchEntitlements(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.privilegedaccessmanager.v1.IEntitlement[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.searchEntitlements as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.searchEntitlements as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'privilegedaccessmanager.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('invokes searchEntitlements with error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.searchEntitlements = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.searchEntitlements(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.searchEntitlements as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.searchEntitlements as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes searchEntitlementsStream without error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()
-        ),
-      ];
-      client.descriptors.page.searchEntitlements.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.searchEntitlementsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.privilegedaccessmanager.v1.Entitlement[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.privilegedaccessmanager.v1.Entitlement
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.searchEntitlements.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.searchEntitlements, request)
-      );
-      assert(
-        (client.descriptors.page.searchEntitlements.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes searchEntitlementsStream with error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.searchEntitlements.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.searchEntitlementsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.privilegedaccessmanager.v1.Entitlement[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.privilegedaccessmanager.v1.Entitlement
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.searchEntitlements.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.searchEntitlements, request)
-      );
-      assert(
-        (client.descriptors.page.searchEntitlements.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with searchEntitlements without error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()
-        ),
-      ];
-      client.descriptors.page.searchEntitlements.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.privilegedaccessmanager.v1.IEntitlement[] =
-        [];
-      const iterable = client.searchEntitlementsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.searchEntitlements.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.searchEntitlements.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with searchEntitlements with error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.searchEntitlements.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.searchEntitlementsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.privilegedaccessmanager.v1.IEntitlement[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'privilegedaccessmanager.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.searchEntitlements.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.searchEntitlements.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('listGrants', () => {
-    it('invokes listGrants without error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.ListGrantsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.ListGrantsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Grant()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Grant()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Grant()
-        ),
-      ];
-      client.innerApiCalls.listGrants = stubSimpleCall(expectedResponse);
-      const [response] = await client.listGrants(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listGrants as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listGrants as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+
+        it('has port', () => {
+            const port = privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.privilegedAccessManagerStub, undefined);
+            await client.initialize();
+            assert(client.privilegedAccessManagerStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.privilegedAccessManagerStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.privilegedAccessManagerStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    it('invokes listGrants without error using callback', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('checkOnboardingStatus', () => {
+        it('invokes checkOnboardingStatus without error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.CheckOnboardingStatusRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.CheckOnboardingStatusRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.CheckOnboardingStatusResponse()
+            );
+            client.innerApiCalls.checkOnboardingStatus = stubSimpleCall(expectedResponse);
+            const [response] = await client.checkOnboardingStatus(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.checkOnboardingStatus as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.checkOnboardingStatus as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.ListGrantsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.ListGrantsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Grant()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Grant()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Grant()
-        ),
-      ];
-      client.innerApiCalls.listGrants =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listGrants(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.privilegedaccessmanager.v1.IGrant[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+
+        it('invokes checkOnboardingStatus without error using callback', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.CheckOnboardingStatusRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.CheckOnboardingStatusRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.CheckOnboardingStatusResponse()
+            );
+            client.innerApiCalls.checkOnboardingStatus = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.checkOnboardingStatus(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.checkOnboardingStatus as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.checkOnboardingStatus as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkOnboardingStatus with error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.CheckOnboardingStatusRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.CheckOnboardingStatusRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.checkOnboardingStatus = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkOnboardingStatus(request), expectedError);
+            const actualRequest = (client.innerApiCalls.checkOnboardingStatus as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.checkOnboardingStatus as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkOnboardingStatus with closed client', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.CheckOnboardingStatusRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.CheckOnboardingStatusRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.checkOnboardingStatus(request), expectedError);
+        });
+    });
+
+    describe('getEntitlement', () => {
+        it('invokes getEntitlement without error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.GetEntitlementRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.GetEntitlementRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()
+            );
+            client.innerApiCalls.getEntitlement = stubSimpleCall(expectedResponse);
+            const [response] = await client.getEntitlement(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getEntitlement as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getEntitlement as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getEntitlement without error using callback', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.GetEntitlementRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.GetEntitlementRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()
+            );
+            client.innerApiCalls.getEntitlement = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getEntitlement(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.privilegedaccessmanager.v1.IEntitlement|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getEntitlement as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getEntitlement as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getEntitlement with error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.GetEntitlementRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.GetEntitlementRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getEntitlement = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getEntitlement(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getEntitlement as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getEntitlement as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getEntitlement with closed client', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.GetEntitlementRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.GetEntitlementRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getEntitlement(request), expectedError);
+        });
+    });
+
+    describe('getGrant', () => {
+        it('invokes getGrant without error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.GetGrantRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.GetGrantRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.Grant()
+            );
+            client.innerApiCalls.getGrant = stubSimpleCall(expectedResponse);
+            const [response] = await client.getGrant(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getGrant as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getGrant as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getGrant without error using callback', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.GetGrantRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.GetGrantRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.Grant()
+            );
+            client.innerApiCalls.getGrant = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getGrant(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.privilegedaccessmanager.v1.IGrant|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getGrant as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getGrant as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getGrant with error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.GetGrantRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.GetGrantRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getGrant = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getGrant(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getGrant as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getGrant as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getGrant with closed client', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.GetGrantRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.GetGrantRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getGrant(request), expectedError);
+        });
+    });
+
+    describe('createGrant', () => {
+        it('invokes createGrant without error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.CreateGrantRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.CreateGrantRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.Grant()
+            );
+            client.innerApiCalls.createGrant = stubSimpleCall(expectedResponse);
+            const [response] = await client.createGrant(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createGrant as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createGrant as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createGrant without error using callback', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.CreateGrantRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.CreateGrantRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.Grant()
+            );
+            client.innerApiCalls.createGrant = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createGrant(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.privilegedaccessmanager.v1.IGrant|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createGrant as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createGrant as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createGrant with error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.CreateGrantRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.CreateGrantRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createGrant = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createGrant(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createGrant as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createGrant as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createGrant with closed client', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.CreateGrantRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.CreateGrantRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createGrant(request), expectedError);
+        });
+    });
+
+    describe('approveGrant', () => {
+        it('invokes approveGrant without error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.ApproveGrantRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.ApproveGrantRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.Grant()
+            );
+            client.innerApiCalls.approveGrant = stubSimpleCall(expectedResponse);
+            const [response] = await client.approveGrant(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.approveGrant as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.approveGrant as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes approveGrant without error using callback', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.ApproveGrantRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.ApproveGrantRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.Grant()
+            );
+            client.innerApiCalls.approveGrant = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.approveGrant(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.privilegedaccessmanager.v1.IGrant|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.approveGrant as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.approveGrant as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes approveGrant with error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.ApproveGrantRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.ApproveGrantRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.approveGrant = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.approveGrant(request), expectedError);
+            const actualRequest = (client.innerApiCalls.approveGrant as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.approveGrant as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes approveGrant with closed client', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.ApproveGrantRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.ApproveGrantRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.approveGrant(request), expectedError);
+        });
+    });
+
+    describe('denyGrant', () => {
+        it('invokes denyGrant without error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.DenyGrantRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.DenyGrantRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.Grant()
+            );
+            client.innerApiCalls.denyGrant = stubSimpleCall(expectedResponse);
+            const [response] = await client.denyGrant(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.denyGrant as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.denyGrant as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes denyGrant without error using callback', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.DenyGrantRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.DenyGrantRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.Grant()
+            );
+            client.innerApiCalls.denyGrant = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.denyGrant(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.privilegedaccessmanager.v1.IGrant|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.denyGrant as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.denyGrant as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes denyGrant with error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.DenyGrantRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.DenyGrantRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.denyGrant = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.denyGrant(request), expectedError);
+            const actualRequest = (client.innerApiCalls.denyGrant as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.denyGrant as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes denyGrant with closed client', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.DenyGrantRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.DenyGrantRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.denyGrant(request), expectedError);
+        });
+    });
+
+    describe('createEntitlement', () => {
+        it('invokes createEntitlement without error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.CreateEntitlementRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.CreateEntitlementRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createEntitlement = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createEntitlement(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createEntitlement as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createEntitlement as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createEntitlement without error using callback', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.CreateEntitlementRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.CreateEntitlementRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createEntitlement = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createEntitlement(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.privilegedaccessmanager.v1.IEntitlement, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.privilegedaccessmanager.v1.IEntitlement, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createEntitlement as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createEntitlement as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createEntitlement with call error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.CreateEntitlementRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.CreateEntitlementRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createEntitlement = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createEntitlement(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createEntitlement as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createEntitlement as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createEntitlement with LRO error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.CreateEntitlementRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.CreateEntitlementRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createEntitlement = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createEntitlement(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createEntitlement as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createEntitlement as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateEntitlementProgress without error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateEntitlementProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateEntitlementProgress with error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateEntitlementProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteEntitlement', () => {
+        it('invokes deleteEntitlement without error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.DeleteEntitlementRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.DeleteEntitlementRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteEntitlement = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteEntitlement(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteEntitlement as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteEntitlement as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteEntitlement without error using callback', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.DeleteEntitlementRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.DeleteEntitlementRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteEntitlement = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteEntitlement(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.privilegedaccessmanager.v1.IEntitlement, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.privilegedaccessmanager.v1.IEntitlement, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteEntitlement as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteEntitlement as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteEntitlement with call error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.DeleteEntitlementRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.DeleteEntitlementRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteEntitlement = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteEntitlement(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteEntitlement as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteEntitlement as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteEntitlement with LRO error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.DeleteEntitlementRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.DeleteEntitlementRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteEntitlement = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteEntitlement(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteEntitlement as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteEntitlement as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteEntitlementProgress without error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteEntitlementProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteEntitlementProgress with error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteEntitlementProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateEntitlement', () => {
+        it('invokes updateEntitlement without error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.UpdateEntitlementRequest()
+            );
+            request.entitlement ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.UpdateEntitlementRequest', ['entitlement', 'name']);
+            request.entitlement.name = defaultValue1;
+            const expectedHeaderRequestParams = `entitlement.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateEntitlement = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateEntitlement(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateEntitlement as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateEntitlement as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateEntitlement without error using callback', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.UpdateEntitlementRequest()
+            );
+            request.entitlement ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.UpdateEntitlementRequest', ['entitlement', 'name']);
+            request.entitlement.name = defaultValue1;
+            const expectedHeaderRequestParams = `entitlement.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateEntitlement = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateEntitlement(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.privilegedaccessmanager.v1.IEntitlement, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.privilegedaccessmanager.v1.IEntitlement, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateEntitlement as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateEntitlement as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateEntitlement with call error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.UpdateEntitlementRequest()
+            );
+            request.entitlement ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.UpdateEntitlementRequest', ['entitlement', 'name']);
+            request.entitlement.name = defaultValue1;
+            const expectedHeaderRequestParams = `entitlement.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateEntitlement = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateEntitlement(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateEntitlement as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateEntitlement as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateEntitlement with LRO error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.UpdateEntitlementRequest()
+            );
+            request.entitlement ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.UpdateEntitlementRequest', ['entitlement', 'name']);
+            request.entitlement.name = defaultValue1;
+            const expectedHeaderRequestParams = `entitlement.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateEntitlement = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateEntitlement(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateEntitlement as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateEntitlement as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateEntitlementProgress without error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateEntitlementProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateEntitlementProgress with error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateEntitlementProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('revokeGrant', () => {
+        it('invokes revokeGrant without error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.RevokeGrantRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.RevokeGrantRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.revokeGrant = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.revokeGrant(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.revokeGrant as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.revokeGrant as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes revokeGrant without error using callback', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.RevokeGrantRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.RevokeGrantRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.revokeGrant = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.revokeGrant(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.privilegedaccessmanager.v1.IGrant, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.privilegedaccessmanager.v1.IGrant, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.revokeGrant as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.revokeGrant as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes revokeGrant with call error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.RevokeGrantRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.RevokeGrantRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.revokeGrant = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.revokeGrant(request), expectedError);
+            const actualRequest = (client.innerApiCalls.revokeGrant as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.revokeGrant as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes revokeGrant with LRO error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.RevokeGrantRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.RevokeGrantRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.revokeGrant = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.revokeGrant(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.revokeGrant as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.revokeGrant as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkRevokeGrantProgress without error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkRevokeGrantProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkRevokeGrantProgress with error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkRevokeGrantProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('listEntitlements', () => {
+        it('invokes listEntitlements without error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.ListEntitlementsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.ListEntitlementsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()),
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()),
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()),
+            ];
+            client.innerApiCalls.listEntitlements = stubSimpleCall(expectedResponse);
+            const [response] = await client.listEntitlements(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listEntitlements as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listEntitlements as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listEntitlements without error using callback', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.ListEntitlementsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.ListEntitlementsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()),
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()),
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()),
+            ];
+            client.innerApiCalls.listEntitlements = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listEntitlements(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.privilegedaccessmanager.v1.IEntitlement[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listEntitlements as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listEntitlements as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listEntitlements with error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.ListEntitlementsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.ListEntitlementsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listEntitlements = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listEntitlements(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listEntitlements as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listEntitlements as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listEntitlementsStream without error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.ListEntitlementsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.ListEntitlementsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()),
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()),
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()),
+            ];
+            client.descriptors.page.listEntitlements.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listEntitlementsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.privilegedaccessmanager.v1.Entitlement[] = [];
+                stream.on('data', (response: protos.google.cloud.privilegedaccessmanager.v1.Entitlement) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listEntitlements.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listEntitlements, request));
+            assert(
+                (client.descriptors.page.listEntitlements.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listEntitlementsStream with error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.ListEntitlementsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.ListEntitlementsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listEntitlements.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listEntitlementsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.privilegedaccessmanager.v1.Entitlement[] = [];
+                stream.on('data', (response: protos.google.cloud.privilegedaccessmanager.v1.Entitlement) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listEntitlements.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listEntitlements, request));
+            assert(
+                (client.descriptors.page.listEntitlements.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listEntitlements without error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.ListEntitlementsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.ListEntitlementsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()),
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()),
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()),
+            ];
+            client.descriptors.page.listEntitlements.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.privilegedaccessmanager.v1.IEntitlement[] = [];
+            const iterable = client.listEntitlementsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listGrants as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listGrants as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listEntitlements.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listEntitlements.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listEntitlements with error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.ListEntitlementsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.ListEntitlementsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listEntitlements.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listEntitlementsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.privilegedaccessmanager.v1.IEntitlement[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listEntitlements.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listEntitlements.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    it('invokes listGrants with error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('searchEntitlements', () => {
+        it('invokes searchEntitlements without error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()),
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()),
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()),
+            ];
+            client.innerApiCalls.searchEntitlements = stubSimpleCall(expectedResponse);
+            const [response] = await client.searchEntitlements(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.searchEntitlements as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.searchEntitlements as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.ListGrantsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.ListGrantsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listGrants = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listGrants(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listGrants as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listGrants as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
 
-    it('invokes listGrantsStream without error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes searchEntitlements without error using callback', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()),
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()),
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()),
+            ];
+            client.innerApiCalls.searchEntitlements = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.searchEntitlements(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.privilegedaccessmanager.v1.IEntitlement[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.searchEntitlements as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.searchEntitlements as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.ListGrantsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.ListGrantsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Grant()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Grant()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Grant()
-        ),
-      ];
-      client.descriptors.page.listGrants.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listGrantsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.privilegedaccessmanager.v1.Grant[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.privilegedaccessmanager.v1.Grant) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listGrants.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listGrants, request)
-      );
-      assert(
-        (client.descriptors.page.listGrants.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('invokes listGrantsStream with error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes searchEntitlements with error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.searchEntitlements = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.searchEntitlements(request), expectedError);
+            const actualRequest = (client.innerApiCalls.searchEntitlements as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.searchEntitlements as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.ListGrantsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.ListGrantsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listGrants.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listGrantsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.privilegedaccessmanager.v1.Grant[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.privilegedaccessmanager.v1.Grant) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listGrants.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listGrants, request)
-      );
-      assert(
-        (client.descriptors.page.listGrants.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listGrants without error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes searchEntitlementsStream without error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()),
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()),
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()),
+            ];
+            client.descriptors.page.searchEntitlements.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.searchEntitlementsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.privilegedaccessmanager.v1.Entitlement[] = [];
+                stream.on('data', (response: protos.google.cloud.privilegedaccessmanager.v1.Entitlement) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.searchEntitlements.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.searchEntitlements, request));
+            assert(
+                (client.descriptors.page.searchEntitlements.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.ListGrantsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.ListGrantsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Grant()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Grant()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Grant()
-        ),
-      ];
-      client.descriptors.page.listGrants.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.privilegedaccessmanager.v1.IGrant[] =
-        [];
-      const iterable = client.listGrantsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listGrants.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listGrants.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listGrants with error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes searchEntitlementsStream with error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.searchEntitlements.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.searchEntitlementsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.privilegedaccessmanager.v1.Entitlement[] = [];
+                stream.on('data', (response: protos.google.cloud.privilegedaccessmanager.v1.Entitlement) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.searchEntitlements.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.searchEntitlements, request));
+            assert(
+                (client.descriptors.page.searchEntitlements.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.ListGrantsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.ListGrantsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listGrants.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listGrantsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.privilegedaccessmanager.v1.IGrant[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listGrants.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listGrants.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
 
-  describe('searchGrants', () => {
-    it('invokes searchGrants without error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Grant()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Grant()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Grant()
-        ),
-      ];
-      client.innerApiCalls.searchGrants = stubSimpleCall(expectedResponse);
-      const [response] = await client.searchGrants(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.searchGrants as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.searchGrants as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes searchGrants without error using callback', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Grant()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Grant()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Grant()
-        ),
-      ];
-      client.innerApiCalls.searchGrants =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.searchGrants(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.privilegedaccessmanager.v1.IGrant[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with searchEntitlements without error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()),
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()),
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Entitlement()),
+            ];
+            client.descriptors.page.searchEntitlements.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.privilegedaccessmanager.v1.IEntitlement[] = [];
+            const iterable = client.searchEntitlementsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.searchGrants as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.searchGrants as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.searchEntitlements.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.searchEntitlements.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with searchEntitlements with error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.searchEntitlements.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.searchEntitlementsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.privilegedaccessmanager.v1.IEntitlement[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.searchEntitlements.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.searchEntitlements.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    it('invokes searchGrants with error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('listGrants', () => {
+        it('invokes listGrants without error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.ListGrantsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.ListGrantsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Grant()),
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Grant()),
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Grant()),
+            ];
+            client.innerApiCalls.listGrants = stubSimpleCall(expectedResponse);
+            const [response] = await client.listGrants(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listGrants as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listGrants as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.searchGrants = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.searchGrants(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.searchGrants as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.searchGrants as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
 
-    it('invokes searchGrantsStream without error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listGrants without error using callback', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.ListGrantsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.ListGrantsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Grant()),
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Grant()),
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Grant()),
+            ];
+            client.innerApiCalls.listGrants = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listGrants(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.privilegedaccessmanager.v1.IGrant[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listGrants as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listGrants as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Grant()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Grant()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Grant()
-        ),
-      ];
-      client.descriptors.page.searchGrants.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.searchGrantsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.privilegedaccessmanager.v1.Grant[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.privilegedaccessmanager.v1.Grant) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.searchGrants.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.searchGrants, request)
-      );
-      assert(
-        (client.descriptors.page.searchGrants.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('invokes searchGrantsStream with error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listGrants with error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.ListGrantsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.ListGrantsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listGrants = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listGrants(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listGrants as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listGrants as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.searchGrants.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.searchGrantsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.privilegedaccessmanager.v1.Grant[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.privilegedaccessmanager.v1.Grant) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.searchGrants.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.searchGrants, request)
-      );
-      assert(
-        (client.descriptors.page.searchGrants.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with searchGrants without error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listGrantsStream without error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.ListGrantsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.ListGrantsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Grant()),
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Grant()),
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Grant()),
+            ];
+            client.descriptors.page.listGrants.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listGrantsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.privilegedaccessmanager.v1.Grant[] = [];
+                stream.on('data', (response: protos.google.cloud.privilegedaccessmanager.v1.Grant) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listGrants.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listGrants, request));
+            assert(
+                (client.descriptors.page.listGrants.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Grant()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Grant()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.privilegedaccessmanager.v1.Grant()
-        ),
-      ];
-      client.descriptors.page.searchGrants.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.privilegedaccessmanager.v1.IGrant[] =
-        [];
-      const iterable = client.searchGrantsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.searchGrants.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.searchGrants.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with searchGrants with error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listGrantsStream with error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.ListGrantsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.ListGrantsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listGrants.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listGrantsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.privilegedaccessmanager.v1.Grant[] = [];
+                stream.on('data', (response: protos.google.cloud.privilegedaccessmanager.v1.Grant) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listGrants.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listGrants, request));
+            assert(
+                (client.descriptors.page.listGrants.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.searchGrants.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.searchGrantsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.privilegedaccessmanager.v1.IGrant[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.searchGrants.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.searchGrants.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-  describe('getLocation', () => {
-    it('invokes getLocation without error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
-      const response = await client.getLocation(request, expectedOptions);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-    it('invokes getLocation without error using callback', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getLocation(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: LocationProtos.google.cloud.location.ILocation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+
+        it('uses async iteration with listGrants without error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.ListGrantsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.ListGrantsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Grant()),
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Grant()),
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Grant()),
+            ];
+            client.descriptors.page.listGrants.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.privilegedaccessmanager.v1.IGrant[] = [];
+            const iterable = client.listGrantsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.locationsClient.getLocation as SinonStub).getCall(0));
-    });
-    it('invokes getLocation with error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listGrants.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listGrants.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.locationsClient.getLocation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getLocation(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-  describe('listLocationsAsync', () => {
-    it('uses async iteration with listLocations without error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+
+        it('uses async iteration with listGrants with error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.ListGrantsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.ListGrantsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listGrants.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listGrantsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.privilegedaccessmanager.v1.IGrant[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listGrants.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listGrants.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedResponse = [
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-      ];
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-      const iterable = client.listLocationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
     });
-    it('uses async iteration with listLocations with error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+
+    describe('searchGrants', () => {
+        it('invokes searchGrants without error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Grant()),
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Grant()),
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Grant()),
+            ];
+            client.innerApiCalls.searchGrants = stubSimpleCall(expectedResponse);
+            const [response] = await client.searchGrants(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.searchGrants as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.searchGrants as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedError = new Error('expected');
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listLocationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
-  describe('getOperation', () => {
-    it('invokes getOperation without error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+
+        it('invokes searchGrants without error using callback', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Grant()),
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Grant()),
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Grant()),
+            ];
+            client.innerApiCalls.searchGrants = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.searchGrants(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.privilegedaccessmanager.v1.IGrant[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.searchGrants as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.searchGrants as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const response = await client.getOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes getOperation without error using callback', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+
+        it('invokes searchGrants with error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.searchGrants = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.searchGrants(request), expectedError);
+            const actualRequest = (client.innerApiCalls.searchGrants as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.searchGrants as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .getOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: operationsProtos.google.longrunning.Operation | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+
+        it('invokes searchGrantsStream without error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Grant()),
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Grant()),
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Grant()),
+            ];
+            client.descriptors.page.searchGrants.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.searchGrantsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.privilegedaccessmanager.v1.Grant[] = [];
+                stream.on('data', (response: protos.google.cloud.privilegedaccessmanager.v1.Grant) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.searchGrants.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.searchGrants, request));
+            assert(
+                (client.descriptors.page.searchGrants.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes searchGrantsStream with error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.searchGrants.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.searchGrantsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.privilegedaccessmanager.v1.Grant[] = [];
+                stream.on('data', (response: protos.google.cloud.privilegedaccessmanager.v1.Grant) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.searchGrants.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.searchGrants, request));
+            assert(
+                (client.descriptors.page.searchGrants.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with searchGrants without error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Grant()),
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Grant()),
+              generateSampleMessage(new protos.google.cloud.privilegedaccessmanager.v1.Grant()),
+            ];
+            client.descriptors.page.searchGrants.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.privilegedaccessmanager.v1.IGrant[] = [];
+            const iterable = client.searchGrantsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-    it('invokes getOperation with error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.searchGrants.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.searchGrants.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.getOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('cancelOperation', () => {
-    it('invokes cancelOperation without error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+
+        it('uses async iteration with searchGrants with error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.searchGrants.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.searchGrantsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.privilegedaccessmanager.v1.IGrant[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.searchGrants.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.searchGrants.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.cancelOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
     });
-    it('invokes cancelOperation without error using callback', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('getLocation', () => {
+        it('invokes getLocation without error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
+            const response = await client.getLocation(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
         });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .cancelOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+        it('invokes getLocation without error using callback', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getLocation(
+                    request,
+                    expectedOptions,
+                    (
+                        err?: Error | null,
+                        result?: LocationProtos.google.cloud.location.ILocation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getLocation with error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.locationsClient.getLocation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getLocation(request, expectedOptions), expectedError);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+    });
+    describe('listLocationsAsync', () => {
+        it('uses async iteration with listLocations without error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+                new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedResponse = [
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+            ];
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+            const iterable = client.listLocationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
-    });
-    it('invokes cancelOperation with error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.cancelOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.cancelOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('deleteOperation', () => {
-    it('invokes deleteOperation without error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('uses async iteration with listLocations with error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedError = new Error('expected');
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listLocationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.deleteOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
     });
-    it('invokes deleteOperation without error using callback', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('getOperation', () => {
+        it('invokes getOperation without error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const response = await client.getOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
         });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .deleteOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+        it('invokes getOperation without error using callback', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.getOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: operationsProtos.google.longrunning.Operation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getOperation with error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.getOperation(request)}, expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('cancelOperation', () => {
+        it('invokes cancelOperation without error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = stubSimpleCall(expectedResponse);
+            const response = await client.cancelOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes cancelOperation without error using callback', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.cancelOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes cancelOperation with error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.cancelOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.cancelOperation(request)}, expectedError);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('deleteOperation', () => {
+        it('invokes deleteOperation without error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = stubSimpleCall(expectedResponse);
+            const response = await client.deleteOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes deleteOperation without error using callback', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.deleteOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes deleteOperation with error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.deleteOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.deleteOperation(request)}, expectedError);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('listOperationsAsync', () => {
+        it('uses async iteration with listOperations without error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedResponse = [
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+            ];
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: operationsProtos.google.longrunning.IOperation[] = [];
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
-    });
-    it('invokes deleteOperation with error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
         });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.deleteOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.deleteOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('listOperationsAsync', () => {
-    it('uses async iteration with listOperations without error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('uses async iteration with listOperations with error', async () => {
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: operationsProtos.google.longrunning.IOperation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
         });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-      ];
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.IOperation[] = [];
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
     });
-    it('uses async iteration with listOperations with error', async () => {
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+
+    describe('Path templates', () => {
+
+        describe('folderLocationEntitlementGrants', async () => {
+            const fakePath = "/rendered/path/folderLocationEntitlementGrants";
+            const expectedParameters = {
+                folder: "folderValue",
+                location: "locationValue",
+                entitlement: "entitlementValue",
+                grant: "grantValue",
+            };
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderLocationEntitlementGrantsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderLocationEntitlementGrantsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderLocationEntitlementGrantsPath', () => {
+                const result = client.folderLocationEntitlementGrantsPath("folderValue", "locationValue", "entitlementValue", "grantValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderLocationEntitlementGrantsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderLocationEntitlementGrantsName', () => {
+                const result = client.matchFolderFromFolderLocationEntitlementGrantsName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderLocationEntitlementGrantsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromFolderLocationEntitlementGrantsName', () => {
+                const result = client.matchLocationFromFolderLocationEntitlementGrantsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.folderLocationEntitlementGrantsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEntitlementFromFolderLocationEntitlementGrantsName', () => {
+                const result = client.matchEntitlementFromFolderLocationEntitlementGrantsName(fakePath);
+                assert.strictEqual(result, "entitlementValue");
+                assert((client.pathTemplates.folderLocationEntitlementGrantsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchGrantFromFolderLocationEntitlementGrantsName', () => {
+                const result = client.matchGrantFromFolderLocationEntitlementGrantsName(fakePath);
+                assert.strictEqual(result, "grantValue");
+                assert((client.pathTemplates.folderLocationEntitlementGrantsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.IOperation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-  });
 
-  describe('Path templates', () => {
-    describe('folderLocationEntitlement', async () => {
-      const fakePath = '/rendered/path/folderLocationEntitlement';
-      const expectedParameters = {
-        folder: 'folderValue',
-        location: 'locationValue',
-        entitlement: 'entitlementValue',
-      };
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        describe('folderLocationEntitlements', async () => {
+            const fakePath = "/rendered/path/folderLocationEntitlements";
+            const expectedParameters = {
+                folder: "folderValue",
+                location: "locationValue",
+                entitlement: "entitlementValue",
+            };
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderLocationEntitlementsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderLocationEntitlementsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderLocationEntitlementsPath', () => {
+                const result = client.folderLocationEntitlementsPath("folderValue", "locationValue", "entitlementValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderLocationEntitlementsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderLocationEntitlementsName', () => {
+                const result = client.matchFolderFromFolderLocationEntitlementsName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderLocationEntitlementsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromFolderLocationEntitlementsName', () => {
+                const result = client.matchLocationFromFolderLocationEntitlementsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.folderLocationEntitlementsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEntitlementFromFolderLocationEntitlementsName', () => {
+                const result = client.matchEntitlementFromFolderLocationEntitlementsName(fakePath);
+                assert.strictEqual(result, "entitlementValue");
+                assert((client.pathTemplates.folderLocationEntitlementsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      await client.initialize();
-      client.pathTemplates.folderLocationEntitlementPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.folderLocationEntitlementPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
 
-      it('folderLocationEntitlementPath', () => {
-        const result = client.folderLocationEntitlementPath(
-          'folderValue',
-          'locationValue',
-          'entitlementValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.folderLocationEntitlementPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('location', async () => {
+            const fakePath = "/rendered/path/location";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.locationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.locationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchFolderFromFolderLocationEntitlementName', () => {
-        const result =
-          client.matchFolderFromFolderLocationEntitlementName(fakePath);
-        assert.strictEqual(result, 'folderValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationEntitlementPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('locationPath', () => {
+                const result = client.locationPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.locationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromFolderLocationEntitlementName', () => {
-        const result =
-          client.matchLocationFromFolderLocationEntitlementName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationEntitlementPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchProjectFromLocationName', () => {
+                const result = client.matchProjectFromLocationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchEntitlementFromFolderLocationEntitlementName', () => {
-        const result =
-          client.matchEntitlementFromFolderLocationEntitlementName(fakePath);
-        assert.strictEqual(result, 'entitlementValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationEntitlementPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('folderLocationEntitlementGrant', async () => {
-      const fakePath = '/rendered/path/folderLocationEntitlementGrant';
-      const expectedParameters = {
-        folder: 'folderValue',
-        location: 'locationValue',
-        entitlement: 'entitlementValue',
-        grant: 'grantValue',
-      };
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            it('matchLocationFromLocationName', () => {
+                const result = client.matchLocationFromLocationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      await client.initialize();
-      client.pathTemplates.folderLocationEntitlementGrantPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.folderLocationEntitlementGrantPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
 
-      it('folderLocationEntitlementGrantPath', () => {
-        const result = client.folderLocationEntitlementGrantPath(
-          'folderValue',
-          'locationValue',
-          'entitlementValue',
-          'grantValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.folderLocationEntitlementGrantPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('organizationLocationEntitlementGrants', async () => {
+            const fakePath = "/rendered/path/organizationLocationEntitlementGrants";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                entitlement: "entitlementValue",
+                grant: "grantValue",
+            };
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationLocationEntitlementGrantsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationLocationEntitlementGrantsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchFolderFromFolderLocationEntitlementGrantName', () => {
-        const result =
-          client.matchFolderFromFolderLocationEntitlementGrantName(fakePath);
-        assert.strictEqual(result, 'folderValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationEntitlementGrantPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('organizationLocationEntitlementGrantsPath', () => {
+                const result = client.organizationLocationEntitlementGrantsPath("organizationValue", "locationValue", "entitlementValue", "grantValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationLocationEntitlementGrantsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromFolderLocationEntitlementGrantName', () => {
-        const result =
-          client.matchLocationFromFolderLocationEntitlementGrantName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationEntitlementGrantPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchOrganizationFromOrganizationLocationEntitlementGrantsName', () => {
+                const result = client.matchOrganizationFromOrganizationLocationEntitlementGrantsName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationLocationEntitlementGrantsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchEntitlementFromFolderLocationEntitlementGrantName', () => {
-        const result =
-          client.matchEntitlementFromFolderLocationEntitlementGrantName(
-            fakePath
-          );
-        assert.strictEqual(result, 'entitlementValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationEntitlementGrantPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchLocationFromOrganizationLocationEntitlementGrantsName', () => {
+                const result = client.matchLocationFromOrganizationLocationEntitlementGrantsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationLocationEntitlementGrantsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchGrantFromFolderLocationEntitlementGrantName', () => {
-        const result =
-          client.matchGrantFromFolderLocationEntitlementGrantName(fakePath);
-        assert.strictEqual(result, 'grantValue');
-        assert(
-          (
-            client.pathTemplates.folderLocationEntitlementGrantPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
+            it('matchEntitlementFromOrganizationLocationEntitlementGrantsName', () => {
+                const result = client.matchEntitlementFromOrganizationLocationEntitlementGrantsName(fakePath);
+                assert.strictEqual(result, "entitlementValue");
+                assert((client.pathTemplates.organizationLocationEntitlementGrantsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-    describe('location', async () => {
-      const fakePath = '/rendered/path/location';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-      };
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            it('matchGrantFromOrganizationLocationEntitlementGrantsName', () => {
+                const result = client.matchGrantFromOrganizationLocationEntitlementGrantsName(fakePath);
+                assert.strictEqual(result, "grantValue");
+                assert((client.pathTemplates.organizationLocationEntitlementGrantsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      await client.initialize();
-      client.pathTemplates.locationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.locationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
 
-      it('locationPath', () => {
-        const result = client.locationPath('projectValue', 'locationValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.locationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('organizationLocationEntitlements', async () => {
+            const fakePath = "/rendered/path/organizationLocationEntitlements";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                entitlement: "entitlementValue",
+            };
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationLocationEntitlementsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationLocationEntitlementsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromLocationName', () => {
-        const result = client.matchProjectFromLocationName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('organizationLocationEntitlementsPath', () => {
+                const result = client.organizationLocationEntitlementsPath("organizationValue", "locationValue", "entitlementValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationLocationEntitlementsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromLocationName', () => {
-        const result = client.matchLocationFromLocationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
+            it('matchOrganizationFromOrganizationLocationEntitlementsName', () => {
+                const result = client.matchOrganizationFromOrganizationLocationEntitlementsName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationLocationEntitlementsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-    describe('organizationLocationEntitlement', async () => {
-      const fakePath = '/rendered/path/organizationLocationEntitlement';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        location: 'locationValue',
-        entitlement: 'entitlementValue',
-      };
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            it('matchLocationFromOrganizationLocationEntitlementsName', () => {
+                const result = client.matchLocationFromOrganizationLocationEntitlementsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationLocationEntitlementsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEntitlementFromOrganizationLocationEntitlementsName', () => {
+                const result = client.matchEntitlementFromOrganizationLocationEntitlementsName(fakePath);
+                assert.strictEqual(result, "entitlementValue");
+                assert((client.pathTemplates.organizationLocationEntitlementsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      await client.initialize();
-      client.pathTemplates.organizationLocationEntitlementPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.organizationLocationEntitlementPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
 
-      it('organizationLocationEntitlementPath', () => {
-        const result = client.organizationLocationEntitlementPath(
-          'organizationValue',
-          'locationValue',
-          'entitlementValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.organizationLocationEntitlementPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('project', async () => {
+            const fakePath = "/rendered/path/project";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchOrganizationFromOrganizationLocationEntitlementName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationLocationEntitlementName(
-            fakePath
-          );
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates.organizationLocationEntitlementPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('projectPath', () => {
+                const result = client.projectPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromOrganizationLocationEntitlementName', () => {
-        const result =
-          client.matchLocationFromOrganizationLocationEntitlementName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.organizationLocationEntitlementPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEntitlementFromOrganizationLocationEntitlementName', () => {
-        const result =
-          client.matchEntitlementFromOrganizationLocationEntitlementName(
-            fakePath
-          );
-        assert.strictEqual(result, 'entitlementValue');
-        assert(
-          (
-            client.pathTemplates.organizationLocationEntitlementPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationLocationEntitlementGrant', async () => {
-      const fakePath = '/rendered/path/organizationLocationEntitlementGrant';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        location: 'locationValue',
-        entitlement: 'entitlementValue',
-        grant: 'grantValue',
-      };
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            it('matchProjectFromProjectName', () => {
+                const result = client.matchProjectFromProjectName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      await client.initialize();
-      client.pathTemplates.organizationLocationEntitlementGrantPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.organizationLocationEntitlementGrantPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
 
-      it('organizationLocationEntitlementGrantPath', () => {
-        const result = client.organizationLocationEntitlementGrantPath(
-          'organizationValue',
-          'locationValue',
-          'entitlementValue',
-          'grantValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationEntitlementGrantPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('projectLocationEntitlementGrants', async () => {
+            const fakePath = "/rendered/path/projectLocationEntitlementGrants";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                entitlement: "entitlementValue",
+                grant: "grantValue",
+            };
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationEntitlementGrantsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationEntitlementGrantsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchOrganizationFromOrganizationLocationEntitlementGrantName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationLocationEntitlementGrantName(
-            fakePath
-          );
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationEntitlementGrantPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('projectLocationEntitlementGrantsPath', () => {
+                const result = client.projectLocationEntitlementGrantsPath("projectValue", "locationValue", "entitlementValue", "grantValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationEntitlementGrantsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromOrganizationLocationEntitlementGrantName', () => {
-        const result =
-          client.matchLocationFromOrganizationLocationEntitlementGrantName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationEntitlementGrantPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchProjectFromProjectLocationEntitlementGrantsName', () => {
+                const result = client.matchProjectFromProjectLocationEntitlementGrantsName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationEntitlementGrantsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchEntitlementFromOrganizationLocationEntitlementGrantName', () => {
-        const result =
-          client.matchEntitlementFromOrganizationLocationEntitlementGrantName(
-            fakePath
-          );
-        assert.strictEqual(result, 'entitlementValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationEntitlementGrantPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchLocationFromProjectLocationEntitlementGrantsName', () => {
+                const result = client.matchLocationFromProjectLocationEntitlementGrantsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationEntitlementGrantsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchGrantFromOrganizationLocationEntitlementGrantName', () => {
-        const result =
-          client.matchGrantFromOrganizationLocationEntitlementGrantName(
-            fakePath
-          );
-        assert.strictEqual(result, 'grantValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationLocationEntitlementGrantPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
+            it('matchEntitlementFromProjectLocationEntitlementGrantsName', () => {
+                const result = client.matchEntitlementFromProjectLocationEntitlementGrantsName(fakePath);
+                assert.strictEqual(result, "entitlementValue");
+                assert((client.pathTemplates.projectLocationEntitlementGrantsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-    describe('project', async () => {
-      const fakePath = '/rendered/path/project';
-      const expectedParameters = {
-        project: 'projectValue',
-      };
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            it('matchGrantFromProjectLocationEntitlementGrantsName', () => {
+                const result = client.matchGrantFromProjectLocationEntitlementGrantsName(fakePath);
+                assert.strictEqual(result, "grantValue");
+                assert((client.pathTemplates.projectLocationEntitlementGrantsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      await client.initialize();
-      client.pathTemplates.projectPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
 
-      it('projectPath', () => {
-        const result = client.projectPath('projectValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('projectLocationEntitlements', async () => {
+            const fakePath = "/rendered/path/projectLocationEntitlements";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                entitlement: "entitlementValue",
+            };
+            const client = new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationEntitlementsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationEntitlementsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromProjectName', () => {
-        const result = client.matchProjectFromProjectName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
+            it('projectLocationEntitlementsPath', () => {
+                const result = client.projectLocationEntitlementsPath("projectValue", "locationValue", "entitlementValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationEntitlementsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-    describe('projectLocationEntitlement', async () => {
-      const fakePath = '/rendered/path/projectLocationEntitlement';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        entitlement: 'entitlementValue',
-      };
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            it('matchProjectFromProjectLocationEntitlementsName', () => {
+                const result = client.matchProjectFromProjectLocationEntitlementsName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationEntitlementsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationEntitlementsName', () => {
+                const result = client.matchLocationFromProjectLocationEntitlementsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationEntitlementsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEntitlementFromProjectLocationEntitlementsName', () => {
+                const result = client.matchEntitlementFromProjectLocationEntitlementsName(fakePath);
+                assert.strictEqual(result, "entitlementValue");
+                assert((client.pathTemplates.projectLocationEntitlementsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      await client.initialize();
-      client.pathTemplates.projectLocationEntitlementPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectLocationEntitlementPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectLocationEntitlementPath', () => {
-        const result = client.projectLocationEntitlementPath(
-          'projectValue',
-          'locationValue',
-          'entitlementValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectLocationEntitlementPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationEntitlementName', () => {
-        const result =
-          client.matchProjectFromProjectLocationEntitlementName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationEntitlementPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationEntitlementName', () => {
-        const result =
-          client.matchLocationFromProjectLocationEntitlementName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationEntitlementPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEntitlementFromProjectLocationEntitlementName', () => {
-        const result =
-          client.matchEntitlementFromProjectLocationEntitlementName(fakePath);
-        assert.strictEqual(result, 'entitlementValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationEntitlementPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
     });
-
-    describe('projectLocationEntitlementGrant', async () => {
-      const fakePath = '/rendered/path/projectLocationEntitlementGrant';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        entitlement: 'entitlementValue',
-        grant: 'grantValue',
-      };
-      const client =
-        new privilegedaccessmanagerModule.v1.PrivilegedAccessManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      client.pathTemplates.projectLocationEntitlementGrantPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationEntitlementGrantPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationEntitlementGrantPath', () => {
-        const result = client.projectLocationEntitlementGrantPath(
-          'projectValue',
-          'locationValue',
-          'entitlementValue',
-          'grantValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectLocationEntitlementGrantPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationEntitlementGrantName', () => {
-        const result =
-          client.matchProjectFromProjectLocationEntitlementGrantName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationEntitlementGrantPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationEntitlementGrantName', () => {
-        const result =
-          client.matchLocationFromProjectLocationEntitlementGrantName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationEntitlementGrantPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEntitlementFromProjectLocationEntitlementGrantName', () => {
-        const result =
-          client.matchEntitlementFromProjectLocationEntitlementGrantName(
-            fakePath
-          );
-        assert.strictEqual(result, 'entitlementValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationEntitlementGrantPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchGrantFromProjectLocationEntitlementGrantName', () => {
-        const result =
-          client.matchGrantFromProjectLocationEntitlementGrantName(fakePath);
-        assert.strictEqual(result, 'grantValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationEntitlementGrantPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

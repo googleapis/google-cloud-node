@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -107,41 +100,20 @@ export class ImageVersionsClient {
    *     const client = new ImageVersionsClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ImageVersionsClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'composer.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -167,7 +139,7 @@ export class ImageVersionsClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -181,7 +153,10 @@ export class ImageVersionsClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -217,20 +192,14 @@ export class ImageVersionsClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listImageVersions: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'imageVersions'
-      ),
+      listImageVersions:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'imageVersions')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.orchestration.airflow.service.v1.ImageVersions',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.orchestration.airflow.service.v1.ImageVersions', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -261,36 +230,32 @@ export class ImageVersionsClient {
     // Put together the "service stub" for
     // google.cloud.orchestration.airflow.service.v1.ImageVersions.
     this.imageVersionsStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.orchestration.airflow.service.v1.ImageVersions'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.orchestration.airflow.service.v1
-            .ImageVersions,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.orchestration.airflow.service.v1.ImageVersions') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.orchestration.airflow.service.v1.ImageVersions,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const imageVersionsStubMethods = ['listImageVersions'];
+    const imageVersionsStubMethods =
+        ['listImageVersions'];
     for (const methodName of imageVersionsStubMethods) {
       const callPromise = this.imageVersionsStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -310,14 +275,8 @@ export class ImageVersionsClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'composer.googleapis.com';
   }
@@ -328,14 +287,8 @@ export class ImageVersionsClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'composer.googleapis.com';
   }
@@ -366,7 +319,9 @@ export class ImageVersionsClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -375,9 +330,8 @@ export class ImageVersionsClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -389,115 +343,90 @@ export class ImageVersionsClient {
   // -- Service calls --
   // -------------------
 
-  /**
-   * List ImageVersions for provided location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   List ImageVersions in the given project and location, in the form:
-   *   "projects/{projectId}/locations/{locationId}"
-   * @param {number} request.pageSize
-   *   The maximum number of image_versions to return.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous List request, if any.
-   * @param {boolean} request.includePastReleases
-   *   Whether or not image versions from old releases should be included.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.orchestration.airflow.service.v1.ImageVersion|ImageVersion}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listImageVersionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * List ImageVersions for provided location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   List ImageVersions in the given project and location, in the form:
+ *   "projects/{projectId}/locations/{locationId}"
+ * @param {number} request.pageSize
+ *   The maximum number of image_versions to return.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous List request, if any.
+ * @param {boolean} request.includePastReleases
+ *   Whether or not image versions from old releases should be included.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.orchestration.airflow.service.v1.ImageVersion|ImageVersion}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listImageVersionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listImageVersions(
-    request?: protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.orchestration.airflow.service.v1.IImageVersion[],
-      protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsRequest | null,
-      protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.orchestration.airflow.service.v1.IImageVersion[],
+        protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsRequest|null,
+        protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsResponse
+      ]>;
   listImageVersions(
-    request: protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsRequest,
-      | protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.orchestration.airflow.service.v1.IImageVersion
-    >
-  ): void;
-  listImageVersions(
-    request: protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsRequest,
-      | protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.orchestration.airflow.service.v1.IImageVersion
-    >
-  ): void;
-  listImageVersions(
-    request?: protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsRequest,
-          | protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.orchestration.airflow.service.v1.IImageVersion
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsRequest,
-      | protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.orchestration.airflow.service.v1.IImageVersion
-    >
-  ): Promise<
-    [
-      protos.google.cloud.orchestration.airflow.service.v1.IImageVersion[],
-      protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsRequest | null,
-      protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsResponse,
-    ]
-  > | void {
+          protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsResponse|null|undefined,
+          protos.google.cloud.orchestration.airflow.service.v1.IImageVersion>): void;
+  listImageVersions(
+      request: protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsRequest,
+          protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsResponse|null|undefined,
+          protos.google.cloud.orchestration.airflow.service.v1.IImageVersion>): void;
+  listImageVersions(
+      request?: protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsRequest,
+          protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsResponse|null|undefined,
+          protos.google.cloud.orchestration.airflow.service.v1.IImageVersion>,
+      callback?: PaginationCallback<
+          protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsRequest,
+          protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsResponse|null|undefined,
+          protos.google.cloud.orchestration.airflow.service.v1.IImageVersion>):
+      Promise<[
+        protos.google.cloud.orchestration.airflow.service.v1.IImageVersion[],
+        protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsRequest|null,
+        protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsRequest,
-          | protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.orchestration.airflow.service.v1.IImageVersion
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsRequest,
+      protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsResponse|null|undefined,
+      protos.google.cloud.orchestration.airflow.service.v1.IImageVersion>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listImageVersions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -506,59 +435,56 @@ export class ImageVersionsClient {
     this._log.info('listImageVersions request %j', request);
     return this.innerApiCalls
       .listImageVersions(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.orchestration.airflow.service.v1.IImageVersion[],
-          protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsRequest | null,
-          protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsResponse,
-        ]) => {
-          this._log.info('listImageVersions values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.orchestration.airflow.service.v1.IImageVersion[],
+        protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsRequest|null,
+        protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsResponse
+      ]) => {
+        this._log.info('listImageVersions values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listImageVersions`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   List ImageVersions in the given project and location, in the form:
-   *   "projects/{projectId}/locations/{locationId}"
-   * @param {number} request.pageSize
-   *   The maximum number of image_versions to return.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous List request, if any.
-   * @param {boolean} request.includePastReleases
-   *   Whether or not image versions from old releases should be included.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.orchestration.airflow.service.v1.ImageVersion|ImageVersion} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listImageVersionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listImageVersions`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   List ImageVersions in the given project and location, in the form:
+ *   "projects/{projectId}/locations/{locationId}"
+ * @param {number} request.pageSize
+ *   The maximum number of image_versions to return.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous List request, if any.
+ * @param {boolean} request.includePastReleases
+ *   Whether or not image versions from old releases should be included.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.orchestration.airflow.service.v1.ImageVersion|ImageVersion} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listImageVersionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listImageVersionsStream(
-    request?: protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listImageVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listImageVersions stream %j', request);
     return this.descriptors.page.listImageVersions.createStream(
       this.innerApiCalls.listImageVersions as GaxCall,
@@ -567,50 +493,49 @@ export class ImageVersionsClient {
     );
   }
 
-  /**
-   * Equivalent to `listImageVersions`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   List ImageVersions in the given project and location, in the form:
-   *   "projects/{projectId}/locations/{locationId}"
-   * @param {number} request.pageSize
-   *   The maximum number of image_versions to return.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous List request, if any.
-   * @param {boolean} request.includePastReleases
-   *   Whether or not image versions from old releases should be included.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.orchestration.airflow.service.v1.ImageVersion|ImageVersion}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/image_versions.list_image_versions.js</caption>
-   * region_tag:composer_v1_generated_ImageVersions_ListImageVersions_async
-   */
+/**
+ * Equivalent to `listImageVersions`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   List ImageVersions in the given project and location, in the form:
+ *   "projects/{projectId}/locations/{locationId}"
+ * @param {number} request.pageSize
+ *   The maximum number of image_versions to return.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous List request, if any.
+ * @param {boolean} request.includePastReleases
+ *   Whether or not image versions from old releases should be included.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.orchestration.airflow.service.v1.ImageVersion|ImageVersion}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/image_versions.list_image_versions.js</caption>
+ * region_tag:composer_v1_generated_ImageVersions_ListImageVersions_async
+ */
   listImageVersionsAsync(
-    request?: protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.orchestration.airflow.service.v1.IImageVersion> {
+      request?: protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.orchestration.airflow.service.v1.IImageVersion>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listImageVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listImageVersions iterate %j', request);
     return this.descriptors.page.listImageVersions.asyncIterate(
       this.innerApiCalls['listImageVersions'] as GaxCall,
@@ -630,7 +555,7 @@ export class ImageVersionsClient {
    * @param {string} environment
    * @returns {string} Resource name string.
    */
-  environmentPath(project: string, location: string, environment: string) {
+  environmentPath(project:string,location:string,environment:string) {
     return this.pathTemplates.environmentPathTemplate.render({
       project: project,
       location: location,
@@ -646,8 +571,7 @@ export class ImageVersionsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName)
-      .project;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName).project;
   }
 
   /**
@@ -658,8 +582,7 @@ export class ImageVersionsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName)
-      .location;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName).location;
   }
 
   /**
@@ -670,8 +593,7 @@ export class ImageVersionsClient {
    * @returns {string} A string representing the environment.
    */
   matchEnvironmentFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName)
-      .environment;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName).environment;
   }
 
   /**
@@ -683,12 +605,7 @@ export class ImageVersionsClient {
    * @param {string} user_workloads_config_map
    * @returns {string} Resource name string.
    */
-  userWorkloadsConfigMapPath(
-    project: string,
-    location: string,
-    environment: string,
-    userWorkloadsConfigMap: string
-  ) {
+  userWorkloadsConfigMapPath(project:string,location:string,environment:string,userWorkloadsConfigMap:string) {
     return this.pathTemplates.userWorkloadsConfigMapPathTemplate.render({
       project: project,
       location: location,
@@ -704,12 +621,8 @@ export class ImageVersionsClient {
    *   A fully-qualified path representing UserWorkloadsConfigMap resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromUserWorkloadsConfigMapName(
-    userWorkloadsConfigMapName: string
-  ) {
-    return this.pathTemplates.userWorkloadsConfigMapPathTemplate.match(
-      userWorkloadsConfigMapName
-    ).project;
+  matchProjectFromUserWorkloadsConfigMapName(userWorkloadsConfigMapName: string) {
+    return this.pathTemplates.userWorkloadsConfigMapPathTemplate.match(userWorkloadsConfigMapName).project;
   }
 
   /**
@@ -719,12 +632,8 @@ export class ImageVersionsClient {
    *   A fully-qualified path representing UserWorkloadsConfigMap resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromUserWorkloadsConfigMapName(
-    userWorkloadsConfigMapName: string
-  ) {
-    return this.pathTemplates.userWorkloadsConfigMapPathTemplate.match(
-      userWorkloadsConfigMapName
-    ).location;
+  matchLocationFromUserWorkloadsConfigMapName(userWorkloadsConfigMapName: string) {
+    return this.pathTemplates.userWorkloadsConfigMapPathTemplate.match(userWorkloadsConfigMapName).location;
   }
 
   /**
@@ -734,12 +643,8 @@ export class ImageVersionsClient {
    *   A fully-qualified path representing UserWorkloadsConfigMap resource.
    * @returns {string} A string representing the environment.
    */
-  matchEnvironmentFromUserWorkloadsConfigMapName(
-    userWorkloadsConfigMapName: string
-  ) {
-    return this.pathTemplates.userWorkloadsConfigMapPathTemplate.match(
-      userWorkloadsConfigMapName
-    ).environment;
+  matchEnvironmentFromUserWorkloadsConfigMapName(userWorkloadsConfigMapName: string) {
+    return this.pathTemplates.userWorkloadsConfigMapPathTemplate.match(userWorkloadsConfigMapName).environment;
   }
 
   /**
@@ -749,12 +654,8 @@ export class ImageVersionsClient {
    *   A fully-qualified path representing UserWorkloadsConfigMap resource.
    * @returns {string} A string representing the user_workloads_config_map.
    */
-  matchUserWorkloadsConfigMapFromUserWorkloadsConfigMapName(
-    userWorkloadsConfigMapName: string
-  ) {
-    return this.pathTemplates.userWorkloadsConfigMapPathTemplate.match(
-      userWorkloadsConfigMapName
-    ).user_workloads_config_map;
+  matchUserWorkloadsConfigMapFromUserWorkloadsConfigMapName(userWorkloadsConfigMapName: string) {
+    return this.pathTemplates.userWorkloadsConfigMapPathTemplate.match(userWorkloadsConfigMapName).user_workloads_config_map;
   }
 
   /**
@@ -766,12 +667,7 @@ export class ImageVersionsClient {
    * @param {string} user_workloads_secret
    * @returns {string} Resource name string.
    */
-  userWorkloadsSecretPath(
-    project: string,
-    location: string,
-    environment: string,
-    userWorkloadsSecret: string
-  ) {
+  userWorkloadsSecretPath(project:string,location:string,environment:string,userWorkloadsSecret:string) {
     return this.pathTemplates.userWorkloadsSecretPathTemplate.render({
       project: project,
       location: location,
@@ -788,9 +684,7 @@ export class ImageVersionsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromUserWorkloadsSecretName(userWorkloadsSecretName: string) {
-    return this.pathTemplates.userWorkloadsSecretPathTemplate.match(
-      userWorkloadsSecretName
-    ).project;
+    return this.pathTemplates.userWorkloadsSecretPathTemplate.match(userWorkloadsSecretName).project;
   }
 
   /**
@@ -801,9 +695,7 @@ export class ImageVersionsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromUserWorkloadsSecretName(userWorkloadsSecretName: string) {
-    return this.pathTemplates.userWorkloadsSecretPathTemplate.match(
-      userWorkloadsSecretName
-    ).location;
+    return this.pathTemplates.userWorkloadsSecretPathTemplate.match(userWorkloadsSecretName).location;
   }
 
   /**
@@ -814,9 +706,7 @@ export class ImageVersionsClient {
    * @returns {string} A string representing the environment.
    */
   matchEnvironmentFromUserWorkloadsSecretName(userWorkloadsSecretName: string) {
-    return this.pathTemplates.userWorkloadsSecretPathTemplate.match(
-      userWorkloadsSecretName
-    ).environment;
+    return this.pathTemplates.userWorkloadsSecretPathTemplate.match(userWorkloadsSecretName).environment;
   }
 
   /**
@@ -826,12 +716,8 @@ export class ImageVersionsClient {
    *   A fully-qualified path representing UserWorkloadsSecret resource.
    * @returns {string} A string representing the user_workloads_secret.
    */
-  matchUserWorkloadsSecretFromUserWorkloadsSecretName(
-    userWorkloadsSecretName: string
-  ) {
-    return this.pathTemplates.userWorkloadsSecretPathTemplate.match(
-      userWorkloadsSecretName
-    ).user_workloads_secret;
+  matchUserWorkloadsSecretFromUserWorkloadsSecretName(userWorkloadsSecretName: string) {
+    return this.pathTemplates.userWorkloadsSecretPathTemplate.match(userWorkloadsSecretName).user_workloads_secret;
   }
 
   /**

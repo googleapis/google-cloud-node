@@ -16,14 +16,13 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const networkmanagement = require('@google-cloud/network-management');
 
 function main() {
-  const reachabilityServiceClient =
-    new networkmanagement.ReachabilityServiceClient();
-  const vpcFlowLogsServiceClient =
-    new networkmanagement.VpcFlowLogsServiceClient();
+  const reachabilityServiceClient = new networkmanagement.ReachabilityServiceClient();
+  const vpcFlowLogsServiceClient = new networkmanagement.VpcFlowLogsServiceClient();
 }
 
 main();

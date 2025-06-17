@@ -673,9 +673,6 @@ export namespace google {
                     /** ServiceConnectionMap etag. */
                     public etag?: (string|null);
 
-                    /** ServiceConnectionMap _etag. */
-                    public _etag?: "etag";
-
                     /**
                      * Creates a new ServiceConnectionMap instance using the specified properties.
                      * @param [properties] Properties to set
@@ -920,9 +917,6 @@ export namespace google {
                         /** ConsumerPscConfig ipVersion. */
                         public ipVersion?: (google.cloud.networkconnectivity.v1.IPVersion|keyof typeof google.cloud.networkconnectivity.v1.IPVersion|null);
 
-                        /** ConsumerPscConfig _ipVersion. */
-                        public _ipVersion?: "ipVersion";
-
                         /**
                          * Creates a new ConsumerPscConfig instance using the specified properties.
                          * @param [properties] Properties to set
@@ -1115,9 +1109,6 @@ export namespace google {
 
                         /** ConsumerPscConnection ipVersion. */
                         public ipVersion?: (google.cloud.networkconnectivity.v1.IPVersion|keyof typeof google.cloud.networkconnectivity.v1.IPVersion|null);
-
-                        /** ConsumerPscConnection _ipVersion. */
-                        public _ipVersion?: "ipVersion";
 
                         /**
                          * Creates a new ConsumerPscConnection instance using the specified properties.
@@ -1794,9 +1785,6 @@ export namespace google {
                     /** DeleteServiceConnectionMapRequest etag. */
                     public etag?: (string|null);
 
-                    /** DeleteServiceConnectionMapRequest _etag. */
-                    public _etag?: "etag";
-
                     /**
                      * Creates a new DeleteServiceConnectionMapRequest instance using the specified properties.
                      * @param [properties] Properties to set
@@ -1954,9 +1942,6 @@ export namespace google {
                     /** ServiceConnectionPolicy etag. */
                     public etag?: (string|null);
 
-                    /** ServiceConnectionPolicy _etag. */
-                    public _etag?: "etag";
-
                     /**
                      * Creates a new ServiceConnectionPolicy instance using the specified properties.
                      * @param [properties] Properties to set
@@ -2073,9 +2058,6 @@ export namespace google {
 
                         /** PscConfig allowedGoogleProducersResourceHierarchyLevel. */
                         public allowedGoogleProducersResourceHierarchyLevel: string[];
-
-                        /** PscConfig _limit. */
-                        public _limit?: "limit";
 
                         /**
                          * Creates a new PscConfig instance using the specified properties.
@@ -2260,9 +2242,6 @@ export namespace google {
 
                         /** PscConnection ipVersion. */
                         public ipVersion?: (google.cloud.networkconnectivity.v1.IPVersion|keyof typeof google.cloud.networkconnectivity.v1.IPVersion|null);
-
-                        /** PscConnection _ipVersion. */
-                        public _ipVersion?: "ipVersion";
 
                         /**
                          * Creates a new PscConnection instance using the specified properties.
@@ -2936,9 +2915,6 @@ export namespace google {
                     /** DeleteServiceConnectionPolicyRequest etag. */
                     public etag?: (string|null);
 
-                    /** DeleteServiceConnectionPolicyRequest _etag. */
-                    public _etag?: "etag";
-
                     /**
                      * Creates a new DeleteServiceConnectionPolicyRequest instance using the specified properties.
                      * @param [properties] Properties to set
@@ -3071,9 +3047,6 @@ export namespace google {
 
                     /** ServiceClass etag. */
                     public etag?: (string|null);
-
-                    /** ServiceClass _etag. */
-                    public _etag?: "etag";
 
                     /**
                      * Creates a new ServiceClass instance using the specified properties.
@@ -3620,9 +3593,6 @@ export namespace google {
                     /** DeleteServiceClassRequest etag. */
                     public etag?: (string|null);
 
-                    /** DeleteServiceClassRequest _etag. */
-                    public _etag?: "etag";
-
                     /**
                      * Creates a new DeleteServiceClassRequest instance using the specified properties.
                      * @param [properties] Properties to set
@@ -3767,9 +3737,6 @@ export namespace google {
 
                     /** ServiceConnectionToken etag. */
                     public etag?: (string|null);
-
-                    /** ServiceConnectionToken _etag. */
-                    public _etag?: "etag";
 
                     /**
                      * Creates a new ServiceConnectionToken instance using the specified properties.
@@ -4321,9 +4288,6 @@ export namespace google {
 
                     /** DeleteServiceConnectionTokenRequest etag. */
                     public etag?: (string|null);
-
-                    /** DeleteServiceConnectionTokenRequest _etag. */
-                    public _etag?: "etag";
 
                     /**
                      * Creates a new DeleteServiceConnectionTokenRequest instance using the specified properties.
@@ -5052,9 +5016,6 @@ export namespace google {
 
                     /** Hub exportPsc. */
                     public exportPsc?: (boolean|null);
-
-                    /** Hub _exportPsc. */
-                    public _exportPsc?: "exportPsc";
 
                     /**
                      * Creates a new Hub instance using the specified properties.
@@ -16066,6 +16027,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -16106,6 +16070,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -20171,6 +20138,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -20422,7 +20392,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -20453,7 +20423,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -21695,7 +21665,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -21711,7 +21681,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.

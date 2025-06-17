@@ -18,24 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-  IamClient,
-  IamProtos,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, IamClient, IamProtos, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -116,42 +103,20 @@ export class ManagedNotebookServiceClient {
    *     const client = new ManagedNotebookServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof ManagedNotebookServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    const staticMembers = this.constructor as typeof ManagedNotebookServiceClient;
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'notebooks.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -177,7 +142,7 @@ export class ManagedNotebookServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -190,14 +155,18 @@ export class ManagedNotebookServiceClient {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
-
+  
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -245,206 +214,114 @@ export class ManagedNotebookServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listRuntimes: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'runtimes'
-      ),
+      listRuntimes:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'runtimes')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v1/{name=projects/*/locations/*}',
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v1/{name=projects/*}/locations',
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
-          get: '/v1/{resource=projects/*/locations/*/instances/*}:getIamPolicy',
-          additional_bindings: [
-            {
-              get: '/v1/{resource=projects/*/locations/*/runtimes/*}:getIamPolicy',
-            },
-          ],
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
-          post: '/v1/{resource=projects/*/locations/*/instances/*}:setIamPolicy',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1/{resource=projects/*/locations/*/runtimes/*}:setIamPolicy',
-              body: '*',
-            },
-          ],
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
-          post: '/v1/{resource=projects/*/locations/*/instances/*}:testIamPermissions',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1/{resource=projects/*/locations/*/runtimes/*}:testIamPermissions',
-              body: '*',
-            },
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
-          body: '*',
-        },
-        {
-          selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1/{name=projects/*/locations/*}/operations',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1/{resource=projects/*/locations/*/instances/*}:getIamPolicy',additional_bindings: [{get: '/v1/{resource=projects/*/locations/*/runtimes/*}:getIamPolicy',}],
+      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/*/instances/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/runtimes/*}:setIamPolicy',body: '*',}],
+      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/*/instances/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/runtimes/*}:testIamPermissions',body: '*',}],
+      },{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createRuntimeResponse = protoFilesRoot.lookup(
-      '.google.cloud.notebooks.v1.Runtime'
-    ) as gax.protobuf.Type;
+      '.google.cloud.notebooks.v1.Runtime') as gax.protobuf.Type;
     const createRuntimeMetadata = protoFilesRoot.lookup(
-      '.google.cloud.notebooks.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.notebooks.v1.OperationMetadata') as gax.protobuf.Type;
     const updateRuntimeResponse = protoFilesRoot.lookup(
-      '.google.cloud.notebooks.v1.Runtime'
-    ) as gax.protobuf.Type;
+      '.google.cloud.notebooks.v1.Runtime') as gax.protobuf.Type;
     const updateRuntimeMetadata = protoFilesRoot.lookup(
-      '.google.cloud.notebooks.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.notebooks.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteRuntimeResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteRuntimeMetadata = protoFilesRoot.lookup(
-      '.google.cloud.notebooks.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.notebooks.v1.OperationMetadata') as gax.protobuf.Type;
     const startRuntimeResponse = protoFilesRoot.lookup(
-      '.google.cloud.notebooks.v1.Runtime'
-    ) as gax.protobuf.Type;
+      '.google.cloud.notebooks.v1.Runtime') as gax.protobuf.Type;
     const startRuntimeMetadata = protoFilesRoot.lookup(
-      '.google.cloud.notebooks.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.notebooks.v1.OperationMetadata') as gax.protobuf.Type;
     const stopRuntimeResponse = protoFilesRoot.lookup(
-      '.google.cloud.notebooks.v1.Runtime'
-    ) as gax.protobuf.Type;
+      '.google.cloud.notebooks.v1.Runtime') as gax.protobuf.Type;
     const stopRuntimeMetadata = protoFilesRoot.lookup(
-      '.google.cloud.notebooks.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.notebooks.v1.OperationMetadata') as gax.protobuf.Type;
     const switchRuntimeResponse = protoFilesRoot.lookup(
-      '.google.cloud.notebooks.v1.Runtime'
-    ) as gax.protobuf.Type;
+      '.google.cloud.notebooks.v1.Runtime') as gax.protobuf.Type;
     const switchRuntimeMetadata = protoFilesRoot.lookup(
-      '.google.cloud.notebooks.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.notebooks.v1.OperationMetadata') as gax.protobuf.Type;
     const resetRuntimeResponse = protoFilesRoot.lookup(
-      '.google.cloud.notebooks.v1.Runtime'
-    ) as gax.protobuf.Type;
+      '.google.cloud.notebooks.v1.Runtime') as gax.protobuf.Type;
     const resetRuntimeMetadata = protoFilesRoot.lookup(
-      '.google.cloud.notebooks.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.notebooks.v1.OperationMetadata') as gax.protobuf.Type;
     const upgradeRuntimeResponse = protoFilesRoot.lookup(
-      '.google.cloud.notebooks.v1.Runtime'
-    ) as gax.protobuf.Type;
+      '.google.cloud.notebooks.v1.Runtime') as gax.protobuf.Type;
     const upgradeRuntimeMetadata = protoFilesRoot.lookup(
-      '.google.cloud.notebooks.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.notebooks.v1.OperationMetadata') as gax.protobuf.Type;
     const reportRuntimeEventResponse = protoFilesRoot.lookup(
-      '.google.cloud.notebooks.v1.Runtime'
-    ) as gax.protobuf.Type;
+      '.google.cloud.notebooks.v1.Runtime') as gax.protobuf.Type;
     const reportRuntimeEventMetadata = protoFilesRoot.lookup(
-      '.google.cloud.notebooks.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.notebooks.v1.OperationMetadata') as gax.protobuf.Type;
     const diagnoseRuntimeResponse = protoFilesRoot.lookup(
-      '.google.cloud.notebooks.v1.Runtime'
-    ) as gax.protobuf.Type;
+      '.google.cloud.notebooks.v1.Runtime') as gax.protobuf.Type;
     const diagnoseRuntimeMetadata = protoFilesRoot.lookup(
-      '.google.cloud.notebooks.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.notebooks.v1.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createRuntime: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createRuntimeResponse.decode.bind(createRuntimeResponse),
-        createRuntimeMetadata.decode.bind(createRuntimeMetadata)
-      ),
+        createRuntimeMetadata.decode.bind(createRuntimeMetadata)),
       updateRuntime: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateRuntimeResponse.decode.bind(updateRuntimeResponse),
-        updateRuntimeMetadata.decode.bind(updateRuntimeMetadata)
-      ),
+        updateRuntimeMetadata.decode.bind(updateRuntimeMetadata)),
       deleteRuntime: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteRuntimeResponse.decode.bind(deleteRuntimeResponse),
-        deleteRuntimeMetadata.decode.bind(deleteRuntimeMetadata)
-      ),
+        deleteRuntimeMetadata.decode.bind(deleteRuntimeMetadata)),
       startRuntime: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         startRuntimeResponse.decode.bind(startRuntimeResponse),
-        startRuntimeMetadata.decode.bind(startRuntimeMetadata)
-      ),
+        startRuntimeMetadata.decode.bind(startRuntimeMetadata)),
       stopRuntime: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         stopRuntimeResponse.decode.bind(stopRuntimeResponse),
-        stopRuntimeMetadata.decode.bind(stopRuntimeMetadata)
-      ),
+        stopRuntimeMetadata.decode.bind(stopRuntimeMetadata)),
       switchRuntime: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         switchRuntimeResponse.decode.bind(switchRuntimeResponse),
-        switchRuntimeMetadata.decode.bind(switchRuntimeMetadata)
-      ),
+        switchRuntimeMetadata.decode.bind(switchRuntimeMetadata)),
       resetRuntime: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         resetRuntimeResponse.decode.bind(resetRuntimeResponse),
-        resetRuntimeMetadata.decode.bind(resetRuntimeMetadata)
-      ),
+        resetRuntimeMetadata.decode.bind(resetRuntimeMetadata)),
       upgradeRuntime: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         upgradeRuntimeResponse.decode.bind(upgradeRuntimeResponse),
-        upgradeRuntimeMetadata.decode.bind(upgradeRuntimeMetadata)
-      ),
+        upgradeRuntimeMetadata.decode.bind(upgradeRuntimeMetadata)),
       reportRuntimeEvent: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         reportRuntimeEventResponse.decode.bind(reportRuntimeEventResponse),
-        reportRuntimeEventMetadata.decode.bind(reportRuntimeEventMetadata)
-      ),
+        reportRuntimeEventMetadata.decode.bind(reportRuntimeEventMetadata)),
       diagnoseRuntime: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         diagnoseRuntimeResponse.decode.bind(diagnoseRuntimeResponse),
-        diagnoseRuntimeMetadata.decode.bind(diagnoseRuntimeMetadata)
-      ),
+        diagnoseRuntimeMetadata.decode.bind(diagnoseRuntimeMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.notebooks.v1.ManagedNotebookService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.notebooks.v1.ManagedNotebookService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -475,48 +352,28 @@ export class ManagedNotebookServiceClient {
     // Put together the "service stub" for
     // google.cloud.notebooks.v1.ManagedNotebookService.
     this.managedNotebookServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.notebooks.v1.ManagedNotebookService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.notebooks.v1
-            .ManagedNotebookService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.notebooks.v1.ManagedNotebookService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.notebooks.v1.ManagedNotebookService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const managedNotebookServiceStubMethods = [
-      'listRuntimes',
-      'getRuntime',
-      'createRuntime',
-      'updateRuntime',
-      'deleteRuntime',
-      'startRuntime',
-      'stopRuntime',
-      'switchRuntime',
-      'resetRuntime',
-      'upgradeRuntime',
-      'reportRuntimeEvent',
-      'refreshRuntimeTokenInternal',
-      'diagnoseRuntime',
-    ];
+    const managedNotebookServiceStubMethods =
+        ['listRuntimes', 'getRuntime', 'createRuntime', 'updateRuntime', 'deleteRuntime', 'startRuntime', 'stopRuntime', 'switchRuntime', 'resetRuntime', 'upgradeRuntime', 'reportRuntimeEvent', 'refreshRuntimeTokenInternal', 'diagnoseRuntime'];
     for (const methodName of managedNotebookServiceStubMethods) {
       const callPromise = this.managedNotebookServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -541,14 +398,8 @@ export class ManagedNotebookServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'notebooks.googleapis.com';
   }
@@ -559,14 +410,8 @@ export class ManagedNotebookServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'notebooks.googleapis.com';
   }
@@ -597,7 +442,9 @@ export class ManagedNotebookServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -606,9 +453,8 @@ export class ManagedNotebookServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -619,2117 +465,1427 @@ export class ManagedNotebookServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets details of a single Runtime. The location must be a regional endpoint
-   * rather than zonal.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Format:
-   *   `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.notebooks.v1.Runtime|Runtime}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_notebook_service.get_runtime.js</caption>
-   * region_tag:notebooks_v1_generated_ManagedNotebookService_GetRuntime_async
-   */
+/**
+ * Gets details of a single Runtime. The location must be a regional endpoint
+ * rather than zonal.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Format:
+ *   `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.notebooks.v1.Runtime|Runtime}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_notebook_service.get_runtime.js</caption>
+ * region_tag:notebooks_v1_generated_ManagedNotebookService_GetRuntime_async
+ */
   getRuntime(
-    request?: protos.google.cloud.notebooks.v1.IGetRuntimeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.notebooks.v1.IRuntime,
-      protos.google.cloud.notebooks.v1.IGetRuntimeRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.notebooks.v1.IGetRuntimeRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.notebooks.v1.IRuntime,
+        protos.google.cloud.notebooks.v1.IGetRuntimeRequest|undefined, {}|undefined
+      ]>;
   getRuntime(
-    request: protos.google.cloud.notebooks.v1.IGetRuntimeRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.notebooks.v1.IRuntime,
-      protos.google.cloud.notebooks.v1.IGetRuntimeRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getRuntime(
-    request: protos.google.cloud.notebooks.v1.IGetRuntimeRequest,
-    callback: Callback<
-      protos.google.cloud.notebooks.v1.IRuntime,
-      protos.google.cloud.notebooks.v1.IGetRuntimeRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getRuntime(
-    request?: protos.google.cloud.notebooks.v1.IGetRuntimeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.notebooks.v1.IGetRuntimeRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.notebooks.v1.IRuntime,
-          | protos.google.cloud.notebooks.v1.IGetRuntimeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.notebooks.v1.IRuntime,
-      protos.google.cloud.notebooks.v1.IGetRuntimeRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.notebooks.v1.IRuntime,
-      protos.google.cloud.notebooks.v1.IGetRuntimeRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.notebooks.v1.IGetRuntimeRequest|null|undefined,
+          {}|null|undefined>): void;
+  getRuntime(
+      request: protos.google.cloud.notebooks.v1.IGetRuntimeRequest,
+      callback: Callback<
+          protos.google.cloud.notebooks.v1.IRuntime,
+          protos.google.cloud.notebooks.v1.IGetRuntimeRequest|null|undefined,
+          {}|null|undefined>): void;
+  getRuntime(
+      request?: protos.google.cloud.notebooks.v1.IGetRuntimeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.notebooks.v1.IRuntime,
+          protos.google.cloud.notebooks.v1.IGetRuntimeRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.notebooks.v1.IRuntime,
+          protos.google.cloud.notebooks.v1.IGetRuntimeRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.notebooks.v1.IRuntime,
+        protos.google.cloud.notebooks.v1.IGetRuntimeRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getRuntime request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.notebooks.v1.IRuntime,
-          | protos.google.cloud.notebooks.v1.IGetRuntimeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.notebooks.v1.IRuntime,
+        protos.google.cloud.notebooks.v1.IGetRuntimeRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getRuntime response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getRuntime(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.notebooks.v1.IRuntime,
-          protos.google.cloud.notebooks.v1.IGetRuntimeRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getRuntime response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getRuntime(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.notebooks.v1.IRuntime,
+        protos.google.cloud.notebooks.v1.IGetRuntimeRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getRuntime response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets an access token for the consumer service account that the customer
-   * attached to the runtime. Only accessible from the tenant instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Format:
-   *   `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`
-   * @param {string} request.vmId
-   *   Required. The VM hardware token for authenticating the VM.
-   *   https://cloud.google.com/compute/docs/instances/verifying-instance-identity
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse|RefreshRuntimeTokenInternalResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_notebook_service.refresh_runtime_token_internal.js</caption>
-   * region_tag:notebooks_v1_generated_ManagedNotebookService_RefreshRuntimeTokenInternal_async
-   */
+/**
+ * Gets an access token for the consumer service account that the customer
+ * attached to the runtime. Only accessible from the tenant instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Format:
+ *   `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`
+ * @param {string} request.vmId
+ *   Required. The VM hardware token for authenticating the VM.
+ *   https://cloud.google.com/compute/docs/instances/verifying-instance-identity
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse|RefreshRuntimeTokenInternalResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_notebook_service.refresh_runtime_token_internal.js</caption>
+ * region_tag:notebooks_v1_generated_ManagedNotebookService_RefreshRuntimeTokenInternal_async
+ */
   refreshRuntimeTokenInternal(
-    request?: protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalResponse,
-      (
-        | protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalResponse,
+        protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest|undefined, {}|undefined
+      ]>;
   refreshRuntimeTokenInternal(
-    request: protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalResponse,
-      | protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  refreshRuntimeTokenInternal(
-    request: protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest,
-    callback: Callback<
-      protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalResponse,
-      | protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  refreshRuntimeTokenInternal(
-    request?: protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalResponse,
-          | protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalResponse,
-      | protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalResponse,
-      (
-        | protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest|null|undefined,
+          {}|null|undefined>): void;
+  refreshRuntimeTokenInternal(
+      request: protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest,
+      callback: Callback<
+          protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalResponse,
+          protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest|null|undefined,
+          {}|null|undefined>): void;
+  refreshRuntimeTokenInternal(
+      request?: protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalResponse,
+          protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalResponse,
+          protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalResponse,
+        protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('refreshRuntimeTokenInternal request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalResponse,
-          | protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalResponse,
+        protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('refreshRuntimeTokenInternal response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .refreshRuntimeTokenInternal(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalResponse,
-          (
-            | protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('refreshRuntimeTokenInternal response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.refreshRuntimeTokenInternal(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalResponse,
+        protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('refreshRuntimeTokenInternal response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Creates a new Runtime in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Format:
-   *   `parent=projects/{project_id}/locations/{location}`
-   * @param {string} request.runtimeId
-   *   Required. User-defined unique ID of this Runtime.
-   * @param {google.cloud.notebooks.v1.Runtime} request.runtime
-   *   Required. The Runtime to be created.
-   * @param {string} request.requestId
-   *   Idempotent request UUID.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_notebook_service.create_runtime.js</caption>
-   * region_tag:notebooks_v1_generated_ManagedNotebookService_CreateRuntime_async
-   */
+/**
+ * Creates a new Runtime in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Format:
+ *   `parent=projects/{project_id}/locations/{location}`
+ * @param {string} request.runtimeId
+ *   Required. User-defined unique ID of this Runtime.
+ * @param {google.cloud.notebooks.v1.Runtime} request.runtime
+ *   Required. The Runtime to be created.
+ * @param {string} request.requestId
+ *   Idempotent request UUID.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_notebook_service.create_runtime.js</caption>
+ * region_tag:notebooks_v1_generated_ManagedNotebookService_CreateRuntime_async
+ */
   createRuntime(
-    request?: protos.google.cloud.notebooks.v1.ICreateRuntimeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.notebooks.v1.ICreateRuntimeRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createRuntime(
-    request: protos.google.cloud.notebooks.v1.ICreateRuntimeRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.notebooks.v1.ICreateRuntimeRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createRuntime(
-    request: protos.google.cloud.notebooks.v1.ICreateRuntimeRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.notebooks.v1.ICreateRuntimeRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createRuntime(
-    request?: protos.google.cloud.notebooks.v1.ICreateRuntimeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.notebooks.v1.IRuntime,
-            protos.google.cloud.notebooks.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.notebooks.v1.ICreateRuntimeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.notebooks.v1.IRuntime,
-            protos.google.cloud.notebooks.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createRuntime response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createRuntime request %j', request);
-    return this.innerApiCalls
-      .createRuntime(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.notebooks.v1.IRuntime,
-            protos.google.cloud.notebooks.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createRuntime response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createRuntime(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createRuntime response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createRuntime()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_notebook_service.create_runtime.js</caption>
-   * region_tag:notebooks_v1_generated_ManagedNotebookService_CreateRuntime_async
-   */
-  async checkCreateRuntimeProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.notebooks.v1.Runtime,
-      protos.google.cloud.notebooks.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createRuntime()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_notebook_service.create_runtime.js</caption>
+ * region_tag:notebooks_v1_generated_ManagedNotebookService_CreateRuntime_async
+ */
+  async checkCreateRuntimeProgress(name: string): Promise<LROperation<protos.google.cloud.notebooks.v1.Runtime, protos.google.cloud.notebooks.v1.OperationMetadata>>{
     this._log.info('createRuntime long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createRuntime,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.notebooks.v1.Runtime,
-      protos.google.cloud.notebooks.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createRuntime, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.notebooks.v1.Runtime, protos.google.cloud.notebooks.v1.OperationMetadata>;
   }
-  /**
-   * Update Notebook Runtime configuration.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.notebooks.v1.Runtime} request.runtime
-   *   Required. The Runtime to be updated.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Specifies the path, relative to `Runtime`, of
-   *   the field to update. For example, to change the software configuration
-   *   kernels, the `update_mask` parameter would be
-   *   specified as `software_config.kernels`,
-   *   and the `PATCH` request body would specify the new value, as follows:
-   *
-   *       {
-   *         "software_config":{
-   *           "kernels": [{
-   *              'repository':
-   *              'gcr.io/deeplearning-platform-release/pytorch-gpu', 'tag':
-   *              'latest' }],
-   *           }
-   *       }
-   *
-   *
-   *   Currently, only the following fields can be updated:
-   *   - `software_config.kernels`
-   *   - `software_config.post_startup_script`
-   *   - `software_config.custom_gpu_driver_path`
-   *   - `software_config.idle_shutdown`
-   *   - `software_config.idle_shutdown_timeout`
-   *   - `software_config.disable_terminal`
-   * @param {string} request.requestId
-   *   Idempotent request UUID.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_notebook_service.update_runtime.js</caption>
-   * region_tag:notebooks_v1_generated_ManagedNotebookService_UpdateRuntime_async
-   */
+/**
+ * Update Notebook Runtime configuration.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.notebooks.v1.Runtime} request.runtime
+ *   Required. The Runtime to be updated.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Specifies the path, relative to `Runtime`, of
+ *   the field to update. For example, to change the software configuration
+ *   kernels, the `update_mask` parameter would be
+ *   specified as `software_config.kernels`,
+ *   and the `PATCH` request body would specify the new value, as follows:
+ *
+ *       {
+ *         "software_config":{
+ *           "kernels": [{
+ *              'repository':
+ *              'gcr.io/deeplearning-platform-release/pytorch-gpu', 'tag':
+ *              'latest' }],
+ *           }
+ *       }
+ *
+ *
+ *   Currently, only the following fields can be updated:
+ *   - `software_config.kernels`
+ *   - `software_config.post_startup_script`
+ *   - `software_config.custom_gpu_driver_path`
+ *   - `software_config.idle_shutdown`
+ *   - `software_config.idle_shutdown_timeout`
+ *   - `software_config.disable_terminal`
+ * @param {string} request.requestId
+ *   Idempotent request UUID.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_notebook_service.update_runtime.js</caption>
+ * region_tag:notebooks_v1_generated_ManagedNotebookService_UpdateRuntime_async
+ */
   updateRuntime(
-    request?: protos.google.cloud.notebooks.v1.IUpdateRuntimeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.notebooks.v1.IUpdateRuntimeRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateRuntime(
-    request: protos.google.cloud.notebooks.v1.IUpdateRuntimeRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.notebooks.v1.IUpdateRuntimeRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateRuntime(
-    request: protos.google.cloud.notebooks.v1.IUpdateRuntimeRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.notebooks.v1.IUpdateRuntimeRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateRuntime(
-    request?: protos.google.cloud.notebooks.v1.IUpdateRuntimeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.notebooks.v1.IRuntime,
-            protos.google.cloud.notebooks.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.notebooks.v1.IUpdateRuntimeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'runtime.name': request.runtime!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'runtime.name': request.runtime!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.notebooks.v1.IRuntime,
-            protos.google.cloud.notebooks.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateRuntime response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateRuntime request %j', request);
-    return this.innerApiCalls
-      .updateRuntime(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.notebooks.v1.IRuntime,
-            protos.google.cloud.notebooks.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateRuntime response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateRuntime(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateRuntime response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateRuntime()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_notebook_service.update_runtime.js</caption>
-   * region_tag:notebooks_v1_generated_ManagedNotebookService_UpdateRuntime_async
-   */
-  async checkUpdateRuntimeProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.notebooks.v1.Runtime,
-      protos.google.cloud.notebooks.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateRuntime()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_notebook_service.update_runtime.js</caption>
+ * region_tag:notebooks_v1_generated_ManagedNotebookService_UpdateRuntime_async
+ */
+  async checkUpdateRuntimeProgress(name: string): Promise<LROperation<protos.google.cloud.notebooks.v1.Runtime, protos.google.cloud.notebooks.v1.OperationMetadata>>{
     this._log.info('updateRuntime long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateRuntime,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.notebooks.v1.Runtime,
-      protos.google.cloud.notebooks.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateRuntime, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.notebooks.v1.Runtime, protos.google.cloud.notebooks.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a single Runtime.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Format:
-   *   `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`
-   * @param {string} request.requestId
-   *   Idempotent request UUID.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_notebook_service.delete_runtime.js</caption>
-   * region_tag:notebooks_v1_generated_ManagedNotebookService_DeleteRuntime_async
-   */
+/**
+ * Deletes a single Runtime.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Format:
+ *   `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`
+ * @param {string} request.requestId
+ *   Idempotent request UUID.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_notebook_service.delete_runtime.js</caption>
+ * region_tag:notebooks_v1_generated_ManagedNotebookService_DeleteRuntime_async
+ */
   deleteRuntime(
-    request?: protos.google.cloud.notebooks.v1.IDeleteRuntimeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.notebooks.v1.IDeleteRuntimeRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteRuntime(
-    request: protos.google.cloud.notebooks.v1.IDeleteRuntimeRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.notebooks.v1.IDeleteRuntimeRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteRuntime(
-    request: protos.google.cloud.notebooks.v1.IDeleteRuntimeRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.notebooks.v1.IDeleteRuntimeRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteRuntime(
-    request?: protos.google.cloud.notebooks.v1.IDeleteRuntimeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.notebooks.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.notebooks.v1.IDeleteRuntimeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.notebooks.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteRuntime response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteRuntime request %j', request);
-    return this.innerApiCalls
-      .deleteRuntime(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.notebooks.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteRuntime response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteRuntime(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteRuntime response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteRuntime()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_notebook_service.delete_runtime.js</caption>
-   * region_tag:notebooks_v1_generated_ManagedNotebookService_DeleteRuntime_async
-   */
-  async checkDeleteRuntimeProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.notebooks.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteRuntime()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_notebook_service.delete_runtime.js</caption>
+ * region_tag:notebooks_v1_generated_ManagedNotebookService_DeleteRuntime_async
+ */
+  async checkDeleteRuntimeProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.notebooks.v1.OperationMetadata>>{
     this._log.info('deleteRuntime long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteRuntime,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.notebooks.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteRuntime, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.notebooks.v1.OperationMetadata>;
   }
-  /**
-   * Starts a Managed Notebook Runtime.
-   * Perform "Start" on GPU instances; "Resume" on CPU instances
-   * See:
-   * https://cloud.google.com/compute/docs/instances/stop-start-instance
-   * https://cloud.google.com/compute/docs/instances/suspend-resume-instance
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Format:
-   *   `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`
-   * @param {string} request.requestId
-   *   Idempotent request UUID.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_notebook_service.start_runtime.js</caption>
-   * region_tag:notebooks_v1_generated_ManagedNotebookService_StartRuntime_async
-   */
+/**
+ * Starts a Managed Notebook Runtime.
+ * Perform "Start" on GPU instances; "Resume" on CPU instances
+ * See:
+ * https://cloud.google.com/compute/docs/instances/stop-start-instance
+ * https://cloud.google.com/compute/docs/instances/suspend-resume-instance
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Format:
+ *   `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`
+ * @param {string} request.requestId
+ *   Idempotent request UUID.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_notebook_service.start_runtime.js</caption>
+ * region_tag:notebooks_v1_generated_ManagedNotebookService_StartRuntime_async
+ */
   startRuntime(
-    request?: protos.google.cloud.notebooks.v1.IStartRuntimeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.notebooks.v1.IStartRuntimeRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   startRuntime(
-    request: protos.google.cloud.notebooks.v1.IStartRuntimeRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.notebooks.v1.IStartRuntimeRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   startRuntime(
-    request: protos.google.cloud.notebooks.v1.IStartRuntimeRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.notebooks.v1.IStartRuntimeRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   startRuntime(
-    request?: protos.google.cloud.notebooks.v1.IStartRuntimeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.notebooks.v1.IRuntime,
-            protos.google.cloud.notebooks.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.notebooks.v1.IStartRuntimeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.notebooks.v1.IRuntime,
-            protos.google.cloud.notebooks.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('startRuntime response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('startRuntime request %j', request);
-    return this.innerApiCalls
-      .startRuntime(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.notebooks.v1.IRuntime,
-            protos.google.cloud.notebooks.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('startRuntime response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.startRuntime(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('startRuntime response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `startRuntime()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_notebook_service.start_runtime.js</caption>
-   * region_tag:notebooks_v1_generated_ManagedNotebookService_StartRuntime_async
-   */
-  async checkStartRuntimeProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.notebooks.v1.Runtime,
-      protos.google.cloud.notebooks.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `startRuntime()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_notebook_service.start_runtime.js</caption>
+ * region_tag:notebooks_v1_generated_ManagedNotebookService_StartRuntime_async
+ */
+  async checkStartRuntimeProgress(name: string): Promise<LROperation<protos.google.cloud.notebooks.v1.Runtime, protos.google.cloud.notebooks.v1.OperationMetadata>>{
     this._log.info('startRuntime long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.startRuntime,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.notebooks.v1.Runtime,
-      protos.google.cloud.notebooks.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.startRuntime, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.notebooks.v1.Runtime, protos.google.cloud.notebooks.v1.OperationMetadata>;
   }
-  /**
-   * Stops a Managed Notebook Runtime.
-   * Perform "Stop" on GPU instances; "Suspend" on CPU instances
-   * See:
-   * https://cloud.google.com/compute/docs/instances/stop-start-instance
-   * https://cloud.google.com/compute/docs/instances/suspend-resume-instance
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Format:
-   *   `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`
-   * @param {string} request.requestId
-   *   Idempotent request UUID.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_notebook_service.stop_runtime.js</caption>
-   * region_tag:notebooks_v1_generated_ManagedNotebookService_StopRuntime_async
-   */
+/**
+ * Stops a Managed Notebook Runtime.
+ * Perform "Stop" on GPU instances; "Suspend" on CPU instances
+ * See:
+ * https://cloud.google.com/compute/docs/instances/stop-start-instance
+ * https://cloud.google.com/compute/docs/instances/suspend-resume-instance
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Format:
+ *   `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`
+ * @param {string} request.requestId
+ *   Idempotent request UUID.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_notebook_service.stop_runtime.js</caption>
+ * region_tag:notebooks_v1_generated_ManagedNotebookService_StopRuntime_async
+ */
   stopRuntime(
-    request?: protos.google.cloud.notebooks.v1.IStopRuntimeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.notebooks.v1.IStopRuntimeRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   stopRuntime(
-    request: protos.google.cloud.notebooks.v1.IStopRuntimeRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.notebooks.v1.IStopRuntimeRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   stopRuntime(
-    request: protos.google.cloud.notebooks.v1.IStopRuntimeRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.notebooks.v1.IStopRuntimeRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   stopRuntime(
-    request?: protos.google.cloud.notebooks.v1.IStopRuntimeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.notebooks.v1.IRuntime,
-            protos.google.cloud.notebooks.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.notebooks.v1.IStopRuntimeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.notebooks.v1.IRuntime,
-            protos.google.cloud.notebooks.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('stopRuntime response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('stopRuntime request %j', request);
-    return this.innerApiCalls
-      .stopRuntime(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.notebooks.v1.IRuntime,
-            protos.google.cloud.notebooks.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('stopRuntime response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.stopRuntime(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('stopRuntime response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `stopRuntime()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_notebook_service.stop_runtime.js</caption>
-   * region_tag:notebooks_v1_generated_ManagedNotebookService_StopRuntime_async
-   */
-  async checkStopRuntimeProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.notebooks.v1.Runtime,
-      protos.google.cloud.notebooks.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `stopRuntime()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_notebook_service.stop_runtime.js</caption>
+ * region_tag:notebooks_v1_generated_ManagedNotebookService_StopRuntime_async
+ */
+  async checkStopRuntimeProgress(name: string): Promise<LROperation<protos.google.cloud.notebooks.v1.Runtime, protos.google.cloud.notebooks.v1.OperationMetadata>>{
     this._log.info('stopRuntime long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.stopRuntime,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.notebooks.v1.Runtime,
-      protos.google.cloud.notebooks.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.stopRuntime, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.notebooks.v1.Runtime, protos.google.cloud.notebooks.v1.OperationMetadata>;
   }
-  /**
-   * Switch a Managed Notebook Runtime.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Format:
-   *   `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`
-   * @param {string} request.machineType
-   *   machine type.
-   * @param {google.cloud.notebooks.v1.RuntimeAcceleratorConfig} request.acceleratorConfig
-   *   accelerator config.
-   * @param {string} request.requestId
-   *   Idempotent request UUID.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_notebook_service.switch_runtime.js</caption>
-   * region_tag:notebooks_v1_generated_ManagedNotebookService_SwitchRuntime_async
-   */
+/**
+ * Switch a Managed Notebook Runtime.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Format:
+ *   `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`
+ * @param {string} request.machineType
+ *   machine type.
+ * @param {google.cloud.notebooks.v1.RuntimeAcceleratorConfig} request.acceleratorConfig
+ *   accelerator config.
+ * @param {string} request.requestId
+ *   Idempotent request UUID.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_notebook_service.switch_runtime.js</caption>
+ * region_tag:notebooks_v1_generated_ManagedNotebookService_SwitchRuntime_async
+ */
   switchRuntime(
-    request?: protos.google.cloud.notebooks.v1.ISwitchRuntimeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.notebooks.v1.ISwitchRuntimeRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   switchRuntime(
-    request: protos.google.cloud.notebooks.v1.ISwitchRuntimeRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.notebooks.v1.ISwitchRuntimeRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   switchRuntime(
-    request: protos.google.cloud.notebooks.v1.ISwitchRuntimeRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.notebooks.v1.ISwitchRuntimeRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   switchRuntime(
-    request?: protos.google.cloud.notebooks.v1.ISwitchRuntimeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.notebooks.v1.IRuntime,
-            protos.google.cloud.notebooks.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.notebooks.v1.ISwitchRuntimeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.notebooks.v1.IRuntime,
-            protos.google.cloud.notebooks.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('switchRuntime response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('switchRuntime request %j', request);
-    return this.innerApiCalls
-      .switchRuntime(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.notebooks.v1.IRuntime,
-            protos.google.cloud.notebooks.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('switchRuntime response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.switchRuntime(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('switchRuntime response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `switchRuntime()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_notebook_service.switch_runtime.js</caption>
-   * region_tag:notebooks_v1_generated_ManagedNotebookService_SwitchRuntime_async
-   */
-  async checkSwitchRuntimeProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.notebooks.v1.Runtime,
-      protos.google.cloud.notebooks.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `switchRuntime()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_notebook_service.switch_runtime.js</caption>
+ * region_tag:notebooks_v1_generated_ManagedNotebookService_SwitchRuntime_async
+ */
+  async checkSwitchRuntimeProgress(name: string): Promise<LROperation<protos.google.cloud.notebooks.v1.Runtime, protos.google.cloud.notebooks.v1.OperationMetadata>>{
     this._log.info('switchRuntime long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.switchRuntime,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.notebooks.v1.Runtime,
-      protos.google.cloud.notebooks.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.switchRuntime, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.notebooks.v1.Runtime, protos.google.cloud.notebooks.v1.OperationMetadata>;
   }
-  /**
-   * Resets a Managed Notebook Runtime.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Format:
-   *   `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`
-   * @param {string} request.requestId
-   *   Idempotent request UUID.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_notebook_service.reset_runtime.js</caption>
-   * region_tag:notebooks_v1_generated_ManagedNotebookService_ResetRuntime_async
-   */
+/**
+ * Resets a Managed Notebook Runtime.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Format:
+ *   `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`
+ * @param {string} request.requestId
+ *   Idempotent request UUID.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_notebook_service.reset_runtime.js</caption>
+ * region_tag:notebooks_v1_generated_ManagedNotebookService_ResetRuntime_async
+ */
   resetRuntime(
-    request?: protos.google.cloud.notebooks.v1.IResetRuntimeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.notebooks.v1.IResetRuntimeRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   resetRuntime(
-    request: protos.google.cloud.notebooks.v1.IResetRuntimeRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.notebooks.v1.IResetRuntimeRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   resetRuntime(
-    request: protos.google.cloud.notebooks.v1.IResetRuntimeRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.notebooks.v1.IResetRuntimeRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   resetRuntime(
-    request?: protos.google.cloud.notebooks.v1.IResetRuntimeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.notebooks.v1.IRuntime,
-            protos.google.cloud.notebooks.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.notebooks.v1.IResetRuntimeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.notebooks.v1.IRuntime,
-            protos.google.cloud.notebooks.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('resetRuntime response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('resetRuntime request %j', request);
-    return this.innerApiCalls
-      .resetRuntime(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.notebooks.v1.IRuntime,
-            protos.google.cloud.notebooks.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('resetRuntime response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.resetRuntime(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('resetRuntime response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `resetRuntime()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_notebook_service.reset_runtime.js</caption>
-   * region_tag:notebooks_v1_generated_ManagedNotebookService_ResetRuntime_async
-   */
-  async checkResetRuntimeProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.notebooks.v1.Runtime,
-      protos.google.cloud.notebooks.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `resetRuntime()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_notebook_service.reset_runtime.js</caption>
+ * region_tag:notebooks_v1_generated_ManagedNotebookService_ResetRuntime_async
+ */
+  async checkResetRuntimeProgress(name: string): Promise<LROperation<protos.google.cloud.notebooks.v1.Runtime, protos.google.cloud.notebooks.v1.OperationMetadata>>{
     this._log.info('resetRuntime long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.resetRuntime,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.notebooks.v1.Runtime,
-      protos.google.cloud.notebooks.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.resetRuntime, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.notebooks.v1.Runtime, protos.google.cloud.notebooks.v1.OperationMetadata>;
   }
-  /**
-   * Upgrades a Managed Notebook Runtime to the latest version.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Format:
-   *   `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`
-   * @param {string} request.requestId
-   *   Idempotent request UUID.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_notebook_service.upgrade_runtime.js</caption>
-   * region_tag:notebooks_v1_generated_ManagedNotebookService_UpgradeRuntime_async
-   */
+/**
+ * Upgrades a Managed Notebook Runtime to the latest version.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Format:
+ *   `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`
+ * @param {string} request.requestId
+ *   Idempotent request UUID.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_notebook_service.upgrade_runtime.js</caption>
+ * region_tag:notebooks_v1_generated_ManagedNotebookService_UpgradeRuntime_async
+ */
   upgradeRuntime(
-    request?: protos.google.cloud.notebooks.v1.IUpgradeRuntimeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.notebooks.v1.IUpgradeRuntimeRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   upgradeRuntime(
-    request: protos.google.cloud.notebooks.v1.IUpgradeRuntimeRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.notebooks.v1.IUpgradeRuntimeRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   upgradeRuntime(
-    request: protos.google.cloud.notebooks.v1.IUpgradeRuntimeRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.notebooks.v1.IUpgradeRuntimeRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   upgradeRuntime(
-    request?: protos.google.cloud.notebooks.v1.IUpgradeRuntimeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.notebooks.v1.IRuntime,
-            protos.google.cloud.notebooks.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.notebooks.v1.IUpgradeRuntimeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.notebooks.v1.IRuntime,
-            protos.google.cloud.notebooks.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('upgradeRuntime response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('upgradeRuntime request %j', request);
-    return this.innerApiCalls
-      .upgradeRuntime(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.notebooks.v1.IRuntime,
-            protos.google.cloud.notebooks.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('upgradeRuntime response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.upgradeRuntime(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('upgradeRuntime response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `upgradeRuntime()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_notebook_service.upgrade_runtime.js</caption>
-   * region_tag:notebooks_v1_generated_ManagedNotebookService_UpgradeRuntime_async
-   */
-  async checkUpgradeRuntimeProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.notebooks.v1.Runtime,
-      protos.google.cloud.notebooks.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `upgradeRuntime()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_notebook_service.upgrade_runtime.js</caption>
+ * region_tag:notebooks_v1_generated_ManagedNotebookService_UpgradeRuntime_async
+ */
+  async checkUpgradeRuntimeProgress(name: string): Promise<LROperation<protos.google.cloud.notebooks.v1.Runtime, protos.google.cloud.notebooks.v1.OperationMetadata>>{
     this._log.info('upgradeRuntime long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.upgradeRuntime,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.notebooks.v1.Runtime,
-      protos.google.cloud.notebooks.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.upgradeRuntime, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.notebooks.v1.Runtime, protos.google.cloud.notebooks.v1.OperationMetadata>;
   }
-  /**
-   * Report and process a runtime event.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Format:
-   *   `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`
-   * @param {string} request.vmId
-   *   Required. The VM hardware token for authenticating the VM.
-   *   https://cloud.google.com/compute/docs/instances/verifying-instance-identity
-   * @param {google.cloud.notebooks.v1.Event} request.event
-   *   Required. The Event to be reported.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_notebook_service.report_runtime_event.js</caption>
-   * region_tag:notebooks_v1_generated_ManagedNotebookService_ReportRuntimeEvent_async
-   */
+/**
+ * Report and process a runtime event.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Format:
+ *   `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`
+ * @param {string} request.vmId
+ *   Required. The VM hardware token for authenticating the VM.
+ *   https://cloud.google.com/compute/docs/instances/verifying-instance-identity
+ * @param {google.cloud.notebooks.v1.Event} request.event
+ *   Required. The Event to be reported.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_notebook_service.report_runtime_event.js</caption>
+ * region_tag:notebooks_v1_generated_ManagedNotebookService_ReportRuntimeEvent_async
+ */
   reportRuntimeEvent(
-    request?: protos.google.cloud.notebooks.v1.IReportRuntimeEventRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.notebooks.v1.IReportRuntimeEventRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   reportRuntimeEvent(
-    request: protos.google.cloud.notebooks.v1.IReportRuntimeEventRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.notebooks.v1.IReportRuntimeEventRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   reportRuntimeEvent(
-    request: protos.google.cloud.notebooks.v1.IReportRuntimeEventRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.notebooks.v1.IReportRuntimeEventRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   reportRuntimeEvent(
-    request?: protos.google.cloud.notebooks.v1.IReportRuntimeEventRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.notebooks.v1.IRuntime,
-            protos.google.cloud.notebooks.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.notebooks.v1.IReportRuntimeEventRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.notebooks.v1.IRuntime,
-            protos.google.cloud.notebooks.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('reportRuntimeEvent response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('reportRuntimeEvent request %j', request);
-    return this.innerApiCalls
-      .reportRuntimeEvent(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.notebooks.v1.IRuntime,
-            protos.google.cloud.notebooks.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('reportRuntimeEvent response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.reportRuntimeEvent(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('reportRuntimeEvent response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `reportRuntimeEvent()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_notebook_service.report_runtime_event.js</caption>
-   * region_tag:notebooks_v1_generated_ManagedNotebookService_ReportRuntimeEvent_async
-   */
-  async checkReportRuntimeEventProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.notebooks.v1.Runtime,
-      protos.google.cloud.notebooks.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `reportRuntimeEvent()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_notebook_service.report_runtime_event.js</caption>
+ * region_tag:notebooks_v1_generated_ManagedNotebookService_ReportRuntimeEvent_async
+ */
+  async checkReportRuntimeEventProgress(name: string): Promise<LROperation<protos.google.cloud.notebooks.v1.Runtime, protos.google.cloud.notebooks.v1.OperationMetadata>>{
     this._log.info('reportRuntimeEvent long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.reportRuntimeEvent,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.notebooks.v1.Runtime,
-      protos.google.cloud.notebooks.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.reportRuntimeEvent, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.notebooks.v1.Runtime, protos.google.cloud.notebooks.v1.OperationMetadata>;
   }
-  /**
-   * Creates a Diagnostic File and runs Diagnostic Tool given a Runtime.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Format:
-   *   `projects/{project_id}/locations/{location}/runtimes/{runtimes_id}`
-   * @param {google.cloud.notebooks.v1.DiagnosticConfig} request.diagnosticConfig
-   *   Required. Defines flags that are used to run the diagnostic tool
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_notebook_service.diagnose_runtime.js</caption>
-   * region_tag:notebooks_v1_generated_ManagedNotebookService_DiagnoseRuntime_async
-   */
+/**
+ * Creates a Diagnostic File and runs Diagnostic Tool given a Runtime.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Format:
+ *   `projects/{project_id}/locations/{location}/runtimes/{runtimes_id}`
+ * @param {google.cloud.notebooks.v1.DiagnosticConfig} request.diagnosticConfig
+ *   Required. Defines flags that are used to run the diagnostic tool
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_notebook_service.diagnose_runtime.js</caption>
+ * region_tag:notebooks_v1_generated_ManagedNotebookService_DiagnoseRuntime_async
+ */
   diagnoseRuntime(
-    request?: protos.google.cloud.notebooks.v1.IDiagnoseRuntimeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.notebooks.v1.IDiagnoseRuntimeRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   diagnoseRuntime(
-    request: protos.google.cloud.notebooks.v1.IDiagnoseRuntimeRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.notebooks.v1.IDiagnoseRuntimeRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   diagnoseRuntime(
-    request: protos.google.cloud.notebooks.v1.IDiagnoseRuntimeRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.notebooks.v1.IDiagnoseRuntimeRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   diagnoseRuntime(
-    request?: protos.google.cloud.notebooks.v1.IDiagnoseRuntimeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.notebooks.v1.IRuntime,
-            protos.google.cloud.notebooks.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.notebooks.v1.IRuntime,
-        protos.google.cloud.notebooks.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.notebooks.v1.IDiagnoseRuntimeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.notebooks.v1.IRuntime,
-            protos.google.cloud.notebooks.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('diagnoseRuntime response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('diagnoseRuntime request %j', request);
-    return this.innerApiCalls
-      .diagnoseRuntime(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.notebooks.v1.IRuntime,
-            protos.google.cloud.notebooks.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('diagnoseRuntime response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.diagnoseRuntime(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.notebooks.v1.IRuntime, protos.google.cloud.notebooks.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('diagnoseRuntime response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `diagnoseRuntime()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_notebook_service.diagnose_runtime.js</caption>
-   * region_tag:notebooks_v1_generated_ManagedNotebookService_DiagnoseRuntime_async
-   */
-  async checkDiagnoseRuntimeProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.notebooks.v1.Runtime,
-      protos.google.cloud.notebooks.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `diagnoseRuntime()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_notebook_service.diagnose_runtime.js</caption>
+ * region_tag:notebooks_v1_generated_ManagedNotebookService_DiagnoseRuntime_async
+ */
+  async checkDiagnoseRuntimeProgress(name: string): Promise<LROperation<protos.google.cloud.notebooks.v1.Runtime, protos.google.cloud.notebooks.v1.OperationMetadata>>{
     this._log.info('diagnoseRuntime long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.diagnoseRuntime,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.notebooks.v1.Runtime,
-      protos.google.cloud.notebooks.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.diagnoseRuntime, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.notebooks.v1.Runtime, protos.google.cloud.notebooks.v1.OperationMetadata>;
   }
-  /**
-   * Lists Runtimes in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Format:
-   *   `parent=projects/{project_id}/locations/{location}`
-   * @param {number} request.pageSize
-   *   Maximum return size of the list call.
-   * @param {string} request.pageToken
-   *   A previous returned page token that can be used to continue listing
-   *   from the last result.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.notebooks.v1.Runtime|Runtime}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listRuntimesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists Runtimes in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Format:
+ *   `parent=projects/{project_id}/locations/{location}`
+ * @param {number} request.pageSize
+ *   Maximum return size of the list call.
+ * @param {string} request.pageToken
+ *   A previous returned page token that can be used to continue listing
+ *   from the last result.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.notebooks.v1.Runtime|Runtime}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listRuntimesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listRuntimes(
-    request?: protos.google.cloud.notebooks.v1.IListRuntimesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.notebooks.v1.IRuntime[],
-      protos.google.cloud.notebooks.v1.IListRuntimesRequest | null,
-      protos.google.cloud.notebooks.v1.IListRuntimesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.notebooks.v1.IListRuntimesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.notebooks.v1.IRuntime[],
+        protos.google.cloud.notebooks.v1.IListRuntimesRequest|null,
+        protos.google.cloud.notebooks.v1.IListRuntimesResponse
+      ]>;
   listRuntimes(
-    request: protos.google.cloud.notebooks.v1.IListRuntimesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.notebooks.v1.IListRuntimesRequest,
-      protos.google.cloud.notebooks.v1.IListRuntimesResponse | null | undefined,
-      protos.google.cloud.notebooks.v1.IRuntime
-    >
-  ): void;
-  listRuntimes(
-    request: protos.google.cloud.notebooks.v1.IListRuntimesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.notebooks.v1.IListRuntimesRequest,
-      protos.google.cloud.notebooks.v1.IListRuntimesResponse | null | undefined,
-      protos.google.cloud.notebooks.v1.IRuntime
-    >
-  ): void;
-  listRuntimes(
-    request?: protos.google.cloud.notebooks.v1.IListRuntimesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.notebooks.v1.IListRuntimesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.notebooks.v1.IListRuntimesRequest,
-          | protos.google.cloud.notebooks.v1.IListRuntimesResponse
-          | null
-          | undefined,
-          protos.google.cloud.notebooks.v1.IRuntime
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.notebooks.v1.IListRuntimesRequest,
-      protos.google.cloud.notebooks.v1.IListRuntimesResponse | null | undefined,
-      protos.google.cloud.notebooks.v1.IRuntime
-    >
-  ): Promise<
-    [
-      protos.google.cloud.notebooks.v1.IRuntime[],
-      protos.google.cloud.notebooks.v1.IListRuntimesRequest | null,
-      protos.google.cloud.notebooks.v1.IListRuntimesResponse,
-    ]
-  > | void {
+          protos.google.cloud.notebooks.v1.IListRuntimesResponse|null|undefined,
+          protos.google.cloud.notebooks.v1.IRuntime>): void;
+  listRuntimes(
+      request: protos.google.cloud.notebooks.v1.IListRuntimesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.notebooks.v1.IListRuntimesRequest,
+          protos.google.cloud.notebooks.v1.IListRuntimesResponse|null|undefined,
+          protos.google.cloud.notebooks.v1.IRuntime>): void;
+  listRuntimes(
+      request?: protos.google.cloud.notebooks.v1.IListRuntimesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.notebooks.v1.IListRuntimesRequest,
+          protos.google.cloud.notebooks.v1.IListRuntimesResponse|null|undefined,
+          protos.google.cloud.notebooks.v1.IRuntime>,
+      callback?: PaginationCallback<
+          protos.google.cloud.notebooks.v1.IListRuntimesRequest,
+          protos.google.cloud.notebooks.v1.IListRuntimesResponse|null|undefined,
+          protos.google.cloud.notebooks.v1.IRuntime>):
+      Promise<[
+        protos.google.cloud.notebooks.v1.IRuntime[],
+        protos.google.cloud.notebooks.v1.IListRuntimesRequest|null,
+        protos.google.cloud.notebooks.v1.IListRuntimesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.notebooks.v1.IListRuntimesRequest,
-          | protos.google.cloud.notebooks.v1.IListRuntimesResponse
-          | null
-          | undefined,
-          protos.google.cloud.notebooks.v1.IRuntime
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.notebooks.v1.IListRuntimesRequest,
+      protos.google.cloud.notebooks.v1.IListRuntimesResponse|null|undefined,
+      protos.google.cloud.notebooks.v1.IRuntime>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listRuntimes values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2738,58 +1894,55 @@ export class ManagedNotebookServiceClient {
     this._log.info('listRuntimes request %j', request);
     return this.innerApiCalls
       .listRuntimes(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.notebooks.v1.IRuntime[],
-          protos.google.cloud.notebooks.v1.IListRuntimesRequest | null,
-          protos.google.cloud.notebooks.v1.IListRuntimesResponse,
-        ]) => {
-          this._log.info('listRuntimes values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.notebooks.v1.IRuntime[],
+        protos.google.cloud.notebooks.v1.IListRuntimesRequest|null,
+        protos.google.cloud.notebooks.v1.IListRuntimesResponse
+      ]) => {
+        this._log.info('listRuntimes values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listRuntimes`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Format:
-   *   `parent=projects/{project_id}/locations/{location}`
-   * @param {number} request.pageSize
-   *   Maximum return size of the list call.
-   * @param {string} request.pageToken
-   *   A previous returned page token that can be used to continue listing
-   *   from the last result.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.notebooks.v1.Runtime|Runtime} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listRuntimesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listRuntimes`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Format:
+ *   `parent=projects/{project_id}/locations/{location}`
+ * @param {number} request.pageSize
+ *   Maximum return size of the list call.
+ * @param {string} request.pageToken
+ *   A previous returned page token that can be used to continue listing
+ *   from the last result.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.notebooks.v1.Runtime|Runtime} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listRuntimesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listRuntimesStream(
-    request?: protos.google.cloud.notebooks.v1.IListRuntimesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.notebooks.v1.IListRuntimesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listRuntimes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listRuntimes stream %j', request);
     return this.descriptors.page.listRuntimes.createStream(
       this.innerApiCalls.listRuntimes as GaxCall,
@@ -2798,49 +1951,48 @@ export class ManagedNotebookServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listRuntimes`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Format:
-   *   `parent=projects/{project_id}/locations/{location}`
-   * @param {number} request.pageSize
-   *   Maximum return size of the list call.
-   * @param {string} request.pageToken
-   *   A previous returned page token that can be used to continue listing
-   *   from the last result.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.notebooks.v1.Runtime|Runtime}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_notebook_service.list_runtimes.js</caption>
-   * region_tag:notebooks_v1_generated_ManagedNotebookService_ListRuntimes_async
-   */
+/**
+ * Equivalent to `listRuntimes`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Format:
+ *   `parent=projects/{project_id}/locations/{location}`
+ * @param {number} request.pageSize
+ *   Maximum return size of the list call.
+ * @param {string} request.pageToken
+ *   A previous returned page token that can be used to continue listing
+ *   from the last result.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.notebooks.v1.Runtime|Runtime}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/managed_notebook_service.list_runtimes.js</caption>
+ * region_tag:notebooks_v1_generated_ManagedNotebookService_ListRuntimes_async
+ */
   listRuntimesAsync(
-    request?: protos.google.cloud.notebooks.v1.IListRuntimesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.notebooks.v1.IRuntime> {
+      request?: protos.google.cloud.notebooks.v1.IListRuntimesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.notebooks.v1.IRuntime>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listRuntimes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listRuntimes iterate %j', request);
     return this.descriptors.page.listRuntimes.asyncIterate(
       this.innerApiCalls['listRuntimes'] as GaxCall,
@@ -2848,31 +2000,31 @@ export class ManagedNotebookServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.notebooks.v1.IRuntime>;
   }
-  /**
-   * Gets the access control policy for a resource. Returns an empty policy
-   * if the resource exists and does not have a policy set.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {Object} [request.options]
-   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`. This field is only used by Cloud IAM.
-   *
-   *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
+/**
+ * Gets the access control policy for a resource. Returns an empty policy
+ * if the resource exists and does not have a policy set.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {Object} [request.options]
+ *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+ *   `GetIamPolicy`. This field is only used by Cloud IAM.
+ *
+ *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ */
   getIamPolicy(
     request: IamProtos.google.iam.v1.GetIamPolicyRequest,
     options?:
@@ -2887,39 +2039,39 @@ export class ManagedNotebookServiceClient {
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.Policy]> {
+  ):Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
-  /**
-   * Returns permissions that a caller has on the specified resource. If the
-   * resource does not exist, this will return an empty set of
-   * permissions, not a NOT_FOUND error.
-   *
-   * Note: This operation is designed to be used for building
-   * permission-aware UIs and command-line tools, not for authorization
-   * checking. This operation may "fail open" without warning.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
+/**
+ * Returns permissions that a caller has on the specified resource. If the
+ * resource does not exist, this will return an empty set of
+ * permissions, not a NOT_FOUND error.
+ *
+ * Note: This operation is designed to be used for building
+ * permission-aware UIs and command-line tools, not for authorization
+ * checking. This operation may "fail open" without warning.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ */
   setIamPolicy(
     request: IamProtos.google.iam.v1.SetIamPolicyRequest,
     options?:
@@ -2934,40 +2086,40 @@ export class ManagedNotebookServiceClient {
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.Policy]> {
+  ):Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
-  /**
-   * Returns permissions that a caller has on the specified resource. If the
-   * resource does not exist, this will return an empty set of
-   * permissions, not a NOT_FOUND error.
-   *
-   * Note: This operation is designed to be used for building
-   * permission-aware UIs and command-line tools, not for authorization
-   * checking. This operation may "fail open" without warning.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   *
-   */
+/**
+ * Returns permissions that a caller has on the specified resource. If the
+ * resource does not exist, this will return an empty set of
+ * permissions, not a NOT_FOUND error.
+ *
+ * Note: This operation is designed to be used for building
+ * permission-aware UIs and command-line tools, not for authorization
+ * checking. This operation may "fail open" without warning.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ *
+ */
   testIamPermissions(
     request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
     options?:
@@ -2982,11 +2134,11 @@ export class ManagedNotebookServiceClient {
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
+  ):Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -3026,7 +2178,7 @@ export class ManagedNotebookServiceClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -3064,7 +2216,7 @@ export class ManagedNotebookServiceClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -3109,20 +2261,20 @@ export class ManagedNotebookServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -3159,13 +2311,13 @@ export class ManagedNotebookServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -3199,7 +2351,7 @@ export class ManagedNotebookServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -3214,20 +2366,20 @@ export class ManagedNotebookServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -3271,20 +2423,20 @@ export class ManagedNotebookServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -3299,7 +2451,7 @@ export class ManagedNotebookServiceClient {
    * @param {string} environment
    * @returns {string} Resource name string.
    */
-  environmentPath(project: string, environment: string) {
+  environmentPath(project:string,environment:string) {
     return this.pathTemplates.environmentPathTemplate.render({
       project: project,
       environment: environment,
@@ -3314,8 +2466,7 @@ export class ManagedNotebookServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName)
-      .project;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName).project;
   }
 
   /**
@@ -3326,8 +2477,7 @@ export class ManagedNotebookServiceClient {
    * @returns {string} A string representing the environment.
    */
   matchEnvironmentFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName)
-      .environment;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName).environment;
   }
 
   /**
@@ -3338,7 +2488,7 @@ export class ManagedNotebookServiceClient {
    * @param {string} execution
    * @returns {string} Resource name string.
    */
-  executionPath(project: string, location: string, execution: string) {
+  executionPath(project:string,location:string,execution:string) {
     return this.pathTemplates.executionPathTemplate.render({
       project: project,
       location: location,
@@ -3354,8 +2504,7 @@ export class ManagedNotebookServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromExecutionName(executionName: string) {
-    return this.pathTemplates.executionPathTemplate.match(executionName)
-      .project;
+    return this.pathTemplates.executionPathTemplate.match(executionName).project;
   }
 
   /**
@@ -3366,8 +2515,7 @@ export class ManagedNotebookServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromExecutionName(executionName: string) {
-    return this.pathTemplates.executionPathTemplate.match(executionName)
-      .location;
+    return this.pathTemplates.executionPathTemplate.match(executionName).location;
   }
 
   /**
@@ -3378,8 +2526,7 @@ export class ManagedNotebookServiceClient {
    * @returns {string} A string representing the execution.
    */
   matchExecutionFromExecutionName(executionName: string) {
-    return this.pathTemplates.executionPathTemplate.match(executionName)
-      .execution;
+    return this.pathTemplates.executionPathTemplate.match(executionName).execution;
   }
 
   /**
@@ -3389,7 +2536,7 @@ export class ManagedNotebookServiceClient {
    * @param {string} instance
    * @returns {string} Resource name string.
    */
-  instancePath(project: string, instance: string) {
+  instancePath(project:string,instance:string) {
     return this.pathTemplates.instancePathTemplate.render({
       project: project,
       instance: instance,
@@ -3425,7 +2572,7 @@ export class ManagedNotebookServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -3460,7 +2607,7 @@ export class ManagedNotebookServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -3485,7 +2632,7 @@ export class ManagedNotebookServiceClient {
    * @param {string} runtime
    * @returns {string} Resource name string.
    */
-  runtimePath(project: string, location: string, runtime: string) {
+  runtimePath(project:string,location:string,runtime:string) {
     return this.pathTemplates.runtimePathTemplate.render({
       project: project,
       location: location,
@@ -3534,7 +2681,7 @@ export class ManagedNotebookServiceClient {
    * @param {string} schedule
    * @returns {string} Resource name string.
    */
-  schedulePath(project: string, location: string, schedule: string) {
+  schedulePath(project:string,location:string,schedule:string) {
     return this.pathTemplates.schedulePathTemplate.render({
       project: project,
       location: location,
@@ -3587,12 +2734,8 @@ export class ManagedNotebookServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch(err => {
-          throw err;
-        });
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.iamClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch(err => {throw err});
         void this.operationsClient.close();
       });
     }

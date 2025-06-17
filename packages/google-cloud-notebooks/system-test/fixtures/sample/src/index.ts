@@ -16,15 +16,10 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {
-  ManagedNotebookServiceClient,
-  NotebookServiceClient,
-} from '@google-cloud/notebooks';
+import {ManagedNotebookServiceClient, NotebookServiceClient} from '@google-cloud/notebooks';
 
 // check that the client class type name can be used
-function doStuffWithManagedNotebookServiceClient(
-  client: ManagedNotebookServiceClient
-) {
+function doStuffWithManagedNotebookServiceClient(client: ManagedNotebookServiceClient) {
   client.close();
 }
 function doStuffWithNotebookServiceClient(client: NotebookServiceClient) {

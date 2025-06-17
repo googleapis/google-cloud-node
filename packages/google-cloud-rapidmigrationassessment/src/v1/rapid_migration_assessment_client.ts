@@ -18,22 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -113,42 +102,20 @@ export class RapidMigrationAssessmentClient {
    *     const client = new RapidMigrationAssessmentClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof RapidMigrationAssessmentClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    const staticMembers = this.constructor as typeof RapidMigrationAssessmentClient;
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'rapidmigrationassessment.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -174,7 +141,7 @@ export class RapidMigrationAssessmentClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -190,9 +157,13 @@ export class RapidMigrationAssessmentClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -228,142 +199,87 @@ export class RapidMigrationAssessmentClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listCollectors: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'collectors'
-      ),
+      listCollectors:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'collectors')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v1/{name=projects/*/locations/*}',
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v1/{name=projects/*}/locations',
-        },
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
-          body: '*',
-        },
-        {
-          selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1/{name=projects/*/locations/*}/operations',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createCollectorResponse = protoFilesRoot.lookup(
-      '.google.cloud.rapidmigrationassessment.v1.Collector'
-    ) as gax.protobuf.Type;
+      '.google.cloud.rapidmigrationassessment.v1.Collector') as gax.protobuf.Type;
     const createCollectorMetadata = protoFilesRoot.lookup(
-      '.google.cloud.rapidmigrationassessment.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.rapidmigrationassessment.v1.OperationMetadata') as gax.protobuf.Type;
     const createAnnotationResponse = protoFilesRoot.lookup(
-      '.google.cloud.rapidmigrationassessment.v1.Annotation'
-    ) as gax.protobuf.Type;
+      '.google.cloud.rapidmigrationassessment.v1.Annotation') as gax.protobuf.Type;
     const createAnnotationMetadata = protoFilesRoot.lookup(
-      '.google.cloud.rapidmigrationassessment.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.rapidmigrationassessment.v1.OperationMetadata') as gax.protobuf.Type;
     const updateCollectorResponse = protoFilesRoot.lookup(
-      '.google.cloud.rapidmigrationassessment.v1.Collector'
-    ) as gax.protobuf.Type;
+      '.google.cloud.rapidmigrationassessment.v1.Collector') as gax.protobuf.Type;
     const updateCollectorMetadata = protoFilesRoot.lookup(
-      '.google.cloud.rapidmigrationassessment.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.rapidmigrationassessment.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteCollectorResponse = protoFilesRoot.lookup(
-      '.google.cloud.rapidmigrationassessment.v1.Collector'
-    ) as gax.protobuf.Type;
+      '.google.cloud.rapidmigrationassessment.v1.Collector') as gax.protobuf.Type;
     const deleteCollectorMetadata = protoFilesRoot.lookup(
-      '.google.cloud.rapidmigrationassessment.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.rapidmigrationassessment.v1.OperationMetadata') as gax.protobuf.Type;
     const resumeCollectorResponse = protoFilesRoot.lookup(
-      '.google.cloud.rapidmigrationassessment.v1.Collector'
-    ) as gax.protobuf.Type;
+      '.google.cloud.rapidmigrationassessment.v1.Collector') as gax.protobuf.Type;
     const resumeCollectorMetadata = protoFilesRoot.lookup(
-      '.google.cloud.rapidmigrationassessment.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.rapidmigrationassessment.v1.OperationMetadata') as gax.protobuf.Type;
     const registerCollectorResponse = protoFilesRoot.lookup(
-      '.google.cloud.rapidmigrationassessment.v1.Collector'
-    ) as gax.protobuf.Type;
+      '.google.cloud.rapidmigrationassessment.v1.Collector') as gax.protobuf.Type;
     const registerCollectorMetadata = protoFilesRoot.lookup(
-      '.google.cloud.rapidmigrationassessment.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.rapidmigrationassessment.v1.OperationMetadata') as gax.protobuf.Type;
     const pauseCollectorResponse = protoFilesRoot.lookup(
-      '.google.cloud.rapidmigrationassessment.v1.Collector'
-    ) as gax.protobuf.Type;
+      '.google.cloud.rapidmigrationassessment.v1.Collector') as gax.protobuf.Type;
     const pauseCollectorMetadata = protoFilesRoot.lookup(
-      '.google.cloud.rapidmigrationassessment.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.rapidmigrationassessment.v1.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createCollector: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createCollectorResponse.decode.bind(createCollectorResponse),
-        createCollectorMetadata.decode.bind(createCollectorMetadata)
-      ),
+        createCollectorMetadata.decode.bind(createCollectorMetadata)),
       createAnnotation: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createAnnotationResponse.decode.bind(createAnnotationResponse),
-        createAnnotationMetadata.decode.bind(createAnnotationMetadata)
-      ),
+        createAnnotationMetadata.decode.bind(createAnnotationMetadata)),
       updateCollector: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateCollectorResponse.decode.bind(updateCollectorResponse),
-        updateCollectorMetadata.decode.bind(updateCollectorMetadata)
-      ),
+        updateCollectorMetadata.decode.bind(updateCollectorMetadata)),
       deleteCollector: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteCollectorResponse.decode.bind(deleteCollectorResponse),
-        deleteCollectorMetadata.decode.bind(deleteCollectorMetadata)
-      ),
+        deleteCollectorMetadata.decode.bind(deleteCollectorMetadata)),
       resumeCollector: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         resumeCollectorResponse.decode.bind(resumeCollectorResponse),
-        resumeCollectorMetadata.decode.bind(resumeCollectorMetadata)
-      ),
+        resumeCollectorMetadata.decode.bind(resumeCollectorMetadata)),
       registerCollector: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         registerCollectorResponse.decode.bind(registerCollectorResponse),
-        registerCollectorMetadata.decode.bind(registerCollectorMetadata)
-      ),
+        registerCollectorMetadata.decode.bind(registerCollectorMetadata)),
       pauseCollector: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         pauseCollectorResponse.decode.bind(pauseCollectorResponse),
-        pauseCollectorMetadata.decode.bind(pauseCollectorMetadata)
-      ),
+        pauseCollectorMetadata.decode.bind(pauseCollectorMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.rapidmigrationassessment.v1.RapidMigrationAssessment',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.rapidmigrationassessment.v1.RapidMigrationAssessment', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -394,45 +310,28 @@ export class RapidMigrationAssessmentClient {
     // Put together the "service stub" for
     // google.cloud.rapidmigrationassessment.v1.RapidMigrationAssessment.
     this.rapidMigrationAssessmentStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.rapidmigrationassessment.v1.RapidMigrationAssessment'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.rapidmigrationassessment.v1
-            .RapidMigrationAssessment,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.rapidmigrationassessment.v1.RapidMigrationAssessment') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.rapidmigrationassessment.v1.RapidMigrationAssessment,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const rapidMigrationAssessmentStubMethods = [
-      'createCollector',
-      'createAnnotation',
-      'getAnnotation',
-      'listCollectors',
-      'getCollector',
-      'updateCollector',
-      'deleteCollector',
-      'resumeCollector',
-      'registerCollector',
-      'pauseCollector',
-    ];
+    const rapidMigrationAssessmentStubMethods =
+        ['createCollector', 'createAnnotation', 'getAnnotation', 'listCollectors', 'getCollector', 'updateCollector', 'deleteCollector', 'resumeCollector', 'registerCollector', 'pauseCollector'];
     for (const methodName of rapidMigrationAssessmentStubMethods) {
       const callPromise = this.rapidMigrationAssessmentStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -457,14 +356,8 @@ export class RapidMigrationAssessmentClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'rapidmigrationassessment.googleapis.com';
   }
@@ -475,14 +368,8 @@ export class RapidMigrationAssessmentClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'rapidmigrationassessment.googleapis.com';
   }
@@ -513,7 +400,9 @@ export class RapidMigrationAssessmentClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -522,9 +411,8 @@ export class RapidMigrationAssessmentClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -535,1643 +423,1118 @@ export class RapidMigrationAssessmentClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets details of a single Annotation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.rapidmigrationassessment.v1.Annotation|Annotation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/rapid_migration_assessment.get_annotation.js</caption>
-   * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_GetAnnotation_async
-   */
+/**
+ * Gets details of a single Annotation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.rapidmigrationassessment.v1.Annotation|Annotation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/rapid_migration_assessment.get_annotation.js</caption>
+ * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_GetAnnotation_async
+ */
   getAnnotation(
-    request?: protos.google.cloud.rapidmigrationassessment.v1.IGetAnnotationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.rapidmigrationassessment.v1.IAnnotation,
-      (
-        | protos.google.cloud.rapidmigrationassessment.v1.IGetAnnotationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.rapidmigrationassessment.v1.IGetAnnotationRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.rapidmigrationassessment.v1.IAnnotation,
+        protos.google.cloud.rapidmigrationassessment.v1.IGetAnnotationRequest|undefined, {}|undefined
+      ]>;
   getAnnotation(
-    request: protos.google.cloud.rapidmigrationassessment.v1.IGetAnnotationRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.rapidmigrationassessment.v1.IAnnotation,
-      | protos.google.cloud.rapidmigrationassessment.v1.IGetAnnotationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAnnotation(
-    request: protos.google.cloud.rapidmigrationassessment.v1.IGetAnnotationRequest,
-    callback: Callback<
-      protos.google.cloud.rapidmigrationassessment.v1.IAnnotation,
-      | protos.google.cloud.rapidmigrationassessment.v1.IGetAnnotationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAnnotation(
-    request?: protos.google.cloud.rapidmigrationassessment.v1.IGetAnnotationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.rapidmigrationassessment.v1.IGetAnnotationRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.rapidmigrationassessment.v1.IAnnotation,
-          | protos.google.cloud.rapidmigrationassessment.v1.IGetAnnotationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.rapidmigrationassessment.v1.IAnnotation,
-      | protos.google.cloud.rapidmigrationassessment.v1.IGetAnnotationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.rapidmigrationassessment.v1.IAnnotation,
-      (
-        | protos.google.cloud.rapidmigrationassessment.v1.IGetAnnotationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.rapidmigrationassessment.v1.IGetAnnotationRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAnnotation(
+      request: protos.google.cloud.rapidmigrationassessment.v1.IGetAnnotationRequest,
+      callback: Callback<
+          protos.google.cloud.rapidmigrationassessment.v1.IAnnotation,
+          protos.google.cloud.rapidmigrationassessment.v1.IGetAnnotationRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAnnotation(
+      request?: protos.google.cloud.rapidmigrationassessment.v1.IGetAnnotationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.rapidmigrationassessment.v1.IAnnotation,
+          protos.google.cloud.rapidmigrationassessment.v1.IGetAnnotationRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.rapidmigrationassessment.v1.IAnnotation,
+          protos.google.cloud.rapidmigrationassessment.v1.IGetAnnotationRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.rapidmigrationassessment.v1.IAnnotation,
+        protos.google.cloud.rapidmigrationassessment.v1.IGetAnnotationRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getAnnotation request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.rapidmigrationassessment.v1.IAnnotation,
-          | protos.google.cloud.rapidmigrationassessment.v1.IGetAnnotationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.rapidmigrationassessment.v1.IAnnotation,
+        protos.google.cloud.rapidmigrationassessment.v1.IGetAnnotationRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getAnnotation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getAnnotation(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.rapidmigrationassessment.v1.IAnnotation,
-          (
-            | protos.google.cloud.rapidmigrationassessment.v1.IGetAnnotationRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getAnnotation response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getAnnotation(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.rapidmigrationassessment.v1.IAnnotation,
+        protos.google.cloud.rapidmigrationassessment.v1.IGetAnnotationRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getAnnotation response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets details of a single Collector.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.rapidmigrationassessment.v1.Collector|Collector}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/rapid_migration_assessment.get_collector.js</caption>
-   * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_GetCollector_async
-   */
+/**
+ * Gets details of a single Collector.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.rapidmigrationassessment.v1.Collector|Collector}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/rapid_migration_assessment.get_collector.js</caption>
+ * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_GetCollector_async
+ */
   getCollector(
-    request?: protos.google.cloud.rapidmigrationassessment.v1.IGetCollectorRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-      (
-        | protos.google.cloud.rapidmigrationassessment.v1.IGetCollectorRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.rapidmigrationassessment.v1.IGetCollectorRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.rapidmigrationassessment.v1.ICollector,
+        protos.google.cloud.rapidmigrationassessment.v1.IGetCollectorRequest|undefined, {}|undefined
+      ]>;
   getCollector(
-    request: protos.google.cloud.rapidmigrationassessment.v1.IGetCollectorRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-      | protos.google.cloud.rapidmigrationassessment.v1.IGetCollectorRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCollector(
-    request: protos.google.cloud.rapidmigrationassessment.v1.IGetCollectorRequest,
-    callback: Callback<
-      protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-      | protos.google.cloud.rapidmigrationassessment.v1.IGetCollectorRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCollector(
-    request?: protos.google.cloud.rapidmigrationassessment.v1.IGetCollectorRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.rapidmigrationassessment.v1.IGetCollectorRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-          | protos.google.cloud.rapidmigrationassessment.v1.IGetCollectorRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-      | protos.google.cloud.rapidmigrationassessment.v1.IGetCollectorRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-      (
-        | protos.google.cloud.rapidmigrationassessment.v1.IGetCollectorRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.rapidmigrationassessment.v1.IGetCollectorRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCollector(
+      request: protos.google.cloud.rapidmigrationassessment.v1.IGetCollectorRequest,
+      callback: Callback<
+          protos.google.cloud.rapidmigrationassessment.v1.ICollector,
+          protos.google.cloud.rapidmigrationassessment.v1.IGetCollectorRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCollector(
+      request?: protos.google.cloud.rapidmigrationassessment.v1.IGetCollectorRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.rapidmigrationassessment.v1.ICollector,
+          protos.google.cloud.rapidmigrationassessment.v1.IGetCollectorRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.rapidmigrationassessment.v1.ICollector,
+          protos.google.cloud.rapidmigrationassessment.v1.IGetCollectorRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.rapidmigrationassessment.v1.ICollector,
+        protos.google.cloud.rapidmigrationassessment.v1.IGetCollectorRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getCollector request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-          | protos.google.cloud.rapidmigrationassessment.v1.IGetCollectorRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.rapidmigrationassessment.v1.ICollector,
+        protos.google.cloud.rapidmigrationassessment.v1.IGetCollectorRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getCollector response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getCollector(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-          (
-            | protos.google.cloud.rapidmigrationassessment.v1.IGetCollectorRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getCollector response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getCollector(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.rapidmigrationassessment.v1.ICollector,
+        protos.google.cloud.rapidmigrationassessment.v1.IGetCollectorRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getCollector response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Create a Collector to manage the on-prem appliance which collects
-   * information about Customer assets.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the parent (project+location).
-   * @param {string} request.collectorId
-   *   Required. Id of the requesting object.
-   * @param {google.cloud.rapidmigrationassessment.v1.Collector} request.collector
-   *   Required. The resource being created.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/rapid_migration_assessment.create_collector.js</caption>
-   * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_CreateCollector_async
-   */
+/**
+ * Create a Collector to manage the on-prem appliance which collects
+ * information about Customer assets.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the parent (project+location).
+ * @param {string} request.collectorId
+ *   Required. Id of the requesting object.
+ * @param {google.cloud.rapidmigrationassessment.v1.Collector} request.collector
+ *   Required. The resource being created.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/rapid_migration_assessment.create_collector.js</caption>
+ * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_CreateCollector_async
+ */
   createCollector(
-    request?: protos.google.cloud.rapidmigrationassessment.v1.ICreateCollectorRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-        protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.rapidmigrationassessment.v1.ICreateCollectorRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createCollector(
-    request: protos.google.cloud.rapidmigrationassessment.v1.ICreateCollectorRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-        protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.rapidmigrationassessment.v1.ICreateCollectorRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createCollector(
-    request: protos.google.cloud.rapidmigrationassessment.v1.ICreateCollectorRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-        protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.rapidmigrationassessment.v1.ICreateCollectorRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createCollector(
-    request?: protos.google.cloud.rapidmigrationassessment.v1.ICreateCollectorRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-            protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-        protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-        protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.rapidmigrationassessment.v1.ICreateCollectorRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-            protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createCollector response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createCollector request %j', request);
-    return this.innerApiCalls
-      .createCollector(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-            protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createCollector response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createCollector(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createCollector response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createCollector()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/rapid_migration_assessment.create_collector.js</caption>
-   * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_CreateCollector_async
-   */
-  async checkCreateCollectorProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.rapidmigrationassessment.v1.Collector,
-      protos.google.cloud.rapidmigrationassessment.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createCollector()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/rapid_migration_assessment.create_collector.js</caption>
+ * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_CreateCollector_async
+ */
+  async checkCreateCollectorProgress(name: string): Promise<LROperation<protos.google.cloud.rapidmigrationassessment.v1.Collector, protos.google.cloud.rapidmigrationassessment.v1.OperationMetadata>>{
     this._log.info('createCollector long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createCollector,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.rapidmigrationassessment.v1.Collector,
-      protos.google.cloud.rapidmigrationassessment.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createCollector, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.rapidmigrationassessment.v1.Collector, protos.google.cloud.rapidmigrationassessment.v1.OperationMetadata>;
   }
-  /**
-   * Creates an Annotation
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the parent (project+location).
-   * @param {google.cloud.rapidmigrationassessment.v1.Annotation} request.annotation
-   *   Required. The resource being created.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/rapid_migration_assessment.create_annotation.js</caption>
-   * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_CreateAnnotation_async
-   */
+/**
+ * Creates an Annotation
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the parent (project+location).
+ * @param {google.cloud.rapidmigrationassessment.v1.Annotation} request.annotation
+ *   Required. The resource being created.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/rapid_migration_assessment.create_annotation.js</caption>
+ * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_CreateAnnotation_async
+ */
   createAnnotation(
-    request?: protos.google.cloud.rapidmigrationassessment.v1.ICreateAnnotationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.rapidmigrationassessment.v1.IAnnotation,
-        protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.rapidmigrationassessment.v1.ICreateAnnotationRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.rapidmigrationassessment.v1.IAnnotation, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createAnnotation(
-    request: protos.google.cloud.rapidmigrationassessment.v1.ICreateAnnotationRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.rapidmigrationassessment.v1.IAnnotation,
-        protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.rapidmigrationassessment.v1.ICreateAnnotationRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.rapidmigrationassessment.v1.IAnnotation, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createAnnotation(
-    request: protos.google.cloud.rapidmigrationassessment.v1.ICreateAnnotationRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.rapidmigrationassessment.v1.IAnnotation,
-        protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.rapidmigrationassessment.v1.ICreateAnnotationRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.rapidmigrationassessment.v1.IAnnotation, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createAnnotation(
-    request?: protos.google.cloud.rapidmigrationassessment.v1.ICreateAnnotationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.rapidmigrationassessment.v1.IAnnotation,
-            protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.rapidmigrationassessment.v1.IAnnotation,
-        protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.rapidmigrationassessment.v1.IAnnotation,
-        protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.rapidmigrationassessment.v1.ICreateAnnotationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.rapidmigrationassessment.v1.IAnnotation, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.rapidmigrationassessment.v1.IAnnotation, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.rapidmigrationassessment.v1.IAnnotation, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.rapidmigrationassessment.v1.IAnnotation,
-            protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.rapidmigrationassessment.v1.IAnnotation, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createAnnotation response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createAnnotation request %j', request);
-    return this.innerApiCalls
-      .createAnnotation(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.rapidmigrationassessment.v1.IAnnotation,
-            protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createAnnotation response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createAnnotation(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.rapidmigrationassessment.v1.IAnnotation, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createAnnotation response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createAnnotation()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/rapid_migration_assessment.create_annotation.js</caption>
-   * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_CreateAnnotation_async
-   */
-  async checkCreateAnnotationProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.rapidmigrationassessment.v1.Annotation,
-      protos.google.cloud.rapidmigrationassessment.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createAnnotation()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/rapid_migration_assessment.create_annotation.js</caption>
+ * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_CreateAnnotation_async
+ */
+  async checkCreateAnnotationProgress(name: string): Promise<LROperation<protos.google.cloud.rapidmigrationassessment.v1.Annotation, protos.google.cloud.rapidmigrationassessment.v1.OperationMetadata>>{
     this._log.info('createAnnotation long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createAnnotation,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.rapidmigrationassessment.v1.Annotation,
-      protos.google.cloud.rapidmigrationassessment.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createAnnotation, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.rapidmigrationassessment.v1.Annotation, protos.google.cloud.rapidmigrationassessment.v1.OperationMetadata>;
   }
-  /**
-   * Updates the parameters of a single Collector.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Field mask is used to specify the fields to be overwritten in the
-   *   Collector resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request. A field will be overwritten if it is in the mask. If the
-   *   user does not provide a mask then all fields will be overwritten.
-   * @param {google.cloud.rapidmigrationassessment.v1.Collector} request.collector
-   *   Required. The resource being updated.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/rapid_migration_assessment.update_collector.js</caption>
-   * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_UpdateCollector_async
-   */
+/**
+ * Updates the parameters of a single Collector.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Field mask is used to specify the fields to be overwritten in the
+ *   Collector resource by the update.
+ *   The fields specified in the update_mask are relative to the resource, not
+ *   the full request. A field will be overwritten if it is in the mask. If the
+ *   user does not provide a mask then all fields will be overwritten.
+ * @param {google.cloud.rapidmigrationassessment.v1.Collector} request.collector
+ *   Required. The resource being updated.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/rapid_migration_assessment.update_collector.js</caption>
+ * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_UpdateCollector_async
+ */
   updateCollector(
-    request?: protos.google.cloud.rapidmigrationassessment.v1.IUpdateCollectorRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-        protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.rapidmigrationassessment.v1.IUpdateCollectorRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateCollector(
-    request: protos.google.cloud.rapidmigrationassessment.v1.IUpdateCollectorRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-        protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.rapidmigrationassessment.v1.IUpdateCollectorRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateCollector(
-    request: protos.google.cloud.rapidmigrationassessment.v1.IUpdateCollectorRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-        protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.rapidmigrationassessment.v1.IUpdateCollectorRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateCollector(
-    request?: protos.google.cloud.rapidmigrationassessment.v1.IUpdateCollectorRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-            protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-        protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-        protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.rapidmigrationassessment.v1.IUpdateCollectorRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'collector.name': request.collector!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'collector.name': request.collector!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-            protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateCollector response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateCollector request %j', request);
-    return this.innerApiCalls
-      .updateCollector(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-            protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateCollector response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateCollector(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateCollector response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateCollector()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/rapid_migration_assessment.update_collector.js</caption>
-   * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_UpdateCollector_async
-   */
-  async checkUpdateCollectorProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.rapidmigrationassessment.v1.Collector,
-      protos.google.cloud.rapidmigrationassessment.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateCollector()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/rapid_migration_assessment.update_collector.js</caption>
+ * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_UpdateCollector_async
+ */
+  async checkUpdateCollectorProgress(name: string): Promise<LROperation<protos.google.cloud.rapidmigrationassessment.v1.Collector, protos.google.cloud.rapidmigrationassessment.v1.OperationMetadata>>{
     this._log.info('updateCollector long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateCollector,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.rapidmigrationassessment.v1.Collector,
-      protos.google.cloud.rapidmigrationassessment.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateCollector, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.rapidmigrationassessment.v1.Collector, protos.google.cloud.rapidmigrationassessment.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a single Collector - changes state of collector to "Deleting".
-   * Background jobs does final deletion through producer API.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/rapid_migration_assessment.delete_collector.js</caption>
-   * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_DeleteCollector_async
-   */
+/**
+ * Deletes a single Collector - changes state of collector to "Deleting".
+ * Background jobs does final deletion through producer API.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/rapid_migration_assessment.delete_collector.js</caption>
+ * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_DeleteCollector_async
+ */
   deleteCollector(
-    request?: protos.google.cloud.rapidmigrationassessment.v1.IDeleteCollectorRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-        protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.rapidmigrationassessment.v1.IDeleteCollectorRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteCollector(
-    request: protos.google.cloud.rapidmigrationassessment.v1.IDeleteCollectorRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-        protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.rapidmigrationassessment.v1.IDeleteCollectorRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteCollector(
-    request: protos.google.cloud.rapidmigrationassessment.v1.IDeleteCollectorRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-        protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.rapidmigrationassessment.v1.IDeleteCollectorRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteCollector(
-    request?: protos.google.cloud.rapidmigrationassessment.v1.IDeleteCollectorRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-            protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-        protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-        protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.rapidmigrationassessment.v1.IDeleteCollectorRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-            protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteCollector response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteCollector request %j', request);
-    return this.innerApiCalls
-      .deleteCollector(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-            protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteCollector response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteCollector(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteCollector response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteCollector()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/rapid_migration_assessment.delete_collector.js</caption>
-   * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_DeleteCollector_async
-   */
-  async checkDeleteCollectorProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.rapidmigrationassessment.v1.Collector,
-      protos.google.cloud.rapidmigrationassessment.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteCollector()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/rapid_migration_assessment.delete_collector.js</caption>
+ * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_DeleteCollector_async
+ */
+  async checkDeleteCollectorProgress(name: string): Promise<LROperation<protos.google.cloud.rapidmigrationassessment.v1.Collector, protos.google.cloud.rapidmigrationassessment.v1.OperationMetadata>>{
     this._log.info('deleteCollector long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteCollector,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.rapidmigrationassessment.v1.Collector,
-      protos.google.cloud.rapidmigrationassessment.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteCollector, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.rapidmigrationassessment.v1.Collector, protos.google.cloud.rapidmigrationassessment.v1.OperationMetadata>;
   }
-  /**
-   * Resumes the given collector.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/rapid_migration_assessment.resume_collector.js</caption>
-   * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_ResumeCollector_async
-   */
+/**
+ * Resumes the given collector.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/rapid_migration_assessment.resume_collector.js</caption>
+ * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_ResumeCollector_async
+ */
   resumeCollector(
-    request?: protos.google.cloud.rapidmigrationassessment.v1.IResumeCollectorRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-        protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.rapidmigrationassessment.v1.IResumeCollectorRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   resumeCollector(
-    request: protos.google.cloud.rapidmigrationassessment.v1.IResumeCollectorRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-        protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.rapidmigrationassessment.v1.IResumeCollectorRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   resumeCollector(
-    request: protos.google.cloud.rapidmigrationassessment.v1.IResumeCollectorRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-        protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.rapidmigrationassessment.v1.IResumeCollectorRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   resumeCollector(
-    request?: protos.google.cloud.rapidmigrationassessment.v1.IResumeCollectorRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-            protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-        protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-        protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.rapidmigrationassessment.v1.IResumeCollectorRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-            protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('resumeCollector response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('resumeCollector request %j', request);
-    return this.innerApiCalls
-      .resumeCollector(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-            protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('resumeCollector response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.resumeCollector(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('resumeCollector response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `resumeCollector()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/rapid_migration_assessment.resume_collector.js</caption>
-   * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_ResumeCollector_async
-   */
-  async checkResumeCollectorProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.rapidmigrationassessment.v1.Collector,
-      protos.google.cloud.rapidmigrationassessment.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `resumeCollector()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/rapid_migration_assessment.resume_collector.js</caption>
+ * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_ResumeCollector_async
+ */
+  async checkResumeCollectorProgress(name: string): Promise<LROperation<protos.google.cloud.rapidmigrationassessment.v1.Collector, protos.google.cloud.rapidmigrationassessment.v1.OperationMetadata>>{
     this._log.info('resumeCollector long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.resumeCollector,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.rapidmigrationassessment.v1.Collector,
-      protos.google.cloud.rapidmigrationassessment.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.resumeCollector, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.rapidmigrationassessment.v1.Collector, protos.google.cloud.rapidmigrationassessment.v1.OperationMetadata>;
   }
-  /**
-   * Registers the given collector.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/rapid_migration_assessment.register_collector.js</caption>
-   * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_RegisterCollector_async
-   */
+/**
+ * Registers the given collector.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/rapid_migration_assessment.register_collector.js</caption>
+ * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_RegisterCollector_async
+ */
   registerCollector(
-    request?: protos.google.cloud.rapidmigrationassessment.v1.IRegisterCollectorRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-        protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.rapidmigrationassessment.v1.IRegisterCollectorRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   registerCollector(
-    request: protos.google.cloud.rapidmigrationassessment.v1.IRegisterCollectorRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-        protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.rapidmigrationassessment.v1.IRegisterCollectorRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   registerCollector(
-    request: protos.google.cloud.rapidmigrationassessment.v1.IRegisterCollectorRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-        protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.rapidmigrationassessment.v1.IRegisterCollectorRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   registerCollector(
-    request?: protos.google.cloud.rapidmigrationassessment.v1.IRegisterCollectorRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-            protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-        protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-        protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.rapidmigrationassessment.v1.IRegisterCollectorRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-            protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('registerCollector response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('registerCollector request %j', request);
-    return this.innerApiCalls
-      .registerCollector(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-            protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('registerCollector response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.registerCollector(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('registerCollector response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `registerCollector()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/rapid_migration_assessment.register_collector.js</caption>
-   * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_RegisterCollector_async
-   */
-  async checkRegisterCollectorProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.rapidmigrationassessment.v1.Collector,
-      protos.google.cloud.rapidmigrationassessment.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `registerCollector()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/rapid_migration_assessment.register_collector.js</caption>
+ * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_RegisterCollector_async
+ */
+  async checkRegisterCollectorProgress(name: string): Promise<LROperation<protos.google.cloud.rapidmigrationassessment.v1.Collector, protos.google.cloud.rapidmigrationassessment.v1.OperationMetadata>>{
     this._log.info('registerCollector long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.registerCollector,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.rapidmigrationassessment.v1.Collector,
-      protos.google.cloud.rapidmigrationassessment.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.registerCollector, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.rapidmigrationassessment.v1.Collector, protos.google.cloud.rapidmigrationassessment.v1.OperationMetadata>;
   }
-  /**
-   * Pauses the given collector.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/rapid_migration_assessment.pause_collector.js</caption>
-   * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_PauseCollector_async
-   */
+/**
+ * Pauses the given collector.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/rapid_migration_assessment.pause_collector.js</caption>
+ * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_PauseCollector_async
+ */
   pauseCollector(
-    request?: protos.google.cloud.rapidmigrationassessment.v1.IPauseCollectorRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-        protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.rapidmigrationassessment.v1.IPauseCollectorRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   pauseCollector(
-    request: protos.google.cloud.rapidmigrationassessment.v1.IPauseCollectorRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-        protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.rapidmigrationassessment.v1.IPauseCollectorRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   pauseCollector(
-    request: protos.google.cloud.rapidmigrationassessment.v1.IPauseCollectorRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-        protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.rapidmigrationassessment.v1.IPauseCollectorRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   pauseCollector(
-    request?: protos.google.cloud.rapidmigrationassessment.v1.IPauseCollectorRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-            protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-        protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-        protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.rapidmigrationassessment.v1.IPauseCollectorRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-            protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('pauseCollector response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('pauseCollector request %j', request);
-    return this.innerApiCalls
-      .pauseCollector(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.rapidmigrationassessment.v1.ICollector,
-            protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('pauseCollector response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.pauseCollector(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.rapidmigrationassessment.v1.ICollector, protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('pauseCollector response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `pauseCollector()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/rapid_migration_assessment.pause_collector.js</caption>
-   * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_PauseCollector_async
-   */
-  async checkPauseCollectorProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.rapidmigrationassessment.v1.Collector,
-      protos.google.cloud.rapidmigrationassessment.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `pauseCollector()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/rapid_migration_assessment.pause_collector.js</caption>
+ * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_PauseCollector_async
+ */
+  async checkPauseCollectorProgress(name: string): Promise<LROperation<protos.google.cloud.rapidmigrationassessment.v1.Collector, protos.google.cloud.rapidmigrationassessment.v1.OperationMetadata>>{
     this._log.info('pauseCollector long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.pauseCollector,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.rapidmigrationassessment.v1.Collector,
-      protos.google.cloud.rapidmigrationassessment.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.pauseCollector, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.rapidmigrationassessment.v1.Collector, protos.google.cloud.rapidmigrationassessment.v1.OperationMetadata>;
   }
-  /**
-   * Lists Collectors in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListCollectorsRequest.
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results.
-   * @param {string} request.orderBy
-   *   Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.rapidmigrationassessment.v1.Collector|Collector}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listCollectorsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists Collectors in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListCollectorsRequest.
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results.
+ * @param {string} request.orderBy
+ *   Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.rapidmigrationassessment.v1.Collector|Collector}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listCollectorsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCollectors(
-    request?: protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.rapidmigrationassessment.v1.ICollector[],
-      protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsRequest | null,
-      protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.rapidmigrationassessment.v1.ICollector[],
+        protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsRequest|null,
+        protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsResponse
+      ]>;
   listCollectors(
-    request: protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsRequest,
-      | protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsResponse
-      | null
-      | undefined,
-      protos.google.cloud.rapidmigrationassessment.v1.ICollector
-    >
-  ): void;
-  listCollectors(
-    request: protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsRequest,
-      | protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsResponse
-      | null
-      | undefined,
-      protos.google.cloud.rapidmigrationassessment.v1.ICollector
-    >
-  ): void;
-  listCollectors(
-    request?: protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsRequest,
-          | protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsResponse
-          | null
-          | undefined,
-          protos.google.cloud.rapidmigrationassessment.v1.ICollector
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsRequest,
-      | protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsResponse
-      | null
-      | undefined,
-      protos.google.cloud.rapidmigrationassessment.v1.ICollector
-    >
-  ): Promise<
-    [
-      protos.google.cloud.rapidmigrationassessment.v1.ICollector[],
-      protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsRequest | null,
-      protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsResponse,
-    ]
-  > | void {
+          protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsResponse|null|undefined,
+          protos.google.cloud.rapidmigrationassessment.v1.ICollector>): void;
+  listCollectors(
+      request: protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsRequest,
+          protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsResponse|null|undefined,
+          protos.google.cloud.rapidmigrationassessment.v1.ICollector>): void;
+  listCollectors(
+      request?: protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsRequest,
+          protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsResponse|null|undefined,
+          protos.google.cloud.rapidmigrationassessment.v1.ICollector>,
+      callback?: PaginationCallback<
+          protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsRequest,
+          protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsResponse|null|undefined,
+          protos.google.cloud.rapidmigrationassessment.v1.ICollector>):
+      Promise<[
+        protos.google.cloud.rapidmigrationassessment.v1.ICollector[],
+        protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsRequest|null,
+        protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsRequest,
-          | protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsResponse
-          | null
-          | undefined,
-          protos.google.cloud.rapidmigrationassessment.v1.ICollector
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsRequest,
+      protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsResponse|null|undefined,
+      protos.google.cloud.rapidmigrationassessment.v1.ICollector>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listCollectors values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2180,61 +1543,58 @@ export class RapidMigrationAssessmentClient {
     this._log.info('listCollectors request %j', request);
     return this.innerApiCalls
       .listCollectors(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.rapidmigrationassessment.v1.ICollector[],
-          protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsRequest | null,
-          protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsResponse,
-        ]) => {
-          this._log.info('listCollectors values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.rapidmigrationassessment.v1.ICollector[],
+        protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsRequest|null,
+        protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsResponse
+      ]) => {
+        this._log.info('listCollectors values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listCollectors`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListCollectorsRequest.
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results.
-   * @param {string} request.orderBy
-   *   Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.rapidmigrationassessment.v1.Collector|Collector} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listCollectorsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listCollectors`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListCollectorsRequest.
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results.
+ * @param {string} request.orderBy
+ *   Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.rapidmigrationassessment.v1.Collector|Collector} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listCollectorsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCollectorsStream(
-    request?: protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listCollectors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listCollectors stream %j', request);
     return this.descriptors.page.listCollectors.createStream(
       this.innerApiCalls.listCollectors as GaxCall,
@@ -2243,52 +1603,51 @@ export class RapidMigrationAssessmentClient {
     );
   }
 
-  /**
-   * Equivalent to `listCollectors`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListCollectorsRequest.
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results.
-   * @param {string} request.orderBy
-   *   Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.rapidmigrationassessment.v1.Collector|Collector}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/rapid_migration_assessment.list_collectors.js</caption>
-   * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_ListCollectors_async
-   */
+/**
+ * Equivalent to `listCollectors`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListCollectorsRequest.
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results.
+ * @param {string} request.orderBy
+ *   Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.rapidmigrationassessment.v1.Collector|Collector}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/rapid_migration_assessment.list_collectors.js</caption>
+ * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_ListCollectors_async
+ */
   listCollectorsAsync(
-    request?: protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.rapidmigrationassessment.v1.ICollector> {
+      request?: protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.rapidmigrationassessment.v1.ICollector>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listCollectors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listCollectors iterate %j', request);
     return this.descriptors.page.listCollectors.asyncIterate(
       this.innerApiCalls['listCollectors'] as GaxCall,
@@ -2296,7 +1655,7 @@ export class RapidMigrationAssessmentClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.rapidmigrationassessment.v1.ICollector>;
   }
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -2336,7 +1695,7 @@ export class RapidMigrationAssessmentClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -2374,7 +1733,7 @@ export class RapidMigrationAssessmentClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -2419,20 +1778,20 @@ export class RapidMigrationAssessmentClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -2469,13 +1828,13 @@ export class RapidMigrationAssessmentClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -2509,7 +1868,7 @@ export class RapidMigrationAssessmentClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -2524,20 +1883,20 @@ export class RapidMigrationAssessmentClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -2581,20 +1940,20 @@ export class RapidMigrationAssessmentClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -2610,7 +1969,7 @@ export class RapidMigrationAssessmentClient {
    * @param {string} annotation
    * @returns {string} Resource name string.
    */
-  annotationPath(project: string, location: string, annotation: string) {
+  annotationPath(project:string,location:string,annotation:string) {
     return this.pathTemplates.annotationPathTemplate.render({
       project: project,
       location: location,
@@ -2626,8 +1985,7 @@ export class RapidMigrationAssessmentClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName)
-      .project;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName).project;
   }
 
   /**
@@ -2638,8 +1996,7 @@ export class RapidMigrationAssessmentClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName)
-      .location;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName).location;
   }
 
   /**
@@ -2650,8 +2007,7 @@ export class RapidMigrationAssessmentClient {
    * @returns {string} A string representing the annotation.
    */
   matchAnnotationFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName)
-      .annotation;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName).annotation;
   }
 
   /**
@@ -2662,7 +2018,7 @@ export class RapidMigrationAssessmentClient {
    * @param {string} collector
    * @returns {string} Resource name string.
    */
-  collectorPath(project: string, location: string, collector: string) {
+  collectorPath(project:string,location:string,collector:string) {
     return this.pathTemplates.collectorPathTemplate.render({
       project: project,
       location: location,
@@ -2678,8 +2034,7 @@ export class RapidMigrationAssessmentClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCollectorName(collectorName: string) {
-    return this.pathTemplates.collectorPathTemplate.match(collectorName)
-      .project;
+    return this.pathTemplates.collectorPathTemplate.match(collectorName).project;
   }
 
   /**
@@ -2690,8 +2045,7 @@ export class RapidMigrationAssessmentClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCollectorName(collectorName: string) {
-    return this.pathTemplates.collectorPathTemplate.match(collectorName)
-      .location;
+    return this.pathTemplates.collectorPathTemplate.match(collectorName).location;
   }
 
   /**
@@ -2702,8 +2056,7 @@ export class RapidMigrationAssessmentClient {
    * @returns {string} A string representing the collector.
    */
   matchCollectorFromCollectorName(collectorName: string) {
-    return this.pathTemplates.collectorPathTemplate.match(collectorName)
-      .collector;
+    return this.pathTemplates.collectorPathTemplate.match(collectorName).collector;
   }
 
   /**
@@ -2713,7 +2066,7 @@ export class RapidMigrationAssessmentClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -2754,9 +2107,7 @@ export class RapidMigrationAssessmentClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.locationsClient.close().catch(err => {throw err});
         void this.operationsClient.close();
       });
     }

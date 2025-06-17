@@ -29,5619 +29,4285 @@ import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubLongRunningCall<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().rejects(callError)
-    : sinon.stub().resolves([mockOperation]);
+function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
 }
 
-function stubLongRunningCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().callsArgWith(2, callError)
-    : sinon.stub().callsArgWith(2, null, mockOperation);
+function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1beta1.EnvironmentsClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'composer.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          environmentsModule.v1beta1.EnvironmentsClient.servicePath;
-        assert.strictEqual(servicePath, 'composer.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          environmentsModule.v1beta1.EnvironmentsClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'composer.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'composer.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'composer.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new environmentsModule.v1beta1.EnvironmentsClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'composer.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'composer.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new environmentsModule.v1beta1.EnvironmentsClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'composer.configured.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new environmentsModule.v1beta1.EnvironmentsClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = environmentsModule.v1beta1.EnvironmentsClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
-
-    it('should create a client with no option', () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.environmentsStub, undefined);
-      await client.initialize();
-      assert(client.environmentsStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.environmentsStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.environmentsStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('getEnvironment', () => {
-    it('invokes getEnvironment without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.GetEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.GetEnvironmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.Environment()
-      );
-      client.innerApiCalls.getEnvironment = stubSimpleCall(expectedResponse);
-      const [response] = await client.getEnvironment(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getEnvironment without error using callback', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.GetEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.GetEnvironmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.Environment()
-      );
-      client.innerApiCalls.getEnvironment =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getEnvironment(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.orchestration.airflow.service.v1beta1.IEnvironment | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getEnvironment with error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.GetEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.GetEnvironmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getEnvironment = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getEnvironment(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getEnvironment with closed client', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.GetEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.GetEnvironmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getEnvironment(request), expectedError);
-    });
-  });
-
-  describe('executeAirflowCommand', () => {
-    it('invokes executeAirflowCommand without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse()
-      );
-      client.innerApiCalls.executeAirflowCommand =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.executeAirflowCommand(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.executeAirflowCommand as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.executeAirflowCommand as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes executeAirflowCommand without error using callback', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse()
-      );
-      client.innerApiCalls.executeAirflowCommand =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.executeAirflowCommand(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.orchestration.airflow.service.v1beta1.IExecuteAirflowCommandResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.executeAirflowCommand as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.executeAirflowCommand as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes executeAirflowCommand with error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.executeAirflowCommand = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.executeAirflowCommand(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.executeAirflowCommand as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.executeAirflowCommand as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes executeAirflowCommand with closed client', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.executeAirflowCommand(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('stopAirflowCommand', () => {
-    it('invokes stopAirflowCommand without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.StopAirflowCommandRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.StopAirflowCommandRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.StopAirflowCommandResponse()
-      );
-      client.innerApiCalls.stopAirflowCommand =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.stopAirflowCommand(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.stopAirflowCommand as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.stopAirflowCommand as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes stopAirflowCommand without error using callback', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.StopAirflowCommandRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.StopAirflowCommandRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.StopAirflowCommandResponse()
-      );
-      client.innerApiCalls.stopAirflowCommand =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.stopAirflowCommand(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.orchestration.airflow.service.v1beta1.IStopAirflowCommandResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.stopAirflowCommand as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.stopAirflowCommand as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes stopAirflowCommand with error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.StopAirflowCommandRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.StopAirflowCommandRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.stopAirflowCommand = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.stopAirflowCommand(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.stopAirflowCommand as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.stopAirflowCommand as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes stopAirflowCommand with closed client', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.StopAirflowCommandRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.StopAirflowCommandRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.stopAirflowCommand(request), expectedError);
-    });
-  });
-
-  describe('pollAirflowCommand', () => {
-    it('invokes pollAirflowCommand without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse()
-      );
-      client.innerApiCalls.pollAirflowCommand =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.pollAirflowCommand(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.pollAirflowCommand as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.pollAirflowCommand as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes pollAirflowCommand without error using callback', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse()
-      );
-      client.innerApiCalls.pollAirflowCommand =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.pollAirflowCommand(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.orchestration.airflow.service.v1beta1.IPollAirflowCommandResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.pollAirflowCommand as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.pollAirflowCommand as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes pollAirflowCommand with error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.pollAirflowCommand = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.pollAirflowCommand(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.pollAirflowCommand as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.pollAirflowCommand as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes pollAirflowCommand with closed client', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.pollAirflowCommand(request), expectedError);
-    });
-  });
-
-  describe('createUserWorkloadsSecret', () => {
-    it('invokes createUserWorkloadsSecret without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsSecretRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsSecretRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret()
-      );
-      client.innerApiCalls.createUserWorkloadsSecret =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.createUserWorkloadsSecret(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createUserWorkloadsSecret as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createUserWorkloadsSecret as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createUserWorkloadsSecret without error using callback', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsSecretRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsSecretRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret()
-      );
-      client.innerApiCalls.createUserWorkloadsSecret =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createUserWorkloadsSecret(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsSecret | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createUserWorkloadsSecret as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createUserWorkloadsSecret as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createUserWorkloadsSecret with error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsSecretRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsSecretRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createUserWorkloadsSecret = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.createUserWorkloadsSecret(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.createUserWorkloadsSecret as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createUserWorkloadsSecret as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createUserWorkloadsSecret with closed client', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsSecretRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsSecretRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.createUserWorkloadsSecret(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('getUserWorkloadsSecret', () => {
-    it('invokes getUserWorkloadsSecret without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsSecretRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsSecretRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret()
-      );
-      client.innerApiCalls.getUserWorkloadsSecret =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getUserWorkloadsSecret(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getUserWorkloadsSecret as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getUserWorkloadsSecret as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getUserWorkloadsSecret without error using callback', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsSecretRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsSecretRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret()
-      );
-      client.innerApiCalls.getUserWorkloadsSecret =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getUserWorkloadsSecret(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsSecret | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getUserWorkloadsSecret as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getUserWorkloadsSecret as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getUserWorkloadsSecret with error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsSecretRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsSecretRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getUserWorkloadsSecret = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getUserWorkloadsSecret(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.getUserWorkloadsSecret as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getUserWorkloadsSecret as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getUserWorkloadsSecret with closed client', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsSecretRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsSecretRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.getUserWorkloadsSecret(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('updateUserWorkloadsSecret', () => {
-    it('invokes updateUserWorkloadsSecret without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsSecretRequest()
-      );
-      request.userWorkloadsSecret ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsSecretRequest',
-        ['userWorkloadsSecret', 'name']
-      );
-      request.userWorkloadsSecret.name = defaultValue1;
-      const expectedHeaderRequestParams = `user_workloads_secret.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret()
-      );
-      client.innerApiCalls.updateUserWorkloadsSecret =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.updateUserWorkloadsSecret(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateUserWorkloadsSecret as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateUserWorkloadsSecret as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateUserWorkloadsSecret without error using callback', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsSecretRequest()
-      );
-      request.userWorkloadsSecret ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsSecretRequest',
-        ['userWorkloadsSecret', 'name']
-      );
-      request.userWorkloadsSecret.name = defaultValue1;
-      const expectedHeaderRequestParams = `user_workloads_secret.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret()
-      );
-      client.innerApiCalls.updateUserWorkloadsSecret =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateUserWorkloadsSecret(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsSecret | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateUserWorkloadsSecret as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateUserWorkloadsSecret as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateUserWorkloadsSecret with error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsSecretRequest()
-      );
-      request.userWorkloadsSecret ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsSecretRequest',
-        ['userWorkloadsSecret', 'name']
-      );
-      request.userWorkloadsSecret.name = defaultValue1;
-      const expectedHeaderRequestParams = `user_workloads_secret.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateUserWorkloadsSecret = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.updateUserWorkloadsSecret(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.updateUserWorkloadsSecret as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateUserWorkloadsSecret as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateUserWorkloadsSecret with closed client', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsSecretRequest()
-      );
-      request.userWorkloadsSecret ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsSecretRequest',
-        ['userWorkloadsSecret', 'name']
-      );
-      request.userWorkloadsSecret.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.updateUserWorkloadsSecret(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('deleteUserWorkloadsSecret', () => {
-    it('invokes deleteUserWorkloadsSecret without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsSecretRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsSecretRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteUserWorkloadsSecret =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteUserWorkloadsSecret(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteUserWorkloadsSecret as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteUserWorkloadsSecret as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteUserWorkloadsSecret without error using callback', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsSecretRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsSecretRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteUserWorkloadsSecret =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteUserWorkloadsSecret(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteUserWorkloadsSecret as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteUserWorkloadsSecret as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteUserWorkloadsSecret with error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsSecretRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsSecretRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteUserWorkloadsSecret = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.deleteUserWorkloadsSecret(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.deleteUserWorkloadsSecret as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteUserWorkloadsSecret as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteUserWorkloadsSecret with closed client', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsSecretRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsSecretRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.deleteUserWorkloadsSecret(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('createUserWorkloadsConfigMap', () => {
-    it('invokes createUserWorkloadsConfigMap without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsConfigMapRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsConfigMapRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap()
-      );
-      client.innerApiCalls.createUserWorkloadsConfigMap =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.createUserWorkloadsConfigMap(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createUserWorkloadsConfigMap as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createUserWorkloadsConfigMap as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createUserWorkloadsConfigMap without error using callback', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsConfigMapRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsConfigMapRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap()
-      );
-      client.innerApiCalls.createUserWorkloadsConfigMap =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createUserWorkloadsConfigMap(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsConfigMap | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createUserWorkloadsConfigMap as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createUserWorkloadsConfigMap as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createUserWorkloadsConfigMap with error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsConfigMapRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsConfigMapRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createUserWorkloadsConfigMap = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.createUserWorkloadsConfigMap(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.createUserWorkloadsConfigMap as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createUserWorkloadsConfigMap as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createUserWorkloadsConfigMap with closed client', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsConfigMapRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsConfigMapRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.createUserWorkloadsConfigMap(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('getUserWorkloadsConfigMap', () => {
-    it('invokes getUserWorkloadsConfigMap without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsConfigMapRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsConfigMapRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap()
-      );
-      client.innerApiCalls.getUserWorkloadsConfigMap =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getUserWorkloadsConfigMap(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getUserWorkloadsConfigMap as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getUserWorkloadsConfigMap as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getUserWorkloadsConfigMap without error using callback', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsConfigMapRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsConfigMapRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap()
-      );
-      client.innerApiCalls.getUserWorkloadsConfigMap =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getUserWorkloadsConfigMap(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsConfigMap | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getUserWorkloadsConfigMap as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getUserWorkloadsConfigMap as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getUserWorkloadsConfigMap with error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsConfigMapRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsConfigMapRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getUserWorkloadsConfigMap = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getUserWorkloadsConfigMap(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.getUserWorkloadsConfigMap as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getUserWorkloadsConfigMap as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getUserWorkloadsConfigMap with closed client', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsConfigMapRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsConfigMapRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.getUserWorkloadsConfigMap(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('updateUserWorkloadsConfigMap', () => {
-    it('invokes updateUserWorkloadsConfigMap without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsConfigMapRequest()
-      );
-      request.userWorkloadsConfigMap ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsConfigMapRequest',
-        ['userWorkloadsConfigMap', 'name']
-      );
-      request.userWorkloadsConfigMap.name = defaultValue1;
-      const expectedHeaderRequestParams = `user_workloads_config_map.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap()
-      );
-      client.innerApiCalls.updateUserWorkloadsConfigMap =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.updateUserWorkloadsConfigMap(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateUserWorkloadsConfigMap as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateUserWorkloadsConfigMap as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateUserWorkloadsConfigMap without error using callback', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsConfigMapRequest()
-      );
-      request.userWorkloadsConfigMap ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsConfigMapRequest',
-        ['userWorkloadsConfigMap', 'name']
-      );
-      request.userWorkloadsConfigMap.name = defaultValue1;
-      const expectedHeaderRequestParams = `user_workloads_config_map.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap()
-      );
-      client.innerApiCalls.updateUserWorkloadsConfigMap =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateUserWorkloadsConfigMap(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsConfigMap | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateUserWorkloadsConfigMap as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateUserWorkloadsConfigMap as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateUserWorkloadsConfigMap with error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsConfigMapRequest()
-      );
-      request.userWorkloadsConfigMap ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsConfigMapRequest',
-        ['userWorkloadsConfigMap', 'name']
-      );
-      request.userWorkloadsConfigMap.name = defaultValue1;
-      const expectedHeaderRequestParams = `user_workloads_config_map.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateUserWorkloadsConfigMap = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.updateUserWorkloadsConfigMap(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.updateUserWorkloadsConfigMap as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateUserWorkloadsConfigMap as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateUserWorkloadsConfigMap with closed client', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsConfigMapRequest()
-      );
-      request.userWorkloadsConfigMap ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsConfigMapRequest',
-        ['userWorkloadsConfigMap', 'name']
-      );
-      request.userWorkloadsConfigMap.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.updateUserWorkloadsConfigMap(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('deleteUserWorkloadsConfigMap', () => {
-    it('invokes deleteUserWorkloadsConfigMap without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsConfigMapRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsConfigMapRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteUserWorkloadsConfigMap =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteUserWorkloadsConfigMap(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteUserWorkloadsConfigMap as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteUserWorkloadsConfigMap as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteUserWorkloadsConfigMap without error using callback', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsConfigMapRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsConfigMapRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteUserWorkloadsConfigMap =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteUserWorkloadsConfigMap(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteUserWorkloadsConfigMap as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteUserWorkloadsConfigMap as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteUserWorkloadsConfigMap with error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsConfigMapRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsConfigMapRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteUserWorkloadsConfigMap = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.deleteUserWorkloadsConfigMap(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.deleteUserWorkloadsConfigMap as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteUserWorkloadsConfigMap as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteUserWorkloadsConfigMap with closed client', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsConfigMapRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsConfigMapRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.deleteUserWorkloadsConfigMap(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('fetchDatabaseProperties', () => {
-    it('invokes fetchDatabaseProperties without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.FetchDatabasePropertiesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.FetchDatabasePropertiesRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.FetchDatabasePropertiesResponse()
-      );
-      client.innerApiCalls.fetchDatabaseProperties =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.fetchDatabaseProperties(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.fetchDatabaseProperties as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.fetchDatabaseProperties as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes fetchDatabaseProperties without error using callback', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.FetchDatabasePropertiesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.FetchDatabasePropertiesRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.FetchDatabasePropertiesResponse()
-      );
-      client.innerApiCalls.fetchDatabaseProperties =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.fetchDatabaseProperties(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.orchestration.airflow.service.v1beta1.IFetchDatabasePropertiesResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.fetchDatabaseProperties as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.fetchDatabaseProperties as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes fetchDatabaseProperties with error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.FetchDatabasePropertiesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.FetchDatabasePropertiesRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.fetchDatabaseProperties = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.fetchDatabaseProperties(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.fetchDatabaseProperties as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.fetchDatabaseProperties as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes fetchDatabaseProperties with closed client', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.FetchDatabasePropertiesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.FetchDatabasePropertiesRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.fetchDatabaseProperties(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('createEnvironment', () => {
-    it('invokes createEnvironment without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.CreateEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.CreateEnvironmentRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createEnvironment =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createEnvironment(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createEnvironment without error using callback', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.CreateEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.CreateEnvironmentRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createEnvironment =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createEnvironment(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.orchestration.airflow.service.v1beta1.IEnvironment,
-              protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.orchestration.airflow.service.v1beta1.IEnvironment,
-        protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createEnvironment with call error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.CreateEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.CreateEnvironmentRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createEnvironment = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createEnvironment(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createEnvironment with LRO error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.CreateEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.CreateEnvironmentRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createEnvironment = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createEnvironment(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateEnvironmentProgress without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateEnvironmentProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateEnvironmentProgress with error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateEnvironmentProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateEnvironment', () => {
-    it('invokes updateEnvironment without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.UpdateEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.UpdateEnvironmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateEnvironment =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateEnvironment(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateEnvironment without error using callback', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.UpdateEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.UpdateEnvironmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateEnvironment =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateEnvironment(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.orchestration.airflow.service.v1beta1.IEnvironment,
-              protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.orchestration.airflow.service.v1beta1.IEnvironment,
-        protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateEnvironment with call error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.UpdateEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.UpdateEnvironmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateEnvironment = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateEnvironment(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateEnvironment with LRO error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.UpdateEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.UpdateEnvironmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateEnvironment = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateEnvironment(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateEnvironmentProgress without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateEnvironmentProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateEnvironmentProgress with error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateEnvironmentProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteEnvironment', () => {
-    it('invokes deleteEnvironment without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.DeleteEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.DeleteEnvironmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteEnvironment =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteEnvironment(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteEnvironment without error using callback', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.DeleteEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.DeleteEnvironmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteEnvironment =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteEnvironment(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteEnvironment with call error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.DeleteEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.DeleteEnvironmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteEnvironment = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteEnvironment(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteEnvironment with LRO error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.DeleteEnvironmentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.DeleteEnvironmentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteEnvironment = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteEnvironment(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteEnvironment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteEnvironment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteEnvironmentProgress without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteEnvironmentProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteEnvironmentProgress with error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteEnvironmentProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('restartWebServer', () => {
-    it('invokes restartWebServer without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.RestartWebServerRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.RestartWebServerRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.restartWebServer =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.restartWebServer(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.restartWebServer as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.restartWebServer as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes restartWebServer without error using callback', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.RestartWebServerRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.RestartWebServerRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.restartWebServer =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.restartWebServer(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.orchestration.airflow.service.v1beta1.IEnvironment,
-              protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.orchestration.airflow.service.v1beta1.IEnvironment,
-        protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.restartWebServer as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.restartWebServer as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes restartWebServer with call error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.RestartWebServerRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.RestartWebServerRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.restartWebServer = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.restartWebServer(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.restartWebServer as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.restartWebServer as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes restartWebServer with LRO error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.RestartWebServerRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.RestartWebServerRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.restartWebServer = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.restartWebServer(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.restartWebServer as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.restartWebServer as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkRestartWebServerProgress without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkRestartWebServerProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkRestartWebServerProgress with error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkRestartWebServerProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('checkUpgrade', () => {
-    it('invokes checkUpgrade without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.CheckUpgradeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.CheckUpgradeRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.checkUpgrade = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.checkUpgrade(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.checkUpgrade as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.checkUpgrade as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpgrade without error using callback', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.CheckUpgradeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.CheckUpgradeRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.checkUpgrade =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.checkUpgrade(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.orchestration.airflow.service.v1beta1.ICheckUpgradeResponse,
-              protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.orchestration.airflow.service.v1beta1.ICheckUpgradeResponse,
-        protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.checkUpgrade as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.checkUpgrade as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpgrade with call error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.CheckUpgradeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.CheckUpgradeRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.checkUpgrade = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkUpgrade(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.checkUpgrade as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.checkUpgrade as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpgrade with LRO error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.CheckUpgradeRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.CheckUpgradeRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.checkUpgrade = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.checkUpgrade(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.checkUpgrade as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.checkUpgrade as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCheckUpgradeProgress without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCheckUpgradeProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCheckUpgradeProgress with error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkCheckUpgradeProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('saveSnapshot', () => {
-    it('invokes saveSnapshot without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.saveSnapshot = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.saveSnapshot(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.saveSnapshot as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.saveSnapshot as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes saveSnapshot without error using callback', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.saveSnapshot =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.saveSnapshot(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.orchestration.airflow.service.v1beta1.ISaveSnapshotResponse,
-              protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.orchestration.airflow.service.v1beta1.ISaveSnapshotResponse,
-        protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.saveSnapshot as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.saveSnapshot as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes saveSnapshot with call error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.saveSnapshot = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.saveSnapshot(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.saveSnapshot as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.saveSnapshot as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes saveSnapshot with LRO error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.saveSnapshot = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.saveSnapshot(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.saveSnapshot as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.saveSnapshot as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkSaveSnapshotProgress without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkSaveSnapshotProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkSaveSnapshotProgress with error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkSaveSnapshotProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('loadSnapshot', () => {
-    it('invokes loadSnapshot without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.loadSnapshot = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.loadSnapshot(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.loadSnapshot as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.loadSnapshot as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes loadSnapshot without error using callback', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.loadSnapshot =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.loadSnapshot(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.orchestration.airflow.service.v1beta1.ILoadSnapshotResponse,
-              protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.orchestration.airflow.service.v1beta1.ILoadSnapshotResponse,
-        protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.loadSnapshot as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.loadSnapshot as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes loadSnapshot with call error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.loadSnapshot = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.loadSnapshot(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.loadSnapshot as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.loadSnapshot as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes loadSnapshot with LRO error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.loadSnapshot = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.loadSnapshot(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.loadSnapshot as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.loadSnapshot as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkLoadSnapshotProgress without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkLoadSnapshotProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkLoadSnapshotProgress with error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkLoadSnapshotProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('databaseFailover', () => {
-    it('invokes databaseFailover without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.DatabaseFailoverRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.DatabaseFailoverRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.databaseFailover =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.databaseFailover(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.databaseFailover as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.databaseFailover as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes databaseFailover without error using callback', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.DatabaseFailoverRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.DatabaseFailoverRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.databaseFailover =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.databaseFailover(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.orchestration.airflow.service.v1beta1.IDatabaseFailoverResponse,
-              protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.orchestration.airflow.service.v1beta1.IDatabaseFailoverResponse,
-        protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.databaseFailover as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.databaseFailover as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes databaseFailover with call error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.DatabaseFailoverRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.DatabaseFailoverRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.databaseFailover = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.databaseFailover(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.databaseFailover as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.databaseFailover as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes databaseFailover with LRO error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.DatabaseFailoverRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.DatabaseFailoverRequest',
-        ['environment']
-      );
-      request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.databaseFailover = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.databaseFailover(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.databaseFailover as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.databaseFailover as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDatabaseFailoverProgress without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDatabaseFailoverProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDatabaseFailoverProgress with error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDatabaseFailoverProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('listEnvironments', () => {
-    it('invokes listEnvironments without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.Environment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.Environment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.Environment()
-        ),
-      ];
-      client.innerApiCalls.listEnvironments = stubSimpleCall(expectedResponse);
-      const [response] = await client.listEnvironments(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listEnvironments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listEnvironments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listEnvironments without error using callback', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.Environment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.Environment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.Environment()
-        ),
-      ];
-      client.innerApiCalls.listEnvironments =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listEnvironments(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.orchestration.airflow.service.v1beta1.IEnvironment[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listEnvironments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listEnvironments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listEnvironments with error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listEnvironments = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listEnvironments(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listEnvironments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listEnvironments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listEnvironmentsStream without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.Environment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.Environment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.Environment()
-        ),
-      ];
-      client.descriptors.page.listEnvironments.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listEnvironmentsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.orchestration.airflow.service.v1beta1.Environment[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.orchestration.airflow.service.v1beta1.Environment
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listEnvironments.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listEnvironments, request)
-      );
-      assert(
-        (client.descriptors.page.listEnvironments.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listEnvironmentsStream with error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listEnvironments.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listEnvironmentsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.orchestration.airflow.service.v1beta1.Environment[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.orchestration.airflow.service.v1beta1.Environment
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listEnvironments.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listEnvironments, request)
-      );
-      assert(
-        (client.descriptors.page.listEnvironments.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listEnvironments without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.Environment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.Environment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.Environment()
-        ),
-      ];
-      client.descriptors.page.listEnvironments.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.orchestration.airflow.service.v1beta1.IEnvironment[] =
-        [];
-      const iterable = client.listEnvironmentsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listEnvironments.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listEnvironments.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listEnvironments with error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listEnvironments.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listEnvironmentsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.orchestration.airflow.service.v1beta1.IEnvironment[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = environmentsModule.v1beta1.EnvironmentsClient.servicePath;
+                assert.strictEqual(servicePath, 'composer.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = environmentsModule.v1beta1.EnvironmentsClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'composer.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listEnvironments.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listEnvironments.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('listWorkloads', () => {
-    it('invokes listWorkloads without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload()
-        ),
-      ];
-      client.innerApiCalls.listWorkloads = stubSimpleCall(expectedResponse);
-      const [response] = await client.listWorkloads(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listWorkloads as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listWorkloads as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listWorkloads without error using callback', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload()
-        ),
-      ];
-      client.innerApiCalls.listWorkloads =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listWorkloads(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.IComposerWorkload[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listWorkloads as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listWorkloads as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listWorkloads with error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listWorkloads = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listWorkloads(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listWorkloads as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listWorkloads as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listWorkloadsStream without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload()
-        ),
-      ];
-      client.descriptors.page.listWorkloads.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listWorkloadsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'composer.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listWorkloads.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listWorkloads, request)
-      );
-      assert(
-        (client.descriptors.page.listWorkloads.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('invokes listWorkloadsStream with error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listWorkloads.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listWorkloadsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'composer.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listWorkloads.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listWorkloads, request)
-      );
-      assert(
-        (client.descriptors.page.listWorkloads.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listWorkloads without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload()
-        ),
-      ];
-      client.descriptors.page.listWorkloads.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.IComposerWorkload[] =
-        [];
-      const iterable = client.listWorkloadsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listWorkloads.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listWorkloads.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new environmentsModule.v1beta1.EnvironmentsClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'composer.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('uses async iteration with listWorkloads with error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listWorkloads.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listWorkloadsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.IComposerWorkload[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new environmentsModule.v1beta1.EnvironmentsClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'composer.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listWorkloads.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listWorkloads.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new environmentsModule.v1beta1.EnvironmentsClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-  describe('listUserWorkloadsSecrets', () => {
-    it('invokes listUserWorkloadsSecrets without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret()
-        ),
-      ];
-      client.innerApiCalls.listUserWorkloadsSecrets =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listUserWorkloadsSecrets(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listUserWorkloadsSecrets as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listUserWorkloadsSecrets as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        it('has port', () => {
+            const port = environmentsModule.v1beta1.EnvironmentsClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.environmentsStub, undefined);
+            await client.initialize();
+            assert(client.environmentsStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.environmentsStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.environmentsStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    it('invokes listUserWorkloadsSecrets without error using callback', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret()
-        ),
-      ];
-      client.innerApiCalls.listUserWorkloadsSecrets =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listUserWorkloadsSecrets(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsSecret[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('getEnvironment', () => {
+        it('invokes getEnvironment without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.GetEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.GetEnvironmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.Environment()
+            );
+            client.innerApiCalls.getEnvironment = stubSimpleCall(expectedResponse);
+            const [response] = await client.getEnvironment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getEnvironment without error using callback', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.GetEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.GetEnvironmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.Environment()
+            );
+            client.innerApiCalls.getEnvironment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getEnvironment(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.orchestration.airflow.service.v1beta1.IEnvironment|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getEnvironment with error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.GetEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.GetEnvironmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getEnvironment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getEnvironment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getEnvironment with closed client', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.GetEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.GetEnvironmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getEnvironment(request), expectedError);
+        });
+    });
+
+    describe('executeAirflowCommand', () => {
+        it('invokes executeAirflowCommand without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedHeaderRequestParams = `environment=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse()
+            );
+            client.innerApiCalls.executeAirflowCommand = stubSimpleCall(expectedResponse);
+            const [response] = await client.executeAirflowCommand(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.executeAirflowCommand as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.executeAirflowCommand as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes executeAirflowCommand without error using callback', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedHeaderRequestParams = `environment=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse()
+            );
+            client.innerApiCalls.executeAirflowCommand = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.executeAirflowCommand(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.orchestration.airflow.service.v1beta1.IExecuteAirflowCommandResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.executeAirflowCommand as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.executeAirflowCommand as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes executeAirflowCommand with error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedHeaderRequestParams = `environment=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.executeAirflowCommand = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.executeAirflowCommand(request), expectedError);
+            const actualRequest = (client.innerApiCalls.executeAirflowCommand as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.executeAirflowCommand as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes executeAirflowCommand with closed client', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.executeAirflowCommand(request), expectedError);
+        });
+    });
+
+    describe('stopAirflowCommand', () => {
+        it('invokes stopAirflowCommand without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.StopAirflowCommandRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.StopAirflowCommandRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedHeaderRequestParams = `environment=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.StopAirflowCommandResponse()
+            );
+            client.innerApiCalls.stopAirflowCommand = stubSimpleCall(expectedResponse);
+            const [response] = await client.stopAirflowCommand(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.stopAirflowCommand as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.stopAirflowCommand as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes stopAirflowCommand without error using callback', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.StopAirflowCommandRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.StopAirflowCommandRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedHeaderRequestParams = `environment=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.StopAirflowCommandResponse()
+            );
+            client.innerApiCalls.stopAirflowCommand = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.stopAirflowCommand(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.orchestration.airflow.service.v1beta1.IStopAirflowCommandResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.stopAirflowCommand as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.stopAirflowCommand as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes stopAirflowCommand with error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.StopAirflowCommandRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.StopAirflowCommandRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedHeaderRequestParams = `environment=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.stopAirflowCommand = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.stopAirflowCommand(request), expectedError);
+            const actualRequest = (client.innerApiCalls.stopAirflowCommand as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.stopAirflowCommand as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes stopAirflowCommand with closed client', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.StopAirflowCommandRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.StopAirflowCommandRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.stopAirflowCommand(request), expectedError);
+        });
+    });
+
+    describe('pollAirflowCommand', () => {
+        it('invokes pollAirflowCommand without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedHeaderRequestParams = `environment=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse()
+            );
+            client.innerApiCalls.pollAirflowCommand = stubSimpleCall(expectedResponse);
+            const [response] = await client.pollAirflowCommand(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.pollAirflowCommand as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.pollAirflowCommand as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes pollAirflowCommand without error using callback', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedHeaderRequestParams = `environment=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse()
+            );
+            client.innerApiCalls.pollAirflowCommand = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.pollAirflowCommand(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.orchestration.airflow.service.v1beta1.IPollAirflowCommandResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.pollAirflowCommand as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.pollAirflowCommand as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes pollAirflowCommand with error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedHeaderRequestParams = `environment=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.pollAirflowCommand = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.pollAirflowCommand(request), expectedError);
+            const actualRequest = (client.innerApiCalls.pollAirflowCommand as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.pollAirflowCommand as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes pollAirflowCommand with closed client', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.pollAirflowCommand(request), expectedError);
+        });
+    });
+
+    describe('createUserWorkloadsSecret', () => {
+        it('invokes createUserWorkloadsSecret without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsSecretRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsSecretRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret()
+            );
+            client.innerApiCalls.createUserWorkloadsSecret = stubSimpleCall(expectedResponse);
+            const [response] = await client.createUserWorkloadsSecret(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createUserWorkloadsSecret as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createUserWorkloadsSecret as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createUserWorkloadsSecret without error using callback', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsSecretRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsSecretRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret()
+            );
+            client.innerApiCalls.createUserWorkloadsSecret = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createUserWorkloadsSecret(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsSecret|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createUserWorkloadsSecret as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createUserWorkloadsSecret as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createUserWorkloadsSecret with error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsSecretRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsSecretRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createUserWorkloadsSecret = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createUserWorkloadsSecret(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createUserWorkloadsSecret as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createUserWorkloadsSecret as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createUserWorkloadsSecret with closed client', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsSecretRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsSecretRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createUserWorkloadsSecret(request), expectedError);
+        });
+    });
+
+    describe('getUserWorkloadsSecret', () => {
+        it('invokes getUserWorkloadsSecret without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsSecretRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsSecretRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret()
+            );
+            client.innerApiCalls.getUserWorkloadsSecret = stubSimpleCall(expectedResponse);
+            const [response] = await client.getUserWorkloadsSecret(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getUserWorkloadsSecret as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getUserWorkloadsSecret as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getUserWorkloadsSecret without error using callback', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsSecretRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsSecretRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret()
+            );
+            client.innerApiCalls.getUserWorkloadsSecret = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getUserWorkloadsSecret(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsSecret|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getUserWorkloadsSecret as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getUserWorkloadsSecret as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getUserWorkloadsSecret with error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsSecretRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsSecretRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getUserWorkloadsSecret = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getUserWorkloadsSecret(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getUserWorkloadsSecret as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getUserWorkloadsSecret as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getUserWorkloadsSecret with closed client', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsSecretRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsSecretRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getUserWorkloadsSecret(request), expectedError);
+        });
+    });
+
+    describe('updateUserWorkloadsSecret', () => {
+        it('invokes updateUserWorkloadsSecret without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsSecretRequest()
+            );
+            request.userWorkloadsSecret ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsSecretRequest', ['userWorkloadsSecret', 'name']);
+            request.userWorkloadsSecret.name = defaultValue1;
+            const expectedHeaderRequestParams = `user_workloads_secret.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret()
+            );
+            client.innerApiCalls.updateUserWorkloadsSecret = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateUserWorkloadsSecret(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateUserWorkloadsSecret as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateUserWorkloadsSecret as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateUserWorkloadsSecret without error using callback', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsSecretRequest()
+            );
+            request.userWorkloadsSecret ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsSecretRequest', ['userWorkloadsSecret', 'name']);
+            request.userWorkloadsSecret.name = defaultValue1;
+            const expectedHeaderRequestParams = `user_workloads_secret.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret()
+            );
+            client.innerApiCalls.updateUserWorkloadsSecret = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateUserWorkloadsSecret(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsSecret|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateUserWorkloadsSecret as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateUserWorkloadsSecret as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateUserWorkloadsSecret with error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsSecretRequest()
+            );
+            request.userWorkloadsSecret ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsSecretRequest', ['userWorkloadsSecret', 'name']);
+            request.userWorkloadsSecret.name = defaultValue1;
+            const expectedHeaderRequestParams = `user_workloads_secret.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateUserWorkloadsSecret = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateUserWorkloadsSecret(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateUserWorkloadsSecret as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateUserWorkloadsSecret as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateUserWorkloadsSecret with closed client', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsSecretRequest()
+            );
+            request.userWorkloadsSecret ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsSecretRequest', ['userWorkloadsSecret', 'name']);
+            request.userWorkloadsSecret.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateUserWorkloadsSecret(request), expectedError);
+        });
+    });
+
+    describe('deleteUserWorkloadsSecret', () => {
+        it('invokes deleteUserWorkloadsSecret without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsSecretRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsSecretRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteUserWorkloadsSecret = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteUserWorkloadsSecret(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteUserWorkloadsSecret as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteUserWorkloadsSecret as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteUserWorkloadsSecret without error using callback', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsSecretRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsSecretRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteUserWorkloadsSecret = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteUserWorkloadsSecret(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteUserWorkloadsSecret as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteUserWorkloadsSecret as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteUserWorkloadsSecret with error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsSecretRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsSecretRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteUserWorkloadsSecret = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteUserWorkloadsSecret(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteUserWorkloadsSecret as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteUserWorkloadsSecret as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteUserWorkloadsSecret with closed client', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsSecretRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsSecretRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteUserWorkloadsSecret(request), expectedError);
+        });
+    });
+
+    describe('createUserWorkloadsConfigMap', () => {
+        it('invokes createUserWorkloadsConfigMap without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsConfigMapRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsConfigMapRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap()
+            );
+            client.innerApiCalls.createUserWorkloadsConfigMap = stubSimpleCall(expectedResponse);
+            const [response] = await client.createUserWorkloadsConfigMap(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createUserWorkloadsConfigMap as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createUserWorkloadsConfigMap as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createUserWorkloadsConfigMap without error using callback', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsConfigMapRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsConfigMapRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap()
+            );
+            client.innerApiCalls.createUserWorkloadsConfigMap = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createUserWorkloadsConfigMap(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsConfigMap|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createUserWorkloadsConfigMap as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createUserWorkloadsConfigMap as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createUserWorkloadsConfigMap with error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsConfigMapRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsConfigMapRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createUserWorkloadsConfigMap = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createUserWorkloadsConfigMap(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createUserWorkloadsConfigMap as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createUserWorkloadsConfigMap as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createUserWorkloadsConfigMap with closed client', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsConfigMapRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsConfigMapRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createUserWorkloadsConfigMap(request), expectedError);
+        });
+    });
+
+    describe('getUserWorkloadsConfigMap', () => {
+        it('invokes getUserWorkloadsConfigMap without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsConfigMapRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsConfigMapRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap()
+            );
+            client.innerApiCalls.getUserWorkloadsConfigMap = stubSimpleCall(expectedResponse);
+            const [response] = await client.getUserWorkloadsConfigMap(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getUserWorkloadsConfigMap as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getUserWorkloadsConfigMap as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getUserWorkloadsConfigMap without error using callback', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsConfigMapRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsConfigMapRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap()
+            );
+            client.innerApiCalls.getUserWorkloadsConfigMap = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getUserWorkloadsConfigMap(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsConfigMap|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getUserWorkloadsConfigMap as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getUserWorkloadsConfigMap as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getUserWorkloadsConfigMap with error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsConfigMapRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsConfigMapRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getUserWorkloadsConfigMap = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getUserWorkloadsConfigMap(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getUserWorkloadsConfigMap as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getUserWorkloadsConfigMap as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getUserWorkloadsConfigMap with closed client', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsConfigMapRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsConfigMapRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getUserWorkloadsConfigMap(request), expectedError);
+        });
+    });
+
+    describe('updateUserWorkloadsConfigMap', () => {
+        it('invokes updateUserWorkloadsConfigMap without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsConfigMapRequest()
+            );
+            request.userWorkloadsConfigMap ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsConfigMapRequest', ['userWorkloadsConfigMap', 'name']);
+            request.userWorkloadsConfigMap.name = defaultValue1;
+            const expectedHeaderRequestParams = `user_workloads_config_map.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap()
+            );
+            client.innerApiCalls.updateUserWorkloadsConfigMap = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateUserWorkloadsConfigMap(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateUserWorkloadsConfigMap as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateUserWorkloadsConfigMap as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateUserWorkloadsConfigMap without error using callback', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsConfigMapRequest()
+            );
+            request.userWorkloadsConfigMap ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsConfigMapRequest', ['userWorkloadsConfigMap', 'name']);
+            request.userWorkloadsConfigMap.name = defaultValue1;
+            const expectedHeaderRequestParams = `user_workloads_config_map.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap()
+            );
+            client.innerApiCalls.updateUserWorkloadsConfigMap = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateUserWorkloadsConfigMap(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsConfigMap|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateUserWorkloadsConfigMap as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateUserWorkloadsConfigMap as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateUserWorkloadsConfigMap with error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsConfigMapRequest()
+            );
+            request.userWorkloadsConfigMap ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsConfigMapRequest', ['userWorkloadsConfigMap', 'name']);
+            request.userWorkloadsConfigMap.name = defaultValue1;
+            const expectedHeaderRequestParams = `user_workloads_config_map.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateUserWorkloadsConfigMap = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateUserWorkloadsConfigMap(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateUserWorkloadsConfigMap as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateUserWorkloadsConfigMap as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateUserWorkloadsConfigMap with closed client', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsConfigMapRequest()
+            );
+            request.userWorkloadsConfigMap ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsConfigMapRequest', ['userWorkloadsConfigMap', 'name']);
+            request.userWorkloadsConfigMap.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateUserWorkloadsConfigMap(request), expectedError);
+        });
+    });
+
+    describe('deleteUserWorkloadsConfigMap', () => {
+        it('invokes deleteUserWorkloadsConfigMap without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsConfigMapRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsConfigMapRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteUserWorkloadsConfigMap = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteUserWorkloadsConfigMap(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteUserWorkloadsConfigMap as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteUserWorkloadsConfigMap as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteUserWorkloadsConfigMap without error using callback', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsConfigMapRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsConfigMapRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteUserWorkloadsConfigMap = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteUserWorkloadsConfigMap(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteUserWorkloadsConfigMap as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteUserWorkloadsConfigMap as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteUserWorkloadsConfigMap with error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsConfigMapRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsConfigMapRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteUserWorkloadsConfigMap = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteUserWorkloadsConfigMap(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteUserWorkloadsConfigMap as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteUserWorkloadsConfigMap as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteUserWorkloadsConfigMap with closed client', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsConfigMapRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsConfigMapRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteUserWorkloadsConfigMap(request), expectedError);
+        });
+    });
+
+    describe('fetchDatabaseProperties', () => {
+        it('invokes fetchDatabaseProperties without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.FetchDatabasePropertiesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.FetchDatabasePropertiesRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedHeaderRequestParams = `environment=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.FetchDatabasePropertiesResponse()
+            );
+            client.innerApiCalls.fetchDatabaseProperties = stubSimpleCall(expectedResponse);
+            const [response] = await client.fetchDatabaseProperties(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.fetchDatabaseProperties as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.fetchDatabaseProperties as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes fetchDatabaseProperties without error using callback', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.FetchDatabasePropertiesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.FetchDatabasePropertiesRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedHeaderRequestParams = `environment=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.FetchDatabasePropertiesResponse()
+            );
+            client.innerApiCalls.fetchDatabaseProperties = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.fetchDatabaseProperties(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.orchestration.airflow.service.v1beta1.IFetchDatabasePropertiesResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.fetchDatabaseProperties as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.fetchDatabaseProperties as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes fetchDatabaseProperties with error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.FetchDatabasePropertiesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.FetchDatabasePropertiesRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedHeaderRequestParams = `environment=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.fetchDatabaseProperties = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.fetchDatabaseProperties(request), expectedError);
+            const actualRequest = (client.innerApiCalls.fetchDatabaseProperties as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.fetchDatabaseProperties as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes fetchDatabaseProperties with closed client', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.FetchDatabasePropertiesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.FetchDatabasePropertiesRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.fetchDatabaseProperties(request), expectedError);
+        });
+    });
+
+    describe('createEnvironment', () => {
+        it('invokes createEnvironment without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.CreateEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.CreateEnvironmentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createEnvironment = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createEnvironment(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createEnvironment without error using callback', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.CreateEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.CreateEnvironmentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createEnvironment = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createEnvironment(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.orchestration.airflow.service.v1beta1.IEnvironment, protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.orchestration.airflow.service.v1beta1.IEnvironment, protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createEnvironment with call error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.CreateEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.CreateEnvironmentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createEnvironment = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createEnvironment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createEnvironment with LRO error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.CreateEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.CreateEnvironmentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createEnvironment = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createEnvironment(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateEnvironmentProgress without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateEnvironmentProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateEnvironmentProgress with error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateEnvironmentProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateEnvironment', () => {
+        it('invokes updateEnvironment without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.UpdateEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.UpdateEnvironmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateEnvironment = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateEnvironment(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateEnvironment without error using callback', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.UpdateEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.UpdateEnvironmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateEnvironment = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateEnvironment(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.orchestration.airflow.service.v1beta1.IEnvironment, protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.orchestration.airflow.service.v1beta1.IEnvironment, protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateEnvironment with call error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.UpdateEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.UpdateEnvironmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateEnvironment = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateEnvironment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateEnvironment with LRO error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.UpdateEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.UpdateEnvironmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateEnvironment = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateEnvironment(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateEnvironmentProgress without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateEnvironmentProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateEnvironmentProgress with error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateEnvironmentProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteEnvironment', () => {
+        it('invokes deleteEnvironment without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.DeleteEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.DeleteEnvironmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteEnvironment = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteEnvironment(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteEnvironment without error using callback', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.DeleteEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.DeleteEnvironmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteEnvironment = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteEnvironment(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteEnvironment with call error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.DeleteEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.DeleteEnvironmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteEnvironment = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteEnvironment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteEnvironment with LRO error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.DeleteEnvironmentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.DeleteEnvironmentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteEnvironment = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteEnvironment(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteEnvironment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteEnvironment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteEnvironmentProgress without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteEnvironmentProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteEnvironmentProgress with error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteEnvironmentProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('restartWebServer', () => {
+        it('invokes restartWebServer without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.RestartWebServerRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.RestartWebServerRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.restartWebServer = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.restartWebServer(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.restartWebServer as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.restartWebServer as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes restartWebServer without error using callback', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.RestartWebServerRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.RestartWebServerRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.restartWebServer = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.restartWebServer(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.orchestration.airflow.service.v1beta1.IEnvironment, protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.orchestration.airflow.service.v1beta1.IEnvironment, protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.restartWebServer as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.restartWebServer as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes restartWebServer with call error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.RestartWebServerRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.RestartWebServerRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.restartWebServer = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.restartWebServer(request), expectedError);
+            const actualRequest = (client.innerApiCalls.restartWebServer as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.restartWebServer as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes restartWebServer with LRO error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.RestartWebServerRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.RestartWebServerRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.restartWebServer = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.restartWebServer(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.restartWebServer as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.restartWebServer as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkRestartWebServerProgress without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkRestartWebServerProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkRestartWebServerProgress with error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkRestartWebServerProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('checkUpgrade', () => {
+        it('invokes checkUpgrade without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.CheckUpgradeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.CheckUpgradeRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedHeaderRequestParams = `environment=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.checkUpgrade = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.checkUpgrade(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.checkUpgrade as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.checkUpgrade as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpgrade without error using callback', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.CheckUpgradeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.CheckUpgradeRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedHeaderRequestParams = `environment=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.checkUpgrade = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.checkUpgrade(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.orchestration.airflow.service.v1beta1.ICheckUpgradeResponse, protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.orchestration.airflow.service.v1beta1.ICheckUpgradeResponse, protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.checkUpgrade as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.checkUpgrade as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpgrade with call error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.CheckUpgradeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.CheckUpgradeRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedHeaderRequestParams = `environment=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.checkUpgrade = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.checkUpgrade(request), expectedError);
+            const actualRequest = (client.innerApiCalls.checkUpgrade as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.checkUpgrade as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpgrade with LRO error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.CheckUpgradeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.CheckUpgradeRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedHeaderRequestParams = `environment=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.checkUpgrade = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.checkUpgrade(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.checkUpgrade as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.checkUpgrade as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCheckUpgradeProgress without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCheckUpgradeProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCheckUpgradeProgress with error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCheckUpgradeProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('saveSnapshot', () => {
+        it('invokes saveSnapshot without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedHeaderRequestParams = `environment=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.saveSnapshot = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.saveSnapshot(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.saveSnapshot as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.saveSnapshot as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes saveSnapshot without error using callback', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedHeaderRequestParams = `environment=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.saveSnapshot = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.saveSnapshot(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.orchestration.airflow.service.v1beta1.ISaveSnapshotResponse, protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.orchestration.airflow.service.v1beta1.ISaveSnapshotResponse, protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.saveSnapshot as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.saveSnapshot as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes saveSnapshot with call error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedHeaderRequestParams = `environment=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.saveSnapshot = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.saveSnapshot(request), expectedError);
+            const actualRequest = (client.innerApiCalls.saveSnapshot as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.saveSnapshot as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes saveSnapshot with LRO error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedHeaderRequestParams = `environment=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.saveSnapshot = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.saveSnapshot(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.saveSnapshot as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.saveSnapshot as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkSaveSnapshotProgress without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkSaveSnapshotProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkSaveSnapshotProgress with error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkSaveSnapshotProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('loadSnapshot', () => {
+        it('invokes loadSnapshot without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedHeaderRequestParams = `environment=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.loadSnapshot = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.loadSnapshot(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.loadSnapshot as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.loadSnapshot as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes loadSnapshot without error using callback', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedHeaderRequestParams = `environment=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.loadSnapshot = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.loadSnapshot(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.orchestration.airflow.service.v1beta1.ILoadSnapshotResponse, protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.orchestration.airflow.service.v1beta1.ILoadSnapshotResponse, protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.loadSnapshot as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.loadSnapshot as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes loadSnapshot with call error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedHeaderRequestParams = `environment=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.loadSnapshot = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.loadSnapshot(request), expectedError);
+            const actualRequest = (client.innerApiCalls.loadSnapshot as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.loadSnapshot as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes loadSnapshot with LRO error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedHeaderRequestParams = `environment=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.loadSnapshot = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.loadSnapshot(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.loadSnapshot as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.loadSnapshot as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkLoadSnapshotProgress without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkLoadSnapshotProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkLoadSnapshotProgress with error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkLoadSnapshotProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('databaseFailover', () => {
+        it('invokes databaseFailover without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.DatabaseFailoverRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.DatabaseFailoverRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedHeaderRequestParams = `environment=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.databaseFailover = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.databaseFailover(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.databaseFailover as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.databaseFailover as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes databaseFailover without error using callback', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.DatabaseFailoverRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.DatabaseFailoverRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedHeaderRequestParams = `environment=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.databaseFailover = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.databaseFailover(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.orchestration.airflow.service.v1beta1.IDatabaseFailoverResponse, protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.orchestration.airflow.service.v1beta1.IDatabaseFailoverResponse, protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.databaseFailover as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.databaseFailover as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes databaseFailover with call error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.DatabaseFailoverRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.DatabaseFailoverRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedHeaderRequestParams = `environment=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.databaseFailover = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.databaseFailover(request), expectedError);
+            const actualRequest = (client.innerApiCalls.databaseFailover as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.databaseFailover as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes databaseFailover with LRO error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.DatabaseFailoverRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.DatabaseFailoverRequest', ['environment']);
+            request.environment = defaultValue1;
+            const expectedHeaderRequestParams = `environment=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.databaseFailover = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.databaseFailover(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.databaseFailover as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.databaseFailover as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDatabaseFailoverProgress without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDatabaseFailoverProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDatabaseFailoverProgress with error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDatabaseFailoverProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('listEnvironments', () => {
+        it('invokes listEnvironments without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.Environment()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.Environment()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.Environment()),
+            ];
+            client.innerApiCalls.listEnvironments = stubSimpleCall(expectedResponse);
+            const [response] = await client.listEnvironments(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listEnvironments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listEnvironments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listEnvironments without error using callback', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.Environment()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.Environment()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.Environment()),
+            ];
+            client.innerApiCalls.listEnvironments = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listEnvironments(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.orchestration.airflow.service.v1beta1.IEnvironment[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listEnvironments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listEnvironments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listEnvironments with error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listEnvironments = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listEnvironments(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listEnvironments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listEnvironments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listEnvironmentsStream without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.Environment()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.Environment()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.Environment()),
+            ];
+            client.descriptors.page.listEnvironments.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listEnvironmentsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.orchestration.airflow.service.v1beta1.Environment[] = [];
+                stream.on('data', (response: protos.google.cloud.orchestration.airflow.service.v1beta1.Environment) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listEnvironments.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listEnvironments, request));
+            assert(
+                (client.descriptors.page.listEnvironments.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listEnvironmentsStream with error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listEnvironments.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listEnvironmentsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.orchestration.airflow.service.v1beta1.Environment[] = [];
+                stream.on('data', (response: protos.google.cloud.orchestration.airflow.service.v1beta1.Environment) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listEnvironments.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listEnvironments, request));
+            assert(
+                (client.descriptors.page.listEnvironments.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listEnvironments without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.Environment()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.Environment()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.Environment()),
+            ];
+            client.descriptors.page.listEnvironments.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.orchestration.airflow.service.v1beta1.IEnvironment[] = [];
+            const iterable = client.listEnvironmentsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listUserWorkloadsSecrets as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listUserWorkloadsSecrets as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listUserWorkloadsSecrets with error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listUserWorkloadsSecrets = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.listUserWorkloadsSecrets(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.listUserWorkloadsSecrets as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listUserWorkloadsSecrets as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listUserWorkloadsSecretsStream without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret()
-        ),
-      ];
-      client.descriptors.page.listUserWorkloadsSecrets.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listUserWorkloadsSecretsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listEnvironments.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listEnvironments.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listEnvironments with error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listEnvironments.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listEnvironmentsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.orchestration.airflow.service.v1beta1.IEnvironment[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listEnvironments.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listEnvironments.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.listUserWorkloadsSecrets
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listUserWorkloadsSecrets, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listUserWorkloadsSecrets
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
     });
 
-    it('invokes listUserWorkloadsSecretsStream with error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listUserWorkloadsSecrets.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listUserWorkloadsSecretsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listWorkloads', () => {
+        it('invokes listWorkloads without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload()),
+            ];
+            client.innerApiCalls.listWorkloads = stubSimpleCall(expectedResponse);
+            const [response] = await client.listWorkloads(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listWorkloads as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listWorkloads as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listWorkloads without error using callback', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload()),
+            ];
+            client.innerApiCalls.listWorkloads = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listWorkloads(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.IComposerWorkload[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listWorkloads as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listWorkloads as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.listUserWorkloadsSecrets
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listUserWorkloadsSecrets, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listUserWorkloadsSecrets
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
 
-    it('uses async iteration with listUserWorkloadsSecrets without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret()
-        ),
-      ];
-      client.descriptors.page.listUserWorkloadsSecrets.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsSecret[] =
-        [];
-      const iterable = client.listUserWorkloadsSecretsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listUserWorkloadsSecrets
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listUserWorkloadsSecrets
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
+        it('invokes listWorkloads with error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listWorkloads = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listWorkloads(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listWorkloads as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listWorkloads as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listUserWorkloadsSecrets with error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listUserWorkloadsSecrets.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listUserWorkloadsSecretsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsSecret[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listUserWorkloadsSecrets
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listUserWorkloadsSecrets
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
+        it('invokes listWorkloadsStream without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload()),
+            ];
+            client.descriptors.page.listWorkloads.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listWorkloadsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload[] = [];
+                stream.on('data', (response: protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listWorkloads.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listWorkloads, request));
+            assert(
+                (client.descriptors.page.listWorkloads.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listUserWorkloadsConfigMaps', () => {
-    it('invokes listUserWorkloadsConfigMaps without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap()
-        ),
-      ];
-      client.innerApiCalls.listUserWorkloadsConfigMaps =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listUserWorkloadsConfigMaps(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listUserWorkloadsConfigMaps as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listUserWorkloadsConfigMaps as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listWorkloadsStream with error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listWorkloads.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listWorkloadsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload[] = [];
+                stream.on('data', (response: protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listWorkloads.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listWorkloads, request));
+            assert(
+                (client.descriptors.page.listWorkloads.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listUserWorkloadsConfigMaps without error using callback', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap()
-        ),
-      ];
-      client.innerApiCalls.listUserWorkloadsConfigMaps =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listUserWorkloadsConfigMaps(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsConfigMap[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listWorkloads without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload()),
+            ];
+            client.descriptors.page.listWorkloads.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.IComposerWorkload[] = [];
+            const iterable = client.listWorkloadsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listUserWorkloadsConfigMaps as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listUserWorkloadsConfigMaps as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listUserWorkloadsConfigMaps with error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listUserWorkloadsConfigMaps = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.listUserWorkloadsConfigMaps(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.listUserWorkloadsConfigMaps as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listUserWorkloadsConfigMaps as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listUserWorkloadsConfigMapsStream without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap()
-        ),
-      ];
-      client.descriptors.page.listUserWorkloadsConfigMaps.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listUserWorkloadsConfigMapsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listWorkloads.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listWorkloads.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listWorkloads with error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listWorkloads.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listWorkloadsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.IComposerWorkload[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listWorkloads.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listWorkloads.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.listUserWorkloadsConfigMaps
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listUserWorkloadsConfigMaps, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listUserWorkloadsConfigMaps
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
     });
 
-    it('invokes listUserWorkloadsConfigMapsStream with error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listUserWorkloadsConfigMaps.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listUserWorkloadsConfigMapsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listUserWorkloadsSecrets', () => {
+        it('invokes listUserWorkloadsSecrets without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret()),
+            ];
+            client.innerApiCalls.listUserWorkloadsSecrets = stubSimpleCall(expectedResponse);
+            const [response] = await client.listUserWorkloadsSecrets(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listUserWorkloadsSecrets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listUserWorkloadsSecrets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listUserWorkloadsSecrets without error using callback', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret()),
+            ];
+            client.innerApiCalls.listUserWorkloadsSecrets = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listUserWorkloadsSecrets(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsSecret[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listUserWorkloadsSecrets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listUserWorkloadsSecrets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.listUserWorkloadsConfigMaps
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listUserWorkloadsConfigMaps, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listUserWorkloadsConfigMaps
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
 
-    it('uses async iteration with listUserWorkloadsConfigMaps without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap()
-        ),
-      ];
-      client.descriptors.page.listUserWorkloadsConfigMaps.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsConfigMap[] =
-        [];
-      const iterable = client.listUserWorkloadsConfigMapsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listUserWorkloadsConfigMaps
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listUserWorkloadsConfigMaps
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
+        it('invokes listUserWorkloadsSecrets with error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listUserWorkloadsSecrets = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listUserWorkloadsSecrets(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listUserWorkloadsSecrets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listUserWorkloadsSecrets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listUserWorkloadsConfigMaps with error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listUserWorkloadsConfigMaps.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listUserWorkloadsConfigMapsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsConfigMap[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listUserWorkloadsConfigMaps
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listUserWorkloadsConfigMaps
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
-  describe('getOperation', () => {
-    it('invokes getOperation without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const response = await client.getOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes getOperation without error using callback', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .getOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: operationsProtos.google.longrunning.Operation | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+        it('invokes listUserWorkloadsSecretsStream without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret()),
+            ];
+            client.descriptors.page.listUserWorkloadsSecrets.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listUserWorkloadsSecretsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret[] = [];
+                stream.on('data', (response: protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listUserWorkloadsSecrets.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listUserWorkloadsSecrets, request));
+            assert(
+                (client.descriptors.page.listUserWorkloadsSecrets.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listUserWorkloadsSecretsStream with error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listUserWorkloadsSecrets.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listUserWorkloadsSecretsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret[] = [];
+                stream.on('data', (response: protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listUserWorkloadsSecrets.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listUserWorkloadsSecrets, request));
+            assert(
+                (client.descriptors.page.listUserWorkloadsSecrets.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listUserWorkloadsSecrets without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret()),
+            ];
+            client.descriptors.page.listUserWorkloadsSecrets.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsSecret[] = [];
+            const iterable = client.listUserWorkloadsSecretsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listUserWorkloadsSecrets.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listUserWorkloadsSecrets.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listUserWorkloadsSecrets with error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listUserWorkloadsSecrets.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listUserWorkloadsSecretsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsSecret[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listUserWorkloadsSecrets.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listUserWorkloadsSecrets.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes getOperation with error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.getOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('cancelOperation', () => {
-    it('invokes cancelOperation without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.cancelOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes cancelOperation without error using callback', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .cancelOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+
+    describe('listUserWorkloadsConfigMaps', () => {
+        it('invokes listUserWorkloadsConfigMaps without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap()),
+            ];
+            client.innerApiCalls.listUserWorkloadsConfigMaps = stubSimpleCall(expectedResponse);
+            const [response] = await client.listUserWorkloadsConfigMaps(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listUserWorkloadsConfigMaps as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listUserWorkloadsConfigMaps as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listUserWorkloadsConfigMaps without error using callback', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap()),
+            ];
+            client.innerApiCalls.listUserWorkloadsConfigMaps = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listUserWorkloadsConfigMaps(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsConfigMap[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listUserWorkloadsConfigMaps as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listUserWorkloadsConfigMaps as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listUserWorkloadsConfigMaps with error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listUserWorkloadsConfigMaps = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listUserWorkloadsConfigMaps(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listUserWorkloadsConfigMaps as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listUserWorkloadsConfigMaps as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listUserWorkloadsConfigMapsStream without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap()),
+            ];
+            client.descriptors.page.listUserWorkloadsConfigMaps.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listUserWorkloadsConfigMapsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap[] = [];
+                stream.on('data', (response: protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listUserWorkloadsConfigMaps.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listUserWorkloadsConfigMaps, request));
+            assert(
+                (client.descriptors.page.listUserWorkloadsConfigMaps.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listUserWorkloadsConfigMapsStream with error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listUserWorkloadsConfigMaps.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listUserWorkloadsConfigMapsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap[] = [];
+                stream.on('data', (response: protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listUserWorkloadsConfigMaps.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listUserWorkloadsConfigMaps, request));
+            assert(
+                (client.descriptors.page.listUserWorkloadsConfigMaps.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listUserWorkloadsConfigMaps without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap()),
+            ];
+            client.descriptors.page.listUserWorkloadsConfigMaps.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsConfigMap[] = [];
+            const iterable = client.listUserWorkloadsConfigMapsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listUserWorkloadsConfigMaps.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listUserWorkloadsConfigMaps.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listUserWorkloadsConfigMaps with error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listUserWorkloadsConfigMaps.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listUserWorkloadsConfigMapsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsConfigMap[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listUserWorkloadsConfigMaps.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listUserWorkloadsConfigMaps.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes cancelOperation with error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.cancelOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.cancelOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('getOperation', () => {
+        it('invokes getOperation without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const response = await client.getOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes getOperation without error using callback', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.getOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: operationsProtos.google.longrunning.Operation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getOperation with error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.getOperation(request)}, expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-  });
-  describe('deleteOperation', () => {
-    it('invokes deleteOperation without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.deleteOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('cancelOperation', () => {
+        it('invokes cancelOperation without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = stubSimpleCall(expectedResponse);
+            const response = await client.cancelOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes cancelOperation without error using callback', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.cancelOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes cancelOperation with error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.cancelOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.cancelOperation(request)}, expectedError);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-    it('invokes deleteOperation without error using callback', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .deleteOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+    describe('deleteOperation', () => {
+        it('invokes deleteOperation without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = stubSimpleCall(expectedResponse);
+            const response = await client.deleteOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes deleteOperation without error using callback', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.deleteOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes deleteOperation with error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.deleteOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.deleteOperation(request)}, expectedError);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('listOperationsAsync', () => {
+        it('uses async iteration with listOperations without error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedResponse = [
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+            ];
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: operationsProtos.google.longrunning.IOperation[] = [];
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
-    });
-    it('invokes deleteOperation with error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.deleteOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.deleteOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('listOperationsAsync', () => {
-    it('uses async iteration with listOperations without error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-      ];
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.IOperation[] = [];
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-    it('uses async iteration with listOperations with error', async () => {
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.IOperation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-  });
-
-  describe('Path templates', () => {
-    describe('environment', async () => {
-      const fakePath = '/rendered/path/environment';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        environment: 'environmentValue',
-      };
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.environmentPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.environmentPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('environmentPath', () => {
-        const result = client.environmentPath(
-          'projectValue',
-          'locationValue',
-          'environmentValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.environmentPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromEnvironmentName', () => {
-        const result = client.matchProjectFromEnvironmentName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.environmentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromEnvironmentName', () => {
-        const result = client.matchLocationFromEnvironmentName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.environmentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEnvironmentFromEnvironmentName', () => {
-        const result = client.matchEnvironmentFromEnvironmentName(fakePath);
-        assert.strictEqual(result, 'environmentValue');
-        assert(
-          (client.pathTemplates.environmentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+        it('uses async iteration with listOperations with error', async () => {
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: operationsProtos.google.longrunning.IOperation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
     });
 
-    describe('userWorkloadsConfigMap', async () => {
-      const fakePath = '/rendered/path/userWorkloadsConfigMap';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        environment: 'environmentValue',
-        user_workloads_config_map: 'userWorkloadsConfigMapValue',
-      };
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.userWorkloadsConfigMapPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.userWorkloadsConfigMapPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('Path templates', () => {
 
-      it('userWorkloadsConfigMapPath', () => {
-        const result = client.userWorkloadsConfigMapPath(
-          'projectValue',
-          'locationValue',
-          'environmentValue',
-          'userWorkloadsConfigMapValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.userWorkloadsConfigMapPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('environment', async () => {
+            const fakePath = "/rendered/path/environment";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                environment: "environmentValue",
+            };
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.environmentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.environmentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromUserWorkloadsConfigMapName', () => {
-        const result =
-          client.matchProjectFromUserWorkloadsConfigMapName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.userWorkloadsConfigMapPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('environmentPath', () => {
+                const result = client.environmentPath("projectValue", "locationValue", "environmentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.environmentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromUserWorkloadsConfigMapName', () => {
-        const result =
-          client.matchLocationFromUserWorkloadsConfigMapName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.userWorkloadsConfigMapPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchProjectFromEnvironmentName', () => {
+                const result = client.matchProjectFromEnvironmentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.environmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchEnvironmentFromUserWorkloadsConfigMapName', () => {
-        const result =
-          client.matchEnvironmentFromUserWorkloadsConfigMapName(fakePath);
-        assert.strictEqual(result, 'environmentValue');
-        assert(
-          (
-            client.pathTemplates.userWorkloadsConfigMapPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchLocationFromEnvironmentName', () => {
+                const result = client.matchLocationFromEnvironmentName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.environmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchUserWorkloadsConfigMapFromUserWorkloadsConfigMapName', () => {
-        const result =
-          client.matchUserWorkloadsConfigMapFromUserWorkloadsConfigMapName(
-            fakePath
-          );
-        assert.strictEqual(result, 'userWorkloadsConfigMapValue');
-        assert(
-          (
-            client.pathTemplates.userWorkloadsConfigMapPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchEnvironmentFromEnvironmentName', () => {
+                const result = client.matchEnvironmentFromEnvironmentName(fakePath);
+                assert.strictEqual(result, "environmentValue");
+                assert((client.pathTemplates.environmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('userWorkloadsConfigMap', async () => {
+            const fakePath = "/rendered/path/userWorkloadsConfigMap";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                environment: "environmentValue",
+                user_workloads_config_map: "userWorkloadsConfigMapValue",
+            };
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.userWorkloadsConfigMapPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.userWorkloadsConfigMapPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('userWorkloadsConfigMapPath', () => {
+                const result = client.userWorkloadsConfigMapPath("projectValue", "locationValue", "environmentValue", "userWorkloadsConfigMapValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.userWorkloadsConfigMapPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromUserWorkloadsConfigMapName', () => {
+                const result = client.matchProjectFromUserWorkloadsConfigMapName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.userWorkloadsConfigMapPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromUserWorkloadsConfigMapName', () => {
+                const result = client.matchLocationFromUserWorkloadsConfigMapName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.userWorkloadsConfigMapPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEnvironmentFromUserWorkloadsConfigMapName', () => {
+                const result = client.matchEnvironmentFromUserWorkloadsConfigMapName(fakePath);
+                assert.strictEqual(result, "environmentValue");
+                assert((client.pathTemplates.userWorkloadsConfigMapPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchUserWorkloadsConfigMapFromUserWorkloadsConfigMapName', () => {
+                const result = client.matchUserWorkloadsConfigMapFromUserWorkloadsConfigMapName(fakePath);
+                assert.strictEqual(result, "userWorkloadsConfigMapValue");
+                assert((client.pathTemplates.userWorkloadsConfigMapPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('userWorkloadsSecret', async () => {
+            const fakePath = "/rendered/path/userWorkloadsSecret";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                environment: "environmentValue",
+                user_workloads_secret: "userWorkloadsSecretValue",
+            };
+            const client = new environmentsModule.v1beta1.EnvironmentsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.userWorkloadsSecretPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.userWorkloadsSecretPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('userWorkloadsSecretPath', () => {
+                const result = client.userWorkloadsSecretPath("projectValue", "locationValue", "environmentValue", "userWorkloadsSecretValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.userWorkloadsSecretPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromUserWorkloadsSecretName', () => {
+                const result = client.matchProjectFromUserWorkloadsSecretName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.userWorkloadsSecretPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromUserWorkloadsSecretName', () => {
+                const result = client.matchLocationFromUserWorkloadsSecretName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.userWorkloadsSecretPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEnvironmentFromUserWorkloadsSecretName', () => {
+                const result = client.matchEnvironmentFromUserWorkloadsSecretName(fakePath);
+                assert.strictEqual(result, "environmentValue");
+                assert((client.pathTemplates.userWorkloadsSecretPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchUserWorkloadsSecretFromUserWorkloadsSecretName', () => {
+                const result = client.matchUserWorkloadsSecretFromUserWorkloadsSecretName(fakePath);
+                assert.strictEqual(result, "userWorkloadsSecretValue");
+                assert((client.pathTemplates.userWorkloadsSecretPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-
-    describe('userWorkloadsSecret', async () => {
-      const fakePath = '/rendered/path/userWorkloadsSecret';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        environment: 'environmentValue',
-        user_workloads_secret: 'userWorkloadsSecretValue',
-      };
-      const client = new environmentsModule.v1beta1.EnvironmentsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.userWorkloadsSecretPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.userWorkloadsSecretPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('userWorkloadsSecretPath', () => {
-        const result = client.userWorkloadsSecretPath(
-          'projectValue',
-          'locationValue',
-          'environmentValue',
-          'userWorkloadsSecretValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.userWorkloadsSecretPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromUserWorkloadsSecretName', () => {
-        const result = client.matchProjectFromUserWorkloadsSecretName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.userWorkloadsSecretPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromUserWorkloadsSecretName', () => {
-        const result =
-          client.matchLocationFromUserWorkloadsSecretName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.userWorkloadsSecretPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEnvironmentFromUserWorkloadsSecretName', () => {
-        const result =
-          client.matchEnvironmentFromUserWorkloadsSecretName(fakePath);
-        assert.strictEqual(result, 'environmentValue');
-        assert(
-          (
-            client.pathTemplates.userWorkloadsSecretPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchUserWorkloadsSecretFromUserWorkloadsSecretName', () => {
-        const result =
-          client.matchUserWorkloadsSecretFromUserWorkloadsSecretName(fakePath);
-        assert.strictEqual(result, 'userWorkloadsSecretValue');
-        assert(
-          (
-            client.pathTemplates.userWorkloadsSecretPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

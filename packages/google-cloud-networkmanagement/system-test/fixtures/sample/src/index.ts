@@ -16,15 +16,10 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {
-  ReachabilityServiceClient,
-  VpcFlowLogsServiceClient,
-} from '@google-cloud/network-management';
+import {ReachabilityServiceClient, VpcFlowLogsServiceClient} from '@google-cloud/network-management';
 
 // check that the client class type name can be used
-function doStuffWithReachabilityServiceClient(
-  client: ReachabilityServiceClient
-) {
+function doStuffWithReachabilityServiceClient(client: ReachabilityServiceClient) {
   client.close();
 }
 function doStuffWithVpcFlowLogsServiceClient(client: VpcFlowLogsServiceClient) {

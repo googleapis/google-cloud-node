@@ -19,9 +19,7 @@
 import {RapidMigrationAssessmentClient} from '@google-cloud/rapidmigrationassessment';
 
 // check that the client class type name can be used
-function doStuffWithRapidMigrationAssessmentClient(
-  client: RapidMigrationAssessmentClient
-) {
+function doStuffWithRapidMigrationAssessmentClient(client: RapidMigrationAssessmentClient) {
   client.close();
 }
 

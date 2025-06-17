@@ -16,12 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const rapidmigrationassessment = require('@google-cloud/rapidmigrationassessment');
 
 function main() {
-  const rapidMigrationAssessmentClient =
-    new rapidmigrationassessment.RapidMigrationAssessmentClient();
+  const rapidMigrationAssessmentClient = new rapidmigrationassessment.RapidMigrationAssessmentClient();
 }
 
 main();

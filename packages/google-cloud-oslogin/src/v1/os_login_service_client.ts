@@ -18,16 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -108,41 +103,20 @@ export class OsLoginServiceClient {
    *     const client = new OsLoginServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof OsLoginServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'oslogin.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -168,7 +142,7 @@ export class OsLoginServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -182,7 +156,10 @@ export class OsLoginServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -209,16 +186,15 @@ export class OsLoginServiceClient {
       sshPublicKeyPathTemplate: new this._gaxModule.PathTemplate(
         'users/{user}/sshPublicKeys/{fingerprint}'
       ),
-      userPathTemplate: new this._gaxModule.PathTemplate('users/{user}'),
+      userPathTemplate: new this._gaxModule.PathTemplate(
+        'users/{user}'
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.oslogin.v1.OsLoginService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.oslogin.v1.OsLoginService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -249,43 +225,31 @@ export class OsLoginServiceClient {
     // Put together the "service stub" for
     // google.cloud.oslogin.v1.OsLoginService.
     this.osLoginServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.oslogin.v1.OsLoginService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.oslogin.v1.OsLoginService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.oslogin.v1.OsLoginService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const osLoginServiceStubMethods = [
-      'createSshPublicKey',
-      'deletePosixAccount',
-      'deleteSshPublicKey',
-      'getLoginProfile',
-      'getSshPublicKey',
-      'importSshPublicKey',
-      'updateSshPublicKey',
-    ];
+    const osLoginServiceStubMethods =
+        ['createSshPublicKey', 'deletePosixAccount', 'deleteSshPublicKey', 'getLoginProfile', 'getSshPublicKey', 'importSshPublicKey', 'updateSshPublicKey'];
     for (const methodName of osLoginServiceStubMethods) {
       const callPromise = this.osLoginServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = undefined;
+      const descriptor =
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -305,14 +269,8 @@ export class OsLoginServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'oslogin.googleapis.com';
   }
@@ -323,14 +281,8 @@ export class OsLoginServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'oslogin.googleapis.com';
   }
@@ -365,7 +317,7 @@ export class OsLoginServiceClient {
       'https://www.googleapis.com/auth/cloud-platform',
       'https://www.googleapis.com/auth/cloud-platform.read-only',
       'https://www.googleapis.com/auth/compute',
-      'https://www.googleapis.com/auth/compute.readonly',
+      'https://www.googleapis.com/auth/compute.readonly'
     ];
   }
 
@@ -375,9 +327,8 @@ export class OsLoginServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -388,849 +339,693 @@ export class OsLoginServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Create an SSH public key
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The unique ID for the user in format `users/{user}`.
-   * @param {google.cloud.oslogin.common.SshPublicKey} request.sshPublicKey
-   *   Required. The SSH public key and expiration time.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.oslogin.common.SshPublicKey|SshPublicKey}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/os_login_service.create_ssh_public_key.js</caption>
-   * region_tag:oslogin_v1_generated_OsLoginService_CreateSshPublicKey_async
-   */
+/**
+ * Create an SSH public key
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The unique ID for the user in format `users/{user}`.
+ * @param {google.cloud.oslogin.common.SshPublicKey} request.sshPublicKey
+ *   Required. The SSH public key and expiration time.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.oslogin.common.SshPublicKey|SshPublicKey}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/os_login_service.create_ssh_public_key.js</caption>
+ * region_tag:oslogin_v1_generated_OsLoginService_CreateSshPublicKey_async
+ */
   createSshPublicKey(
-    request?: protos.google.cloud.oslogin.v1.ICreateSshPublicKeyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.oslogin.common.ISshPublicKey,
-      protos.google.cloud.oslogin.v1.ICreateSshPublicKeyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.oslogin.v1.ICreateSshPublicKeyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.oslogin.common.ISshPublicKey,
+        protos.google.cloud.oslogin.v1.ICreateSshPublicKeyRequest|undefined, {}|undefined
+      ]>;
   createSshPublicKey(
-    request: protos.google.cloud.oslogin.v1.ICreateSshPublicKeyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.oslogin.common.ISshPublicKey,
-      | protos.google.cloud.oslogin.v1.ICreateSshPublicKeyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createSshPublicKey(
-    request: protos.google.cloud.oslogin.v1.ICreateSshPublicKeyRequest,
-    callback: Callback<
-      protos.google.cloud.oslogin.common.ISshPublicKey,
-      | protos.google.cloud.oslogin.v1.ICreateSshPublicKeyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createSshPublicKey(
-    request?: protos.google.cloud.oslogin.v1.ICreateSshPublicKeyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.oslogin.v1.ICreateSshPublicKeyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.oslogin.common.ISshPublicKey,
-          | protos.google.cloud.oslogin.v1.ICreateSshPublicKeyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.oslogin.common.ISshPublicKey,
-      | protos.google.cloud.oslogin.v1.ICreateSshPublicKeyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.oslogin.common.ISshPublicKey,
-      protos.google.cloud.oslogin.v1.ICreateSshPublicKeyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.oslogin.v1.ICreateSshPublicKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  createSshPublicKey(
+      request: protos.google.cloud.oslogin.v1.ICreateSshPublicKeyRequest,
+      callback: Callback<
+          protos.google.cloud.oslogin.common.ISshPublicKey,
+          protos.google.cloud.oslogin.v1.ICreateSshPublicKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  createSshPublicKey(
+      request?: protos.google.cloud.oslogin.v1.ICreateSshPublicKeyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.oslogin.common.ISshPublicKey,
+          protos.google.cloud.oslogin.v1.ICreateSshPublicKeyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.oslogin.common.ISshPublicKey,
+          protos.google.cloud.oslogin.v1.ICreateSshPublicKeyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.oslogin.common.ISshPublicKey,
+        protos.google.cloud.oslogin.v1.ICreateSshPublicKeyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createSshPublicKey request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.oslogin.common.ISshPublicKey,
-          | protos.google.cloud.oslogin.v1.ICreateSshPublicKeyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.oslogin.common.ISshPublicKey,
+        protos.google.cloud.oslogin.v1.ICreateSshPublicKeyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createSshPublicKey response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createSshPublicKey(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.oslogin.common.ISshPublicKey,
-          protos.google.cloud.oslogin.v1.ICreateSshPublicKeyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createSshPublicKey response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createSshPublicKey(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.oslogin.common.ISshPublicKey,
+        protos.google.cloud.oslogin.v1.ICreateSshPublicKeyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createSshPublicKey response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a POSIX account.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. A reference to the POSIX account to update. POSIX accounts are
-   *   identified by the project ID they are associated with. A reference to the
-   *   POSIX account is in format `users/{user}/projects/{project}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/os_login_service.delete_posix_account.js</caption>
-   * region_tag:oslogin_v1_generated_OsLoginService_DeletePosixAccount_async
-   */
+/**
+ * Deletes a POSIX account.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. A reference to the POSIX account to update. POSIX accounts are
+ *   identified by the project ID they are associated with. A reference to the
+ *   POSIX account is in format `users/{user}/projects/{project}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/os_login_service.delete_posix_account.js</caption>
+ * region_tag:oslogin_v1_generated_OsLoginService_DeletePosixAccount_async
+ */
   deletePosixAccount(
-    request?: protos.google.cloud.oslogin.v1.IDeletePosixAccountRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.oslogin.v1.IDeletePosixAccountRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.oslogin.v1.IDeletePosixAccountRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.oslogin.v1.IDeletePosixAccountRequest|undefined, {}|undefined
+      ]>;
   deletePosixAccount(
-    request: protos.google.cloud.oslogin.v1.IDeletePosixAccountRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.oslogin.v1.IDeletePosixAccountRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deletePosixAccount(
-    request: protos.google.cloud.oslogin.v1.IDeletePosixAccountRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.oslogin.v1.IDeletePosixAccountRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deletePosixAccount(
-    request?: protos.google.cloud.oslogin.v1.IDeletePosixAccountRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.oslogin.v1.IDeletePosixAccountRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.oslogin.v1.IDeletePosixAccountRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.oslogin.v1.IDeletePosixAccountRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.oslogin.v1.IDeletePosixAccountRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.oslogin.v1.IDeletePosixAccountRequest|null|undefined,
+          {}|null|undefined>): void;
+  deletePosixAccount(
+      request: protos.google.cloud.oslogin.v1.IDeletePosixAccountRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.oslogin.v1.IDeletePosixAccountRequest|null|undefined,
+          {}|null|undefined>): void;
+  deletePosixAccount(
+      request?: protos.google.cloud.oslogin.v1.IDeletePosixAccountRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.oslogin.v1.IDeletePosixAccountRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.oslogin.v1.IDeletePosixAccountRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.oslogin.v1.IDeletePosixAccountRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deletePosixAccount request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.oslogin.v1.IDeletePosixAccountRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.oslogin.v1.IDeletePosixAccountRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deletePosixAccount response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deletePosixAccount(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.oslogin.v1.IDeletePosixAccountRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deletePosixAccount response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deletePosixAccount(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.oslogin.v1.IDeletePosixAccountRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deletePosixAccount response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes an SSH public key.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The fingerprint of the public key to update. Public keys are
-   *   identified by their SHA-256 fingerprint. The fingerprint of the public key
-   *   is in format `users/{user}/sshPublicKeys/{fingerprint}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/os_login_service.delete_ssh_public_key.js</caption>
-   * region_tag:oslogin_v1_generated_OsLoginService_DeleteSshPublicKey_async
-   */
+/**
+ * Deletes an SSH public key.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The fingerprint of the public key to update. Public keys are
+ *   identified by their SHA-256 fingerprint. The fingerprint of the public key
+ *   is in format `users/{user}/sshPublicKeys/{fingerprint}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/os_login_service.delete_ssh_public_key.js</caption>
+ * region_tag:oslogin_v1_generated_OsLoginService_DeleteSshPublicKey_async
+ */
   deleteSshPublicKey(
-    request?: protos.google.cloud.oslogin.v1.IDeleteSshPublicKeyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.oslogin.v1.IDeleteSshPublicKeyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.oslogin.v1.IDeleteSshPublicKeyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.oslogin.v1.IDeleteSshPublicKeyRequest|undefined, {}|undefined
+      ]>;
   deleteSshPublicKey(
-    request: protos.google.cloud.oslogin.v1.IDeleteSshPublicKeyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.oslogin.v1.IDeleteSshPublicKeyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteSshPublicKey(
-    request: protos.google.cloud.oslogin.v1.IDeleteSshPublicKeyRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.oslogin.v1.IDeleteSshPublicKeyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteSshPublicKey(
-    request?: protos.google.cloud.oslogin.v1.IDeleteSshPublicKeyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.oslogin.v1.IDeleteSshPublicKeyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.oslogin.v1.IDeleteSshPublicKeyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.oslogin.v1.IDeleteSshPublicKeyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.oslogin.v1.IDeleteSshPublicKeyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.oslogin.v1.IDeleteSshPublicKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteSshPublicKey(
+      request: protos.google.cloud.oslogin.v1.IDeleteSshPublicKeyRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.oslogin.v1.IDeleteSshPublicKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteSshPublicKey(
+      request?: protos.google.cloud.oslogin.v1.IDeleteSshPublicKeyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.oslogin.v1.IDeleteSshPublicKeyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.oslogin.v1.IDeleteSshPublicKeyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.oslogin.v1.IDeleteSshPublicKeyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteSshPublicKey request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.oslogin.v1.IDeleteSshPublicKeyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.oslogin.v1.IDeleteSshPublicKeyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteSshPublicKey response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteSshPublicKey(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.oslogin.v1.IDeleteSshPublicKeyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteSshPublicKey response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteSshPublicKey(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.oslogin.v1.IDeleteSshPublicKeyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteSshPublicKey response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Retrieves the profile information used for logging in to a virtual machine
-   * on Google Compute Engine.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The unique ID for the user in format `users/{user}`.
-   * @param {string} request.projectId
-   *   The project ID of the Google Cloud Platform project.
-   * @param {string} request.systemId
-   *   A system ID for filtering the results of the request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.oslogin.v1.LoginProfile|LoginProfile}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/os_login_service.get_login_profile.js</caption>
-   * region_tag:oslogin_v1_generated_OsLoginService_GetLoginProfile_async
-   */
+/**
+ * Retrieves the profile information used for logging in to a virtual machine
+ * on Google Compute Engine.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The unique ID for the user in format `users/{user}`.
+ * @param {string} request.projectId
+ *   The project ID of the Google Cloud Platform project.
+ * @param {string} request.systemId
+ *   A system ID for filtering the results of the request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.oslogin.v1.LoginProfile|LoginProfile}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/os_login_service.get_login_profile.js</caption>
+ * region_tag:oslogin_v1_generated_OsLoginService_GetLoginProfile_async
+ */
   getLoginProfile(
-    request?: protos.google.cloud.oslogin.v1.IGetLoginProfileRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.oslogin.v1.ILoginProfile,
-      protos.google.cloud.oslogin.v1.IGetLoginProfileRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.oslogin.v1.IGetLoginProfileRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.oslogin.v1.ILoginProfile,
+        protos.google.cloud.oslogin.v1.IGetLoginProfileRequest|undefined, {}|undefined
+      ]>;
   getLoginProfile(
-    request: protos.google.cloud.oslogin.v1.IGetLoginProfileRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.oslogin.v1.ILoginProfile,
-      protos.google.cloud.oslogin.v1.IGetLoginProfileRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getLoginProfile(
-    request: protos.google.cloud.oslogin.v1.IGetLoginProfileRequest,
-    callback: Callback<
-      protos.google.cloud.oslogin.v1.ILoginProfile,
-      protos.google.cloud.oslogin.v1.IGetLoginProfileRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getLoginProfile(
-    request?: protos.google.cloud.oslogin.v1.IGetLoginProfileRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.oslogin.v1.IGetLoginProfileRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.oslogin.v1.ILoginProfile,
-          | protos.google.cloud.oslogin.v1.IGetLoginProfileRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.oslogin.v1.ILoginProfile,
-      protos.google.cloud.oslogin.v1.IGetLoginProfileRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.oslogin.v1.ILoginProfile,
-      protos.google.cloud.oslogin.v1.IGetLoginProfileRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.oslogin.v1.IGetLoginProfileRequest|null|undefined,
+          {}|null|undefined>): void;
+  getLoginProfile(
+      request: protos.google.cloud.oslogin.v1.IGetLoginProfileRequest,
+      callback: Callback<
+          protos.google.cloud.oslogin.v1.ILoginProfile,
+          protos.google.cloud.oslogin.v1.IGetLoginProfileRequest|null|undefined,
+          {}|null|undefined>): void;
+  getLoginProfile(
+      request?: protos.google.cloud.oslogin.v1.IGetLoginProfileRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.oslogin.v1.ILoginProfile,
+          protos.google.cloud.oslogin.v1.IGetLoginProfileRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.oslogin.v1.ILoginProfile,
+          protos.google.cloud.oslogin.v1.IGetLoginProfileRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.oslogin.v1.ILoginProfile,
+        protos.google.cloud.oslogin.v1.IGetLoginProfileRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getLoginProfile request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.oslogin.v1.ILoginProfile,
-          | protos.google.cloud.oslogin.v1.IGetLoginProfileRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.oslogin.v1.ILoginProfile,
+        protos.google.cloud.oslogin.v1.IGetLoginProfileRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getLoginProfile response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getLoginProfile(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.oslogin.v1.ILoginProfile,
-          protos.google.cloud.oslogin.v1.IGetLoginProfileRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getLoginProfile response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getLoginProfile(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.oslogin.v1.ILoginProfile,
+        protos.google.cloud.oslogin.v1.IGetLoginProfileRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getLoginProfile response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Retrieves an SSH public key.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The fingerprint of the public key to retrieve. Public keys are
-   *   identified by their SHA-256 fingerprint. The fingerprint of the public key
-   *   is in format `users/{user}/sshPublicKeys/{fingerprint}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.oslogin.common.SshPublicKey|SshPublicKey}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/os_login_service.get_ssh_public_key.js</caption>
-   * region_tag:oslogin_v1_generated_OsLoginService_GetSshPublicKey_async
-   */
+/**
+ * Retrieves an SSH public key.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The fingerprint of the public key to retrieve. Public keys are
+ *   identified by their SHA-256 fingerprint. The fingerprint of the public key
+ *   is in format `users/{user}/sshPublicKeys/{fingerprint}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.oslogin.common.SshPublicKey|SshPublicKey}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/os_login_service.get_ssh_public_key.js</caption>
+ * region_tag:oslogin_v1_generated_OsLoginService_GetSshPublicKey_async
+ */
   getSshPublicKey(
-    request?: protos.google.cloud.oslogin.v1.IGetSshPublicKeyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.oslogin.common.ISshPublicKey,
-      protos.google.cloud.oslogin.v1.IGetSshPublicKeyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.oslogin.v1.IGetSshPublicKeyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.oslogin.common.ISshPublicKey,
+        protos.google.cloud.oslogin.v1.IGetSshPublicKeyRequest|undefined, {}|undefined
+      ]>;
   getSshPublicKey(
-    request: protos.google.cloud.oslogin.v1.IGetSshPublicKeyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.oslogin.common.ISshPublicKey,
-      protos.google.cloud.oslogin.v1.IGetSshPublicKeyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getSshPublicKey(
-    request: protos.google.cloud.oslogin.v1.IGetSshPublicKeyRequest,
-    callback: Callback<
-      protos.google.cloud.oslogin.common.ISshPublicKey,
-      protos.google.cloud.oslogin.v1.IGetSshPublicKeyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getSshPublicKey(
-    request?: protos.google.cloud.oslogin.v1.IGetSshPublicKeyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.oslogin.v1.IGetSshPublicKeyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.oslogin.common.ISshPublicKey,
-          | protos.google.cloud.oslogin.v1.IGetSshPublicKeyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.oslogin.common.ISshPublicKey,
-      protos.google.cloud.oslogin.v1.IGetSshPublicKeyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.oslogin.common.ISshPublicKey,
-      protos.google.cloud.oslogin.v1.IGetSshPublicKeyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.oslogin.v1.IGetSshPublicKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getSshPublicKey(
+      request: protos.google.cloud.oslogin.v1.IGetSshPublicKeyRequest,
+      callback: Callback<
+          protos.google.cloud.oslogin.common.ISshPublicKey,
+          protos.google.cloud.oslogin.v1.IGetSshPublicKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getSshPublicKey(
+      request?: protos.google.cloud.oslogin.v1.IGetSshPublicKeyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.oslogin.common.ISshPublicKey,
+          protos.google.cloud.oslogin.v1.IGetSshPublicKeyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.oslogin.common.ISshPublicKey,
+          protos.google.cloud.oslogin.v1.IGetSshPublicKeyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.oslogin.common.ISshPublicKey,
+        protos.google.cloud.oslogin.v1.IGetSshPublicKeyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getSshPublicKey request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.oslogin.common.ISshPublicKey,
-          | protos.google.cloud.oslogin.v1.IGetSshPublicKeyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.oslogin.common.ISshPublicKey,
+        protos.google.cloud.oslogin.v1.IGetSshPublicKeyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getSshPublicKey response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getSshPublicKey(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.oslogin.common.ISshPublicKey,
-          protos.google.cloud.oslogin.v1.IGetSshPublicKeyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getSshPublicKey response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getSshPublicKey(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.oslogin.common.ISshPublicKey,
+        protos.google.cloud.oslogin.v1.IGetSshPublicKeyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getSshPublicKey response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Adds an SSH public key and returns the profile information. Default POSIX
-   * account information is set when no username and UID exist as part of the
-   * login profile.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The unique ID for the user in format `users/{user}`.
-   * @param {google.cloud.oslogin.common.SshPublicKey} [request.sshPublicKey]
-   *   Optional. The SSH public key and expiration time.
-   * @param {string} request.projectId
-   *   The project ID of the Google Cloud Platform project.
-   * @param {string[]} [request.regions]
-   *   Optional. The regions to which to assert that the key was written.
-   *   If unspecified, defaults to all regions.
-   *   Regions are listed at https://cloud.google.com/about/locations#region.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.oslogin.v1.ImportSshPublicKeyResponse|ImportSshPublicKeyResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/os_login_service.import_ssh_public_key.js</caption>
-   * region_tag:oslogin_v1_generated_OsLoginService_ImportSshPublicKey_async
-   */
+/**
+ * Adds an SSH public key and returns the profile information. Default POSIX
+ * account information is set when no username and UID exist as part of the
+ * login profile.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The unique ID for the user in format `users/{user}`.
+ * @param {google.cloud.oslogin.common.SshPublicKey} [request.sshPublicKey]
+ *   Optional. The SSH public key and expiration time.
+ * @param {string} request.projectId
+ *   The project ID of the Google Cloud Platform project.
+ * @param {string[]} [request.regions]
+ *   Optional. The regions to which to assert that the key was written.
+ *   If unspecified, defaults to all regions.
+ *   Regions are listed at https://cloud.google.com/about/locations#region.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.oslogin.v1.ImportSshPublicKeyResponse|ImportSshPublicKeyResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/os_login_service.import_ssh_public_key.js</caption>
+ * region_tag:oslogin_v1_generated_OsLoginService_ImportSshPublicKey_async
+ */
   importSshPublicKey(
-    request?: protos.google.cloud.oslogin.v1.IImportSshPublicKeyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.oslogin.v1.IImportSshPublicKeyResponse,
-      protos.google.cloud.oslogin.v1.IImportSshPublicKeyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.oslogin.v1.IImportSshPublicKeyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.oslogin.v1.IImportSshPublicKeyResponse,
+        protos.google.cloud.oslogin.v1.IImportSshPublicKeyRequest|undefined, {}|undefined
+      ]>;
   importSshPublicKey(
-    request: protos.google.cloud.oslogin.v1.IImportSshPublicKeyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.oslogin.v1.IImportSshPublicKeyResponse,
-      | protos.google.cloud.oslogin.v1.IImportSshPublicKeyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  importSshPublicKey(
-    request: protos.google.cloud.oslogin.v1.IImportSshPublicKeyRequest,
-    callback: Callback<
-      protos.google.cloud.oslogin.v1.IImportSshPublicKeyResponse,
-      | protos.google.cloud.oslogin.v1.IImportSshPublicKeyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  importSshPublicKey(
-    request?: protos.google.cloud.oslogin.v1.IImportSshPublicKeyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.oslogin.v1.IImportSshPublicKeyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.oslogin.v1.IImportSshPublicKeyResponse,
-          | protos.google.cloud.oslogin.v1.IImportSshPublicKeyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.oslogin.v1.IImportSshPublicKeyResponse,
-      | protos.google.cloud.oslogin.v1.IImportSshPublicKeyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.oslogin.v1.IImportSshPublicKeyResponse,
-      protos.google.cloud.oslogin.v1.IImportSshPublicKeyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.oslogin.v1.IImportSshPublicKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  importSshPublicKey(
+      request: protos.google.cloud.oslogin.v1.IImportSshPublicKeyRequest,
+      callback: Callback<
+          protos.google.cloud.oslogin.v1.IImportSshPublicKeyResponse,
+          protos.google.cloud.oslogin.v1.IImportSshPublicKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  importSshPublicKey(
+      request?: protos.google.cloud.oslogin.v1.IImportSshPublicKeyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.oslogin.v1.IImportSshPublicKeyResponse,
+          protos.google.cloud.oslogin.v1.IImportSshPublicKeyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.oslogin.v1.IImportSshPublicKeyResponse,
+          protos.google.cloud.oslogin.v1.IImportSshPublicKeyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.oslogin.v1.IImportSshPublicKeyResponse,
+        protos.google.cloud.oslogin.v1.IImportSshPublicKeyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('importSshPublicKey request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.oslogin.v1.IImportSshPublicKeyResponse,
-          | protos.google.cloud.oslogin.v1.IImportSshPublicKeyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.oslogin.v1.IImportSshPublicKeyResponse,
+        protos.google.cloud.oslogin.v1.IImportSshPublicKeyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('importSshPublicKey response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .importSshPublicKey(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.oslogin.v1.IImportSshPublicKeyResponse,
-          protos.google.cloud.oslogin.v1.IImportSshPublicKeyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('importSshPublicKey response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.importSshPublicKey(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.oslogin.v1.IImportSshPublicKeyResponse,
+        protos.google.cloud.oslogin.v1.IImportSshPublicKeyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('importSshPublicKey response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates an SSH public key and returns the profile information. This method
-   * supports patch semantics.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The fingerprint of the public key to update. Public keys are
-   *   identified by their SHA-256 fingerprint. The fingerprint of the public key
-   *   is in format `users/{user}/sshPublicKeys/{fingerprint}`.
-   * @param {google.cloud.oslogin.common.SshPublicKey} request.sshPublicKey
-   *   Required. The SSH public key and expiration time.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Mask to control which fields get updated. Updates all if not present.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.oslogin.common.SshPublicKey|SshPublicKey}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/os_login_service.update_ssh_public_key.js</caption>
-   * region_tag:oslogin_v1_generated_OsLoginService_UpdateSshPublicKey_async
-   */
+/**
+ * Updates an SSH public key and returns the profile information. This method
+ * supports patch semantics.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The fingerprint of the public key to update. Public keys are
+ *   identified by their SHA-256 fingerprint. The fingerprint of the public key
+ *   is in format `users/{user}/sshPublicKeys/{fingerprint}`.
+ * @param {google.cloud.oslogin.common.SshPublicKey} request.sshPublicKey
+ *   Required. The SSH public key and expiration time.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Mask to control which fields get updated. Updates all if not present.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.oslogin.common.SshPublicKey|SshPublicKey}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/os_login_service.update_ssh_public_key.js</caption>
+ * region_tag:oslogin_v1_generated_OsLoginService_UpdateSshPublicKey_async
+ */
   updateSshPublicKey(
-    request?: protos.google.cloud.oslogin.v1.IUpdateSshPublicKeyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.oslogin.common.ISshPublicKey,
-      protos.google.cloud.oslogin.v1.IUpdateSshPublicKeyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.oslogin.v1.IUpdateSshPublicKeyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.oslogin.common.ISshPublicKey,
+        protos.google.cloud.oslogin.v1.IUpdateSshPublicKeyRequest|undefined, {}|undefined
+      ]>;
   updateSshPublicKey(
-    request: protos.google.cloud.oslogin.v1.IUpdateSshPublicKeyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.oslogin.common.ISshPublicKey,
-      | protos.google.cloud.oslogin.v1.IUpdateSshPublicKeyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateSshPublicKey(
-    request: protos.google.cloud.oslogin.v1.IUpdateSshPublicKeyRequest,
-    callback: Callback<
-      protos.google.cloud.oslogin.common.ISshPublicKey,
-      | protos.google.cloud.oslogin.v1.IUpdateSshPublicKeyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateSshPublicKey(
-    request?: protos.google.cloud.oslogin.v1.IUpdateSshPublicKeyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.oslogin.v1.IUpdateSshPublicKeyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.oslogin.common.ISshPublicKey,
-          | protos.google.cloud.oslogin.v1.IUpdateSshPublicKeyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.oslogin.common.ISshPublicKey,
-      | protos.google.cloud.oslogin.v1.IUpdateSshPublicKeyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.oslogin.common.ISshPublicKey,
-      protos.google.cloud.oslogin.v1.IUpdateSshPublicKeyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.oslogin.v1.IUpdateSshPublicKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateSshPublicKey(
+      request: protos.google.cloud.oslogin.v1.IUpdateSshPublicKeyRequest,
+      callback: Callback<
+          protos.google.cloud.oslogin.common.ISshPublicKey,
+          protos.google.cloud.oslogin.v1.IUpdateSshPublicKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateSshPublicKey(
+      request?: protos.google.cloud.oslogin.v1.IUpdateSshPublicKeyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.oslogin.common.ISshPublicKey,
+          protos.google.cloud.oslogin.v1.IUpdateSshPublicKeyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.oslogin.common.ISshPublicKey,
+          protos.google.cloud.oslogin.v1.IUpdateSshPublicKeyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.oslogin.common.ISshPublicKey,
+        protos.google.cloud.oslogin.v1.IUpdateSshPublicKeyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateSshPublicKey request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.oslogin.common.ISshPublicKey,
-          | protos.google.cloud.oslogin.v1.IUpdateSshPublicKeyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.oslogin.common.ISshPublicKey,
+        protos.google.cloud.oslogin.v1.IUpdateSshPublicKeyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateSshPublicKey response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateSshPublicKey(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.oslogin.common.ISshPublicKey,
-          protos.google.cloud.oslogin.v1.IUpdateSshPublicKeyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateSshPublicKey response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateSshPublicKey(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.oslogin.common.ISshPublicKey,
+        protos.google.cloud.oslogin.v1.IUpdateSshPublicKeyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateSshPublicKey response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
   // --------------------
@@ -1244,7 +1039,7 @@ export class OsLoginServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  posixAccountPath(user: string, project: string) {
+  posixAccountPath(user:string,project:string) {
     return this.pathTemplates.posixAccountPathTemplate.render({
       user: user,
       project: project,
@@ -1259,8 +1054,7 @@ export class OsLoginServiceClient {
    * @returns {string} A string representing the user.
    */
   matchUserFromPosixAccountName(posixAccountName: string) {
-    return this.pathTemplates.posixAccountPathTemplate.match(posixAccountName)
-      .user;
+    return this.pathTemplates.posixAccountPathTemplate.match(posixAccountName).user;
   }
 
   /**
@@ -1271,8 +1065,7 @@ export class OsLoginServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromPosixAccountName(posixAccountName: string) {
-    return this.pathTemplates.posixAccountPathTemplate.match(posixAccountName)
-      .project;
+    return this.pathTemplates.posixAccountPathTemplate.match(posixAccountName).project;
   }
 
   /**
@@ -1282,7 +1075,7 @@ export class OsLoginServiceClient {
    * @param {string} fingerprint
    * @returns {string} Resource name string.
    */
-  sshPublicKeyPath(user: string, fingerprint: string) {
+  sshPublicKeyPath(user:string,fingerprint:string) {
     return this.pathTemplates.sshPublicKeyPathTemplate.render({
       user: user,
       fingerprint: fingerprint,
@@ -1297,8 +1090,7 @@ export class OsLoginServiceClient {
    * @returns {string} A string representing the user.
    */
   matchUserFromSshPublicKeyName(sshPublicKeyName: string) {
-    return this.pathTemplates.sshPublicKeyPathTemplate.match(sshPublicKeyName)
-      .user;
+    return this.pathTemplates.sshPublicKeyPathTemplate.match(sshPublicKeyName).user;
   }
 
   /**
@@ -1309,8 +1101,7 @@ export class OsLoginServiceClient {
    * @returns {string} A string representing the fingerprint.
    */
   matchFingerprintFromSshPublicKeyName(sshPublicKeyName: string) {
-    return this.pathTemplates.sshPublicKeyPathTemplate.match(sshPublicKeyName)
-      .fingerprint;
+    return this.pathTemplates.sshPublicKeyPathTemplate.match(sshPublicKeyName).fingerprint;
   }
 
   /**
@@ -1319,7 +1110,7 @@ export class OsLoginServiceClient {
    * @param {string} user
    * @returns {string} Resource name string.
    */
-  userPath(user: string) {
+  userPath(user:string) {
     return this.pathTemplates.userPathTemplate.render({
       user: user,
     });

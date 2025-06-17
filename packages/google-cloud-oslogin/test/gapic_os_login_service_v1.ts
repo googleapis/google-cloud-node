@@ -27,1297 +27,1053 @@ import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
 describe('v1.OsLoginServiceClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new osloginserviceModule.v1.OsLoginServiceClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'oslogin.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new osloginserviceModule.v1.OsLoginServiceClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          osloginserviceModule.v1.OsLoginServiceClient.servicePath;
-        assert.strictEqual(servicePath, 'oslogin.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          osloginserviceModule.v1.OsLoginServiceClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'oslogin.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new osloginserviceModule.v1.OsLoginServiceClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'oslogin.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new osloginserviceModule.v1.OsLoginServiceClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'oslogin.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new osloginserviceModule.v1.OsLoginServiceClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'oslogin.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new osloginserviceModule.v1.OsLoginServiceClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'oslogin.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new osloginserviceModule.v1.OsLoginServiceClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'oslogin.configured.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new osloginserviceModule.v1.OsLoginServiceClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new osloginserviceModule.v1.OsLoginServiceClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
+
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = osloginserviceModule.v1.OsLoginServiceClient.servicePath;
+                assert.strictEqual(servicePath, 'oslogin.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = osloginserviceModule.v1.OsLoginServiceClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'oslogin.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+        }
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new osloginserviceModule.v1.OsLoginServiceClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'oslogin.example.com');
         });
-      });
-    });
 
-    it('has port', () => {
-      const port = osloginserviceModule.v1.OsLoginServiceClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new osloginserviceModule.v1.OsLoginServiceClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'oslogin.example.com');
+        });
 
-    it('should create a client with no option', () => {
-      const client = new osloginserviceModule.v1.OsLoginServiceClient();
-      assert(client);
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new osloginserviceModule.v1.OsLoginServiceClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'oslogin.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('should create a client with gRPC fallback', () => {
-      const client = new osloginserviceModule.v1.OsLoginServiceClient({
-        fallback: true,
-      });
-      assert(client);
-    });
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new osloginserviceModule.v1.OsLoginServiceClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'oslogin.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
+        }
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new osloginserviceModule.v1.OsLoginServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new osloginserviceModule.v1.OsLoginServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.osLoginServiceStub, undefined);
-      await client.initialize();
-      assert(client.osLoginServiceStub);
-    });
+        it('has port', () => {
+            const port = osloginserviceModule.v1.OsLoginServiceClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
 
-    it('has close method for the initialized client', done => {
-      const client = new osloginserviceModule.v1.OsLoginServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.osLoginServiceStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
+        it('should create a client with no option', () => {
+            const client = new osloginserviceModule.v1.OsLoginServiceClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new osloginserviceModule.v1.OsLoginServiceClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new osloginserviceModule.v1.OsLoginServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.osLoginServiceStub, undefined);
+            await client.initialize();
+            assert(client.osLoginServiceStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new osloginserviceModule.v1.OsLoginServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.osLoginServiceStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new osloginserviceModule.v1.OsLoginServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.osLoginServiceStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new osloginserviceModule.v1.OsLoginServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new osloginserviceModule.v1.OsLoginServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
         });
     });
 
-    it('has close method for the non-initialized client', done => {
-      const client = new osloginserviceModule.v1.OsLoginServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.osLoginServiceStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
+    describe('createSshPublicKey', () => {
+        it('invokes createSshPublicKey without error', async () => {
+            const client = new osloginserviceModule.v1.OsLoginServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oslogin.v1.CreateSshPublicKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oslogin.v1.CreateSshPublicKeyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.oslogin.common.SshPublicKey()
+            );
+            client.innerApiCalls.createSshPublicKey = stubSimpleCall(expectedResponse);
+            const [response] = await client.createSshPublicKey(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createSshPublicKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createSshPublicKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createSshPublicKey without error using callback', async () => {
+            const client = new osloginserviceModule.v1.OsLoginServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oslogin.v1.CreateSshPublicKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oslogin.v1.CreateSshPublicKeyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.oslogin.common.SshPublicKey()
+            );
+            client.innerApiCalls.createSshPublicKey = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createSshPublicKey(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.oslogin.common.ISshPublicKey|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createSshPublicKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createSshPublicKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createSshPublicKey with error', async () => {
+            const client = new osloginserviceModule.v1.OsLoginServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oslogin.v1.CreateSshPublicKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oslogin.v1.CreateSshPublicKeyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createSshPublicKey = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createSshPublicKey(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createSshPublicKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createSshPublicKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createSshPublicKey with closed client', async () => {
+            const client = new osloginserviceModule.v1.OsLoginServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oslogin.v1.CreateSshPublicKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oslogin.v1.CreateSshPublicKeyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createSshPublicKey(request), expectedError);
         });
     });
 
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new osloginserviceModule.v1.OsLoginServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new osloginserviceModule.v1.OsLoginServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
+    describe('deletePosixAccount', () => {
+        it('invokes deletePosixAccount without error', async () => {
+            const client = new osloginserviceModule.v1.OsLoginServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oslogin.v1.DeletePosixAccountRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oslogin.v1.DeletePosixAccountRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deletePosixAccount = stubSimpleCall(expectedResponse);
+            const [response] = await client.deletePosixAccount(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deletePosixAccount as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deletePosixAccount as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
 
-  describe('createSshPublicKey', () => {
-    it('invokes createSshPublicKey without error', async () => {
-      const client = new osloginserviceModule.v1.OsLoginServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.oslogin.v1.CreateSshPublicKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.oslogin.v1.CreateSshPublicKeyRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.oslogin.common.SshPublicKey()
-      );
-      client.innerApiCalls.createSshPublicKey =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.createSshPublicKey(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createSshPublicKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createSshPublicKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes deletePosixAccount without error using callback', async () => {
+            const client = new osloginserviceModule.v1.OsLoginServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oslogin.v1.DeletePosixAccountRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oslogin.v1.DeletePosixAccountRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deletePosixAccount = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deletePosixAccount(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deletePosixAccount as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deletePosixAccount as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('invokes createSshPublicKey without error using callback', async () => {
-      const client = new osloginserviceModule.v1.OsLoginServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.oslogin.v1.CreateSshPublicKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.oslogin.v1.CreateSshPublicKeyRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.oslogin.common.SshPublicKey()
-      );
-      client.innerApiCalls.createSshPublicKey =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createSshPublicKey(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.oslogin.common.ISshPublicKey | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createSshPublicKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createSshPublicKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        it('invokes deletePosixAccount with error', async () => {
+            const client = new osloginserviceModule.v1.OsLoginServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oslogin.v1.DeletePosixAccountRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oslogin.v1.DeletePosixAccountRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deletePosixAccount = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deletePosixAccount(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deletePosixAccount as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deletePosixAccount as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deletePosixAccount with closed client', async () => {
+            const client = new osloginserviceModule.v1.OsLoginServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oslogin.v1.DeletePosixAccountRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oslogin.v1.DeletePosixAccountRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deletePosixAccount(request), expectedError);
+        });
     });
 
-    it('invokes createSshPublicKey with error', async () => {
-      const client = new osloginserviceModule.v1.OsLoginServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.oslogin.v1.CreateSshPublicKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.oslogin.v1.CreateSshPublicKeyRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createSshPublicKey = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createSshPublicKey(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createSshPublicKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createSshPublicKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    describe('deleteSshPublicKey', () => {
+        it('invokes deleteSshPublicKey without error', async () => {
+            const client = new osloginserviceModule.v1.OsLoginServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oslogin.v1.DeleteSshPublicKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oslogin.v1.DeleteSshPublicKeyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteSshPublicKey = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteSshPublicKey(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteSshPublicKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteSshPublicKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteSshPublicKey without error using callback', async () => {
+            const client = new osloginserviceModule.v1.OsLoginServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oslogin.v1.DeleteSshPublicKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oslogin.v1.DeleteSshPublicKeyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteSshPublicKey = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteSshPublicKey(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteSshPublicKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteSshPublicKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteSshPublicKey with error', async () => {
+            const client = new osloginserviceModule.v1.OsLoginServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oslogin.v1.DeleteSshPublicKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oslogin.v1.DeleteSshPublicKeyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteSshPublicKey = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteSshPublicKey(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteSshPublicKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteSshPublicKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteSshPublicKey with closed client', async () => {
+            const client = new osloginserviceModule.v1.OsLoginServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oslogin.v1.DeleteSshPublicKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oslogin.v1.DeleteSshPublicKeyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteSshPublicKey(request), expectedError);
+        });
     });
 
-    it('invokes createSshPublicKey with closed client', async () => {
-      const client = new osloginserviceModule.v1.OsLoginServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.oslogin.v1.CreateSshPublicKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.oslogin.v1.CreateSshPublicKeyRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createSshPublicKey(request), expectedError);
-    });
-  });
+    describe('getLoginProfile', () => {
+        it('invokes getLoginProfile without error', async () => {
+            const client = new osloginserviceModule.v1.OsLoginServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oslogin.v1.GetLoginProfileRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oslogin.v1.GetLoginProfileRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.oslogin.v1.LoginProfile()
+            );
+            client.innerApiCalls.getLoginProfile = stubSimpleCall(expectedResponse);
+            const [response] = await client.getLoginProfile(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getLoginProfile as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getLoginProfile as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-  describe('deletePosixAccount', () => {
-    it('invokes deletePosixAccount without error', async () => {
-      const client = new osloginserviceModule.v1.OsLoginServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.oslogin.v1.DeletePosixAccountRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.oslogin.v1.DeletePosixAccountRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deletePosixAccount =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.deletePosixAccount(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deletePosixAccount as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deletePosixAccount as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes getLoginProfile without error using callback', async () => {
+            const client = new osloginserviceModule.v1.OsLoginServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oslogin.v1.GetLoginProfileRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oslogin.v1.GetLoginProfileRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.oslogin.v1.LoginProfile()
+            );
+            client.innerApiCalls.getLoginProfile = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getLoginProfile(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.oslogin.v1.ILoginProfile|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getLoginProfile as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getLoginProfile as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('invokes deletePosixAccount without error using callback', async () => {
-      const client = new osloginserviceModule.v1.OsLoginServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.oslogin.v1.DeletePosixAccountRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.oslogin.v1.DeletePosixAccountRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deletePosixAccount =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deletePosixAccount(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deletePosixAccount as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deletePosixAccount as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes getLoginProfile with error', async () => {
+            const client = new osloginserviceModule.v1.OsLoginServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oslogin.v1.GetLoginProfileRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oslogin.v1.GetLoginProfileRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getLoginProfile = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getLoginProfile(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getLoginProfile as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getLoginProfile as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('invokes deletePosixAccount with error', async () => {
-      const client = new osloginserviceModule.v1.OsLoginServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.oslogin.v1.DeletePosixAccountRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.oslogin.v1.DeletePosixAccountRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deletePosixAccount = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deletePosixAccount(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deletePosixAccount as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deletePosixAccount as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        it('invokes getLoginProfile with closed client', async () => {
+            const client = new osloginserviceModule.v1.OsLoginServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oslogin.v1.GetLoginProfileRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oslogin.v1.GetLoginProfileRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getLoginProfile(request), expectedError);
+        });
     });
 
-    it('invokes deletePosixAccount with closed client', async () => {
-      const client = new osloginserviceModule.v1.OsLoginServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.oslogin.v1.DeletePosixAccountRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.oslogin.v1.DeletePosixAccountRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.deletePosixAccount(request), expectedError);
-    });
-  });
+    describe('getSshPublicKey', () => {
+        it('invokes getSshPublicKey without error', async () => {
+            const client = new osloginserviceModule.v1.OsLoginServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oslogin.v1.GetSshPublicKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oslogin.v1.GetSshPublicKeyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.oslogin.common.SshPublicKey()
+            );
+            client.innerApiCalls.getSshPublicKey = stubSimpleCall(expectedResponse);
+            const [response] = await client.getSshPublicKey(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getSshPublicKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSshPublicKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-  describe('deleteSshPublicKey', () => {
-    it('invokes deleteSshPublicKey without error', async () => {
-      const client = new osloginserviceModule.v1.OsLoginServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.oslogin.v1.DeleteSshPublicKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.oslogin.v1.DeleteSshPublicKeyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteSshPublicKey =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteSshPublicKey(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteSshPublicKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteSshPublicKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes getSshPublicKey without error using callback', async () => {
+            const client = new osloginserviceModule.v1.OsLoginServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oslogin.v1.GetSshPublicKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oslogin.v1.GetSshPublicKeyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.oslogin.common.SshPublicKey()
+            );
+            client.innerApiCalls.getSshPublicKey = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getSshPublicKey(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.oslogin.common.ISshPublicKey|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getSshPublicKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSshPublicKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('invokes deleteSshPublicKey without error using callback', async () => {
-      const client = new osloginserviceModule.v1.OsLoginServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.oslogin.v1.DeleteSshPublicKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.oslogin.v1.DeleteSshPublicKeyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteSshPublicKey =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteSshPublicKey(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteSshPublicKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteSshPublicKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes getSshPublicKey with error', async () => {
+            const client = new osloginserviceModule.v1.OsLoginServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oslogin.v1.GetSshPublicKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oslogin.v1.GetSshPublicKeyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getSshPublicKey = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getSshPublicKey(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getSshPublicKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSshPublicKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('invokes deleteSshPublicKey with error', async () => {
-      const client = new osloginserviceModule.v1.OsLoginServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.oslogin.v1.DeleteSshPublicKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.oslogin.v1.DeleteSshPublicKeyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteSshPublicKey = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteSshPublicKey(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteSshPublicKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteSshPublicKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        it('invokes getSshPublicKey with closed client', async () => {
+            const client = new osloginserviceModule.v1.OsLoginServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oslogin.v1.GetSshPublicKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oslogin.v1.GetSshPublicKeyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getSshPublicKey(request), expectedError);
+        });
     });
 
-    it('invokes deleteSshPublicKey with closed client', async () => {
-      const client = new osloginserviceModule.v1.OsLoginServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.oslogin.v1.DeleteSshPublicKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.oslogin.v1.DeleteSshPublicKeyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.deleteSshPublicKey(request), expectedError);
-    });
-  });
+    describe('importSshPublicKey', () => {
+        it('invokes importSshPublicKey without error', async () => {
+            const client = new osloginserviceModule.v1.OsLoginServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oslogin.v1.ImportSshPublicKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oslogin.v1.ImportSshPublicKeyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.oslogin.v1.ImportSshPublicKeyResponse()
+            );
+            client.innerApiCalls.importSshPublicKey = stubSimpleCall(expectedResponse);
+            const [response] = await client.importSshPublicKey(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.importSshPublicKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.importSshPublicKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-  describe('getLoginProfile', () => {
-    it('invokes getLoginProfile without error', async () => {
-      const client = new osloginserviceModule.v1.OsLoginServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.oslogin.v1.GetLoginProfileRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.oslogin.v1.GetLoginProfileRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.oslogin.v1.LoginProfile()
-      );
-      client.innerApiCalls.getLoginProfile = stubSimpleCall(expectedResponse);
-      const [response] = await client.getLoginProfile(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getLoginProfile as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getLoginProfile as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes importSshPublicKey without error using callback', async () => {
+            const client = new osloginserviceModule.v1.OsLoginServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oslogin.v1.ImportSshPublicKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oslogin.v1.ImportSshPublicKeyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.oslogin.v1.ImportSshPublicKeyResponse()
+            );
+            client.innerApiCalls.importSshPublicKey = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.importSshPublicKey(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.oslogin.v1.IImportSshPublicKeyResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.importSshPublicKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.importSshPublicKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('invokes getLoginProfile without error using callback', async () => {
-      const client = new osloginserviceModule.v1.OsLoginServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.oslogin.v1.GetLoginProfileRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.oslogin.v1.GetLoginProfileRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.oslogin.v1.LoginProfile()
-      );
-      client.innerApiCalls.getLoginProfile =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getLoginProfile(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.oslogin.v1.ILoginProfile | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getLoginProfile as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getLoginProfile as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes importSshPublicKey with error', async () => {
+            const client = new osloginserviceModule.v1.OsLoginServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oslogin.v1.ImportSshPublicKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oslogin.v1.ImportSshPublicKeyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.importSshPublicKey = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.importSshPublicKey(request), expectedError);
+            const actualRequest = (client.innerApiCalls.importSshPublicKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.importSshPublicKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('invokes getLoginProfile with error', async () => {
-      const client = new osloginserviceModule.v1.OsLoginServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.oslogin.v1.GetLoginProfileRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.oslogin.v1.GetLoginProfileRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getLoginProfile = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getLoginProfile(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getLoginProfile as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getLoginProfile as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        it('invokes importSshPublicKey with closed client', async () => {
+            const client = new osloginserviceModule.v1.OsLoginServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oslogin.v1.ImportSshPublicKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oslogin.v1.ImportSshPublicKeyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.importSshPublicKey(request), expectedError);
+        });
     });
 
-    it('invokes getLoginProfile with closed client', async () => {
-      const client = new osloginserviceModule.v1.OsLoginServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.oslogin.v1.GetLoginProfileRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.oslogin.v1.GetLoginProfileRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getLoginProfile(request), expectedError);
-    });
-  });
+    describe('updateSshPublicKey', () => {
+        it('invokes updateSshPublicKey without error', async () => {
+            const client = new osloginserviceModule.v1.OsLoginServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oslogin.v1.UpdateSshPublicKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oslogin.v1.UpdateSshPublicKeyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.oslogin.common.SshPublicKey()
+            );
+            client.innerApiCalls.updateSshPublicKey = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateSshPublicKey(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateSshPublicKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSshPublicKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-  describe('getSshPublicKey', () => {
-    it('invokes getSshPublicKey without error', async () => {
-      const client = new osloginserviceModule.v1.OsLoginServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.oslogin.v1.GetSshPublicKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.oslogin.v1.GetSshPublicKeyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.oslogin.common.SshPublicKey()
-      );
-      client.innerApiCalls.getSshPublicKey = stubSimpleCall(expectedResponse);
-      const [response] = await client.getSshPublicKey(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getSshPublicKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getSshPublicKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes updateSshPublicKey without error using callback', async () => {
+            const client = new osloginserviceModule.v1.OsLoginServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oslogin.v1.UpdateSshPublicKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oslogin.v1.UpdateSshPublicKeyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.oslogin.common.SshPublicKey()
+            );
+            client.innerApiCalls.updateSshPublicKey = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateSshPublicKey(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.oslogin.common.ISshPublicKey|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateSshPublicKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSshPublicKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('invokes getSshPublicKey without error using callback', async () => {
-      const client = new osloginserviceModule.v1.OsLoginServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.oslogin.v1.GetSshPublicKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.oslogin.v1.GetSshPublicKeyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.oslogin.common.SshPublicKey()
-      );
-      client.innerApiCalls.getSshPublicKey =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getSshPublicKey(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.oslogin.common.ISshPublicKey | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getSshPublicKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getSshPublicKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes updateSshPublicKey with error', async () => {
+            const client = new osloginserviceModule.v1.OsLoginServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oslogin.v1.UpdateSshPublicKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oslogin.v1.UpdateSshPublicKeyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateSshPublicKey = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateSshPublicKey(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateSshPublicKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSshPublicKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('invokes getSshPublicKey with error', async () => {
-      const client = new osloginserviceModule.v1.OsLoginServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.oslogin.v1.GetSshPublicKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.oslogin.v1.GetSshPublicKeyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getSshPublicKey = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getSshPublicKey(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getSshPublicKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getSshPublicKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        it('invokes updateSshPublicKey with closed client', async () => {
+            const client = new osloginserviceModule.v1.OsLoginServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.oslogin.v1.UpdateSshPublicKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.oslogin.v1.UpdateSshPublicKeyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateSshPublicKey(request), expectedError);
+        });
     });
 
-    it('invokes getSshPublicKey with closed client', async () => {
-      const client = new osloginserviceModule.v1.OsLoginServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.oslogin.v1.GetSshPublicKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.oslogin.v1.GetSshPublicKeyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getSshPublicKey(request), expectedError);
+    describe('Path templates', () => {
+
+        describe('posixAccount', async () => {
+            const fakePath = "/rendered/path/posixAccount";
+            const expectedParameters = {
+                user: "userValue",
+                project: "projectValue",
+            };
+            const client = new osloginserviceModule.v1.OsLoginServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.posixAccountPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.posixAccountPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('posixAccountPath', () => {
+                const result = client.posixAccountPath("userValue", "projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.posixAccountPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchUserFromPosixAccountName', () => {
+                const result = client.matchUserFromPosixAccountName(fakePath);
+                assert.strictEqual(result, "userValue");
+                assert((client.pathTemplates.posixAccountPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchProjectFromPosixAccountName', () => {
+                const result = client.matchProjectFromPosixAccountName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.posixAccountPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('sshPublicKey', async () => {
+            const fakePath = "/rendered/path/sshPublicKey";
+            const expectedParameters = {
+                user: "userValue",
+                fingerprint: "fingerprintValue",
+            };
+            const client = new osloginserviceModule.v1.OsLoginServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.sshPublicKeyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.sshPublicKeyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('sshPublicKeyPath', () => {
+                const result = client.sshPublicKeyPath("userValue", "fingerprintValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.sshPublicKeyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchUserFromSshPublicKeyName', () => {
+                const result = client.matchUserFromSshPublicKeyName(fakePath);
+                assert.strictEqual(result, "userValue");
+                assert((client.pathTemplates.sshPublicKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFingerprintFromSshPublicKeyName', () => {
+                const result = client.matchFingerprintFromSshPublicKeyName(fakePath);
+                assert.strictEqual(result, "fingerprintValue");
+                assert((client.pathTemplates.sshPublicKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('user', async () => {
+            const fakePath = "/rendered/path/user";
+            const expectedParameters = {
+                user: "userValue",
+            };
+            const client = new osloginserviceModule.v1.OsLoginServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.userPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.userPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('userPath', () => {
+                const result = client.userPath("userValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.userPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchUserFromUserName', () => {
+                const result = client.matchUserFromUserName(fakePath);
+                assert.strictEqual(result, "userValue");
+                assert((client.pathTemplates.userPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-  });
-
-  describe('importSshPublicKey', () => {
-    it('invokes importSshPublicKey without error', async () => {
-      const client = new osloginserviceModule.v1.OsLoginServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.oslogin.v1.ImportSshPublicKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.oslogin.v1.ImportSshPublicKeyRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.oslogin.v1.ImportSshPublicKeyResponse()
-      );
-      client.innerApiCalls.importSshPublicKey =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.importSshPublicKey(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.importSshPublicKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.importSshPublicKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes importSshPublicKey without error using callback', async () => {
-      const client = new osloginserviceModule.v1.OsLoginServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.oslogin.v1.ImportSshPublicKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.oslogin.v1.ImportSshPublicKeyRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.oslogin.v1.ImportSshPublicKeyResponse()
-      );
-      client.innerApiCalls.importSshPublicKey =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.importSshPublicKey(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.oslogin.v1.IImportSshPublicKeyResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.importSshPublicKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.importSshPublicKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes importSshPublicKey with error', async () => {
-      const client = new osloginserviceModule.v1.OsLoginServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.oslogin.v1.ImportSshPublicKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.oslogin.v1.ImportSshPublicKeyRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.importSshPublicKey = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.importSshPublicKey(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.importSshPublicKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.importSshPublicKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes importSshPublicKey with closed client', async () => {
-      const client = new osloginserviceModule.v1.OsLoginServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.oslogin.v1.ImportSshPublicKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.oslogin.v1.ImportSshPublicKeyRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.importSshPublicKey(request), expectedError);
-    });
-  });
-
-  describe('updateSshPublicKey', () => {
-    it('invokes updateSshPublicKey without error', async () => {
-      const client = new osloginserviceModule.v1.OsLoginServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.oslogin.v1.UpdateSshPublicKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.oslogin.v1.UpdateSshPublicKeyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.oslogin.common.SshPublicKey()
-      );
-      client.innerApiCalls.updateSshPublicKey =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.updateSshPublicKey(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateSshPublicKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSshPublicKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateSshPublicKey without error using callback', async () => {
-      const client = new osloginserviceModule.v1.OsLoginServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.oslogin.v1.UpdateSshPublicKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.oslogin.v1.UpdateSshPublicKeyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.oslogin.common.SshPublicKey()
-      );
-      client.innerApiCalls.updateSshPublicKey =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateSshPublicKey(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.oslogin.common.ISshPublicKey | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateSshPublicKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSshPublicKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateSshPublicKey with error', async () => {
-      const client = new osloginserviceModule.v1.OsLoginServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.oslogin.v1.UpdateSshPublicKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.oslogin.v1.UpdateSshPublicKeyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateSshPublicKey = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateSshPublicKey(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateSshPublicKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSshPublicKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateSshPublicKey with closed client', async () => {
-      const client = new osloginserviceModule.v1.OsLoginServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.oslogin.v1.UpdateSshPublicKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.oslogin.v1.UpdateSshPublicKeyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updateSshPublicKey(request), expectedError);
-    });
-  });
-
-  describe('Path templates', () => {
-    describe('posixAccount', async () => {
-      const fakePath = '/rendered/path/posixAccount';
-      const expectedParameters = {
-        user: 'userValue',
-        project: 'projectValue',
-      };
-      const client = new osloginserviceModule.v1.OsLoginServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.posixAccountPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.posixAccountPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('posixAccountPath', () => {
-        const result = client.posixAccountPath('userValue', 'projectValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.posixAccountPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchUserFromPosixAccountName', () => {
-        const result = client.matchUserFromPosixAccountName(fakePath);
-        assert.strictEqual(result, 'userValue');
-        assert(
-          (client.pathTemplates.posixAccountPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchProjectFromPosixAccountName', () => {
-        const result = client.matchProjectFromPosixAccountName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.posixAccountPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('sshPublicKey', async () => {
-      const fakePath = '/rendered/path/sshPublicKey';
-      const expectedParameters = {
-        user: 'userValue',
-        fingerprint: 'fingerprintValue',
-      };
-      const client = new osloginserviceModule.v1.OsLoginServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.sshPublicKeyPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.sshPublicKeyPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('sshPublicKeyPath', () => {
-        const result = client.sshPublicKeyPath('userValue', 'fingerprintValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.sshPublicKeyPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchUserFromSshPublicKeyName', () => {
-        const result = client.matchUserFromSshPublicKeyName(fakePath);
-        assert.strictEqual(result, 'userValue');
-        assert(
-          (client.pathTemplates.sshPublicKeyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchFingerprintFromSshPublicKeyName', () => {
-        const result = client.matchFingerprintFromSshPublicKeyName(fakePath);
-        assert.strictEqual(result, 'fingerprintValue');
-        assert(
-          (client.pathTemplates.sshPublicKeyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('user', async () => {
-      const fakePath = '/rendered/path/user';
-      const expectedParameters = {
-        user: 'userValue',
-      };
-      const client = new osloginserviceModule.v1.OsLoginServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.userPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.userPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('userPath', () => {
-        const result = client.userPath('userValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.userPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchUserFromUserName', () => {
-        const result = client.matchUserFromUserName(fakePath);
-        assert.strictEqual(result, 'userValue');
-        assert(
-          (client.pathTemplates.userPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

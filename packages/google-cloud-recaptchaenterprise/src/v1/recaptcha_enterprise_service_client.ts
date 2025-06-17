@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -107,42 +100,20 @@ export class RecaptchaEnterpriseServiceClient {
    *     const client = new RecaptchaEnterpriseServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof RecaptchaEnterpriseServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    const staticMembers = this.constructor as typeof RecaptchaEnterpriseServiceClient;
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'recaptchaenterprise.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -168,7 +139,7 @@ export class RecaptchaEnterpriseServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -182,7 +153,10 @@ export class RecaptchaEnterpriseServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -221,55 +195,33 @@ export class RecaptchaEnterpriseServiceClient {
       relatedAccountGroupPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/relatedaccountgroups/{relatedaccountgroup}'
       ),
-      relatedAccountGroupMembershipPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/relatedaccountgroups/{relatedaccountgroup}/memberships/{membership}'
-        ),
+      relatedAccountGroupMembershipPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/relatedaccountgroups/{relatedaccountgroup}/memberships/{membership}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listKeys: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'keys'
-      ),
-      listIpOverrides: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'ipOverrides'
-      ),
-      listFirewallPolicies: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'firewallPolicies'
-      ),
-      listRelatedAccountGroups: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'relatedAccountGroups'
-      ),
-      listRelatedAccountGroupMemberships: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'relatedAccountGroupMemberships'
-      ),
-      searchRelatedAccountGroupMemberships: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'relatedAccountGroupMemberships'
-      ),
+      listKeys:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'keys'),
+      listIpOverrides:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'ipOverrides'),
+      listFirewallPolicies:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'firewallPolicies'),
+      listRelatedAccountGroups:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'relatedAccountGroups'),
+      listRelatedAccountGroupMemberships:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'relatedAccountGroupMemberships'),
+      searchRelatedAccountGroupMemberships:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'relatedAccountGroupMemberships')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -300,59 +252,32 @@ export class RecaptchaEnterpriseServiceClient {
     // Put together the "service stub" for
     // google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.
     this.recaptchaEnterpriseServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.recaptchaenterprise.v1
-            .RecaptchaEnterpriseService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const recaptchaEnterpriseServiceStubMethods = [
-      'createAssessment',
-      'annotateAssessment',
-      'createKey',
-      'listKeys',
-      'retrieveLegacySecretKey',
-      'getKey',
-      'updateKey',
-      'deleteKey',
-      'migrateKey',
-      'addIpOverride',
-      'removeIpOverride',
-      'listIpOverrides',
-      'getMetrics',
-      'createFirewallPolicy',
-      'listFirewallPolicies',
-      'getFirewallPolicy',
-      'updateFirewallPolicy',
-      'deleteFirewallPolicy',
-      'reorderFirewallPolicies',
-      'listRelatedAccountGroups',
-      'listRelatedAccountGroupMemberships',
-      'searchRelatedAccountGroupMemberships',
-    ];
+    const recaptchaEnterpriseServiceStubMethods =
+        ['createAssessment', 'annotateAssessment', 'createKey', 'listKeys', 'retrieveLegacySecretKey', 'getKey', 'updateKey', 'deleteKey', 'migrateKey', 'addIpOverride', 'removeIpOverride', 'listIpOverrides', 'getMetrics', 'createFirewallPolicy', 'listFirewallPolicies', 'getFirewallPolicy', 'updateFirewallPolicy', 'deleteFirewallPolicy', 'reorderFirewallPolicies', 'listRelatedAccountGroups', 'listRelatedAccountGroupMemberships', 'searchRelatedAccountGroupMemberships'];
     for (const methodName of recaptchaEnterpriseServiceStubMethods) {
       const callPromise = this.recaptchaEnterpriseServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -372,14 +297,8 @@ export class RecaptchaEnterpriseServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'recaptchaenterprise.googleapis.com';
   }
@@ -390,14 +309,8 @@ export class RecaptchaEnterpriseServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'recaptchaenterprise.googleapis.com';
   }
@@ -428,7 +341,9 @@ export class RecaptchaEnterpriseServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -437,9 +352,8 @@ export class RecaptchaEnterpriseServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -450,2187 +364,1673 @@ export class RecaptchaEnterpriseServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Creates an Assessment of the likelihood an event is legitimate.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the project in which the assessment is created,
-   *   in the format `projects/{project}`.
-   * @param {google.cloud.recaptchaenterprise.v1.Assessment} request.assessment
-   *   Required. The assessment details.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.Assessment|Assessment}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.create_assessment.js</caption>
-   * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_CreateAssessment_async
-   */
+/**
+ * Creates an Assessment of the likelihood an event is legitimate.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the project in which the assessment is created,
+ *   in the format `projects/{project}`.
+ * @param {google.cloud.recaptchaenterprise.v1.Assessment} request.assessment
+ *   Required. The assessment details.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.Assessment|Assessment}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.create_assessment.js</caption>
+ * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_CreateAssessment_async
+ */
   createAssessment(
-    request?: protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IAssessment,
-      (
-        | protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IAssessment,
+        protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest|undefined, {}|undefined
+      ]>;
   createAssessment(
-    request: protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IAssessment,
-      | protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createAssessment(
-    request: protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest,
-    callback: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IAssessment,
-      | protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createAssessment(
-    request?: protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.recaptchaenterprise.v1.IAssessment,
-          | protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IAssessment,
-      | protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IAssessment,
-      (
-        | protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest|null|undefined,
+          {}|null|undefined>): void;
+  createAssessment(
+      request: protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest,
+      callback: Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IAssessment,
+          protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest|null|undefined,
+          {}|null|undefined>): void;
+  createAssessment(
+      request?: protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IAssessment,
+          protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IAssessment,
+          protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IAssessment,
+        protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createAssessment request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.recaptchaenterprise.v1.IAssessment,
-          | protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.recaptchaenterprise.v1.IAssessment,
+        protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createAssessment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createAssessment(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.recaptchaenterprise.v1.IAssessment,
-          (
-            | protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createAssessment response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createAssessment(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.recaptchaenterprise.v1.IAssessment,
+        protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createAssessment response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Annotates a previously created Assessment to provide additional information
-   * on whether the event turned out to be authentic or fraudulent.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the Assessment, in the format
-   *   `projects/{project}/assessments/{assessment}`.
-   * @param {google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Annotation} [request.annotation]
-   *   Optional. The annotation that is assigned to the Event. This field can be
-   *   left empty to provide reasons that apply to an event without concluding
-   *   whether the event is legitimate or fraudulent.
-   * @param {number[]} [request.reasons]
-   *   Optional. Reasons for the annotation that are assigned to the event.
-   * @param {string} [request.accountId]
-   *   Optional. A stable account identifier to apply to the assessment. This is
-   *   an alternative to setting `account_id` in `CreateAssessment`, for example
-   *   when a stable account identifier is not yet known in the initial request.
-   * @param {Buffer} [request.hashedAccountId]
-   *   Optional. A stable hashed account identifier to apply to the assessment.
-   *   This is an alternative to setting `hashed_account_id` in
-   *   `CreateAssessment`, for example when a stable account identifier is not yet
-   *   known in the initial request.
-   * @param {google.cloud.recaptchaenterprise.v1.TransactionEvent} [request.transactionEvent]
-   *   Optional. If the assessment is part of a payment transaction, provide
-   *   details on payment lifecycle events that occur in the transaction.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentResponse|AnnotateAssessmentResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.annotate_assessment.js</caption>
-   * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_AnnotateAssessment_async
-   */
+/**
+ * Annotates a previously created Assessment to provide additional information
+ * on whether the event turned out to be authentic or fraudulent.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the Assessment, in the format
+ *   `projects/{project}/assessments/{assessment}`.
+ * @param {google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Annotation} [request.annotation]
+ *   Optional. The annotation that is assigned to the Event. This field can be
+ *   left empty to provide reasons that apply to an event without concluding
+ *   whether the event is legitimate or fraudulent.
+ * @param {number[]} [request.reasons]
+ *   Optional. Reasons for the annotation that are assigned to the event.
+ * @param {string} [request.accountId]
+ *   Optional. A stable account identifier to apply to the assessment. This is
+ *   an alternative to setting `account_id` in `CreateAssessment`, for example
+ *   when a stable account identifier is not yet known in the initial request.
+ * @param {Buffer} [request.hashedAccountId]
+ *   Optional. A stable hashed account identifier to apply to the assessment.
+ *   This is an alternative to setting `hashed_account_id` in
+ *   `CreateAssessment`, for example when a stable account identifier is not yet
+ *   known in the initial request.
+ * @param {google.cloud.recaptchaenterprise.v1.TransactionEvent} [request.transactionEvent]
+ *   Optional. If the assessment is part of a payment transaction, provide
+ *   details on payment lifecycle events that occur in the transaction.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentResponse|AnnotateAssessmentResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.annotate_assessment.js</caption>
+ * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_AnnotateAssessment_async
+ */
   annotateAssessment(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentResponse,
-      (
-        | protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentResponse,
+        protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest|undefined, {}|undefined
+      ]>;
   annotateAssessment(
-    request: protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentResponse,
-      | protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  annotateAssessment(
-    request: protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest,
-    callback: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentResponse,
-      | protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  annotateAssessment(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentResponse,
-          | protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentResponse,
-      | protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentResponse,
-      (
-        | protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest|null|undefined,
+          {}|null|undefined>): void;
+  annotateAssessment(
+      request: protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest,
+      callback: Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentResponse,
+          protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest|null|undefined,
+          {}|null|undefined>): void;
+  annotateAssessment(
+      request?: protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentResponse,
+          protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentResponse,
+          protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentResponse,
+        protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('annotateAssessment request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentResponse,
-          | protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentResponse,
+        protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('annotateAssessment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .annotateAssessment(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentResponse,
-          (
-            | protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('annotateAssessment response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.annotateAssessment(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentResponse,
+        protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('annotateAssessment response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a new reCAPTCHA Enterprise key.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the project in which the key is created, in the
-   *   format `projects/{project}`.
-   * @param {google.cloud.recaptchaenterprise.v1.Key} request.key
-   *   Required. Information to create a reCAPTCHA Enterprise key.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.Key|Key}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.create_key.js</caption>
-   * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_CreateKey_async
-   */
+/**
+ * Creates a new reCAPTCHA Enterprise key.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the project in which the key is created, in the
+ *   format `projects/{project}`.
+ * @param {google.cloud.recaptchaenterprise.v1.Key} request.key
+ *   Required. Information to create a reCAPTCHA Enterprise key.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.Key|Key}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.create_key.js</caption>
+ * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_CreateKey_async
+ */
   createKey(
-    request?: protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IKey,
-      protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IKey,
+        protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest|undefined, {}|undefined
+      ]>;
   createKey(
-    request: protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IKey,
-      | protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createKey(
-    request: protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest,
-    callback: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IKey,
-      | protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createKey(
-    request?: protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.recaptchaenterprise.v1.IKey,
-          | protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IKey,
-      | protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IKey,
-      protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  createKey(
+      request: protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest,
+      callback: Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IKey,
+          protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  createKey(
+      request?: protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IKey,
+          protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IKey,
+          protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IKey,
+        protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createKey request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.recaptchaenterprise.v1.IKey,
-          | protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.recaptchaenterprise.v1.IKey,
+        protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createKey response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createKey(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.recaptchaenterprise.v1.IKey,
-          (
-            | protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createKey response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createKey(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.recaptchaenterprise.v1.IKey,
+        protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createKey response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Returns the secret key related to the specified public key.
-   * You must use the legacy secret key only in a 3rd party integration with
-   * legacy reCAPTCHA.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.key
-   *   Required. The public key name linked to the requested secret key in the
-   *   format `projects/{project}/keys/{key}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse|RetrieveLegacySecretKeyResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.retrieve_legacy_secret_key.js</caption>
-   * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_RetrieveLegacySecretKey_async
-   */
+/**
+ * Returns the secret key related to the specified public key.
+ * You must use the legacy secret key only in a 3rd party integration with
+ * legacy reCAPTCHA.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.key
+ *   Required. The public key name linked to the requested secret key in the
+ *   format `projects/{project}/keys/{key}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse|RetrieveLegacySecretKeyResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.retrieve_legacy_secret_key.js</caption>
+ * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_RetrieveLegacySecretKey_async
+ */
   retrieveLegacySecretKey(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyResponse,
-      (
-        | protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyResponse,
+        protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest|undefined, {}|undefined
+      ]>;
   retrieveLegacySecretKey(
-    request: protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyResponse,
-      | protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  retrieveLegacySecretKey(
-    request: protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest,
-    callback: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyResponse,
-      | protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  retrieveLegacySecretKey(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyResponse,
-          | protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyResponse,
-      | protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyResponse,
-      (
-        | protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  retrieveLegacySecretKey(
+      request: protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest,
+      callback: Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyResponse,
+          protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  retrieveLegacySecretKey(
+      request?: protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyResponse,
+          protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyResponse,
+          protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyResponse,
+        protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        key: request.key ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'key': request.key ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('retrieveLegacySecretKey request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyResponse,
-          | protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyResponse,
+        protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('retrieveLegacySecretKey response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .retrieveLegacySecretKey(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyResponse,
-          (
-            | protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('retrieveLegacySecretKey response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.retrieveLegacySecretKey(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyResponse,
+        protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('retrieveLegacySecretKey response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Returns the specified key.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the requested key, in the format
-   *   `projects/{project}/keys/{key}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.Key|Key}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.get_key.js</caption>
-   * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_GetKey_async
-   */
+/**
+ * Returns the specified key.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the requested key, in the format
+ *   `projects/{project}/keys/{key}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.Key|Key}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.get_key.js</caption>
+ * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_GetKey_async
+ */
   getKey(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IKey,
-      protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IKey,
+        protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest|undefined, {}|undefined
+      ]>;
   getKey(
-    request: protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IKey,
-      | protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getKey(
-    request: protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest,
-    callback: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IKey,
-      | protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getKey(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.recaptchaenterprise.v1.IKey,
-          | protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IKey,
-      | protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IKey,
-      protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getKey(
+      request: protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest,
+      callback: Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IKey,
+          protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getKey(
+      request?: protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IKey,
+          protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IKey,
+          protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IKey,
+        protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getKey request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.recaptchaenterprise.v1.IKey,
-          | protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.recaptchaenterprise.v1.IKey,
+        protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getKey response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getKey(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.recaptchaenterprise.v1.IKey,
-          protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getKey response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getKey(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.recaptchaenterprise.v1.IKey,
+        protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getKey response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates the specified key.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.recaptchaenterprise.v1.Key} request.key
-   *   Required. The key to update.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. The mask to control which fields of the key get updated. If the
-   *   mask is not present, all fields are updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.Key|Key}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.update_key.js</caption>
-   * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_UpdateKey_async
-   */
+/**
+ * Updates the specified key.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.recaptchaenterprise.v1.Key} request.key
+ *   Required. The key to update.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. The mask to control which fields of the key get updated. If the
+ *   mask is not present, all fields are updated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.Key|Key}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.update_key.js</caption>
+ * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_UpdateKey_async
+ */
   updateKey(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IKey,
-      protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IKey,
+        protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest|undefined, {}|undefined
+      ]>;
   updateKey(
-    request: protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IKey,
-      | protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateKey(
-    request: protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest,
-    callback: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IKey,
-      | protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateKey(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.recaptchaenterprise.v1.IKey,
-          | protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IKey,
-      | protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IKey,
-      protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateKey(
+      request: protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest,
+      callback: Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IKey,
+          protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateKey(
+      request?: protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IKey,
+          protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IKey,
+          protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IKey,
+        protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'key.name': request.key!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'key.name': request.key!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateKey request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.recaptchaenterprise.v1.IKey,
-          | protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.recaptchaenterprise.v1.IKey,
+        protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateKey response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateKey(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.recaptchaenterprise.v1.IKey,
-          (
-            | protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateKey response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateKey(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.recaptchaenterprise.v1.IKey,
+        protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateKey response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes the specified key.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the key to be deleted, in the format
-   *   `projects/{project}/keys/{key}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.delete_key.js</caption>
-   * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_DeleteKey_async
-   */
+/**
+ * Deletes the specified key.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the key to be deleted, in the format
+ *   `projects/{project}/keys/{key}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.delete_key.js</caption>
+ * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_DeleteKey_async
+ */
   deleteKey(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest|undefined, {}|undefined
+      ]>;
   deleteKey(
-    request: protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteKey(
-    request: protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteKey(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteKey(
+      request: protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteKey(
+      request?: protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteKey request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteKey response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteKey(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteKey response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteKey(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteKey response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Migrates an existing key from reCAPTCHA to reCAPTCHA Enterprise.
-   * Once a key is migrated, it can be used from either product. SiteVerify
-   * requests are billed as CreateAssessment calls. You must be
-   * authenticated as one of the current owners of the reCAPTCHA Key, and
-   * your user must have the reCAPTCHA Enterprise Admin IAM role in the
-   * destination project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the key to be migrated, in the format
-   *   `projects/{project}/keys/{key}`.
-   * @param {boolean} [request.skipBillingCheck]
-   *   Optional. If true, skips the billing check.
-   *   A reCAPTCHA Enterprise key or migrated key behaves differently than a
-   *   reCAPTCHA (non-Enterprise version) key when you reach a quota limit (see
-   *   https://cloud.google.com/recaptcha/quotas#quota_limit). To avoid
-   *   any disruption of your usage, we check that a billing account is present.
-   *   If your usage of reCAPTCHA is under the free quota, you can safely skip the
-   *   billing check and proceed with the migration. See
-   *   https://cloud.google.com/recaptcha/docs/billing-information.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.Key|Key}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.migrate_key.js</caption>
-   * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_MigrateKey_async
-   */
+/**
+ * Migrates an existing key from reCAPTCHA to reCAPTCHA Enterprise.
+ * Once a key is migrated, it can be used from either product. SiteVerify
+ * requests are billed as CreateAssessment calls. You must be
+ * authenticated as one of the current owners of the reCAPTCHA Key, and
+ * your user must have the reCAPTCHA Enterprise Admin IAM role in the
+ * destination project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the key to be migrated, in the format
+ *   `projects/{project}/keys/{key}`.
+ * @param {boolean} [request.skipBillingCheck]
+ *   Optional. If true, skips the billing check.
+ *   A reCAPTCHA Enterprise key or migrated key behaves differently than a
+ *   reCAPTCHA (non-Enterprise version) key when you reach a quota limit (see
+ *   https://cloud.google.com/recaptcha/quotas#quota_limit). To avoid
+ *   any disruption of your usage, we check that a billing account is present.
+ *   If your usage of reCAPTCHA is under the free quota, you can safely skip the
+ *   billing check and proceed with the migration. See
+ *   https://cloud.google.com/recaptcha/docs/billing-information.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.Key|Key}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.migrate_key.js</caption>
+ * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_MigrateKey_async
+ */
   migrateKey(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IKey,
-      protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IKey,
+        protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest|undefined, {}|undefined
+      ]>;
   migrateKey(
-    request: protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IKey,
-      | protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  migrateKey(
-    request: protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest,
-    callback: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IKey,
-      | protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  migrateKey(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.recaptchaenterprise.v1.IKey,
-          | protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IKey,
-      | protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IKey,
-      protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  migrateKey(
+      request: protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest,
+      callback: Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IKey,
+          protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  migrateKey(
+      request?: protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IKey,
+          protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IKey,
+          protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IKey,
+        protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('migrateKey request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.recaptchaenterprise.v1.IKey,
-          | protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.recaptchaenterprise.v1.IKey,
+        protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('migrateKey response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .migrateKey(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.recaptchaenterprise.v1.IKey,
-          (
-            | protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('migrateKey response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.migrateKey(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.recaptchaenterprise.v1.IKey,
+        protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('migrateKey response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Adds an IP override to a key. The following restrictions hold:
-   * * The maximum number of IP overrides per key is 100.
-   * * For any conflict (such as IP already exists or IP part of an existing
-   *   IP range), an error is returned.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the key to which the IP override is added, in the
-   *   format `projects/{project}/keys/{key}`.
-   * @param {google.cloud.recaptchaenterprise.v1.IpOverrideData} request.ipOverrideData
-   *   Required. IP override added to the key.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.AddIpOverrideResponse|AddIpOverrideResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.add_ip_override.js</caption>
-   * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_AddIpOverride_async
-   */
+/**
+ * Adds an IP override to a key. The following restrictions hold:
+ * * The maximum number of IP overrides per key is 100.
+ * * For any conflict (such as IP already exists or IP part of an existing
+ *   IP range), an error is returned.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the key to which the IP override is added, in the
+ *   format `projects/{project}/keys/{key}`.
+ * @param {google.cloud.recaptchaenterprise.v1.IpOverrideData} request.ipOverrideData
+ *   Required. IP override added to the key.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.AddIpOverrideResponse|AddIpOverrideResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.add_ip_override.js</caption>
+ * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_AddIpOverride_async
+ */
   addIpOverride(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideResponse,
-      (
-        | protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideResponse,
+        protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideRequest|undefined, {}|undefined
+      ]>;
   addIpOverride(
-    request: protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideResponse,
-      | protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  addIpOverride(
-    request: protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideRequest,
-    callback: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideResponse,
-      | protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  addIpOverride(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideResponse,
-          | protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideResponse,
-      | protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideResponse,
-      (
-        | protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideRequest|null|undefined,
+          {}|null|undefined>): void;
+  addIpOverride(
+      request: protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideRequest,
+      callback: Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideResponse,
+          protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideRequest|null|undefined,
+          {}|null|undefined>): void;
+  addIpOverride(
+      request?: protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideResponse,
+          protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideResponse,
+          protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideResponse,
+        protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('addIpOverride request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideResponse,
-          | protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideResponse,
+        protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('addIpOverride response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .addIpOverride(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideResponse,
-          (
-            | protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('addIpOverride response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.addIpOverride(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideResponse,
+        protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('addIpOverride response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Removes an IP override from a key. The following restrictions hold:
-   * * If the IP isn't found in an existing IP override, a `NOT_FOUND` error
-   * is returned.
-   * * If the IP is found in an existing IP override, but the
-   * override type does not match, a `NOT_FOUND` error is returned.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the key from which the IP override is removed, in the
-   *   format `projects/{project}/keys/{key}`.
-   * @param {google.cloud.recaptchaenterprise.v1.IpOverrideData} request.ipOverrideData
-   *   Required. IP override to be removed from the key.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.RemoveIpOverrideResponse|RemoveIpOverrideResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.remove_ip_override.js</caption>
-   * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_RemoveIpOverride_async
-   */
+/**
+ * Removes an IP override from a key. The following restrictions hold:
+ * * If the IP isn't found in an existing IP override, a `NOT_FOUND` error
+ * is returned.
+ * * If the IP is found in an existing IP override, but the
+ * override type does not match, a `NOT_FOUND` error is returned.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the key from which the IP override is removed, in the
+ *   format `projects/{project}/keys/{key}`.
+ * @param {google.cloud.recaptchaenterprise.v1.IpOverrideData} request.ipOverrideData
+ *   Required. IP override to be removed from the key.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.RemoveIpOverrideResponse|RemoveIpOverrideResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.remove_ip_override.js</caption>
+ * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_RemoveIpOverride_async
+ */
   removeIpOverride(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideResponse,
-      (
-        | protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideResponse,
+        protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideRequest|undefined, {}|undefined
+      ]>;
   removeIpOverride(
-    request: protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideResponse,
-      | protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  removeIpOverride(
-    request: protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideRequest,
-    callback: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideResponse,
-      | protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  removeIpOverride(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideResponse,
-          | protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideResponse,
-      | protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideResponse,
-      (
-        | protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideRequest|null|undefined,
+          {}|null|undefined>): void;
+  removeIpOverride(
+      request: protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideRequest,
+      callback: Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideResponse,
+          protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideRequest|null|undefined,
+          {}|null|undefined>): void;
+  removeIpOverride(
+      request?: protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideResponse,
+          protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideResponse,
+          protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideResponse,
+        protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('removeIpOverride request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideResponse,
-          | protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideResponse,
+        protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('removeIpOverride response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .removeIpOverride(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideResponse,
-          (
-            | protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('removeIpOverride response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.removeIpOverride(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideResponse,
+        protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('removeIpOverride response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Get some aggregated metrics for a Key. This data can be used to build
-   * dashboards.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the requested metrics, in the format
-   *   `projects/{project}/keys/{key}/metrics`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.Metrics|Metrics}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.get_metrics.js</caption>
-   * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_GetMetrics_async
-   */
+/**
+ * Get some aggregated metrics for a Key. This data can be used to build
+ * dashboards.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the requested metrics, in the format
+ *   `projects/{project}/keys/{key}/metrics`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.Metrics|Metrics}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.get_metrics.js</caption>
+ * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_GetMetrics_async
+ */
   getMetrics(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IMetrics,
-      protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IMetrics,
+        protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest|undefined, {}|undefined
+      ]>;
   getMetrics(
-    request: protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IMetrics,
-      | protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getMetrics(
-    request: protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest,
-    callback: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IMetrics,
-      | protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getMetrics(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.recaptchaenterprise.v1.IMetrics,
-          | protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IMetrics,
-      | protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IMetrics,
-      protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest|null|undefined,
+          {}|null|undefined>): void;
+  getMetrics(
+      request: protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest,
+      callback: Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IMetrics,
+          protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest|null|undefined,
+          {}|null|undefined>): void;
+  getMetrics(
+      request?: protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IMetrics,
+          protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IMetrics,
+          protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IMetrics,
+        protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getMetrics request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.recaptchaenterprise.v1.IMetrics,
-          | protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.recaptchaenterprise.v1.IMetrics,
+        protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getMetrics response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getMetrics(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.recaptchaenterprise.v1.IMetrics,
-          (
-            | protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getMetrics response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getMetrics(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.recaptchaenterprise.v1.IMetrics,
+        protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getMetrics response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a new FirewallPolicy, specifying conditions at which reCAPTCHA
-   * Enterprise actions can be executed.
-   * A project may have a maximum of 1000 policies.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the project this policy applies to, in the format
-   *   `projects/{project}`.
-   * @param {google.cloud.recaptchaenterprise.v1.FirewallPolicy} request.firewallPolicy
-   *   Required. Information to create the policy.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.FirewallPolicy|FirewallPolicy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.create_firewall_policy.js</caption>
-   * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_CreateFirewallPolicy_async
-   */
+/**
+ * Creates a new FirewallPolicy, specifying conditions at which reCAPTCHA
+ * Enterprise actions can be executed.
+ * A project may have a maximum of 1000 policies.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the project this policy applies to, in the format
+ *   `projects/{project}`.
+ * @param {google.cloud.recaptchaenterprise.v1.FirewallPolicy} request.firewallPolicy
+ *   Required. Information to create the policy.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.FirewallPolicy|FirewallPolicy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.create_firewall_policy.js</caption>
+ * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_CreateFirewallPolicy_async
+ */
   createFirewallPolicy(
-    request?: protos.google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
-      (
-        | protos.google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+        protos.google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest|undefined, {}|undefined
+      ]>;
   createFirewallPolicy(
-    request: protos.google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
-      | protos.google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createFirewallPolicy(
-    request: protos.google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest,
-    callback: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
-      | protos.google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createFirewallPolicy(
-    request?: protos.google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
-          | protos.google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
-      | protos.google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
-      (
-        | protos.google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  createFirewallPolicy(
+      request: protos.google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest,
+      callback: Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+          protos.google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  createFirewallPolicy(
+      request?: protos.google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+          protos.google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+          protos.google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+        protos.google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createFirewallPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
-          | protos.google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+        protos.google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createFirewallPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createFirewallPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
-          (
-            | protos.google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createFirewallPolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createFirewallPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+        protos.google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createFirewallPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Returns the specified firewall policy.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the requested policy, in the format
-   *   `projects/{project}/firewallpolicies/{firewallpolicy}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.FirewallPolicy|FirewallPolicy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.get_firewall_policy.js</caption>
-   * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_GetFirewallPolicy_async
-   */
+/**
+ * Returns the specified firewall policy.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the requested policy, in the format
+ *   `projects/{project}/firewallpolicies/{firewallpolicy}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.FirewallPolicy|FirewallPolicy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.get_firewall_policy.js</caption>
+ * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_GetFirewallPolicy_async
+ */
   getFirewallPolicy(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
-      (
-        | protos.google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+        protos.google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest|undefined, {}|undefined
+      ]>;
   getFirewallPolicy(
-    request: protos.google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
-      | protos.google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getFirewallPolicy(
-    request: protos.google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest,
-    callback: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
-      | protos.google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getFirewallPolicy(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
-          | protos.google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
-      | protos.google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
-      (
-        | protos.google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getFirewallPolicy(
+      request: protos.google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest,
+      callback: Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+          protos.google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getFirewallPolicy(
+      request?: protos.google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+          protos.google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+          protos.google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+        protos.google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getFirewallPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
-          | protos.google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+        protos.google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getFirewallPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getFirewallPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
-          (
-            | protos.google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getFirewallPolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getFirewallPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+        protos.google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getFirewallPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates the specified firewall policy.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.recaptchaenterprise.v1.FirewallPolicy} request.firewallPolicy
-   *   Required. The policy to update.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. The mask to control which fields of the policy get updated. If
-   *   the mask is not present, all fields are updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.FirewallPolicy|FirewallPolicy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.update_firewall_policy.js</caption>
-   * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_UpdateFirewallPolicy_async
-   */
+/**
+ * Updates the specified firewall policy.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.recaptchaenterprise.v1.FirewallPolicy} request.firewallPolicy
+ *   Required. The policy to update.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. The mask to control which fields of the policy get updated. If
+ *   the mask is not present, all fields are updated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.FirewallPolicy|FirewallPolicy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.update_firewall_policy.js</caption>
+ * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_UpdateFirewallPolicy_async
+ */
   updateFirewallPolicy(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
-      (
-        | protos.google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+        protos.google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest|undefined, {}|undefined
+      ]>;
   updateFirewallPolicy(
-    request: protos.google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
-      | protos.google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateFirewallPolicy(
-    request: protos.google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest,
-    callback: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
-      | protos.google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateFirewallPolicy(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
-          | protos.google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
-      | protos.google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
-      (
-        | protos.google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateFirewallPolicy(
+      request: protos.google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest,
+      callback: Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+          protos.google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateFirewallPolicy(
+      request?: protos.google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+          protos.google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+          protos.google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+        protos.google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'firewall_policy.name': request.firewallPolicy!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'firewall_policy.name': request.firewallPolicy!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateFirewallPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
-          | protos.google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+        protos.google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateFirewallPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateFirewallPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
-          (
-            | protos.google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateFirewallPolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateFirewallPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+        protos.google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateFirewallPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes the specified firewall policy.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the policy to be deleted, in the format
-   *   `projects/{project}/firewallpolicies/{firewallpolicy}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.delete_firewall_policy.js</caption>
-   * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_DeleteFirewallPolicy_async
-   */
+/**
+ * Deletes the specified firewall policy.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the policy to be deleted, in the format
+ *   `projects/{project}/firewallpolicies/{firewallpolicy}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.delete_firewall_policy.js</caption>
+ * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_DeleteFirewallPolicy_async
+ */
   deleteFirewallPolicy(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest|undefined, {}|undefined
+      ]>;
   deleteFirewallPolicy(
-    request: protos.google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteFirewallPolicy(
-    request: protos.google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteFirewallPolicy(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteFirewallPolicy(
+      request: protos.google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteFirewallPolicy(
+      request?: protos.google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteFirewallPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteFirewallPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteFirewallPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteFirewallPolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteFirewallPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteFirewallPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Reorders all firewall policies.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the project to list the policies for, in the format
-   *   `projects/{project}`.
-   * @param {string[]} request.names
-   *   Required. A list containing all policy names, in the new order. Each name
-   *   is in the format `projects/{project}/firewallpolicies/{firewallpolicy}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesResponse|ReorderFirewallPoliciesResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.reorder_firewall_policies.js</caption>
-   * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_ReorderFirewallPolicies_async
-   */
+/**
+ * Reorders all firewall policies.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the project to list the policies for, in the format
+ *   `projects/{project}`.
+ * @param {string[]} request.names
+ *   Required. A list containing all policy names, in the new order. Each name
+ *   is in the format `projects/{project}/firewallpolicies/{firewallpolicy}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesResponse|ReorderFirewallPoliciesResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.reorder_firewall_policies.js</caption>
+ * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_ReorderFirewallPolicies_async
+ */
   reorderFirewallPolicies(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesResponse,
-      (
-        | protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesResponse,
+        protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest|undefined, {}|undefined
+      ]>;
   reorderFirewallPolicies(
-    request: protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesResponse,
-      | protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  reorderFirewallPolicies(
-    request: protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest,
-    callback: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesResponse,
-      | protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  reorderFirewallPolicies(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesResponse,
-          | protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesResponse,
-      | protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesResponse,
-      (
-        | protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest|null|undefined,
+          {}|null|undefined>): void;
+  reorderFirewallPolicies(
+      request: protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest,
+      callback: Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesResponse,
+          protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest|null|undefined,
+          {}|null|undefined>): void;
+  reorderFirewallPolicies(
+      request?: protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesResponse,
+          protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesResponse,
+          protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesResponse,
+        protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('reorderFirewallPolicies request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesResponse,
-          | protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesResponse,
+        protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('reorderFirewallPolicies response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .reorderFirewallPolicies(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesResponse,
-          (
-            | protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('reorderFirewallPolicies response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.reorderFirewallPolicies(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesResponse,
+        protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('reorderFirewallPolicies response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Returns the list of all keys that belong to a project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the project that contains the keys that is
-   *   listed, in the format `projects/{project}`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of keys to return. Default is 10. Max limit is
-   *   1000.
-   * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous.
-   *   ListKeysRequest, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.recaptchaenterprise.v1.Key|Key}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listKeysAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Returns the list of all keys that belong to a project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the project that contains the keys that is
+ *   listed, in the format `projects/{project}`.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of keys to return. Default is 10. Max limit is
+ *   1000.
+ * @param {string} [request.pageToken]
+ *   Optional. The next_page_token value returned from a previous.
+ *   ListKeysRequest, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.recaptchaenterprise.v1.Key|Key}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listKeysAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listKeys(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IKey[],
-      protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest | null,
-      protos.google.cloud.recaptchaenterprise.v1.IListKeysResponse,
-    ]
-  >;
+      request?: protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IKey[],
+        protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest|null,
+        protos.google.cloud.recaptchaenterprise.v1.IListKeysResponse
+      ]>;
   listKeys(
-    request: protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest,
-      | protos.google.cloud.recaptchaenterprise.v1.IListKeysResponse
-      | null
-      | undefined,
-      protos.google.cloud.recaptchaenterprise.v1.IKey
-    >
-  ): void;
-  listKeys(
-    request: protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest,
-      | protos.google.cloud.recaptchaenterprise.v1.IListKeysResponse
-      | null
-      | undefined,
-      protos.google.cloud.recaptchaenterprise.v1.IKey
-    >
-  ): void;
-  listKeys(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest,
-          | protos.google.cloud.recaptchaenterprise.v1.IListKeysResponse
-          | null
-          | undefined,
-          protos.google.cloud.recaptchaenterprise.v1.IKey
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest,
-      | protos.google.cloud.recaptchaenterprise.v1.IListKeysResponse
-      | null
-      | undefined,
-      protos.google.cloud.recaptchaenterprise.v1.IKey
-    >
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IKey[],
-      protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest | null,
-      protos.google.cloud.recaptchaenterprise.v1.IListKeysResponse,
-    ]
-  > | void {
+          protos.google.cloud.recaptchaenterprise.v1.IListKeysResponse|null|undefined,
+          protos.google.cloud.recaptchaenterprise.v1.IKey>): void;
+  listKeys(
+      request: protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest,
+          protos.google.cloud.recaptchaenterprise.v1.IListKeysResponse|null|undefined,
+          protos.google.cloud.recaptchaenterprise.v1.IKey>): void;
+  listKeys(
+      request?: protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest,
+          protos.google.cloud.recaptchaenterprise.v1.IListKeysResponse|null|undefined,
+          protos.google.cloud.recaptchaenterprise.v1.IKey>,
+      callback?: PaginationCallback<
+          protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest,
+          protos.google.cloud.recaptchaenterprise.v1.IListKeysResponse|null|undefined,
+          protos.google.cloud.recaptchaenterprise.v1.IKey>):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IKey[],
+        protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest|null,
+        protos.google.cloud.recaptchaenterprise.v1.IListKeysResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest,
-          | protos.google.cloud.recaptchaenterprise.v1.IListKeysResponse
-          | null
-          | undefined,
-          protos.google.cloud.recaptchaenterprise.v1.IKey
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest,
+      protos.google.cloud.recaptchaenterprise.v1.IListKeysResponse|null|undefined,
+      protos.google.cloud.recaptchaenterprise.v1.IKey>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listKeys values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2639,59 +2039,56 @@ export class RecaptchaEnterpriseServiceClient {
     this._log.info('listKeys request %j', request);
     return this.innerApiCalls
       .listKeys(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.recaptchaenterprise.v1.IKey[],
-          protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest | null,
-          protos.google.cloud.recaptchaenterprise.v1.IListKeysResponse,
-        ]) => {
-          this._log.info('listKeys values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.recaptchaenterprise.v1.IKey[],
+        protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest|null,
+        protos.google.cloud.recaptchaenterprise.v1.IListKeysResponse
+      ]) => {
+        this._log.info('listKeys values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listKeys`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the project that contains the keys that is
-   *   listed, in the format `projects/{project}`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of keys to return. Default is 10. Max limit is
-   *   1000.
-   * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous.
-   *   ListKeysRequest, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.recaptchaenterprise.v1.Key|Key} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listKeysAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listKeys`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the project that contains the keys that is
+ *   listed, in the format `projects/{project}`.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of keys to return. Default is 10. Max limit is
+ *   1000.
+ * @param {string} [request.pageToken]
+ *   Optional. The next_page_token value returned from a previous.
+ *   ListKeysRequest, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.recaptchaenterprise.v1.Key|Key} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listKeysAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listKeysStream(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listKeys'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listKeys stream %j', request);
     return this.descriptors.page.listKeys.createStream(
       this.innerApiCalls.listKeys as GaxCall,
@@ -2700,50 +2097,49 @@ export class RecaptchaEnterpriseServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listKeys`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the project that contains the keys that is
-   *   listed, in the format `projects/{project}`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of keys to return. Default is 10. Max limit is
-   *   1000.
-   * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous.
-   *   ListKeysRequest, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.recaptchaenterprise.v1.Key|Key}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.list_keys.js</caption>
-   * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_ListKeys_async
-   */
+/**
+ * Equivalent to `listKeys`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the project that contains the keys that is
+ *   listed, in the format `projects/{project}`.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of keys to return. Default is 10. Max limit is
+ *   1000.
+ * @param {string} [request.pageToken]
+ *   Optional. The next_page_token value returned from a previous.
+ *   ListKeysRequest, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.recaptchaenterprise.v1.Key|Key}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.list_keys.js</caption>
+ * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_ListKeys_async
+ */
   listKeysAsync(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.recaptchaenterprise.v1.IKey> {
+      request?: protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.recaptchaenterprise.v1.IKey>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listKeys'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listKeys iterate %j', request);
     return this.descriptors.page.listKeys.asyncIterate(
       this.innerApiCalls['listKeys'] as GaxCall,
@@ -2751,117 +2147,92 @@ export class RecaptchaEnterpriseServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.recaptchaenterprise.v1.IKey>;
   }
-  /**
-   * Lists all IP overrides for a key.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent key for which the IP overrides are listed, in the
-   *   format `projects/{project}/keys/{key}`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of overrides to return. Default is 10. Max
-   *   limit is 100. If the number of overrides is less than the page_size, all
-   *   overrides are returned. If the page size is more than 100, it is coerced to
-   *   100.
-   * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous
-   *   ListIpOverridesRequest, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.recaptchaenterprise.v1.IpOverrideData|IpOverrideData}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listIpOverridesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all IP overrides for a key.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent key for which the IP overrides are listed, in the
+ *   format `projects/{project}/keys/{key}`.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of overrides to return. Default is 10. Max
+ *   limit is 100. If the number of overrides is less than the page_size, all
+ *   overrides are returned. If the page size is more than 100, it is coerced to
+ *   100.
+ * @param {string} [request.pageToken]
+ *   Optional. The next_page_token value returned from a previous
+ *   ListIpOverridesRequest, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.recaptchaenterprise.v1.IpOverrideData|IpOverrideData}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listIpOverridesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listIpOverrides(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IIpOverrideData[],
-      protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest | null,
-      protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IIpOverrideData[],
+        protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest|null,
+        protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesResponse
+      ]>;
   listIpOverrides(
-    request: protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest,
-      | protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesResponse
-      | null
-      | undefined,
-      protos.google.cloud.recaptchaenterprise.v1.IIpOverrideData
-    >
-  ): void;
-  listIpOverrides(
-    request: protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest,
-      | protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesResponse
-      | null
-      | undefined,
-      protos.google.cloud.recaptchaenterprise.v1.IIpOverrideData
-    >
-  ): void;
-  listIpOverrides(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest,
-          | protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesResponse
-          | null
-          | undefined,
-          protos.google.cloud.recaptchaenterprise.v1.IIpOverrideData
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest,
-      | protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesResponse
-      | null
-      | undefined,
-      protos.google.cloud.recaptchaenterprise.v1.IIpOverrideData
-    >
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IIpOverrideData[],
-      protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest | null,
-      protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesResponse,
-    ]
-  > | void {
+          protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesResponse|null|undefined,
+          protos.google.cloud.recaptchaenterprise.v1.IIpOverrideData>): void;
+  listIpOverrides(
+      request: protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest,
+          protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesResponse|null|undefined,
+          protos.google.cloud.recaptchaenterprise.v1.IIpOverrideData>): void;
+  listIpOverrides(
+      request?: protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest,
+          protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesResponse|null|undefined,
+          protos.google.cloud.recaptchaenterprise.v1.IIpOverrideData>,
+      callback?: PaginationCallback<
+          protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest,
+          protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesResponse|null|undefined,
+          protos.google.cloud.recaptchaenterprise.v1.IIpOverrideData>):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IIpOverrideData[],
+        protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest|null,
+        protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest,
-          | protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesResponse
-          | null
-          | undefined,
-          protos.google.cloud.recaptchaenterprise.v1.IIpOverrideData
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest,
+      protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesResponse|null|undefined,
+      protos.google.cloud.recaptchaenterprise.v1.IIpOverrideData>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listIpOverrides values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2870,61 +2241,58 @@ export class RecaptchaEnterpriseServiceClient {
     this._log.info('listIpOverrides request %j', request);
     return this.innerApiCalls
       .listIpOverrides(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.recaptchaenterprise.v1.IIpOverrideData[],
-          protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest | null,
-          protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesResponse,
-        ]) => {
-          this._log.info('listIpOverrides values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.recaptchaenterprise.v1.IIpOverrideData[],
+        protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest|null,
+        protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesResponse
+      ]) => {
+        this._log.info('listIpOverrides values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listIpOverrides`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent key for which the IP overrides are listed, in the
-   *   format `projects/{project}/keys/{key}`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of overrides to return. Default is 10. Max
-   *   limit is 100. If the number of overrides is less than the page_size, all
-   *   overrides are returned. If the page size is more than 100, it is coerced to
-   *   100.
-   * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous
-   *   ListIpOverridesRequest, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.recaptchaenterprise.v1.IpOverrideData|IpOverrideData} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listIpOverridesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listIpOverrides`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent key for which the IP overrides are listed, in the
+ *   format `projects/{project}/keys/{key}`.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of overrides to return. Default is 10. Max
+ *   limit is 100. If the number of overrides is less than the page_size, all
+ *   overrides are returned. If the page size is more than 100, it is coerced to
+ *   100.
+ * @param {string} [request.pageToken]
+ *   Optional. The next_page_token value returned from a previous
+ *   ListIpOverridesRequest, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.recaptchaenterprise.v1.IpOverrideData|IpOverrideData} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listIpOverridesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listIpOverridesStream(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listIpOverrides'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listIpOverrides stream %j', request);
     return this.descriptors.page.listIpOverrides.createStream(
       this.innerApiCalls.listIpOverrides as GaxCall,
@@ -2933,52 +2301,51 @@ export class RecaptchaEnterpriseServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listIpOverrides`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent key for which the IP overrides are listed, in the
-   *   format `projects/{project}/keys/{key}`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of overrides to return. Default is 10. Max
-   *   limit is 100. If the number of overrides is less than the page_size, all
-   *   overrides are returned. If the page size is more than 100, it is coerced to
-   *   100.
-   * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous
-   *   ListIpOverridesRequest, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.recaptchaenterprise.v1.IpOverrideData|IpOverrideData}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.list_ip_overrides.js</caption>
-   * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_ListIpOverrides_async
-   */
+/**
+ * Equivalent to `listIpOverrides`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent key for which the IP overrides are listed, in the
+ *   format `projects/{project}/keys/{key}`.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of overrides to return. Default is 10. Max
+ *   limit is 100. If the number of overrides is less than the page_size, all
+ *   overrides are returned. If the page size is more than 100, it is coerced to
+ *   100.
+ * @param {string} [request.pageToken]
+ *   Optional. The next_page_token value returned from a previous
+ *   ListIpOverridesRequest, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.recaptchaenterprise.v1.IpOverrideData|IpOverrideData}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.list_ip_overrides.js</caption>
+ * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_ListIpOverrides_async
+ */
   listIpOverridesAsync(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.recaptchaenterprise.v1.IIpOverrideData> {
+      request?: protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.recaptchaenterprise.v1.IIpOverrideData>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listIpOverrides'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listIpOverrides iterate %j', request);
     return this.descriptors.page.listIpOverrides.asyncIterate(
       this.innerApiCalls['listIpOverrides'] as GaxCall,
@@ -2986,115 +2353,90 @@ export class RecaptchaEnterpriseServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.recaptchaenterprise.v1.IIpOverrideData>;
   }
-  /**
-   * Returns the list of all firewall policies that belong to a project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the project to list the policies for, in the format
-   *   `projects/{project}`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of policies to return. Default is 10. Max
-   *   limit is 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous.
-   *   ListFirewallPoliciesRequest, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.recaptchaenterprise.v1.FirewallPolicy|FirewallPolicy}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listFirewallPoliciesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Returns the list of all firewall policies that belong to a project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the project to list the policies for, in the format
+ *   `projects/{project}`.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of policies to return. Default is 10. Max
+ *   limit is 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. The next_page_token value returned from a previous.
+ *   ListFirewallPoliciesRequest, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.recaptchaenterprise.v1.FirewallPolicy|FirewallPolicy}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listFirewallPoliciesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listFirewallPolicies(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy[],
-      protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest | null,
-      protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy[],
+        protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest|null,
+        protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesResponse
+      ]>;
   listFirewallPolicies(
-    request: protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest,
-      | protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesResponse
-      | null
-      | undefined,
-      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy
-    >
-  ): void;
-  listFirewallPolicies(
-    request: protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest,
-      | protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesResponse
-      | null
-      | undefined,
-      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy
-    >
-  ): void;
-  listFirewallPolicies(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest,
-          | protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesResponse
-          | null
-          | undefined,
-          protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest,
-      | protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesResponse
-      | null
-      | undefined,
-      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy
-    >
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy[],
-      protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest | null,
-      protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesResponse,
-    ]
-  > | void {
+          protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesResponse|null|undefined,
+          protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy>): void;
+  listFirewallPolicies(
+      request: protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest,
+          protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesResponse|null|undefined,
+          protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy>): void;
+  listFirewallPolicies(
+      request?: protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest,
+          protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesResponse|null|undefined,
+          protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy>,
+      callback?: PaginationCallback<
+          protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest,
+          protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesResponse|null|undefined,
+          protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy>):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy[],
+        protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest|null,
+        protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest,
-          | protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesResponse
-          | null
-          | undefined,
-          protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest,
+      protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesResponse|null|undefined,
+      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listFirewallPolicies values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3103,59 +2445,56 @@ export class RecaptchaEnterpriseServiceClient {
     this._log.info('listFirewallPolicies request %j', request);
     return this.innerApiCalls
       .listFirewallPolicies(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy[],
-          protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest | null,
-          protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesResponse,
-        ]) => {
-          this._log.info('listFirewallPolicies values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy[],
+        protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest|null,
+        protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesResponse
+      ]) => {
+        this._log.info('listFirewallPolicies values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listFirewallPolicies`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the project to list the policies for, in the format
-   *   `projects/{project}`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of policies to return. Default is 10. Max
-   *   limit is 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous.
-   *   ListFirewallPoliciesRequest, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.recaptchaenterprise.v1.FirewallPolicy|FirewallPolicy} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listFirewallPoliciesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listFirewallPolicies`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the project to list the policies for, in the format
+ *   `projects/{project}`.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of policies to return. Default is 10. Max
+ *   limit is 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. The next_page_token value returned from a previous.
+ *   ListFirewallPoliciesRequest, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.recaptchaenterprise.v1.FirewallPolicy|FirewallPolicy} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listFirewallPoliciesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listFirewallPoliciesStream(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listFirewallPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listFirewallPolicies stream %j', request);
     return this.descriptors.page.listFirewallPolicies.createStream(
       this.innerApiCalls.listFirewallPolicies as GaxCall,
@@ -3164,50 +2503,49 @@ export class RecaptchaEnterpriseServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listFirewallPolicies`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the project to list the policies for, in the format
-   *   `projects/{project}`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of policies to return. Default is 10. Max
-   *   limit is 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous.
-   *   ListFirewallPoliciesRequest, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.recaptchaenterprise.v1.FirewallPolicy|FirewallPolicy}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.list_firewall_policies.js</caption>
-   * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_ListFirewallPolicies_async
-   */
+/**
+ * Equivalent to `listFirewallPolicies`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the project to list the policies for, in the format
+ *   `projects/{project}`.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of policies to return. Default is 10. Max
+ *   limit is 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. The next_page_token value returned from a previous.
+ *   ListFirewallPoliciesRequest, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.recaptchaenterprise.v1.FirewallPolicy|FirewallPolicy}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.list_firewall_policies.js</caption>
+ * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_ListFirewallPolicies_async
+ */
   listFirewallPoliciesAsync(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy> {
+      request?: protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listFirewallPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listFirewallPolicies iterate %j', request);
     return this.descriptors.page.listFirewallPolicies.asyncIterate(
       this.innerApiCalls['listFirewallPolicies'] as GaxCall,
@@ -3215,120 +2553,95 @@ export class RecaptchaEnterpriseServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy>;
   }
-  /**
-   * List groups of related accounts.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the project to list related account groups from, in
-   *   the format `projects/{project}`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of groups to return. The service might return
-   *   fewer than this value. If unspecified, at most 50 groups are returned. The
-   *   maximum value is 1000; values above 1000 are coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListRelatedAccountGroups`
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `ListRelatedAccountGroups` must match the call that provided the page
-   *   token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroup|RelatedAccountGroup}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listRelatedAccountGroupsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * List groups of related accounts.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the project to list related account groups from, in
+ *   the format `projects/{project}`.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of groups to return. The service might return
+ *   fewer than this value. If unspecified, at most 50 groups are returned. The
+ *   maximum value is 1000; values above 1000 are coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListRelatedAccountGroups`
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `ListRelatedAccountGroups` must match the call that provided the page
+ *   token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroup|RelatedAccountGroup}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listRelatedAccountGroupsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listRelatedAccountGroups(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup[],
-      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest | null,
-      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup[],
+        protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest|null,
+        protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse
+      ]>;
   listRelatedAccountGroups(
-    request: protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest,
-      | protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse
-      | null
-      | undefined,
-      protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup
-    >
-  ): void;
-  listRelatedAccountGroups(
-    request: protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest,
-      | protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse
-      | null
-      | undefined,
-      protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup
-    >
-  ): void;
-  listRelatedAccountGroups(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest,
-          | protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse
-          | null
-          | undefined,
-          protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest,
-      | protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse
-      | null
-      | undefined,
-      protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup
-    >
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup[],
-      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest | null,
-      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse,
-    ]
-  > | void {
+          protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse|null|undefined,
+          protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup>): void;
+  listRelatedAccountGroups(
+      request: protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest,
+          protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse|null|undefined,
+          protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup>): void;
+  listRelatedAccountGroups(
+      request?: protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest,
+          protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse|null|undefined,
+          protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup>,
+      callback?: PaginationCallback<
+          protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest,
+          protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse|null|undefined,
+          protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup>):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup[],
+        protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest|null,
+        protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest,
-          | protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse
-          | null
-          | undefined,
-          protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest,
+      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse|null|undefined,
+      protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listRelatedAccountGroups values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3337,64 +2650,61 @@ export class RecaptchaEnterpriseServiceClient {
     this._log.info('listRelatedAccountGroups request %j', request);
     return this.innerApiCalls
       .listRelatedAccountGroups(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup[],
-          protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest | null,
-          protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse,
-        ]) => {
-          this._log.info('listRelatedAccountGroups values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup[],
+        protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest|null,
+        protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse
+      ]) => {
+        this._log.info('listRelatedAccountGroups values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listRelatedAccountGroups`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the project to list related account groups from, in
-   *   the format `projects/{project}`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of groups to return. The service might return
-   *   fewer than this value. If unspecified, at most 50 groups are returned. The
-   *   maximum value is 1000; values above 1000 are coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListRelatedAccountGroups`
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `ListRelatedAccountGroups` must match the call that provided the page
-   *   token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroup|RelatedAccountGroup} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listRelatedAccountGroupsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listRelatedAccountGroups`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the project to list related account groups from, in
+ *   the format `projects/{project}`.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of groups to return. The service might return
+ *   fewer than this value. If unspecified, at most 50 groups are returned. The
+ *   maximum value is 1000; values above 1000 are coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListRelatedAccountGroups`
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `ListRelatedAccountGroups` must match the call that provided the page
+ *   token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroup|RelatedAccountGroup} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listRelatedAccountGroupsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listRelatedAccountGroupsStream(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listRelatedAccountGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listRelatedAccountGroups stream %j', request);
     return this.descriptors.page.listRelatedAccountGroups.createStream(
       this.innerApiCalls.listRelatedAccountGroups as GaxCall,
@@ -3403,55 +2713,54 @@ export class RecaptchaEnterpriseServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listRelatedAccountGroups`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the project to list related account groups from, in
-   *   the format `projects/{project}`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of groups to return. The service might return
-   *   fewer than this value. If unspecified, at most 50 groups are returned. The
-   *   maximum value is 1000; values above 1000 are coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListRelatedAccountGroups`
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `ListRelatedAccountGroups` must match the call that provided the page
-   *   token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroup|RelatedAccountGroup}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.list_related_account_groups.js</caption>
-   * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_ListRelatedAccountGroups_async
-   */
+/**
+ * Equivalent to `listRelatedAccountGroups`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the project to list related account groups from, in
+ *   the format `projects/{project}`.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of groups to return. The service might return
+ *   fewer than this value. If unspecified, at most 50 groups are returned. The
+ *   maximum value is 1000; values above 1000 are coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListRelatedAccountGroups`
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `ListRelatedAccountGroups` must match the call that provided the page
+ *   token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroup|RelatedAccountGroup}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.list_related_account_groups.js</caption>
+ * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_ListRelatedAccountGroups_async
+ */
   listRelatedAccountGroupsAsync(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup> {
+      request?: protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listRelatedAccountGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listRelatedAccountGroups iterate %j', request);
     return this.descriptors.page.listRelatedAccountGroups.asyncIterate(
       this.innerApiCalls['listRelatedAccountGroups'] as GaxCall,
@@ -3459,193 +2768,158 @@ export class RecaptchaEnterpriseServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup>;
   }
-  /**
-   * Get memberships in a group of related accounts.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name for the related account group in the format
-   *   `projects/{project}/relatedaccountgroups/{relatedaccountgroup}`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of accounts to return. The service might
-   *   return fewer than this value. If unspecified, at most 50 accounts are
-   *   returned. The maximum value is 1000; values above 1000 are coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous
-   *   `ListRelatedAccountGroupMemberships` call.
-   *
-   *   When paginating, all other parameters provided to
-   *   `ListRelatedAccountGroupMemberships` must match the call that provided the
-   *   page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership|RelatedAccountGroupMembership}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listRelatedAccountGroupMembershipsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Get memberships in a group of related accounts.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name for the related account group in the format
+ *   `projects/{project}/relatedaccountgroups/{relatedaccountgroup}`.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of accounts to return. The service might
+ *   return fewer than this value. If unspecified, at most 50 accounts are
+ *   returned. The maximum value is 1000; values above 1000 are coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous
+ *   `ListRelatedAccountGroupMemberships` call.
+ *
+ *   When paginating, all other parameters provided to
+ *   `ListRelatedAccountGroupMemberships` must match the call that provided the
+ *   page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership|RelatedAccountGroupMembership}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listRelatedAccountGroupMembershipsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listRelatedAccountGroupMemberships(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership[],
-      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest | null,
-      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership[],
+        protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest|null,
+        protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse
+      ]>;
   listRelatedAccountGroupMemberships(
-    request: protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest,
-      | protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse
-      | null
-      | undefined,
-      protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership
-    >
-  ): void;
-  listRelatedAccountGroupMemberships(
-    request: protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest,
-      | protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse
-      | null
-      | undefined,
-      protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership
-    >
-  ): void;
-  listRelatedAccountGroupMemberships(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest,
-          | protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse
-          | null
-          | undefined,
-          protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest,
-      | protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse
-      | null
-      | undefined,
-      protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership
-    >
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership[],
-      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest | null,
-      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse,
-    ]
-  > | void {
+          protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse|null|undefined,
+          protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership>): void;
+  listRelatedAccountGroupMemberships(
+      request: protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest,
+          protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse|null|undefined,
+          protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership>): void;
+  listRelatedAccountGroupMemberships(
+      request?: protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest,
+          protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse|null|undefined,
+          protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership>,
+      callback?: PaginationCallback<
+          protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest,
+          protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse|null|undefined,
+          protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership>):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership[],
+        protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest|null,
+        protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest,
-          | protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse
-          | null
-          | undefined,
-          protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest,
+      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse|null|undefined,
+      protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info(
-            'listRelatedAccountGroupMemberships values %j',
-            values
-          );
+          this._log.info('listRelatedAccountGroupMemberships values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
     this._log.info('listRelatedAccountGroupMemberships request %j', request);
     return this.innerApiCalls
       .listRelatedAccountGroupMemberships(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership[],
-          protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest | null,
-          protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse,
-        ]) => {
-          this._log.info(
-            'listRelatedAccountGroupMemberships values %j',
-            response
-          );
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership[],
+        protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest|null,
+        protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse
+      ]) => {
+        this._log.info('listRelatedAccountGroupMemberships values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listRelatedAccountGroupMemberships`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name for the related account group in the format
-   *   `projects/{project}/relatedaccountgroups/{relatedaccountgroup}`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of accounts to return. The service might
-   *   return fewer than this value. If unspecified, at most 50 accounts are
-   *   returned. The maximum value is 1000; values above 1000 are coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous
-   *   `ListRelatedAccountGroupMemberships` call.
-   *
-   *   When paginating, all other parameters provided to
-   *   `ListRelatedAccountGroupMemberships` must match the call that provided the
-   *   page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership|RelatedAccountGroupMembership} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listRelatedAccountGroupMembershipsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listRelatedAccountGroupMemberships`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name for the related account group in the format
+ *   `projects/{project}/relatedaccountgroups/{relatedaccountgroup}`.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of accounts to return. The service might
+ *   return fewer than this value. If unspecified, at most 50 accounts are
+ *   returned. The maximum value is 1000; values above 1000 are coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous
+ *   `ListRelatedAccountGroupMemberships` call.
+ *
+ *   When paginating, all other parameters provided to
+ *   `ListRelatedAccountGroupMemberships` must match the call that provided the
+ *   page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership|RelatedAccountGroupMembership} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listRelatedAccountGroupMembershipsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listRelatedAccountGroupMembershipsStream(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    const defaultCallSettings =
-      this._defaults['listRelatedAccountGroupMemberships'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    const defaultCallSettings = this._defaults['listRelatedAccountGroupMemberships'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
     this._log.info('listRelatedAccountGroupMemberships stream %j', request);
     return this.descriptors.page.listRelatedAccountGroupMemberships.createStream(
       this.innerApiCalls.listRelatedAccountGroupMemberships as GaxCall,
@@ -3654,56 +2928,54 @@ export class RecaptchaEnterpriseServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listRelatedAccountGroupMemberships`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name for the related account group in the format
-   *   `projects/{project}/relatedaccountgroups/{relatedaccountgroup}`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of accounts to return. The service might
-   *   return fewer than this value. If unspecified, at most 50 accounts are
-   *   returned. The maximum value is 1000; values above 1000 are coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous
-   *   `ListRelatedAccountGroupMemberships` call.
-   *
-   *   When paginating, all other parameters provided to
-   *   `ListRelatedAccountGroupMemberships` must match the call that provided the
-   *   page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership|RelatedAccountGroupMembership}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.list_related_account_group_memberships.js</caption>
-   * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_ListRelatedAccountGroupMemberships_async
-   */
+/**
+ * Equivalent to `listRelatedAccountGroupMemberships`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name for the related account group in the format
+ *   `projects/{project}/relatedaccountgroups/{relatedaccountgroup}`.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of accounts to return. The service might
+ *   return fewer than this value. If unspecified, at most 50 accounts are
+ *   returned. The maximum value is 1000; values above 1000 are coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous
+ *   `ListRelatedAccountGroupMemberships` call.
+ *
+ *   When paginating, all other parameters provided to
+ *   `ListRelatedAccountGroupMemberships` must match the call that provided the
+ *   page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership|RelatedAccountGroupMembership}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.list_related_account_group_memberships.js</caption>
+ * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_ListRelatedAccountGroupMemberships_async
+ */
   listRelatedAccountGroupMembershipsAsync(
-    request?: protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership> {
+      request?: protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    const defaultCallSettings =
-      this._defaults['listRelatedAccountGroupMemberships'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    const defaultCallSettings = this._defaults['listRelatedAccountGroupMemberships'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
     this._log.info('listRelatedAccountGroupMemberships iterate %j', request);
     return this.descriptors.page.listRelatedAccountGroupMemberships.asyncIterate(
       this.innerApiCalls['listRelatedAccountGroupMemberships'] as GaxCall,
@@ -3711,219 +2983,184 @@ export class RecaptchaEnterpriseServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership>;
   }
-  /**
-   * Search group memberships related to a given account.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.project
-   *   Required. The name of the project to search related account group
-   *   memberships from. Specify the project name in the following format:
-   *   `projects/{project}`.
-   * @param {string} [request.accountId]
-   *   Optional. The unique stable account identifier used to search connections.
-   *   The identifier should correspond to an `account_id` provided in a previous
-   *   `CreateAssessment` or `AnnotateAssessment` call. Either hashed_account_id
-   *   or account_id must be set, but not both.
-   * @param {Buffer} [request.hashedAccountId]
-   *   Optional. Deprecated: use `account_id` instead.
-   *   The unique stable hashed account identifier used to search connections. The
-   *   identifier should correspond to a `hashed_account_id` provided in a
-   *   previous `CreateAssessment` or `AnnotateAssessment` call. Either
-   *   hashed_account_id or account_id must be set, but not both.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of groups to return. The service might return
-   *   fewer than this value. If unspecified, at most 50 groups are returned. The
-   *   maximum value is 1000; values above 1000 are coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous
-   *   `SearchRelatedAccountGroupMemberships` call. Provide this to retrieve the
-   *   subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `SearchRelatedAccountGroupMemberships` must match the call that provided
-   *   the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership|RelatedAccountGroupMembership}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `searchRelatedAccountGroupMembershipsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Search group memberships related to a given account.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.project
+ *   Required. The name of the project to search related account group
+ *   memberships from. Specify the project name in the following format:
+ *   `projects/{project}`.
+ * @param {string} [request.accountId]
+ *   Optional. The unique stable account identifier used to search connections.
+ *   The identifier should correspond to an `account_id` provided in a previous
+ *   `CreateAssessment` or `AnnotateAssessment` call. Either hashed_account_id
+ *   or account_id must be set, but not both.
+ * @param {Buffer} [request.hashedAccountId]
+ *   Optional. Deprecated: use `account_id` instead.
+ *   The unique stable hashed account identifier used to search connections. The
+ *   identifier should correspond to a `hashed_account_id` provided in a
+ *   previous `CreateAssessment` or `AnnotateAssessment` call. Either
+ *   hashed_account_id or account_id must be set, but not both.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of groups to return. The service might return
+ *   fewer than this value. If unspecified, at most 50 groups are returned. The
+ *   maximum value is 1000; values above 1000 are coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous
+ *   `SearchRelatedAccountGroupMemberships` call. Provide this to retrieve the
+ *   subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `SearchRelatedAccountGroupMemberships` must match the call that provided
+ *   the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership|RelatedAccountGroupMembership}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `searchRelatedAccountGroupMembershipsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   searchRelatedAccountGroupMemberships(
-    request?: protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership[],
-      protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest | null,
-      protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership[],
+        protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest|null,
+        protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse
+      ]>;
   searchRelatedAccountGroupMemberships(
-    request: protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest,
-      | protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse
-      | null
-      | undefined,
-      protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership
-    >
-  ): void;
-  searchRelatedAccountGroupMemberships(
-    request: protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest,
-      | protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse
-      | null
-      | undefined,
-      protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership
-    >
-  ): void;
-  searchRelatedAccountGroupMemberships(
-    request?: protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest,
-          | protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse
-          | null
-          | undefined,
-          protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest,
-      | protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse
-      | null
-      | undefined,
-      protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership
-    >
-  ): Promise<
-    [
-      protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership[],
-      protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest | null,
-      protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse,
-    ]
-  > | void {
+          protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse|null|undefined,
+          protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership>): void;
+  searchRelatedAccountGroupMemberships(
+      request: protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest,
+          protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse|null|undefined,
+          protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership>): void;
+  searchRelatedAccountGroupMemberships(
+      request?: protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest,
+          protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse|null|undefined,
+          protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership>,
+      callback?: PaginationCallback<
+          protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest,
+          protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse|null|undefined,
+          protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership>):
+      Promise<[
+        protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership[],
+        protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest|null,
+        protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest,
-          | protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse
-          | null
-          | undefined,
-          protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest,
+      protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse|null|undefined,
+      protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info(
-            'searchRelatedAccountGroupMemberships values %j',
-            values
-          );
+          this._log.info('searchRelatedAccountGroupMemberships values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
     this._log.info('searchRelatedAccountGroupMemberships request %j', request);
     return this.innerApiCalls
       .searchRelatedAccountGroupMemberships(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership[],
-          protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest | null,
-          protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse,
-        ]) => {
-          this._log.info(
-            'searchRelatedAccountGroupMemberships values %j',
-            response
-          );
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership[],
+        protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest|null,
+        protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse
+      ]) => {
+        this._log.info('searchRelatedAccountGroupMemberships values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `searchRelatedAccountGroupMemberships`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.project
-   *   Required. The name of the project to search related account group
-   *   memberships from. Specify the project name in the following format:
-   *   `projects/{project}`.
-   * @param {string} [request.accountId]
-   *   Optional. The unique stable account identifier used to search connections.
-   *   The identifier should correspond to an `account_id` provided in a previous
-   *   `CreateAssessment` or `AnnotateAssessment` call. Either hashed_account_id
-   *   or account_id must be set, but not both.
-   * @param {Buffer} [request.hashedAccountId]
-   *   Optional. Deprecated: use `account_id` instead.
-   *   The unique stable hashed account identifier used to search connections. The
-   *   identifier should correspond to a `hashed_account_id` provided in a
-   *   previous `CreateAssessment` or `AnnotateAssessment` call. Either
-   *   hashed_account_id or account_id must be set, but not both.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of groups to return. The service might return
-   *   fewer than this value. If unspecified, at most 50 groups are returned. The
-   *   maximum value is 1000; values above 1000 are coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous
-   *   `SearchRelatedAccountGroupMemberships` call. Provide this to retrieve the
-   *   subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `SearchRelatedAccountGroupMemberships` must match the call that provided
-   *   the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership|RelatedAccountGroupMembership} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `searchRelatedAccountGroupMembershipsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `searchRelatedAccountGroupMemberships`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.project
+ *   Required. The name of the project to search related account group
+ *   memberships from. Specify the project name in the following format:
+ *   `projects/{project}`.
+ * @param {string} [request.accountId]
+ *   Optional. The unique stable account identifier used to search connections.
+ *   The identifier should correspond to an `account_id` provided in a previous
+ *   `CreateAssessment` or `AnnotateAssessment` call. Either hashed_account_id
+ *   or account_id must be set, but not both.
+ * @param {Buffer} [request.hashedAccountId]
+ *   Optional. Deprecated: use `account_id` instead.
+ *   The unique stable hashed account identifier used to search connections. The
+ *   identifier should correspond to a `hashed_account_id` provided in a
+ *   previous `CreateAssessment` or `AnnotateAssessment` call. Either
+ *   hashed_account_id or account_id must be set, but not both.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of groups to return. The service might return
+ *   fewer than this value. If unspecified, at most 50 groups are returned. The
+ *   maximum value is 1000; values above 1000 are coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous
+ *   `SearchRelatedAccountGroupMemberships` call. Provide this to retrieve the
+ *   subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `SearchRelatedAccountGroupMemberships` must match the call that provided
+ *   the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership|RelatedAccountGroupMembership} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `searchRelatedAccountGroupMembershipsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   searchRelatedAccountGroupMembershipsStream(
-    request?: protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-      });
-    const defaultCallSettings =
-      this._defaults['searchRelatedAccountGroupMemberships'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
     });
+    const defaultCallSettings = this._defaults['searchRelatedAccountGroupMemberships'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
     this._log.info('searchRelatedAccountGroupMemberships stream %j', request);
     return this.descriptors.page.searchRelatedAccountGroupMemberships.createStream(
       this.innerApiCalls.searchRelatedAccountGroupMemberships as GaxCall,
@@ -3932,69 +3169,67 @@ export class RecaptchaEnterpriseServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `searchRelatedAccountGroupMemberships`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.project
-   *   Required. The name of the project to search related account group
-   *   memberships from. Specify the project name in the following format:
-   *   `projects/{project}`.
-   * @param {string} [request.accountId]
-   *   Optional. The unique stable account identifier used to search connections.
-   *   The identifier should correspond to an `account_id` provided in a previous
-   *   `CreateAssessment` or `AnnotateAssessment` call. Either hashed_account_id
-   *   or account_id must be set, but not both.
-   * @param {Buffer} [request.hashedAccountId]
-   *   Optional. Deprecated: use `account_id` instead.
-   *   The unique stable hashed account identifier used to search connections. The
-   *   identifier should correspond to a `hashed_account_id` provided in a
-   *   previous `CreateAssessment` or `AnnotateAssessment` call. Either
-   *   hashed_account_id or account_id must be set, but not both.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of groups to return. The service might return
-   *   fewer than this value. If unspecified, at most 50 groups are returned. The
-   *   maximum value is 1000; values above 1000 are coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous
-   *   `SearchRelatedAccountGroupMemberships` call. Provide this to retrieve the
-   *   subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `SearchRelatedAccountGroupMemberships` must match the call that provided
-   *   the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership|RelatedAccountGroupMembership}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.search_related_account_group_memberships.js</caption>
-   * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_SearchRelatedAccountGroupMemberships_async
-   */
+/**
+ * Equivalent to `searchRelatedAccountGroupMemberships`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.project
+ *   Required. The name of the project to search related account group
+ *   memberships from. Specify the project name in the following format:
+ *   `projects/{project}`.
+ * @param {string} [request.accountId]
+ *   Optional. The unique stable account identifier used to search connections.
+ *   The identifier should correspond to an `account_id` provided in a previous
+ *   `CreateAssessment` or `AnnotateAssessment` call. Either hashed_account_id
+ *   or account_id must be set, but not both.
+ * @param {Buffer} [request.hashedAccountId]
+ *   Optional. Deprecated: use `account_id` instead.
+ *   The unique stable hashed account identifier used to search connections. The
+ *   identifier should correspond to a `hashed_account_id` provided in a
+ *   previous `CreateAssessment` or `AnnotateAssessment` call. Either
+ *   hashed_account_id or account_id must be set, but not both.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of groups to return. The service might return
+ *   fewer than this value. If unspecified, at most 50 groups are returned. The
+ *   maximum value is 1000; values above 1000 are coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous
+ *   `SearchRelatedAccountGroupMemberships` call. Provide this to retrieve the
+ *   subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `SearchRelatedAccountGroupMemberships` must match the call that provided
+ *   the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership|RelatedAccountGroupMembership}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.search_related_account_group_memberships.js</caption>
+ * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_SearchRelatedAccountGroupMemberships_async
+ */
   searchRelatedAccountGroupMembershipsAsync(
-    request?: protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership> {
+      request?: protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-      });
-    const defaultCallSettings =
-      this._defaults['searchRelatedAccountGroupMemberships'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
     });
+    const defaultCallSettings = this._defaults['searchRelatedAccountGroupMemberships'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
     this._log.info('searchRelatedAccountGroupMemberships iterate %j', request);
     return this.descriptors.page.searchRelatedAccountGroupMemberships.asyncIterate(
       this.innerApiCalls['searchRelatedAccountGroupMemberships'] as GaxCall,
@@ -4013,7 +3248,7 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {string} assessment
    * @returns {string} Resource name string.
    */
-  assessmentPath(project: string, assessment: string) {
+  assessmentPath(project:string,assessment:string) {
     return this.pathTemplates.assessmentPathTemplate.render({
       project: project,
       assessment: assessment,
@@ -4028,8 +3263,7 @@ export class RecaptchaEnterpriseServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAssessmentName(assessmentName: string) {
-    return this.pathTemplates.assessmentPathTemplate.match(assessmentName)
-      .project;
+    return this.pathTemplates.assessmentPathTemplate.match(assessmentName).project;
   }
 
   /**
@@ -4040,8 +3274,7 @@ export class RecaptchaEnterpriseServiceClient {
    * @returns {string} A string representing the assessment.
    */
   matchAssessmentFromAssessmentName(assessmentName: string) {
-    return this.pathTemplates.assessmentPathTemplate.match(assessmentName)
-      .assessment;
+    return this.pathTemplates.assessmentPathTemplate.match(assessmentName).assessment;
   }
 
   /**
@@ -4051,7 +3284,7 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {string} firewallpolicy
    * @returns {string} Resource name string.
    */
-  firewallPolicyPath(project: string, firewallpolicy: string) {
+  firewallPolicyPath(project:string,firewallpolicy:string) {
     return this.pathTemplates.firewallPolicyPathTemplate.render({
       project: project,
       firewallpolicy: firewallpolicy,
@@ -4066,9 +3299,7 @@ export class RecaptchaEnterpriseServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromFirewallPolicyName(firewallPolicyName: string) {
-    return this.pathTemplates.firewallPolicyPathTemplate.match(
-      firewallPolicyName
-    ).project;
+    return this.pathTemplates.firewallPolicyPathTemplate.match(firewallPolicyName).project;
   }
 
   /**
@@ -4079,9 +3310,7 @@ export class RecaptchaEnterpriseServiceClient {
    * @returns {string} A string representing the firewallpolicy.
    */
   matchFirewallpolicyFromFirewallPolicyName(firewallPolicyName: string) {
-    return this.pathTemplates.firewallPolicyPathTemplate.match(
-      firewallPolicyName
-    ).firewallpolicy;
+    return this.pathTemplates.firewallPolicyPathTemplate.match(firewallPolicyName).firewallpolicy;
   }
 
   /**
@@ -4091,7 +3320,7 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {string} key
    * @returns {string} Resource name string.
    */
-  keyPath(project: string, key: string) {
+  keyPath(project:string,key:string) {
     return this.pathTemplates.keyPathTemplate.render({
       project: project,
       key: key,
@@ -4127,7 +3356,7 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {string} key
    * @returns {string} Resource name string.
    */
-  metricsPath(project: string, key: string) {
+  metricsPath(project:string,key:string) {
     return this.pathTemplates.metricsPathTemplate.render({
       project: project,
       key: key,
@@ -4162,7 +3391,7 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -4186,7 +3415,7 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {string} relatedaccountgroup
    * @returns {string} Resource name string.
    */
-  relatedAccountGroupPath(project: string, relatedaccountgroup: string) {
+  relatedAccountGroupPath(project:string,relatedaccountgroup:string) {
     return this.pathTemplates.relatedAccountGroupPathTemplate.render({
       project: project,
       relatedaccountgroup: relatedaccountgroup,
@@ -4201,9 +3430,7 @@ export class RecaptchaEnterpriseServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromRelatedAccountGroupName(relatedAccountGroupName: string) {
-    return this.pathTemplates.relatedAccountGroupPathTemplate.match(
-      relatedAccountGroupName
-    ).project;
+    return this.pathTemplates.relatedAccountGroupPathTemplate.match(relatedAccountGroupName).project;
   }
 
   /**
@@ -4213,12 +3440,8 @@ export class RecaptchaEnterpriseServiceClient {
    *   A fully-qualified path representing RelatedAccountGroup resource.
    * @returns {string} A string representing the relatedaccountgroup.
    */
-  matchRelatedaccountgroupFromRelatedAccountGroupName(
-    relatedAccountGroupName: string
-  ) {
-    return this.pathTemplates.relatedAccountGroupPathTemplate.match(
-      relatedAccountGroupName
-    ).relatedaccountgroup;
+  matchRelatedaccountgroupFromRelatedAccountGroupName(relatedAccountGroupName: string) {
+    return this.pathTemplates.relatedAccountGroupPathTemplate.match(relatedAccountGroupName).relatedaccountgroup;
   }
 
   /**
@@ -4229,11 +3452,7 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {string} membership
    * @returns {string} Resource name string.
    */
-  relatedAccountGroupMembershipPath(
-    project: string,
-    relatedaccountgroup: string,
-    membership: string
-  ) {
+  relatedAccountGroupMembershipPath(project:string,relatedaccountgroup:string,membership:string) {
     return this.pathTemplates.relatedAccountGroupMembershipPathTemplate.render({
       project: project,
       relatedaccountgroup: relatedaccountgroup,
@@ -4248,12 +3467,8 @@ export class RecaptchaEnterpriseServiceClient {
    *   A fully-qualified path representing RelatedAccountGroupMembership resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromRelatedAccountGroupMembershipName(
-    relatedAccountGroupMembershipName: string
-  ) {
-    return this.pathTemplates.relatedAccountGroupMembershipPathTemplate.match(
-      relatedAccountGroupMembershipName
-    ).project;
+  matchProjectFromRelatedAccountGroupMembershipName(relatedAccountGroupMembershipName: string) {
+    return this.pathTemplates.relatedAccountGroupMembershipPathTemplate.match(relatedAccountGroupMembershipName).project;
   }
 
   /**
@@ -4263,12 +3478,8 @@ export class RecaptchaEnterpriseServiceClient {
    *   A fully-qualified path representing RelatedAccountGroupMembership resource.
    * @returns {string} A string representing the relatedaccountgroup.
    */
-  matchRelatedaccountgroupFromRelatedAccountGroupMembershipName(
-    relatedAccountGroupMembershipName: string
-  ) {
-    return this.pathTemplates.relatedAccountGroupMembershipPathTemplate.match(
-      relatedAccountGroupMembershipName
-    ).relatedaccountgroup;
+  matchRelatedaccountgroupFromRelatedAccountGroupMembershipName(relatedAccountGroupMembershipName: string) {
+    return this.pathTemplates.relatedAccountGroupMembershipPathTemplate.match(relatedAccountGroupMembershipName).relatedaccountgroup;
   }
 
   /**
@@ -4278,12 +3489,8 @@ export class RecaptchaEnterpriseServiceClient {
    *   A fully-qualified path representing RelatedAccountGroupMembership resource.
    * @returns {string} A string representing the membership.
    */
-  matchMembershipFromRelatedAccountGroupMembershipName(
-    relatedAccountGroupMembershipName: string
-  ) {
-    return this.pathTemplates.relatedAccountGroupMembershipPathTemplate.match(
-      relatedAccountGroupMembershipName
-    ).membership;
+  matchMembershipFromRelatedAccountGroupMembershipName(relatedAccountGroupMembershipName: string) {
+    return this.pathTemplates.relatedAccountGroupMembershipPathTemplate.match(relatedAccountGroupMembershipName).membership;
   }
 
   /**

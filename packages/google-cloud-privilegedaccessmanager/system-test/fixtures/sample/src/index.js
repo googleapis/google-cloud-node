@@ -16,12 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const privilegedaccessmanager = require('@google-cloud/privilegedaccessmanager');
 
 function main() {
-  const privilegedAccessManagerClient =
-    new privilegedaccessmanager.PrivilegedAccessManagerClient();
+  const privilegedAccessManagerClient = new privilegedaccessmanager.PrivilegedAccessManagerClient();
 }
 
 main();

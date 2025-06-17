@@ -16,15 +16,14 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const networkconnectivity = require('@google-cloud/network-connectivity');
 
 function main() {
-  const crossNetworkAutomationServiceClient =
-    new networkconnectivity.CrossNetworkAutomationServiceClient();
+  const crossNetworkAutomationServiceClient = new networkconnectivity.CrossNetworkAutomationServiceClient();
   const hubServiceClient = new networkconnectivity.HubServiceClient();
-  const policyBasedRoutingServiceClient =
-    new networkconnectivity.PolicyBasedRoutingServiceClient();
+  const policyBasedRoutingServiceClient = new networkconnectivity.PolicyBasedRoutingServiceClient();
 }
 
 main();

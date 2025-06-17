@@ -18,20 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -113,41 +104,20 @@ export class HubServiceClient {
    *     const client = new HubServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof HubServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'networkconnectivity.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -173,7 +143,7 @@ export class HubServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -187,7 +157,10 @@ export class HubServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -232,167 +205,84 @@ export class HubServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listHubs: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'hubs'
-      ),
-      listSpokes: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'spokes'
-      ),
+      listHubs:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'hubs'),
+      listSpokes:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'spokes')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v1alpha1/{name=projects/*/locations/*}',
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v1alpha1/{name=projects/*}/locations',
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
-          get: '/v1alpha1/{resource=projects/*/locations/global/hubs/*}:getIamPolicy',
-          additional_bindings: [
-            {
-              get: '/v1alpha1/{resource=projects/*/locations/*/spokes/*}:getIamPolicy',
-            },
-          ],
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
-          post: '/v1alpha1/{resource=projects/*/locations/global/hubs/*}:setIamPolicy',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1alpha1/{resource=projects/*/locations/*/spokes/*}:setIamPolicy',
-              body: '*',
-            },
-          ],
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
-          post: '/v1alpha1/{resource=projects/*/locations/global/hubs/*}:testIamPermissions',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1alpha1/{resource=projects/*/locations/*/spokes/*}:testIamPermissions',
-              body: '*',
-            },
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v1alpha1/{name=projects/*/locations/*/operations/*}:cancel',
-          body: '*',
-        },
-        {
-          selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1alpha1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1alpha1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1alpha1/{name=projects/*/locations/*}/operations',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1alpha1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1alpha1/{name=projects/*}/locations',},{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1alpha1/{resource=projects/*/locations/global/hubs/*}:getIamPolicy',additional_bindings: [{get: '/v1alpha1/{resource=projects/*/locations/*/spokes/*}:getIamPolicy',}],
+      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1alpha1/{resource=projects/*/locations/global/hubs/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1alpha1/{resource=projects/*/locations/*/spokes/*}:setIamPolicy',body: '*',}],
+      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1alpha1/{resource=projects/*/locations/global/hubs/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1alpha1/{resource=projects/*/locations/*/spokes/*}:testIamPermissions',body: '*',}],
+      },{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1alpha1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1alpha1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1alpha1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1alpha1/{name=projects/*/locations/*}/operations',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createHubResponse = protoFilesRoot.lookup(
-      '.google.cloud.networkconnectivity.v1alpha1.Hub'
-    ) as gax.protobuf.Type;
+      '.google.cloud.networkconnectivity.v1alpha1.Hub') as gax.protobuf.Type;
     const createHubMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networkconnectivity.v1alpha1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.networkconnectivity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
     const updateHubResponse = protoFilesRoot.lookup(
-      '.google.cloud.networkconnectivity.v1alpha1.Hub'
-    ) as gax.protobuf.Type;
+      '.google.cloud.networkconnectivity.v1alpha1.Hub') as gax.protobuf.Type;
     const updateHubMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networkconnectivity.v1alpha1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.networkconnectivity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
     const deleteHubResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteHubMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networkconnectivity.v1alpha1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.networkconnectivity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
     const createSpokeResponse = protoFilesRoot.lookup(
-      '.google.cloud.networkconnectivity.v1alpha1.Spoke'
-    ) as gax.protobuf.Type;
+      '.google.cloud.networkconnectivity.v1alpha1.Spoke') as gax.protobuf.Type;
     const createSpokeMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networkconnectivity.v1alpha1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.networkconnectivity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
     const updateSpokeResponse = protoFilesRoot.lookup(
-      '.google.cloud.networkconnectivity.v1alpha1.Spoke'
-    ) as gax.protobuf.Type;
+      '.google.cloud.networkconnectivity.v1alpha1.Spoke') as gax.protobuf.Type;
     const updateSpokeMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networkconnectivity.v1alpha1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.networkconnectivity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
     const deleteSpokeResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteSpokeMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networkconnectivity.v1alpha1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.networkconnectivity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createHub: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createHubResponse.decode.bind(createHubResponse),
-        createHubMetadata.decode.bind(createHubMetadata)
-      ),
+        createHubMetadata.decode.bind(createHubMetadata)),
       updateHub: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateHubResponse.decode.bind(updateHubResponse),
-        updateHubMetadata.decode.bind(updateHubMetadata)
-      ),
+        updateHubMetadata.decode.bind(updateHubMetadata)),
       deleteHub: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteHubResponse.decode.bind(deleteHubResponse),
-        deleteHubMetadata.decode.bind(deleteHubMetadata)
-      ),
+        deleteHubMetadata.decode.bind(deleteHubMetadata)),
       createSpoke: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createSpokeResponse.decode.bind(createSpokeResponse),
-        createSpokeMetadata.decode.bind(createSpokeMetadata)
-      ),
+        createSpokeMetadata.decode.bind(createSpokeMetadata)),
       updateSpoke: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateSpokeResponse.decode.bind(updateSpokeResponse),
-        updateSpokeMetadata.decode.bind(updateSpokeMetadata)
-      ),
+        updateSpokeMetadata.decode.bind(updateSpokeMetadata)),
       deleteSpoke: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteSpokeResponse.decode.bind(deleteSpokeResponse),
-        deleteSpokeMetadata.decode.bind(deleteSpokeMetadata)
-      ),
+        deleteSpokeMetadata.decode.bind(deleteSpokeMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.networkconnectivity.v1alpha1.HubService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.networkconnectivity.v1alpha1.HubService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -423,45 +313,28 @@ export class HubServiceClient {
     // Put together the "service stub" for
     // google.cloud.networkconnectivity.v1alpha1.HubService.
     this.hubServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.networkconnectivity.v1alpha1.HubService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.networkconnectivity.v1alpha1
-            .HubService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.networkconnectivity.v1alpha1.HubService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.networkconnectivity.v1alpha1.HubService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const hubServiceStubMethods = [
-      'listHubs',
-      'getHub',
-      'createHub',
-      'updateHub',
-      'deleteHub',
-      'listSpokes',
-      'getSpoke',
-      'createSpoke',
-      'updateSpoke',
-      'deleteSpoke',
-    ];
+    const hubServiceStubMethods =
+        ['listHubs', 'getHub', 'createHub', 'updateHub', 'deleteHub', 'listSpokes', 'getSpoke', 'createSpoke', 'updateSpoke', 'deleteSpoke'];
     for (const methodName of hubServiceStubMethods) {
       const callPromise = this.hubServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -486,14 +359,8 @@ export class HubServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'networkconnectivity.googleapis.com';
   }
@@ -504,14 +371,8 @@ export class HubServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'networkconnectivity.googleapis.com';
   }
@@ -542,7 +403,9 @@ export class HubServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -551,9 +414,8 @@ export class HubServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -564,1489 +426,1026 @@ export class HubServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets details of a single Hub.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the Hub resource to get.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.networkconnectivity.v1alpha1.Hub|Hub}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/hub_service.get_hub.js</caption>
-   * region_tag:networkconnectivity_v1alpha1_generated_HubService_GetHub_async
-   */
+/**
+ * Gets details of a single Hub.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the Hub resource to get.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.networkconnectivity.v1alpha1.Hub|Hub}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/hub_service.get_hub.js</caption>
+ * region_tag:networkconnectivity_v1alpha1_generated_HubService_GetHub_async
+ */
   getHub(
-    request?: protos.google.cloud.networkconnectivity.v1alpha1.IGetHubRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.networkconnectivity.v1alpha1.IHub,
-      (
-        | protos.google.cloud.networkconnectivity.v1alpha1.IGetHubRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.networkconnectivity.v1alpha1.IGetHubRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.networkconnectivity.v1alpha1.IHub,
+        protos.google.cloud.networkconnectivity.v1alpha1.IGetHubRequest|undefined, {}|undefined
+      ]>;
   getHub(
-    request: protos.google.cloud.networkconnectivity.v1alpha1.IGetHubRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.networkconnectivity.v1alpha1.IHub,
-      | protos.google.cloud.networkconnectivity.v1alpha1.IGetHubRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getHub(
-    request: protos.google.cloud.networkconnectivity.v1alpha1.IGetHubRequest,
-    callback: Callback<
-      protos.google.cloud.networkconnectivity.v1alpha1.IHub,
-      | protos.google.cloud.networkconnectivity.v1alpha1.IGetHubRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getHub(
-    request?: protos.google.cloud.networkconnectivity.v1alpha1.IGetHubRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.networkconnectivity.v1alpha1.IGetHubRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.networkconnectivity.v1alpha1.IHub,
-          | protos.google.cloud.networkconnectivity.v1alpha1.IGetHubRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.networkconnectivity.v1alpha1.IHub,
-      | protos.google.cloud.networkconnectivity.v1alpha1.IGetHubRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.networkconnectivity.v1alpha1.IHub,
-      (
-        | protos.google.cloud.networkconnectivity.v1alpha1.IGetHubRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.networkconnectivity.v1alpha1.IGetHubRequest|null|undefined,
+          {}|null|undefined>): void;
+  getHub(
+      request: protos.google.cloud.networkconnectivity.v1alpha1.IGetHubRequest,
+      callback: Callback<
+          protos.google.cloud.networkconnectivity.v1alpha1.IHub,
+          protos.google.cloud.networkconnectivity.v1alpha1.IGetHubRequest|null|undefined,
+          {}|null|undefined>): void;
+  getHub(
+      request?: protos.google.cloud.networkconnectivity.v1alpha1.IGetHubRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.networkconnectivity.v1alpha1.IHub,
+          protos.google.cloud.networkconnectivity.v1alpha1.IGetHubRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.networkconnectivity.v1alpha1.IHub,
+          protos.google.cloud.networkconnectivity.v1alpha1.IGetHubRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.networkconnectivity.v1alpha1.IHub,
+        protos.google.cloud.networkconnectivity.v1alpha1.IGetHubRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getHub request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.networkconnectivity.v1alpha1.IHub,
-          | protos.google.cloud.networkconnectivity.v1alpha1.IGetHubRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.networkconnectivity.v1alpha1.IHub,
+        protos.google.cloud.networkconnectivity.v1alpha1.IGetHubRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getHub response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getHub(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.networkconnectivity.v1alpha1.IHub,
-          (
-            | protos.google.cloud.networkconnectivity.v1alpha1.IGetHubRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getHub response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getHub(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.networkconnectivity.v1alpha1.IHub,
+        protos.google.cloud.networkconnectivity.v1alpha1.IGetHubRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getHub response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets details of a single Spoke.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of Spoke resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.networkconnectivity.v1alpha1.Spoke|Spoke}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/hub_service.get_spoke.js</caption>
-   * region_tag:networkconnectivity_v1alpha1_generated_HubService_GetSpoke_async
-   */
+/**
+ * Gets details of a single Spoke.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of Spoke resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.networkconnectivity.v1alpha1.Spoke|Spoke}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/hub_service.get_spoke.js</caption>
+ * region_tag:networkconnectivity_v1alpha1_generated_HubService_GetSpoke_async
+ */
   getSpoke(
-    request?: protos.google.cloud.networkconnectivity.v1alpha1.IGetSpokeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.networkconnectivity.v1alpha1.ISpoke,
-      (
-        | protos.google.cloud.networkconnectivity.v1alpha1.IGetSpokeRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.networkconnectivity.v1alpha1.IGetSpokeRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.networkconnectivity.v1alpha1.ISpoke,
+        protos.google.cloud.networkconnectivity.v1alpha1.IGetSpokeRequest|undefined, {}|undefined
+      ]>;
   getSpoke(
-    request: protos.google.cloud.networkconnectivity.v1alpha1.IGetSpokeRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.networkconnectivity.v1alpha1.ISpoke,
-      | protos.google.cloud.networkconnectivity.v1alpha1.IGetSpokeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getSpoke(
-    request: protos.google.cloud.networkconnectivity.v1alpha1.IGetSpokeRequest,
-    callback: Callback<
-      protos.google.cloud.networkconnectivity.v1alpha1.ISpoke,
-      | protos.google.cloud.networkconnectivity.v1alpha1.IGetSpokeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getSpoke(
-    request?: protos.google.cloud.networkconnectivity.v1alpha1.IGetSpokeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.networkconnectivity.v1alpha1.IGetSpokeRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.networkconnectivity.v1alpha1.ISpoke,
-          | protos.google.cloud.networkconnectivity.v1alpha1.IGetSpokeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.networkconnectivity.v1alpha1.ISpoke,
-      | protos.google.cloud.networkconnectivity.v1alpha1.IGetSpokeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.networkconnectivity.v1alpha1.ISpoke,
-      (
-        | protos.google.cloud.networkconnectivity.v1alpha1.IGetSpokeRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.networkconnectivity.v1alpha1.IGetSpokeRequest|null|undefined,
+          {}|null|undefined>): void;
+  getSpoke(
+      request: protos.google.cloud.networkconnectivity.v1alpha1.IGetSpokeRequest,
+      callback: Callback<
+          protos.google.cloud.networkconnectivity.v1alpha1.ISpoke,
+          protos.google.cloud.networkconnectivity.v1alpha1.IGetSpokeRequest|null|undefined,
+          {}|null|undefined>): void;
+  getSpoke(
+      request?: protos.google.cloud.networkconnectivity.v1alpha1.IGetSpokeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.networkconnectivity.v1alpha1.ISpoke,
+          protos.google.cloud.networkconnectivity.v1alpha1.IGetSpokeRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.networkconnectivity.v1alpha1.ISpoke,
+          protos.google.cloud.networkconnectivity.v1alpha1.IGetSpokeRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.networkconnectivity.v1alpha1.ISpoke,
+        protos.google.cloud.networkconnectivity.v1alpha1.IGetSpokeRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getSpoke request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.networkconnectivity.v1alpha1.ISpoke,
-          | protos.google.cloud.networkconnectivity.v1alpha1.IGetSpokeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.networkconnectivity.v1alpha1.ISpoke,
+        protos.google.cloud.networkconnectivity.v1alpha1.IGetSpokeRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getSpoke response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getSpoke(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.networkconnectivity.v1alpha1.ISpoke,
-          (
-            | protos.google.cloud.networkconnectivity.v1alpha1.IGetSpokeRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getSpoke response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getSpoke(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.networkconnectivity.v1alpha1.ISpoke,
+        protos.google.cloud.networkconnectivity.v1alpha1.IGetSpokeRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getSpoke response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Creates a new Hub in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource's name of the Hub.
-   * @param {string} [request.hubId]
-   *   Optional. Unique id for the Hub to create.
-   * @param {google.cloud.networkconnectivity.v1alpha1.Hub} request.hub
-   *   Required. Initial values for a new Hub.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique request ID
-   *   so that if you must retry your request, the server will know to ignore
-   *   the request if it has already been completed. The server will guarantee
-   *   that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and t
-   *   he request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/hub_service.create_hub.js</caption>
-   * region_tag:networkconnectivity_v1alpha1_generated_HubService_CreateHub_async
-   */
+/**
+ * Creates a new Hub in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource's name of the Hub.
+ * @param {string} [request.hubId]
+ *   Optional. Unique id for the Hub to create.
+ * @param {google.cloud.networkconnectivity.v1alpha1.Hub} request.hub
+ *   Required. Initial values for a new Hub.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique request ID
+ *   so that if you must retry your request, the server will know to ignore
+ *   the request if it has already been completed. The server will guarantee
+ *   that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and t
+ *   he request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/hub_service.create_hub.js</caption>
+ * region_tag:networkconnectivity_v1alpha1_generated_HubService_CreateHub_async
+ */
   createHub(
-    request?: protos.google.cloud.networkconnectivity.v1alpha1.ICreateHubRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.networkconnectivity.v1alpha1.IHub,
-        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.networkconnectivity.v1alpha1.ICreateHubRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.networkconnectivity.v1alpha1.IHub, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createHub(
-    request: protos.google.cloud.networkconnectivity.v1alpha1.ICreateHubRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.networkconnectivity.v1alpha1.IHub,
-        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.networkconnectivity.v1alpha1.ICreateHubRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.networkconnectivity.v1alpha1.IHub, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createHub(
-    request: protos.google.cloud.networkconnectivity.v1alpha1.ICreateHubRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.networkconnectivity.v1alpha1.IHub,
-        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.networkconnectivity.v1alpha1.ICreateHubRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.networkconnectivity.v1alpha1.IHub, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createHub(
-    request?: protos.google.cloud.networkconnectivity.v1alpha1.ICreateHubRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.networkconnectivity.v1alpha1.IHub,
-            protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.networkconnectivity.v1alpha1.IHub,
-        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.networkconnectivity.v1alpha1.IHub,
-        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.networkconnectivity.v1alpha1.ICreateHubRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.networkconnectivity.v1alpha1.IHub, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.networkconnectivity.v1alpha1.IHub, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.networkconnectivity.v1alpha1.IHub, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.networkconnectivity.v1alpha1.IHub,
-            protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.networkconnectivity.v1alpha1.IHub, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createHub response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createHub request %j', request);
-    return this.innerApiCalls
-      .createHub(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.networkconnectivity.v1alpha1.IHub,
-            protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createHub response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createHub(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.networkconnectivity.v1alpha1.IHub, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createHub response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createHub()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/hub_service.create_hub.js</caption>
-   * region_tag:networkconnectivity_v1alpha1_generated_HubService_CreateHub_async
-   */
-  async checkCreateHubProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.networkconnectivity.v1alpha1.Hub,
-      protos.google.cloud.networkconnectivity.v1alpha1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createHub()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/hub_service.create_hub.js</caption>
+ * region_tag:networkconnectivity_v1alpha1_generated_HubService_CreateHub_async
+ */
+  async checkCreateHubProgress(name: string): Promise<LROperation<protos.google.cloud.networkconnectivity.v1alpha1.Hub, protos.google.cloud.networkconnectivity.v1alpha1.OperationMetadata>>{
     this._log.info('createHub long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createHub,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.networkconnectivity.v1alpha1.Hub,
-      protos.google.cloud.networkconnectivity.v1alpha1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createHub, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.networkconnectivity.v1alpha1.Hub, protos.google.cloud.networkconnectivity.v1alpha1.OperationMetadata>;
   }
-  /**
-   * Updates the parameters of a single Hub.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. Field mask is used to specify the fields to be overwritten in the
-   *   Hub resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request. A field will be overwritten if it is in the mask. If the
-   *   user does not provide a mask then all fields will be overwritten.
-   * @param {google.cloud.networkconnectivity.v1alpha1.Hub} request.hub
-   *   Required. The state that the Hub should be in after the update.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique request ID
-   *   so that if you must retry your request, the server will know to ignore
-   *   the request if it has already been completed. The server will guarantee
-   *   that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and t
-   *   he request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/hub_service.update_hub.js</caption>
-   * region_tag:networkconnectivity_v1alpha1_generated_HubService_UpdateHub_async
-   */
+/**
+ * Updates the parameters of a single Hub.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Field mask is used to specify the fields to be overwritten in the
+ *   Hub resource by the update.
+ *   The fields specified in the update_mask are relative to the resource, not
+ *   the full request. A field will be overwritten if it is in the mask. If the
+ *   user does not provide a mask then all fields will be overwritten.
+ * @param {google.cloud.networkconnectivity.v1alpha1.Hub} request.hub
+ *   Required. The state that the Hub should be in after the update.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique request ID
+ *   so that if you must retry your request, the server will know to ignore
+ *   the request if it has already been completed. The server will guarantee
+ *   that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and t
+ *   he request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/hub_service.update_hub.js</caption>
+ * region_tag:networkconnectivity_v1alpha1_generated_HubService_UpdateHub_async
+ */
   updateHub(
-    request?: protos.google.cloud.networkconnectivity.v1alpha1.IUpdateHubRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.networkconnectivity.v1alpha1.IHub,
-        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.networkconnectivity.v1alpha1.IUpdateHubRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.networkconnectivity.v1alpha1.IHub, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateHub(
-    request: protos.google.cloud.networkconnectivity.v1alpha1.IUpdateHubRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.networkconnectivity.v1alpha1.IHub,
-        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.networkconnectivity.v1alpha1.IUpdateHubRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.networkconnectivity.v1alpha1.IHub, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateHub(
-    request: protos.google.cloud.networkconnectivity.v1alpha1.IUpdateHubRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.networkconnectivity.v1alpha1.IHub,
-        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.networkconnectivity.v1alpha1.IUpdateHubRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.networkconnectivity.v1alpha1.IHub, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateHub(
-    request?: protos.google.cloud.networkconnectivity.v1alpha1.IUpdateHubRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.networkconnectivity.v1alpha1.IHub,
-            protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.networkconnectivity.v1alpha1.IHub,
-        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.networkconnectivity.v1alpha1.IHub,
-        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.networkconnectivity.v1alpha1.IUpdateHubRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.networkconnectivity.v1alpha1.IHub, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.networkconnectivity.v1alpha1.IHub, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.networkconnectivity.v1alpha1.IHub, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'hub.name': request.hub!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'hub.name': request.hub!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.networkconnectivity.v1alpha1.IHub,
-            protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.networkconnectivity.v1alpha1.IHub, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateHub response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateHub request %j', request);
-    return this.innerApiCalls
-      .updateHub(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.networkconnectivity.v1alpha1.IHub,
-            protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateHub response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateHub(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.networkconnectivity.v1alpha1.IHub, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateHub response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateHub()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/hub_service.update_hub.js</caption>
-   * region_tag:networkconnectivity_v1alpha1_generated_HubService_UpdateHub_async
-   */
-  async checkUpdateHubProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.networkconnectivity.v1alpha1.Hub,
-      protos.google.cloud.networkconnectivity.v1alpha1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateHub()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/hub_service.update_hub.js</caption>
+ * region_tag:networkconnectivity_v1alpha1_generated_HubService_UpdateHub_async
+ */
+  async checkUpdateHubProgress(name: string): Promise<LROperation<protos.google.cloud.networkconnectivity.v1alpha1.Hub, protos.google.cloud.networkconnectivity.v1alpha1.OperationMetadata>>{
     this._log.info('updateHub long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateHub,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.networkconnectivity.v1alpha1.Hub,
-      protos.google.cloud.networkconnectivity.v1alpha1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateHub, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.networkconnectivity.v1alpha1.Hub, protos.google.cloud.networkconnectivity.v1alpha1.OperationMetadata>;
   }
-  /**
-   * Deletes a single Hub.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the Hub to delete.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique request ID
-   *   so that if you must retry your request, the server will know to ignore
-   *   the request if it has already been completed. The server will guarantee
-   *   that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and t
-   *   he request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/hub_service.delete_hub.js</caption>
-   * region_tag:networkconnectivity_v1alpha1_generated_HubService_DeleteHub_async
-   */
+/**
+ * Deletes a single Hub.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the Hub to delete.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique request ID
+ *   so that if you must retry your request, the server will know to ignore
+ *   the request if it has already been completed. The server will guarantee
+ *   that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and t
+ *   he request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/hub_service.delete_hub.js</caption>
+ * region_tag:networkconnectivity_v1alpha1_generated_HubService_DeleteHub_async
+ */
   deleteHub(
-    request?: protos.google.cloud.networkconnectivity.v1alpha1.IDeleteHubRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.networkconnectivity.v1alpha1.IDeleteHubRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteHub(
-    request: protos.google.cloud.networkconnectivity.v1alpha1.IDeleteHubRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.networkconnectivity.v1alpha1.IDeleteHubRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteHub(
-    request: protos.google.cloud.networkconnectivity.v1alpha1.IDeleteHubRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.networkconnectivity.v1alpha1.IDeleteHubRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteHub(
-    request?: protos.google.cloud.networkconnectivity.v1alpha1.IDeleteHubRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.networkconnectivity.v1alpha1.IDeleteHubRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteHub response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteHub request %j', request);
-    return this.innerApiCalls
-      .deleteHub(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteHub response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteHub(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteHub response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteHub()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/hub_service.delete_hub.js</caption>
-   * region_tag:networkconnectivity_v1alpha1_generated_HubService_DeleteHub_async
-   */
-  async checkDeleteHubProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.networkconnectivity.v1alpha1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteHub()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/hub_service.delete_hub.js</caption>
+ * region_tag:networkconnectivity_v1alpha1_generated_HubService_DeleteHub_async
+ */
+  async checkDeleteHubProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.networkconnectivity.v1alpha1.OperationMetadata>>{
     this._log.info('deleteHub long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteHub,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.networkconnectivity.v1alpha1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteHub, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.networkconnectivity.v1alpha1.OperationMetadata>;
   }
-  /**
-   * Creates a new Spoke in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent's resource name of the Spoke.
-   * @param {string} [request.spokeId]
-   *   Optional. Unique id for the Spoke to create.
-   * @param {google.cloud.networkconnectivity.v1alpha1.Spoke} request.spoke
-   *   Required. Initial values for a new Hub.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique request ID
-   *   so that if you must retry your request, the server will know to ignore
-   *   the request if it has already been completed. The server will guarantee
-   *   that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and t
-   *   he request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/hub_service.create_spoke.js</caption>
-   * region_tag:networkconnectivity_v1alpha1_generated_HubService_CreateSpoke_async
-   */
+/**
+ * Creates a new Spoke in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent's resource name of the Spoke.
+ * @param {string} [request.spokeId]
+ *   Optional. Unique id for the Spoke to create.
+ * @param {google.cloud.networkconnectivity.v1alpha1.Spoke} request.spoke
+ *   Required. Initial values for a new Hub.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique request ID
+ *   so that if you must retry your request, the server will know to ignore
+ *   the request if it has already been completed. The server will guarantee
+ *   that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and t
+ *   he request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/hub_service.create_spoke.js</caption>
+ * region_tag:networkconnectivity_v1alpha1_generated_HubService_CreateSpoke_async
+ */
   createSpoke(
-    request?: protos.google.cloud.networkconnectivity.v1alpha1.ICreateSpokeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.networkconnectivity.v1alpha1.ISpoke,
-        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.networkconnectivity.v1alpha1.ICreateSpokeRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.networkconnectivity.v1alpha1.ISpoke, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createSpoke(
-    request: protos.google.cloud.networkconnectivity.v1alpha1.ICreateSpokeRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.networkconnectivity.v1alpha1.ISpoke,
-        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.networkconnectivity.v1alpha1.ICreateSpokeRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.networkconnectivity.v1alpha1.ISpoke, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createSpoke(
-    request: protos.google.cloud.networkconnectivity.v1alpha1.ICreateSpokeRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.networkconnectivity.v1alpha1.ISpoke,
-        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.networkconnectivity.v1alpha1.ICreateSpokeRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.networkconnectivity.v1alpha1.ISpoke, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createSpoke(
-    request?: protos.google.cloud.networkconnectivity.v1alpha1.ICreateSpokeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.networkconnectivity.v1alpha1.ISpoke,
-            protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.networkconnectivity.v1alpha1.ISpoke,
-        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.networkconnectivity.v1alpha1.ISpoke,
-        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.networkconnectivity.v1alpha1.ICreateSpokeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.networkconnectivity.v1alpha1.ISpoke, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.networkconnectivity.v1alpha1.ISpoke, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.networkconnectivity.v1alpha1.ISpoke, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.networkconnectivity.v1alpha1.ISpoke,
-            protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.networkconnectivity.v1alpha1.ISpoke, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createSpoke response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createSpoke request %j', request);
-    return this.innerApiCalls
-      .createSpoke(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.networkconnectivity.v1alpha1.ISpoke,
-            protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createSpoke response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createSpoke(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.networkconnectivity.v1alpha1.ISpoke, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createSpoke response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createSpoke()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/hub_service.create_spoke.js</caption>
-   * region_tag:networkconnectivity_v1alpha1_generated_HubService_CreateSpoke_async
-   */
-  async checkCreateSpokeProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.networkconnectivity.v1alpha1.Spoke,
-      protos.google.cloud.networkconnectivity.v1alpha1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createSpoke()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/hub_service.create_spoke.js</caption>
+ * region_tag:networkconnectivity_v1alpha1_generated_HubService_CreateSpoke_async
+ */
+  async checkCreateSpokeProgress(name: string): Promise<LROperation<protos.google.cloud.networkconnectivity.v1alpha1.Spoke, protos.google.cloud.networkconnectivity.v1alpha1.OperationMetadata>>{
     this._log.info('createSpoke long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createSpoke,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.networkconnectivity.v1alpha1.Spoke,
-      protos.google.cloud.networkconnectivity.v1alpha1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createSpoke, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.networkconnectivity.v1alpha1.Spoke, protos.google.cloud.networkconnectivity.v1alpha1.OperationMetadata>;
   }
-  /**
-   * Updates the parameters of a single Spoke.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. Field mask is used to specify the fields to be overwritten in the
-   *   Spoke resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request. A field will be overwritten if it is in the mask. If the
-   *   user does not provide a mask then all fields will be overwritten.
-   * @param {google.cloud.networkconnectivity.v1alpha1.Spoke} request.spoke
-   *   Required. The state that the Spoke should be in after the update.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique request ID
-   *   so that if you must retry your request, the server will know to ignore
-   *   the request if it has already been completed. The server will guarantee
-   *   that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and t
-   *   he request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/hub_service.update_spoke.js</caption>
-   * region_tag:networkconnectivity_v1alpha1_generated_HubService_UpdateSpoke_async
-   */
+/**
+ * Updates the parameters of a single Spoke.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Field mask is used to specify the fields to be overwritten in the
+ *   Spoke resource by the update.
+ *   The fields specified in the update_mask are relative to the resource, not
+ *   the full request. A field will be overwritten if it is in the mask. If the
+ *   user does not provide a mask then all fields will be overwritten.
+ * @param {google.cloud.networkconnectivity.v1alpha1.Spoke} request.spoke
+ *   Required. The state that the Spoke should be in after the update.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique request ID
+ *   so that if you must retry your request, the server will know to ignore
+ *   the request if it has already been completed. The server will guarantee
+ *   that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and t
+ *   he request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/hub_service.update_spoke.js</caption>
+ * region_tag:networkconnectivity_v1alpha1_generated_HubService_UpdateSpoke_async
+ */
   updateSpoke(
-    request?: protos.google.cloud.networkconnectivity.v1alpha1.IUpdateSpokeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.networkconnectivity.v1alpha1.ISpoke,
-        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.networkconnectivity.v1alpha1.IUpdateSpokeRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.networkconnectivity.v1alpha1.ISpoke, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateSpoke(
-    request: protos.google.cloud.networkconnectivity.v1alpha1.IUpdateSpokeRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.networkconnectivity.v1alpha1.ISpoke,
-        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.networkconnectivity.v1alpha1.IUpdateSpokeRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.networkconnectivity.v1alpha1.ISpoke, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateSpoke(
-    request: protos.google.cloud.networkconnectivity.v1alpha1.IUpdateSpokeRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.networkconnectivity.v1alpha1.ISpoke,
-        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.networkconnectivity.v1alpha1.IUpdateSpokeRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.networkconnectivity.v1alpha1.ISpoke, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateSpoke(
-    request?: protos.google.cloud.networkconnectivity.v1alpha1.IUpdateSpokeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.networkconnectivity.v1alpha1.ISpoke,
-            protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.networkconnectivity.v1alpha1.ISpoke,
-        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.networkconnectivity.v1alpha1.ISpoke,
-        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.networkconnectivity.v1alpha1.IUpdateSpokeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.networkconnectivity.v1alpha1.ISpoke, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.networkconnectivity.v1alpha1.ISpoke, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.networkconnectivity.v1alpha1.ISpoke, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'spoke.name': request.spoke!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'spoke.name': request.spoke!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.networkconnectivity.v1alpha1.ISpoke,
-            protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.networkconnectivity.v1alpha1.ISpoke, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateSpoke response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateSpoke request %j', request);
-    return this.innerApiCalls
-      .updateSpoke(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.networkconnectivity.v1alpha1.ISpoke,
-            protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateSpoke response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateSpoke(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.networkconnectivity.v1alpha1.ISpoke, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateSpoke response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateSpoke()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/hub_service.update_spoke.js</caption>
-   * region_tag:networkconnectivity_v1alpha1_generated_HubService_UpdateSpoke_async
-   */
-  async checkUpdateSpokeProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.networkconnectivity.v1alpha1.Spoke,
-      protos.google.cloud.networkconnectivity.v1alpha1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateSpoke()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/hub_service.update_spoke.js</caption>
+ * region_tag:networkconnectivity_v1alpha1_generated_HubService_UpdateSpoke_async
+ */
+  async checkUpdateSpokeProgress(name: string): Promise<LROperation<protos.google.cloud.networkconnectivity.v1alpha1.Spoke, protos.google.cloud.networkconnectivity.v1alpha1.OperationMetadata>>{
     this._log.info('updateSpoke long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateSpoke,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.networkconnectivity.v1alpha1.Spoke,
-      protos.google.cloud.networkconnectivity.v1alpha1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateSpoke, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.networkconnectivity.v1alpha1.Spoke, protos.google.cloud.networkconnectivity.v1alpha1.OperationMetadata>;
   }
-  /**
-   * Deletes a single Spoke.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the Spoke to delete.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique request ID
-   *   so that if you must retry your request, the server will know to ignore
-   *   the request if it has already been completed. The server will guarantee
-   *   that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and t
-   *   he request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/hub_service.delete_spoke.js</caption>
-   * region_tag:networkconnectivity_v1alpha1_generated_HubService_DeleteSpoke_async
-   */
+/**
+ * Deletes a single Spoke.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the Spoke to delete.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique request ID
+ *   so that if you must retry your request, the server will know to ignore
+ *   the request if it has already been completed. The server will guarantee
+ *   that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and t
+ *   he request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/hub_service.delete_spoke.js</caption>
+ * region_tag:networkconnectivity_v1alpha1_generated_HubService_DeleteSpoke_async
+ */
   deleteSpoke(
-    request?: protos.google.cloud.networkconnectivity.v1alpha1.IDeleteSpokeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.networkconnectivity.v1alpha1.IDeleteSpokeRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteSpoke(
-    request: protos.google.cloud.networkconnectivity.v1alpha1.IDeleteSpokeRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.networkconnectivity.v1alpha1.IDeleteSpokeRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteSpoke(
-    request: protos.google.cloud.networkconnectivity.v1alpha1.IDeleteSpokeRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.networkconnectivity.v1alpha1.IDeleteSpokeRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteSpoke(
-    request?: protos.google.cloud.networkconnectivity.v1alpha1.IDeleteSpokeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.networkconnectivity.v1alpha1.IDeleteSpokeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteSpoke response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteSpoke request %j', request);
-    return this.innerApiCalls
-      .deleteSpoke(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteSpoke response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteSpoke(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteSpoke response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteSpoke()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/hub_service.delete_spoke.js</caption>
-   * region_tag:networkconnectivity_v1alpha1_generated_HubService_DeleteSpoke_async
-   */
-  async checkDeleteSpokeProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.networkconnectivity.v1alpha1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteSpoke()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/hub_service.delete_spoke.js</caption>
+ * region_tag:networkconnectivity_v1alpha1_generated_HubService_DeleteSpoke_async
+ */
+  async checkDeleteSpokeProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.networkconnectivity.v1alpha1.OperationMetadata>>{
     this._log.info('deleteSpoke long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteSpoke,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.networkconnectivity.v1alpha1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteSpoke, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.networkconnectivity.v1alpha1.OperationMetadata>;
   }
-  /**
-   * Lists Hubs in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource's name.
-   * @param {number} request.pageSize
-   *   The maximum number of results per page that should be returned.
-   * @param {string} request.pageToken
-   *   The page token.
-   * @param {string} request.filter
-   *   A filter expression that filters the results listed in the response.
-   * @param {string} request.orderBy
-   *   Sort the results by a certain order.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.networkconnectivity.v1alpha1.Hub|Hub}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listHubsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists Hubs in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource's name.
+ * @param {number} request.pageSize
+ *   The maximum number of results per page that should be returned.
+ * @param {string} request.pageToken
+ *   The page token.
+ * @param {string} request.filter
+ *   A filter expression that filters the results listed in the response.
+ * @param {string} request.orderBy
+ *   Sort the results by a certain order.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.networkconnectivity.v1alpha1.Hub|Hub}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listHubsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listHubs(
-    request?: protos.google.cloud.networkconnectivity.v1alpha1.IListHubsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.networkconnectivity.v1alpha1.IHub[],
-      protos.google.cloud.networkconnectivity.v1alpha1.IListHubsRequest | null,
-      protos.google.cloud.networkconnectivity.v1alpha1.IListHubsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.networkconnectivity.v1alpha1.IListHubsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.networkconnectivity.v1alpha1.IHub[],
+        protos.google.cloud.networkconnectivity.v1alpha1.IListHubsRequest|null,
+        protos.google.cloud.networkconnectivity.v1alpha1.IListHubsResponse
+      ]>;
   listHubs(
-    request: protos.google.cloud.networkconnectivity.v1alpha1.IListHubsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.networkconnectivity.v1alpha1.IListHubsRequest,
-      | protos.google.cloud.networkconnectivity.v1alpha1.IListHubsResponse
-      | null
-      | undefined,
-      protos.google.cloud.networkconnectivity.v1alpha1.IHub
-    >
-  ): void;
-  listHubs(
-    request: protos.google.cloud.networkconnectivity.v1alpha1.IListHubsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.networkconnectivity.v1alpha1.IListHubsRequest,
-      | protos.google.cloud.networkconnectivity.v1alpha1.IListHubsResponse
-      | null
-      | undefined,
-      protos.google.cloud.networkconnectivity.v1alpha1.IHub
-    >
-  ): void;
-  listHubs(
-    request?: protos.google.cloud.networkconnectivity.v1alpha1.IListHubsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.networkconnectivity.v1alpha1.IListHubsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.networkconnectivity.v1alpha1.IListHubsRequest,
-          | protos.google.cloud.networkconnectivity.v1alpha1.IListHubsResponse
-          | null
-          | undefined,
-          protos.google.cloud.networkconnectivity.v1alpha1.IHub
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.networkconnectivity.v1alpha1.IListHubsRequest,
-      | protos.google.cloud.networkconnectivity.v1alpha1.IListHubsResponse
-      | null
-      | undefined,
-      protos.google.cloud.networkconnectivity.v1alpha1.IHub
-    >
-  ): Promise<
-    [
-      protos.google.cloud.networkconnectivity.v1alpha1.IHub[],
-      protos.google.cloud.networkconnectivity.v1alpha1.IListHubsRequest | null,
-      protos.google.cloud.networkconnectivity.v1alpha1.IListHubsResponse,
-    ]
-  > | void {
+          protos.google.cloud.networkconnectivity.v1alpha1.IListHubsResponse|null|undefined,
+          protos.google.cloud.networkconnectivity.v1alpha1.IHub>): void;
+  listHubs(
+      request: protos.google.cloud.networkconnectivity.v1alpha1.IListHubsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.networkconnectivity.v1alpha1.IListHubsRequest,
+          protos.google.cloud.networkconnectivity.v1alpha1.IListHubsResponse|null|undefined,
+          protos.google.cloud.networkconnectivity.v1alpha1.IHub>): void;
+  listHubs(
+      request?: protos.google.cloud.networkconnectivity.v1alpha1.IListHubsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.networkconnectivity.v1alpha1.IListHubsRequest,
+          protos.google.cloud.networkconnectivity.v1alpha1.IListHubsResponse|null|undefined,
+          protos.google.cloud.networkconnectivity.v1alpha1.IHub>,
+      callback?: PaginationCallback<
+          protos.google.cloud.networkconnectivity.v1alpha1.IListHubsRequest,
+          protos.google.cloud.networkconnectivity.v1alpha1.IListHubsResponse|null|undefined,
+          protos.google.cloud.networkconnectivity.v1alpha1.IHub>):
+      Promise<[
+        protos.google.cloud.networkconnectivity.v1alpha1.IHub[],
+        protos.google.cloud.networkconnectivity.v1alpha1.IListHubsRequest|null,
+        protos.google.cloud.networkconnectivity.v1alpha1.IListHubsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.networkconnectivity.v1alpha1.IListHubsRequest,
-          | protos.google.cloud.networkconnectivity.v1alpha1.IListHubsResponse
-          | null
-          | undefined,
-          protos.google.cloud.networkconnectivity.v1alpha1.IHub
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.networkconnectivity.v1alpha1.IListHubsRequest,
+      protos.google.cloud.networkconnectivity.v1alpha1.IListHubsResponse|null|undefined,
+      protos.google.cloud.networkconnectivity.v1alpha1.IHub>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listHubs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2055,60 +1454,57 @@ export class HubServiceClient {
     this._log.info('listHubs request %j', request);
     return this.innerApiCalls
       .listHubs(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.networkconnectivity.v1alpha1.IHub[],
-          protos.google.cloud.networkconnectivity.v1alpha1.IListHubsRequest | null,
-          protos.google.cloud.networkconnectivity.v1alpha1.IListHubsResponse,
-        ]) => {
-          this._log.info('listHubs values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.networkconnectivity.v1alpha1.IHub[],
+        protos.google.cloud.networkconnectivity.v1alpha1.IListHubsRequest|null,
+        protos.google.cloud.networkconnectivity.v1alpha1.IListHubsResponse
+      ]) => {
+        this._log.info('listHubs values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listHubs`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource's name.
-   * @param {number} request.pageSize
-   *   The maximum number of results per page that should be returned.
-   * @param {string} request.pageToken
-   *   The page token.
-   * @param {string} request.filter
-   *   A filter expression that filters the results listed in the response.
-   * @param {string} request.orderBy
-   *   Sort the results by a certain order.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.networkconnectivity.v1alpha1.Hub|Hub} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listHubsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listHubs`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource's name.
+ * @param {number} request.pageSize
+ *   The maximum number of results per page that should be returned.
+ * @param {string} request.pageToken
+ *   The page token.
+ * @param {string} request.filter
+ *   A filter expression that filters the results listed in the response.
+ * @param {string} request.orderBy
+ *   Sort the results by a certain order.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.networkconnectivity.v1alpha1.Hub|Hub} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listHubsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listHubsStream(
-    request?: protos.google.cloud.networkconnectivity.v1alpha1.IListHubsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.networkconnectivity.v1alpha1.IListHubsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listHubs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listHubs stream %j', request);
     return this.descriptors.page.listHubs.createStream(
       this.innerApiCalls.listHubs as GaxCall,
@@ -2117,51 +1513,50 @@ export class HubServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listHubs`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource's name.
-   * @param {number} request.pageSize
-   *   The maximum number of results per page that should be returned.
-   * @param {string} request.pageToken
-   *   The page token.
-   * @param {string} request.filter
-   *   A filter expression that filters the results listed in the response.
-   * @param {string} request.orderBy
-   *   Sort the results by a certain order.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.networkconnectivity.v1alpha1.Hub|Hub}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/hub_service.list_hubs.js</caption>
-   * region_tag:networkconnectivity_v1alpha1_generated_HubService_ListHubs_async
-   */
+/**
+ * Equivalent to `listHubs`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource's name.
+ * @param {number} request.pageSize
+ *   The maximum number of results per page that should be returned.
+ * @param {string} request.pageToken
+ *   The page token.
+ * @param {string} request.filter
+ *   A filter expression that filters the results listed in the response.
+ * @param {string} request.orderBy
+ *   Sort the results by a certain order.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.networkconnectivity.v1alpha1.Hub|Hub}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/hub_service.list_hubs.js</caption>
+ * region_tag:networkconnectivity_v1alpha1_generated_HubService_ListHubs_async
+ */
   listHubsAsync(
-    request?: protos.google.cloud.networkconnectivity.v1alpha1.IListHubsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.networkconnectivity.v1alpha1.IHub> {
+      request?: protos.google.cloud.networkconnectivity.v1alpha1.IListHubsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.networkconnectivity.v1alpha1.IHub>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listHubs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listHubs iterate %j', request);
     return this.descriptors.page.listHubs.asyncIterate(
       this.innerApiCalls['listHubs'] as GaxCall,
@@ -2169,116 +1564,91 @@ export class HubServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.networkconnectivity.v1alpha1.IHub>;
   }
-  /**
-   * Lists Spokes in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent's resource name.
-   * @param {number} request.pageSize
-   *   The maximum number of results per page that should be returned.
-   * @param {string} request.pageToken
-   *   The page token.
-   * @param {string} request.filter
-   *   A filter expression that filters the results listed in the response.
-   * @param {string} request.orderBy
-   *   Sort the results by a certain order.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.networkconnectivity.v1alpha1.Spoke|Spoke}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listSpokesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists Spokes in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent's resource name.
+ * @param {number} request.pageSize
+ *   The maximum number of results per page that should be returned.
+ * @param {string} request.pageToken
+ *   The page token.
+ * @param {string} request.filter
+ *   A filter expression that filters the results listed in the response.
+ * @param {string} request.orderBy
+ *   Sort the results by a certain order.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.networkconnectivity.v1alpha1.Spoke|Spoke}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listSpokesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listSpokes(
-    request?: protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.networkconnectivity.v1alpha1.ISpoke[],
-      protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesRequest | null,
-      protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.networkconnectivity.v1alpha1.ISpoke[],
+        protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesRequest|null,
+        protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesResponse
+      ]>;
   listSpokes(
-    request: protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesRequest,
-      | protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesResponse
-      | null
-      | undefined,
-      protos.google.cloud.networkconnectivity.v1alpha1.ISpoke
-    >
-  ): void;
-  listSpokes(
-    request: protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesRequest,
-      | protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesResponse
-      | null
-      | undefined,
-      protos.google.cloud.networkconnectivity.v1alpha1.ISpoke
-    >
-  ): void;
-  listSpokes(
-    request?: protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesRequest,
-          | protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesResponse
-          | null
-          | undefined,
-          protos.google.cloud.networkconnectivity.v1alpha1.ISpoke
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesRequest,
-      | protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesResponse
-      | null
-      | undefined,
-      protos.google.cloud.networkconnectivity.v1alpha1.ISpoke
-    >
-  ): Promise<
-    [
-      protos.google.cloud.networkconnectivity.v1alpha1.ISpoke[],
-      protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesRequest | null,
-      protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesResponse,
-    ]
-  > | void {
+          protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesResponse|null|undefined,
+          protos.google.cloud.networkconnectivity.v1alpha1.ISpoke>): void;
+  listSpokes(
+      request: protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesRequest,
+          protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesResponse|null|undefined,
+          protos.google.cloud.networkconnectivity.v1alpha1.ISpoke>): void;
+  listSpokes(
+      request?: protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesRequest,
+          protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesResponse|null|undefined,
+          protos.google.cloud.networkconnectivity.v1alpha1.ISpoke>,
+      callback?: PaginationCallback<
+          protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesRequest,
+          protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesResponse|null|undefined,
+          protos.google.cloud.networkconnectivity.v1alpha1.ISpoke>):
+      Promise<[
+        protos.google.cloud.networkconnectivity.v1alpha1.ISpoke[],
+        protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesRequest|null,
+        protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesRequest,
-          | protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesResponse
-          | null
-          | undefined,
-          protos.google.cloud.networkconnectivity.v1alpha1.ISpoke
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesRequest,
+      protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesResponse|null|undefined,
+      protos.google.cloud.networkconnectivity.v1alpha1.ISpoke>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listSpokes values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2287,60 +1657,57 @@ export class HubServiceClient {
     this._log.info('listSpokes request %j', request);
     return this.innerApiCalls
       .listSpokes(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.networkconnectivity.v1alpha1.ISpoke[],
-          protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesRequest | null,
-          protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesResponse,
-        ]) => {
-          this._log.info('listSpokes values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.networkconnectivity.v1alpha1.ISpoke[],
+        protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesRequest|null,
+        protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesResponse
+      ]) => {
+        this._log.info('listSpokes values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listSpokes`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent's resource name.
-   * @param {number} request.pageSize
-   *   The maximum number of results per page that should be returned.
-   * @param {string} request.pageToken
-   *   The page token.
-   * @param {string} request.filter
-   *   A filter expression that filters the results listed in the response.
-   * @param {string} request.orderBy
-   *   Sort the results by a certain order.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.networkconnectivity.v1alpha1.Spoke|Spoke} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listSpokesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listSpokes`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent's resource name.
+ * @param {number} request.pageSize
+ *   The maximum number of results per page that should be returned.
+ * @param {string} request.pageToken
+ *   The page token.
+ * @param {string} request.filter
+ *   A filter expression that filters the results listed in the response.
+ * @param {string} request.orderBy
+ *   Sort the results by a certain order.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.networkconnectivity.v1alpha1.Spoke|Spoke} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listSpokesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listSpokesStream(
-    request?: protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listSpokes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listSpokes stream %j', request);
     return this.descriptors.page.listSpokes.createStream(
       this.innerApiCalls.listSpokes as GaxCall,
@@ -2349,51 +1716,50 @@ export class HubServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listSpokes`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent's resource name.
-   * @param {number} request.pageSize
-   *   The maximum number of results per page that should be returned.
-   * @param {string} request.pageToken
-   *   The page token.
-   * @param {string} request.filter
-   *   A filter expression that filters the results listed in the response.
-   * @param {string} request.orderBy
-   *   Sort the results by a certain order.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.networkconnectivity.v1alpha1.Spoke|Spoke}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/hub_service.list_spokes.js</caption>
-   * region_tag:networkconnectivity_v1alpha1_generated_HubService_ListSpokes_async
-   */
+/**
+ * Equivalent to `listSpokes`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent's resource name.
+ * @param {number} request.pageSize
+ *   The maximum number of results per page that should be returned.
+ * @param {string} request.pageToken
+ *   The page token.
+ * @param {string} request.filter
+ *   A filter expression that filters the results listed in the response.
+ * @param {string} request.orderBy
+ *   Sort the results by a certain order.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.networkconnectivity.v1alpha1.Spoke|Spoke}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/hub_service.list_spokes.js</caption>
+ * region_tag:networkconnectivity_v1alpha1_generated_HubService_ListSpokes_async
+ */
   listSpokesAsync(
-    request?: protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.networkconnectivity.v1alpha1.ISpoke> {
+      request?: protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.networkconnectivity.v1alpha1.ISpoke>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listSpokes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listSpokes iterate %j', request);
     return this.descriptors.page.listSpokes.asyncIterate(
       this.innerApiCalls['listSpokes'] as GaxCall,
@@ -2412,7 +1778,7 @@ export class HubServiceClient {
    * @param {string} hub
    * @returns {string} Resource name string.
    */
-  hubPath(project: string, hub: string) {
+  hubPath(project:string,hub:string) {
     return this.pathTemplates.hubPathTemplate.render({
       project: project,
       hub: hub,
@@ -2449,7 +1815,7 @@ export class HubServiceClient {
    * @param {string} instance
    * @returns {string} Resource name string.
    */
-  instancePath(project: string, zone: string, instance: string) {
+  instancePath(project:string,zone:string,instance:string) {
     return this.pathTemplates.instancePathTemplate.render({
       project: project,
       zone: zone,
@@ -2498,11 +1864,7 @@ export class HubServiceClient {
    * @param {string} resource_id
    * @returns {string} Resource name string.
    */
-  interconnectAttachmentPath(
-    project: string,
-    region: string,
-    resourceId: string
-  ) {
+  interconnectAttachmentPath(project:string,region:string,resourceId:string) {
     return this.pathTemplates.interconnectAttachmentPathTemplate.render({
       project: project,
       region: region,
@@ -2517,12 +1879,8 @@ export class HubServiceClient {
    *   A fully-qualified path representing InterconnectAttachment resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromInterconnectAttachmentName(
-    interconnectAttachmentName: string
-  ) {
-    return this.pathTemplates.interconnectAttachmentPathTemplate.match(
-      interconnectAttachmentName
-    ).project;
+  matchProjectFromInterconnectAttachmentName(interconnectAttachmentName: string) {
+    return this.pathTemplates.interconnectAttachmentPathTemplate.match(interconnectAttachmentName).project;
   }
 
   /**
@@ -2532,12 +1890,8 @@ export class HubServiceClient {
    *   A fully-qualified path representing InterconnectAttachment resource.
    * @returns {string} A string representing the region.
    */
-  matchRegionFromInterconnectAttachmentName(
-    interconnectAttachmentName: string
-  ) {
-    return this.pathTemplates.interconnectAttachmentPathTemplate.match(
-      interconnectAttachmentName
-    ).region;
+  matchRegionFromInterconnectAttachmentName(interconnectAttachmentName: string) {
+    return this.pathTemplates.interconnectAttachmentPathTemplate.match(interconnectAttachmentName).region;
   }
 
   /**
@@ -2547,12 +1901,8 @@ export class HubServiceClient {
    *   A fully-qualified path representing InterconnectAttachment resource.
    * @returns {string} A string representing the resource_id.
    */
-  matchResourceIdFromInterconnectAttachmentName(
-    interconnectAttachmentName: string
-  ) {
-    return this.pathTemplates.interconnectAttachmentPathTemplate.match(
-      interconnectAttachmentName
-    ).resource_id;
+  matchResourceIdFromInterconnectAttachmentName(interconnectAttachmentName: string) {
+    return this.pathTemplates.interconnectAttachmentPathTemplate.match(interconnectAttachmentName).resource_id;
   }
 
   /**
@@ -2562,7 +1912,7 @@ export class HubServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -2599,7 +1949,7 @@ export class HubServiceClient {
    * @param {string} spoke
    * @returns {string} Resource name string.
    */
-  spokePath(project: string, location: string, spoke: string) {
+  spokePath(project:string,location:string,spoke:string) {
     return this.pathTemplates.spokePathTemplate.render({
       project: project,
       location: location,
@@ -2648,7 +1998,7 @@ export class HubServiceClient {
    * @param {string} resource_id
    * @returns {string} Resource name string.
    */
-  vpnTunnelPath(project: string, region: string, resourceId: string) {
+  vpnTunnelPath(project:string,region:string,resourceId:string) {
     return this.pathTemplates.vpnTunnelPathTemplate.render({
       project: project,
       region: region,
@@ -2664,8 +2014,7 @@ export class HubServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromVpnTunnelName(vpnTunnelName: string) {
-    return this.pathTemplates.vpnTunnelPathTemplate.match(vpnTunnelName)
-      .project;
+    return this.pathTemplates.vpnTunnelPathTemplate.match(vpnTunnelName).project;
   }
 
   /**
@@ -2687,8 +2036,7 @@ export class HubServiceClient {
    * @returns {string} A string representing the resource_id.
    */
   matchResourceIdFromVpnTunnelName(vpnTunnelName: string) {
-    return this.pathTemplates.vpnTunnelPathTemplate.match(vpnTunnelName)
-      .resource_id;
+    return this.pathTemplates.vpnTunnelPathTemplate.match(vpnTunnelName).resource_id;
   }
 
   /**

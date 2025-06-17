@@ -16,12 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const phishingprotection = require('@google-cloud/phishing-protection');
 
 function main() {
-  const phishingProtectionServiceV1Beta1Client =
-    new phishingprotection.PhishingProtectionServiceV1Beta1Client();
+  const phishingProtectionServiceV1Beta1Client = new phishingprotection.PhishingProtectionServiceV1Beta1Client();
 }
 
 main();

@@ -16,10 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {
-  EnvironmentsClient,
-  ImageVersionsClient,
-} from '@google-cloud/orchestration-airflow';
+import {EnvironmentsClient, ImageVersionsClient} from '@google-cloud/orchestration-airflow';
 
 // check that the client class type name can be used
 function doStuffWithEnvironmentsClient(client: EnvironmentsClient) {

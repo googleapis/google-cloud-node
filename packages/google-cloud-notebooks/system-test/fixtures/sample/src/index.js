@@ -16,12 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const notebooks = require('@google-cloud/notebooks');
 
 function main() {
-  const managedNotebookServiceClient =
-    new notebooks.ManagedNotebookServiceClient();
+  const managedNotebookServiceClient = new notebooks.ManagedNotebookServiceClient();
   const notebookServiceClient = new notebooks.NotebookServiceClient();
 }
 

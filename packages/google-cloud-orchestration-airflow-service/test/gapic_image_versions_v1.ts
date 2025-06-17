@@ -29,883 +29,635 @@ import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.ImageVersionsClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new imageversionsModule.v1.ImageVersionsClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'composer.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new imageversionsModule.v1.ImageVersionsClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          imageversionsModule.v1.ImageVersionsClient.servicePath;
-        assert.strictEqual(servicePath, 'composer.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          imageversionsModule.v1.ImageVersionsClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'composer.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new imageversionsModule.v1.ImageVersionsClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'composer.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new imageversionsModule.v1.ImageVersionsClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'composer.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new imageversionsModule.v1.ImageVersionsClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'composer.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new imageversionsModule.v1.ImageVersionsClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'composer.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new imageversionsModule.v1.ImageVersionsClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'composer.configured.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new imageversionsModule.v1.ImageVersionsClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new imageversionsModule.v1.ImageVersionsClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = imageversionsModule.v1.ImageVersionsClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = imageversionsModule.v1.ImageVersionsClient.servicePath;
+                assert.strictEqual(servicePath, 'composer.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
 
-    it('should create a client with no option', () => {
-      const client = new imageversionsModule.v1.ImageVersionsClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new imageversionsModule.v1.ImageVersionsClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new imageversionsModule.v1.ImageVersionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.imageVersionsStub, undefined);
-      await client.initialize();
-      assert(client.imageVersionsStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new imageversionsModule.v1.ImageVersionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.imageVersionsStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new imageversionsModule.v1.ImageVersionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.imageVersionsStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new imageversionsModule.v1.ImageVersionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new imageversionsModule.v1.ImageVersionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('listImageVersions', () => {
-    it('invokes listImageVersions without error', async () => {
-      const client = new imageversionsModule.v1.ImageVersionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1.ImageVersion()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1.ImageVersion()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1.ImageVersion()
-        ),
-      ];
-      client.innerApiCalls.listImageVersions = stubSimpleCall(expectedResponse);
-      const [response] = await client.listImageVersions(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listImageVersions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listImageVersions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listImageVersions without error using callback', async () => {
-      const client = new imageversionsModule.v1.ImageVersionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1.ImageVersion()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1.ImageVersion()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1.ImageVersion()
-        ),
-      ];
-      client.innerApiCalls.listImageVersions =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listImageVersions(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.orchestration.airflow.service.v1.IImageVersion[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listImageVersions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listImageVersions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listImageVersions with error', async () => {
-      const client = new imageversionsModule.v1.ImageVersionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listImageVersions = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listImageVersions(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listImageVersions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listImageVersions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listImageVersionsStream without error', async () => {
-      const client = new imageversionsModule.v1.ImageVersionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1.ImageVersion()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1.ImageVersion()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1.ImageVersion()
-        ),
-      ];
-      client.descriptors.page.listImageVersions.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listImageVersionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.orchestration.airflow.service.v1.ImageVersion[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.orchestration.airflow.service.v1.ImageVersion
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listImageVersions.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listImageVersions, request)
-      );
-      assert(
-        (client.descriptors.page.listImageVersions.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listImageVersionsStream with error', async () => {
-      const client = new imageversionsModule.v1.ImageVersionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listImageVersions.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listImageVersionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.orchestration.airflow.service.v1.ImageVersion[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.orchestration.airflow.service.v1.ImageVersion
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listImageVersions.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listImageVersions, request)
-      );
-      assert(
-        (client.descriptors.page.listImageVersions.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listImageVersions without error', async () => {
-      const client = new imageversionsModule.v1.ImageVersionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1.ImageVersion()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1.ImageVersion()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.orchestration.airflow.service.v1.ImageVersion()
-        ),
-      ];
-      client.descriptors.page.listImageVersions.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.orchestration.airflow.service.v1.IImageVersion[] =
-        [];
-      const iterable = client.listImageVersionsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listImageVersions.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listImageVersions.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listImageVersions with error', async () => {
-      const client = new imageversionsModule.v1.ImageVersionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listImageVersions.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listImageVersionsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.orchestration.airflow.service.v1.IImageVersion[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = imageversionsModule.v1.ImageVersionsClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'composer.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listImageVersions.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listImageVersions.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new imageversionsModule.v1.ImageVersionsClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'composer.example.com');
+        });
 
-  describe('Path templates', () => {
-    describe('environment', async () => {
-      const fakePath = '/rendered/path/environment';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        environment: 'environmentValue',
-      };
-      const client = new imageversionsModule.v1.ImageVersionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.environmentPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.environmentPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new imageversionsModule.v1.ImageVersionsClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'composer.example.com');
+        });
 
-      it('environmentPath', () => {
-        const result = client.environmentPath(
-          'projectValue',
-          'locationValue',
-          'environmentValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.environmentPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new imageversionsModule.v1.ImageVersionsClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'composer.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-      it('matchProjectFromEnvironmentName', () => {
-        const result = client.matchProjectFromEnvironmentName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.environmentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new imageversionsModule.v1.ImageVersionsClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'composer.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
+        }
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new imageversionsModule.v1.ImageVersionsClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-      it('matchLocationFromEnvironmentName', () => {
-        const result = client.matchLocationFromEnvironmentName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.environmentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has port', () => {
+            const port = imageversionsModule.v1.ImageVersionsClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
 
-      it('matchEnvironmentFromEnvironmentName', () => {
-        const result = client.matchEnvironmentFromEnvironmentName(fakePath);
-        assert.strictEqual(result, 'environmentValue');
-        assert(
-          (client.pathTemplates.environmentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
+        it('should create a client with no option', () => {
+            const client = new imageversionsModule.v1.ImageVersionsClient();
+            assert(client);
+        });
 
-    describe('userWorkloadsConfigMap', async () => {
-      const fakePath = '/rendered/path/userWorkloadsConfigMap';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        environment: 'environmentValue',
-        user_workloads_config_map: 'userWorkloadsConfigMapValue',
-      };
-      const client = new imageversionsModule.v1.ImageVersionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.userWorkloadsConfigMapPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.userWorkloadsConfigMapPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+        it('should create a client with gRPC fallback', () => {
+            const client = new imageversionsModule.v1.ImageVersionsClient({
+                fallback: true,
+            });
+            assert(client);
+        });
 
-      it('userWorkloadsConfigMapPath', () => {
-        const result = client.userWorkloadsConfigMapPath(
-          'projectValue',
-          'locationValue',
-          'environmentValue',
-          'userWorkloadsConfigMapValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.userWorkloadsConfigMapPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new imageversionsModule.v1.ImageVersionsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.imageVersionsStub, undefined);
+            await client.initialize();
+            assert(client.imageVersionsStub);
+        });
 
-      it('matchProjectFromUserWorkloadsConfigMapName', () => {
-        const result =
-          client.matchProjectFromUserWorkloadsConfigMapName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.userWorkloadsConfigMapPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has close method for the initialized client', done => {
+            const client = new imageversionsModule.v1.ImageVersionsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.imageVersionsStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
 
-      it('matchLocationFromUserWorkloadsConfigMapName', () => {
-        const result =
-          client.matchLocationFromUserWorkloadsConfigMapName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.userWorkloadsConfigMapPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has close method for the non-initialized client', done => {
+            const client = new imageversionsModule.v1.ImageVersionsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.imageVersionsStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
 
-      it('matchEnvironmentFromUserWorkloadsConfigMapName', () => {
-        const result =
-          client.matchEnvironmentFromUserWorkloadsConfigMapName(fakePath);
-        assert.strictEqual(result, 'environmentValue');
-        assert(
-          (
-            client.pathTemplates.userWorkloadsConfigMapPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new imageversionsModule.v1.ImageVersionsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
 
-      it('matchUserWorkloadsConfigMapFromUserWorkloadsConfigMapName', () => {
-        const result =
-          client.matchUserWorkloadsConfigMapFromUserWorkloadsConfigMapName(
-            fakePath
-          );
-        assert.strictEqual(result, 'userWorkloadsConfigMapValue');
-        assert(
-          (
-            client.pathTemplates.userWorkloadsConfigMapPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new imageversionsModule.v1.ImageVersionsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    describe('userWorkloadsSecret', async () => {
-      const fakePath = '/rendered/path/userWorkloadsSecret';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        environment: 'environmentValue',
-        user_workloads_secret: 'userWorkloadsSecretValue',
-      };
-      const client = new imageversionsModule.v1.ImageVersionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.userWorkloadsSecretPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.userWorkloadsSecretPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('listImageVersions', () => {
+        it('invokes listImageVersions without error', async () => {
+            const client = new imageversionsModule.v1.ImageVersionsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1.ImageVersion()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1.ImageVersion()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1.ImageVersion()),
+            ];
+            client.innerApiCalls.listImageVersions = stubSimpleCall(expectedResponse);
+            const [response] = await client.listImageVersions(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listImageVersions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listImageVersions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('userWorkloadsSecretPath', () => {
-        const result = client.userWorkloadsSecretPath(
-          'projectValue',
-          'locationValue',
-          'environmentValue',
-          'userWorkloadsSecretValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.userWorkloadsSecretPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes listImageVersions without error using callback', async () => {
+            const client = new imageversionsModule.v1.ImageVersionsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1.ImageVersion()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1.ImageVersion()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1.ImageVersion()),
+            ];
+            client.innerApiCalls.listImageVersions = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listImageVersions(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.orchestration.airflow.service.v1.IImageVersion[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listImageVersions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listImageVersions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchProjectFromUserWorkloadsSecretName', () => {
-        const result = client.matchProjectFromUserWorkloadsSecretName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.userWorkloadsSecretPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes listImageVersions with error', async () => {
+            const client = new imageversionsModule.v1.ImageVersionsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listImageVersions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listImageVersions(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listImageVersions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listImageVersions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchLocationFromUserWorkloadsSecretName', () => {
-        const result =
-          client.matchLocationFromUserWorkloadsSecretName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.userWorkloadsSecretPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes listImageVersionsStream without error', async () => {
+            const client = new imageversionsModule.v1.ImageVersionsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1.ImageVersion()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1.ImageVersion()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1.ImageVersion()),
+            ];
+            client.descriptors.page.listImageVersions.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listImageVersionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.orchestration.airflow.service.v1.ImageVersion[] = [];
+                stream.on('data', (response: protos.google.cloud.orchestration.airflow.service.v1.ImageVersion) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listImageVersions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listImageVersions, request));
+            assert(
+                (client.descriptors.page.listImageVersions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-      it('matchEnvironmentFromUserWorkloadsSecretName', () => {
-        const result =
-          client.matchEnvironmentFromUserWorkloadsSecretName(fakePath);
-        assert.strictEqual(result, 'environmentValue');
-        assert(
-          (
-            client.pathTemplates.userWorkloadsSecretPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes listImageVersionsStream with error', async () => {
+            const client = new imageversionsModule.v1.ImageVersionsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listImageVersions.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listImageVersionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.orchestration.airflow.service.v1.ImageVersion[] = [];
+                stream.on('data', (response: protos.google.cloud.orchestration.airflow.service.v1.ImageVersion) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listImageVersions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listImageVersions, request));
+            assert(
+                (client.descriptors.page.listImageVersions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-      it('matchUserWorkloadsSecretFromUserWorkloadsSecretName', () => {
-        const result =
-          client.matchUserWorkloadsSecretFromUserWorkloadsSecretName(fakePath);
-        assert.strictEqual(result, 'userWorkloadsSecretValue');
-        assert(
-          (
-            client.pathTemplates.userWorkloadsSecretPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('uses async iteration with listImageVersions without error', async () => {
+            const client = new imageversionsModule.v1.ImageVersionsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1.ImageVersion()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1.ImageVersion()),
+              generateSampleMessage(new protos.google.cloud.orchestration.airflow.service.v1.ImageVersion()),
+            ];
+            client.descriptors.page.listImageVersions.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.orchestration.airflow.service.v1.IImageVersion[] = [];
+            const iterable = client.listImageVersionsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listImageVersions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listImageVersions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listImageVersions with error', async () => {
+            const client = new imageversionsModule.v1.ImageVersionsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listImageVersions.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listImageVersionsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.orchestration.airflow.service.v1.IImageVersion[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listImageVersions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listImageVersions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-  });
+
+    describe('Path templates', () => {
+
+        describe('environment', async () => {
+            const fakePath = "/rendered/path/environment";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                environment: "environmentValue",
+            };
+            const client = new imageversionsModule.v1.ImageVersionsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.environmentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.environmentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('environmentPath', () => {
+                const result = client.environmentPath("projectValue", "locationValue", "environmentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.environmentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromEnvironmentName', () => {
+                const result = client.matchProjectFromEnvironmentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.environmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromEnvironmentName', () => {
+                const result = client.matchLocationFromEnvironmentName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.environmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEnvironmentFromEnvironmentName', () => {
+                const result = client.matchEnvironmentFromEnvironmentName(fakePath);
+                assert.strictEqual(result, "environmentValue");
+                assert((client.pathTemplates.environmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('userWorkloadsConfigMap', async () => {
+            const fakePath = "/rendered/path/userWorkloadsConfigMap";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                environment: "environmentValue",
+                user_workloads_config_map: "userWorkloadsConfigMapValue",
+            };
+            const client = new imageversionsModule.v1.ImageVersionsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.userWorkloadsConfigMapPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.userWorkloadsConfigMapPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('userWorkloadsConfigMapPath', () => {
+                const result = client.userWorkloadsConfigMapPath("projectValue", "locationValue", "environmentValue", "userWorkloadsConfigMapValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.userWorkloadsConfigMapPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromUserWorkloadsConfigMapName', () => {
+                const result = client.matchProjectFromUserWorkloadsConfigMapName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.userWorkloadsConfigMapPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromUserWorkloadsConfigMapName', () => {
+                const result = client.matchLocationFromUserWorkloadsConfigMapName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.userWorkloadsConfigMapPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEnvironmentFromUserWorkloadsConfigMapName', () => {
+                const result = client.matchEnvironmentFromUserWorkloadsConfigMapName(fakePath);
+                assert.strictEqual(result, "environmentValue");
+                assert((client.pathTemplates.userWorkloadsConfigMapPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchUserWorkloadsConfigMapFromUserWorkloadsConfigMapName', () => {
+                const result = client.matchUserWorkloadsConfigMapFromUserWorkloadsConfigMapName(fakePath);
+                assert.strictEqual(result, "userWorkloadsConfigMapValue");
+                assert((client.pathTemplates.userWorkloadsConfigMapPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('userWorkloadsSecret', async () => {
+            const fakePath = "/rendered/path/userWorkloadsSecret";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                environment: "environmentValue",
+                user_workloads_secret: "userWorkloadsSecretValue",
+            };
+            const client = new imageversionsModule.v1.ImageVersionsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.userWorkloadsSecretPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.userWorkloadsSecretPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('userWorkloadsSecretPath', () => {
+                const result = client.userWorkloadsSecretPath("projectValue", "locationValue", "environmentValue", "userWorkloadsSecretValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.userWorkloadsSecretPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromUserWorkloadsSecretName', () => {
+                const result = client.matchProjectFromUserWorkloadsSecretName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.userWorkloadsSecretPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromUserWorkloadsSecretName', () => {
+                const result = client.matchLocationFromUserWorkloadsSecretName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.userWorkloadsSecretPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEnvironmentFromUserWorkloadsSecretName', () => {
+                const result = client.matchEnvironmentFromUserWorkloadsSecretName(fakePath);
+                assert.strictEqual(result, "environmentValue");
+                assert((client.pathTemplates.userWorkloadsSecretPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchUserWorkloadsSecretFromUserWorkloadsSecretName', () => {
+                const result = client.matchUserWorkloadsSecretFromUserWorkloadsSecretName(fakePath);
+                assert.strictEqual(result, "userWorkloadsSecretValue");
+                assert((client.pathTemplates.userWorkloadsSecretPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+    });
 });

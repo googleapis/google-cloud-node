@@ -19,9 +19,7 @@
 import {PolicyTroubleshooterClient} from '@google-cloud/policy-troubleshooter-iam';
 
 // check that the client class type name can be used
-function doStuffWithPolicyTroubleshooterClient(
-  client: PolicyTroubleshooterClient
-) {
+function doStuffWithPolicyTroubleshooterClient(client: PolicyTroubleshooterClient) {
   client.close();
 }
 

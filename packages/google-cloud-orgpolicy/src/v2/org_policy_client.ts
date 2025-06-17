@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -126,41 +119,20 @@ export class OrgPolicyClient {
    *     const client = new OrgPolicyClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof OrgPolicyClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'orgpolicy.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -186,7 +158,7 @@ export class OrgPolicyClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -200,7 +172,10 @@ export class OrgPolicyClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -254,30 +229,18 @@ export class OrgPolicyClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listConstraints: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'constraints'
-      ),
-      listPolicies: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'policies'
-      ),
-      listCustomConstraints: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'customConstraints'
-      ),
+      listConstraints:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'constraints'),
+      listPolicies:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'policies'),
+      listCustomConstraints:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'customConstraints')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.orgpolicy.v2.OrgPolicy',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.orgpolicy.v2.OrgPolicy', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -308,48 +271,32 @@ export class OrgPolicyClient {
     // Put together the "service stub" for
     // google.cloud.orgpolicy.v2.OrgPolicy.
     this.orgPolicyStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.orgpolicy.v2.OrgPolicy'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.orgpolicy.v2.OrgPolicy') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.orgpolicy.v2.OrgPolicy,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const orgPolicyStubMethods = [
-      'listConstraints',
-      'listPolicies',
-      'getPolicy',
-      'getEffectivePolicy',
-      'createPolicy',
-      'updatePolicy',
-      'deletePolicy',
-      'createCustomConstraint',
-      'updateCustomConstraint',
-      'getCustomConstraint',
-      'listCustomConstraints',
-      'deleteCustomConstraint',
-    ];
+    const orgPolicyStubMethods =
+        ['listConstraints', 'listPolicies', 'getPolicy', 'getEffectivePolicy', 'createPolicy', 'updatePolicy', 'deletePolicy', 'createCustomConstraint', 'updateCustomConstraint', 'getCustomConstraint', 'listCustomConstraints', 'deleteCustomConstraint'];
     for (const methodName of orgPolicyStubMethods) {
       const callPromise = this.orgPolicyStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -369,14 +316,8 @@ export class OrgPolicyClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'orgpolicy.googleapis.com';
   }
@@ -387,14 +328,8 @@ export class OrgPolicyClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'orgpolicy.googleapis.com';
   }
@@ -425,7 +360,9 @@ export class OrgPolicyClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -434,9 +371,8 @@ export class OrgPolicyClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -447,1256 +383,1010 @@ export class OrgPolicyClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets a policy on a resource.
-   *
-   * If no policy is set on the resource, `NOT_FOUND` is returned. The
-   * `etag` value can be used with `UpdatePolicy()` to update a
-   * policy during read-modify-write.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the policy. See
-   *   {@link protos.google.cloud.orgpolicy.v2.Policy|Policy} for naming requirements.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.orgpolicy.v2.Policy|Policy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/org_policy.get_policy.js</caption>
-   * region_tag:orgpolicy_v2_generated_OrgPolicy_GetPolicy_async
-   */
+/**
+ * Gets a policy on a resource.
+ *
+ * If no policy is set on the resource, `NOT_FOUND` is returned. The
+ * `etag` value can be used with `UpdatePolicy()` to update a
+ * policy during read-modify-write.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the policy. See
+ *   {@link protos.google.cloud.orgpolicy.v2.Policy|Policy} for naming requirements.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.orgpolicy.v2.Policy|Policy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/org_policy.get_policy.js</caption>
+ * region_tag:orgpolicy_v2_generated_OrgPolicy_GetPolicy_async
+ */
   getPolicy(
-    request?: protos.google.cloud.orgpolicy.v2.IGetPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.orgpolicy.v2.IPolicy,
-      protos.google.cloud.orgpolicy.v2.IGetPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.orgpolicy.v2.IGetPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.orgpolicy.v2.IPolicy,
+        protos.google.cloud.orgpolicy.v2.IGetPolicyRequest|undefined, {}|undefined
+      ]>;
   getPolicy(
-    request: protos.google.cloud.orgpolicy.v2.IGetPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.orgpolicy.v2.IPolicy,
-      protos.google.cloud.orgpolicy.v2.IGetPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPolicy(
-    request: protos.google.cloud.orgpolicy.v2.IGetPolicyRequest,
-    callback: Callback<
-      protos.google.cloud.orgpolicy.v2.IPolicy,
-      protos.google.cloud.orgpolicy.v2.IGetPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPolicy(
-    request?: protos.google.cloud.orgpolicy.v2.IGetPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.orgpolicy.v2.IGetPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.orgpolicy.v2.IPolicy,
-          protos.google.cloud.orgpolicy.v2.IGetPolicyRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.orgpolicy.v2.IPolicy,
-      protos.google.cloud.orgpolicy.v2.IGetPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.orgpolicy.v2.IPolicy,
-      protos.google.cloud.orgpolicy.v2.IGetPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.orgpolicy.v2.IGetPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getPolicy(
+      request: protos.google.cloud.orgpolicy.v2.IGetPolicyRequest,
+      callback: Callback<
+          protos.google.cloud.orgpolicy.v2.IPolicy,
+          protos.google.cloud.orgpolicy.v2.IGetPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getPolicy(
+      request?: protos.google.cloud.orgpolicy.v2.IGetPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.orgpolicy.v2.IPolicy,
+          protos.google.cloud.orgpolicy.v2.IGetPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.orgpolicy.v2.IPolicy,
+          protos.google.cloud.orgpolicy.v2.IGetPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.orgpolicy.v2.IPolicy,
+        protos.google.cloud.orgpolicy.v2.IGetPolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.orgpolicy.v2.IPolicy,
-          protos.google.cloud.orgpolicy.v2.IGetPolicyRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.orgpolicy.v2.IPolicy,
+        protos.google.cloud.orgpolicy.v2.IGetPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.orgpolicy.v2.IPolicy,
-          protos.google.cloud.orgpolicy.v2.IGetPolicyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getPolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.orgpolicy.v2.IPolicy,
+        protos.google.cloud.orgpolicy.v2.IGetPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets the effective policy on a resource. This is the result of merging
-   * policies in the resource hierarchy and evaluating conditions. The
-   * returned policy will not have an `etag` or `condition` set because it is
-   * an evaluated policy across multiple resources.
-   * Subtrees of Resource Manager resource hierarchy with 'under:' prefix will
-   * not be expanded.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The effective policy to compute. See
-   *   {@link protos.google.cloud.orgpolicy.v2.Policy|Policy} for naming requirements.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.orgpolicy.v2.Policy|Policy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/org_policy.get_effective_policy.js</caption>
-   * region_tag:orgpolicy_v2_generated_OrgPolicy_GetEffectivePolicy_async
-   */
+/**
+ * Gets the effective policy on a resource. This is the result of merging
+ * policies in the resource hierarchy and evaluating conditions. The
+ * returned policy will not have an `etag` or `condition` set because it is
+ * an evaluated policy across multiple resources.
+ * Subtrees of Resource Manager resource hierarchy with 'under:' prefix will
+ * not be expanded.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The effective policy to compute. See
+ *   {@link protos.google.cloud.orgpolicy.v2.Policy|Policy} for naming requirements.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.orgpolicy.v2.Policy|Policy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/org_policy.get_effective_policy.js</caption>
+ * region_tag:orgpolicy_v2_generated_OrgPolicy_GetEffectivePolicy_async
+ */
   getEffectivePolicy(
-    request?: protos.google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.orgpolicy.v2.IPolicy,
-      protos.google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.orgpolicy.v2.IPolicy,
+        protos.google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest|undefined, {}|undefined
+      ]>;
   getEffectivePolicy(
-    request: protos.google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.orgpolicy.v2.IPolicy,
-      | protos.google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEffectivePolicy(
-    request: protos.google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest,
-    callback: Callback<
-      protos.google.cloud.orgpolicy.v2.IPolicy,
-      | protos.google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEffectivePolicy(
-    request?: protos.google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.orgpolicy.v2.IPolicy,
-          | protos.google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.orgpolicy.v2.IPolicy,
-      | protos.google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.orgpolicy.v2.IPolicy,
-      protos.google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getEffectivePolicy(
+      request: protos.google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest,
+      callback: Callback<
+          protos.google.cloud.orgpolicy.v2.IPolicy,
+          protos.google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getEffectivePolicy(
+      request?: protos.google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.orgpolicy.v2.IPolicy,
+          protos.google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.orgpolicy.v2.IPolicy,
+          protos.google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.orgpolicy.v2.IPolicy,
+        protos.google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getEffectivePolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.orgpolicy.v2.IPolicy,
-          | protos.google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.orgpolicy.v2.IPolicy,
+        protos.google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getEffectivePolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getEffectivePolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.orgpolicy.v2.IPolicy,
-          (
-            | protos.google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getEffectivePolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getEffectivePolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.orgpolicy.v2.IPolicy,
+        protos.google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getEffectivePolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a policy.
-   *
-   * Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the
-   * constraint does not exist.
-   * Returns a `google.rpc.Status` with `google.rpc.Code.ALREADY_EXISTS` if the
-   * policy already exists on the given Google Cloud resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The Google Cloud resource that will parent the new policy. Must
-   *   be in one of the following forms:
-   *
-   *   * `projects/{project_number}`
-   *   * `projects/{project_id}`
-   *   * `folders/{folder_id}`
-   *   * `organizations/{organization_id}`
-   * @param {google.cloud.orgpolicy.v2.Policy} request.policy
-   *   Required. Policy to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.orgpolicy.v2.Policy|Policy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/org_policy.create_policy.js</caption>
-   * region_tag:orgpolicy_v2_generated_OrgPolicy_CreatePolicy_async
-   */
+/**
+ * Creates a policy.
+ *
+ * Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the
+ * constraint does not exist.
+ * Returns a `google.rpc.Status` with `google.rpc.Code.ALREADY_EXISTS` if the
+ * policy already exists on the given Google Cloud resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The Google Cloud resource that will parent the new policy. Must
+ *   be in one of the following forms:
+ *
+ *   * `projects/{project_number}`
+ *   * `projects/{project_id}`
+ *   * `folders/{folder_id}`
+ *   * `organizations/{organization_id}`
+ * @param {google.cloud.orgpolicy.v2.Policy} request.policy
+ *   Required. Policy to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.orgpolicy.v2.Policy|Policy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/org_policy.create_policy.js</caption>
+ * region_tag:orgpolicy_v2_generated_OrgPolicy_CreatePolicy_async
+ */
   createPolicy(
-    request?: protos.google.cloud.orgpolicy.v2.ICreatePolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.orgpolicy.v2.IPolicy,
-      protos.google.cloud.orgpolicy.v2.ICreatePolicyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.orgpolicy.v2.ICreatePolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.orgpolicy.v2.IPolicy,
+        protos.google.cloud.orgpolicy.v2.ICreatePolicyRequest|undefined, {}|undefined
+      ]>;
   createPolicy(
-    request: protos.google.cloud.orgpolicy.v2.ICreatePolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.orgpolicy.v2.IPolicy,
-      protos.google.cloud.orgpolicy.v2.ICreatePolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createPolicy(
-    request: protos.google.cloud.orgpolicy.v2.ICreatePolicyRequest,
-    callback: Callback<
-      protos.google.cloud.orgpolicy.v2.IPolicy,
-      protos.google.cloud.orgpolicy.v2.ICreatePolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createPolicy(
-    request?: protos.google.cloud.orgpolicy.v2.ICreatePolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.orgpolicy.v2.ICreatePolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.orgpolicy.v2.IPolicy,
-          | protos.google.cloud.orgpolicy.v2.ICreatePolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.orgpolicy.v2.IPolicy,
-      protos.google.cloud.orgpolicy.v2.ICreatePolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.orgpolicy.v2.IPolicy,
-      protos.google.cloud.orgpolicy.v2.ICreatePolicyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.orgpolicy.v2.ICreatePolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  createPolicy(
+      request: protos.google.cloud.orgpolicy.v2.ICreatePolicyRequest,
+      callback: Callback<
+          protos.google.cloud.orgpolicy.v2.IPolicy,
+          protos.google.cloud.orgpolicy.v2.ICreatePolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  createPolicy(
+      request?: protos.google.cloud.orgpolicy.v2.ICreatePolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.orgpolicy.v2.IPolicy,
+          protos.google.cloud.orgpolicy.v2.ICreatePolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.orgpolicy.v2.IPolicy,
+          protos.google.cloud.orgpolicy.v2.ICreatePolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.orgpolicy.v2.IPolicy,
+        protos.google.cloud.orgpolicy.v2.ICreatePolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.orgpolicy.v2.IPolicy,
-          | protos.google.cloud.orgpolicy.v2.ICreatePolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.orgpolicy.v2.IPolicy,
+        protos.google.cloud.orgpolicy.v2.ICreatePolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.orgpolicy.v2.IPolicy,
-          protos.google.cloud.orgpolicy.v2.ICreatePolicyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createPolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.orgpolicy.v2.IPolicy,
+        protos.google.cloud.orgpolicy.v2.ICreatePolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates a policy.
-   *
-   * Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the
-   * constraint or the policy do not exist.
-   * Returns a `google.rpc.Status` with `google.rpc.Code.ABORTED` if the etag
-   * supplied in the request does not match the persisted etag of the policy
-   *
-   * Note: the supplied policy will perform a full overwrite of all
-   * fields.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.orgpolicy.v2.Policy} request.policy
-   *   Required. Policy to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Field mask used to specify the fields to be overwritten in the policy
-   *   by the set. The fields specified in the update_mask are relative to the
-   *   policy, not the full request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.orgpolicy.v2.Policy|Policy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/org_policy.update_policy.js</caption>
-   * region_tag:orgpolicy_v2_generated_OrgPolicy_UpdatePolicy_async
-   */
+/**
+ * Updates a policy.
+ *
+ * Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the
+ * constraint or the policy do not exist.
+ * Returns a `google.rpc.Status` with `google.rpc.Code.ABORTED` if the etag
+ * supplied in the request does not match the persisted etag of the policy
+ *
+ * Note: the supplied policy will perform a full overwrite of all
+ * fields.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.orgpolicy.v2.Policy} request.policy
+ *   Required. Policy to update.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Field mask used to specify the fields to be overwritten in the policy
+ *   by the set. The fields specified in the update_mask are relative to the
+ *   policy, not the full request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.orgpolicy.v2.Policy|Policy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/org_policy.update_policy.js</caption>
+ * region_tag:orgpolicy_v2_generated_OrgPolicy_UpdatePolicy_async
+ */
   updatePolicy(
-    request?: protos.google.cloud.orgpolicy.v2.IUpdatePolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.orgpolicy.v2.IPolicy,
-      protos.google.cloud.orgpolicy.v2.IUpdatePolicyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.orgpolicy.v2.IUpdatePolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.orgpolicy.v2.IPolicy,
+        protos.google.cloud.orgpolicy.v2.IUpdatePolicyRequest|undefined, {}|undefined
+      ]>;
   updatePolicy(
-    request: protos.google.cloud.orgpolicy.v2.IUpdatePolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.orgpolicy.v2.IPolicy,
-      protos.google.cloud.orgpolicy.v2.IUpdatePolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updatePolicy(
-    request: protos.google.cloud.orgpolicy.v2.IUpdatePolicyRequest,
-    callback: Callback<
-      protos.google.cloud.orgpolicy.v2.IPolicy,
-      protos.google.cloud.orgpolicy.v2.IUpdatePolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updatePolicy(
-    request?: protos.google.cloud.orgpolicy.v2.IUpdatePolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.orgpolicy.v2.IUpdatePolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.orgpolicy.v2.IPolicy,
-          | protos.google.cloud.orgpolicy.v2.IUpdatePolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.orgpolicy.v2.IPolicy,
-      protos.google.cloud.orgpolicy.v2.IUpdatePolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.orgpolicy.v2.IPolicy,
-      protos.google.cloud.orgpolicy.v2.IUpdatePolicyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.orgpolicy.v2.IUpdatePolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  updatePolicy(
+      request: protos.google.cloud.orgpolicy.v2.IUpdatePolicyRequest,
+      callback: Callback<
+          protos.google.cloud.orgpolicy.v2.IPolicy,
+          protos.google.cloud.orgpolicy.v2.IUpdatePolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  updatePolicy(
+      request?: protos.google.cloud.orgpolicy.v2.IUpdatePolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.orgpolicy.v2.IPolicy,
+          protos.google.cloud.orgpolicy.v2.IUpdatePolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.orgpolicy.v2.IPolicy,
+          protos.google.cloud.orgpolicy.v2.IUpdatePolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.orgpolicy.v2.IPolicy,
+        protos.google.cloud.orgpolicy.v2.IUpdatePolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'policy.name': request.policy!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'policy.name': request.policy!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updatePolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.orgpolicy.v2.IPolicy,
-          | protos.google.cloud.orgpolicy.v2.IUpdatePolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.orgpolicy.v2.IPolicy,
+        protos.google.cloud.orgpolicy.v2.IUpdatePolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updatePolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updatePolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.orgpolicy.v2.IPolicy,
-          protos.google.cloud.orgpolicy.v2.IUpdatePolicyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updatePolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updatePolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.orgpolicy.v2.IPolicy,
+        protos.google.cloud.orgpolicy.v2.IUpdatePolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updatePolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a policy.
-   *
-   * Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the
-   * constraint or organization policy does not exist.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the policy to delete.
-   *   See the policy entry for naming rules.
-   * @param {string} [request.etag]
-   *   Optional. The current etag of policy. If an etag is provided and does not
-   *   match the current etag of the policy, deletion will be blocked and an
-   *   ABORTED error will be returned.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/org_policy.delete_policy.js</caption>
-   * region_tag:orgpolicy_v2_generated_OrgPolicy_DeletePolicy_async
-   */
+/**
+ * Deletes a policy.
+ *
+ * Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the
+ * constraint or organization policy does not exist.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the policy to delete.
+ *   See the policy entry for naming rules.
+ * @param {string} [request.etag]
+ *   Optional. The current etag of policy. If an etag is provided and does not
+ *   match the current etag of the policy, deletion will be blocked and an
+ *   ABORTED error will be returned.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/org_policy.delete_policy.js</caption>
+ * region_tag:orgpolicy_v2_generated_OrgPolicy_DeletePolicy_async
+ */
   deletePolicy(
-    request?: protos.google.cloud.orgpolicy.v2.IDeletePolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.orgpolicy.v2.IDeletePolicyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.orgpolicy.v2.IDeletePolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.orgpolicy.v2.IDeletePolicyRequest|undefined, {}|undefined
+      ]>;
   deletePolicy(
-    request: protos.google.cloud.orgpolicy.v2.IDeletePolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.orgpolicy.v2.IDeletePolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deletePolicy(
-    request: protos.google.cloud.orgpolicy.v2.IDeletePolicyRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.orgpolicy.v2.IDeletePolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deletePolicy(
-    request?: protos.google.cloud.orgpolicy.v2.IDeletePolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.orgpolicy.v2.IDeletePolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.orgpolicy.v2.IDeletePolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.orgpolicy.v2.IDeletePolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.orgpolicy.v2.IDeletePolicyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.orgpolicy.v2.IDeletePolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  deletePolicy(
+      request: protos.google.cloud.orgpolicy.v2.IDeletePolicyRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.orgpolicy.v2.IDeletePolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  deletePolicy(
+      request?: protos.google.cloud.orgpolicy.v2.IDeletePolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.orgpolicy.v2.IDeletePolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.orgpolicy.v2.IDeletePolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.orgpolicy.v2.IDeletePolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deletePolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.orgpolicy.v2.IDeletePolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.orgpolicy.v2.IDeletePolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deletePolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deletePolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.orgpolicy.v2.IDeletePolicyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deletePolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deletePolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.orgpolicy.v2.IDeletePolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deletePolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a custom constraint.
-   *
-   * Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the
-   * organization does not exist.
-   * Returns a `google.rpc.Status` with `google.rpc.Code.ALREADY_EXISTS` if the
-   * constraint already exists on the given organization.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Must be in the following form:
-   *
-   *   * `organizations/{organization_id}`
-   * @param {google.cloud.orgpolicy.v2.CustomConstraint} request.customConstraint
-   *   Required. Custom constraint to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.orgpolicy.v2.CustomConstraint|CustomConstraint}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/org_policy.create_custom_constraint.js</caption>
-   * region_tag:orgpolicy_v2_generated_OrgPolicy_CreateCustomConstraint_async
-   */
+/**
+ * Creates a custom constraint.
+ *
+ * Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the
+ * organization does not exist.
+ * Returns a `google.rpc.Status` with `google.rpc.Code.ALREADY_EXISTS` if the
+ * constraint already exists on the given organization.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Must be in the following form:
+ *
+ *   * `organizations/{organization_id}`
+ * @param {google.cloud.orgpolicy.v2.CustomConstraint} request.customConstraint
+ *   Required. Custom constraint to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.orgpolicy.v2.CustomConstraint|CustomConstraint}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/org_policy.create_custom_constraint.js</caption>
+ * region_tag:orgpolicy_v2_generated_OrgPolicy_CreateCustomConstraint_async
+ */
   createCustomConstraint(
-    request?: protos.google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.orgpolicy.v2.ICustomConstraint,
-      (
-        | protos.google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.orgpolicy.v2.ICustomConstraint,
+        protos.google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest|undefined, {}|undefined
+      ]>;
   createCustomConstraint(
-    request: protos.google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.orgpolicy.v2.ICustomConstraint,
-      | protos.google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createCustomConstraint(
-    request: protos.google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest,
-    callback: Callback<
-      protos.google.cloud.orgpolicy.v2.ICustomConstraint,
-      | protos.google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createCustomConstraint(
-    request?: protos.google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.orgpolicy.v2.ICustomConstraint,
-          | protos.google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.orgpolicy.v2.ICustomConstraint,
-      | protos.google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.orgpolicy.v2.ICustomConstraint,
-      (
-        | protos.google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest|null|undefined,
+          {}|null|undefined>): void;
+  createCustomConstraint(
+      request: protos.google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest,
+      callback: Callback<
+          protos.google.cloud.orgpolicy.v2.ICustomConstraint,
+          protos.google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest|null|undefined,
+          {}|null|undefined>): void;
+  createCustomConstraint(
+      request?: protos.google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.orgpolicy.v2.ICustomConstraint,
+          protos.google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.orgpolicy.v2.ICustomConstraint,
+          protos.google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.orgpolicy.v2.ICustomConstraint,
+        protos.google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createCustomConstraint request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.orgpolicy.v2.ICustomConstraint,
-          | protos.google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.orgpolicy.v2.ICustomConstraint,
+        protos.google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createCustomConstraint response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createCustomConstraint(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.orgpolicy.v2.ICustomConstraint,
-          (
-            | protos.google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createCustomConstraint response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createCustomConstraint(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.orgpolicy.v2.ICustomConstraint,
+        protos.google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createCustomConstraint response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates a custom constraint.
-   *
-   * Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the
-   * constraint does not exist.
-   *
-   * Note: the supplied policy will perform a full overwrite of all
-   * fields.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.orgpolicy.v2.CustomConstraint} request.customConstraint
-   *   Required. `CustomConstraint` to update.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.orgpolicy.v2.CustomConstraint|CustomConstraint}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/org_policy.update_custom_constraint.js</caption>
-   * region_tag:orgpolicy_v2_generated_OrgPolicy_UpdateCustomConstraint_async
-   */
+/**
+ * Updates a custom constraint.
+ *
+ * Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the
+ * constraint does not exist.
+ *
+ * Note: the supplied policy will perform a full overwrite of all
+ * fields.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.orgpolicy.v2.CustomConstraint} request.customConstraint
+ *   Required. `CustomConstraint` to update.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.orgpolicy.v2.CustomConstraint|CustomConstraint}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/org_policy.update_custom_constraint.js</caption>
+ * region_tag:orgpolicy_v2_generated_OrgPolicy_UpdateCustomConstraint_async
+ */
   updateCustomConstraint(
-    request?: protos.google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.orgpolicy.v2.ICustomConstraint,
-      (
-        | protos.google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.orgpolicy.v2.ICustomConstraint,
+        protos.google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest|undefined, {}|undefined
+      ]>;
   updateCustomConstraint(
-    request: protos.google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.orgpolicy.v2.ICustomConstraint,
-      | protos.google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateCustomConstraint(
-    request: protos.google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest,
-    callback: Callback<
-      protos.google.cloud.orgpolicy.v2.ICustomConstraint,
-      | protos.google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateCustomConstraint(
-    request?: protos.google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.orgpolicy.v2.ICustomConstraint,
-          | protos.google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.orgpolicy.v2.ICustomConstraint,
-      | protos.google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.orgpolicy.v2.ICustomConstraint,
-      (
-        | protos.google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateCustomConstraint(
+      request: protos.google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest,
+      callback: Callback<
+          protos.google.cloud.orgpolicy.v2.ICustomConstraint,
+          protos.google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateCustomConstraint(
+      request?: protos.google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.orgpolicy.v2.ICustomConstraint,
+          protos.google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.orgpolicy.v2.ICustomConstraint,
+          protos.google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.orgpolicy.v2.ICustomConstraint,
+        protos.google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'custom_constraint.name': request.customConstraint!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'custom_constraint.name': request.customConstraint!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateCustomConstraint request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.orgpolicy.v2.ICustomConstraint,
-          | protos.google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.orgpolicy.v2.ICustomConstraint,
+        protos.google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateCustomConstraint response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateCustomConstraint(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.orgpolicy.v2.ICustomConstraint,
-          (
-            | protos.google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateCustomConstraint response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateCustomConstraint(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.orgpolicy.v2.ICustomConstraint,
+        protos.google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateCustomConstraint response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a custom or managed constraint.
-   *
-   * Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the
-   * custom or managed constraint does not exist.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the custom or managed constraint. See the custom
-   *   constraint entry for naming requirements.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.orgpolicy.v2.CustomConstraint|CustomConstraint}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/org_policy.get_custom_constraint.js</caption>
-   * region_tag:orgpolicy_v2_generated_OrgPolicy_GetCustomConstraint_async
-   */
+/**
+ * Gets a custom or managed constraint.
+ *
+ * Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the
+ * custom or managed constraint does not exist.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the custom or managed constraint. See the custom
+ *   constraint entry for naming requirements.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.orgpolicy.v2.CustomConstraint|CustomConstraint}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/org_policy.get_custom_constraint.js</caption>
+ * region_tag:orgpolicy_v2_generated_OrgPolicy_GetCustomConstraint_async
+ */
   getCustomConstraint(
-    request?: protos.google.cloud.orgpolicy.v2.IGetCustomConstraintRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.orgpolicy.v2.ICustomConstraint,
-      protos.google.cloud.orgpolicy.v2.IGetCustomConstraintRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.orgpolicy.v2.IGetCustomConstraintRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.orgpolicy.v2.ICustomConstraint,
+        protos.google.cloud.orgpolicy.v2.IGetCustomConstraintRequest|undefined, {}|undefined
+      ]>;
   getCustomConstraint(
-    request: protos.google.cloud.orgpolicy.v2.IGetCustomConstraintRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.orgpolicy.v2.ICustomConstraint,
-      | protos.google.cloud.orgpolicy.v2.IGetCustomConstraintRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCustomConstraint(
-    request: protos.google.cloud.orgpolicy.v2.IGetCustomConstraintRequest,
-    callback: Callback<
-      protos.google.cloud.orgpolicy.v2.ICustomConstraint,
-      | protos.google.cloud.orgpolicy.v2.IGetCustomConstraintRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCustomConstraint(
-    request?: protos.google.cloud.orgpolicy.v2.IGetCustomConstraintRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.orgpolicy.v2.IGetCustomConstraintRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.orgpolicy.v2.ICustomConstraint,
-          | protos.google.cloud.orgpolicy.v2.IGetCustomConstraintRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.orgpolicy.v2.ICustomConstraint,
-      | protos.google.cloud.orgpolicy.v2.IGetCustomConstraintRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.orgpolicy.v2.ICustomConstraint,
-      protos.google.cloud.orgpolicy.v2.IGetCustomConstraintRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.orgpolicy.v2.IGetCustomConstraintRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCustomConstraint(
+      request: protos.google.cloud.orgpolicy.v2.IGetCustomConstraintRequest,
+      callback: Callback<
+          protos.google.cloud.orgpolicy.v2.ICustomConstraint,
+          protos.google.cloud.orgpolicy.v2.IGetCustomConstraintRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCustomConstraint(
+      request?: protos.google.cloud.orgpolicy.v2.IGetCustomConstraintRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.orgpolicy.v2.ICustomConstraint,
+          protos.google.cloud.orgpolicy.v2.IGetCustomConstraintRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.orgpolicy.v2.ICustomConstraint,
+          protos.google.cloud.orgpolicy.v2.IGetCustomConstraintRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.orgpolicy.v2.ICustomConstraint,
+        protos.google.cloud.orgpolicy.v2.IGetCustomConstraintRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getCustomConstraint request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.orgpolicy.v2.ICustomConstraint,
-          | protos.google.cloud.orgpolicy.v2.IGetCustomConstraintRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.orgpolicy.v2.ICustomConstraint,
+        protos.google.cloud.orgpolicy.v2.IGetCustomConstraintRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getCustomConstraint response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getCustomConstraint(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.orgpolicy.v2.ICustomConstraint,
-          (
-            | protos.google.cloud.orgpolicy.v2.IGetCustomConstraintRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getCustomConstraint response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getCustomConstraint(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.orgpolicy.v2.ICustomConstraint,
+        protos.google.cloud.orgpolicy.v2.IGetCustomConstraintRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getCustomConstraint response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a custom constraint.
-   *
-   * Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the
-   * constraint does not exist.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the custom constraint to delete.
-   *   See the custom constraint entry for naming rules.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/org_policy.delete_custom_constraint.js</caption>
-   * region_tag:orgpolicy_v2_generated_OrgPolicy_DeleteCustomConstraint_async
-   */
+/**
+ * Deletes a custom constraint.
+ *
+ * Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the
+ * constraint does not exist.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the custom constraint to delete.
+ *   See the custom constraint entry for naming rules.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/org_policy.delete_custom_constraint.js</caption>
+ * region_tag:orgpolicy_v2_generated_OrgPolicy_DeleteCustomConstraint_async
+ */
   deleteCustomConstraint(
-    request?: protos.google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest|undefined, {}|undefined
+      ]>;
   deleteCustomConstraint(
-    request: protos.google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteCustomConstraint(
-    request: protos.google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteCustomConstraint(
-    request?: protos.google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteCustomConstraint(
+      request: protos.google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteCustomConstraint(
+      request?: protos.google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteCustomConstraint request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteCustomConstraint response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteCustomConstraint(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteCustomConstraint response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteCustomConstraint(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteCustomConstraint response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Lists constraints that could be applied on the specified resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The Google Cloud resource that parents the constraint. Must be in
-   *   one of the following forms:
-   *
-   *   * `projects/{project_number}`
-   *   * `projects/{project_id}`
-   *   * `folders/{folder_id}`
-   *   * `organizations/{organization_id}`
-   * @param {number} request.pageSize
-   *   Size of the pages to be returned. This is currently unsupported and will
-   *   be ignored. The server may at any point start using this field to limit
-   *   page size.
-   * @param {string} request.pageToken
-   *   Page token used to retrieve the next page. This is currently unsupported
-   *   and will be ignored. The server may at any point start using this field.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.orgpolicy.v2.Constraint|Constraint}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listConstraintsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists constraints that could be applied on the specified resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The Google Cloud resource that parents the constraint. Must be in
+ *   one of the following forms:
+ *
+ *   * `projects/{project_number}`
+ *   * `projects/{project_id}`
+ *   * `folders/{folder_id}`
+ *   * `organizations/{organization_id}`
+ * @param {number} request.pageSize
+ *   Size of the pages to be returned. This is currently unsupported and will
+ *   be ignored. The server may at any point start using this field to limit
+ *   page size.
+ * @param {string} request.pageToken
+ *   Page token used to retrieve the next page. This is currently unsupported
+ *   and will be ignored. The server may at any point start using this field.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.orgpolicy.v2.Constraint|Constraint}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listConstraintsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listConstraints(
-    request?: protos.google.cloud.orgpolicy.v2.IListConstraintsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.orgpolicy.v2.IConstraint[],
-      protos.google.cloud.orgpolicy.v2.IListConstraintsRequest | null,
-      protos.google.cloud.orgpolicy.v2.IListConstraintsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.orgpolicy.v2.IListConstraintsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.orgpolicy.v2.IConstraint[],
+        protos.google.cloud.orgpolicy.v2.IListConstraintsRequest|null,
+        protos.google.cloud.orgpolicy.v2.IListConstraintsResponse
+      ]>;
   listConstraints(
-    request: protos.google.cloud.orgpolicy.v2.IListConstraintsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.orgpolicy.v2.IListConstraintsRequest,
-      | protos.google.cloud.orgpolicy.v2.IListConstraintsResponse
-      | null
-      | undefined,
-      protos.google.cloud.orgpolicy.v2.IConstraint
-    >
-  ): void;
-  listConstraints(
-    request: protos.google.cloud.orgpolicy.v2.IListConstraintsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.orgpolicy.v2.IListConstraintsRequest,
-      | protos.google.cloud.orgpolicy.v2.IListConstraintsResponse
-      | null
-      | undefined,
-      protos.google.cloud.orgpolicy.v2.IConstraint
-    >
-  ): void;
-  listConstraints(
-    request?: protos.google.cloud.orgpolicy.v2.IListConstraintsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.orgpolicy.v2.IListConstraintsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.orgpolicy.v2.IListConstraintsRequest,
-          | protos.google.cloud.orgpolicy.v2.IListConstraintsResponse
-          | null
-          | undefined,
-          protos.google.cloud.orgpolicy.v2.IConstraint
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.orgpolicy.v2.IListConstraintsRequest,
-      | protos.google.cloud.orgpolicy.v2.IListConstraintsResponse
-      | null
-      | undefined,
-      protos.google.cloud.orgpolicy.v2.IConstraint
-    >
-  ): Promise<
-    [
-      protos.google.cloud.orgpolicy.v2.IConstraint[],
-      protos.google.cloud.orgpolicy.v2.IListConstraintsRequest | null,
-      protos.google.cloud.orgpolicy.v2.IListConstraintsResponse,
-    ]
-  > | void {
+          protos.google.cloud.orgpolicy.v2.IListConstraintsResponse|null|undefined,
+          protos.google.cloud.orgpolicy.v2.IConstraint>): void;
+  listConstraints(
+      request: protos.google.cloud.orgpolicy.v2.IListConstraintsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.orgpolicy.v2.IListConstraintsRequest,
+          protos.google.cloud.orgpolicy.v2.IListConstraintsResponse|null|undefined,
+          protos.google.cloud.orgpolicy.v2.IConstraint>): void;
+  listConstraints(
+      request?: protos.google.cloud.orgpolicy.v2.IListConstraintsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.orgpolicy.v2.IListConstraintsRequest,
+          protos.google.cloud.orgpolicy.v2.IListConstraintsResponse|null|undefined,
+          protos.google.cloud.orgpolicy.v2.IConstraint>,
+      callback?: PaginationCallback<
+          protos.google.cloud.orgpolicy.v2.IListConstraintsRequest,
+          protos.google.cloud.orgpolicy.v2.IListConstraintsResponse|null|undefined,
+          protos.google.cloud.orgpolicy.v2.IConstraint>):
+      Promise<[
+        protos.google.cloud.orgpolicy.v2.IConstraint[],
+        protos.google.cloud.orgpolicy.v2.IListConstraintsRequest|null,
+        protos.google.cloud.orgpolicy.v2.IListConstraintsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.orgpolicy.v2.IListConstraintsRequest,
-          | protos.google.cloud.orgpolicy.v2.IListConstraintsResponse
-          | null
-          | undefined,
-          protos.google.cloud.orgpolicy.v2.IConstraint
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.orgpolicy.v2.IListConstraintsRequest,
+      protos.google.cloud.orgpolicy.v2.IListConstraintsResponse|null|undefined,
+      protos.google.cloud.orgpolicy.v2.IConstraint>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listConstraints values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1705,65 +1395,62 @@ export class OrgPolicyClient {
     this._log.info('listConstraints request %j', request);
     return this.innerApiCalls
       .listConstraints(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.orgpolicy.v2.IConstraint[],
-          protos.google.cloud.orgpolicy.v2.IListConstraintsRequest | null,
-          protos.google.cloud.orgpolicy.v2.IListConstraintsResponse,
-        ]) => {
-          this._log.info('listConstraints values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.orgpolicy.v2.IConstraint[],
+        protos.google.cloud.orgpolicy.v2.IListConstraintsRequest|null,
+        protos.google.cloud.orgpolicy.v2.IListConstraintsResponse
+      ]) => {
+        this._log.info('listConstraints values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listConstraints`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The Google Cloud resource that parents the constraint. Must be in
-   *   one of the following forms:
-   *
-   *   * `projects/{project_number}`
-   *   * `projects/{project_id}`
-   *   * `folders/{folder_id}`
-   *   * `organizations/{organization_id}`
-   * @param {number} request.pageSize
-   *   Size of the pages to be returned. This is currently unsupported and will
-   *   be ignored. The server may at any point start using this field to limit
-   *   page size.
-   * @param {string} request.pageToken
-   *   Page token used to retrieve the next page. This is currently unsupported
-   *   and will be ignored. The server may at any point start using this field.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.orgpolicy.v2.Constraint|Constraint} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listConstraintsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listConstraints`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The Google Cloud resource that parents the constraint. Must be in
+ *   one of the following forms:
+ *
+ *   * `projects/{project_number}`
+ *   * `projects/{project_id}`
+ *   * `folders/{folder_id}`
+ *   * `organizations/{organization_id}`
+ * @param {number} request.pageSize
+ *   Size of the pages to be returned. This is currently unsupported and will
+ *   be ignored. The server may at any point start using this field to limit
+ *   page size.
+ * @param {string} request.pageToken
+ *   Page token used to retrieve the next page. This is currently unsupported
+ *   and will be ignored. The server may at any point start using this field.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.orgpolicy.v2.Constraint|Constraint} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listConstraintsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listConstraintsStream(
-    request?: protos.google.cloud.orgpolicy.v2.IListConstraintsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.orgpolicy.v2.IListConstraintsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listConstraints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listConstraints stream %j', request);
     return this.descriptors.page.listConstraints.createStream(
       this.innerApiCalls.listConstraints as GaxCall,
@@ -1772,56 +1459,55 @@ export class OrgPolicyClient {
     );
   }
 
-  /**
-   * Equivalent to `listConstraints`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The Google Cloud resource that parents the constraint. Must be in
-   *   one of the following forms:
-   *
-   *   * `projects/{project_number}`
-   *   * `projects/{project_id}`
-   *   * `folders/{folder_id}`
-   *   * `organizations/{organization_id}`
-   * @param {number} request.pageSize
-   *   Size of the pages to be returned. This is currently unsupported and will
-   *   be ignored. The server may at any point start using this field to limit
-   *   page size.
-   * @param {string} request.pageToken
-   *   Page token used to retrieve the next page. This is currently unsupported
-   *   and will be ignored. The server may at any point start using this field.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.orgpolicy.v2.Constraint|Constraint}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/org_policy.list_constraints.js</caption>
-   * region_tag:orgpolicy_v2_generated_OrgPolicy_ListConstraints_async
-   */
+/**
+ * Equivalent to `listConstraints`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The Google Cloud resource that parents the constraint. Must be in
+ *   one of the following forms:
+ *
+ *   * `projects/{project_number}`
+ *   * `projects/{project_id}`
+ *   * `folders/{folder_id}`
+ *   * `organizations/{organization_id}`
+ * @param {number} request.pageSize
+ *   Size of the pages to be returned. This is currently unsupported and will
+ *   be ignored. The server may at any point start using this field to limit
+ *   page size.
+ * @param {string} request.pageToken
+ *   Page token used to retrieve the next page. This is currently unsupported
+ *   and will be ignored. The server may at any point start using this field.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.orgpolicy.v2.Constraint|Constraint}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/org_policy.list_constraints.js</caption>
+ * region_tag:orgpolicy_v2_generated_OrgPolicy_ListConstraints_async
+ */
   listConstraintsAsync(
-    request?: protos.google.cloud.orgpolicy.v2.IListConstraintsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.orgpolicy.v2.IConstraint> {
+      request?: protos.google.cloud.orgpolicy.v2.IListConstraintsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.orgpolicy.v2.IConstraint>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listConstraints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listConstraints iterate %j', request);
     return this.descriptors.page.listConstraints.asyncIterate(
       this.innerApiCalls['listConstraints'] as GaxCall,
@@ -1829,116 +1515,97 @@ export class OrgPolicyClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.orgpolicy.v2.IConstraint>;
   }
-  /**
-   * Retrieves all of the policies that exist on a particular resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The target Google Cloud resource that parents the set of
-   *   constraints and policies that will be returned from this call. Must be in
-   *   one of the following forms:
-   *
-   *   * `projects/{project_number}`
-   *   * `projects/{project_id}`
-   *   * `folders/{folder_id}`
-   *   * `organizations/{organization_id}`
-   * @param {number} request.pageSize
-   *   Size of the pages to be returned. This is currently unsupported and will
-   *   be ignored. The server may at any point start using this field to limit
-   *   page size.
-   * @param {string} request.pageToken
-   *   Page token used to retrieve the next page. This is currently unsupported
-   *   and will be ignored. The server may at any point start using this field.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.orgpolicy.v2.Policy|Policy}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listPoliciesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Retrieves all of the policies that exist on a particular resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The target Google Cloud resource that parents the set of
+ *   constraints and policies that will be returned from this call. Must be in
+ *   one of the following forms:
+ *
+ *   * `projects/{project_number}`
+ *   * `projects/{project_id}`
+ *   * `folders/{folder_id}`
+ *   * `organizations/{organization_id}`
+ * @param {number} request.pageSize
+ *   Size of the pages to be returned. This is currently unsupported and will
+ *   be ignored. The server may at any point start using this field to limit
+ *   page size.
+ * @param {string} request.pageToken
+ *   Page token used to retrieve the next page. This is currently unsupported
+ *   and will be ignored. The server may at any point start using this field.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.orgpolicy.v2.Policy|Policy}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listPoliciesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listPolicies(
-    request?: protos.google.cloud.orgpolicy.v2.IListPoliciesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.orgpolicy.v2.IPolicy[],
-      protos.google.cloud.orgpolicy.v2.IListPoliciesRequest | null,
-      protos.google.cloud.orgpolicy.v2.IListPoliciesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.orgpolicy.v2.IListPoliciesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.orgpolicy.v2.IPolicy[],
+        protos.google.cloud.orgpolicy.v2.IListPoliciesRequest|null,
+        protos.google.cloud.orgpolicy.v2.IListPoliciesResponse
+      ]>;
   listPolicies(
-    request: protos.google.cloud.orgpolicy.v2.IListPoliciesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.orgpolicy.v2.IListPoliciesRequest,
-      protos.google.cloud.orgpolicy.v2.IListPoliciesResponse | null | undefined,
-      protos.google.cloud.orgpolicy.v2.IPolicy
-    >
-  ): void;
-  listPolicies(
-    request: protos.google.cloud.orgpolicy.v2.IListPoliciesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.orgpolicy.v2.IListPoliciesRequest,
-      protos.google.cloud.orgpolicy.v2.IListPoliciesResponse | null | undefined,
-      protos.google.cloud.orgpolicy.v2.IPolicy
-    >
-  ): void;
-  listPolicies(
-    request?: protos.google.cloud.orgpolicy.v2.IListPoliciesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.orgpolicy.v2.IListPoliciesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.orgpolicy.v2.IListPoliciesRequest,
-          | protos.google.cloud.orgpolicy.v2.IListPoliciesResponse
-          | null
-          | undefined,
-          protos.google.cloud.orgpolicy.v2.IPolicy
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.orgpolicy.v2.IListPoliciesRequest,
-      protos.google.cloud.orgpolicy.v2.IListPoliciesResponse | null | undefined,
-      protos.google.cloud.orgpolicy.v2.IPolicy
-    >
-  ): Promise<
-    [
-      protos.google.cloud.orgpolicy.v2.IPolicy[],
-      protos.google.cloud.orgpolicy.v2.IListPoliciesRequest | null,
-      protos.google.cloud.orgpolicy.v2.IListPoliciesResponse,
-    ]
-  > | void {
+          protos.google.cloud.orgpolicy.v2.IListPoliciesResponse|null|undefined,
+          protos.google.cloud.orgpolicy.v2.IPolicy>): void;
+  listPolicies(
+      request: protos.google.cloud.orgpolicy.v2.IListPoliciesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.orgpolicy.v2.IListPoliciesRequest,
+          protos.google.cloud.orgpolicy.v2.IListPoliciesResponse|null|undefined,
+          protos.google.cloud.orgpolicy.v2.IPolicy>): void;
+  listPolicies(
+      request?: protos.google.cloud.orgpolicy.v2.IListPoliciesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.orgpolicy.v2.IListPoliciesRequest,
+          protos.google.cloud.orgpolicy.v2.IListPoliciesResponse|null|undefined,
+          protos.google.cloud.orgpolicy.v2.IPolicy>,
+      callback?: PaginationCallback<
+          protos.google.cloud.orgpolicy.v2.IListPoliciesRequest,
+          protos.google.cloud.orgpolicy.v2.IListPoliciesResponse|null|undefined,
+          protos.google.cloud.orgpolicy.v2.IPolicy>):
+      Promise<[
+        protos.google.cloud.orgpolicy.v2.IPolicy[],
+        protos.google.cloud.orgpolicy.v2.IListPoliciesRequest|null,
+        protos.google.cloud.orgpolicy.v2.IListPoliciesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.orgpolicy.v2.IListPoliciesRequest,
-          | protos.google.cloud.orgpolicy.v2.IListPoliciesResponse
-          | null
-          | undefined,
-          protos.google.cloud.orgpolicy.v2.IPolicy
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.orgpolicy.v2.IListPoliciesRequest,
+      protos.google.cloud.orgpolicy.v2.IListPoliciesResponse|null|undefined,
+      protos.google.cloud.orgpolicy.v2.IPolicy>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listPolicies values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1947,66 +1614,63 @@ export class OrgPolicyClient {
     this._log.info('listPolicies request %j', request);
     return this.innerApiCalls
       .listPolicies(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.orgpolicy.v2.IPolicy[],
-          protos.google.cloud.orgpolicy.v2.IListPoliciesRequest | null,
-          protos.google.cloud.orgpolicy.v2.IListPoliciesResponse,
-        ]) => {
-          this._log.info('listPolicies values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.orgpolicy.v2.IPolicy[],
+        protos.google.cloud.orgpolicy.v2.IListPoliciesRequest|null,
+        protos.google.cloud.orgpolicy.v2.IListPoliciesResponse
+      ]) => {
+        this._log.info('listPolicies values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listPolicies`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The target Google Cloud resource that parents the set of
-   *   constraints and policies that will be returned from this call. Must be in
-   *   one of the following forms:
-   *
-   *   * `projects/{project_number}`
-   *   * `projects/{project_id}`
-   *   * `folders/{folder_id}`
-   *   * `organizations/{organization_id}`
-   * @param {number} request.pageSize
-   *   Size of the pages to be returned. This is currently unsupported and will
-   *   be ignored. The server may at any point start using this field to limit
-   *   page size.
-   * @param {string} request.pageToken
-   *   Page token used to retrieve the next page. This is currently unsupported
-   *   and will be ignored. The server may at any point start using this field.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.orgpolicy.v2.Policy|Policy} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listPoliciesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listPolicies`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The target Google Cloud resource that parents the set of
+ *   constraints and policies that will be returned from this call. Must be in
+ *   one of the following forms:
+ *
+ *   * `projects/{project_number}`
+ *   * `projects/{project_id}`
+ *   * `folders/{folder_id}`
+ *   * `organizations/{organization_id}`
+ * @param {number} request.pageSize
+ *   Size of the pages to be returned. This is currently unsupported and will
+ *   be ignored. The server may at any point start using this field to limit
+ *   page size.
+ * @param {string} request.pageToken
+ *   Page token used to retrieve the next page. This is currently unsupported
+ *   and will be ignored. The server may at any point start using this field.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.orgpolicy.v2.Policy|Policy} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listPoliciesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listPoliciesStream(
-    request?: protos.google.cloud.orgpolicy.v2.IListPoliciesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.orgpolicy.v2.IListPoliciesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listPolicies stream %j', request);
     return this.descriptors.page.listPolicies.createStream(
       this.innerApiCalls.listPolicies as GaxCall,
@@ -2015,57 +1679,56 @@ export class OrgPolicyClient {
     );
   }
 
-  /**
-   * Equivalent to `listPolicies`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The target Google Cloud resource that parents the set of
-   *   constraints and policies that will be returned from this call. Must be in
-   *   one of the following forms:
-   *
-   *   * `projects/{project_number}`
-   *   * `projects/{project_id}`
-   *   * `folders/{folder_id}`
-   *   * `organizations/{organization_id}`
-   * @param {number} request.pageSize
-   *   Size of the pages to be returned. This is currently unsupported and will
-   *   be ignored. The server may at any point start using this field to limit
-   *   page size.
-   * @param {string} request.pageToken
-   *   Page token used to retrieve the next page. This is currently unsupported
-   *   and will be ignored. The server may at any point start using this field.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.orgpolicy.v2.Policy|Policy}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/org_policy.list_policies.js</caption>
-   * region_tag:orgpolicy_v2_generated_OrgPolicy_ListPolicies_async
-   */
+/**
+ * Equivalent to `listPolicies`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The target Google Cloud resource that parents the set of
+ *   constraints and policies that will be returned from this call. Must be in
+ *   one of the following forms:
+ *
+ *   * `projects/{project_number}`
+ *   * `projects/{project_id}`
+ *   * `folders/{folder_id}`
+ *   * `organizations/{organization_id}`
+ * @param {number} request.pageSize
+ *   Size of the pages to be returned. This is currently unsupported and will
+ *   be ignored. The server may at any point start using this field to limit
+ *   page size.
+ * @param {string} request.pageToken
+ *   Page token used to retrieve the next page. This is currently unsupported
+ *   and will be ignored. The server may at any point start using this field.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.orgpolicy.v2.Policy|Policy}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/org_policy.list_policies.js</caption>
+ * region_tag:orgpolicy_v2_generated_OrgPolicy_ListPolicies_async
+ */
   listPoliciesAsync(
-    request?: protos.google.cloud.orgpolicy.v2.IListPoliciesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.orgpolicy.v2.IPolicy> {
+      request?: protos.google.cloud.orgpolicy.v2.IListPoliciesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.orgpolicy.v2.IPolicy>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listPolicies iterate %j', request);
     return this.descriptors.page.listPolicies.asyncIterate(
       this.innerApiCalls['listPolicies'] as GaxCall,
@@ -2073,120 +1736,95 @@ export class OrgPolicyClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.orgpolicy.v2.IPolicy>;
   }
-  /**
-   * Retrieves all of the custom constraints that exist on a particular
-   * organization resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The target Google Cloud resource that parents the set of custom
-   *   constraints that will be returned from this call. Must be in one of the
-   *   following forms:
-   *
-   *   * `organizations/{organization_id}`
-   * @param {number} request.pageSize
-   *   Size of the pages to be returned. This is currently unsupported and will
-   *   be ignored. The server may at any point start using this field to limit
-   *   page size.
-   * @param {string} request.pageToken
-   *   Page token used to retrieve the next page. This is currently unsupported
-   *   and will be ignored. The server may at any point start using this field.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.orgpolicy.v2.CustomConstraint|CustomConstraint}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listCustomConstraintsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Retrieves all of the custom constraints that exist on a particular
+ * organization resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The target Google Cloud resource that parents the set of custom
+ *   constraints that will be returned from this call. Must be in one of the
+ *   following forms:
+ *
+ *   * `organizations/{organization_id}`
+ * @param {number} request.pageSize
+ *   Size of the pages to be returned. This is currently unsupported and will
+ *   be ignored. The server may at any point start using this field to limit
+ *   page size.
+ * @param {string} request.pageToken
+ *   Page token used to retrieve the next page. This is currently unsupported
+ *   and will be ignored. The server may at any point start using this field.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.orgpolicy.v2.CustomConstraint|CustomConstraint}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listCustomConstraintsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCustomConstraints(
-    request?: protos.google.cloud.orgpolicy.v2.IListCustomConstraintsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.orgpolicy.v2.ICustomConstraint[],
-      protos.google.cloud.orgpolicy.v2.IListCustomConstraintsRequest | null,
-      protos.google.cloud.orgpolicy.v2.IListCustomConstraintsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.orgpolicy.v2.IListCustomConstraintsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.orgpolicy.v2.ICustomConstraint[],
+        protos.google.cloud.orgpolicy.v2.IListCustomConstraintsRequest|null,
+        protos.google.cloud.orgpolicy.v2.IListCustomConstraintsResponse
+      ]>;
   listCustomConstraints(
-    request: protos.google.cloud.orgpolicy.v2.IListCustomConstraintsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.orgpolicy.v2.IListCustomConstraintsRequest,
-      | protos.google.cloud.orgpolicy.v2.IListCustomConstraintsResponse
-      | null
-      | undefined,
-      protos.google.cloud.orgpolicy.v2.ICustomConstraint
-    >
-  ): void;
-  listCustomConstraints(
-    request: protos.google.cloud.orgpolicy.v2.IListCustomConstraintsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.orgpolicy.v2.IListCustomConstraintsRequest,
-      | protos.google.cloud.orgpolicy.v2.IListCustomConstraintsResponse
-      | null
-      | undefined,
-      protos.google.cloud.orgpolicy.v2.ICustomConstraint
-    >
-  ): void;
-  listCustomConstraints(
-    request?: protos.google.cloud.orgpolicy.v2.IListCustomConstraintsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.orgpolicy.v2.IListCustomConstraintsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.orgpolicy.v2.IListCustomConstraintsRequest,
-          | protos.google.cloud.orgpolicy.v2.IListCustomConstraintsResponse
-          | null
-          | undefined,
-          protos.google.cloud.orgpolicy.v2.ICustomConstraint
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.orgpolicy.v2.IListCustomConstraintsRequest,
-      | protos.google.cloud.orgpolicy.v2.IListCustomConstraintsResponse
-      | null
-      | undefined,
-      protos.google.cloud.orgpolicy.v2.ICustomConstraint
-    >
-  ): Promise<
-    [
-      protos.google.cloud.orgpolicy.v2.ICustomConstraint[],
-      protos.google.cloud.orgpolicy.v2.IListCustomConstraintsRequest | null,
-      protos.google.cloud.orgpolicy.v2.IListCustomConstraintsResponse,
-    ]
-  > | void {
+          protos.google.cloud.orgpolicy.v2.IListCustomConstraintsResponse|null|undefined,
+          protos.google.cloud.orgpolicy.v2.ICustomConstraint>): void;
+  listCustomConstraints(
+      request: protos.google.cloud.orgpolicy.v2.IListCustomConstraintsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.orgpolicy.v2.IListCustomConstraintsRequest,
+          protos.google.cloud.orgpolicy.v2.IListCustomConstraintsResponse|null|undefined,
+          protos.google.cloud.orgpolicy.v2.ICustomConstraint>): void;
+  listCustomConstraints(
+      request?: protos.google.cloud.orgpolicy.v2.IListCustomConstraintsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.orgpolicy.v2.IListCustomConstraintsRequest,
+          protos.google.cloud.orgpolicy.v2.IListCustomConstraintsResponse|null|undefined,
+          protos.google.cloud.orgpolicy.v2.ICustomConstraint>,
+      callback?: PaginationCallback<
+          protos.google.cloud.orgpolicy.v2.IListCustomConstraintsRequest,
+          protos.google.cloud.orgpolicy.v2.IListCustomConstraintsResponse|null|undefined,
+          protos.google.cloud.orgpolicy.v2.ICustomConstraint>):
+      Promise<[
+        protos.google.cloud.orgpolicy.v2.ICustomConstraint[],
+        protos.google.cloud.orgpolicy.v2.IListCustomConstraintsRequest|null,
+        protos.google.cloud.orgpolicy.v2.IListCustomConstraintsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.orgpolicy.v2.IListCustomConstraintsRequest,
-          | protos.google.cloud.orgpolicy.v2.IListCustomConstraintsResponse
-          | null
-          | undefined,
-          protos.google.cloud.orgpolicy.v2.ICustomConstraint
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.orgpolicy.v2.IListCustomConstraintsRequest,
+      protos.google.cloud.orgpolicy.v2.IListCustomConstraintsResponse|null|undefined,
+      protos.google.cloud.orgpolicy.v2.ICustomConstraint>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listCustomConstraints values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2195,63 +1833,60 @@ export class OrgPolicyClient {
     this._log.info('listCustomConstraints request %j', request);
     return this.innerApiCalls
       .listCustomConstraints(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.orgpolicy.v2.ICustomConstraint[],
-          protos.google.cloud.orgpolicy.v2.IListCustomConstraintsRequest | null,
-          protos.google.cloud.orgpolicy.v2.IListCustomConstraintsResponse,
-        ]) => {
-          this._log.info('listCustomConstraints values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.orgpolicy.v2.ICustomConstraint[],
+        protos.google.cloud.orgpolicy.v2.IListCustomConstraintsRequest|null,
+        protos.google.cloud.orgpolicy.v2.IListCustomConstraintsResponse
+      ]) => {
+        this._log.info('listCustomConstraints values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listCustomConstraints`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The target Google Cloud resource that parents the set of custom
-   *   constraints that will be returned from this call. Must be in one of the
-   *   following forms:
-   *
-   *   * `organizations/{organization_id}`
-   * @param {number} request.pageSize
-   *   Size of the pages to be returned. This is currently unsupported and will
-   *   be ignored. The server may at any point start using this field to limit
-   *   page size.
-   * @param {string} request.pageToken
-   *   Page token used to retrieve the next page. This is currently unsupported
-   *   and will be ignored. The server may at any point start using this field.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.orgpolicy.v2.CustomConstraint|CustomConstraint} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listCustomConstraintsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listCustomConstraints`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The target Google Cloud resource that parents the set of custom
+ *   constraints that will be returned from this call. Must be in one of the
+ *   following forms:
+ *
+ *   * `organizations/{organization_id}`
+ * @param {number} request.pageSize
+ *   Size of the pages to be returned. This is currently unsupported and will
+ *   be ignored. The server may at any point start using this field to limit
+ *   page size.
+ * @param {string} request.pageToken
+ *   Page token used to retrieve the next page. This is currently unsupported
+ *   and will be ignored. The server may at any point start using this field.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.orgpolicy.v2.CustomConstraint|CustomConstraint} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listCustomConstraintsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCustomConstraintsStream(
-    request?: protos.google.cloud.orgpolicy.v2.IListCustomConstraintsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.orgpolicy.v2.IListCustomConstraintsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listCustomConstraints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listCustomConstraints stream %j', request);
     return this.descriptors.page.listCustomConstraints.createStream(
       this.innerApiCalls.listCustomConstraints as GaxCall,
@@ -2260,54 +1895,53 @@ export class OrgPolicyClient {
     );
   }
 
-  /**
-   * Equivalent to `listCustomConstraints`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The target Google Cloud resource that parents the set of custom
-   *   constraints that will be returned from this call. Must be in one of the
-   *   following forms:
-   *
-   *   * `organizations/{organization_id}`
-   * @param {number} request.pageSize
-   *   Size of the pages to be returned. This is currently unsupported and will
-   *   be ignored. The server may at any point start using this field to limit
-   *   page size.
-   * @param {string} request.pageToken
-   *   Page token used to retrieve the next page. This is currently unsupported
-   *   and will be ignored. The server may at any point start using this field.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.orgpolicy.v2.CustomConstraint|CustomConstraint}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/org_policy.list_custom_constraints.js</caption>
-   * region_tag:orgpolicy_v2_generated_OrgPolicy_ListCustomConstraints_async
-   */
+/**
+ * Equivalent to `listCustomConstraints`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The target Google Cloud resource that parents the set of custom
+ *   constraints that will be returned from this call. Must be in one of the
+ *   following forms:
+ *
+ *   * `organizations/{organization_id}`
+ * @param {number} request.pageSize
+ *   Size of the pages to be returned. This is currently unsupported and will
+ *   be ignored. The server may at any point start using this field to limit
+ *   page size.
+ * @param {string} request.pageToken
+ *   Page token used to retrieve the next page. This is currently unsupported
+ *   and will be ignored. The server may at any point start using this field.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.orgpolicy.v2.CustomConstraint|CustomConstraint}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/org_policy.list_custom_constraints.js</caption>
+ * region_tag:orgpolicy_v2_generated_OrgPolicy_ListCustomConstraints_async
+ */
   listCustomConstraintsAsync(
-    request?: protos.google.cloud.orgpolicy.v2.IListCustomConstraintsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.orgpolicy.v2.ICustomConstraint> {
+      request?: protos.google.cloud.orgpolicy.v2.IListCustomConstraintsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.orgpolicy.v2.ICustomConstraint>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listCustomConstraints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listCustomConstraints iterate %j', request);
     return this.descriptors.page.listCustomConstraints.asyncIterate(
       this.innerApiCalls['listCustomConstraints'] as GaxCall,
@@ -2326,7 +1960,7 @@ export class OrgPolicyClient {
    * @param {string} custom_constraint
    * @returns {string} Resource name string.
    */
-  customConstraintPath(organization: string, customConstraint: string) {
+  customConstraintPath(organization:string,customConstraint:string) {
     return this.pathTemplates.customConstraintPathTemplate.render({
       organization: organization,
       custom_constraint: customConstraint,
@@ -2341,9 +1975,7 @@ export class OrgPolicyClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromCustomConstraintName(customConstraintName: string) {
-    return this.pathTemplates.customConstraintPathTemplate.match(
-      customConstraintName
-    ).organization;
+    return this.pathTemplates.customConstraintPathTemplate.match(customConstraintName).organization;
   }
 
   /**
@@ -2354,9 +1986,7 @@ export class OrgPolicyClient {
    * @returns {string} A string representing the custom_constraint.
    */
   matchCustomConstraintFromCustomConstraintName(customConstraintName: string) {
-    return this.pathTemplates.customConstraintPathTemplate.match(
-      customConstraintName
-    ).custom_constraint;
+    return this.pathTemplates.customConstraintPathTemplate.match(customConstraintName).custom_constraint;
   }
 
   /**
@@ -2366,7 +1996,7 @@ export class OrgPolicyClient {
    * @param {string} constraint
    * @returns {string} Resource name string.
    */
-  folderConstraintPath(folder: string, constraint: string) {
+  folderConstraintPath(folder:string,constraint:string) {
     return this.pathTemplates.folderConstraintPathTemplate.render({
       folder: folder,
       constraint: constraint,
@@ -2381,9 +2011,7 @@ export class OrgPolicyClient {
    * @returns {string} A string representing the folder.
    */
   matchFolderFromFolderConstraintName(folderConstraintName: string) {
-    return this.pathTemplates.folderConstraintPathTemplate.match(
-      folderConstraintName
-    ).folder;
+    return this.pathTemplates.folderConstraintPathTemplate.match(folderConstraintName).folder;
   }
 
   /**
@@ -2394,9 +2022,7 @@ export class OrgPolicyClient {
    * @returns {string} A string representing the constraint.
    */
   matchConstraintFromFolderConstraintName(folderConstraintName: string) {
-    return this.pathTemplates.folderConstraintPathTemplate.match(
-      folderConstraintName
-    ).constraint;
+    return this.pathTemplates.folderConstraintPathTemplate.match(folderConstraintName).constraint;
   }
 
   /**
@@ -2406,7 +2032,7 @@ export class OrgPolicyClient {
    * @param {string} policy
    * @returns {string} Resource name string.
    */
-  folderPolicyPath(folder: string, policy: string) {
+  folderPolicyPath(folder:string,policy:string) {
     return this.pathTemplates.folderPolicyPathTemplate.render({
       folder: folder,
       policy: policy,
@@ -2421,8 +2047,7 @@ export class OrgPolicyClient {
    * @returns {string} A string representing the folder.
    */
   matchFolderFromFolderPolicyName(folderPolicyName: string) {
-    return this.pathTemplates.folderPolicyPathTemplate.match(folderPolicyName)
-      .folder;
+    return this.pathTemplates.folderPolicyPathTemplate.match(folderPolicyName).folder;
   }
 
   /**
@@ -2433,8 +2058,7 @@ export class OrgPolicyClient {
    * @returns {string} A string representing the policy.
    */
   matchPolicyFromFolderPolicyName(folderPolicyName: string) {
-    return this.pathTemplates.folderPolicyPathTemplate.match(folderPolicyName)
-      .policy;
+    return this.pathTemplates.folderPolicyPathTemplate.match(folderPolicyName).policy;
   }
 
   /**
@@ -2443,7 +2067,7 @@ export class OrgPolicyClient {
    * @param {string} organization
    * @returns {string} Resource name string.
    */
-  organizationPath(organization: string) {
+  organizationPath(organization:string) {
     return this.pathTemplates.organizationPathTemplate.render({
       organization: organization,
     });
@@ -2457,8 +2081,7 @@ export class OrgPolicyClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationName(organizationName: string) {
-    return this.pathTemplates.organizationPathTemplate.match(organizationName)
-      .organization;
+    return this.pathTemplates.organizationPathTemplate.match(organizationName).organization;
   }
 
   /**
@@ -2468,7 +2091,7 @@ export class OrgPolicyClient {
    * @param {string} constraint
    * @returns {string} Resource name string.
    */
-  organizationConstraintPath(organization: string, constraint: string) {
+  organizationConstraintPath(organization:string,constraint:string) {
     return this.pathTemplates.organizationConstraintPathTemplate.render({
       organization: organization,
       constraint: constraint,
@@ -2482,12 +2105,8 @@ export class OrgPolicyClient {
    *   A fully-qualified path representing organization_constraint resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationConstraintName(
-    organizationConstraintName: string
-  ) {
-    return this.pathTemplates.organizationConstraintPathTemplate.match(
-      organizationConstraintName
-    ).organization;
+  matchOrganizationFromOrganizationConstraintName(organizationConstraintName: string) {
+    return this.pathTemplates.organizationConstraintPathTemplate.match(organizationConstraintName).organization;
   }
 
   /**
@@ -2497,12 +2116,8 @@ export class OrgPolicyClient {
    *   A fully-qualified path representing organization_constraint resource.
    * @returns {string} A string representing the constraint.
    */
-  matchConstraintFromOrganizationConstraintName(
-    organizationConstraintName: string
-  ) {
-    return this.pathTemplates.organizationConstraintPathTemplate.match(
-      organizationConstraintName
-    ).constraint;
+  matchConstraintFromOrganizationConstraintName(organizationConstraintName: string) {
+    return this.pathTemplates.organizationConstraintPathTemplate.match(organizationConstraintName).constraint;
   }
 
   /**
@@ -2512,7 +2127,7 @@ export class OrgPolicyClient {
    * @param {string} policy
    * @returns {string} Resource name string.
    */
-  organizationPolicyPath(organization: string, policy: string) {
+  organizationPolicyPath(organization:string,policy:string) {
     return this.pathTemplates.organizationPolicyPathTemplate.render({
       organization: organization,
       policy: policy,
@@ -2527,9 +2142,7 @@ export class OrgPolicyClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationPolicyName(organizationPolicyName: string) {
-    return this.pathTemplates.organizationPolicyPathTemplate.match(
-      organizationPolicyName
-    ).organization;
+    return this.pathTemplates.organizationPolicyPathTemplate.match(organizationPolicyName).organization;
   }
 
   /**
@@ -2540,9 +2153,7 @@ export class OrgPolicyClient {
    * @returns {string} A string representing the policy.
    */
   matchPolicyFromOrganizationPolicyName(organizationPolicyName: string) {
-    return this.pathTemplates.organizationPolicyPathTemplate.match(
-      organizationPolicyName
-    ).policy;
+    return this.pathTemplates.organizationPolicyPathTemplate.match(organizationPolicyName).policy;
   }
 
   /**
@@ -2551,7 +2162,7 @@ export class OrgPolicyClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -2575,7 +2186,7 @@ export class OrgPolicyClient {
    * @param {string} constraint
    * @returns {string} Resource name string.
    */
-  projectConstraintPath(project: string, constraint: string) {
+  projectConstraintPath(project:string,constraint:string) {
     return this.pathTemplates.projectConstraintPathTemplate.render({
       project: project,
       constraint: constraint,
@@ -2590,9 +2201,7 @@ export class OrgPolicyClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectConstraintName(projectConstraintName: string) {
-    return this.pathTemplates.projectConstraintPathTemplate.match(
-      projectConstraintName
-    ).project;
+    return this.pathTemplates.projectConstraintPathTemplate.match(projectConstraintName).project;
   }
 
   /**
@@ -2603,9 +2212,7 @@ export class OrgPolicyClient {
    * @returns {string} A string representing the constraint.
    */
   matchConstraintFromProjectConstraintName(projectConstraintName: string) {
-    return this.pathTemplates.projectConstraintPathTemplate.match(
-      projectConstraintName
-    ).constraint;
+    return this.pathTemplates.projectConstraintPathTemplate.match(projectConstraintName).constraint;
   }
 
   /**
@@ -2615,7 +2222,7 @@ export class OrgPolicyClient {
    * @param {string} policy
    * @returns {string} Resource name string.
    */
-  projectPolicyPath(project: string, policy: string) {
+  projectPolicyPath(project:string,policy:string) {
     return this.pathTemplates.projectPolicyPathTemplate.render({
       project: project,
       policy: policy,
@@ -2630,8 +2237,7 @@ export class OrgPolicyClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectPolicyName(projectPolicyName: string) {
-    return this.pathTemplates.projectPolicyPathTemplate.match(projectPolicyName)
-      .project;
+    return this.pathTemplates.projectPolicyPathTemplate.match(projectPolicyName).project;
   }
 
   /**
@@ -2642,8 +2248,7 @@ export class OrgPolicyClient {
    * @returns {string} A string representing the policy.
    */
   matchPolicyFromProjectPolicyName(projectPolicyName: string) {
-    return this.pathTemplates.projectPolicyPathTemplate.match(projectPolicyName)
-      .policy;
+    return this.pathTemplates.projectPolicyPathTemplate.match(projectPolicyName).policy;
   }
 
   /**

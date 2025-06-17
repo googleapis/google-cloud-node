@@ -18,22 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -132,42 +121,20 @@ export class PrivilegedAccessManagerClient {
    *     const client = new PrivilegedAccessManagerClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof PrivilegedAccessManagerClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    const staticMembers = this.constructor as typeof PrivilegedAccessManagerClient;
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'privilegedaccessmanager.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -193,7 +160,7 @@ export class PrivilegedAccessManagerClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -209,9 +176,13 @@ export class PrivilegedAccessManagerClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -232,173 +203,104 @@ export class PrivilegedAccessManagerClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      folderLocationEntitlementPathTemplate: new this._gaxModule.PathTemplate(
+      folderLocationEntitlementGrantsPathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/locations/{location}/entitlements/{entitlement}/grants/{grant}'
+      ),
+      folderLocationEntitlementsPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/locations/{location}/entitlements/{entitlement}'
       ),
-      folderLocationEntitlementGrantPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'folders/{folder}/locations/{location}/entitlements/{entitlement}/grants/{grant}'
-        ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
-      organizationLocationEntitlementPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/locations/{location}/entitlements/{entitlement}'
-        ),
-      organizationLocationEntitlementGrantPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/locations/{location}/entitlements/{entitlement}/grants/{grant}'
-        ),
+      organizationLocationEntitlementGrantsPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/entitlements/{entitlement}/grants/{grant}'
+      ),
+      organizationLocationEntitlementsPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/entitlements/{entitlement}'
+      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
-      projectLocationEntitlementPathTemplate: new this._gaxModule.PathTemplate(
+      projectLocationEntitlementGrantsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/entitlements/{entitlement}/grants/{grant}'
+      ),
+      projectLocationEntitlementsPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/entitlements/{entitlement}'
       ),
-      projectLocationEntitlementGrantPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/entitlements/{entitlement}/grants/{grant}'
-        ),
     };
 
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listEntitlements: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'entitlements'
-      ),
-      searchEntitlements: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'entitlements'
-      ),
-      listGrants: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'grants'
-      ),
-      searchGrants: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'grants'
-      ),
+      listEntitlements:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'entitlements'),
+      searchEntitlements:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'entitlements'),
+      listGrants:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'grants'),
+      searchGrants:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'grants')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v1/{name=projects/*/locations/*}',
-          additional_bindings: [
-            {get: '/v1/{name=organizations/*/locations/*}'},
-            {get: '/v1/{name=folders/*/locations/*}'},
-          ],
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v1/{name=projects/*}/locations',
-          additional_bindings: [
-            {get: '/v1/{name=organizations/*}/locations'},
-            {get: '/v1/{name=folders/*}/locations'},
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1/{name=projects/*/locations/*/operations/*}',
-          additional_bindings: [
-            {delete: '/v1/{name=organizations/*/locations/*/operations/*}'},
-            {delete: '/v1/{name=folders/*/locations/*/operations/*}'},
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=projects/*/locations/*/operations/*}',
-          additional_bindings: [
-            {get: '/v1/{name=organizations/*/locations/*/operations/*}'},
-            {get: '/v1/{name=folders/*/locations/*/operations/*}'},
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1/{name=projects/*/locations/*}/operations',
-          additional_bindings: [
-            {get: '/v1/{name=organizations/*/locations/*}/operations'},
-            {get: '/v1/{name=folders/*/locations/*}/operations'},
-          ],
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*}',},{get: '/v1/{name=folders/*/locations/*}',}],
+      },{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',additional_bindings: [{get: '/v1/{name=organizations/*}/locations',},{get: '/v1/{name=folders/*}/locations',}],
+      },{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',additional_bindings: [{delete: '/v1/{name=organizations/*/locations/*/operations/*}',},{delete: '/v1/{name=folders/*/locations/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*/operations/*}',},{get: '/v1/{name=folders/*/locations/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*}/operations',},{get: '/v1/{name=folders/*/locations/*}/operations',}],
+      }];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createEntitlementResponse = protoFilesRoot.lookup(
-      '.google.cloud.privilegedaccessmanager.v1.Entitlement'
-    ) as gax.protobuf.Type;
+      '.google.cloud.privilegedaccessmanager.v1.Entitlement') as gax.protobuf.Type;
     const createEntitlementMetadata = protoFilesRoot.lookup(
-      '.google.cloud.privilegedaccessmanager.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.privilegedaccessmanager.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteEntitlementResponse = protoFilesRoot.lookup(
-      '.google.cloud.privilegedaccessmanager.v1.Entitlement'
-    ) as gax.protobuf.Type;
+      '.google.cloud.privilegedaccessmanager.v1.Entitlement') as gax.protobuf.Type;
     const deleteEntitlementMetadata = protoFilesRoot.lookup(
-      '.google.cloud.privilegedaccessmanager.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.privilegedaccessmanager.v1.OperationMetadata') as gax.protobuf.Type;
     const updateEntitlementResponse = protoFilesRoot.lookup(
-      '.google.cloud.privilegedaccessmanager.v1.Entitlement'
-    ) as gax.protobuf.Type;
+      '.google.cloud.privilegedaccessmanager.v1.Entitlement') as gax.protobuf.Type;
     const updateEntitlementMetadata = protoFilesRoot.lookup(
-      '.google.cloud.privilegedaccessmanager.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.privilegedaccessmanager.v1.OperationMetadata') as gax.protobuf.Type;
     const revokeGrantResponse = protoFilesRoot.lookup(
-      '.google.cloud.privilegedaccessmanager.v1.Grant'
-    ) as gax.protobuf.Type;
+      '.google.cloud.privilegedaccessmanager.v1.Grant') as gax.protobuf.Type;
     const revokeGrantMetadata = protoFilesRoot.lookup(
-      '.google.cloud.privilegedaccessmanager.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.privilegedaccessmanager.v1.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createEntitlement: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createEntitlementResponse.decode.bind(createEntitlementResponse),
-        createEntitlementMetadata.decode.bind(createEntitlementMetadata)
-      ),
+        createEntitlementMetadata.decode.bind(createEntitlementMetadata)),
       deleteEntitlement: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteEntitlementResponse.decode.bind(deleteEntitlementResponse),
-        deleteEntitlementMetadata.decode.bind(deleteEntitlementMetadata)
-      ),
+        deleteEntitlementMetadata.decode.bind(deleteEntitlementMetadata)),
       updateEntitlement: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateEntitlementResponse.decode.bind(updateEntitlementResponse),
-        updateEntitlementMetadata.decode.bind(updateEntitlementMetadata)
-      ),
+        updateEntitlementMetadata.decode.bind(updateEntitlementMetadata)),
       revokeGrant: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         revokeGrantResponse.decode.bind(revokeGrantResponse),
-        revokeGrantMetadata.decode.bind(revokeGrantMetadata)
-      ),
+        revokeGrantMetadata.decode.bind(revokeGrantMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.privilegedaccessmanager.v1.PrivilegedAccessManager',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.privilegedaccessmanager.v1.PrivilegedAccessManager', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -429,49 +331,28 @@ export class PrivilegedAccessManagerClient {
     // Put together the "service stub" for
     // google.cloud.privilegedaccessmanager.v1.PrivilegedAccessManager.
     this.privilegedAccessManagerStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.privilegedaccessmanager.v1.PrivilegedAccessManager'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.privilegedaccessmanager.v1
-            .PrivilegedAccessManager,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.privilegedaccessmanager.v1.PrivilegedAccessManager') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.privilegedaccessmanager.v1.PrivilegedAccessManager,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const privilegedAccessManagerStubMethods = [
-      'checkOnboardingStatus',
-      'listEntitlements',
-      'searchEntitlements',
-      'getEntitlement',
-      'createEntitlement',
-      'deleteEntitlement',
-      'updateEntitlement',
-      'listGrants',
-      'searchGrants',
-      'getGrant',
-      'createGrant',
-      'approveGrant',
-      'denyGrant',
-      'revokeGrant',
-    ];
+    const privilegedAccessManagerStubMethods =
+        ['checkOnboardingStatus', 'listEntitlements', 'searchEntitlements', 'getEntitlement', 'createEntitlement', 'deleteEntitlement', 'updateEntitlement', 'listGrants', 'searchGrants', 'getGrant', 'createGrant', 'approveGrant', 'denyGrant', 'revokeGrant'];
     for (const methodName of privilegedAccessManagerStubMethods) {
       const callPromise = this.privilegedAccessManagerStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -496,14 +377,8 @@ export class PrivilegedAccessManagerClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'privilegedaccessmanager.googleapis.com';
   }
@@ -514,14 +389,8 @@ export class PrivilegedAccessManagerClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'privilegedaccessmanager.googleapis.com';
   }
@@ -552,7 +421,9 @@ export class PrivilegedAccessManagerClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -561,9 +432,8 @@ export class PrivilegedAccessManagerClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -574,1676 +444,1205 @@ export class PrivilegedAccessManagerClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * `CheckOnboardingStatus` reports the onboarding status for a
-   * project/folder/organization. Any findings reported by this API need to be
-   * fixed before PAM can be used on the resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource for which the onboarding status should be checked.
-   *   Should be in one of the following formats:
-   *
-   *   * `projects/{project-number|project-id}/locations/{region}`
-   *   * `folders/{folder-number}/locations/{region}`
-   *   * `organizations/{organization-number}/locations/{region}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.privilegedaccessmanager.v1.CheckOnboardingStatusResponse|CheckOnboardingStatusResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/privileged_access_manager.check_onboarding_status.js</caption>
-   * region_tag:privilegedaccessmanager_v1_generated_PrivilegedAccessManager_CheckOnboardingStatus_async
-   */
+/**
+ * `CheckOnboardingStatus` reports the onboarding status for a
+ * project/folder/organization. Any findings reported by this API need to be
+ * fixed before PAM can be used on the resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource for which the onboarding status should be checked.
+ *   Should be in one of the following formats:
+ *
+ *   * `projects/{project-number|project-id}/locations/{region}`
+ *   * `folders/{folder-number}/locations/{region}`
+ *   * `organizations/{organization-number}/locations/{region}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.privilegedaccessmanager.v1.CheckOnboardingStatusResponse|CheckOnboardingStatusResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/privileged_access_manager.check_onboarding_status.js</caption>
+ * region_tag:privilegedaccessmanager_v1_generated_PrivilegedAccessManager_CheckOnboardingStatus_async
+ */
   checkOnboardingStatus(
-    request?: protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusResponse,
-      (
-        | protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusResponse,
+        protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusRequest|undefined, {}|undefined
+      ]>;
   checkOnboardingStatus(
-    request: protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusResponse,
-      | protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  checkOnboardingStatus(
-    request: protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusRequest,
-    callback: Callback<
-      protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusResponse,
-      | protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  checkOnboardingStatus(
-    request?: protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusResponse,
-          | protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusResponse,
-      | protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusResponse,
-      (
-        | protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusRequest|null|undefined,
+          {}|null|undefined>): void;
+  checkOnboardingStatus(
+      request: protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusRequest,
+      callback: Callback<
+          protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusResponse,
+          protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusRequest|null|undefined,
+          {}|null|undefined>): void;
+  checkOnboardingStatus(
+      request?: protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusResponse,
+          protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusResponse,
+          protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusResponse,
+        protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('checkOnboardingStatus request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusResponse,
-          | protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusResponse,
+        protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('checkOnboardingStatus response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .checkOnboardingStatus(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusResponse,
-          (
-            | protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('checkOnboardingStatus response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.checkOnboardingStatus(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusResponse,
+        protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('checkOnboardingStatus response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets details of a single entitlement.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.privilegedaccessmanager.v1.Entitlement|Entitlement}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/privileged_access_manager.get_entitlement.js</caption>
-   * region_tag:privilegedaccessmanager_v1_generated_PrivilegedAccessManager_GetEntitlement_async
-   */
+/**
+ * Gets details of a single entitlement.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.privilegedaccessmanager.v1.Entitlement|Entitlement}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/privileged_access_manager.get_entitlement.js</caption>
+ * region_tag:privilegedaccessmanager_v1_generated_PrivilegedAccessManager_GetEntitlement_async
+ */
   getEntitlement(
-    request?: protos.google.cloud.privilegedaccessmanager.v1.IGetEntitlementRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
-      (
-        | protos.google.cloud.privilegedaccessmanager.v1.IGetEntitlementRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.privilegedaccessmanager.v1.IGetEntitlementRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
+        protos.google.cloud.privilegedaccessmanager.v1.IGetEntitlementRequest|undefined, {}|undefined
+      ]>;
   getEntitlement(
-    request: protos.google.cloud.privilegedaccessmanager.v1.IGetEntitlementRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
-      | protos.google.cloud.privilegedaccessmanager.v1.IGetEntitlementRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEntitlement(
-    request: protos.google.cloud.privilegedaccessmanager.v1.IGetEntitlementRequest,
-    callback: Callback<
-      protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
-      | protos.google.cloud.privilegedaccessmanager.v1.IGetEntitlementRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEntitlement(
-    request?: protos.google.cloud.privilegedaccessmanager.v1.IGetEntitlementRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.privilegedaccessmanager.v1.IGetEntitlementRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
-          | protos.google.cloud.privilegedaccessmanager.v1.IGetEntitlementRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
-      | protos.google.cloud.privilegedaccessmanager.v1.IGetEntitlementRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
-      (
-        | protos.google.cloud.privilegedaccessmanager.v1.IGetEntitlementRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.privilegedaccessmanager.v1.IGetEntitlementRequest|null|undefined,
+          {}|null|undefined>): void;
+  getEntitlement(
+      request: protos.google.cloud.privilegedaccessmanager.v1.IGetEntitlementRequest,
+      callback: Callback<
+          protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
+          protos.google.cloud.privilegedaccessmanager.v1.IGetEntitlementRequest|null|undefined,
+          {}|null|undefined>): void;
+  getEntitlement(
+      request?: protos.google.cloud.privilegedaccessmanager.v1.IGetEntitlementRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
+          protos.google.cloud.privilegedaccessmanager.v1.IGetEntitlementRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
+          protos.google.cloud.privilegedaccessmanager.v1.IGetEntitlementRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
+        protos.google.cloud.privilegedaccessmanager.v1.IGetEntitlementRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getEntitlement request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
-          | protos.google.cloud.privilegedaccessmanager.v1.IGetEntitlementRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
+        protos.google.cloud.privilegedaccessmanager.v1.IGetEntitlementRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getEntitlement response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getEntitlement(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
-          (
-            | protos.google.cloud.privilegedaccessmanager.v1.IGetEntitlementRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getEntitlement response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getEntitlement(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
+        protos.google.cloud.privilegedaccessmanager.v1.IGetEntitlementRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getEntitlement response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Get details of a single grant.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.privilegedaccessmanager.v1.Grant|Grant}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/privileged_access_manager.get_grant.js</caption>
-   * region_tag:privilegedaccessmanager_v1_generated_PrivilegedAccessManager_GetGrant_async
-   */
+/**
+ * Get details of a single grant.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.privilegedaccessmanager.v1.Grant|Grant}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/privileged_access_manager.get_grant.js</caption>
+ * region_tag:privilegedaccessmanager_v1_generated_PrivilegedAccessManager_GetGrant_async
+ */
   getGrant(
-    request?: protos.google.cloud.privilegedaccessmanager.v1.IGetGrantRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-      (
-        | protos.google.cloud.privilegedaccessmanager.v1.IGetGrantRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.privilegedaccessmanager.v1.IGetGrantRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.privilegedaccessmanager.v1.IGrant,
+        protos.google.cloud.privilegedaccessmanager.v1.IGetGrantRequest|undefined, {}|undefined
+      ]>;
   getGrant(
-    request: protos.google.cloud.privilegedaccessmanager.v1.IGetGrantRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-      | protos.google.cloud.privilegedaccessmanager.v1.IGetGrantRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getGrant(
-    request: protos.google.cloud.privilegedaccessmanager.v1.IGetGrantRequest,
-    callback: Callback<
-      protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-      | protos.google.cloud.privilegedaccessmanager.v1.IGetGrantRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getGrant(
-    request?: protos.google.cloud.privilegedaccessmanager.v1.IGetGrantRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.privilegedaccessmanager.v1.IGetGrantRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-          | protos.google.cloud.privilegedaccessmanager.v1.IGetGrantRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-      | protos.google.cloud.privilegedaccessmanager.v1.IGetGrantRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-      (
-        | protos.google.cloud.privilegedaccessmanager.v1.IGetGrantRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.privilegedaccessmanager.v1.IGetGrantRequest|null|undefined,
+          {}|null|undefined>): void;
+  getGrant(
+      request: protos.google.cloud.privilegedaccessmanager.v1.IGetGrantRequest,
+      callback: Callback<
+          protos.google.cloud.privilegedaccessmanager.v1.IGrant,
+          protos.google.cloud.privilegedaccessmanager.v1.IGetGrantRequest|null|undefined,
+          {}|null|undefined>): void;
+  getGrant(
+      request?: protos.google.cloud.privilegedaccessmanager.v1.IGetGrantRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.privilegedaccessmanager.v1.IGrant,
+          protos.google.cloud.privilegedaccessmanager.v1.IGetGrantRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.privilegedaccessmanager.v1.IGrant,
+          protos.google.cloud.privilegedaccessmanager.v1.IGetGrantRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.privilegedaccessmanager.v1.IGrant,
+        protos.google.cloud.privilegedaccessmanager.v1.IGetGrantRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getGrant request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-          | protos.google.cloud.privilegedaccessmanager.v1.IGetGrantRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.privilegedaccessmanager.v1.IGrant,
+        protos.google.cloud.privilegedaccessmanager.v1.IGetGrantRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getGrant response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getGrant(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-          (
-            | protos.google.cloud.privilegedaccessmanager.v1.IGetGrantRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getGrant response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getGrant(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.privilegedaccessmanager.v1.IGrant,
+        protos.google.cloud.privilegedaccessmanager.v1.IGetGrantRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getGrant response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a new grant in a given project/folder/organization and
-   * location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the parent entitlement for which this grant is being
-   *   requested.
-   * @param {google.cloud.privilegedaccessmanager.v1.Grant} request.grant
-   *   Required. The resource being created.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server knows to
-   *   ignore the request if it has already been completed. The server guarantees
-   *   this for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, ignores the second request. This prevents
-   *   clients from accidentally creating duplicate grants.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.privilegedaccessmanager.v1.Grant|Grant}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/privileged_access_manager.create_grant.js</caption>
-   * region_tag:privilegedaccessmanager_v1_generated_PrivilegedAccessManager_CreateGrant_async
-   */
+/**
+ * Creates a new grant in a given project/folder/organization and
+ * location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the parent entitlement for which this grant is being
+ *   requested.
+ * @param {google.cloud.privilegedaccessmanager.v1.Grant} request.grant
+ *   Required. The resource being created.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server knows to
+ *   ignore the request if it has already been completed. The server guarantees
+ *   this for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, ignores the second request. This prevents
+ *   clients from accidentally creating duplicate grants.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.privilegedaccessmanager.v1.Grant|Grant}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/privileged_access_manager.create_grant.js</caption>
+ * region_tag:privilegedaccessmanager_v1_generated_PrivilegedAccessManager_CreateGrant_async
+ */
   createGrant(
-    request?: protos.google.cloud.privilegedaccessmanager.v1.ICreateGrantRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-      (
-        | protos.google.cloud.privilegedaccessmanager.v1.ICreateGrantRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.privilegedaccessmanager.v1.ICreateGrantRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.privilegedaccessmanager.v1.IGrant,
+        protos.google.cloud.privilegedaccessmanager.v1.ICreateGrantRequest|undefined, {}|undefined
+      ]>;
   createGrant(
-    request: protos.google.cloud.privilegedaccessmanager.v1.ICreateGrantRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-      | protos.google.cloud.privilegedaccessmanager.v1.ICreateGrantRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createGrant(
-    request: protos.google.cloud.privilegedaccessmanager.v1.ICreateGrantRequest,
-    callback: Callback<
-      protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-      | protos.google.cloud.privilegedaccessmanager.v1.ICreateGrantRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createGrant(
-    request?: protos.google.cloud.privilegedaccessmanager.v1.ICreateGrantRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.privilegedaccessmanager.v1.ICreateGrantRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-          | protos.google.cloud.privilegedaccessmanager.v1.ICreateGrantRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-      | protos.google.cloud.privilegedaccessmanager.v1.ICreateGrantRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-      (
-        | protos.google.cloud.privilegedaccessmanager.v1.ICreateGrantRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.privilegedaccessmanager.v1.ICreateGrantRequest|null|undefined,
+          {}|null|undefined>): void;
+  createGrant(
+      request: protos.google.cloud.privilegedaccessmanager.v1.ICreateGrantRequest,
+      callback: Callback<
+          protos.google.cloud.privilegedaccessmanager.v1.IGrant,
+          protos.google.cloud.privilegedaccessmanager.v1.ICreateGrantRequest|null|undefined,
+          {}|null|undefined>): void;
+  createGrant(
+      request?: protos.google.cloud.privilegedaccessmanager.v1.ICreateGrantRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.privilegedaccessmanager.v1.IGrant,
+          protos.google.cloud.privilegedaccessmanager.v1.ICreateGrantRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.privilegedaccessmanager.v1.IGrant,
+          protos.google.cloud.privilegedaccessmanager.v1.ICreateGrantRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.privilegedaccessmanager.v1.IGrant,
+        protos.google.cloud.privilegedaccessmanager.v1.ICreateGrantRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createGrant request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-          | protos.google.cloud.privilegedaccessmanager.v1.ICreateGrantRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.privilegedaccessmanager.v1.IGrant,
+        protos.google.cloud.privilegedaccessmanager.v1.ICreateGrantRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createGrant response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createGrant(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-          (
-            | protos.google.cloud.privilegedaccessmanager.v1.ICreateGrantRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createGrant response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createGrant(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.privilegedaccessmanager.v1.IGrant,
+        protos.google.cloud.privilegedaccessmanager.v1.ICreateGrantRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createGrant response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * `ApproveGrant` is used to approve a grant. This method can only be called
-   * on a grant when it's in the `APPROVAL_AWAITED` state. This operation can't
-   * be undone.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the grant resource which is being approved.
-   * @param {string} [request.reason]
-   *   Optional. The reason for approving this grant. This is required if the
-   *   `require_approver_justification` field of the `ManualApprovals` workflow
-   *   used in this grant is true.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.privilegedaccessmanager.v1.Grant|Grant}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/privileged_access_manager.approve_grant.js</caption>
-   * region_tag:privilegedaccessmanager_v1_generated_PrivilegedAccessManager_ApproveGrant_async
-   */
+/**
+ * `ApproveGrant` is used to approve a grant. This method can only be called
+ * on a grant when it's in the `APPROVAL_AWAITED` state. This operation can't
+ * be undone.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the grant resource which is being approved.
+ * @param {string} [request.reason]
+ *   Optional. The reason for approving this grant. This is required if the
+ *   `require_approver_justification` field of the `ManualApprovals` workflow
+ *   used in this grant is true.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.privilegedaccessmanager.v1.Grant|Grant}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/privileged_access_manager.approve_grant.js</caption>
+ * region_tag:privilegedaccessmanager_v1_generated_PrivilegedAccessManager_ApproveGrant_async
+ */
   approveGrant(
-    request?: protos.google.cloud.privilegedaccessmanager.v1.IApproveGrantRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-      (
-        | protos.google.cloud.privilegedaccessmanager.v1.IApproveGrantRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.privilegedaccessmanager.v1.IApproveGrantRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.privilegedaccessmanager.v1.IGrant,
+        protos.google.cloud.privilegedaccessmanager.v1.IApproveGrantRequest|undefined, {}|undefined
+      ]>;
   approveGrant(
-    request: protos.google.cloud.privilegedaccessmanager.v1.IApproveGrantRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-      | protos.google.cloud.privilegedaccessmanager.v1.IApproveGrantRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  approveGrant(
-    request: protos.google.cloud.privilegedaccessmanager.v1.IApproveGrantRequest,
-    callback: Callback<
-      protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-      | protos.google.cloud.privilegedaccessmanager.v1.IApproveGrantRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  approveGrant(
-    request?: protos.google.cloud.privilegedaccessmanager.v1.IApproveGrantRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.privilegedaccessmanager.v1.IApproveGrantRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-          | protos.google.cloud.privilegedaccessmanager.v1.IApproveGrantRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-      | protos.google.cloud.privilegedaccessmanager.v1.IApproveGrantRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-      (
-        | protos.google.cloud.privilegedaccessmanager.v1.IApproveGrantRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.privilegedaccessmanager.v1.IApproveGrantRequest|null|undefined,
+          {}|null|undefined>): void;
+  approveGrant(
+      request: protos.google.cloud.privilegedaccessmanager.v1.IApproveGrantRequest,
+      callback: Callback<
+          protos.google.cloud.privilegedaccessmanager.v1.IGrant,
+          protos.google.cloud.privilegedaccessmanager.v1.IApproveGrantRequest|null|undefined,
+          {}|null|undefined>): void;
+  approveGrant(
+      request?: protos.google.cloud.privilegedaccessmanager.v1.IApproveGrantRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.privilegedaccessmanager.v1.IGrant,
+          protos.google.cloud.privilegedaccessmanager.v1.IApproveGrantRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.privilegedaccessmanager.v1.IGrant,
+          protos.google.cloud.privilegedaccessmanager.v1.IApproveGrantRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.privilegedaccessmanager.v1.IGrant,
+        protos.google.cloud.privilegedaccessmanager.v1.IApproveGrantRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('approveGrant request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-          | protos.google.cloud.privilegedaccessmanager.v1.IApproveGrantRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.privilegedaccessmanager.v1.IGrant,
+        protos.google.cloud.privilegedaccessmanager.v1.IApproveGrantRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('approveGrant response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .approveGrant(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-          (
-            | protos.google.cloud.privilegedaccessmanager.v1.IApproveGrantRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('approveGrant response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.approveGrant(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.privilegedaccessmanager.v1.IGrant,
+        protos.google.cloud.privilegedaccessmanager.v1.IApproveGrantRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('approveGrant response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * `DenyGrant` is used to deny a grant. This method can only be called on a
-   * grant when it's in the `APPROVAL_AWAITED` state. This operation can't be
-   * undone.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the grant resource which is being denied.
-   * @param {string} [request.reason]
-   *   Optional. The reason for denying this grant. This is required if
-   *   `require_approver_justification` field of the `ManualApprovals` workflow
-   *   used in this grant is true.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.privilegedaccessmanager.v1.Grant|Grant}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/privileged_access_manager.deny_grant.js</caption>
-   * region_tag:privilegedaccessmanager_v1_generated_PrivilegedAccessManager_DenyGrant_async
-   */
+/**
+ * `DenyGrant` is used to deny a grant. This method can only be called on a
+ * grant when it's in the `APPROVAL_AWAITED` state. This operation can't be
+ * undone.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the grant resource which is being denied.
+ * @param {string} [request.reason]
+ *   Optional. The reason for denying this grant. This is required if
+ *   `require_approver_justification` field of the `ManualApprovals` workflow
+ *   used in this grant is true.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.privilegedaccessmanager.v1.Grant|Grant}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/privileged_access_manager.deny_grant.js</caption>
+ * region_tag:privilegedaccessmanager_v1_generated_PrivilegedAccessManager_DenyGrant_async
+ */
   denyGrant(
-    request?: protos.google.cloud.privilegedaccessmanager.v1.IDenyGrantRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-      (
-        | protos.google.cloud.privilegedaccessmanager.v1.IDenyGrantRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.privilegedaccessmanager.v1.IDenyGrantRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.privilegedaccessmanager.v1.IGrant,
+        protos.google.cloud.privilegedaccessmanager.v1.IDenyGrantRequest|undefined, {}|undefined
+      ]>;
   denyGrant(
-    request: protos.google.cloud.privilegedaccessmanager.v1.IDenyGrantRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-      | protos.google.cloud.privilegedaccessmanager.v1.IDenyGrantRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  denyGrant(
-    request: protos.google.cloud.privilegedaccessmanager.v1.IDenyGrantRequest,
-    callback: Callback<
-      protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-      | protos.google.cloud.privilegedaccessmanager.v1.IDenyGrantRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  denyGrant(
-    request?: protos.google.cloud.privilegedaccessmanager.v1.IDenyGrantRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.privilegedaccessmanager.v1.IDenyGrantRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-          | protos.google.cloud.privilegedaccessmanager.v1.IDenyGrantRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-      | protos.google.cloud.privilegedaccessmanager.v1.IDenyGrantRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-      (
-        | protos.google.cloud.privilegedaccessmanager.v1.IDenyGrantRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.privilegedaccessmanager.v1.IDenyGrantRequest|null|undefined,
+          {}|null|undefined>): void;
+  denyGrant(
+      request: protos.google.cloud.privilegedaccessmanager.v1.IDenyGrantRequest,
+      callback: Callback<
+          protos.google.cloud.privilegedaccessmanager.v1.IGrant,
+          protos.google.cloud.privilegedaccessmanager.v1.IDenyGrantRequest|null|undefined,
+          {}|null|undefined>): void;
+  denyGrant(
+      request?: protos.google.cloud.privilegedaccessmanager.v1.IDenyGrantRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.privilegedaccessmanager.v1.IGrant,
+          protos.google.cloud.privilegedaccessmanager.v1.IDenyGrantRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.privilegedaccessmanager.v1.IGrant,
+          protos.google.cloud.privilegedaccessmanager.v1.IDenyGrantRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.privilegedaccessmanager.v1.IGrant,
+        protos.google.cloud.privilegedaccessmanager.v1.IDenyGrantRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('denyGrant request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-          | protos.google.cloud.privilegedaccessmanager.v1.IDenyGrantRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.privilegedaccessmanager.v1.IGrant,
+        protos.google.cloud.privilegedaccessmanager.v1.IDenyGrantRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('denyGrant response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .denyGrant(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-          (
-            | protos.google.cloud.privilegedaccessmanager.v1.IDenyGrantRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('denyGrant response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.denyGrant(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.privilegedaccessmanager.v1.IGrant,
+        protos.google.cloud.privilegedaccessmanager.v1.IDenyGrantRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('denyGrant response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Creates a new entitlement in a given project/folder/organization and
-   * location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the parent resource for the entitlement.
-   *   Possible formats:
-   *
-   *   * `organizations/{organization-number}/locations/{region}`
-   *   * `folders/{folder-number}/locations/{region}`
-   *   * `projects/{project-id|project-number}/locations/{region}`
-   * @param {string} request.entitlementId
-   *   Required. The ID to use for this entitlement. This becomes the last part of
-   *   the resource name.
-   *
-   *   This value should be 4-63 characters in length, and valid characters are
-   *   "[a-z]", "[0-9]", and "-". The first character should be from [a-z].
-   *
-   *   This value should be unique among all other entitlements under the
-   *   specified `parent`.
-   * @param {google.cloud.privilegedaccessmanager.v1.Entitlement} request.entitlement
-   *   Required. The resource being created
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server knows to
-   *   ignore the request if it has already been completed. The server guarantees
-   *   this for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, ignores the second request and returns the
-   *   previous operation's response. This prevents clients from accidentally
-   *   creating duplicate entitlements.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/privileged_access_manager.create_entitlement.js</caption>
-   * region_tag:privilegedaccessmanager_v1_generated_PrivilegedAccessManager_CreateEntitlement_async
-   */
+/**
+ * Creates a new entitlement in a given project/folder/organization and
+ * location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the parent resource for the entitlement.
+ *   Possible formats:
+ *
+ *   * `organizations/{organization-number}/locations/{region}`
+ *   * `folders/{folder-number}/locations/{region}`
+ *   * `projects/{project-id|project-number}/locations/{region}`
+ * @param {string} request.entitlementId
+ *   Required. The ID to use for this entitlement. This becomes the last part of
+ *   the resource name.
+ *
+ *   This value should be 4-63 characters in length, and valid characters are
+ *   "[a-z]", "[0-9]", and "-". The first character should be from [a-z].
+ *
+ *   This value should be unique among all other entitlements under the
+ *   specified `parent`.
+ * @param {google.cloud.privilegedaccessmanager.v1.Entitlement} request.entitlement
+ *   Required. The resource being created
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server knows to
+ *   ignore the request if it has already been completed. The server guarantees
+ *   this for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, ignores the second request and returns the
+ *   previous operation's response. This prevents clients from accidentally
+ *   creating duplicate entitlements.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/privileged_access_manager.create_entitlement.js</caption>
+ * region_tag:privilegedaccessmanager_v1_generated_PrivilegedAccessManager_CreateEntitlement_async
+ */
   createEntitlement(
-    request?: protos.google.cloud.privilegedaccessmanager.v1.ICreateEntitlementRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
-        protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.privilegedaccessmanager.v1.ICreateEntitlementRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.privilegedaccessmanager.v1.IEntitlement, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createEntitlement(
-    request: protos.google.cloud.privilegedaccessmanager.v1.ICreateEntitlementRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
-        protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.privilegedaccessmanager.v1.ICreateEntitlementRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.privilegedaccessmanager.v1.IEntitlement, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createEntitlement(
-    request: protos.google.cloud.privilegedaccessmanager.v1.ICreateEntitlementRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
-        protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.privilegedaccessmanager.v1.ICreateEntitlementRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.privilegedaccessmanager.v1.IEntitlement, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createEntitlement(
-    request?: protos.google.cloud.privilegedaccessmanager.v1.ICreateEntitlementRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
-            protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
-        protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
-        protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.privilegedaccessmanager.v1.ICreateEntitlementRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.privilegedaccessmanager.v1.IEntitlement, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.privilegedaccessmanager.v1.IEntitlement, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.privilegedaccessmanager.v1.IEntitlement, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
-            protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.privilegedaccessmanager.v1.IEntitlement, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createEntitlement response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createEntitlement request %j', request);
-    return this.innerApiCalls
-      .createEntitlement(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
-            protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createEntitlement response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createEntitlement(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.privilegedaccessmanager.v1.IEntitlement, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createEntitlement response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createEntitlement()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/privileged_access_manager.create_entitlement.js</caption>
-   * region_tag:privilegedaccessmanager_v1_generated_PrivilegedAccessManager_CreateEntitlement_async
-   */
-  async checkCreateEntitlementProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.privilegedaccessmanager.v1.Entitlement,
-      protos.google.cloud.privilegedaccessmanager.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createEntitlement()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/privileged_access_manager.create_entitlement.js</caption>
+ * region_tag:privilegedaccessmanager_v1_generated_PrivilegedAccessManager_CreateEntitlement_async
+ */
+  async checkCreateEntitlementProgress(name: string): Promise<LROperation<protos.google.cloud.privilegedaccessmanager.v1.Entitlement, protos.google.cloud.privilegedaccessmanager.v1.OperationMetadata>>{
     this._log.info('createEntitlement long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createEntitlement,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.privilegedaccessmanager.v1.Entitlement,
-      protos.google.cloud.privilegedaccessmanager.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createEntitlement, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.privilegedaccessmanager.v1.Entitlement, protos.google.cloud.privilegedaccessmanager.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a single entitlement. This method can only be called when there
-   * are no in-progress (`ACTIVE`/`ACTIVATING`/`REVOKING`) grants under the
-   * entitlement.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server knows to
-   *   ignore the request if it has already been completed. The server guarantees
-   *   this for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, ignores the second request.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {boolean} [request.force]
-   *   Optional. If set to true, any child grant under this entitlement is also
-   *   deleted. (Otherwise, the request only works if the entitlement has no child
-   *   grant.)
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/privileged_access_manager.delete_entitlement.js</caption>
-   * region_tag:privilegedaccessmanager_v1_generated_PrivilegedAccessManager_DeleteEntitlement_async
-   */
+/**
+ * Deletes a single entitlement. This method can only be called when there
+ * are no in-progress (`ACTIVE`/`ACTIVATING`/`REVOKING`) grants under the
+ * entitlement.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server knows to
+ *   ignore the request if it has already been completed. The server guarantees
+ *   this for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, ignores the second request.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {boolean} [request.force]
+ *   Optional. If set to true, any child grant under this entitlement is also
+ *   deleted. (Otherwise, the request only works if the entitlement has no child
+ *   grant.)
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/privileged_access_manager.delete_entitlement.js</caption>
+ * region_tag:privilegedaccessmanager_v1_generated_PrivilegedAccessManager_DeleteEntitlement_async
+ */
   deleteEntitlement(
-    request?: protos.google.cloud.privilegedaccessmanager.v1.IDeleteEntitlementRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
-        protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.privilegedaccessmanager.v1.IDeleteEntitlementRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.privilegedaccessmanager.v1.IEntitlement, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteEntitlement(
-    request: protos.google.cloud.privilegedaccessmanager.v1.IDeleteEntitlementRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
-        protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.privilegedaccessmanager.v1.IDeleteEntitlementRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.privilegedaccessmanager.v1.IEntitlement, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteEntitlement(
-    request: protos.google.cloud.privilegedaccessmanager.v1.IDeleteEntitlementRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
-        protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.privilegedaccessmanager.v1.IDeleteEntitlementRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.privilegedaccessmanager.v1.IEntitlement, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteEntitlement(
-    request?: protos.google.cloud.privilegedaccessmanager.v1.IDeleteEntitlementRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
-            protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
-        protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
-        protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.privilegedaccessmanager.v1.IDeleteEntitlementRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.privilegedaccessmanager.v1.IEntitlement, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.privilegedaccessmanager.v1.IEntitlement, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.privilegedaccessmanager.v1.IEntitlement, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
-            protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.privilegedaccessmanager.v1.IEntitlement, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteEntitlement response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteEntitlement request %j', request);
-    return this.innerApiCalls
-      .deleteEntitlement(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
-            protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteEntitlement response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteEntitlement(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.privilegedaccessmanager.v1.IEntitlement, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteEntitlement response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteEntitlement()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/privileged_access_manager.delete_entitlement.js</caption>
-   * region_tag:privilegedaccessmanager_v1_generated_PrivilegedAccessManager_DeleteEntitlement_async
-   */
-  async checkDeleteEntitlementProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.privilegedaccessmanager.v1.Entitlement,
-      protos.google.cloud.privilegedaccessmanager.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteEntitlement()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/privileged_access_manager.delete_entitlement.js</caption>
+ * region_tag:privilegedaccessmanager_v1_generated_PrivilegedAccessManager_DeleteEntitlement_async
+ */
+  async checkDeleteEntitlementProgress(name: string): Promise<LROperation<protos.google.cloud.privilegedaccessmanager.v1.Entitlement, protos.google.cloud.privilegedaccessmanager.v1.OperationMetadata>>{
     this._log.info('deleteEntitlement long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteEntitlement,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.privilegedaccessmanager.v1.Entitlement,
-      protos.google.cloud.privilegedaccessmanager.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteEntitlement, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.privilegedaccessmanager.v1.Entitlement, protos.google.cloud.privilegedaccessmanager.v1.OperationMetadata>;
   }
-  /**
-   * Updates the entitlement specified in the request. Updated fields in the
-   * entitlement need to be specified in an update mask. The changes made to an
-   * entitlement are applicable only on future grants of the entitlement.
-   * However, if new approvers are added or existing approvers are removed from
-   * the approval workflow, the changes are effective on existing grants.
-   *
-   * The following fields are not supported for updates:
-   *
-   *  * All immutable fields
-   *  * Entitlement name
-   *  * Resource name
-   *  * Resource type
-   *  * Adding an approval workflow in an entitlement which previously had no
-   *    approval workflow.
-   *  * Deleting the approval workflow from an entitlement.
-   *  * Adding or deleting a step in the approval workflow (only one step is
-   *    supported)
-   *
-   * Note that updates are allowed on the list of approvers in an approval
-   * workflow step.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.privilegedaccessmanager.v1.Entitlement} request.entitlement
-   *   Required. The entitlement resource that is updated.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to update. A field is overwritten if, and only
-   *   if, it is in the mask. Any immutable fields set in the mask are ignored by
-   *   the server. Repeated fields and map fields are only allowed in the last
-   *   position of a `paths` string and overwrite the existing values. Hence an
-   *   update to a repeated field or a map should contain the entire list of
-   *   values. The fields specified in the update_mask are relative to the
-   *   resource and not to the request.
-   *   (e.g. `MaxRequestDuration`; *not* `entitlement.MaxRequestDuration`)
-   *   A value of '*' for this field refers to full replacement of the resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/privileged_access_manager.update_entitlement.js</caption>
-   * region_tag:privilegedaccessmanager_v1_generated_PrivilegedAccessManager_UpdateEntitlement_async
-   */
+/**
+ * Updates the entitlement specified in the request. Updated fields in the
+ * entitlement need to be specified in an update mask. The changes made to an
+ * entitlement are applicable only on future grants of the entitlement.
+ * However, if new approvers are added or existing approvers are removed from
+ * the approval workflow, the changes are effective on existing grants.
+ *
+ * The following fields are not supported for updates:
+ *
+ *  * All immutable fields
+ *  * Entitlement name
+ *  * Resource name
+ *  * Resource type
+ *  * Adding an approval workflow in an entitlement which previously had no
+ *    approval workflow.
+ *  * Deleting the approval workflow from an entitlement.
+ *  * Adding or deleting a step in the approval workflow (only one step is
+ *    supported)
+ *
+ * Note that updates are allowed on the list of approvers in an approval
+ * workflow step.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.privilegedaccessmanager.v1.Entitlement} request.entitlement
+ *   Required. The entitlement resource that is updated.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. The list of fields to update. A field is overwritten if, and only
+ *   if, it is in the mask. Any immutable fields set in the mask are ignored by
+ *   the server. Repeated fields and map fields are only allowed in the last
+ *   position of a `paths` string and overwrite the existing values. Hence an
+ *   update to a repeated field or a map should contain the entire list of
+ *   values. The fields specified in the update_mask are relative to the
+ *   resource and not to the request.
+ *   (e.g. `MaxRequestDuration`; *not* `entitlement.MaxRequestDuration`)
+ *   A value of '*' for this field refers to full replacement of the resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/privileged_access_manager.update_entitlement.js</caption>
+ * region_tag:privilegedaccessmanager_v1_generated_PrivilegedAccessManager_UpdateEntitlement_async
+ */
   updateEntitlement(
-    request?: protos.google.cloud.privilegedaccessmanager.v1.IUpdateEntitlementRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
-        protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.privilegedaccessmanager.v1.IUpdateEntitlementRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.privilegedaccessmanager.v1.IEntitlement, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateEntitlement(
-    request: protos.google.cloud.privilegedaccessmanager.v1.IUpdateEntitlementRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
-        protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.privilegedaccessmanager.v1.IUpdateEntitlementRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.privilegedaccessmanager.v1.IEntitlement, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateEntitlement(
-    request: protos.google.cloud.privilegedaccessmanager.v1.IUpdateEntitlementRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
-        protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.privilegedaccessmanager.v1.IUpdateEntitlementRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.privilegedaccessmanager.v1.IEntitlement, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateEntitlement(
-    request?: protos.google.cloud.privilegedaccessmanager.v1.IUpdateEntitlementRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
-            protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
-        protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
-        protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.privilegedaccessmanager.v1.IUpdateEntitlementRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.privilegedaccessmanager.v1.IEntitlement, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.privilegedaccessmanager.v1.IEntitlement, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.privilegedaccessmanager.v1.IEntitlement, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'entitlement.name': request.entitlement!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'entitlement.name': request.entitlement!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
-            protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.privilegedaccessmanager.v1.IEntitlement, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateEntitlement response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateEntitlement request %j', request);
-    return this.innerApiCalls
-      .updateEntitlement(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
-            protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateEntitlement response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateEntitlement(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.privilegedaccessmanager.v1.IEntitlement, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateEntitlement response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateEntitlement()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/privileged_access_manager.update_entitlement.js</caption>
-   * region_tag:privilegedaccessmanager_v1_generated_PrivilegedAccessManager_UpdateEntitlement_async
-   */
-  async checkUpdateEntitlementProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.privilegedaccessmanager.v1.Entitlement,
-      protos.google.cloud.privilegedaccessmanager.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateEntitlement()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/privileged_access_manager.update_entitlement.js</caption>
+ * region_tag:privilegedaccessmanager_v1_generated_PrivilegedAccessManager_UpdateEntitlement_async
+ */
+  async checkUpdateEntitlementProgress(name: string): Promise<LROperation<protos.google.cloud.privilegedaccessmanager.v1.Entitlement, protos.google.cloud.privilegedaccessmanager.v1.OperationMetadata>>{
     this._log.info('updateEntitlement long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateEntitlement,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.privilegedaccessmanager.v1.Entitlement,
-      protos.google.cloud.privilegedaccessmanager.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateEntitlement, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.privilegedaccessmanager.v1.Entitlement, protos.google.cloud.privilegedaccessmanager.v1.OperationMetadata>;
   }
-  /**
-   * `RevokeGrant` is used to immediately revoke access for a grant. This method
-   * can be called when the grant is in a non-terminal state.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the grant resource which is being revoked.
-   * @param {string} [request.reason]
-   *   Optional. The reason for revoking this grant.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/privileged_access_manager.revoke_grant.js</caption>
-   * region_tag:privilegedaccessmanager_v1_generated_PrivilegedAccessManager_RevokeGrant_async
-   */
+/**
+ * `RevokeGrant` is used to immediately revoke access for a grant. This method
+ * can be called when the grant is in a non-terminal state.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the grant resource which is being revoked.
+ * @param {string} [request.reason]
+ *   Optional. The reason for revoking this grant.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/privileged_access_manager.revoke_grant.js</caption>
+ * region_tag:privilegedaccessmanager_v1_generated_PrivilegedAccessManager_RevokeGrant_async
+ */
   revokeGrant(
-    request?: protos.google.cloud.privilegedaccessmanager.v1.IRevokeGrantRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-        protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.privilegedaccessmanager.v1.IRevokeGrantRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.privilegedaccessmanager.v1.IGrant, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   revokeGrant(
-    request: protos.google.cloud.privilegedaccessmanager.v1.IRevokeGrantRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-        protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.privilegedaccessmanager.v1.IRevokeGrantRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.privilegedaccessmanager.v1.IGrant, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   revokeGrant(
-    request: protos.google.cloud.privilegedaccessmanager.v1.IRevokeGrantRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-        protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.privilegedaccessmanager.v1.IRevokeGrantRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.privilegedaccessmanager.v1.IGrant, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   revokeGrant(
-    request?: protos.google.cloud.privilegedaccessmanager.v1.IRevokeGrantRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-            protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-        protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-        protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.privilegedaccessmanager.v1.IRevokeGrantRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.privilegedaccessmanager.v1.IGrant, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.privilegedaccessmanager.v1.IGrant, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.privilegedaccessmanager.v1.IGrant, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-            protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.privilegedaccessmanager.v1.IGrant, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('revokeGrant response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('revokeGrant request %j', request);
-    return this.innerApiCalls
-      .revokeGrant(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.privilegedaccessmanager.v1.IGrant,
-            protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('revokeGrant response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.revokeGrant(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.privilegedaccessmanager.v1.IGrant, protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('revokeGrant response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `revokeGrant()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/privileged_access_manager.revoke_grant.js</caption>
-   * region_tag:privilegedaccessmanager_v1_generated_PrivilegedAccessManager_RevokeGrant_async
-   */
-  async checkRevokeGrantProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.privilegedaccessmanager.v1.Grant,
-      protos.google.cloud.privilegedaccessmanager.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `revokeGrant()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/privileged_access_manager.revoke_grant.js</caption>
+ * region_tag:privilegedaccessmanager_v1_generated_PrivilegedAccessManager_RevokeGrant_async
+ */
+  async checkRevokeGrantProgress(name: string): Promise<LROperation<protos.google.cloud.privilegedaccessmanager.v1.Grant, protos.google.cloud.privilegedaccessmanager.v1.OperationMetadata>>{
     this._log.info('revokeGrant long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.revokeGrant,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.privilegedaccessmanager.v1.Grant,
-      protos.google.cloud.privilegedaccessmanager.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.revokeGrant, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.privilegedaccessmanager.v1.Grant, protos.google.cloud.privilegedaccessmanager.v1.OperationMetadata>;
   }
-  /**
-   * Lists entitlements in a given project/folder/organization and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent which owns the entitlement resources.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, the server picks an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results.
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.privilegedaccessmanager.v1.Entitlement|Entitlement}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listEntitlementsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists entitlements in a given project/folder/organization and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent which owns the entitlement resources.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, the server picks an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.privilegedaccessmanager.v1.Entitlement|Entitlement}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listEntitlementsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listEntitlements(
-    request?: protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.privilegedaccessmanager.v1.IEntitlement[],
-      protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsRequest | null,
-      protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.privilegedaccessmanager.v1.IEntitlement[],
+        protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsRequest|null,
+        protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsResponse
+      ]>;
   listEntitlements(
-    request: protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsRequest,
-      | protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsResponse
-      | null
-      | undefined,
-      protos.google.cloud.privilegedaccessmanager.v1.IEntitlement
-    >
-  ): void;
-  listEntitlements(
-    request: protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsRequest,
-      | protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsResponse
-      | null
-      | undefined,
-      protos.google.cloud.privilegedaccessmanager.v1.IEntitlement
-    >
-  ): void;
-  listEntitlements(
-    request?: protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsRequest,
-          | protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsResponse
-          | null
-          | undefined,
-          protos.google.cloud.privilegedaccessmanager.v1.IEntitlement
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsRequest,
-      | protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsResponse
-      | null
-      | undefined,
-      protos.google.cloud.privilegedaccessmanager.v1.IEntitlement
-    >
-  ): Promise<
-    [
-      protos.google.cloud.privilegedaccessmanager.v1.IEntitlement[],
-      protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsRequest | null,
-      protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsResponse,
-    ]
-  > | void {
+          protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsResponse|null|undefined,
+          protos.google.cloud.privilegedaccessmanager.v1.IEntitlement>): void;
+  listEntitlements(
+      request: protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsRequest,
+          protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsResponse|null|undefined,
+          protos.google.cloud.privilegedaccessmanager.v1.IEntitlement>): void;
+  listEntitlements(
+      request?: protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsRequest,
+          protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsResponse|null|undefined,
+          protos.google.cloud.privilegedaccessmanager.v1.IEntitlement>,
+      callback?: PaginationCallback<
+          protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsRequest,
+          protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsResponse|null|undefined,
+          protos.google.cloud.privilegedaccessmanager.v1.IEntitlement>):
+      Promise<[
+        protos.google.cloud.privilegedaccessmanager.v1.IEntitlement[],
+        protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsRequest|null,
+        protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsRequest,
-          | protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsResponse
-          | null
-          | undefined,
-          protos.google.cloud.privilegedaccessmanager.v1.IEntitlement
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsRequest,
+      protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsResponse|null|undefined,
+      protos.google.cloud.privilegedaccessmanager.v1.IEntitlement>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listEntitlements values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2252,61 +1651,58 @@ export class PrivilegedAccessManagerClient {
     this._log.info('listEntitlements request %j', request);
     return this.innerApiCalls
       .listEntitlements(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.privilegedaccessmanager.v1.IEntitlement[],
-          protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsRequest | null,
-          protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsResponse,
-        ]) => {
-          this._log.info('listEntitlements values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.privilegedaccessmanager.v1.IEntitlement[],
+        protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsRequest|null,
+        protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsResponse
+      ]) => {
+        this._log.info('listEntitlements values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listEntitlements`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent which owns the entitlement resources.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, the server picks an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results.
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.privilegedaccessmanager.v1.Entitlement|Entitlement} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listEntitlementsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listEntitlements`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent which owns the entitlement resources.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, the server picks an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.privilegedaccessmanager.v1.Entitlement|Entitlement} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listEntitlementsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listEntitlementsStream(
-    request?: protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listEntitlements'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listEntitlements stream %j', request);
     return this.descriptors.page.listEntitlements.createStream(
       this.innerApiCalls.listEntitlements as GaxCall,
@@ -2315,52 +1711,51 @@ export class PrivilegedAccessManagerClient {
     );
   }
 
-  /**
-   * Equivalent to `listEntitlements`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent which owns the entitlement resources.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, the server picks an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results.
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.privilegedaccessmanager.v1.Entitlement|Entitlement}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/privileged_access_manager.list_entitlements.js</caption>
-   * region_tag:privilegedaccessmanager_v1_generated_PrivilegedAccessManager_ListEntitlements_async
-   */
+/**
+ * Equivalent to `listEntitlements`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent which owns the entitlement resources.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, the server picks an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.privilegedaccessmanager.v1.Entitlement|Entitlement}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/privileged_access_manager.list_entitlements.js</caption>
+ * region_tag:privilegedaccessmanager_v1_generated_PrivilegedAccessManager_ListEntitlements_async
+ */
   listEntitlementsAsync(
-    request?: protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.privilegedaccessmanager.v1.IEntitlement> {
+      request?: protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.privilegedaccessmanager.v1.IEntitlement>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listEntitlements'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listEntitlements iterate %j', request);
     return this.descriptors.page.listEntitlements.asyncIterate(
       this.innerApiCalls['listEntitlements'] as GaxCall,
@@ -2368,120 +1763,95 @@ export class PrivilegedAccessManagerClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.privilegedaccessmanager.v1.IEntitlement>;
   }
-  /**
-   * `SearchEntitlements` returns entitlements on which the caller has the
-   * specified access.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent which owns the entitlement resources.
-   * @param {google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest.CallerAccessType} request.callerAccessType
-   *   Required. Only entitlements where the calling user has this access are
-   *   returned.
-   * @param {string} [request.filter]
-   *   Optional. Only entitlements matching this filter are returned in the
-   *   response.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. The server may return fewer items than
-   *   requested. If unspecified, the server picks an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.privilegedaccessmanager.v1.Entitlement|Entitlement}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `searchEntitlementsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * `SearchEntitlements` returns entitlements on which the caller has the
+ * specified access.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent which owns the entitlement resources.
+ * @param {google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest.CallerAccessType} request.callerAccessType
+ *   Required. Only entitlements where the calling user has this access are
+ *   returned.
+ * @param {string} [request.filter]
+ *   Optional. Only entitlements matching this filter are returned in the
+ *   response.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. The server may return fewer items than
+ *   requested. If unspecified, the server picks an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.privilegedaccessmanager.v1.Entitlement|Entitlement}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `searchEntitlementsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   searchEntitlements(
-    request?: protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.privilegedaccessmanager.v1.IEntitlement[],
-      protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsRequest | null,
-      protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.privilegedaccessmanager.v1.IEntitlement[],
+        protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsRequest|null,
+        protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsResponse
+      ]>;
   searchEntitlements(
-    request: protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsRequest,
-      | protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsResponse
-      | null
-      | undefined,
-      protos.google.cloud.privilegedaccessmanager.v1.IEntitlement
-    >
-  ): void;
-  searchEntitlements(
-    request: protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsRequest,
-      | protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsResponse
-      | null
-      | undefined,
-      protos.google.cloud.privilegedaccessmanager.v1.IEntitlement
-    >
-  ): void;
-  searchEntitlements(
-    request?: protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsRequest,
-          | protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsResponse
-          | null
-          | undefined,
-          protos.google.cloud.privilegedaccessmanager.v1.IEntitlement
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsRequest,
-      | protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsResponse
-      | null
-      | undefined,
-      protos.google.cloud.privilegedaccessmanager.v1.IEntitlement
-    >
-  ): Promise<
-    [
-      protos.google.cloud.privilegedaccessmanager.v1.IEntitlement[],
-      protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsRequest | null,
-      protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsResponse,
-    ]
-  > | void {
+          protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsResponse|null|undefined,
+          protos.google.cloud.privilegedaccessmanager.v1.IEntitlement>): void;
+  searchEntitlements(
+      request: protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsRequest,
+          protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsResponse|null|undefined,
+          protos.google.cloud.privilegedaccessmanager.v1.IEntitlement>): void;
+  searchEntitlements(
+      request?: protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsRequest,
+          protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsResponse|null|undefined,
+          protos.google.cloud.privilegedaccessmanager.v1.IEntitlement>,
+      callback?: PaginationCallback<
+          protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsRequest,
+          protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsResponse|null|undefined,
+          protos.google.cloud.privilegedaccessmanager.v1.IEntitlement>):
+      Promise<[
+        protos.google.cloud.privilegedaccessmanager.v1.IEntitlement[],
+        protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsRequest|null,
+        protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsRequest,
-          | protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsResponse
-          | null
-          | undefined,
-          protos.google.cloud.privilegedaccessmanager.v1.IEntitlement
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsRequest,
+      protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsResponse|null|undefined,
+      protos.google.cloud.privilegedaccessmanager.v1.IEntitlement>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('searchEntitlements values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2490,63 +1860,60 @@ export class PrivilegedAccessManagerClient {
     this._log.info('searchEntitlements request %j', request);
     return this.innerApiCalls
       .searchEntitlements(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.privilegedaccessmanager.v1.IEntitlement[],
-          protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsRequest | null,
-          protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsResponse,
-        ]) => {
-          this._log.info('searchEntitlements values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.privilegedaccessmanager.v1.IEntitlement[],
+        protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsRequest|null,
+        protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsResponse
+      ]) => {
+        this._log.info('searchEntitlements values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `searchEntitlements`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent which owns the entitlement resources.
-   * @param {google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest.CallerAccessType} request.callerAccessType
-   *   Required. Only entitlements where the calling user has this access are
-   *   returned.
-   * @param {string} [request.filter]
-   *   Optional. Only entitlements matching this filter are returned in the
-   *   response.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. The server may return fewer items than
-   *   requested. If unspecified, the server picks an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.privilegedaccessmanager.v1.Entitlement|Entitlement} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `searchEntitlementsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `searchEntitlements`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent which owns the entitlement resources.
+ * @param {google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest.CallerAccessType} request.callerAccessType
+ *   Required. Only entitlements where the calling user has this access are
+ *   returned.
+ * @param {string} [request.filter]
+ *   Optional. Only entitlements matching this filter are returned in the
+ *   response.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. The server may return fewer items than
+ *   requested. If unspecified, the server picks an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.privilegedaccessmanager.v1.Entitlement|Entitlement} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `searchEntitlementsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   searchEntitlementsStream(
-    request?: protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['searchEntitlements'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('searchEntitlements stream %j', request);
     return this.descriptors.page.searchEntitlements.createStream(
       this.innerApiCalls.searchEntitlements as GaxCall,
@@ -2555,54 +1922,53 @@ export class PrivilegedAccessManagerClient {
     );
   }
 
-  /**
-   * Equivalent to `searchEntitlements`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent which owns the entitlement resources.
-   * @param {google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest.CallerAccessType} request.callerAccessType
-   *   Required. Only entitlements where the calling user has this access are
-   *   returned.
-   * @param {string} [request.filter]
-   *   Optional. Only entitlements matching this filter are returned in the
-   *   response.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. The server may return fewer items than
-   *   requested. If unspecified, the server picks an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.privilegedaccessmanager.v1.Entitlement|Entitlement}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/privileged_access_manager.search_entitlements.js</caption>
-   * region_tag:privilegedaccessmanager_v1_generated_PrivilegedAccessManager_SearchEntitlements_async
-   */
+/**
+ * Equivalent to `searchEntitlements`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent which owns the entitlement resources.
+ * @param {google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest.CallerAccessType} request.callerAccessType
+ *   Required. Only entitlements where the calling user has this access are
+ *   returned.
+ * @param {string} [request.filter]
+ *   Optional. Only entitlements matching this filter are returned in the
+ *   response.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. The server may return fewer items than
+ *   requested. If unspecified, the server picks an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.privilegedaccessmanager.v1.Entitlement|Entitlement}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/privileged_access_manager.search_entitlements.js</caption>
+ * region_tag:privilegedaccessmanager_v1_generated_PrivilegedAccessManager_SearchEntitlements_async
+ */
   searchEntitlementsAsync(
-    request?: protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.privilegedaccessmanager.v1.IEntitlement> {
+      request?: protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.privilegedaccessmanager.v1.IEntitlement>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['searchEntitlements'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('searchEntitlements iterate %j', request);
     return this.descriptors.page.searchEntitlements.asyncIterate(
       this.innerApiCalls['searchEntitlements'] as GaxCall,
@@ -2610,117 +1976,92 @@ export class PrivilegedAccessManagerClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.privilegedaccessmanager.v1.IEntitlement>;
   }
-  /**
-   * Lists grants for a given entitlement.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource which owns the grants.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. The server may return fewer items than
-   *   requested. If unspecified, the server picks an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results.
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.privilegedaccessmanager.v1.Grant|Grant}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listGrantsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists grants for a given entitlement.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource which owns the grants.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. The server may return fewer items than
+ *   requested. If unspecified, the server picks an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.privilegedaccessmanager.v1.Grant|Grant}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listGrantsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listGrants(
-    request?: protos.google.cloud.privilegedaccessmanager.v1.IListGrantsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.privilegedaccessmanager.v1.IGrant[],
-      protos.google.cloud.privilegedaccessmanager.v1.IListGrantsRequest | null,
-      protos.google.cloud.privilegedaccessmanager.v1.IListGrantsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.privilegedaccessmanager.v1.IListGrantsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.privilegedaccessmanager.v1.IGrant[],
+        protos.google.cloud.privilegedaccessmanager.v1.IListGrantsRequest|null,
+        protos.google.cloud.privilegedaccessmanager.v1.IListGrantsResponse
+      ]>;
   listGrants(
-    request: protos.google.cloud.privilegedaccessmanager.v1.IListGrantsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.privilegedaccessmanager.v1.IListGrantsRequest,
-      | protos.google.cloud.privilegedaccessmanager.v1.IListGrantsResponse
-      | null
-      | undefined,
-      protos.google.cloud.privilegedaccessmanager.v1.IGrant
-    >
-  ): void;
-  listGrants(
-    request: protos.google.cloud.privilegedaccessmanager.v1.IListGrantsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.privilegedaccessmanager.v1.IListGrantsRequest,
-      | protos.google.cloud.privilegedaccessmanager.v1.IListGrantsResponse
-      | null
-      | undefined,
-      protos.google.cloud.privilegedaccessmanager.v1.IGrant
-    >
-  ): void;
-  listGrants(
-    request?: protos.google.cloud.privilegedaccessmanager.v1.IListGrantsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.privilegedaccessmanager.v1.IListGrantsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.privilegedaccessmanager.v1.IListGrantsRequest,
-          | protos.google.cloud.privilegedaccessmanager.v1.IListGrantsResponse
-          | null
-          | undefined,
-          protos.google.cloud.privilegedaccessmanager.v1.IGrant
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.privilegedaccessmanager.v1.IListGrantsRequest,
-      | protos.google.cloud.privilegedaccessmanager.v1.IListGrantsResponse
-      | null
-      | undefined,
-      protos.google.cloud.privilegedaccessmanager.v1.IGrant
-    >
-  ): Promise<
-    [
-      protos.google.cloud.privilegedaccessmanager.v1.IGrant[],
-      protos.google.cloud.privilegedaccessmanager.v1.IListGrantsRequest | null,
-      protos.google.cloud.privilegedaccessmanager.v1.IListGrantsResponse,
-    ]
-  > | void {
+          protos.google.cloud.privilegedaccessmanager.v1.IListGrantsResponse|null|undefined,
+          protos.google.cloud.privilegedaccessmanager.v1.IGrant>): void;
+  listGrants(
+      request: protos.google.cloud.privilegedaccessmanager.v1.IListGrantsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.privilegedaccessmanager.v1.IListGrantsRequest,
+          protos.google.cloud.privilegedaccessmanager.v1.IListGrantsResponse|null|undefined,
+          protos.google.cloud.privilegedaccessmanager.v1.IGrant>): void;
+  listGrants(
+      request?: protos.google.cloud.privilegedaccessmanager.v1.IListGrantsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.privilegedaccessmanager.v1.IListGrantsRequest,
+          protos.google.cloud.privilegedaccessmanager.v1.IListGrantsResponse|null|undefined,
+          protos.google.cloud.privilegedaccessmanager.v1.IGrant>,
+      callback?: PaginationCallback<
+          protos.google.cloud.privilegedaccessmanager.v1.IListGrantsRequest,
+          protos.google.cloud.privilegedaccessmanager.v1.IListGrantsResponse|null|undefined,
+          protos.google.cloud.privilegedaccessmanager.v1.IGrant>):
+      Promise<[
+        protos.google.cloud.privilegedaccessmanager.v1.IGrant[],
+        protos.google.cloud.privilegedaccessmanager.v1.IListGrantsRequest|null,
+        protos.google.cloud.privilegedaccessmanager.v1.IListGrantsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.privilegedaccessmanager.v1.IListGrantsRequest,
-          | protos.google.cloud.privilegedaccessmanager.v1.IListGrantsResponse
-          | null
-          | undefined,
-          protos.google.cloud.privilegedaccessmanager.v1.IGrant
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.privilegedaccessmanager.v1.IListGrantsRequest,
+      protos.google.cloud.privilegedaccessmanager.v1.IListGrantsResponse|null|undefined,
+      protos.google.cloud.privilegedaccessmanager.v1.IGrant>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listGrants values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2729,61 +2070,58 @@ export class PrivilegedAccessManagerClient {
     this._log.info('listGrants request %j', request);
     return this.innerApiCalls
       .listGrants(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.privilegedaccessmanager.v1.IGrant[],
-          protos.google.cloud.privilegedaccessmanager.v1.IListGrantsRequest | null,
-          protos.google.cloud.privilegedaccessmanager.v1.IListGrantsResponse,
-        ]) => {
-          this._log.info('listGrants values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.privilegedaccessmanager.v1.IGrant[],
+        protos.google.cloud.privilegedaccessmanager.v1.IListGrantsRequest|null,
+        protos.google.cloud.privilegedaccessmanager.v1.IListGrantsResponse
+      ]) => {
+        this._log.info('listGrants values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listGrants`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource which owns the grants.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. The server may return fewer items than
-   *   requested. If unspecified, the server picks an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results.
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.privilegedaccessmanager.v1.Grant|Grant} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listGrantsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listGrants`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource which owns the grants.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. The server may return fewer items than
+ *   requested. If unspecified, the server picks an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.privilegedaccessmanager.v1.Grant|Grant} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listGrantsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listGrantsStream(
-    request?: protos.google.cloud.privilegedaccessmanager.v1.IListGrantsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.privilegedaccessmanager.v1.IListGrantsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listGrants'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listGrants stream %j', request);
     return this.descriptors.page.listGrants.createStream(
       this.innerApiCalls.listGrants as GaxCall,
@@ -2792,52 +2130,51 @@ export class PrivilegedAccessManagerClient {
     );
   }
 
-  /**
-   * Equivalent to `listGrants`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource which owns the grants.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. The server may return fewer items than
-   *   requested. If unspecified, the server picks an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results.
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.privilegedaccessmanager.v1.Grant|Grant}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/privileged_access_manager.list_grants.js</caption>
-   * region_tag:privilegedaccessmanager_v1_generated_PrivilegedAccessManager_ListGrants_async
-   */
+/**
+ * Equivalent to `listGrants`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource which owns the grants.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. The server may return fewer items than
+ *   requested. If unspecified, the server picks an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.privilegedaccessmanager.v1.Grant|Grant}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/privileged_access_manager.list_grants.js</caption>
+ * region_tag:privilegedaccessmanager_v1_generated_PrivilegedAccessManager_ListGrants_async
+ */
   listGrantsAsync(
-    request?: protos.google.cloud.privilegedaccessmanager.v1.IListGrantsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.privilegedaccessmanager.v1.IGrant> {
+      request?: protos.google.cloud.privilegedaccessmanager.v1.IListGrantsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.privilegedaccessmanager.v1.IGrant>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listGrants'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listGrants iterate %j', request);
     return this.descriptors.page.listGrants.asyncIterate(
       this.innerApiCalls['listGrants'] as GaxCall,
@@ -2845,119 +2182,94 @@ export class PrivilegedAccessManagerClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.privilegedaccessmanager.v1.IGrant>;
   }
-  /**
-   * `SearchGrants` returns grants that are related to the calling user in the
-   * specified way.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent which owns the grant resources.
-   * @param {google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest.CallerRelationshipType} request.callerRelationship
-   *   Required. Only grants which the caller is related to by this relationship
-   *   are returned in the response.
-   * @param {string} [request.filter]
-   *   Optional. Only grants matching this filter are returned in the response.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. The server may return fewer items than
-   *   requested. If unspecified, server picks an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.privilegedaccessmanager.v1.Grant|Grant}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `searchGrantsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * `SearchGrants` returns grants that are related to the calling user in the
+ * specified way.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent which owns the grant resources.
+ * @param {google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest.CallerRelationshipType} request.callerRelationship
+ *   Required. Only grants which the caller is related to by this relationship
+ *   are returned in the response.
+ * @param {string} [request.filter]
+ *   Optional. Only grants matching this filter are returned in the response.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. The server may return fewer items than
+ *   requested. If unspecified, server picks an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.privilegedaccessmanager.v1.Grant|Grant}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `searchGrantsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   searchGrants(
-    request?: protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.privilegedaccessmanager.v1.IGrant[],
-      protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsRequest | null,
-      protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.privilegedaccessmanager.v1.IGrant[],
+        protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsRequest|null,
+        protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsResponse
+      ]>;
   searchGrants(
-    request: protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsRequest,
-      | protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsResponse
-      | null
-      | undefined,
-      protos.google.cloud.privilegedaccessmanager.v1.IGrant
-    >
-  ): void;
-  searchGrants(
-    request: protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsRequest,
-      | protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsResponse
-      | null
-      | undefined,
-      protos.google.cloud.privilegedaccessmanager.v1.IGrant
-    >
-  ): void;
-  searchGrants(
-    request?: protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsRequest,
-          | protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsResponse
-          | null
-          | undefined,
-          protos.google.cloud.privilegedaccessmanager.v1.IGrant
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsRequest,
-      | protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsResponse
-      | null
-      | undefined,
-      protos.google.cloud.privilegedaccessmanager.v1.IGrant
-    >
-  ): Promise<
-    [
-      protos.google.cloud.privilegedaccessmanager.v1.IGrant[],
-      protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsRequest | null,
-      protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsResponse,
-    ]
-  > | void {
+          protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsResponse|null|undefined,
+          protos.google.cloud.privilegedaccessmanager.v1.IGrant>): void;
+  searchGrants(
+      request: protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsRequest,
+          protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsResponse|null|undefined,
+          protos.google.cloud.privilegedaccessmanager.v1.IGrant>): void;
+  searchGrants(
+      request?: protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsRequest,
+          protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsResponse|null|undefined,
+          protos.google.cloud.privilegedaccessmanager.v1.IGrant>,
+      callback?: PaginationCallback<
+          protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsRequest,
+          protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsResponse|null|undefined,
+          protos.google.cloud.privilegedaccessmanager.v1.IGrant>):
+      Promise<[
+        protos.google.cloud.privilegedaccessmanager.v1.IGrant[],
+        protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsRequest|null,
+        protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsRequest,
-          | protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsResponse
-          | null
-          | undefined,
-          protos.google.cloud.privilegedaccessmanager.v1.IGrant
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsRequest,
+      protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsResponse|null|undefined,
+      protos.google.cloud.privilegedaccessmanager.v1.IGrant>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('searchGrants values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2966,62 +2278,59 @@ export class PrivilegedAccessManagerClient {
     this._log.info('searchGrants request %j', request);
     return this.innerApiCalls
       .searchGrants(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.privilegedaccessmanager.v1.IGrant[],
-          protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsRequest | null,
-          protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsResponse,
-        ]) => {
-          this._log.info('searchGrants values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.privilegedaccessmanager.v1.IGrant[],
+        protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsRequest|null,
+        protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsResponse
+      ]) => {
+        this._log.info('searchGrants values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `searchGrants`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent which owns the grant resources.
-   * @param {google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest.CallerRelationshipType} request.callerRelationship
-   *   Required. Only grants which the caller is related to by this relationship
-   *   are returned in the response.
-   * @param {string} [request.filter]
-   *   Optional. Only grants matching this filter are returned in the response.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. The server may return fewer items than
-   *   requested. If unspecified, server picks an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.privilegedaccessmanager.v1.Grant|Grant} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `searchGrantsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `searchGrants`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent which owns the grant resources.
+ * @param {google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest.CallerRelationshipType} request.callerRelationship
+ *   Required. Only grants which the caller is related to by this relationship
+ *   are returned in the response.
+ * @param {string} [request.filter]
+ *   Optional. Only grants matching this filter are returned in the response.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. The server may return fewer items than
+ *   requested. If unspecified, server picks an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.privilegedaccessmanager.v1.Grant|Grant} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `searchGrantsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   searchGrantsStream(
-    request?: protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['searchGrants'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('searchGrants stream %j', request);
     return this.descriptors.page.searchGrants.createStream(
       this.innerApiCalls.searchGrants as GaxCall,
@@ -3030,53 +2339,52 @@ export class PrivilegedAccessManagerClient {
     );
   }
 
-  /**
-   * Equivalent to `searchGrants`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent which owns the grant resources.
-   * @param {google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest.CallerRelationshipType} request.callerRelationship
-   *   Required. Only grants which the caller is related to by this relationship
-   *   are returned in the response.
-   * @param {string} [request.filter]
-   *   Optional. Only grants matching this filter are returned in the response.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. The server may return fewer items than
-   *   requested. If unspecified, server picks an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.privilegedaccessmanager.v1.Grant|Grant}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/privileged_access_manager.search_grants.js</caption>
-   * region_tag:privilegedaccessmanager_v1_generated_PrivilegedAccessManager_SearchGrants_async
-   */
+/**
+ * Equivalent to `searchGrants`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent which owns the grant resources.
+ * @param {google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest.CallerRelationshipType} request.callerRelationship
+ *   Required. Only grants which the caller is related to by this relationship
+ *   are returned in the response.
+ * @param {string} [request.filter]
+ *   Optional. Only grants matching this filter are returned in the response.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. The server may return fewer items than
+ *   requested. If unspecified, server picks an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.privilegedaccessmanager.v1.Grant|Grant}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/privileged_access_manager.search_grants.js</caption>
+ * region_tag:privilegedaccessmanager_v1_generated_PrivilegedAccessManager_SearchGrants_async
+ */
   searchGrantsAsync(
-    request?: protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.privilegedaccessmanager.v1.IGrant> {
+      request?: protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.privilegedaccessmanager.v1.IGrant>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['searchGrants'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('searchGrants iterate %j', request);
     return this.descriptors.page.searchGrants.asyncIterate(
       this.innerApiCalls['searchGrants'] as GaxCall,
@@ -3084,7 +2392,7 @@ export class PrivilegedAccessManagerClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.privilegedaccessmanager.v1.IGrant>;
   }
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -3124,7 +2432,7 @@ export class PrivilegedAccessManagerClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -3162,7 +2470,7 @@ export class PrivilegedAccessManagerClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -3207,20 +2515,20 @@ export class PrivilegedAccessManagerClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -3257,13 +2565,13 @@ export class PrivilegedAccessManagerClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -3297,7 +2605,7 @@ export class PrivilegedAccessManagerClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -3312,20 +2620,20 @@ export class PrivilegedAccessManagerClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -3369,20 +2677,20 @@ export class PrivilegedAccessManagerClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -3391,72 +2699,7 @@ export class PrivilegedAccessManagerClient {
   // --------------------
 
   /**
-   * Return a fully-qualified folderLocationEntitlement resource name string.
-   *
-   * @param {string} folder
-   * @param {string} location
-   * @param {string} entitlement
-   * @returns {string} Resource name string.
-   */
-  folderLocationEntitlementPath(
-    folder: string,
-    location: string,
-    entitlement: string
-  ) {
-    return this.pathTemplates.folderLocationEntitlementPathTemplate.render({
-      folder: folder,
-      location: location,
-      entitlement: entitlement,
-    });
-  }
-
-  /**
-   * Parse the folder from FolderLocationEntitlement resource.
-   *
-   * @param {string} folderLocationEntitlementName
-   *   A fully-qualified path representing folder_location_entitlement resource.
-   * @returns {string} A string representing the folder.
-   */
-  matchFolderFromFolderLocationEntitlementName(
-    folderLocationEntitlementName: string
-  ) {
-    return this.pathTemplates.folderLocationEntitlementPathTemplate.match(
-      folderLocationEntitlementName
-    ).folder;
-  }
-
-  /**
-   * Parse the location from FolderLocationEntitlement resource.
-   *
-   * @param {string} folderLocationEntitlementName
-   *   A fully-qualified path representing folder_location_entitlement resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromFolderLocationEntitlementName(
-    folderLocationEntitlementName: string
-  ) {
-    return this.pathTemplates.folderLocationEntitlementPathTemplate.match(
-      folderLocationEntitlementName
-    ).location;
-  }
-
-  /**
-   * Parse the entitlement from FolderLocationEntitlement resource.
-   *
-   * @param {string} folderLocationEntitlementName
-   *   A fully-qualified path representing folder_location_entitlement resource.
-   * @returns {string} A string representing the entitlement.
-   */
-  matchEntitlementFromFolderLocationEntitlementName(
-    folderLocationEntitlementName: string
-  ) {
-    return this.pathTemplates.folderLocationEntitlementPathTemplate.match(
-      folderLocationEntitlementName
-    ).entitlement;
-  }
-
-  /**
-   * Return a fully-qualified folderLocationEntitlementGrant resource name string.
+   * Return a fully-qualified folderLocationEntitlementGrants resource name string.
    *
    * @param {string} folder
    * @param {string} location
@@ -3464,80 +2707,106 @@ export class PrivilegedAccessManagerClient {
    * @param {string} grant
    * @returns {string} Resource name string.
    */
-  folderLocationEntitlementGrantPath(
-    folder: string,
-    location: string,
-    entitlement: string,
-    grant: string
-  ) {
-    return this.pathTemplates.folderLocationEntitlementGrantPathTemplate.render(
-      {
-        folder: folder,
-        location: location,
-        entitlement: entitlement,
-        grant: grant,
-      }
-    );
+  folderLocationEntitlementGrantsPath(folder:string,location:string,entitlement:string,grant:string) {
+    return this.pathTemplates.folderLocationEntitlementGrantsPathTemplate.render({
+      folder: folder,
+      location: location,
+      entitlement: entitlement,
+      grant: grant,
+    });
   }
 
   /**
-   * Parse the folder from FolderLocationEntitlementGrant resource.
+   * Parse the folder from FolderLocationEntitlementGrants resource.
    *
-   * @param {string} folderLocationEntitlementGrantName
-   *   A fully-qualified path representing folder_location_entitlement_grant resource.
+   * @param {string} folderLocationEntitlementGrantsName
+   *   A fully-qualified path representing folder_location_entitlement_grants resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderLocationEntitlementGrantName(
-    folderLocationEntitlementGrantName: string
-  ) {
-    return this.pathTemplates.folderLocationEntitlementGrantPathTemplate.match(
-      folderLocationEntitlementGrantName
-    ).folder;
+  matchFolderFromFolderLocationEntitlementGrantsName(folderLocationEntitlementGrantsName: string) {
+    return this.pathTemplates.folderLocationEntitlementGrantsPathTemplate.match(folderLocationEntitlementGrantsName).folder;
   }
 
   /**
-   * Parse the location from FolderLocationEntitlementGrant resource.
+   * Parse the location from FolderLocationEntitlementGrants resource.
    *
-   * @param {string} folderLocationEntitlementGrantName
-   *   A fully-qualified path representing folder_location_entitlement_grant resource.
+   * @param {string} folderLocationEntitlementGrantsName
+   *   A fully-qualified path representing folder_location_entitlement_grants resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromFolderLocationEntitlementGrantName(
-    folderLocationEntitlementGrantName: string
-  ) {
-    return this.pathTemplates.folderLocationEntitlementGrantPathTemplate.match(
-      folderLocationEntitlementGrantName
-    ).location;
+  matchLocationFromFolderLocationEntitlementGrantsName(folderLocationEntitlementGrantsName: string) {
+    return this.pathTemplates.folderLocationEntitlementGrantsPathTemplate.match(folderLocationEntitlementGrantsName).location;
   }
 
   /**
-   * Parse the entitlement from FolderLocationEntitlementGrant resource.
+   * Parse the entitlement from FolderLocationEntitlementGrants resource.
    *
-   * @param {string} folderLocationEntitlementGrantName
-   *   A fully-qualified path representing folder_location_entitlement_grant resource.
+   * @param {string} folderLocationEntitlementGrantsName
+   *   A fully-qualified path representing folder_location_entitlement_grants resource.
    * @returns {string} A string representing the entitlement.
    */
-  matchEntitlementFromFolderLocationEntitlementGrantName(
-    folderLocationEntitlementGrantName: string
-  ) {
-    return this.pathTemplates.folderLocationEntitlementGrantPathTemplate.match(
-      folderLocationEntitlementGrantName
-    ).entitlement;
+  matchEntitlementFromFolderLocationEntitlementGrantsName(folderLocationEntitlementGrantsName: string) {
+    return this.pathTemplates.folderLocationEntitlementGrantsPathTemplate.match(folderLocationEntitlementGrantsName).entitlement;
   }
 
   /**
-   * Parse the grant from FolderLocationEntitlementGrant resource.
+   * Parse the grant from FolderLocationEntitlementGrants resource.
    *
-   * @param {string} folderLocationEntitlementGrantName
-   *   A fully-qualified path representing folder_location_entitlement_grant resource.
+   * @param {string} folderLocationEntitlementGrantsName
+   *   A fully-qualified path representing folder_location_entitlement_grants resource.
    * @returns {string} A string representing the grant.
    */
-  matchGrantFromFolderLocationEntitlementGrantName(
-    folderLocationEntitlementGrantName: string
-  ) {
-    return this.pathTemplates.folderLocationEntitlementGrantPathTemplate.match(
-      folderLocationEntitlementGrantName
-    ).grant;
+  matchGrantFromFolderLocationEntitlementGrantsName(folderLocationEntitlementGrantsName: string) {
+    return this.pathTemplates.folderLocationEntitlementGrantsPathTemplate.match(folderLocationEntitlementGrantsName).grant;
+  }
+
+  /**
+   * Return a fully-qualified folderLocationEntitlements resource name string.
+   *
+   * @param {string} folder
+   * @param {string} location
+   * @param {string} entitlement
+   * @returns {string} Resource name string.
+   */
+  folderLocationEntitlementsPath(folder:string,location:string,entitlement:string) {
+    return this.pathTemplates.folderLocationEntitlementsPathTemplate.render({
+      folder: folder,
+      location: location,
+      entitlement: entitlement,
+    });
+  }
+
+  /**
+   * Parse the folder from FolderLocationEntitlements resource.
+   *
+   * @param {string} folderLocationEntitlementsName
+   *   A fully-qualified path representing folder_location_entitlements resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderLocationEntitlementsName(folderLocationEntitlementsName: string) {
+    return this.pathTemplates.folderLocationEntitlementsPathTemplate.match(folderLocationEntitlementsName).folder;
+  }
+
+  /**
+   * Parse the location from FolderLocationEntitlements resource.
+   *
+   * @param {string} folderLocationEntitlementsName
+   *   A fully-qualified path representing folder_location_entitlements resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFolderLocationEntitlementsName(folderLocationEntitlementsName: string) {
+    return this.pathTemplates.folderLocationEntitlementsPathTemplate.match(folderLocationEntitlementsName).location;
+  }
+
+  /**
+   * Parse the entitlement from FolderLocationEntitlements resource.
+   *
+   * @param {string} folderLocationEntitlementsName
+   *   A fully-qualified path representing folder_location_entitlements resource.
+   * @returns {string} A string representing the entitlement.
+   */
+  matchEntitlementFromFolderLocationEntitlementsName(folderLocationEntitlementsName: string) {
+    return this.pathTemplates.folderLocationEntitlementsPathTemplate.match(folderLocationEntitlementsName).entitlement;
   }
 
   /**
@@ -3547,7 +2816,7 @@ export class PrivilegedAccessManagerClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -3577,74 +2846,7 @@ export class PrivilegedAccessManagerClient {
   }
 
   /**
-   * Return a fully-qualified organizationLocationEntitlement resource name string.
-   *
-   * @param {string} organization
-   * @param {string} location
-   * @param {string} entitlement
-   * @returns {string} Resource name string.
-   */
-  organizationLocationEntitlementPath(
-    organization: string,
-    location: string,
-    entitlement: string
-  ) {
-    return this.pathTemplates.organizationLocationEntitlementPathTemplate.render(
-      {
-        organization: organization,
-        location: location,
-        entitlement: entitlement,
-      }
-    );
-  }
-
-  /**
-   * Parse the organization from OrganizationLocationEntitlement resource.
-   *
-   * @param {string} organizationLocationEntitlementName
-   *   A fully-qualified path representing organization_location_entitlement resource.
-   * @returns {string} A string representing the organization.
-   */
-  matchOrganizationFromOrganizationLocationEntitlementName(
-    organizationLocationEntitlementName: string
-  ) {
-    return this.pathTemplates.organizationLocationEntitlementPathTemplate.match(
-      organizationLocationEntitlementName
-    ).organization;
-  }
-
-  /**
-   * Parse the location from OrganizationLocationEntitlement resource.
-   *
-   * @param {string} organizationLocationEntitlementName
-   *   A fully-qualified path representing organization_location_entitlement resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromOrganizationLocationEntitlementName(
-    organizationLocationEntitlementName: string
-  ) {
-    return this.pathTemplates.organizationLocationEntitlementPathTemplate.match(
-      organizationLocationEntitlementName
-    ).location;
-  }
-
-  /**
-   * Parse the entitlement from OrganizationLocationEntitlement resource.
-   *
-   * @param {string} organizationLocationEntitlementName
-   *   A fully-qualified path representing organization_location_entitlement resource.
-   * @returns {string} A string representing the entitlement.
-   */
-  matchEntitlementFromOrganizationLocationEntitlementName(
-    organizationLocationEntitlementName: string
-  ) {
-    return this.pathTemplates.organizationLocationEntitlementPathTemplate.match(
-      organizationLocationEntitlementName
-    ).entitlement;
-  }
-
-  /**
-   * Return a fully-qualified organizationLocationEntitlementGrant resource name string.
+   * Return a fully-qualified organizationLocationEntitlementGrants resource name string.
    *
    * @param {string} organization
    * @param {string} location
@@ -3652,80 +2854,106 @@ export class PrivilegedAccessManagerClient {
    * @param {string} grant
    * @returns {string} Resource name string.
    */
-  organizationLocationEntitlementGrantPath(
-    organization: string,
-    location: string,
-    entitlement: string,
-    grant: string
-  ) {
-    return this.pathTemplates.organizationLocationEntitlementGrantPathTemplate.render(
-      {
-        organization: organization,
-        location: location,
-        entitlement: entitlement,
-        grant: grant,
-      }
-    );
+  organizationLocationEntitlementGrantsPath(organization:string,location:string,entitlement:string,grant:string) {
+    return this.pathTemplates.organizationLocationEntitlementGrantsPathTemplate.render({
+      organization: organization,
+      location: location,
+      entitlement: entitlement,
+      grant: grant,
+    });
   }
 
   /**
-   * Parse the organization from OrganizationLocationEntitlementGrant resource.
+   * Parse the organization from OrganizationLocationEntitlementGrants resource.
    *
-   * @param {string} organizationLocationEntitlementGrantName
-   *   A fully-qualified path representing organization_location_entitlement_grant resource.
+   * @param {string} organizationLocationEntitlementGrantsName
+   *   A fully-qualified path representing organization_location_entitlement_grants resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationEntitlementGrantName(
-    organizationLocationEntitlementGrantName: string
-  ) {
-    return this.pathTemplates.organizationLocationEntitlementGrantPathTemplate.match(
-      organizationLocationEntitlementGrantName
-    ).organization;
+  matchOrganizationFromOrganizationLocationEntitlementGrantsName(organizationLocationEntitlementGrantsName: string) {
+    return this.pathTemplates.organizationLocationEntitlementGrantsPathTemplate.match(organizationLocationEntitlementGrantsName).organization;
   }
 
   /**
-   * Parse the location from OrganizationLocationEntitlementGrant resource.
+   * Parse the location from OrganizationLocationEntitlementGrants resource.
    *
-   * @param {string} organizationLocationEntitlementGrantName
-   *   A fully-qualified path representing organization_location_entitlement_grant resource.
+   * @param {string} organizationLocationEntitlementGrantsName
+   *   A fully-qualified path representing organization_location_entitlement_grants resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationEntitlementGrantName(
-    organizationLocationEntitlementGrantName: string
-  ) {
-    return this.pathTemplates.organizationLocationEntitlementGrantPathTemplate.match(
-      organizationLocationEntitlementGrantName
-    ).location;
+  matchLocationFromOrganizationLocationEntitlementGrantsName(organizationLocationEntitlementGrantsName: string) {
+    return this.pathTemplates.organizationLocationEntitlementGrantsPathTemplate.match(organizationLocationEntitlementGrantsName).location;
   }
 
   /**
-   * Parse the entitlement from OrganizationLocationEntitlementGrant resource.
+   * Parse the entitlement from OrganizationLocationEntitlementGrants resource.
    *
-   * @param {string} organizationLocationEntitlementGrantName
-   *   A fully-qualified path representing organization_location_entitlement_grant resource.
+   * @param {string} organizationLocationEntitlementGrantsName
+   *   A fully-qualified path representing organization_location_entitlement_grants resource.
    * @returns {string} A string representing the entitlement.
    */
-  matchEntitlementFromOrganizationLocationEntitlementGrantName(
-    organizationLocationEntitlementGrantName: string
-  ) {
-    return this.pathTemplates.organizationLocationEntitlementGrantPathTemplate.match(
-      organizationLocationEntitlementGrantName
-    ).entitlement;
+  matchEntitlementFromOrganizationLocationEntitlementGrantsName(organizationLocationEntitlementGrantsName: string) {
+    return this.pathTemplates.organizationLocationEntitlementGrantsPathTemplate.match(organizationLocationEntitlementGrantsName).entitlement;
   }
 
   /**
-   * Parse the grant from OrganizationLocationEntitlementGrant resource.
+   * Parse the grant from OrganizationLocationEntitlementGrants resource.
    *
-   * @param {string} organizationLocationEntitlementGrantName
-   *   A fully-qualified path representing organization_location_entitlement_grant resource.
+   * @param {string} organizationLocationEntitlementGrantsName
+   *   A fully-qualified path representing organization_location_entitlement_grants resource.
    * @returns {string} A string representing the grant.
    */
-  matchGrantFromOrganizationLocationEntitlementGrantName(
-    organizationLocationEntitlementGrantName: string
-  ) {
-    return this.pathTemplates.organizationLocationEntitlementGrantPathTemplate.match(
-      organizationLocationEntitlementGrantName
-    ).grant;
+  matchGrantFromOrganizationLocationEntitlementGrantsName(organizationLocationEntitlementGrantsName: string) {
+    return this.pathTemplates.organizationLocationEntitlementGrantsPathTemplate.match(organizationLocationEntitlementGrantsName).grant;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationEntitlements resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} entitlement
+   * @returns {string} Resource name string.
+   */
+  organizationLocationEntitlementsPath(organization:string,location:string,entitlement:string) {
+    return this.pathTemplates.organizationLocationEntitlementsPathTemplate.render({
+      organization: organization,
+      location: location,
+      entitlement: entitlement,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationEntitlements resource.
+   *
+   * @param {string} organizationLocationEntitlementsName
+   *   A fully-qualified path representing organization_location_entitlements resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationEntitlementsName(organizationLocationEntitlementsName: string) {
+    return this.pathTemplates.organizationLocationEntitlementsPathTemplate.match(organizationLocationEntitlementsName).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationEntitlements resource.
+   *
+   * @param {string} organizationLocationEntitlementsName
+   *   A fully-qualified path representing organization_location_entitlements resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationEntitlementsName(organizationLocationEntitlementsName: string) {
+    return this.pathTemplates.organizationLocationEntitlementsPathTemplate.match(organizationLocationEntitlementsName).location;
+  }
+
+  /**
+   * Parse the entitlement from OrganizationLocationEntitlements resource.
+   *
+   * @param {string} organizationLocationEntitlementsName
+   *   A fully-qualified path representing organization_location_entitlements resource.
+   * @returns {string} A string representing the entitlement.
+   */
+  matchEntitlementFromOrganizationLocationEntitlementsName(organizationLocationEntitlementsName: string) {
+    return this.pathTemplates.organizationLocationEntitlementsPathTemplate.match(organizationLocationEntitlementsName).entitlement;
   }
 
   /**
@@ -3734,7 +2962,7 @@ export class PrivilegedAccessManagerClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -3752,72 +2980,7 @@ export class PrivilegedAccessManagerClient {
   }
 
   /**
-   * Return a fully-qualified projectLocationEntitlement resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} entitlement
-   * @returns {string} Resource name string.
-   */
-  projectLocationEntitlementPath(
-    project: string,
-    location: string,
-    entitlement: string
-  ) {
-    return this.pathTemplates.projectLocationEntitlementPathTemplate.render({
-      project: project,
-      location: location,
-      entitlement: entitlement,
-    });
-  }
-
-  /**
-   * Parse the project from ProjectLocationEntitlement resource.
-   *
-   * @param {string} projectLocationEntitlementName
-   *   A fully-qualified path representing project_location_entitlement resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromProjectLocationEntitlementName(
-    projectLocationEntitlementName: string
-  ) {
-    return this.pathTemplates.projectLocationEntitlementPathTemplate.match(
-      projectLocationEntitlementName
-    ).project;
-  }
-
-  /**
-   * Parse the location from ProjectLocationEntitlement resource.
-   *
-   * @param {string} projectLocationEntitlementName
-   *   A fully-qualified path representing project_location_entitlement resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromProjectLocationEntitlementName(
-    projectLocationEntitlementName: string
-  ) {
-    return this.pathTemplates.projectLocationEntitlementPathTemplate.match(
-      projectLocationEntitlementName
-    ).location;
-  }
-
-  /**
-   * Parse the entitlement from ProjectLocationEntitlement resource.
-   *
-   * @param {string} projectLocationEntitlementName
-   *   A fully-qualified path representing project_location_entitlement resource.
-   * @returns {string} A string representing the entitlement.
-   */
-  matchEntitlementFromProjectLocationEntitlementName(
-    projectLocationEntitlementName: string
-  ) {
-    return this.pathTemplates.projectLocationEntitlementPathTemplate.match(
-      projectLocationEntitlementName
-    ).entitlement;
-  }
-
-  /**
-   * Return a fully-qualified projectLocationEntitlementGrant resource name string.
+   * Return a fully-qualified projectLocationEntitlementGrants resource name string.
    *
    * @param {string} project
    * @param {string} location
@@ -3825,80 +2988,106 @@ export class PrivilegedAccessManagerClient {
    * @param {string} grant
    * @returns {string} Resource name string.
    */
-  projectLocationEntitlementGrantPath(
-    project: string,
-    location: string,
-    entitlement: string,
-    grant: string
-  ) {
-    return this.pathTemplates.projectLocationEntitlementGrantPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        entitlement: entitlement,
-        grant: grant,
-      }
-    );
+  projectLocationEntitlementGrantsPath(project:string,location:string,entitlement:string,grant:string) {
+    return this.pathTemplates.projectLocationEntitlementGrantsPathTemplate.render({
+      project: project,
+      location: location,
+      entitlement: entitlement,
+      grant: grant,
+    });
   }
 
   /**
-   * Parse the project from ProjectLocationEntitlementGrant resource.
+   * Parse the project from ProjectLocationEntitlementGrants resource.
    *
-   * @param {string} projectLocationEntitlementGrantName
-   *   A fully-qualified path representing project_location_entitlement_grant resource.
+   * @param {string} projectLocationEntitlementGrantsName
+   *   A fully-qualified path representing project_location_entitlement_grants resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationEntitlementGrantName(
-    projectLocationEntitlementGrantName: string
-  ) {
-    return this.pathTemplates.projectLocationEntitlementGrantPathTemplate.match(
-      projectLocationEntitlementGrantName
-    ).project;
+  matchProjectFromProjectLocationEntitlementGrantsName(projectLocationEntitlementGrantsName: string) {
+    return this.pathTemplates.projectLocationEntitlementGrantsPathTemplate.match(projectLocationEntitlementGrantsName).project;
   }
 
   /**
-   * Parse the location from ProjectLocationEntitlementGrant resource.
+   * Parse the location from ProjectLocationEntitlementGrants resource.
    *
-   * @param {string} projectLocationEntitlementGrantName
-   *   A fully-qualified path representing project_location_entitlement_grant resource.
+   * @param {string} projectLocationEntitlementGrantsName
+   *   A fully-qualified path representing project_location_entitlement_grants resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationEntitlementGrantName(
-    projectLocationEntitlementGrantName: string
-  ) {
-    return this.pathTemplates.projectLocationEntitlementGrantPathTemplate.match(
-      projectLocationEntitlementGrantName
-    ).location;
+  matchLocationFromProjectLocationEntitlementGrantsName(projectLocationEntitlementGrantsName: string) {
+    return this.pathTemplates.projectLocationEntitlementGrantsPathTemplate.match(projectLocationEntitlementGrantsName).location;
   }
 
   /**
-   * Parse the entitlement from ProjectLocationEntitlementGrant resource.
+   * Parse the entitlement from ProjectLocationEntitlementGrants resource.
    *
-   * @param {string} projectLocationEntitlementGrantName
-   *   A fully-qualified path representing project_location_entitlement_grant resource.
+   * @param {string} projectLocationEntitlementGrantsName
+   *   A fully-qualified path representing project_location_entitlement_grants resource.
    * @returns {string} A string representing the entitlement.
    */
-  matchEntitlementFromProjectLocationEntitlementGrantName(
-    projectLocationEntitlementGrantName: string
-  ) {
-    return this.pathTemplates.projectLocationEntitlementGrantPathTemplate.match(
-      projectLocationEntitlementGrantName
-    ).entitlement;
+  matchEntitlementFromProjectLocationEntitlementGrantsName(projectLocationEntitlementGrantsName: string) {
+    return this.pathTemplates.projectLocationEntitlementGrantsPathTemplate.match(projectLocationEntitlementGrantsName).entitlement;
   }
 
   /**
-   * Parse the grant from ProjectLocationEntitlementGrant resource.
+   * Parse the grant from ProjectLocationEntitlementGrants resource.
    *
-   * @param {string} projectLocationEntitlementGrantName
-   *   A fully-qualified path representing project_location_entitlement_grant resource.
+   * @param {string} projectLocationEntitlementGrantsName
+   *   A fully-qualified path representing project_location_entitlement_grants resource.
    * @returns {string} A string representing the grant.
    */
-  matchGrantFromProjectLocationEntitlementGrantName(
-    projectLocationEntitlementGrantName: string
-  ) {
-    return this.pathTemplates.projectLocationEntitlementGrantPathTemplate.match(
-      projectLocationEntitlementGrantName
-    ).grant;
+  matchGrantFromProjectLocationEntitlementGrantsName(projectLocationEntitlementGrantsName: string) {
+    return this.pathTemplates.projectLocationEntitlementGrantsPathTemplate.match(projectLocationEntitlementGrantsName).grant;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationEntitlements resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} entitlement
+   * @returns {string} Resource name string.
+   */
+  projectLocationEntitlementsPath(project:string,location:string,entitlement:string) {
+    return this.pathTemplates.projectLocationEntitlementsPathTemplate.render({
+      project: project,
+      location: location,
+      entitlement: entitlement,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationEntitlements resource.
+   *
+   * @param {string} projectLocationEntitlementsName
+   *   A fully-qualified path representing project_location_entitlements resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationEntitlementsName(projectLocationEntitlementsName: string) {
+    return this.pathTemplates.projectLocationEntitlementsPathTemplate.match(projectLocationEntitlementsName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationEntitlements resource.
+   *
+   * @param {string} projectLocationEntitlementsName
+   *   A fully-qualified path representing project_location_entitlements resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationEntitlementsName(projectLocationEntitlementsName: string) {
+    return this.pathTemplates.projectLocationEntitlementsPathTemplate.match(projectLocationEntitlementsName).location;
+  }
+
+  /**
+   * Parse the entitlement from ProjectLocationEntitlements resource.
+   *
+   * @param {string} projectLocationEntitlementsName
+   *   A fully-qualified path representing project_location_entitlements resource.
+   * @returns {string} A string representing the entitlement.
+   */
+  matchEntitlementFromProjectLocationEntitlementsName(projectLocationEntitlementsName: string) {
+    return this.pathTemplates.projectLocationEntitlementsPathTemplate.match(projectLocationEntitlementsName).entitlement;
   }
 
   /**
@@ -3913,9 +3102,7 @@ export class PrivilegedAccessManagerClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.locationsClient.close().catch(err => {throw err});
         void this.operationsClient.close();
       });
     }
