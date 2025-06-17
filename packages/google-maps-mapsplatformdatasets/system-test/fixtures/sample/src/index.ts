@@ -19,9 +19,7 @@
 import {MapsPlatformDatasetsClient} from '@googlemaps/maps-platform-datasets';
 
 // check that the client class type name can be used
-function doStuffWithMapsPlatformDatasetsClient(
-  client: MapsPlatformDatasetsClient
-) {
+function doStuffWithMapsPlatformDatasetsClient(client: MapsPlatformDatasetsClient) {
   client.close();
 }
 

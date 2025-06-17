@@ -1133,9 +1133,6 @@ export namespace google {
                         /** Landmark travelDistanceMeters. */
                         public travelDistanceMeters?: (number|null);
 
-                        /** Landmark _travelDistanceMeters. */
-                        public _travelDistanceMeters?: "travelDistanceMeters";
-
                         /**
                          * Creates a new Landmark instance using the specified properties.
                          * @param [properties] Properties to set
@@ -2747,12 +2744,6 @@ export namespace google {
                         /** ConnectorAggregation availabilityLastUpdateTime. */
                         public availabilityLastUpdateTime?: (google.protobuf.ITimestamp|null);
 
-                        /** ConnectorAggregation _availableCount. */
-                        public _availableCount?: "availableCount";
-
-                        /** ConnectorAggregation _outOfServiceCount. */
-                        public _outOfServiceCount?: "outOfServiceCount";
-
                         /**
                          * Creates a new ConnectorAggregation instance using the specified properties.
                          * @param [properties] Properties to set
@@ -3626,87 +3617,6 @@ export namespace google {
                     /** Place neighborhoodSummary. */
                     public neighborhoodSummary?: (google.maps.places.v1.Place.INeighborhoodSummary|null);
 
-                    /** Place _utcOffsetMinutes. */
-                    public _utcOffsetMinutes?: "utcOffsetMinutes";
-
-                    /** Place _userRatingCount. */
-                    public _userRatingCount?: "userRatingCount";
-
-                    /** Place _takeout. */
-                    public _takeout?: "takeout";
-
-                    /** Place _delivery. */
-                    public _delivery?: "delivery";
-
-                    /** Place _dineIn. */
-                    public _dineIn?: "dineIn";
-
-                    /** Place _curbsidePickup. */
-                    public _curbsidePickup?: "curbsidePickup";
-
-                    /** Place _reservable. */
-                    public _reservable?: "reservable";
-
-                    /** Place _servesBreakfast. */
-                    public _servesBreakfast?: "servesBreakfast";
-
-                    /** Place _servesLunch. */
-                    public _servesLunch?: "servesLunch";
-
-                    /** Place _servesDinner. */
-                    public _servesDinner?: "servesDinner";
-
-                    /** Place _servesBeer. */
-                    public _servesBeer?: "servesBeer";
-
-                    /** Place _servesWine. */
-                    public _servesWine?: "servesWine";
-
-                    /** Place _servesBrunch. */
-                    public _servesBrunch?: "servesBrunch";
-
-                    /** Place _servesVegetarianFood. */
-                    public _servesVegetarianFood?: "servesVegetarianFood";
-
-                    /** Place _outdoorSeating. */
-                    public _outdoorSeating?: "outdoorSeating";
-
-                    /** Place _liveMusic. */
-                    public _liveMusic?: "liveMusic";
-
-                    /** Place _menuForChildren. */
-                    public _menuForChildren?: "menuForChildren";
-
-                    /** Place _servesCocktails. */
-                    public _servesCocktails?: "servesCocktails";
-
-                    /** Place _servesDessert. */
-                    public _servesDessert?: "servesDessert";
-
-                    /** Place _servesCoffee. */
-                    public _servesCoffee?: "servesCoffee";
-
-                    /** Place _goodForChildren. */
-                    public _goodForChildren?: "goodForChildren";
-
-                    /** Place _allowsDogs. */
-                    public _allowsDogs?: "allowsDogs";
-
-                    /** Place _restroom. */
-                    public _restroom?: "restroom";
-
-                    /** Place _goodForGroups. */
-                    public _goodForGroups?: "goodForGroups";
-
-                    /** Place _goodForWatchingSports. */
-                    public _goodForWatchingSports?: "goodForWatchingSports";
-
-                    /** Place _accessibilityOptions. */
-                    public _accessibilityOptions?: "accessibilityOptions";
-
-                    /** Place _pureServiceAreaBusiness. */
-                    public _pureServiceAreaBusiness?: "pureServiceAreaBusiness";
-
                     /**
                      * Creates a new Place instance using the specified properties.
                      * @param [properties] Properties to set
@@ -4060,9 +3970,6 @@ export namespace google {
                         /** OpeningHours nextCloseTime. */
                         public nextCloseTime?: (google.protobuf.ITimestamp|null);
 
-                        /** OpeningHours _openNow. */
-                        public _openNow?: "openNow";
-
                         /**
                          * Creates a new OpeningHours instance using the specified properties.
                          * @param [properties] Properties to set
@@ -4290,15 +4197,6 @@ export namespace google {
 
                                 /** Point truncated. */
                                 public truncated: boolean;
-
-                                /** Point _day. */
-                                public _day?: "day";
-
-                                /** Point _hour. */
-                                public _hour?: "hour";
-
-                                /** Point _minute. */
-                                public _minute?: "minute";
 
                                 /**
                                  * Creates a new Point instance using the specified properties.
@@ -4643,18 +4541,6 @@ export namespace google {
                         /** PaymentOptions acceptsNfc. */
                         public acceptsNfc?: (boolean|null);
 
-                        /** PaymentOptions _acceptsCreditCards. */
-                        public _acceptsCreditCards?: "acceptsCreditCards";
-
-                        /** PaymentOptions _acceptsDebitCards. */
-                        public _acceptsDebitCards?: "acceptsDebitCards";
-
-                        /** PaymentOptions _acceptsCashOnly. */
-                        public _acceptsCashOnly?: "acceptsCashOnly";
-
-                        /** PaymentOptions _acceptsNfc. */
-                        public _acceptsNfc?: "acceptsNfc";
-
                         /**
                          * Creates a new PaymentOptions instance using the specified properties.
                          * @param [properties] Properties to set
@@ -4787,27 +4673,6 @@ export namespace google {
 
                         /** ParkingOptions paidGarageParking. */
                         public paidGarageParking?: (boolean|null);
-
-                        /** ParkingOptions _freeParkingLot. */
-                        public _freeParkingLot?: "freeParkingLot";
-
-                        /** ParkingOptions _paidParkingLot. */
-                        public _paidParkingLot?: "paidParkingLot";
-
-                        /** ParkingOptions _freeStreetParking. */
-                        public _freeStreetParking?: "freeStreetParking";
-
-                        /** ParkingOptions _paidStreetParking. */
-                        public _paidStreetParking?: "paidStreetParking";
-
-                        /** ParkingOptions _valetParking. */
-                        public _valetParking?: "valetParking";
-
-                        /** ParkingOptions _freeGarageParking. */
-                        public _freeGarageParking?: "freeGarageParking";
-
-                        /** ParkingOptions _paidGarageParking. */
-                        public _paidGarageParking?: "paidGarageParking";
 
                         /**
                          * Creates a new ParkingOptions instance using the specified properties.
@@ -5026,18 +4891,6 @@ export namespace google {
 
                         /** AccessibilityOptions wheelchairAccessibleSeating. */
                         public wheelchairAccessibleSeating?: (boolean|null);
-
-                        /** AccessibilityOptions _wheelchairAccessibleParking. */
-                        public _wheelchairAccessibleParking?: "wheelchairAccessibleParking";
-
-                        /** AccessibilityOptions _wheelchairAccessibleEntrance. */
-                        public _wheelchairAccessibleEntrance?: "wheelchairAccessibleEntrance";
-
-                        /** AccessibilityOptions _wheelchairAccessibleRestroom. */
-                        public _wheelchairAccessibleRestroom?: "wheelchairAccessibleRestroom";
-
-                        /** AccessibilityOptions _wheelchairAccessibleSeating. */
-                        public _wheelchairAccessibleSeating?: "wheelchairAccessibleSeating";
 
                         /**
                          * Creates a new AccessibilityOptions instance using the specified properties.
@@ -9937,6 +9790,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -9977,6 +9833,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -13930,6 +13789,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -14178,7 +14040,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -14209,7 +14071,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;

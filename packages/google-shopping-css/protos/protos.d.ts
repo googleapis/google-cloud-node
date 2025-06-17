@@ -156,12 +156,6 @@ export namespace google {
                     /** ListChildAccountsRequest pageToken. */
                     public pageToken: string;
 
-                    /** ListChildAccountsRequest _labelId. */
-                    public _labelId?: "labelId";
-
-                    /** ListChildAccountsRequest _fullName. */
-                    public _fullName?: "fullName";
-
                     /**
                      * Creates a new ListChildAccountsRequest instance using the specified properties.
                      * @param [properties] Properties to set
@@ -368,9 +362,6 @@ export namespace google {
                     /** GetAccountRequest parent. */
                     public parent?: (string|null);
 
-                    /** GetAccountRequest _parent. */
-                    public _parent?: "parent";
-
                     /**
                      * Creates a new GetAccountRequest instance using the specified properties.
                      * @param [properties] Properties to set
@@ -479,9 +470,6 @@ export namespace google {
 
                     /** UpdateAccountLabelsRequest parent. */
                     public parent?: (string|null);
-
-                    /** UpdateAccountLabelsRequest _parent. */
-                    public _parent?: "parent";
 
                     /**
                      * Creates a new UpdateAccountLabelsRequest instance using the specified properties.
@@ -621,15 +609,6 @@ export namespace google {
 
                     /** Account accountType. */
                     public accountType: (google.shopping.css.v1.Account.AccountType|keyof typeof google.shopping.css.v1.Account.AccountType);
-
-                    /** Account _displayName. */
-                    public _displayName?: "displayName";
-
-                    /** Account _homepageUri. */
-                    public _homepageUri?: "homepageUri";
-
-                    /** Account _parent. */
-                    public _parent?: "parent";
 
                     /**
                      * Creates a new Account instance using the specified properties.
@@ -881,12 +860,6 @@ export namespace google {
 
                     /** AccountLabel labelType. */
                     public labelType: (google.shopping.css.v1.AccountLabel.LabelType|keyof typeof google.shopping.css.v1.AccountLabel.LabelType);
-
-                    /** AccountLabel _displayName. */
-                    public _displayName?: "displayName";
-
-                    /** AccountLabel _description. */
-                    public _description?: "description";
 
                     /**
                      * Creates a new AccountLabel instance using the specified properties.
@@ -1797,99 +1770,6 @@ export namespace google {
 
                     /** Attributes headlineOfferSubscriptionCost. */
                     public headlineOfferSubscriptionCost?: (google.shopping.css.v1.IHeadlineOfferSubscriptionCost|null);
-
-                    /** Attributes _cppLink. */
-                    public _cppLink?: "cppLink";
-
-                    /** Attributes _cppMobileLink. */
-                    public _cppMobileLink?: "cppMobileLink";
-
-                    /** Attributes _cppAdsRedirect. */
-                    public _cppAdsRedirect?: "cppAdsRedirect";
-
-                    /** Attributes _numberOfOffers. */
-                    public _numberOfOffers?: "numberOfOffers";
-
-                    /** Attributes _headlineOfferCondition. */
-                    public _headlineOfferCondition?: "headlineOfferCondition";
-
-                    /** Attributes _headlineOfferLink. */
-                    public _headlineOfferLink?: "headlineOfferLink";
-
-                    /** Attributes _headlineOfferMobileLink. */
-                    public _headlineOfferMobileLink?: "headlineOfferMobileLink";
-
-                    /** Attributes _title. */
-                    public _title?: "title";
-
-                    /** Attributes _imageLink. */
-                    public _imageLink?: "imageLink";
-
-                    /** Attributes _description. */
-                    public _description?: "description";
-
-                    /** Attributes _brand. */
-                    public _brand?: "brand";
-
-                    /** Attributes _mpn. */
-                    public _mpn?: "mpn";
-
-                    /** Attributes _gtin. */
-                    public _gtin?: "gtin";
-
-                    /** Attributes _googleProductCategory. */
-                    public _googleProductCategory?: "googleProductCategory";
-
-                    /** Attributes _adult. */
-                    public _adult?: "adult";
-
-                    /** Attributes _multipack. */
-                    public _multipack?: "multipack";
-
-                    /** Attributes _isBundle. */
-                    public _isBundle?: "isBundle";
-
-                    /** Attributes _ageGroup. */
-                    public _ageGroup?: "ageGroup";
-
-                    /** Attributes _color. */
-                    public _color?: "color";
-
-                    /** Attributes _gender. */
-                    public _gender?: "gender";
-
-                    /** Attributes _material. */
-                    public _material?: "material";
-
-                    /** Attributes _pattern. */
-                    public _pattern?: "pattern";
-
-                    /** Attributes _size. */
-                    public _size?: "size";
-
-                    /** Attributes _sizeSystem. */
-                    public _sizeSystem?: "sizeSystem";
-
-                    /** Attributes _itemGroupId. */
-                    public _itemGroupId?: "itemGroupId";
-
-                    /** Attributes _pause. */
-                    public _pause?: "pause";
-
-                    /** Attributes _customLabel_0. */
-                    public _customLabel_0?: "customLabel_0";
-
-                    /** Attributes _customLabel_1. */
-                    public _customLabel_1?: "customLabel_1";
-
-                    /** Attributes _customLabel_2. */
-                    public _customLabel_2?: "customLabel_2";
-
-                    /** Attributes _customLabel_3. */
-                    public _customLabel_3?: "customLabel_3";
-
-                    /** Attributes _customLabel_4. */
-                    public _customLabel_4?: "customLabel_4";
 
                     /**
                      * Creates a new Attributes instance using the specified properties.
@@ -3465,9 +3345,6 @@ export namespace google {
                     /** DeleteCssProductInputRequest supplementalFeedId. */
                     public supplementalFeedId?: (number|Long|string|null);
 
-                    /** DeleteCssProductInputRequest _supplementalFeedId. */
-                    public _supplementalFeedId?: "supplementalFeedId";
-
                     /**
                      * Creates a new DeleteCssProductInputRequest instance using the specified properties.
                      * @param [properties] Properties to set
@@ -4577,9 +4454,6 @@ export namespace google {
                 /** Weight unit. */
                 public unit: (google.shopping.type.Weight.WeightUnit|keyof typeof google.shopping.type.Weight.WeightUnit);
 
-                /** Weight _amountMicros. */
-                public _amountMicros?: "amountMicros";
-
                 /**
                  * Creates a new Weight instance using the specified properties.
                  * @param [properties] Properties to set
@@ -4693,12 +4567,6 @@ export namespace google {
                 /** Price currencyCode. */
                 public currencyCode?: (string|null);
 
-                /** Price _amountMicros. */
-                public _amountMicros?: "amountMicros";
-
-                /** Price _currencyCode. */
-                public _currencyCode?: "currencyCode";
-
                 /**
                  * Creates a new Price instance using the specified properties.
                  * @param [properties] Properties to set
@@ -4807,12 +4675,6 @@ export namespace google {
 
                 /** CustomAttribute groupValues. */
                 public groupValues: google.shopping.type.ICustomAttribute[];
-
-                /** CustomAttribute _name. */
-                public _name?: "name";
-
-                /** CustomAttribute _value. */
-                public _value?: "value";
 
                 /**
                  * Creates a new CustomAttribute instance using the specified properties.
@@ -5868,6 +5730,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -5908,6 +5773,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -10126,6 +9994,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -10374,7 +10245,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -10405,7 +10276,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;

@@ -1921,9 +1921,6 @@ export namespace google {
                     /** BuildStep automapSubstitutions. */
                     public automapSubstitutions?: (boolean|null);
 
-                    /** BuildStep _automapSubstitutions. */
-                    public _automapSubstitutions?: "automapSubstitutions";
-
                     /**
                      * Creates a new BuildStep instance using the specified properties.
                      * @param [properties] Properties to set
@@ -4529,7 +4526,7 @@ export namespace google {
                     type?: (google.devtools.cloudbuild.v1.Hash.HashType|keyof typeof google.devtools.cloudbuild.v1.Hash.HashType|null);
 
                     /** Hash value */
-                    value?: (Uint8Array|string|null);
+                    value?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents a Hash. */
@@ -4545,7 +4542,7 @@ export namespace google {
                     public type: (google.devtools.cloudbuild.v1.Hash.HashType|keyof typeof google.devtools.cloudbuild.v1.Hash.HashType);
 
                     /** Hash value. */
-                    public value: (Uint8Array|string);
+                    public value: (Uint8Array|Buffer|string);
 
                     /**
                      * Creates a new Hash instance using the specified properties.
@@ -15246,6 +15243,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -15286,6 +15286,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -16461,7 +16464,7 @@ export namespace google {
             contentType?: (string|null);
 
             /** HttpBody data */
-            data?: (Uint8Array|string|null);
+            data?: (Uint8Array|Buffer|string|null);
 
             /** HttpBody extensions */
             extensions?: (google.protobuf.IAny[]|null);
@@ -16480,7 +16483,7 @@ export namespace google {
             public contentType: string;
 
             /** HttpBody data. */
-            public data: (Uint8Array|string);
+            public data: (Uint8Array|Buffer|string);
 
             /** HttpBody extensions. */
             public extensions: google.protobuf.IAny[];
@@ -19813,6 +19816,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -20067,7 +20073,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -20098,7 +20104,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -21237,7 +21243,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -21253,7 +21259,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.

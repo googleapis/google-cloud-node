@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -108,41 +101,20 @@ export class ExportServiceClient {
    *     const client = new ExportServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ExportServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'cloudprofiler.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -168,7 +140,7 @@ export class ExportServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -182,7 +154,10 @@ export class ExportServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -215,20 +190,14 @@ export class ExportServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listProfiles: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'profiles'
-      ),
+      listProfiles:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'profiles')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.devtools.cloudprofiler.v2.ExportService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.devtools.cloudprofiler.v2.ExportService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -259,35 +228,32 @@ export class ExportServiceClient {
     // Put together the "service stub" for
     // google.devtools.cloudprofiler.v2.ExportService.
     this.exportServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.devtools.cloudprofiler.v2.ExportService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.devtools.cloudprofiler.v2.ExportService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.devtools.cloudprofiler.v2.ExportService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const exportServiceStubMethods = ['listProfiles'];
+    const exportServiceStubMethods =
+        ['listProfiles'];
     for (const methodName of exportServiceStubMethods) {
       const callPromise = this.exportServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -307,14 +273,8 @@ export class ExportServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'cloudprofiler.googleapis.com';
   }
@@ -325,14 +285,8 @@ export class ExportServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'cloudprofiler.googleapis.com';
   }
@@ -366,7 +320,7 @@ export class ExportServiceClient {
     return [
       'https://www.googleapis.com/auth/cloud-platform',
       'https://www.googleapis.com/auth/monitoring',
-      'https://www.googleapis.com/auth/monitoring.write',
+      'https://www.googleapis.com/auth/monitoring.write'
     ];
   }
 
@@ -376,9 +330,8 @@ export class ExportServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -390,118 +343,93 @@ export class ExportServiceClient {
   // -- Service calls --
   // -------------------
 
-  /**
-   * Lists profiles which have been collected so far and for which the caller
-   * has permission to view.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns this collection of profiles.
-   *   Format: projects/{user_project_id}
-   * @param {number} request.pageSize
-   *   The maximum number of items to return.
-   *   Default page_size is 1000.
-   *   Max limit is 1000.
-   * @param {string} request.pageToken
-   *   The token to continue pagination and get profiles from a particular page.
-   *   When paginating, all other parameters provided to `ListProfiles` must match
-   *   the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.devtools.cloudprofiler.v2.Profile|Profile}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listProfilesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists profiles which have been collected so far and for which the caller
+ * has permission to view.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns this collection of profiles.
+ *   Format: projects/{user_project_id}
+ * @param {number} request.pageSize
+ *   The maximum number of items to return.
+ *   Default page_size is 1000.
+ *   Max limit is 1000.
+ * @param {string} request.pageToken
+ *   The token to continue pagination and get profiles from a particular page.
+ *   When paginating, all other parameters provided to `ListProfiles` must match
+ *   the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.devtools.cloudprofiler.v2.Profile|Profile}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listProfilesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listProfiles(
-    request?: protos.google.devtools.cloudprofiler.v2.IListProfilesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.cloudprofiler.v2.IProfile[],
-      protos.google.devtools.cloudprofiler.v2.IListProfilesRequest | null,
-      protos.google.devtools.cloudprofiler.v2.IListProfilesResponse,
-    ]
-  >;
+      request?: protos.google.devtools.cloudprofiler.v2.IListProfilesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.cloudprofiler.v2.IProfile[],
+        protos.google.devtools.cloudprofiler.v2.IListProfilesRequest|null,
+        protos.google.devtools.cloudprofiler.v2.IListProfilesResponse
+      ]>;
   listProfiles(
-    request: protos.google.devtools.cloudprofiler.v2.IListProfilesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.devtools.cloudprofiler.v2.IListProfilesRequest,
-      | protos.google.devtools.cloudprofiler.v2.IListProfilesResponse
-      | null
-      | undefined,
-      protos.google.devtools.cloudprofiler.v2.IProfile
-    >
-  ): void;
-  listProfiles(
-    request: protos.google.devtools.cloudprofiler.v2.IListProfilesRequest,
-    callback: PaginationCallback<
-      protos.google.devtools.cloudprofiler.v2.IListProfilesRequest,
-      | protos.google.devtools.cloudprofiler.v2.IListProfilesResponse
-      | null
-      | undefined,
-      protos.google.devtools.cloudprofiler.v2.IProfile
-    >
-  ): void;
-  listProfiles(
-    request?: protos.google.devtools.cloudprofiler.v2.IListProfilesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.devtools.cloudprofiler.v2.IListProfilesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.devtools.cloudprofiler.v2.IListProfilesRequest,
-          | protos.google.devtools.cloudprofiler.v2.IListProfilesResponse
-          | null
-          | undefined,
-          protos.google.devtools.cloudprofiler.v2.IProfile
-        >,
-    callback?: PaginationCallback<
-      protos.google.devtools.cloudprofiler.v2.IListProfilesRequest,
-      | protos.google.devtools.cloudprofiler.v2.IListProfilesResponse
-      | null
-      | undefined,
-      protos.google.devtools.cloudprofiler.v2.IProfile
-    >
-  ): Promise<
-    [
-      protos.google.devtools.cloudprofiler.v2.IProfile[],
-      protos.google.devtools.cloudprofiler.v2.IListProfilesRequest | null,
-      protos.google.devtools.cloudprofiler.v2.IListProfilesResponse,
-    ]
-  > | void {
+          protos.google.devtools.cloudprofiler.v2.IListProfilesResponse|null|undefined,
+          protos.google.devtools.cloudprofiler.v2.IProfile>): void;
+  listProfiles(
+      request: protos.google.devtools.cloudprofiler.v2.IListProfilesRequest,
+      callback: PaginationCallback<
+          protos.google.devtools.cloudprofiler.v2.IListProfilesRequest,
+          protos.google.devtools.cloudprofiler.v2.IListProfilesResponse|null|undefined,
+          protos.google.devtools.cloudprofiler.v2.IProfile>): void;
+  listProfiles(
+      request?: protos.google.devtools.cloudprofiler.v2.IListProfilesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.devtools.cloudprofiler.v2.IListProfilesRequest,
+          protos.google.devtools.cloudprofiler.v2.IListProfilesResponse|null|undefined,
+          protos.google.devtools.cloudprofiler.v2.IProfile>,
+      callback?: PaginationCallback<
+          protos.google.devtools.cloudprofiler.v2.IListProfilesRequest,
+          protos.google.devtools.cloudprofiler.v2.IListProfilesResponse|null|undefined,
+          protos.google.devtools.cloudprofiler.v2.IProfile>):
+      Promise<[
+        protos.google.devtools.cloudprofiler.v2.IProfile[],
+        protos.google.devtools.cloudprofiler.v2.IListProfilesRequest|null,
+        protos.google.devtools.cloudprofiler.v2.IListProfilesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.devtools.cloudprofiler.v2.IListProfilesRequest,
-          | protos.google.devtools.cloudprofiler.v2.IListProfilesResponse
-          | null
-          | undefined,
-          protos.google.devtools.cloudprofiler.v2.IProfile
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.devtools.cloudprofiler.v2.IListProfilesRequest,
+      protos.google.devtools.cloudprofiler.v2.IListProfilesResponse|null|undefined,
+      protos.google.devtools.cloudprofiler.v2.IProfile>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listProfiles values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -510,61 +438,58 @@ export class ExportServiceClient {
     this._log.info('listProfiles request %j', request);
     return this.innerApiCalls
       .listProfiles(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.devtools.cloudprofiler.v2.IProfile[],
-          protos.google.devtools.cloudprofiler.v2.IListProfilesRequest | null,
-          protos.google.devtools.cloudprofiler.v2.IListProfilesResponse,
-        ]) => {
-          this._log.info('listProfiles values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.devtools.cloudprofiler.v2.IProfile[],
+        protos.google.devtools.cloudprofiler.v2.IListProfilesRequest|null,
+        protos.google.devtools.cloudprofiler.v2.IListProfilesResponse
+      ]) => {
+        this._log.info('listProfiles values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listProfiles`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns this collection of profiles.
-   *   Format: projects/{user_project_id}
-   * @param {number} request.pageSize
-   *   The maximum number of items to return.
-   *   Default page_size is 1000.
-   *   Max limit is 1000.
-   * @param {string} request.pageToken
-   *   The token to continue pagination and get profiles from a particular page.
-   *   When paginating, all other parameters provided to `ListProfiles` must match
-   *   the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.devtools.cloudprofiler.v2.Profile|Profile} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listProfilesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listProfiles`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns this collection of profiles.
+ *   Format: projects/{user_project_id}
+ * @param {number} request.pageSize
+ *   The maximum number of items to return.
+ *   Default page_size is 1000.
+ *   Max limit is 1000.
+ * @param {string} request.pageToken
+ *   The token to continue pagination and get profiles from a particular page.
+ *   When paginating, all other parameters provided to `ListProfiles` must match
+ *   the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.devtools.cloudprofiler.v2.Profile|Profile} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listProfilesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listProfilesStream(
-    request?: protos.google.devtools.cloudprofiler.v2.IListProfilesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.devtools.cloudprofiler.v2.IListProfilesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listProfiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listProfiles stream %j', request);
     return this.descriptors.page.listProfiles.createStream(
       this.innerApiCalls.listProfiles as GaxCall,
@@ -573,52 +498,51 @@ export class ExportServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listProfiles`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns this collection of profiles.
-   *   Format: projects/{user_project_id}
-   * @param {number} request.pageSize
-   *   The maximum number of items to return.
-   *   Default page_size is 1000.
-   *   Max limit is 1000.
-   * @param {string} request.pageToken
-   *   The token to continue pagination and get profiles from a particular page.
-   *   When paginating, all other parameters provided to `ListProfiles` must match
-   *   the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.devtools.cloudprofiler.v2.Profile|Profile}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/export_service.list_profiles.js</caption>
-   * region_tag:cloudprofiler_v2_generated_ExportService_ListProfiles_async
-   */
+/**
+ * Equivalent to `listProfiles`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns this collection of profiles.
+ *   Format: projects/{user_project_id}
+ * @param {number} request.pageSize
+ *   The maximum number of items to return.
+ *   Default page_size is 1000.
+ *   Max limit is 1000.
+ * @param {string} request.pageToken
+ *   The token to continue pagination and get profiles from a particular page.
+ *   When paginating, all other parameters provided to `ListProfiles` must match
+ *   the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.devtools.cloudprofiler.v2.Profile|Profile}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/export_service.list_profiles.js</caption>
+ * region_tag:cloudprofiler_v2_generated_ExportService_ListProfiles_async
+ */
   listProfilesAsync(
-    request?: protos.google.devtools.cloudprofiler.v2.IListProfilesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.devtools.cloudprofiler.v2.IProfile> {
+      request?: protos.google.devtools.cloudprofiler.v2.IListProfilesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.devtools.cloudprofiler.v2.IProfile>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listProfiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listProfiles iterate %j', request);
     return this.descriptors.page.listProfiles.asyncIterate(
       this.innerApiCalls['listProfiles'] as GaxCall,
@@ -637,7 +561,7 @@ export class ExportServiceClient {
    * @param {string} profile
    * @returns {string} Resource name string.
    */
-  profilePath(project: string, profile: string) {
+  profilePath(project:string,profile:string) {
     return this.pathTemplates.profilePathTemplate.render({
       project: project,
       profile: profile,
@@ -672,7 +596,7 @@ export class ExportServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });

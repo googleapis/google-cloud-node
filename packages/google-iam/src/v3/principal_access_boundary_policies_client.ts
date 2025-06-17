@@ -18,22 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -114,42 +103,20 @@ export class PrincipalAccessBoundaryPoliciesClient {
    *     const client = new PrincipalAccessBoundaryPoliciesClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof PrincipalAccessBoundaryPoliciesClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    const staticMembers = this.constructor as typeof PrincipalAccessBoundaryPoliciesClient;
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'iam.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -175,7 +142,7 @@ export class PrincipalAccessBoundaryPoliciesClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -191,9 +158,13 @@ export class PrincipalAccessBoundaryPoliciesClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -214,7 +185,7 @@ export class PrincipalAccessBoundaryPoliciesClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      folderLocationPolicyBindingPathTemplate: new this._gaxModule.PathTemplate(
+      folderLocationPolicyBindingsPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/locations/{location}/policyBindings/{policy_binding}'
       ),
       organizationPathTemplate: new this._gaxModule.PathTemplate(
@@ -223,120 +194,73 @@ export class PrincipalAccessBoundaryPoliciesClient {
       organizationLocationPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/locations/{location}'
       ),
-      organizationLocationPolicyBindingPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/locations/{location}/policyBindings/{policy_binding}'
-        ),
-      principalAccessBoundaryPolicyPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/locations/{location}/principalAccessBoundaryPolicies/{principal_access_boundary_policy}'
-        ),
-      projectLocationPolicyBindingPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/policyBindings/{policy_binding}'
-        ),
+      organizationLocationPolicyBindingsPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/policyBindings/{policy_binding}'
+      ),
+      principalAccessBoundaryPolicyPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/principalAccessBoundaryPolicies/{principal_access_boundary_policy}'
+      ),
+      projectLocationPolicyBindingsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/policyBindings/{policy_binding}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listPrincipalAccessBoundaryPolicies: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'principalAccessBoundaryPolicies'
-      ),
+      listPrincipalAccessBoundaryPolicies:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'principalAccessBoundaryPolicies'),
       searchPrincipalAccessBoundaryPolicyBindings:
-        new this._gaxModule.PageDescriptor(
-          'pageToken',
-          'nextPageToken',
-          'policyBindings'
-        ),
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'policyBindings')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v3/{name=projects/*/locations/*/operations/*}',
-          additional_bindings: [
-            {get: '/v3/{name=folders/*/locations/*/operations/*}'},
-            {get: '/v3/{name=organizations/*/locations/*/operations/*}'},
-          ],
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.GetOperation',get: '/v3/{name=projects/*/locations/*/operations/*}',additional_bindings: [{get: '/v3/{name=folders/*/locations/*/operations/*}',},{get: '/v3/{name=organizations/*/locations/*/operations/*}',}],
+      }];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createPrincipalAccessBoundaryPolicyResponse = protoFilesRoot.lookup(
-      '.google.iam.v3.PrincipalAccessBoundaryPolicy'
-    ) as gax.protobuf.Type;
+      '.google.iam.v3.PrincipalAccessBoundaryPolicy') as gax.protobuf.Type;
     const createPrincipalAccessBoundaryPolicyMetadata = protoFilesRoot.lookup(
-      '.google.iam.v3.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.iam.v3.OperationMetadata') as gax.protobuf.Type;
     const updatePrincipalAccessBoundaryPolicyResponse = protoFilesRoot.lookup(
-      '.google.iam.v3.PrincipalAccessBoundaryPolicy'
-    ) as gax.protobuf.Type;
+      '.google.iam.v3.PrincipalAccessBoundaryPolicy') as gax.protobuf.Type;
     const updatePrincipalAccessBoundaryPolicyMetadata = protoFilesRoot.lookup(
-      '.google.iam.v3.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.iam.v3.OperationMetadata') as gax.protobuf.Type;
     const deletePrincipalAccessBoundaryPolicyResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deletePrincipalAccessBoundaryPolicyMetadata = protoFilesRoot.lookup(
-      '.google.iam.v3.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.iam.v3.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
-      createPrincipalAccessBoundaryPolicy:
-        new this._gaxModule.LongrunningDescriptor(
-          this.operationsClient,
-          createPrincipalAccessBoundaryPolicyResponse.decode.bind(
-            createPrincipalAccessBoundaryPolicyResponse
-          ),
-          createPrincipalAccessBoundaryPolicyMetadata.decode.bind(
-            createPrincipalAccessBoundaryPolicyMetadata
-          )
-        ),
-      updatePrincipalAccessBoundaryPolicy:
-        new this._gaxModule.LongrunningDescriptor(
-          this.operationsClient,
-          updatePrincipalAccessBoundaryPolicyResponse.decode.bind(
-            updatePrincipalAccessBoundaryPolicyResponse
-          ),
-          updatePrincipalAccessBoundaryPolicyMetadata.decode.bind(
-            updatePrincipalAccessBoundaryPolicyMetadata
-          )
-        ),
-      deletePrincipalAccessBoundaryPolicy:
-        new this._gaxModule.LongrunningDescriptor(
-          this.operationsClient,
-          deletePrincipalAccessBoundaryPolicyResponse.decode.bind(
-            deletePrincipalAccessBoundaryPolicyResponse
-          ),
-          deletePrincipalAccessBoundaryPolicyMetadata.decode.bind(
-            deletePrincipalAccessBoundaryPolicyMetadata
-          )
-        ),
+      createPrincipalAccessBoundaryPolicy: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createPrincipalAccessBoundaryPolicyResponse.decode.bind(createPrincipalAccessBoundaryPolicyResponse),
+        createPrincipalAccessBoundaryPolicyMetadata.decode.bind(createPrincipalAccessBoundaryPolicyMetadata)),
+      updatePrincipalAccessBoundaryPolicy: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updatePrincipalAccessBoundaryPolicyResponse.decode.bind(updatePrincipalAccessBoundaryPolicyResponse),
+        updatePrincipalAccessBoundaryPolicyMetadata.decode.bind(updatePrincipalAccessBoundaryPolicyMetadata)),
+      deletePrincipalAccessBoundaryPolicy: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deletePrincipalAccessBoundaryPolicyResponse.decode.bind(deletePrincipalAccessBoundaryPolicyResponse),
+        deletePrincipalAccessBoundaryPolicyMetadata.decode.bind(deletePrincipalAccessBoundaryPolicyMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.iam.v3.PrincipalAccessBoundaryPolicies',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.iam.v3.PrincipalAccessBoundaryPolicies', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -367,40 +291,28 @@ export class PrincipalAccessBoundaryPoliciesClient {
     // Put together the "service stub" for
     // google.iam.v3.PrincipalAccessBoundaryPolicies.
     this.principalAccessBoundaryPoliciesStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.iam.v3.PrincipalAccessBoundaryPolicies'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.iam.v3.PrincipalAccessBoundaryPolicies') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.iam.v3.PrincipalAccessBoundaryPolicies,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const principalAccessBoundaryPoliciesStubMethods = [
-      'createPrincipalAccessBoundaryPolicy',
-      'getPrincipalAccessBoundaryPolicy',
-      'updatePrincipalAccessBoundaryPolicy',
-      'deletePrincipalAccessBoundaryPolicy',
-      'listPrincipalAccessBoundaryPolicies',
-      'searchPrincipalAccessBoundaryPolicyBindings',
-    ];
+    const principalAccessBoundaryPoliciesStubMethods =
+        ['createPrincipalAccessBoundaryPolicy', 'getPrincipalAccessBoundaryPolicy', 'updatePrincipalAccessBoundaryPolicy', 'deletePrincipalAccessBoundaryPolicy', 'listPrincipalAccessBoundaryPolicies', 'searchPrincipalAccessBoundaryPolicyBindings'];
     for (const methodName of principalAccessBoundaryPoliciesStubMethods) {
       const callPromise = this.principalAccessBoundaryPoliciesStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -425,14 +337,8 @@ export class PrincipalAccessBoundaryPoliciesClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'iam.googleapis.com';
   }
@@ -443,14 +349,8 @@ export class PrincipalAccessBoundaryPoliciesClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'iam.googleapis.com';
   }
@@ -481,7 +381,9 @@ export class PrincipalAccessBoundaryPoliciesClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -490,9 +392,8 @@ export class PrincipalAccessBoundaryPoliciesClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -503,902 +404,629 @@ export class PrincipalAccessBoundaryPoliciesClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets a principal access boundary policy.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the principal access boundary policy to retrieve.
-   *
-   *   Format:
-   *     `organizations/{organization_id}/locations/{location}/principalAccessBoundaryPolicies/{principal_access_boundary_policy_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v3.PrincipalAccessBoundaryPolicy|PrincipalAccessBoundaryPolicy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3/principal_access_boundary_policies.get_principal_access_boundary_policy.js</caption>
-   * region_tag:iam_v3_generated_PrincipalAccessBoundaryPolicies_GetPrincipalAccessBoundaryPolicy_async
-   */
+/**
+ * Gets a principal access boundary policy.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the principal access boundary policy to retrieve.
+ *
+ *   Format:
+ *     `organizations/{organization_id}/locations/{location}/principalAccessBoundaryPolicies/{principal_access_boundary_policy_id}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v3.PrincipalAccessBoundaryPolicy|PrincipalAccessBoundaryPolicy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/principal_access_boundary_policies.get_principal_access_boundary_policy.js</caption>
+ * region_tag:iam_v3_generated_PrincipalAccessBoundaryPolicies_GetPrincipalAccessBoundaryPolicy_async
+ */
   getPrincipalAccessBoundaryPolicy(
-    request?: protos.google.iam.v3.IGetPrincipalAccessBoundaryPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v3.IPrincipalAccessBoundaryPolicy,
-      protos.google.iam.v3.IGetPrincipalAccessBoundaryPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v3.IGetPrincipalAccessBoundaryPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v3.IPrincipalAccessBoundaryPolicy,
+        protos.google.iam.v3.IGetPrincipalAccessBoundaryPolicyRequest|undefined, {}|undefined
+      ]>;
   getPrincipalAccessBoundaryPolicy(
-    request: protos.google.iam.v3.IGetPrincipalAccessBoundaryPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v3.IPrincipalAccessBoundaryPolicy,
-      | protos.google.iam.v3.IGetPrincipalAccessBoundaryPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPrincipalAccessBoundaryPolicy(
-    request: protos.google.iam.v3.IGetPrincipalAccessBoundaryPolicyRequest,
-    callback: Callback<
-      protos.google.iam.v3.IPrincipalAccessBoundaryPolicy,
-      | protos.google.iam.v3.IGetPrincipalAccessBoundaryPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPrincipalAccessBoundaryPolicy(
-    request?: protos.google.iam.v3.IGetPrincipalAccessBoundaryPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.iam.v3.IGetPrincipalAccessBoundaryPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.iam.v3.IPrincipalAccessBoundaryPolicy,
-          | protos.google.iam.v3.IGetPrincipalAccessBoundaryPolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v3.IPrincipalAccessBoundaryPolicy,
-      | protos.google.iam.v3.IGetPrincipalAccessBoundaryPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v3.IPrincipalAccessBoundaryPolicy,
-      protos.google.iam.v3.IGetPrincipalAccessBoundaryPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.iam.v3.IGetPrincipalAccessBoundaryPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getPrincipalAccessBoundaryPolicy(
+      request: protos.google.iam.v3.IGetPrincipalAccessBoundaryPolicyRequest,
+      callback: Callback<
+          protos.google.iam.v3.IPrincipalAccessBoundaryPolicy,
+          protos.google.iam.v3.IGetPrincipalAccessBoundaryPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getPrincipalAccessBoundaryPolicy(
+      request?: protos.google.iam.v3.IGetPrincipalAccessBoundaryPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v3.IPrincipalAccessBoundaryPolicy,
+          protos.google.iam.v3.IGetPrincipalAccessBoundaryPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v3.IPrincipalAccessBoundaryPolicy,
+          protos.google.iam.v3.IGetPrincipalAccessBoundaryPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v3.IPrincipalAccessBoundaryPolicy,
+        protos.google.iam.v3.IGetPrincipalAccessBoundaryPolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getPrincipalAccessBoundaryPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v3.IPrincipalAccessBoundaryPolicy,
-          | protos.google.iam.v3.IGetPrincipalAccessBoundaryPolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.iam.v3.IPrincipalAccessBoundaryPolicy,
+        protos.google.iam.v3.IGetPrincipalAccessBoundaryPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
-            'getPrincipalAccessBoundaryPolicy response %j',
-            response
-          );
+          this._log.info('getPrincipalAccessBoundaryPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getPrincipalAccessBoundaryPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v3.IPrincipalAccessBoundaryPolicy,
-          (
-            | protos.google.iam.v3.IGetPrincipalAccessBoundaryPolicyRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info(
-            'getPrincipalAccessBoundaryPolicy response %j',
-            response
-          );
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getPrincipalAccessBoundaryPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v3.IPrincipalAccessBoundaryPolicy,
+        protos.google.iam.v3.IGetPrincipalAccessBoundaryPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getPrincipalAccessBoundaryPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Creates a principal access boundary policy, and returns a long running
-   * operation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource where this principal access boundary policy
-   *   will be created. Only organizations are supported.
-   *
-   *   Format:
-   *     `organizations/{organization_id}/locations/{location}`
-   * @param {string} request.principalAccessBoundaryPolicyId
-   *   Required. The ID to use for the principal access boundary policy, which
-   *   will become the final component of the principal access boundary policy's
-   *   resource name.
-   *
-   *   This value must start with a lowercase letter followed by up to 62
-   *   lowercase letters, numbers, hyphens, or dots. Pattern,
-   *   /{@link protos.a-z0-9-\.|a-z}{2,62}/.
-   * @param {google.iam.v3.PrincipalAccessBoundaryPolicy} request.principalAccessBoundaryPolicy
-   *   Required. The principal access boundary policy to create.
-   * @param {boolean} [request.validateOnly]
-   *   Optional. If set, validate the request and preview the creation, but do not
-   *   actually post it.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3/principal_access_boundary_policies.create_principal_access_boundary_policy.js</caption>
-   * region_tag:iam_v3_generated_PrincipalAccessBoundaryPolicies_CreatePrincipalAccessBoundaryPolicy_async
-   */
+/**
+ * Creates a principal access boundary policy, and returns a long running
+ * operation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource where this principal access boundary policy
+ *   will be created. Only organizations are supported.
+ *
+ *   Format:
+ *     `organizations/{organization_id}/locations/{location}`
+ * @param {string} request.principalAccessBoundaryPolicyId
+ *   Required. The ID to use for the principal access boundary policy, which
+ *   will become the final component of the principal access boundary policy's
+ *   resource name.
+ *
+ *   This value must start with a lowercase letter followed by up to 62
+ *   lowercase letters, numbers, hyphens, or dots. Pattern,
+ *   /{@link protos.a-z0-9-\.|a-z}{2,62}/.
+ * @param {google.iam.v3.PrincipalAccessBoundaryPolicy} request.principalAccessBoundaryPolicy
+ *   Required. The principal access boundary policy to create.
+ * @param {boolean} [request.validateOnly]
+ *   Optional. If set, validate the request and preview the creation, but do not
+ *   actually post it.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/principal_access_boundary_policies.create_principal_access_boundary_policy.js</caption>
+ * region_tag:iam_v3_generated_PrincipalAccessBoundaryPolicies_CreatePrincipalAccessBoundaryPolicy_async
+ */
   createPrincipalAccessBoundaryPolicy(
-    request?: protos.google.iam.v3.ICreatePrincipalAccessBoundaryPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.iam.v3.IPrincipalAccessBoundaryPolicy,
-        protos.google.iam.v3.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v3.ICreatePrincipalAccessBoundaryPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.iam.v3.IPrincipalAccessBoundaryPolicy, protos.google.iam.v3.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createPrincipalAccessBoundaryPolicy(
-    request: protos.google.iam.v3.ICreatePrincipalAccessBoundaryPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.iam.v3.IPrincipalAccessBoundaryPolicy,
-        protos.google.iam.v3.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.iam.v3.ICreatePrincipalAccessBoundaryPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.iam.v3.IPrincipalAccessBoundaryPolicy, protos.google.iam.v3.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createPrincipalAccessBoundaryPolicy(
-    request: protos.google.iam.v3.ICreatePrincipalAccessBoundaryPolicyRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.iam.v3.IPrincipalAccessBoundaryPolicy,
-        protos.google.iam.v3.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.iam.v3.ICreatePrincipalAccessBoundaryPolicyRequest,
+      callback: Callback<
+          LROperation<protos.google.iam.v3.IPrincipalAccessBoundaryPolicy, protos.google.iam.v3.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createPrincipalAccessBoundaryPolicy(
-    request?: protos.google.iam.v3.ICreatePrincipalAccessBoundaryPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.iam.v3.IPrincipalAccessBoundaryPolicy,
-            protos.google.iam.v3.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.iam.v3.IPrincipalAccessBoundaryPolicy,
-        protos.google.iam.v3.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.iam.v3.IPrincipalAccessBoundaryPolicy,
-        protos.google.iam.v3.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.iam.v3.ICreatePrincipalAccessBoundaryPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.iam.v3.IPrincipalAccessBoundaryPolicy, protos.google.iam.v3.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.iam.v3.IPrincipalAccessBoundaryPolicy, protos.google.iam.v3.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.iam.v3.IPrincipalAccessBoundaryPolicy, protos.google.iam.v3.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.iam.v3.IPrincipalAccessBoundaryPolicy,
-            protos.google.iam.v3.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.iam.v3.IPrincipalAccessBoundaryPolicy, protos.google.iam.v3.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
-            'createPrincipalAccessBoundaryPolicy response %j',
-            rawResponse
-          );
+          this._log.info('createPrincipalAccessBoundaryPolicy response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createPrincipalAccessBoundaryPolicy request %j', request);
-    return this.innerApiCalls
-      .createPrincipalAccessBoundaryPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.iam.v3.IPrincipalAccessBoundaryPolicy,
-            protos.google.iam.v3.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info(
-            'createPrincipalAccessBoundaryPolicy response %j',
-            rawResponse
-          );
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createPrincipalAccessBoundaryPolicy(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.iam.v3.IPrincipalAccessBoundaryPolicy, protos.google.iam.v3.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createPrincipalAccessBoundaryPolicy response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createPrincipalAccessBoundaryPolicy()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3/principal_access_boundary_policies.create_principal_access_boundary_policy.js</caption>
-   * region_tag:iam_v3_generated_PrincipalAccessBoundaryPolicies_CreatePrincipalAccessBoundaryPolicy_async
-   */
-  async checkCreatePrincipalAccessBoundaryPolicyProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.iam.v3.PrincipalAccessBoundaryPolicy,
-      protos.google.iam.v3.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createPrincipalAccessBoundaryPolicy()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/principal_access_boundary_policies.create_principal_access_boundary_policy.js</caption>
+ * region_tag:iam_v3_generated_PrincipalAccessBoundaryPolicies_CreatePrincipalAccessBoundaryPolicy_async
+ */
+  async checkCreatePrincipalAccessBoundaryPolicyProgress(name: string): Promise<LROperation<protos.google.iam.v3.PrincipalAccessBoundaryPolicy, protos.google.iam.v3.OperationMetadata>>{
     this._log.info('createPrincipalAccessBoundaryPolicy long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createPrincipalAccessBoundaryPolicy,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.iam.v3.PrincipalAccessBoundaryPolicy,
-      protos.google.iam.v3.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createPrincipalAccessBoundaryPolicy, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.iam.v3.PrincipalAccessBoundaryPolicy, protos.google.iam.v3.OperationMetadata>;
   }
-  /**
-   * Updates a principal access boundary policy.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.iam.v3.PrincipalAccessBoundaryPolicy} request.principalAccessBoundaryPolicy
-   *   Required. The principal access boundary policy to update.
-   *
-   *   The principal access boundary policy's `name` field is used to identify the
-   *   policy to update.
-   * @param {boolean} [request.validateOnly]
-   *   Optional. If set, validate the request and preview the update, but do not
-   *   actually post it.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. The list of fields to update
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3/principal_access_boundary_policies.update_principal_access_boundary_policy.js</caption>
-   * region_tag:iam_v3_generated_PrincipalAccessBoundaryPolicies_UpdatePrincipalAccessBoundaryPolicy_async
-   */
+/**
+ * Updates a principal access boundary policy.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.iam.v3.PrincipalAccessBoundaryPolicy} request.principalAccessBoundaryPolicy
+ *   Required. The principal access boundary policy to update.
+ *
+ *   The principal access boundary policy's `name` field is used to identify the
+ *   policy to update.
+ * @param {boolean} [request.validateOnly]
+ *   Optional. If set, validate the request and preview the update, but do not
+ *   actually post it.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. The list of fields to update
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/principal_access_boundary_policies.update_principal_access_boundary_policy.js</caption>
+ * region_tag:iam_v3_generated_PrincipalAccessBoundaryPolicies_UpdatePrincipalAccessBoundaryPolicy_async
+ */
   updatePrincipalAccessBoundaryPolicy(
-    request?: protos.google.iam.v3.IUpdatePrincipalAccessBoundaryPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.iam.v3.IPrincipalAccessBoundaryPolicy,
-        protos.google.iam.v3.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v3.IUpdatePrincipalAccessBoundaryPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.iam.v3.IPrincipalAccessBoundaryPolicy, protos.google.iam.v3.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updatePrincipalAccessBoundaryPolicy(
-    request: protos.google.iam.v3.IUpdatePrincipalAccessBoundaryPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.iam.v3.IPrincipalAccessBoundaryPolicy,
-        protos.google.iam.v3.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.iam.v3.IUpdatePrincipalAccessBoundaryPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.iam.v3.IPrincipalAccessBoundaryPolicy, protos.google.iam.v3.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updatePrincipalAccessBoundaryPolicy(
-    request: protos.google.iam.v3.IUpdatePrincipalAccessBoundaryPolicyRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.iam.v3.IPrincipalAccessBoundaryPolicy,
-        protos.google.iam.v3.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.iam.v3.IUpdatePrincipalAccessBoundaryPolicyRequest,
+      callback: Callback<
+          LROperation<protos.google.iam.v3.IPrincipalAccessBoundaryPolicy, protos.google.iam.v3.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updatePrincipalAccessBoundaryPolicy(
-    request?: protos.google.iam.v3.IUpdatePrincipalAccessBoundaryPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.iam.v3.IPrincipalAccessBoundaryPolicy,
-            protos.google.iam.v3.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.iam.v3.IPrincipalAccessBoundaryPolicy,
-        protos.google.iam.v3.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.iam.v3.IPrincipalAccessBoundaryPolicy,
-        protos.google.iam.v3.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.iam.v3.IUpdatePrincipalAccessBoundaryPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.iam.v3.IPrincipalAccessBoundaryPolicy, protos.google.iam.v3.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.iam.v3.IPrincipalAccessBoundaryPolicy, protos.google.iam.v3.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.iam.v3.IPrincipalAccessBoundaryPolicy, protos.google.iam.v3.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'principal_access_boundary_policy.name':
-          request.principalAccessBoundaryPolicy!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'principal_access_boundary_policy.name': request.principalAccessBoundaryPolicy!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.iam.v3.IPrincipalAccessBoundaryPolicy,
-            protos.google.iam.v3.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.iam.v3.IPrincipalAccessBoundaryPolicy, protos.google.iam.v3.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
-            'updatePrincipalAccessBoundaryPolicy response %j',
-            rawResponse
-          );
+          this._log.info('updatePrincipalAccessBoundaryPolicy response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updatePrincipalAccessBoundaryPolicy request %j', request);
-    return this.innerApiCalls
-      .updatePrincipalAccessBoundaryPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.iam.v3.IPrincipalAccessBoundaryPolicy,
-            protos.google.iam.v3.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info(
-            'updatePrincipalAccessBoundaryPolicy response %j',
-            rawResponse
-          );
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updatePrincipalAccessBoundaryPolicy(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.iam.v3.IPrincipalAccessBoundaryPolicy, protos.google.iam.v3.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updatePrincipalAccessBoundaryPolicy response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updatePrincipalAccessBoundaryPolicy()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3/principal_access_boundary_policies.update_principal_access_boundary_policy.js</caption>
-   * region_tag:iam_v3_generated_PrincipalAccessBoundaryPolicies_UpdatePrincipalAccessBoundaryPolicy_async
-   */
-  async checkUpdatePrincipalAccessBoundaryPolicyProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.iam.v3.PrincipalAccessBoundaryPolicy,
-      protos.google.iam.v3.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updatePrincipalAccessBoundaryPolicy()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/principal_access_boundary_policies.update_principal_access_boundary_policy.js</caption>
+ * region_tag:iam_v3_generated_PrincipalAccessBoundaryPolicies_UpdatePrincipalAccessBoundaryPolicy_async
+ */
+  async checkUpdatePrincipalAccessBoundaryPolicyProgress(name: string): Promise<LROperation<protos.google.iam.v3.PrincipalAccessBoundaryPolicy, protos.google.iam.v3.OperationMetadata>>{
     this._log.info('updatePrincipalAccessBoundaryPolicy long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updatePrincipalAccessBoundaryPolicy,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.iam.v3.PrincipalAccessBoundaryPolicy,
-      protos.google.iam.v3.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updatePrincipalAccessBoundaryPolicy, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.iam.v3.PrincipalAccessBoundaryPolicy, protos.google.iam.v3.OperationMetadata>;
   }
-  /**
-   * Deletes a principal access boundary policy.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the principal access boundary policy to delete.
-   *
-   *   Format:
-   *     `organizations/{organization_id}/locations/{location}/principalAccessBoundaryPolicies/{principal_access_boundary_policy_id}`
-   * @param {string} [request.etag]
-   *   Optional. The etag of the principal access boundary policy.
-   *   If this is provided, it must match the server's etag.
-   * @param {boolean} [request.validateOnly]
-   *   Optional. If set, validate the request and preview the deletion, but do not
-   *   actually post it.
-   * @param {boolean} [request.force]
-   *   Optional. If set to true, the request will force the deletion of the policy
-   *   even if the policy is referenced in policy bindings.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3/principal_access_boundary_policies.delete_principal_access_boundary_policy.js</caption>
-   * region_tag:iam_v3_generated_PrincipalAccessBoundaryPolicies_DeletePrincipalAccessBoundaryPolicy_async
-   */
+/**
+ * Deletes a principal access boundary policy.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the principal access boundary policy to delete.
+ *
+ *   Format:
+ *     `organizations/{organization_id}/locations/{location}/principalAccessBoundaryPolicies/{principal_access_boundary_policy_id}`
+ * @param {string} [request.etag]
+ *   Optional. The etag of the principal access boundary policy.
+ *   If this is provided, it must match the server's etag.
+ * @param {boolean} [request.validateOnly]
+ *   Optional. If set, validate the request and preview the deletion, but do not
+ *   actually post it.
+ * @param {boolean} [request.force]
+ *   Optional. If set to true, the request will force the deletion of the policy
+ *   even if the policy is referenced in policy bindings.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/principal_access_boundary_policies.delete_principal_access_boundary_policy.js</caption>
+ * region_tag:iam_v3_generated_PrincipalAccessBoundaryPolicies_DeletePrincipalAccessBoundaryPolicy_async
+ */
   deletePrincipalAccessBoundaryPolicy(
-    request?: protos.google.iam.v3.IDeletePrincipalAccessBoundaryPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.iam.v3.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v3.IDeletePrincipalAccessBoundaryPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.iam.v3.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deletePrincipalAccessBoundaryPolicy(
-    request: protos.google.iam.v3.IDeletePrincipalAccessBoundaryPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.iam.v3.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.iam.v3.IDeletePrincipalAccessBoundaryPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.iam.v3.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deletePrincipalAccessBoundaryPolicy(
-    request: protos.google.iam.v3.IDeletePrincipalAccessBoundaryPolicyRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.iam.v3.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.iam.v3.IDeletePrincipalAccessBoundaryPolicyRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.iam.v3.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deletePrincipalAccessBoundaryPolicy(
-    request?: protos.google.iam.v3.IDeletePrincipalAccessBoundaryPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.iam.v3.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.iam.v3.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.iam.v3.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.iam.v3.IDeletePrincipalAccessBoundaryPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.iam.v3.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.iam.v3.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.iam.v3.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.iam.v3.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.iam.v3.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
-            'deletePrincipalAccessBoundaryPolicy response %j',
-            rawResponse
-          );
+          this._log.info('deletePrincipalAccessBoundaryPolicy response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deletePrincipalAccessBoundaryPolicy request %j', request);
-    return this.innerApiCalls
-      .deletePrincipalAccessBoundaryPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.iam.v3.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info(
-            'deletePrincipalAccessBoundaryPolicy response %j',
-            rawResponse
-          );
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deletePrincipalAccessBoundaryPolicy(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.iam.v3.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deletePrincipalAccessBoundaryPolicy response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deletePrincipalAccessBoundaryPolicy()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3/principal_access_boundary_policies.delete_principal_access_boundary_policy.js</caption>
-   * region_tag:iam_v3_generated_PrincipalAccessBoundaryPolicies_DeletePrincipalAccessBoundaryPolicy_async
-   */
-  async checkDeletePrincipalAccessBoundaryPolicyProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.iam.v3.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deletePrincipalAccessBoundaryPolicy()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/principal_access_boundary_policies.delete_principal_access_boundary_policy.js</caption>
+ * region_tag:iam_v3_generated_PrincipalAccessBoundaryPolicies_DeletePrincipalAccessBoundaryPolicy_async
+ */
+  async checkDeletePrincipalAccessBoundaryPolicyProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.iam.v3.OperationMetadata>>{
     this._log.info('deletePrincipalAccessBoundaryPolicy long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deletePrincipalAccessBoundaryPolicy,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.iam.v3.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deletePrincipalAccessBoundaryPolicy, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.iam.v3.OperationMetadata>;
   }
-  /**
-   * Lists principal access boundary policies.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource, which owns the collection of principal
-   *   access boundary policies.
-   *
-   *   Format:
-   *     `organizations/{organization_id}/locations/{location}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of principal access boundary policies to
-   *   return. The service may return fewer than this value.
-   *
-   *   If unspecified, at most 50 principal access boundary policies will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous
-   *   `ListPrincipalAccessBoundaryPolicies` call. Provide this to retrieve the
-   *   subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `ListPrincipalAccessBoundaryPolicies` must match the call that provided the
-   *   page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.iam.v3.PrincipalAccessBoundaryPolicy|PrincipalAccessBoundaryPolicy}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listPrincipalAccessBoundaryPoliciesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists principal access boundary policies.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource, which owns the collection of principal
+ *   access boundary policies.
+ *
+ *   Format:
+ *     `organizations/{organization_id}/locations/{location}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of principal access boundary policies to
+ *   return. The service may return fewer than this value.
+ *
+ *   If unspecified, at most 50 principal access boundary policies will be
+ *   returned. The maximum value is 1000; values above 1000 will be coerced to
+ *   1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous
+ *   `ListPrincipalAccessBoundaryPolicies` call. Provide this to retrieve the
+ *   subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `ListPrincipalAccessBoundaryPolicies` must match the call that provided the
+ *   page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.iam.v3.PrincipalAccessBoundaryPolicy|PrincipalAccessBoundaryPolicy}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listPrincipalAccessBoundaryPoliciesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listPrincipalAccessBoundaryPolicies(
-    request?: protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v3.IPrincipalAccessBoundaryPolicy[],
-      protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesRequest | null,
-      protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesResponse,
-    ]
-  >;
+      request?: protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v3.IPrincipalAccessBoundaryPolicy[],
+        protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesRequest|null,
+        protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesResponse
+      ]>;
   listPrincipalAccessBoundaryPolicies(
-    request: protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesRequest,
-      | protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesResponse
-      | null
-      | undefined,
-      protos.google.iam.v3.IPrincipalAccessBoundaryPolicy
-    >
-  ): void;
-  listPrincipalAccessBoundaryPolicies(
-    request: protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesRequest,
-    callback: PaginationCallback<
-      protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesRequest,
-      | protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesResponse
-      | null
-      | undefined,
-      protos.google.iam.v3.IPrincipalAccessBoundaryPolicy
-    >
-  ): void;
-  listPrincipalAccessBoundaryPolicies(
-    request?: protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesRequest,
-          | protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesResponse
-          | null
-          | undefined,
-          protos.google.iam.v3.IPrincipalAccessBoundaryPolicy
-        >,
-    callback?: PaginationCallback<
-      protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesRequest,
-      | protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesResponse
-      | null
-      | undefined,
-      protos.google.iam.v3.IPrincipalAccessBoundaryPolicy
-    >
-  ): Promise<
-    [
-      protos.google.iam.v3.IPrincipalAccessBoundaryPolicy[],
-      protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesRequest | null,
-      protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesResponse,
-    ]
-  > | void {
+          protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesResponse|null|undefined,
+          protos.google.iam.v3.IPrincipalAccessBoundaryPolicy>): void;
+  listPrincipalAccessBoundaryPolicies(
+      request: protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesRequest,
+      callback: PaginationCallback<
+          protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesRequest,
+          protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesResponse|null|undefined,
+          protos.google.iam.v3.IPrincipalAccessBoundaryPolicy>): void;
+  listPrincipalAccessBoundaryPolicies(
+      request?: protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesRequest,
+          protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesResponse|null|undefined,
+          protos.google.iam.v3.IPrincipalAccessBoundaryPolicy>,
+      callback?: PaginationCallback<
+          protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesRequest,
+          protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesResponse|null|undefined,
+          protos.google.iam.v3.IPrincipalAccessBoundaryPolicy>):
+      Promise<[
+        protos.google.iam.v3.IPrincipalAccessBoundaryPolicy[],
+        protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesRequest|null,
+        protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesRequest,
-          | protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesResponse
-          | null
-          | undefined,
-          protos.google.iam.v3.IPrincipalAccessBoundaryPolicy
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesRequest,
+      protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesResponse|null|undefined,
+      protos.google.iam.v3.IPrincipalAccessBoundaryPolicy>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info(
-            'listPrincipalAccessBoundaryPolicies values %j',
-            values
-          );
+          this._log.info('listPrincipalAccessBoundaryPolicies values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
     this._log.info('listPrincipalAccessBoundaryPolicies request %j', request);
     return this.innerApiCalls
       .listPrincipalAccessBoundaryPolicies(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.iam.v3.IPrincipalAccessBoundaryPolicy[],
-          protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesRequest | null,
-          protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesResponse,
-        ]) => {
-          this._log.info(
-            'listPrincipalAccessBoundaryPolicies values %j',
-            response
-          );
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.iam.v3.IPrincipalAccessBoundaryPolicy[],
+        protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesRequest|null,
+        protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesResponse
+      ]) => {
+        this._log.info('listPrincipalAccessBoundaryPolicies values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listPrincipalAccessBoundaryPolicies`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource, which owns the collection of principal
-   *   access boundary policies.
-   *
-   *   Format:
-   *     `organizations/{organization_id}/locations/{location}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of principal access boundary policies to
-   *   return. The service may return fewer than this value.
-   *
-   *   If unspecified, at most 50 principal access boundary policies will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous
-   *   `ListPrincipalAccessBoundaryPolicies` call. Provide this to retrieve the
-   *   subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `ListPrincipalAccessBoundaryPolicies` must match the call that provided the
-   *   page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.iam.v3.PrincipalAccessBoundaryPolicy|PrincipalAccessBoundaryPolicy} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listPrincipalAccessBoundaryPoliciesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listPrincipalAccessBoundaryPolicies`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource, which owns the collection of principal
+ *   access boundary policies.
+ *
+ *   Format:
+ *     `organizations/{organization_id}/locations/{location}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of principal access boundary policies to
+ *   return. The service may return fewer than this value.
+ *
+ *   If unspecified, at most 50 principal access boundary policies will be
+ *   returned. The maximum value is 1000; values above 1000 will be coerced to
+ *   1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous
+ *   `ListPrincipalAccessBoundaryPolicies` call. Provide this to retrieve the
+ *   subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `ListPrincipalAccessBoundaryPolicies` must match the call that provided the
+ *   page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.iam.v3.PrincipalAccessBoundaryPolicy|PrincipalAccessBoundaryPolicy} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listPrincipalAccessBoundaryPoliciesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listPrincipalAccessBoundaryPoliciesStream(
-    request?: protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    const defaultCallSettings =
-      this._defaults['listPrincipalAccessBoundaryPolicies'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    const defaultCallSettings = this._defaults['listPrincipalAccessBoundaryPolicies'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
     this._log.info('listPrincipalAccessBoundaryPolicies stream %j', request);
     return this.descriptors.page.listPrincipalAccessBoundaryPolicies.createStream(
       this.innerApiCalls.listPrincipalAccessBoundaryPolicies as GaxCall,
@@ -1407,63 +1035,61 @@ export class PrincipalAccessBoundaryPoliciesClient {
     );
   }
 
-  /**
-   * Equivalent to `listPrincipalAccessBoundaryPolicies`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource, which owns the collection of principal
-   *   access boundary policies.
-   *
-   *   Format:
-   *     `organizations/{organization_id}/locations/{location}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of principal access boundary policies to
-   *   return. The service may return fewer than this value.
-   *
-   *   If unspecified, at most 50 principal access boundary policies will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous
-   *   `ListPrincipalAccessBoundaryPolicies` call. Provide this to retrieve the
-   *   subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `ListPrincipalAccessBoundaryPolicies` must match the call that provided the
-   *   page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.iam.v3.PrincipalAccessBoundaryPolicy|PrincipalAccessBoundaryPolicy}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3/principal_access_boundary_policies.list_principal_access_boundary_policies.js</caption>
-   * region_tag:iam_v3_generated_PrincipalAccessBoundaryPolicies_ListPrincipalAccessBoundaryPolicies_async
-   */
+/**
+ * Equivalent to `listPrincipalAccessBoundaryPolicies`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource, which owns the collection of principal
+ *   access boundary policies.
+ *
+ *   Format:
+ *     `organizations/{organization_id}/locations/{location}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of principal access boundary policies to
+ *   return. The service may return fewer than this value.
+ *
+ *   If unspecified, at most 50 principal access boundary policies will be
+ *   returned. The maximum value is 1000; values above 1000 will be coerced to
+ *   1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous
+ *   `ListPrincipalAccessBoundaryPolicies` call. Provide this to retrieve the
+ *   subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `ListPrincipalAccessBoundaryPolicies` must match the call that provided the
+ *   page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.iam.v3.PrincipalAccessBoundaryPolicy|PrincipalAccessBoundaryPolicy}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/principal_access_boundary_policies.list_principal_access_boundary_policies.js</caption>
+ * region_tag:iam_v3_generated_PrincipalAccessBoundaryPolicies_ListPrincipalAccessBoundaryPolicies_async
+ */
   listPrincipalAccessBoundaryPoliciesAsync(
-    request?: protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.iam.v3.IPrincipalAccessBoundaryPolicy> {
+      request?: protos.google.iam.v3.IListPrincipalAccessBoundaryPoliciesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.iam.v3.IPrincipalAccessBoundaryPolicy>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    const defaultCallSettings =
-      this._defaults['listPrincipalAccessBoundaryPolicies'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    const defaultCallSettings = this._defaults['listPrincipalAccessBoundaryPolicies'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
     this._log.info('listPrincipalAccessBoundaryPolicies iterate %j', request);
     return this.descriptors.page.listPrincipalAccessBoundaryPolicies.asyncIterate(
       this.innerApiCalls['listPrincipalAccessBoundaryPolicies'] as GaxCall,
@@ -1471,213 +1097,168 @@ export class PrincipalAccessBoundaryPoliciesClient {
       callSettings
     ) as AsyncIterable<protos.google.iam.v3.IPrincipalAccessBoundaryPolicy>;
   }
-  /**
-   * Returns all policy bindings that bind a specific policy if a user has
-   * searchPolicyBindings permission on that policy.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the principal access boundary policy.
-   *   Format:
-   *    `organizations/{organization_id}/locations/{location}/principalAccessBoundaryPolicies/{principal_access_boundary_policy_id}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of policy bindings to return. The service may
-   *   return fewer than this value.
-   *
-   *   If unspecified, at most 50 policy bindings will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous
-   *   `SearchPrincipalAccessBoundaryPolicyBindingsRequest` call. Provide this to
-   *   retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `SearchPrincipalAccessBoundaryPolicyBindingsRequest` must match the call
-   *   that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.iam.v3.PolicyBinding|PolicyBinding}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `searchPrincipalAccessBoundaryPolicyBindingsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Returns all policy bindings that bind a specific policy if a user has
+ * searchPolicyBindings permission on that policy.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the principal access boundary policy.
+ *   Format:
+ *    `organizations/{organization_id}/locations/{location}/principalAccessBoundaryPolicies/{principal_access_boundary_policy_id}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of policy bindings to return. The service may
+ *   return fewer than this value.
+ *
+ *   If unspecified, at most 50 policy bindings will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous
+ *   `SearchPrincipalAccessBoundaryPolicyBindingsRequest` call. Provide this to
+ *   retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `SearchPrincipalAccessBoundaryPolicyBindingsRequest` must match the call
+ *   that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.iam.v3.PolicyBinding|PolicyBinding}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `searchPrincipalAccessBoundaryPolicyBindingsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   searchPrincipalAccessBoundaryPolicyBindings(
-    request?: protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v3.IPolicyBinding[],
-      protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsRequest | null,
-      protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsResponse,
-    ]
-  >;
+      request?: protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v3.IPolicyBinding[],
+        protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsRequest|null,
+        protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsResponse
+      ]>;
   searchPrincipalAccessBoundaryPolicyBindings(
-    request: protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsRequest,
-      | protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsResponse
-      | null
-      | undefined,
-      protos.google.iam.v3.IPolicyBinding
-    >
-  ): void;
-  searchPrincipalAccessBoundaryPolicyBindings(
-    request: protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsRequest,
-    callback: PaginationCallback<
-      protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsRequest,
-      | protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsResponse
-      | null
-      | undefined,
-      protos.google.iam.v3.IPolicyBinding
-    >
-  ): void;
-  searchPrincipalAccessBoundaryPolicyBindings(
-    request?: protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsRequest,
-          | protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsResponse
-          | null
-          | undefined,
-          protos.google.iam.v3.IPolicyBinding
-        >,
-    callback?: PaginationCallback<
-      protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsRequest,
-      | protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsResponse
-      | null
-      | undefined,
-      protos.google.iam.v3.IPolicyBinding
-    >
-  ): Promise<
-    [
-      protos.google.iam.v3.IPolicyBinding[],
-      protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsRequest | null,
-      protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsResponse,
-    ]
-  > | void {
+          protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsResponse|null|undefined,
+          protos.google.iam.v3.IPolicyBinding>): void;
+  searchPrincipalAccessBoundaryPolicyBindings(
+      request: protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsRequest,
+      callback: PaginationCallback<
+          protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsRequest,
+          protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsResponse|null|undefined,
+          protos.google.iam.v3.IPolicyBinding>): void;
+  searchPrincipalAccessBoundaryPolicyBindings(
+      request?: protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsRequest,
+          protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsResponse|null|undefined,
+          protos.google.iam.v3.IPolicyBinding>,
+      callback?: PaginationCallback<
+          protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsRequest,
+          protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsResponse|null|undefined,
+          protos.google.iam.v3.IPolicyBinding>):
+      Promise<[
+        protos.google.iam.v3.IPolicyBinding[],
+        protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsRequest|null,
+        protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsRequest,
-          | protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsResponse
-          | null
-          | undefined,
-          protos.google.iam.v3.IPolicyBinding
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsRequest,
+      protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsResponse|null|undefined,
+      protos.google.iam.v3.IPolicyBinding>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info(
-            'searchPrincipalAccessBoundaryPolicyBindings values %j',
-            values
-          );
+          this._log.info('searchPrincipalAccessBoundaryPolicyBindings values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info(
-      'searchPrincipalAccessBoundaryPolicyBindings request %j',
-      request
-    );
+    this._log.info('searchPrincipalAccessBoundaryPolicyBindings request %j', request);
     return this.innerApiCalls
-      .searchPrincipalAccessBoundaryPolicyBindings(
-        request,
-        options,
-        wrappedCallback
-      )
-      ?.then(
-        ([response, input, output]: [
-          protos.google.iam.v3.IPolicyBinding[],
-          protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsRequest | null,
-          protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsResponse,
-        ]) => {
-          this._log.info(
-            'searchPrincipalAccessBoundaryPolicyBindings values %j',
-            response
-          );
-          return [response, input, output];
-        }
-      );
+      .searchPrincipalAccessBoundaryPolicyBindings(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.iam.v3.IPolicyBinding[],
+        protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsRequest|null,
+        protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsResponse
+      ]) => {
+        this._log.info('searchPrincipalAccessBoundaryPolicyBindings values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `searchPrincipalAccessBoundaryPolicyBindings`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the principal access boundary policy.
-   *   Format:
-   *    `organizations/{organization_id}/locations/{location}/principalAccessBoundaryPolicies/{principal_access_boundary_policy_id}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of policy bindings to return. The service may
-   *   return fewer than this value.
-   *
-   *   If unspecified, at most 50 policy bindings will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous
-   *   `SearchPrincipalAccessBoundaryPolicyBindingsRequest` call. Provide this to
-   *   retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `SearchPrincipalAccessBoundaryPolicyBindingsRequest` must match the call
-   *   that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.iam.v3.PolicyBinding|PolicyBinding} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `searchPrincipalAccessBoundaryPolicyBindingsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `searchPrincipalAccessBoundaryPolicyBindings`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the principal access boundary policy.
+ *   Format:
+ *    `organizations/{organization_id}/locations/{location}/principalAccessBoundaryPolicies/{principal_access_boundary_policy_id}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of policy bindings to return. The service may
+ *   return fewer than this value.
+ *
+ *   If unspecified, at most 50 policy bindings will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous
+ *   `SearchPrincipalAccessBoundaryPolicyBindingsRequest` call. Provide this to
+ *   retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `SearchPrincipalAccessBoundaryPolicyBindingsRequest` must match the call
+ *   that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.iam.v3.PolicyBinding|PolicyBinding} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `searchPrincipalAccessBoundaryPolicyBindingsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   searchPrincipalAccessBoundaryPolicyBindingsStream(
-    request?: protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    const defaultCallSettings =
-      this._defaults['searchPrincipalAccessBoundaryPolicyBindings'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    this._log.info(
-      'searchPrincipalAccessBoundaryPolicyBindings stream %j',
-      request
-    );
+    const defaultCallSettings = this._defaults['searchPrincipalAccessBoundaryPolicyBindings'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('searchPrincipalAccessBoundaryPolicyBindings stream %j', request);
     return this.descriptors.page.searchPrincipalAccessBoundaryPolicyBindings.createStream(
       this.innerApiCalls.searchPrincipalAccessBoundaryPolicyBindings as GaxCall,
       request,
@@ -1685,73 +1266,66 @@ export class PrincipalAccessBoundaryPoliciesClient {
     );
   }
 
-  /**
-   * Equivalent to `searchPrincipalAccessBoundaryPolicyBindings`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the principal access boundary policy.
-   *   Format:
-   *    `organizations/{organization_id}/locations/{location}/principalAccessBoundaryPolicies/{principal_access_boundary_policy_id}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of policy bindings to return. The service may
-   *   return fewer than this value.
-   *
-   *   If unspecified, at most 50 policy bindings will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous
-   *   `SearchPrincipalAccessBoundaryPolicyBindingsRequest` call. Provide this to
-   *   retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `SearchPrincipalAccessBoundaryPolicyBindingsRequest` must match the call
-   *   that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.iam.v3.PolicyBinding|PolicyBinding}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3/principal_access_boundary_policies.search_principal_access_boundary_policy_bindings.js</caption>
-   * region_tag:iam_v3_generated_PrincipalAccessBoundaryPolicies_SearchPrincipalAccessBoundaryPolicyBindings_async
-   */
+/**
+ * Equivalent to `searchPrincipalAccessBoundaryPolicyBindings`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the principal access boundary policy.
+ *   Format:
+ *    `organizations/{organization_id}/locations/{location}/principalAccessBoundaryPolicies/{principal_access_boundary_policy_id}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of policy bindings to return. The service may
+ *   return fewer than this value.
+ *
+ *   If unspecified, at most 50 policy bindings will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous
+ *   `SearchPrincipalAccessBoundaryPolicyBindingsRequest` call. Provide this to
+ *   retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `SearchPrincipalAccessBoundaryPolicyBindingsRequest` must match the call
+ *   that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.iam.v3.PolicyBinding|PolicyBinding}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/principal_access_boundary_policies.search_principal_access_boundary_policy_bindings.js</caption>
+ * region_tag:iam_v3_generated_PrincipalAccessBoundaryPolicies_SearchPrincipalAccessBoundaryPolicyBindings_async
+ */
   searchPrincipalAccessBoundaryPolicyBindingsAsync(
-    request?: protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.iam.v3.IPolicyBinding> {
+      request?: protos.google.iam.v3.ISearchPrincipalAccessBoundaryPolicyBindingsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.iam.v3.IPolicyBinding>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    const defaultCallSettings =
-      this._defaults['searchPrincipalAccessBoundaryPolicyBindings'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    this._log.info(
-      'searchPrincipalAccessBoundaryPolicyBindings iterate %j',
-      request
-    );
+    const defaultCallSettings = this._defaults['searchPrincipalAccessBoundaryPolicyBindings'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('searchPrincipalAccessBoundaryPolicyBindings iterate %j', request);
     return this.descriptors.page.searchPrincipalAccessBoundaryPolicyBindings.asyncIterate(
-      this.innerApiCalls[
-        'searchPrincipalAccessBoundaryPolicyBindings'
-      ] as GaxCall,
+      this.innerApiCalls['searchPrincipalAccessBoundaryPolicyBindings'] as GaxCall,
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.iam.v3.IPolicyBinding>;
   }
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1791,7 +1365,7 @@ export class PrincipalAccessBoundaryPoliciesClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1829,7 +1403,7 @@ export class PrincipalAccessBoundaryPoliciesClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1874,20 +1448,20 @@ export class PrincipalAccessBoundaryPoliciesClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1924,13 +1498,13 @@ export class PrincipalAccessBoundaryPoliciesClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1964,7 +1538,7 @@ export class PrincipalAccessBoundaryPoliciesClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -1979,20 +1553,20 @@ export class PrincipalAccessBoundaryPoliciesClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -2036,20 +1610,20 @@ export class PrincipalAccessBoundaryPoliciesClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -2058,19 +1632,15 @@ export class PrincipalAccessBoundaryPoliciesClient {
   // --------------------
 
   /**
-   * Return a fully-qualified folderLocationPolicyBinding resource name string.
+   * Return a fully-qualified folderLocationPolicyBindings resource name string.
    *
    * @param {string} folder
    * @param {string} location
    * @param {string} policy_binding
    * @returns {string} Resource name string.
    */
-  folderLocationPolicyBindingPath(
-    folder: string,
-    location: string,
-    policyBinding: string
-  ) {
-    return this.pathTemplates.folderLocationPolicyBindingPathTemplate.render({
+  folderLocationPolicyBindingsPath(folder:string,location:string,policyBinding:string) {
+    return this.pathTemplates.folderLocationPolicyBindingsPathTemplate.render({
       folder: folder,
       location: location,
       policy_binding: policyBinding,
@@ -2078,48 +1648,36 @@ export class PrincipalAccessBoundaryPoliciesClient {
   }
 
   /**
-   * Parse the folder from FolderLocationPolicyBinding resource.
+   * Parse the folder from FolderLocationPolicyBindings resource.
    *
-   * @param {string} folderLocationPolicyBindingName
-   *   A fully-qualified path representing folder_location_policy_binding resource.
+   * @param {string} folderLocationPolicyBindingsName
+   *   A fully-qualified path representing folder_location_policyBindings resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderLocationPolicyBindingName(
-    folderLocationPolicyBindingName: string
-  ) {
-    return this.pathTemplates.folderLocationPolicyBindingPathTemplate.match(
-      folderLocationPolicyBindingName
-    ).folder;
+  matchFolderFromFolderLocationPolicyBindingsName(folderLocationPolicyBindingsName: string) {
+    return this.pathTemplates.folderLocationPolicyBindingsPathTemplate.match(folderLocationPolicyBindingsName).folder;
   }
 
   /**
-   * Parse the location from FolderLocationPolicyBinding resource.
+   * Parse the location from FolderLocationPolicyBindings resource.
    *
-   * @param {string} folderLocationPolicyBindingName
-   *   A fully-qualified path representing folder_location_policy_binding resource.
+   * @param {string} folderLocationPolicyBindingsName
+   *   A fully-qualified path representing folder_location_policyBindings resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromFolderLocationPolicyBindingName(
-    folderLocationPolicyBindingName: string
-  ) {
-    return this.pathTemplates.folderLocationPolicyBindingPathTemplate.match(
-      folderLocationPolicyBindingName
-    ).location;
+  matchLocationFromFolderLocationPolicyBindingsName(folderLocationPolicyBindingsName: string) {
+    return this.pathTemplates.folderLocationPolicyBindingsPathTemplate.match(folderLocationPolicyBindingsName).location;
   }
 
   /**
-   * Parse the policy_binding from FolderLocationPolicyBinding resource.
+   * Parse the policy_binding from FolderLocationPolicyBindings resource.
    *
-   * @param {string} folderLocationPolicyBindingName
-   *   A fully-qualified path representing folder_location_policy_binding resource.
+   * @param {string} folderLocationPolicyBindingsName
+   *   A fully-qualified path representing folder_location_policyBindings resource.
    * @returns {string} A string representing the policy_binding.
    */
-  matchPolicyBindingFromFolderLocationPolicyBindingName(
-    folderLocationPolicyBindingName: string
-  ) {
-    return this.pathTemplates.folderLocationPolicyBindingPathTemplate.match(
-      folderLocationPolicyBindingName
-    ).policy_binding;
+  matchPolicyBindingFromFolderLocationPolicyBindingsName(folderLocationPolicyBindingsName: string) {
+    return this.pathTemplates.folderLocationPolicyBindingsPathTemplate.match(folderLocationPolicyBindingsName).policy_binding;
   }
 
   /**
@@ -2128,7 +1686,7 @@ export class PrincipalAccessBoundaryPoliciesClient {
    * @param {string} organization
    * @returns {string} Resource name string.
    */
-  organizationPath(organization: string) {
+  organizationPath(organization:string) {
     return this.pathTemplates.organizationPathTemplate.render({
       organization: organization,
     });
@@ -2142,8 +1700,7 @@ export class PrincipalAccessBoundaryPoliciesClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationName(organizationName: string) {
-    return this.pathTemplates.organizationPathTemplate.match(organizationName)
-      .organization;
+    return this.pathTemplates.organizationPathTemplate.match(organizationName).organization;
   }
 
   /**
@@ -2153,7 +1710,7 @@ export class PrincipalAccessBoundaryPoliciesClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  organizationLocationPath(organization: string, location: string) {
+  organizationLocationPath(organization:string,location:string) {
     return this.pathTemplates.organizationLocationPathTemplate.render({
       organization: organization,
       location: location,
@@ -2167,12 +1724,8 @@ export class PrincipalAccessBoundaryPoliciesClient {
    *   A fully-qualified path representing OrganizationLocation resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationName(
-    organizationLocationName: string
-  ) {
-    return this.pathTemplates.organizationLocationPathTemplate.match(
-      organizationLocationName
-    ).organization;
+  matchOrganizationFromOrganizationLocationName(organizationLocationName: string) {
+    return this.pathTemplates.organizationLocationPathTemplate.match(organizationLocationName).organization;
   }
 
   /**
@@ -2183,76 +1736,56 @@ export class PrincipalAccessBoundaryPoliciesClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromOrganizationLocationName(organizationLocationName: string) {
-    return this.pathTemplates.organizationLocationPathTemplate.match(
-      organizationLocationName
-    ).location;
+    return this.pathTemplates.organizationLocationPathTemplate.match(organizationLocationName).location;
   }
 
   /**
-   * Return a fully-qualified organizationLocationPolicyBinding resource name string.
+   * Return a fully-qualified organizationLocationPolicyBindings resource name string.
    *
    * @param {string} organization
    * @param {string} location
    * @param {string} policy_binding
    * @returns {string} Resource name string.
    */
-  organizationLocationPolicyBindingPath(
-    organization: string,
-    location: string,
-    policyBinding: string
-  ) {
-    return this.pathTemplates.organizationLocationPolicyBindingPathTemplate.render(
-      {
-        organization: organization,
-        location: location,
-        policy_binding: policyBinding,
-      }
-    );
+  organizationLocationPolicyBindingsPath(organization:string,location:string,policyBinding:string) {
+    return this.pathTemplates.organizationLocationPolicyBindingsPathTemplate.render({
+      organization: organization,
+      location: location,
+      policy_binding: policyBinding,
+    });
   }
 
   /**
-   * Parse the organization from OrganizationLocationPolicyBinding resource.
+   * Parse the organization from OrganizationLocationPolicyBindings resource.
    *
-   * @param {string} organizationLocationPolicyBindingName
-   *   A fully-qualified path representing organization_location_policy_binding resource.
+   * @param {string} organizationLocationPolicyBindingsName
+   *   A fully-qualified path representing organization_location_policyBindings resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationPolicyBindingName(
-    organizationLocationPolicyBindingName: string
-  ) {
-    return this.pathTemplates.organizationLocationPolicyBindingPathTemplate.match(
-      organizationLocationPolicyBindingName
-    ).organization;
+  matchOrganizationFromOrganizationLocationPolicyBindingsName(organizationLocationPolicyBindingsName: string) {
+    return this.pathTemplates.organizationLocationPolicyBindingsPathTemplate.match(organizationLocationPolicyBindingsName).organization;
   }
 
   /**
-   * Parse the location from OrganizationLocationPolicyBinding resource.
+   * Parse the location from OrganizationLocationPolicyBindings resource.
    *
-   * @param {string} organizationLocationPolicyBindingName
-   *   A fully-qualified path representing organization_location_policy_binding resource.
+   * @param {string} organizationLocationPolicyBindingsName
+   *   A fully-qualified path representing organization_location_policyBindings resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationPolicyBindingName(
-    organizationLocationPolicyBindingName: string
-  ) {
-    return this.pathTemplates.organizationLocationPolicyBindingPathTemplate.match(
-      organizationLocationPolicyBindingName
-    ).location;
+  matchLocationFromOrganizationLocationPolicyBindingsName(organizationLocationPolicyBindingsName: string) {
+    return this.pathTemplates.organizationLocationPolicyBindingsPathTemplate.match(organizationLocationPolicyBindingsName).location;
   }
 
   /**
-   * Parse the policy_binding from OrganizationLocationPolicyBinding resource.
+   * Parse the policy_binding from OrganizationLocationPolicyBindings resource.
    *
-   * @param {string} organizationLocationPolicyBindingName
-   *   A fully-qualified path representing organization_location_policy_binding resource.
+   * @param {string} organizationLocationPolicyBindingsName
+   *   A fully-qualified path representing organization_location_policyBindings resource.
    * @returns {string} A string representing the policy_binding.
    */
-  matchPolicyBindingFromOrganizationLocationPolicyBindingName(
-    organizationLocationPolicyBindingName: string
-  ) {
-    return this.pathTemplates.organizationLocationPolicyBindingPathTemplate.match(
-      organizationLocationPolicyBindingName
-    ).policy_binding;
+  matchPolicyBindingFromOrganizationLocationPolicyBindingsName(organizationLocationPolicyBindingsName: string) {
+    return this.pathTemplates.organizationLocationPolicyBindingsPathTemplate.match(organizationLocationPolicyBindingsName).policy_binding;
   }
 
   /**
@@ -2263,11 +1796,7 @@ export class PrincipalAccessBoundaryPoliciesClient {
    * @param {string} principal_access_boundary_policy
    * @returns {string} Resource name string.
    */
-  principalAccessBoundaryPolicyPath(
-    organization: string,
-    location: string,
-    principalAccessBoundaryPolicy: string
-  ) {
+  principalAccessBoundaryPolicyPath(organization:string,location:string,principalAccessBoundaryPolicy:string) {
     return this.pathTemplates.principalAccessBoundaryPolicyPathTemplate.render({
       organization: organization,
       location: location,
@@ -2282,12 +1811,8 @@ export class PrincipalAccessBoundaryPoliciesClient {
    *   A fully-qualified path representing PrincipalAccessBoundaryPolicy resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromPrincipalAccessBoundaryPolicyName(
-    principalAccessBoundaryPolicyName: string
-  ) {
-    return this.pathTemplates.principalAccessBoundaryPolicyPathTemplate.match(
-      principalAccessBoundaryPolicyName
-    ).organization;
+  matchOrganizationFromPrincipalAccessBoundaryPolicyName(principalAccessBoundaryPolicyName: string) {
+    return this.pathTemplates.principalAccessBoundaryPolicyPathTemplate.match(principalAccessBoundaryPolicyName).organization;
   }
 
   /**
@@ -2297,12 +1822,8 @@ export class PrincipalAccessBoundaryPoliciesClient {
    *   A fully-qualified path representing PrincipalAccessBoundaryPolicy resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromPrincipalAccessBoundaryPolicyName(
-    principalAccessBoundaryPolicyName: string
-  ) {
-    return this.pathTemplates.principalAccessBoundaryPolicyPathTemplate.match(
-      principalAccessBoundaryPolicyName
-    ).location;
+  matchLocationFromPrincipalAccessBoundaryPolicyName(principalAccessBoundaryPolicyName: string) {
+    return this.pathTemplates.principalAccessBoundaryPolicyPathTemplate.match(principalAccessBoundaryPolicyName).location;
   }
 
   /**
@@ -2312,28 +1833,20 @@ export class PrincipalAccessBoundaryPoliciesClient {
    *   A fully-qualified path representing PrincipalAccessBoundaryPolicy resource.
    * @returns {string} A string representing the principal_access_boundary_policy.
    */
-  matchPrincipalAccessBoundaryPolicyFromPrincipalAccessBoundaryPolicyName(
-    principalAccessBoundaryPolicyName: string
-  ) {
-    return this.pathTemplates.principalAccessBoundaryPolicyPathTemplate.match(
-      principalAccessBoundaryPolicyName
-    ).principal_access_boundary_policy;
+  matchPrincipalAccessBoundaryPolicyFromPrincipalAccessBoundaryPolicyName(principalAccessBoundaryPolicyName: string) {
+    return this.pathTemplates.principalAccessBoundaryPolicyPathTemplate.match(principalAccessBoundaryPolicyName).principal_access_boundary_policy;
   }
 
   /**
-   * Return a fully-qualified projectLocationPolicyBinding resource name string.
+   * Return a fully-qualified projectLocationPolicyBindings resource name string.
    *
    * @param {string} project
    * @param {string} location
    * @param {string} policy_binding
    * @returns {string} Resource name string.
    */
-  projectLocationPolicyBindingPath(
-    project: string,
-    location: string,
-    policyBinding: string
-  ) {
-    return this.pathTemplates.projectLocationPolicyBindingPathTemplate.render({
+  projectLocationPolicyBindingsPath(project:string,location:string,policyBinding:string) {
+    return this.pathTemplates.projectLocationPolicyBindingsPathTemplate.render({
       project: project,
       location: location,
       policy_binding: policyBinding,
@@ -2341,48 +1854,36 @@ export class PrincipalAccessBoundaryPoliciesClient {
   }
 
   /**
-   * Parse the project from ProjectLocationPolicyBinding resource.
+   * Parse the project from ProjectLocationPolicyBindings resource.
    *
-   * @param {string} projectLocationPolicyBindingName
-   *   A fully-qualified path representing project_location_policy_binding resource.
+   * @param {string} projectLocationPolicyBindingsName
+   *   A fully-qualified path representing project_location_policyBindings resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationPolicyBindingName(
-    projectLocationPolicyBindingName: string
-  ) {
-    return this.pathTemplates.projectLocationPolicyBindingPathTemplate.match(
-      projectLocationPolicyBindingName
-    ).project;
+  matchProjectFromProjectLocationPolicyBindingsName(projectLocationPolicyBindingsName: string) {
+    return this.pathTemplates.projectLocationPolicyBindingsPathTemplate.match(projectLocationPolicyBindingsName).project;
   }
 
   /**
-   * Parse the location from ProjectLocationPolicyBinding resource.
+   * Parse the location from ProjectLocationPolicyBindings resource.
    *
-   * @param {string} projectLocationPolicyBindingName
-   *   A fully-qualified path representing project_location_policy_binding resource.
+   * @param {string} projectLocationPolicyBindingsName
+   *   A fully-qualified path representing project_location_policyBindings resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationPolicyBindingName(
-    projectLocationPolicyBindingName: string
-  ) {
-    return this.pathTemplates.projectLocationPolicyBindingPathTemplate.match(
-      projectLocationPolicyBindingName
-    ).location;
+  matchLocationFromProjectLocationPolicyBindingsName(projectLocationPolicyBindingsName: string) {
+    return this.pathTemplates.projectLocationPolicyBindingsPathTemplate.match(projectLocationPolicyBindingsName).location;
   }
 
   /**
-   * Parse the policy_binding from ProjectLocationPolicyBinding resource.
+   * Parse the policy_binding from ProjectLocationPolicyBindings resource.
    *
-   * @param {string} projectLocationPolicyBindingName
-   *   A fully-qualified path representing project_location_policy_binding resource.
+   * @param {string} projectLocationPolicyBindingsName
+   *   A fully-qualified path representing project_location_policyBindings resource.
    * @returns {string} A string representing the policy_binding.
    */
-  matchPolicyBindingFromProjectLocationPolicyBindingName(
-    projectLocationPolicyBindingName: string
-  ) {
-    return this.pathTemplates.projectLocationPolicyBindingPathTemplate.match(
-      projectLocationPolicyBindingName
-    ).policy_binding;
+  matchPolicyBindingFromProjectLocationPolicyBindingsName(projectLocationPolicyBindingsName: string) {
+    return this.pathTemplates.projectLocationPolicyBindingsPathTemplate.match(projectLocationPolicyBindingsName).policy_binding;
   }
 
   /**
@@ -2397,9 +1898,7 @@ export class PrincipalAccessBoundaryPoliciesClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.locationsClient.close().catch(err => {throw err});
         void this.operationsClient.close();
       });
     }

@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -107,41 +100,20 @@ export class MapsPlatformDatasetsClient {
    *     const client = new MapsPlatformDatasetsClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof MapsPlatformDatasetsClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'mapsplatformdatasets.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -167,7 +139,7 @@ export class MapsPlatformDatasetsClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -181,7 +153,10 @@ export class MapsPlatformDatasetsClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -211,25 +186,16 @@ export class MapsPlatformDatasetsClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      fetchDatasetErrors: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'errors'
-      ),
-      listDatasets: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'datasets'
-      ),
+      fetchDatasetErrors:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'errors'),
+      listDatasets:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'datasets')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -260,43 +226,32 @@ export class MapsPlatformDatasetsClient {
     // Put together the "service stub" for
     // google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets.
     this.mapsPlatformDatasetsStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.maps.mapsplatformdatasets.v1
-            .MapsPlatformDatasets,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const mapsPlatformDatasetsStubMethods = [
-      'createDataset',
-      'updateDatasetMetadata',
-      'getDataset',
-      'fetchDatasetErrors',
-      'listDatasets',
-      'deleteDataset',
-    ];
+    const mapsPlatformDatasetsStubMethods =
+        ['createDataset', 'updateDatasetMetadata', 'getDataset', 'fetchDatasetErrors', 'listDatasets', 'deleteDataset'];
     for (const methodName of mapsPlatformDatasetsStubMethods) {
       const callPromise = this.mapsPlatformDatasetsStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -316,14 +271,8 @@ export class MapsPlatformDatasetsClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'mapsplatformdatasets.googleapis.com';
   }
@@ -334,14 +283,8 @@ export class MapsPlatformDatasetsClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'mapsplatformdatasets.googleapis.com';
   }
@@ -372,7 +315,9 @@ export class MapsPlatformDatasetsClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -381,9 +326,8 @@ export class MapsPlatformDatasetsClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -394,638 +338,487 @@ export class MapsPlatformDatasetsClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Creates a new dataset for the specified project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent project that will own the dataset.
-   *   Format: projects/{project}
-   * @param {google.maps.mapsplatformdatasets.v1.Dataset} request.dataset
-   *   Required. The dataset version to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.maps.mapsplatformdatasets.v1.Dataset|Dataset}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/maps_platform_datasets.create_dataset.js</caption>
-   * region_tag:mapsplatformdatasets_v1_generated_MapsPlatformDatasets_CreateDataset_async
-   */
+/**
+ * Creates a new dataset for the specified project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent project that will own the dataset.
+ *   Format: projects/{project}
+ * @param {google.maps.mapsplatformdatasets.v1.Dataset} request.dataset
+ *   Required. The dataset version to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.maps.mapsplatformdatasets.v1.Dataset|Dataset}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/maps_platform_datasets.create_dataset.js</caption>
+ * region_tag:mapsplatformdatasets_v1_generated_MapsPlatformDatasets_CreateDataset_async
+ */
   createDataset(
-    request?: protos.google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.maps.mapsplatformdatasets.v1.IDataset,
-      (
-        | protos.google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.maps.mapsplatformdatasets.v1.IDataset,
+        protos.google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest|undefined, {}|undefined
+      ]>;
   createDataset(
-    request: protos.google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.maps.mapsplatformdatasets.v1.IDataset,
-      | protos.google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createDataset(
-    request: protos.google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest,
-    callback: Callback<
-      protos.google.maps.mapsplatformdatasets.v1.IDataset,
-      | protos.google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createDataset(
-    request?: protos.google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.maps.mapsplatformdatasets.v1.IDataset,
-          | protos.google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.maps.mapsplatformdatasets.v1.IDataset,
-      | protos.google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.maps.mapsplatformdatasets.v1.IDataset,
-      (
-        | protos.google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest|null|undefined,
+          {}|null|undefined>): void;
+  createDataset(
+      request: protos.google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest,
+      callback: Callback<
+          protos.google.maps.mapsplatformdatasets.v1.IDataset,
+          protos.google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest|null|undefined,
+          {}|null|undefined>): void;
+  createDataset(
+      request?: protos.google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.maps.mapsplatformdatasets.v1.IDataset,
+          protos.google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.maps.mapsplatformdatasets.v1.IDataset,
+          protos.google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.maps.mapsplatformdatasets.v1.IDataset,
+        protos.google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createDataset request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.maps.mapsplatformdatasets.v1.IDataset,
-          | protos.google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.maps.mapsplatformdatasets.v1.IDataset,
+        protos.google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createDataset response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createDataset(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.maps.mapsplatformdatasets.v1.IDataset,
-          (
-            | protos.google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createDataset response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createDataset(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.maps.mapsplatformdatasets.v1.IDataset,
+        protos.google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createDataset response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates the metadata for the dataset.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.maps.mapsplatformdatasets.v1.Dataset} request.dataset
-   *   Required. Resource name of the dataset to update.
-   *   Format: projects/{project}/datasets/{dataset_id}
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The list of fields to be updated.
-   *
-   *   The value "*" is used for full replacement (default).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.maps.mapsplatformdatasets.v1.Dataset|Dataset}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/maps_platform_datasets.update_dataset_metadata.js</caption>
-   * region_tag:mapsplatformdatasets_v1_generated_MapsPlatformDatasets_UpdateDatasetMetadata_async
-   */
+/**
+ * Updates the metadata for the dataset.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.maps.mapsplatformdatasets.v1.Dataset} request.dataset
+ *   Required. Resource name of the dataset to update.
+ *   Format: projects/{project}/datasets/{dataset_id}
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   The list of fields to be updated.
+ *
+ *   The value "*" is used for full replacement (default).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.maps.mapsplatformdatasets.v1.Dataset|Dataset}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/maps_platform_datasets.update_dataset_metadata.js</caption>
+ * region_tag:mapsplatformdatasets_v1_generated_MapsPlatformDatasets_UpdateDatasetMetadata_async
+ */
   updateDatasetMetadata(
-    request?: protos.google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.maps.mapsplatformdatasets.v1.IDataset,
-      (
-        | protos.google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.maps.mapsplatformdatasets.v1.IDataset,
+        protos.google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest|undefined, {}|undefined
+      ]>;
   updateDatasetMetadata(
-    request: protos.google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.maps.mapsplatformdatasets.v1.IDataset,
-      | protos.google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateDatasetMetadata(
-    request: protos.google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest,
-    callback: Callback<
-      protos.google.maps.mapsplatformdatasets.v1.IDataset,
-      | protos.google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateDatasetMetadata(
-    request?: protos.google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.maps.mapsplatformdatasets.v1.IDataset,
-          | protos.google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.maps.mapsplatformdatasets.v1.IDataset,
-      | protos.google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.maps.mapsplatformdatasets.v1.IDataset,
-      (
-        | protos.google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateDatasetMetadata(
+      request: protos.google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest,
+      callback: Callback<
+          protos.google.maps.mapsplatformdatasets.v1.IDataset,
+          protos.google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateDatasetMetadata(
+      request?: protos.google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.maps.mapsplatformdatasets.v1.IDataset,
+          protos.google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.maps.mapsplatformdatasets.v1.IDataset,
+          protos.google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.maps.mapsplatformdatasets.v1.IDataset,
+        protos.google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'dataset.name': request.dataset!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'dataset.name': request.dataset!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateDatasetMetadata request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.maps.mapsplatformdatasets.v1.IDataset,
-          | protos.google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.maps.mapsplatformdatasets.v1.IDataset,
+        protos.google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateDatasetMetadata response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateDatasetMetadata(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.maps.mapsplatformdatasets.v1.IDataset,
-          (
-            | protos.google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateDatasetMetadata response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateDatasetMetadata(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.maps.mapsplatformdatasets.v1.IDataset,
+        protos.google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateDatasetMetadata response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets the dataset.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name.
-   *   Format: projects/{project}/datasets/{dataset_id}
-   *
-   *
-   *   Can also fetch some special versions by appending "@" and a tag.
-   *   Format: projects/{project}/datasets/{dataset_id}@{tag}
-   *
-   *   Tag "active": The info of the latest completed version will be included,
-   *   and NOT_FOUND if the dataset does not have one.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.maps.mapsplatformdatasets.v1.Dataset|Dataset}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/maps_platform_datasets.get_dataset.js</caption>
-   * region_tag:mapsplatformdatasets_v1_generated_MapsPlatformDatasets_GetDataset_async
-   */
+/**
+ * Gets the dataset.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name.
+ *   Format: projects/{project}/datasets/{dataset_id}
+ *
+ *
+ *   Can also fetch some special versions by appending "@" and a tag.
+ *   Format: projects/{project}/datasets/{dataset_id}@{tag}
+ *
+ *   Tag "active": The info of the latest completed version will be included,
+ *   and NOT_FOUND if the dataset does not have one.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.maps.mapsplatformdatasets.v1.Dataset|Dataset}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/maps_platform_datasets.get_dataset.js</caption>
+ * region_tag:mapsplatformdatasets_v1_generated_MapsPlatformDatasets_GetDataset_async
+ */
   getDataset(
-    request?: protos.google.maps.mapsplatformdatasets.v1.IGetDatasetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.maps.mapsplatformdatasets.v1.IDataset,
-      protos.google.maps.mapsplatformdatasets.v1.IGetDatasetRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.maps.mapsplatformdatasets.v1.IGetDatasetRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.maps.mapsplatformdatasets.v1.IDataset,
+        protos.google.maps.mapsplatformdatasets.v1.IGetDatasetRequest|undefined, {}|undefined
+      ]>;
   getDataset(
-    request: protos.google.maps.mapsplatformdatasets.v1.IGetDatasetRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.maps.mapsplatformdatasets.v1.IDataset,
-      | protos.google.maps.mapsplatformdatasets.v1.IGetDatasetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDataset(
-    request: protos.google.maps.mapsplatformdatasets.v1.IGetDatasetRequest,
-    callback: Callback<
-      protos.google.maps.mapsplatformdatasets.v1.IDataset,
-      | protos.google.maps.mapsplatformdatasets.v1.IGetDatasetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDataset(
-    request?: protos.google.maps.mapsplatformdatasets.v1.IGetDatasetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.maps.mapsplatformdatasets.v1.IGetDatasetRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.maps.mapsplatformdatasets.v1.IDataset,
-          | protos.google.maps.mapsplatformdatasets.v1.IGetDatasetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.maps.mapsplatformdatasets.v1.IDataset,
-      | protos.google.maps.mapsplatformdatasets.v1.IGetDatasetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.maps.mapsplatformdatasets.v1.IDataset,
-      protos.google.maps.mapsplatformdatasets.v1.IGetDatasetRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.maps.mapsplatformdatasets.v1.IGetDatasetRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDataset(
+      request: protos.google.maps.mapsplatformdatasets.v1.IGetDatasetRequest,
+      callback: Callback<
+          protos.google.maps.mapsplatformdatasets.v1.IDataset,
+          protos.google.maps.mapsplatformdatasets.v1.IGetDatasetRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDataset(
+      request?: protos.google.maps.mapsplatformdatasets.v1.IGetDatasetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.maps.mapsplatformdatasets.v1.IDataset,
+          protos.google.maps.mapsplatformdatasets.v1.IGetDatasetRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.maps.mapsplatformdatasets.v1.IDataset,
+          protos.google.maps.mapsplatformdatasets.v1.IGetDatasetRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.maps.mapsplatformdatasets.v1.IDataset,
+        protos.google.maps.mapsplatformdatasets.v1.IGetDatasetRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getDataset request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.maps.mapsplatformdatasets.v1.IDataset,
-          | protos.google.maps.mapsplatformdatasets.v1.IGetDatasetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.maps.mapsplatformdatasets.v1.IDataset,
+        protos.google.maps.mapsplatformdatasets.v1.IGetDatasetRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDataset response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getDataset(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.maps.mapsplatformdatasets.v1.IDataset,
-          (
-            | protos.google.maps.mapsplatformdatasets.v1.IGetDatasetRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getDataset response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getDataset(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.maps.mapsplatformdatasets.v1.IDataset,
+        protos.google.maps.mapsplatformdatasets.v1.IGetDatasetRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getDataset response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes the specified dataset.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the dataset to delete.
-   *   Format: projects/{project}/datasets/{dataset_id}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/maps_platform_datasets.delete_dataset.js</caption>
-   * region_tag:mapsplatformdatasets_v1_generated_MapsPlatformDatasets_DeleteDataset_async
-   */
+/**
+ * Deletes the specified dataset.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the dataset to delete.
+ *   Format: projects/{project}/datasets/{dataset_id}
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/maps_platform_datasets.delete_dataset.js</caption>
+ * region_tag:mapsplatformdatasets_v1_generated_MapsPlatformDatasets_DeleteDataset_async
+ */
   deleteDataset(
-    request?: protos.google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest|undefined, {}|undefined
+      ]>;
   deleteDataset(
-    request: protos.google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteDataset(
-    request: protos.google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteDataset(
-    request?: protos.google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteDataset(
+      request: protos.google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteDataset(
+      request?: protos.google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteDataset request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteDataset response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteDataset(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteDataset response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteDataset(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteDataset response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Gets all the errors of a dataset.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.dataset
-   *   Required. The name of the dataset to list all the errors for.
-   *   Format: projects/{project}/datasets/{dataset_id}
-   * @param {number} request.pageSize
-   *   The maximum number of errors to return per page.
-   *
-   *   The maximum value is 500; values above 500 will be capped to 500.
-   *
-   *   If unspecified, at most 50 errors will be returned.
-   * @param {string} request.pageToken
-   *   The page token, received from a previous ListDatasetErrors call.
-   *   Provide this to retrieve the subsequent page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.rpc.Status|Status}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `fetchDatasetErrorsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Gets all the errors of a dataset.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.dataset
+ *   Required. The name of the dataset to list all the errors for.
+ *   Format: projects/{project}/datasets/{dataset_id}
+ * @param {number} request.pageSize
+ *   The maximum number of errors to return per page.
+ *
+ *   The maximum value is 500; values above 500 will be capped to 500.
+ *
+ *   If unspecified, at most 50 errors will be returned.
+ * @param {string} request.pageToken
+ *   The page token, received from a previous ListDatasetErrors call.
+ *   Provide this to retrieve the subsequent page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.rpc.Status|Status}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `fetchDatasetErrorsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   fetchDatasetErrors(
-    request?: protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.rpc.IStatus[],
-      protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest | null,
-      protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsResponse,
-    ]
-  >;
+      request?: protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.rpc.IStatus[],
+        protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest|null,
+        protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsResponse
+      ]>;
   fetchDatasetErrors(
-    request: protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
-      | protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsResponse
-      | null
-      | undefined,
-      protos.google.rpc.IStatus
-    >
-  ): void;
-  fetchDatasetErrors(
-    request: protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
-    callback: PaginationCallback<
-      protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
-      | protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsResponse
-      | null
-      | undefined,
-      protos.google.rpc.IStatus
-    >
-  ): void;
-  fetchDatasetErrors(
-    request?: protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
-          | protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsResponse
-          | null
-          | undefined,
-          protos.google.rpc.IStatus
-        >,
-    callback?: PaginationCallback<
-      protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
-      | protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsResponse
-      | null
-      | undefined,
-      protos.google.rpc.IStatus
-    >
-  ): Promise<
-    [
-      protos.google.rpc.IStatus[],
-      protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest | null,
-      protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsResponse,
-    ]
-  > | void {
+          protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsResponse|null|undefined,
+          protos.google.rpc.IStatus>): void;
+  fetchDatasetErrors(
+      request: protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
+      callback: PaginationCallback<
+          protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
+          protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsResponse|null|undefined,
+          protos.google.rpc.IStatus>): void;
+  fetchDatasetErrors(
+      request?: protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
+          protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsResponse|null|undefined,
+          protos.google.rpc.IStatus>,
+      callback?: PaginationCallback<
+          protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
+          protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsResponse|null|undefined,
+          protos.google.rpc.IStatus>):
+      Promise<[
+        protos.google.rpc.IStatus[],
+        protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest|null,
+        protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        dataset: request.dataset ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'dataset': request.dataset ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
-          | protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsResponse
-          | null
-          | undefined,
-          protos.google.rpc.IStatus
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
+      protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsResponse|null|undefined,
+      protos.google.rpc.IStatus>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('fetchDatasetErrors values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1034,62 +827,59 @@ export class MapsPlatformDatasetsClient {
     this._log.info('fetchDatasetErrors request %j', request);
     return this.innerApiCalls
       .fetchDatasetErrors(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.rpc.IStatus[],
-          protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest | null,
-          protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsResponse,
-        ]) => {
-          this._log.info('fetchDatasetErrors values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.rpc.IStatus[],
+        protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest|null,
+        protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsResponse
+      ]) => {
+        this._log.info('fetchDatasetErrors values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `fetchDatasetErrors`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.dataset
-   *   Required. The name of the dataset to list all the errors for.
-   *   Format: projects/{project}/datasets/{dataset_id}
-   * @param {number} request.pageSize
-   *   The maximum number of errors to return per page.
-   *
-   *   The maximum value is 500; values above 500 will be capped to 500.
-   *
-   *   If unspecified, at most 50 errors will be returned.
-   * @param {string} request.pageToken
-   *   The page token, received from a previous ListDatasetErrors call.
-   *   Provide this to retrieve the subsequent page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.rpc.Status|Status} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `fetchDatasetErrorsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `fetchDatasetErrors`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.dataset
+ *   Required. The name of the dataset to list all the errors for.
+ *   Format: projects/{project}/datasets/{dataset_id}
+ * @param {number} request.pageSize
+ *   The maximum number of errors to return per page.
+ *
+ *   The maximum value is 500; values above 500 will be capped to 500.
+ *
+ *   If unspecified, at most 50 errors will be returned.
+ * @param {string} request.pageToken
+ *   The page token, received from a previous ListDatasetErrors call.
+ *   Provide this to retrieve the subsequent page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.rpc.Status|Status} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `fetchDatasetErrorsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   fetchDatasetErrorsStream(
-    request?: protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        dataset: request.dataset ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'dataset': request.dataset ?? '',
+    });
     const defaultCallSettings = this._defaults['fetchDatasetErrors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('fetchDatasetErrors stream %j', request);
     return this.descriptors.page.fetchDatasetErrors.createStream(
       this.innerApiCalls.fetchDatasetErrors as GaxCall,
@@ -1098,53 +888,52 @@ export class MapsPlatformDatasetsClient {
     );
   }
 
-  /**
-   * Equivalent to `fetchDatasetErrors`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.dataset
-   *   Required. The name of the dataset to list all the errors for.
-   *   Format: projects/{project}/datasets/{dataset_id}
-   * @param {number} request.pageSize
-   *   The maximum number of errors to return per page.
-   *
-   *   The maximum value is 500; values above 500 will be capped to 500.
-   *
-   *   If unspecified, at most 50 errors will be returned.
-   * @param {string} request.pageToken
-   *   The page token, received from a previous ListDatasetErrors call.
-   *   Provide this to retrieve the subsequent page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.rpc.Status|Status}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/maps_platform_datasets.fetch_dataset_errors.js</caption>
-   * region_tag:mapsplatformdatasets_v1_generated_MapsPlatformDatasets_FetchDatasetErrors_async
-   */
+/**
+ * Equivalent to `fetchDatasetErrors`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.dataset
+ *   Required. The name of the dataset to list all the errors for.
+ *   Format: projects/{project}/datasets/{dataset_id}
+ * @param {number} request.pageSize
+ *   The maximum number of errors to return per page.
+ *
+ *   The maximum value is 500; values above 500 will be capped to 500.
+ *
+ *   If unspecified, at most 50 errors will be returned.
+ * @param {string} request.pageToken
+ *   The page token, received from a previous ListDatasetErrors call.
+ *   Provide this to retrieve the subsequent page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.rpc.Status|Status}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/maps_platform_datasets.fetch_dataset_errors.js</caption>
+ * region_tag:mapsplatformdatasets_v1_generated_MapsPlatformDatasets_FetchDatasetErrors_async
+ */
   fetchDatasetErrorsAsync(
-    request?: protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.rpc.IStatus> {
+      request?: protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.rpc.IStatus>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        dataset: request.dataset ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'dataset': request.dataset ?? '',
+    });
     const defaultCallSettings = this._defaults['fetchDatasetErrors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('fetchDatasetErrors iterate %j', request);
     return this.descriptors.page.fetchDatasetErrors.asyncIterate(
       this.innerApiCalls['fetchDatasetErrors'] as GaxCall,
@@ -1152,126 +941,101 @@ export class MapsPlatformDatasetsClient {
       callSettings
     ) as AsyncIterable<protos.google.rpc.IStatus>;
   }
-  /**
-   * Lists all the datasets for the specified project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the project to list all the datasets for.
-   *   Format: projects/{project}
-   * @param {number} request.pageSize
-   *   The maximum number of datasets to return per page.
-   *
-   *   If unspecified (or zero), all datasets will be returned.
-   * @param {string} request.pageToken
-   *   The page token, received from a previous ListDatasets call.
-   *   Provide this to retrieve the subsequent page.
-   * @param {string} request.tag
-   *   The tag that specifies the desired version for each dataset.
-   *
-   *   Note that when pagination is also specified, some filtering can happen
-   *   after pagination, which may cause the response to contain fewer datasets
-   *   than the page size, even if it's not the last page.
-   *
-   *   Tag "active": Each dataset in the response will include the info of its
-   *   latest completed version, and the dataset will be skipped if it does not
-   *   have one.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.maps.mapsplatformdatasets.v1.Dataset|Dataset}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listDatasetsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all the datasets for the specified project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the project to list all the datasets for.
+ *   Format: projects/{project}
+ * @param {number} request.pageSize
+ *   The maximum number of datasets to return per page.
+ *
+ *   If unspecified (or zero), all datasets will be returned.
+ * @param {string} request.pageToken
+ *   The page token, received from a previous ListDatasets call.
+ *   Provide this to retrieve the subsequent page.
+ * @param {string} request.tag
+ *   The tag that specifies the desired version for each dataset.
+ *
+ *   Note that when pagination is also specified, some filtering can happen
+ *   after pagination, which may cause the response to contain fewer datasets
+ *   than the page size, even if it's not the last page.
+ *
+ *   Tag "active": Each dataset in the response will include the info of its
+ *   latest completed version, and the dataset will be skipped if it does not
+ *   have one.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.maps.mapsplatformdatasets.v1.Dataset|Dataset}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listDatasetsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDatasets(
-    request?: protos.google.maps.mapsplatformdatasets.v1.IListDatasetsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.maps.mapsplatformdatasets.v1.IDataset[],
-      protos.google.maps.mapsplatformdatasets.v1.IListDatasetsRequest | null,
-      protos.google.maps.mapsplatformdatasets.v1.IListDatasetsResponse,
-    ]
-  >;
+      request?: protos.google.maps.mapsplatformdatasets.v1.IListDatasetsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.maps.mapsplatformdatasets.v1.IDataset[],
+        protos.google.maps.mapsplatformdatasets.v1.IListDatasetsRequest|null,
+        protos.google.maps.mapsplatformdatasets.v1.IListDatasetsResponse
+      ]>;
   listDatasets(
-    request: protos.google.maps.mapsplatformdatasets.v1.IListDatasetsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.maps.mapsplatformdatasets.v1.IListDatasetsRequest,
-      | protos.google.maps.mapsplatformdatasets.v1.IListDatasetsResponse
-      | null
-      | undefined,
-      protos.google.maps.mapsplatformdatasets.v1.IDataset
-    >
-  ): void;
-  listDatasets(
-    request: protos.google.maps.mapsplatformdatasets.v1.IListDatasetsRequest,
-    callback: PaginationCallback<
-      protos.google.maps.mapsplatformdatasets.v1.IListDatasetsRequest,
-      | protos.google.maps.mapsplatformdatasets.v1.IListDatasetsResponse
-      | null
-      | undefined,
-      protos.google.maps.mapsplatformdatasets.v1.IDataset
-    >
-  ): void;
-  listDatasets(
-    request?: protos.google.maps.mapsplatformdatasets.v1.IListDatasetsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.maps.mapsplatformdatasets.v1.IListDatasetsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.maps.mapsplatformdatasets.v1.IListDatasetsRequest,
-          | protos.google.maps.mapsplatformdatasets.v1.IListDatasetsResponse
-          | null
-          | undefined,
-          protos.google.maps.mapsplatformdatasets.v1.IDataset
-        >,
-    callback?: PaginationCallback<
-      protos.google.maps.mapsplatformdatasets.v1.IListDatasetsRequest,
-      | protos.google.maps.mapsplatformdatasets.v1.IListDatasetsResponse
-      | null
-      | undefined,
-      protos.google.maps.mapsplatformdatasets.v1.IDataset
-    >
-  ): Promise<
-    [
-      protos.google.maps.mapsplatformdatasets.v1.IDataset[],
-      protos.google.maps.mapsplatformdatasets.v1.IListDatasetsRequest | null,
-      protos.google.maps.mapsplatformdatasets.v1.IListDatasetsResponse,
-    ]
-  > | void {
+          protos.google.maps.mapsplatformdatasets.v1.IListDatasetsResponse|null|undefined,
+          protos.google.maps.mapsplatformdatasets.v1.IDataset>): void;
+  listDatasets(
+      request: protos.google.maps.mapsplatformdatasets.v1.IListDatasetsRequest,
+      callback: PaginationCallback<
+          protos.google.maps.mapsplatformdatasets.v1.IListDatasetsRequest,
+          protos.google.maps.mapsplatformdatasets.v1.IListDatasetsResponse|null|undefined,
+          protos.google.maps.mapsplatformdatasets.v1.IDataset>): void;
+  listDatasets(
+      request?: protos.google.maps.mapsplatformdatasets.v1.IListDatasetsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.maps.mapsplatformdatasets.v1.IListDatasetsRequest,
+          protos.google.maps.mapsplatformdatasets.v1.IListDatasetsResponse|null|undefined,
+          protos.google.maps.mapsplatformdatasets.v1.IDataset>,
+      callback?: PaginationCallback<
+          protos.google.maps.mapsplatformdatasets.v1.IListDatasetsRequest,
+          protos.google.maps.mapsplatformdatasets.v1.IListDatasetsResponse|null|undefined,
+          protos.google.maps.mapsplatformdatasets.v1.IDataset>):
+      Promise<[
+        protos.google.maps.mapsplatformdatasets.v1.IDataset[],
+        protos.google.maps.mapsplatformdatasets.v1.IListDatasetsRequest|null,
+        protos.google.maps.mapsplatformdatasets.v1.IListDatasetsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.maps.mapsplatformdatasets.v1.IListDatasetsRequest,
-          | protos.google.maps.mapsplatformdatasets.v1.IListDatasetsResponse
-          | null
-          | undefined,
-          protos.google.maps.mapsplatformdatasets.v1.IDataset
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.maps.mapsplatformdatasets.v1.IListDatasetsRequest,
+      protos.google.maps.mapsplatformdatasets.v1.IListDatasetsResponse|null|undefined,
+      protos.google.maps.mapsplatformdatasets.v1.IDataset>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDatasets values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1280,70 +1044,67 @@ export class MapsPlatformDatasetsClient {
     this._log.info('listDatasets request %j', request);
     return this.innerApiCalls
       .listDatasets(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.maps.mapsplatformdatasets.v1.IDataset[],
-          protos.google.maps.mapsplatformdatasets.v1.IListDatasetsRequest | null,
-          protos.google.maps.mapsplatformdatasets.v1.IListDatasetsResponse,
-        ]) => {
-          this._log.info('listDatasets values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.maps.mapsplatformdatasets.v1.IDataset[],
+        protos.google.maps.mapsplatformdatasets.v1.IListDatasetsRequest|null,
+        protos.google.maps.mapsplatformdatasets.v1.IListDatasetsResponse
+      ]) => {
+        this._log.info('listDatasets values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listDatasets`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the project to list all the datasets for.
-   *   Format: projects/{project}
-   * @param {number} request.pageSize
-   *   The maximum number of datasets to return per page.
-   *
-   *   If unspecified (or zero), all datasets will be returned.
-   * @param {string} request.pageToken
-   *   The page token, received from a previous ListDatasets call.
-   *   Provide this to retrieve the subsequent page.
-   * @param {string} request.tag
-   *   The tag that specifies the desired version for each dataset.
-   *
-   *   Note that when pagination is also specified, some filtering can happen
-   *   after pagination, which may cause the response to contain fewer datasets
-   *   than the page size, even if it's not the last page.
-   *
-   *   Tag "active": Each dataset in the response will include the info of its
-   *   latest completed version, and the dataset will be skipped if it does not
-   *   have one.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.maps.mapsplatformdatasets.v1.Dataset|Dataset} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listDatasetsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listDatasets`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the project to list all the datasets for.
+ *   Format: projects/{project}
+ * @param {number} request.pageSize
+ *   The maximum number of datasets to return per page.
+ *
+ *   If unspecified (or zero), all datasets will be returned.
+ * @param {string} request.pageToken
+ *   The page token, received from a previous ListDatasets call.
+ *   Provide this to retrieve the subsequent page.
+ * @param {string} request.tag
+ *   The tag that specifies the desired version for each dataset.
+ *
+ *   Note that when pagination is also specified, some filtering can happen
+ *   after pagination, which may cause the response to contain fewer datasets
+ *   than the page size, even if it's not the last page.
+ *
+ *   Tag "active": Each dataset in the response will include the info of its
+ *   latest completed version, and the dataset will be skipped if it does not
+ *   have one.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.maps.mapsplatformdatasets.v1.Dataset|Dataset} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listDatasetsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDatasetsStream(
-    request?: protos.google.maps.mapsplatformdatasets.v1.IListDatasetsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.maps.mapsplatformdatasets.v1.IListDatasetsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDatasets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDatasets stream %j', request);
     return this.descriptors.page.listDatasets.createStream(
       this.innerApiCalls.listDatasets as GaxCall,
@@ -1352,61 +1113,60 @@ export class MapsPlatformDatasetsClient {
     );
   }
 
-  /**
-   * Equivalent to `listDatasets`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the project to list all the datasets for.
-   *   Format: projects/{project}
-   * @param {number} request.pageSize
-   *   The maximum number of datasets to return per page.
-   *
-   *   If unspecified (or zero), all datasets will be returned.
-   * @param {string} request.pageToken
-   *   The page token, received from a previous ListDatasets call.
-   *   Provide this to retrieve the subsequent page.
-   * @param {string} request.tag
-   *   The tag that specifies the desired version for each dataset.
-   *
-   *   Note that when pagination is also specified, some filtering can happen
-   *   after pagination, which may cause the response to contain fewer datasets
-   *   than the page size, even if it's not the last page.
-   *
-   *   Tag "active": Each dataset in the response will include the info of its
-   *   latest completed version, and the dataset will be skipped if it does not
-   *   have one.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.maps.mapsplatformdatasets.v1.Dataset|Dataset}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/maps_platform_datasets.list_datasets.js</caption>
-   * region_tag:mapsplatformdatasets_v1_generated_MapsPlatformDatasets_ListDatasets_async
-   */
+/**
+ * Equivalent to `listDatasets`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the project to list all the datasets for.
+ *   Format: projects/{project}
+ * @param {number} request.pageSize
+ *   The maximum number of datasets to return per page.
+ *
+ *   If unspecified (or zero), all datasets will be returned.
+ * @param {string} request.pageToken
+ *   The page token, received from a previous ListDatasets call.
+ *   Provide this to retrieve the subsequent page.
+ * @param {string} request.tag
+ *   The tag that specifies the desired version for each dataset.
+ *
+ *   Note that when pagination is also specified, some filtering can happen
+ *   after pagination, which may cause the response to contain fewer datasets
+ *   than the page size, even if it's not the last page.
+ *
+ *   Tag "active": Each dataset in the response will include the info of its
+ *   latest completed version, and the dataset will be skipped if it does not
+ *   have one.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.maps.mapsplatformdatasets.v1.Dataset|Dataset}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/maps_platform_datasets.list_datasets.js</caption>
+ * region_tag:mapsplatformdatasets_v1_generated_MapsPlatformDatasets_ListDatasets_async
+ */
   listDatasetsAsync(
-    request?: protos.google.maps.mapsplatformdatasets.v1.IListDatasetsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.maps.mapsplatformdatasets.v1.IDataset> {
+      request?: protos.google.maps.mapsplatformdatasets.v1.IListDatasetsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.maps.mapsplatformdatasets.v1.IDataset>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDatasets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDatasets iterate %j', request);
     return this.descriptors.page.listDatasets.asyncIterate(
       this.innerApiCalls['listDatasets'] as GaxCall,
@@ -1425,7 +1185,7 @@ export class MapsPlatformDatasetsClient {
    * @param {string} dataset
    * @returns {string} Resource name string.
    */
-  datasetPath(project: string, dataset: string) {
+  datasetPath(project:string,dataset:string) {
     return this.pathTemplates.datasetPathTemplate.render({
       project: project,
       dataset: dataset,

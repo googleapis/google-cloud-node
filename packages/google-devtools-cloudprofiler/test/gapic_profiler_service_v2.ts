@@ -27,723 +27,587 @@ import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
 describe('v2.ProfilerServiceClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new profilerserviceModule.v2.ProfilerServiceClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'cloudprofiler.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new profilerserviceModule.v2.ProfilerServiceClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          profilerserviceModule.v2.ProfilerServiceClient.servicePath;
-        assert.strictEqual(servicePath, 'cloudprofiler.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          profilerserviceModule.v2.ProfilerServiceClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'cloudprofiler.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'cloudprofiler.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'cloudprofiler.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new profilerserviceModule.v2.ProfilerServiceClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'cloudprofiler.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new profilerserviceModule.v2.ProfilerServiceClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'cloudprofiler.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new profilerserviceModule.v2.ProfilerServiceClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'cloudprofiler.configured.example.com'
-          );
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new profilerserviceModule.v2.ProfilerServiceClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new profilerserviceModule.v2.ProfilerServiceClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
+
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = profilerserviceModule.v2.ProfilerServiceClient.servicePath;
+                assert.strictEqual(servicePath, 'cloudprofiler.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = profilerserviceModule.v2.ProfilerServiceClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'cloudprofiler.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+        }
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new profilerserviceModule.v2.ProfilerServiceClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'cloudprofiler.example.com');
         });
-      });
-    });
 
-    it('has port', () => {
-      const port = profilerserviceModule.v2.ProfilerServiceClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new profilerserviceModule.v2.ProfilerServiceClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'cloudprofiler.example.com');
+        });
 
-    it('should create a client with no option', () => {
-      const client = new profilerserviceModule.v2.ProfilerServiceClient();
-      assert(client);
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new profilerserviceModule.v2.ProfilerServiceClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'cloudprofiler.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('should create a client with gRPC fallback', () => {
-      const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        fallback: true,
-      });
-      assert(client);
-    });
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new profilerserviceModule.v2.ProfilerServiceClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'cloudprofiler.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
+        }
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new profilerserviceModule.v2.ProfilerServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.profilerServiceStub, undefined);
-      await client.initialize();
-      assert(client.profilerServiceStub);
-    });
+        it('has port', () => {
+            const port = profilerserviceModule.v2.ProfilerServiceClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
 
-    it('has close method for the initialized client', done => {
-      const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.profilerServiceStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
+        it('should create a client with no option', () => {
+            const client = new profilerserviceModule.v2.ProfilerServiceClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new profilerserviceModule.v2.ProfilerServiceClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new profilerserviceModule.v2.ProfilerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.profilerServiceStub, undefined);
+            await client.initialize();
+            assert(client.profilerServiceStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new profilerserviceModule.v2.ProfilerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.profilerServiceStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new profilerserviceModule.v2.ProfilerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.profilerServiceStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new profilerserviceModule.v2.ProfilerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new profilerserviceModule.v2.ProfilerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
         });
     });
 
-    it('has close method for the non-initialized client', done => {
-      const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.profilerServiceStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
+    describe('createProfile', () => {
+        it('invokes createProfile without error', async () => {
+            const client = new profilerserviceModule.v2.ProfilerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudprofiler.v2.CreateProfileRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudprofiler.v2.CreateProfileRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.devtools.cloudprofiler.v2.Profile()
+            );
+            client.innerApiCalls.createProfile = stubSimpleCall(expectedResponse);
+            const [response] = await client.createProfile(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createProfile as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createProfile as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createProfile without error using callback', async () => {
+            const client = new profilerserviceModule.v2.ProfilerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudprofiler.v2.CreateProfileRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudprofiler.v2.CreateProfileRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.devtools.cloudprofiler.v2.Profile()
+            );
+            client.innerApiCalls.createProfile = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createProfile(
+                    request,
+                    (err?: Error|null, result?: protos.google.devtools.cloudprofiler.v2.IProfile|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createProfile as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createProfile as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createProfile with error', async () => {
+            const client = new profilerserviceModule.v2.ProfilerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudprofiler.v2.CreateProfileRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudprofiler.v2.CreateProfileRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createProfile = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createProfile(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createProfile as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createProfile as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createProfile with closed client', async () => {
+            const client = new profilerserviceModule.v2.ProfilerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudprofiler.v2.CreateProfileRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudprofiler.v2.CreateProfileRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createProfile(request), expectedError);
         });
     });
 
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
+    describe('createOfflineProfile', () => {
+        it('invokes createOfflineProfile without error', async () => {
+            const client = new profilerserviceModule.v2.ProfilerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudprofiler.v2.CreateOfflineProfileRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudprofiler.v2.CreateOfflineProfileRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.devtools.cloudprofiler.v2.Profile()
+            );
+            client.innerApiCalls.createOfflineProfile = stubSimpleCall(expectedResponse);
+            const [response] = await client.createOfflineProfile(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createOfflineProfile as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createOfflineProfile as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
 
-  describe('createProfile', () => {
-    it('invokes createProfile without error', async () => {
-      const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudprofiler.v2.CreateProfileRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudprofiler.v2.CreateProfileRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.devtools.cloudprofiler.v2.Profile()
-      );
-      client.innerApiCalls.createProfile = stubSimpleCall(expectedResponse);
-      const [response] = await client.createProfile(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createProfile as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createProfile as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes createOfflineProfile without error using callback', async () => {
+            const client = new profilerserviceModule.v2.ProfilerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudprofiler.v2.CreateOfflineProfileRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudprofiler.v2.CreateOfflineProfileRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.devtools.cloudprofiler.v2.Profile()
+            );
+            client.innerApiCalls.createOfflineProfile = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createOfflineProfile(
+                    request,
+                    (err?: Error|null, result?: protos.google.devtools.cloudprofiler.v2.IProfile|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createOfflineProfile as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createOfflineProfile as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('invokes createProfile without error using callback', async () => {
-      const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudprofiler.v2.CreateProfileRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudprofiler.v2.CreateProfileRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.devtools.cloudprofiler.v2.Profile()
-      );
-      client.innerApiCalls.createProfile =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createProfile(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.devtools.cloudprofiler.v2.IProfile | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createProfile as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createProfile as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        it('invokes createOfflineProfile with error', async () => {
+            const client = new profilerserviceModule.v2.ProfilerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudprofiler.v2.CreateOfflineProfileRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudprofiler.v2.CreateOfflineProfileRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createOfflineProfile = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createOfflineProfile(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createOfflineProfile as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createOfflineProfile as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createOfflineProfile with closed client', async () => {
+            const client = new profilerserviceModule.v2.ProfilerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudprofiler.v2.CreateOfflineProfileRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudprofiler.v2.CreateOfflineProfileRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createOfflineProfile(request), expectedError);
+        });
     });
 
-    it('invokes createProfile with error', async () => {
-      const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudprofiler.v2.CreateProfileRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudprofiler.v2.CreateProfileRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createProfile = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createProfile(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createProfile as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createProfile as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    describe('updateProfile', () => {
+        it('invokes updateProfile without error', async () => {
+            const client = new profilerserviceModule.v2.ProfilerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudprofiler.v2.UpdateProfileRequest()
+            );
+            request.profile ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudprofiler.v2.UpdateProfileRequest', ['profile', 'name']);
+            request.profile.name = defaultValue1;
+            const expectedHeaderRequestParams = `profile.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.devtools.cloudprofiler.v2.Profile()
+            );
+            client.innerApiCalls.updateProfile = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateProfile(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateProfile as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateProfile as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateProfile without error using callback', async () => {
+            const client = new profilerserviceModule.v2.ProfilerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudprofiler.v2.UpdateProfileRequest()
+            );
+            request.profile ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudprofiler.v2.UpdateProfileRequest', ['profile', 'name']);
+            request.profile.name = defaultValue1;
+            const expectedHeaderRequestParams = `profile.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.devtools.cloudprofiler.v2.Profile()
+            );
+            client.innerApiCalls.updateProfile = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateProfile(
+                    request,
+                    (err?: Error|null, result?: protos.google.devtools.cloudprofiler.v2.IProfile|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateProfile as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateProfile as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateProfile with error', async () => {
+            const client = new profilerserviceModule.v2.ProfilerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudprofiler.v2.UpdateProfileRequest()
+            );
+            request.profile ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudprofiler.v2.UpdateProfileRequest', ['profile', 'name']);
+            request.profile.name = defaultValue1;
+            const expectedHeaderRequestParams = `profile.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateProfile = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateProfile(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateProfile as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateProfile as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateProfile with closed client', async () => {
+            const client = new profilerserviceModule.v2.ProfilerServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.devtools.cloudprofiler.v2.UpdateProfileRequest()
+            );
+            request.profile ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.devtools.cloudprofiler.v2.UpdateProfileRequest', ['profile', 'name']);
+            request.profile.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateProfile(request), expectedError);
+        });
     });
 
-    it('invokes createProfile with closed client', async () => {
-      const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudprofiler.v2.CreateProfileRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudprofiler.v2.CreateProfileRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createProfile(request), expectedError);
+    describe('Path templates', () => {
+
+        describe('profile', async () => {
+            const fakePath = "/rendered/path/profile";
+            const expectedParameters = {
+                project: "projectValue",
+                profile: "profileValue",
+            };
+            const client = new profilerserviceModule.v2.ProfilerServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.profilePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.profilePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('profilePath', () => {
+                const result = client.profilePath("projectValue", "profileValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.profilePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProfileName', () => {
+                const result = client.matchProjectFromProfileName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.profilePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchProfileFromProfileName', () => {
+                const result = client.matchProfileFromProfileName(fakePath);
+                assert.strictEqual(result, "profileValue");
+                assert((client.pathTemplates.profilePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('project', async () => {
+            const fakePath = "/rendered/path/project";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new profilerserviceModule.v2.ProfilerServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectPath', () => {
+                const result = client.projectPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectName', () => {
+                const result = client.matchProjectFromProjectName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-  });
-
-  describe('createOfflineProfile', () => {
-    it('invokes createOfflineProfile without error', async () => {
-      const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudprofiler.v2.CreateOfflineProfileRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudprofiler.v2.CreateOfflineProfileRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.devtools.cloudprofiler.v2.Profile()
-      );
-      client.innerApiCalls.createOfflineProfile =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.createOfflineProfile(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createOfflineProfile as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createOfflineProfile as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createOfflineProfile without error using callback', async () => {
-      const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudprofiler.v2.CreateOfflineProfileRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudprofiler.v2.CreateOfflineProfileRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.devtools.cloudprofiler.v2.Profile()
-      );
-      client.innerApiCalls.createOfflineProfile =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createOfflineProfile(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.devtools.cloudprofiler.v2.IProfile | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createOfflineProfile as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createOfflineProfile as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createOfflineProfile with error', async () => {
-      const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudprofiler.v2.CreateOfflineProfileRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudprofiler.v2.CreateOfflineProfileRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createOfflineProfile = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createOfflineProfile(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createOfflineProfile as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createOfflineProfile as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createOfflineProfile with closed client', async () => {
-      const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudprofiler.v2.CreateOfflineProfileRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudprofiler.v2.CreateOfflineProfileRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createOfflineProfile(request), expectedError);
-    });
-  });
-
-  describe('updateProfile', () => {
-    it('invokes updateProfile without error', async () => {
-      const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudprofiler.v2.UpdateProfileRequest()
-      );
-      request.profile ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudprofiler.v2.UpdateProfileRequest',
-        ['profile', 'name']
-      );
-      request.profile.name = defaultValue1;
-      const expectedHeaderRequestParams = `profile.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.devtools.cloudprofiler.v2.Profile()
-      );
-      client.innerApiCalls.updateProfile = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateProfile(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateProfile as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateProfile as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateProfile without error using callback', async () => {
-      const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudprofiler.v2.UpdateProfileRequest()
-      );
-      request.profile ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudprofiler.v2.UpdateProfileRequest',
-        ['profile', 'name']
-      );
-      request.profile.name = defaultValue1;
-      const expectedHeaderRequestParams = `profile.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.devtools.cloudprofiler.v2.Profile()
-      );
-      client.innerApiCalls.updateProfile =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateProfile(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.devtools.cloudprofiler.v2.IProfile | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateProfile as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateProfile as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateProfile with error', async () => {
-      const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudprofiler.v2.UpdateProfileRequest()
-      );
-      request.profile ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudprofiler.v2.UpdateProfileRequest',
-        ['profile', 'name']
-      );
-      request.profile.name = defaultValue1;
-      const expectedHeaderRequestParams = `profile.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateProfile = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateProfile(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateProfile as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateProfile as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateProfile with closed client', async () => {
-      const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudprofiler.v2.UpdateProfileRequest()
-      );
-      request.profile ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudprofiler.v2.UpdateProfileRequest',
-        ['profile', 'name']
-      );
-      request.profile.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updateProfile(request), expectedError);
-    });
-  });
-
-  describe('Path templates', () => {
-    describe('profile', async () => {
-      const fakePath = '/rendered/path/profile';
-      const expectedParameters = {
-        project: 'projectValue',
-        profile: 'profileValue',
-      };
-      const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.profilePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.profilePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('profilePath', () => {
-        const result = client.profilePath('projectValue', 'profileValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.profilePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProfileName', () => {
-        const result = client.matchProjectFromProfileName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.profilePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchProfileFromProfileName', () => {
-        const result = client.matchProfileFromProfileName(fakePath);
-        assert.strictEqual(result, 'profileValue');
-        assert(
-          (client.pathTemplates.profilePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('project', async () => {
-      const fakePath = '/rendered/path/project';
-      const expectedParameters = {
-        project: 'projectValue',
-      };
-      const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectPath', () => {
-        const result = client.projectPath('projectValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectName', () => {
-        const result = client.matchProjectFromProjectName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

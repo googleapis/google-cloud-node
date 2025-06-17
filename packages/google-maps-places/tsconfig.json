@@ -5,7 +5,7 @@
     "outDir": "build",
     "resolveJsonModule": true,
     "lib": [
-      "es2018",
+      "es2023",
       "dom"
     ]
   },
@@ -16,6 +16,7 @@
     "test/**/*.ts",
     "system-test/*.ts",
     "src/**/*.json",
+    "samples/**/*.json",
     "protos/protos.json"
   ]
 }

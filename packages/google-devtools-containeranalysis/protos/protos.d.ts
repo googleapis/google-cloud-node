@@ -328,7 +328,7 @@ export namespace grafeas {
         interface IAttestationOccurrence {
 
             /** AttestationOccurrence serializedPayload */
-            serializedPayload?: (Uint8Array|string|null);
+            serializedPayload?: (Uint8Array|Buffer|string|null);
 
             /** AttestationOccurrence signatures */
             signatures?: (grafeas.v1.ISignature[]|null);
@@ -347,7 +347,7 @@ export namespace grafeas {
             constructor(properties?: grafeas.v1.IAttestationOccurrence);
 
             /** AttestationOccurrence serializedPayload. */
-            public serializedPayload: (Uint8Array|string);
+            public serializedPayload: (Uint8Array|Buffer|string);
 
             /** AttestationOccurrence signatures. */
             public signatures: grafeas.v1.ISignature[];
@@ -558,7 +558,7 @@ export namespace grafeas {
         interface ISignature {
 
             /** Signature signature */
-            signature?: (Uint8Array|string|null);
+            signature?: (Uint8Array|Buffer|string|null);
 
             /** Signature publicKeyId */
             publicKeyId?: (string|null);
@@ -574,7 +574,7 @@ export namespace grafeas {
             constructor(properties?: grafeas.v1.ISignature);
 
             /** Signature signature. */
-            public signature: (Uint8Array|string);
+            public signature: (Uint8Array|Buffer|string);
 
             /** Signature publicKeyId. */
             public publicKeyId: string;
@@ -661,7 +661,7 @@ export namespace grafeas {
         interface IEnvelope {
 
             /** Envelope payload */
-            payload?: (Uint8Array|string|null);
+            payload?: (Uint8Array|Buffer|string|null);
 
             /** Envelope payloadType */
             payloadType?: (string|null);
@@ -680,7 +680,7 @@ export namespace grafeas {
             constructor(properties?: grafeas.v1.IEnvelope);
 
             /** Envelope payload. */
-            public payload: (Uint8Array|string);
+            public payload: (Uint8Array|Buffer|string);
 
             /** Envelope payloadType. */
             public payloadType: string;
@@ -770,7 +770,7 @@ export namespace grafeas {
         interface IEnvelopeSignature {
 
             /** EnvelopeSignature sig */
-            sig?: (Uint8Array|string|null);
+            sig?: (Uint8Array|Buffer|string|null);
 
             /** EnvelopeSignature keyid */
             keyid?: (string|null);
@@ -786,7 +786,7 @@ export namespace grafeas {
             constructor(properties?: grafeas.v1.IEnvelopeSignature);
 
             /** EnvelopeSignature sig. */
-            public sig: (Uint8Array|string);
+            public sig: (Uint8Array|Buffer|string);
 
             /** EnvelopeSignature keyid. */
             public keyid: string;
@@ -1312,7 +1312,7 @@ export namespace grafeas {
             algo?: (string|null);
 
             /** Digest digestBytes */
-            digestBytes?: (Uint8Array|string|null);
+            digestBytes?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents a Digest. */
@@ -1328,7 +1328,7 @@ export namespace grafeas {
             public algo: string;
 
             /** Digest digestBytes. */
-            public digestBytes: (Uint8Array|string);
+            public digestBytes: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Digest instance using the specified properties.
@@ -2770,7 +2770,7 @@ export namespace grafeas {
                 digest?: ({ [k: string]: string }|null);
 
                 /** ResourceDescriptor content */
-                content?: (Uint8Array|string|null);
+                content?: (Uint8Array|Buffer|string|null);
 
                 /** ResourceDescriptor downloadLocation */
                 downloadLocation?: (string|null);
@@ -2801,7 +2801,7 @@ export namespace grafeas {
                 public digest: { [k: string]: string };
 
                 /** ResourceDescriptor content. */
-                public content: (Uint8Array|string);
+                public content: (Uint8Array|Buffer|string);
 
                 /** ResourceDescriptor downloadLocation. */
                 public downloadLocation: string;
@@ -5053,7 +5053,7 @@ export namespace grafeas {
             type?: (string|null);
 
             /** Hash value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents a Hash. */
@@ -5069,7 +5069,7 @@ export namespace grafeas {
             public type: string;
 
             /** Hash value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Hash instance using the specified properties.
@@ -6181,7 +6181,7 @@ export namespace grafeas {
             cisBenchmark?: (grafeas.v1.ComplianceNote.ICisBenchmark|null);
 
             /** ComplianceNote scanInstructions */
-            scanInstructions?: (Uint8Array|string|null);
+            scanInstructions?: (Uint8Array|Buffer|string|null);
 
             /** ComplianceNote impact */
             impact?: (string|null);
@@ -6215,7 +6215,7 @@ export namespace grafeas {
             public cisBenchmark?: (grafeas.v1.ComplianceNote.ICisBenchmark|null);
 
             /** ComplianceNote scanInstructions. */
-            public scanInstructions: (Uint8Array|string);
+            public scanInstructions: (Uint8Array|Buffer|string);
 
             /** ComplianceNote impact. */
             public impact?: (string|null);
@@ -15592,7 +15592,7 @@ export namespace grafeas {
                 contentType?: (grafeas.v1beta1.attestation.GenericSignedAttestation.ContentType|keyof typeof grafeas.v1beta1.attestation.GenericSignedAttestation.ContentType|null);
 
                 /** GenericSignedAttestation serializedPayload */
-                serializedPayload?: (Uint8Array|string|null);
+                serializedPayload?: (Uint8Array|Buffer|string|null);
 
                 /** GenericSignedAttestation signatures */
                 signatures?: (grafeas.v1beta1.ISignature[]|null);
@@ -15611,7 +15611,7 @@ export namespace grafeas {
                 public contentType: (grafeas.v1beta1.attestation.GenericSignedAttestation.ContentType|keyof typeof grafeas.v1beta1.attestation.GenericSignedAttestation.ContentType);
 
                 /** GenericSignedAttestation serializedPayload. */
-                public serializedPayload: (Uint8Array|string);
+                public serializedPayload: (Uint8Array|Buffer|string);
 
                 /** GenericSignedAttestation signatures. */
                 public signatures: grafeas.v1beta1.ISignature[];
@@ -16223,7 +16223,7 @@ export namespace grafeas {
         interface ISignature {
 
             /** Signature signature */
-            signature?: (Uint8Array|string|null);
+            signature?: (Uint8Array|Buffer|string|null);
 
             /** Signature publicKeyId */
             publicKeyId?: (string|null);
@@ -16239,7 +16239,7 @@ export namespace grafeas {
             constructor(properties?: grafeas.v1beta1.ISignature);
 
             /** Signature signature. */
-            public signature: (Uint8Array|string);
+            public signature: (Uint8Array|Buffer|string);
 
             /** Signature publicKeyId. */
             public publicKeyId: string;
@@ -16435,7 +16435,7 @@ export namespace grafeas {
                 publicKey?: (string|null);
 
                 /** BuildSignature signature */
-                signature?: (Uint8Array|string|null);
+                signature?: (Uint8Array|Buffer|string|null);
 
                 /** BuildSignature keyId */
                 keyId?: (string|null);
@@ -16457,7 +16457,7 @@ export namespace grafeas {
                 public publicKey: string;
 
                 /** BuildSignature signature. */
-                public signature: (Uint8Array|string);
+                public signature: (Uint8Array|Buffer|string);
 
                 /** BuildSignature keyId. */
                 public keyId: string;
@@ -17048,7 +17048,7 @@ export namespace grafeas {
                 type?: (grafeas.v1beta1.provenance.Hash.HashType|keyof typeof grafeas.v1beta1.provenance.Hash.HashType|null);
 
                 /** Hash value */
-                value?: (Uint8Array|string|null);
+                value?: (Uint8Array|Buffer|string|null);
             }
 
             /** Represents a Hash. */
@@ -17064,7 +17064,7 @@ export namespace grafeas {
                 public type: (grafeas.v1beta1.provenance.Hash.HashType|keyof typeof grafeas.v1beta1.provenance.Hash.HashType);
 
                 /** Hash value. */
-                public value: (Uint8Array|string);
+                public value: (Uint8Array|Buffer|string);
 
                 /**
                  * Creates a new Hash instance using the specified properties.
@@ -26306,6 +26306,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -26346,6 +26349,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -30564,6 +30570,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -30812,7 +30821,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -30843,7 +30852,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -32079,7 +32088,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -32095,7 +32104,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.
@@ -33314,7 +33323,7 @@ export namespace google {
                 auditConfigs?: (google.iam.v1.IAuditConfig[]|null);
 
                 /** Policy etag */
-                etag?: (Uint8Array|string|null);
+                etag?: (Uint8Array|Buffer|string|null);
             }
 
             /** Represents a Policy. */
@@ -33336,7 +33345,7 @@ export namespace google {
                 public auditConfigs: google.iam.v1.IAuditConfig[];
 
                 /** Policy etag. */
-                public etag: (Uint8Array|string);
+                public etag: (Uint8Array|Buffer|string);
 
                 /**
                  * Creates a new Policy instance using the specified properties.

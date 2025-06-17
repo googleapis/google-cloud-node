@@ -18,16 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -105,41 +100,20 @@ export class AreaInsightsClient {
    *     const client = new AreaInsightsClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof AreaInsightsClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'areainsights.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -165,7 +139,7 @@ export class AreaInsightsClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -179,7 +153,10 @@ export class AreaInsightsClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -200,16 +177,15 @@ export class AreaInsightsClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      placePathTemplate: new this._gaxModule.PathTemplate('places/{place_id}'),
+      placePathTemplate: new this._gaxModule.PathTemplate(
+        'places/{place_id}'
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.maps.areainsights.v1.AreaInsights',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.maps.areainsights.v1.AreaInsights', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -240,35 +216,31 @@ export class AreaInsightsClient {
     // Put together the "service stub" for
     // google.maps.areainsights.v1.AreaInsights.
     this.areaInsightsStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.maps.areainsights.v1.AreaInsights'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.maps.areainsights.v1.AreaInsights') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.maps.areainsights.v1.AreaInsights,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const areaInsightsStubMethods = ['computeInsights'];
+    const areaInsightsStubMethods =
+        ['computeInsights'];
     for (const methodName of areaInsightsStubMethods) {
       const callPromise = this.areaInsightsStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = undefined;
+      const descriptor =
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -288,14 +260,8 @@ export class AreaInsightsClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'areainsights.googleapis.com';
   }
@@ -306,14 +272,8 @@ export class AreaInsightsClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'areainsights.googleapis.com';
   }
@@ -344,7 +304,9 @@ export class AreaInsightsClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -353,9 +315,8 @@ export class AreaInsightsClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -366,133 +327,105 @@ export class AreaInsightsClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * This method lets you retrieve insights about areas using a variety of
-   * filter such as: area, place type, operating status, price level
-   * and ratings. Currently "count" and "places" insights are supported. With
-   * "count" insights you can answer questions such as "How many restaurant are
-   * located in California that are operational, are inexpensive and have an
-   * average rating of at least 4 stars" (see `insight` enum for more details).
-   * With "places" insights, you can determine which places match the
-   * requested filter. Clients can then use those place resource names to fetch
-   * more details about each individual place using the Places API.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number[]} request.insights
-   *   Required. Insights to compute. Currently only INSIGHT_COUNT and
-   *   INSIGHT_PLACES are supported.
-   * @param {google.maps.areainsights.v1.Filter} request.filter
-   *   Required. Insight filter.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.maps.areainsights.v1.ComputeInsightsResponse|ComputeInsightsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/area_insights.compute_insights.js</caption>
-   * region_tag:areainsights_v1_generated_AreaInsights_ComputeInsights_async
-   */
+/**
+ * This method lets you retrieve insights about areas using a variety of
+ * filter such as: area, place type, operating status, price level
+ * and ratings. Currently "count" and "places" insights are supported. With
+ * "count" insights you can answer questions such as "How many restaurant are
+ * located in California that are operational, are inexpensive and have an
+ * average rating of at least 4 stars" (see `insight` enum for more details).
+ * With "places" insights, you can determine which places match the
+ * requested filter. Clients can then use those place resource names to fetch
+ * more details about each individual place using the Places API.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {number[]} request.insights
+ *   Required. Insights to compute. Currently only INSIGHT_COUNT and
+ *   INSIGHT_PLACES are supported.
+ * @param {google.maps.areainsights.v1.Filter} request.filter
+ *   Required. Insight filter.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.maps.areainsights.v1.ComputeInsightsResponse|ComputeInsightsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/area_insights.compute_insights.js</caption>
+ * region_tag:areainsights_v1_generated_AreaInsights_ComputeInsights_async
+ */
   computeInsights(
-    request?: protos.google.maps.areainsights.v1.IComputeInsightsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.maps.areainsights.v1.IComputeInsightsResponse,
-      protos.google.maps.areainsights.v1.IComputeInsightsRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.maps.areainsights.v1.IComputeInsightsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.maps.areainsights.v1.IComputeInsightsResponse,
+        protos.google.maps.areainsights.v1.IComputeInsightsRequest|undefined, {}|undefined
+      ]>;
   computeInsights(
-    request: protos.google.maps.areainsights.v1.IComputeInsightsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.maps.areainsights.v1.IComputeInsightsResponse,
-      | protos.google.maps.areainsights.v1.IComputeInsightsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  computeInsights(
-    request: protos.google.maps.areainsights.v1.IComputeInsightsRequest,
-    callback: Callback<
-      protos.google.maps.areainsights.v1.IComputeInsightsResponse,
-      | protos.google.maps.areainsights.v1.IComputeInsightsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  computeInsights(
-    request?: protos.google.maps.areainsights.v1.IComputeInsightsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.maps.areainsights.v1.IComputeInsightsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.maps.areainsights.v1.IComputeInsightsResponse,
-          | protos.google.maps.areainsights.v1.IComputeInsightsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.maps.areainsights.v1.IComputeInsightsResponse,
-      | protos.google.maps.areainsights.v1.IComputeInsightsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.maps.areainsights.v1.IComputeInsightsResponse,
-      protos.google.maps.areainsights.v1.IComputeInsightsRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.maps.areainsights.v1.IComputeInsightsRequest|null|undefined,
+          {}|null|undefined>): void;
+  computeInsights(
+      request: protos.google.maps.areainsights.v1.IComputeInsightsRequest,
+      callback: Callback<
+          protos.google.maps.areainsights.v1.IComputeInsightsResponse,
+          protos.google.maps.areainsights.v1.IComputeInsightsRequest|null|undefined,
+          {}|null|undefined>): void;
+  computeInsights(
+      request?: protos.google.maps.areainsights.v1.IComputeInsightsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.maps.areainsights.v1.IComputeInsightsResponse,
+          protos.google.maps.areainsights.v1.IComputeInsightsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.maps.areainsights.v1.IComputeInsightsResponse,
+          protos.google.maps.areainsights.v1.IComputeInsightsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.maps.areainsights.v1.IComputeInsightsResponse,
+        protos.google.maps.areainsights.v1.IComputeInsightsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('computeInsights request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.maps.areainsights.v1.IComputeInsightsResponse,
-          | protos.google.maps.areainsights.v1.IComputeInsightsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.maps.areainsights.v1.IComputeInsightsResponse,
+        protos.google.maps.areainsights.v1.IComputeInsightsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('computeInsights response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .computeInsights(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.maps.areainsights.v1.IComputeInsightsResponse,
-          (
-            | protos.google.maps.areainsights.v1.IComputeInsightsRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('computeInsights response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.computeInsights(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.maps.areainsights.v1.IComputeInsightsResponse,
+        protos.google.maps.areainsights.v1.IComputeInsightsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('computeInsights response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
   // --------------------
@@ -505,7 +438,7 @@ export class AreaInsightsClient {
    * @param {string} place_id
    * @returns {string} Resource name string.
    */
-  placePath(placeId: string) {
+  placePath(placeId:string) {
     return this.pathTemplates.placePathTemplate.render({
       place_id: placeId,
     });

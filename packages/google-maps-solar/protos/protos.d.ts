@@ -706,15 +706,6 @@ export namespace google {
                     /** RoofSegmentSizeAndSunshineStats planeHeightAtCenterMeters. */
                     public planeHeightAtCenterMeters?: (number|null);
 
-                    /** RoofSegmentSizeAndSunshineStats _pitchDegrees. */
-                    public _pitchDegrees?: "pitchDegrees";
-
-                    /** RoofSegmentSizeAndSunshineStats _azimuthDegrees. */
-                    public _azimuthDegrees?: "azimuthDegrees";
-
-                    /** RoofSegmentSizeAndSunshineStats _planeHeightAtCenterMeters. */
-                    public _planeHeightAtCenterMeters?: "planeHeightAtCenterMeters";
-
                     /**
                      * Creates a new RoofSegmentSizeAndSunshineStats instance using the specified properties.
                      * @param [properties] Properties to set
@@ -938,9 +929,6 @@ export namespace google {
 
                     /** SolarPanel segmentIndex. */
                     public segmentIndex?: (number|null);
-
-                    /** SolarPanel _segmentIndex. */
-                    public _segmentIndex?: "segmentIndex";
 
                     /**
                      * Creates a new SolarPanel instance using the specified properties.
@@ -1172,15 +1160,6 @@ export namespace google {
                     /** RoofSegmentSummary segmentIndex. */
                     public segmentIndex?: (number|null);
 
-                    /** RoofSegmentSummary _pitchDegrees. */
-                    public _pitchDegrees?: "pitchDegrees";
-
-                    /** RoofSegmentSummary _azimuthDegrees. */
-                    public _azimuthDegrees?: "azimuthDegrees";
-
-                    /** RoofSegmentSummary _segmentIndex. */
-                    public _segmentIndex?: "segmentIndex";
-
                     /**
                      * Creates a new RoofSegmentSummary instance using the specified properties.
                      * @param [properties] Properties to set
@@ -1319,9 +1298,6 @@ export namespace google {
 
                     /** FinancialAnalysis financedPurchaseSavings. */
                     public financedPurchaseSavings?: (google.maps.solar.v1.IFinancedPurchaseSavings|null);
-
-                    /** FinancialAnalysis _panelConfigIndex. */
-                    public _panelConfigIndex?: "panelConfigIndex";
 
                     /**
                      * Creates a new FinancialAnalysis instance using the specified properties.
@@ -1473,12 +1449,6 @@ export namespace google {
 
                     /** FinancialDetails percentageExportedToGrid. */
                     public percentageExportedToGrid?: (number|null);
-
-                    /** FinancialDetails _solarPercentage. */
-                    public _solarPercentage?: "solarPercentage";
-
-                    /** FinancialDetails _percentageExportedToGrid. */
-                    public _percentageExportedToGrid?: "percentageExportedToGrid";
 
                     /**
                      * Creates a new FinancialDetails instance using the specified properties.
@@ -1842,9 +1812,6 @@ export namespace google {
 
                     /** CashPurchaseSavings savings. */
                     public savings?: (google.maps.solar.v1.ISavingsOverTime|null);
-
-                    /** CashPurchaseSavings _paybackYears. */
-                    public _paybackYears?: "paybackYears";
 
                     /**
                      * Creates a new CashPurchaseSavings instance using the specified properties.
@@ -3091,6 +3058,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -3131,6 +3101,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -4306,7 +4279,7 @@ export namespace google {
             contentType?: (string|null);
 
             /** HttpBody data */
-            data?: (Uint8Array|string|null);
+            data?: (Uint8Array|Buffer|string|null);
 
             /** HttpBody extensions */
             extensions?: (google.protobuf.IAny[]|null);
@@ -4325,7 +4298,7 @@ export namespace google {
             public contentType: string;
 
             /** HttpBody data. */
-            public data: (Uint8Array|string);
+            public data: (Uint8Array|Buffer|string);
 
             /** HttpBody extensions. */
             public extensions: google.protobuf.IAny[];
@@ -7197,6 +7170,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -7445,7 +7421,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -7476,7 +7452,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -8615,7 +8591,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -8631,7 +8607,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.

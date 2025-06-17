@@ -18,16 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -104,41 +99,20 @@ export class SolarClient {
    *     const client = new SolarClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof SolarClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'solar.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -164,7 +138,7 @@ export class SolarClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -178,7 +152,10 @@ export class SolarClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -197,11 +174,8 @@ export class SolarClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.maps.solar.v1.Solar',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.maps.solar.v1.Solar', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -232,39 +206,31 @@ export class SolarClient {
     // Put together the "service stub" for
     // google.maps.solar.v1.Solar.
     this.solarStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.maps.solar.v1.Solar'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.maps.solar.v1.Solar') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.maps.solar.v1.Solar,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const solarStubMethods = [
-      'findClosestBuildingInsights',
-      'getDataLayers',
-      'getGeoTiff',
-    ];
+    const solarStubMethods =
+        ['findClosestBuildingInsights', 'getDataLayers', 'getGeoTiff'];
     for (const methodName of solarStubMethods) {
       const callPromise = this.solarStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = undefined;
+      const descriptor =
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -284,14 +250,8 @@ export class SolarClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'solar.googleapis.com';
   }
@@ -302,14 +262,8 @@ export class SolarClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'solar.googleapis.com';
   }
@@ -340,7 +294,9 @@ export class SolarClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -349,9 +305,8 @@ export class SolarClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -362,385 +317,322 @@ export class SolarClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Locates the closest building to a query point. Returns an error with
-   * code `NOT_FOUND` if there are no buildings within approximately 50m of the
-   * query point.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.type.LatLng} request.location
-   *   Required. The longitude and latitude from which the API looks for the
-   *   nearest known building.
-   * @param {google.maps.solar.v1.ImageryQuality} [request.requiredQuality]
-   *   Optional. The minimum quality level allowed in the results. No result with
-   *   lower quality than this will be returned. Not specifying this is
-   *   equivalent to restricting to HIGH quality only.
-   * @param {boolean} [request.exactQualityRequired]
-   *   Optional. Whether to require exact quality of the imagery.
-   *   If set to false, the `required_quality` field is interpreted as the minimum
-   *   required quality, such that HIGH quality imagery may be returned when
-   *   `required_quality` is set to MEDIUM.  If set to true, `required_quality`
-   *   is interpreted as the exact required quality and only `MEDIUM` quality
-   *   imagery is returned if `required_quality` is set to `MEDIUM`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.maps.solar.v1.BuildingInsights|BuildingInsights}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/solar.find_closest_building_insights.js</caption>
-   * region_tag:solar_v1_generated_Solar_FindClosestBuildingInsights_async
-   */
+/**
+ * Locates the closest building to a query point. Returns an error with
+ * code `NOT_FOUND` if there are no buildings within approximately 50m of the
+ * query point.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.type.LatLng} request.location
+ *   Required. The longitude and latitude from which the API looks for the
+ *   nearest known building.
+ * @param {google.maps.solar.v1.ImageryQuality} [request.requiredQuality]
+ *   Optional. The minimum quality level allowed in the results. No result with
+ *   lower quality than this will be returned. Not specifying this is
+ *   equivalent to restricting to HIGH quality only.
+ * @param {boolean} [request.exactQualityRequired]
+ *   Optional. Whether to require exact quality of the imagery.
+ *   If set to false, the `required_quality` field is interpreted as the minimum
+ *   required quality, such that HIGH quality imagery may be returned when
+ *   `required_quality` is set to MEDIUM.  If set to true, `required_quality`
+ *   is interpreted as the exact required quality and only `MEDIUM` quality
+ *   imagery is returned if `required_quality` is set to `MEDIUM`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.maps.solar.v1.BuildingInsights|BuildingInsights}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/solar.find_closest_building_insights.js</caption>
+ * region_tag:solar_v1_generated_Solar_FindClosestBuildingInsights_async
+ */
   findClosestBuildingInsights(
-    request?: protos.google.maps.solar.v1.IFindClosestBuildingInsightsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.maps.solar.v1.IBuildingInsights,
-      (
-        | protos.google.maps.solar.v1.IFindClosestBuildingInsightsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.maps.solar.v1.IFindClosestBuildingInsightsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.maps.solar.v1.IBuildingInsights,
+        protos.google.maps.solar.v1.IFindClosestBuildingInsightsRequest|undefined, {}|undefined
+      ]>;
   findClosestBuildingInsights(
-    request: protos.google.maps.solar.v1.IFindClosestBuildingInsightsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.maps.solar.v1.IBuildingInsights,
-      | protos.google.maps.solar.v1.IFindClosestBuildingInsightsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  findClosestBuildingInsights(
-    request: protos.google.maps.solar.v1.IFindClosestBuildingInsightsRequest,
-    callback: Callback<
-      protos.google.maps.solar.v1.IBuildingInsights,
-      | protos.google.maps.solar.v1.IFindClosestBuildingInsightsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  findClosestBuildingInsights(
-    request?: protos.google.maps.solar.v1.IFindClosestBuildingInsightsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.maps.solar.v1.IFindClosestBuildingInsightsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.maps.solar.v1.IBuildingInsights,
-          | protos.google.maps.solar.v1.IFindClosestBuildingInsightsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.maps.solar.v1.IBuildingInsights,
-      | protos.google.maps.solar.v1.IFindClosestBuildingInsightsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.maps.solar.v1.IBuildingInsights,
-      (
-        | protos.google.maps.solar.v1.IFindClosestBuildingInsightsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.maps.solar.v1.IFindClosestBuildingInsightsRequest|null|undefined,
+          {}|null|undefined>): void;
+  findClosestBuildingInsights(
+      request: protos.google.maps.solar.v1.IFindClosestBuildingInsightsRequest,
+      callback: Callback<
+          protos.google.maps.solar.v1.IBuildingInsights,
+          protos.google.maps.solar.v1.IFindClosestBuildingInsightsRequest|null|undefined,
+          {}|null|undefined>): void;
+  findClosestBuildingInsights(
+      request?: protos.google.maps.solar.v1.IFindClosestBuildingInsightsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.maps.solar.v1.IBuildingInsights,
+          protos.google.maps.solar.v1.IFindClosestBuildingInsightsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.maps.solar.v1.IBuildingInsights,
+          protos.google.maps.solar.v1.IFindClosestBuildingInsightsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.maps.solar.v1.IBuildingInsights,
+        protos.google.maps.solar.v1.IFindClosestBuildingInsightsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('findClosestBuildingInsights request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.maps.solar.v1.IBuildingInsights,
-          | protos.google.maps.solar.v1.IFindClosestBuildingInsightsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.maps.solar.v1.IBuildingInsights,
+        protos.google.maps.solar.v1.IFindClosestBuildingInsightsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('findClosestBuildingInsights response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .findClosestBuildingInsights(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.maps.solar.v1.IBuildingInsights,
-          (
-            | protos.google.maps.solar.v1.IFindClosestBuildingInsightsRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('findClosestBuildingInsights response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.findClosestBuildingInsights(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.maps.solar.v1.IBuildingInsights,
+        protos.google.maps.solar.v1.IFindClosestBuildingInsightsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('findClosestBuildingInsights response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets solar information for a region surrounding a location.
-   * Returns an error with code `NOT_FOUND` if the location is outside
-   * the coverage area.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.type.LatLng} request.location
-   *   Required. The longitude and latitude for the center of the region to get
-   *   data for.
-   * @param {number} request.radiusMeters
-   *   Required. The radius, in meters, defining the region surrounding that
-   *   centre point for which data should be returned. The limitations
-   *   on this value are:
-   *
-   *   * Any value up to 100m can always be specified.
-   *   * Values over 100m can be specified, as long as
-   *     `radius_meters` <= `pixel_size_meters * 1000`.
-   *   * However, for values over 175m, the `DataLayerView` in the
-   *     request must not include monthly flux or hourly shade.
-   * @param {google.maps.solar.v1.DataLayerView} [request.view]
-   *   Optional. The desired subset of the data to return.
-   * @param {google.maps.solar.v1.ImageryQuality} [request.requiredQuality]
-   *   Optional. The minimum quality level allowed in the results. No result with
-   *   lower quality than this will be returned. Not specifying this is
-   *   equivalent to restricting to HIGH quality only.
-   * @param {number} [request.pixelSizeMeters]
-   *   Optional. The minimum scale, in meters per pixel, of the data to return.
-   *   Values of 0.1 (the default, if this field is not set explicitly),
-   *   0.25, 0.5, and 1.0 are supported. Imagery components whose normal
-   *   resolution is less than `pixel_size_meters` will be returned at
-   *   the resolution specified by `pixel_size_meters`; imagery
-   *   components whose normal resolution is equal to or greater than
-   *   `pixel_size_meters` will be returned at that normal resolution.
-   * @param {boolean} [request.exactQualityRequired]
-   *   Optional. Whether to require exact quality of the imagery.
-   *   If set to false, the `required_quality` field is interpreted as the minimum
-   *   required quality, such that HIGH quality imagery may be returned when
-   *   `required_quality` is set to MEDIUM.  If set to true, `required_quality`
-   *   is interpreted as the exact required quality and only `MEDIUM` quality
-   *   imagery is returned if `required_quality` is set to `MEDIUM`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.maps.solar.v1.DataLayers|DataLayers}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/solar.get_data_layers.js</caption>
-   * region_tag:solar_v1_generated_Solar_GetDataLayers_async
-   */
+/**
+ * Gets solar information for a region surrounding a location.
+ * Returns an error with code `NOT_FOUND` if the location is outside
+ * the coverage area.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.type.LatLng} request.location
+ *   Required. The longitude and latitude for the center of the region to get
+ *   data for.
+ * @param {number} request.radiusMeters
+ *   Required. The radius, in meters, defining the region surrounding that
+ *   centre point for which data should be returned. The limitations
+ *   on this value are:
+ *
+ *   * Any value up to 100m can always be specified.
+ *   * Values over 100m can be specified, as long as
+ *     `radius_meters` <= `pixel_size_meters * 1000`.
+ *   * However, for values over 175m, the `DataLayerView` in the
+ *     request must not include monthly flux or hourly shade.
+ * @param {google.maps.solar.v1.DataLayerView} [request.view]
+ *   Optional. The desired subset of the data to return.
+ * @param {google.maps.solar.v1.ImageryQuality} [request.requiredQuality]
+ *   Optional. The minimum quality level allowed in the results. No result with
+ *   lower quality than this will be returned. Not specifying this is
+ *   equivalent to restricting to HIGH quality only.
+ * @param {number} [request.pixelSizeMeters]
+ *   Optional. The minimum scale, in meters per pixel, of the data to return.
+ *   Values of 0.1 (the default, if this field is not set explicitly),
+ *   0.25, 0.5, and 1.0 are supported. Imagery components whose normal
+ *   resolution is less than `pixel_size_meters` will be returned at
+ *   the resolution specified by `pixel_size_meters`; imagery
+ *   components whose normal resolution is equal to or greater than
+ *   `pixel_size_meters` will be returned at that normal resolution.
+ * @param {boolean} [request.exactQualityRequired]
+ *   Optional. Whether to require exact quality of the imagery.
+ *   If set to false, the `required_quality` field is interpreted as the minimum
+ *   required quality, such that HIGH quality imagery may be returned when
+ *   `required_quality` is set to MEDIUM.  If set to true, `required_quality`
+ *   is interpreted as the exact required quality and only `MEDIUM` quality
+ *   imagery is returned if `required_quality` is set to `MEDIUM`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.maps.solar.v1.DataLayers|DataLayers}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/solar.get_data_layers.js</caption>
+ * region_tag:solar_v1_generated_Solar_GetDataLayers_async
+ */
   getDataLayers(
-    request?: protos.google.maps.solar.v1.IGetDataLayersRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.maps.solar.v1.IDataLayers,
-      protos.google.maps.solar.v1.IGetDataLayersRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.maps.solar.v1.IGetDataLayersRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.maps.solar.v1.IDataLayers,
+        protos.google.maps.solar.v1.IGetDataLayersRequest|undefined, {}|undefined
+      ]>;
   getDataLayers(
-    request: protos.google.maps.solar.v1.IGetDataLayersRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.maps.solar.v1.IDataLayers,
-      protos.google.maps.solar.v1.IGetDataLayersRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDataLayers(
-    request: protos.google.maps.solar.v1.IGetDataLayersRequest,
-    callback: Callback<
-      protos.google.maps.solar.v1.IDataLayers,
-      protos.google.maps.solar.v1.IGetDataLayersRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDataLayers(
-    request?: protos.google.maps.solar.v1.IGetDataLayersRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.maps.solar.v1.IGetDataLayersRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.maps.solar.v1.IDataLayers,
-          protos.google.maps.solar.v1.IGetDataLayersRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.maps.solar.v1.IDataLayers,
-      protos.google.maps.solar.v1.IGetDataLayersRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.maps.solar.v1.IDataLayers,
-      protos.google.maps.solar.v1.IGetDataLayersRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.maps.solar.v1.IGetDataLayersRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDataLayers(
+      request: protos.google.maps.solar.v1.IGetDataLayersRequest,
+      callback: Callback<
+          protos.google.maps.solar.v1.IDataLayers,
+          protos.google.maps.solar.v1.IGetDataLayersRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDataLayers(
+      request?: protos.google.maps.solar.v1.IGetDataLayersRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.maps.solar.v1.IDataLayers,
+          protos.google.maps.solar.v1.IGetDataLayersRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.maps.solar.v1.IDataLayers,
+          protos.google.maps.solar.v1.IGetDataLayersRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.maps.solar.v1.IDataLayers,
+        protos.google.maps.solar.v1.IGetDataLayersRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('getDataLayers request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.maps.solar.v1.IDataLayers,
-          protos.google.maps.solar.v1.IGetDataLayersRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.maps.solar.v1.IDataLayers,
+        protos.google.maps.solar.v1.IGetDataLayersRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDataLayers response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getDataLayers(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.maps.solar.v1.IDataLayers,
-          protos.google.maps.solar.v1.IGetDataLayersRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getDataLayers response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getDataLayers(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.maps.solar.v1.IDataLayers,
+        protos.google.maps.solar.v1.IGetDataLayersRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getDataLayers response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Returns an image by its ID.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.id
-   *   Required. The ID of the asset being requested.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.api.HttpBody|HttpBody}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/solar.get_geo_tiff.js</caption>
-   * region_tag:solar_v1_generated_Solar_GetGeoTiff_async
-   */
+/**
+ * Returns an image by its ID.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.id
+ *   Required. The ID of the asset being requested.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.api.HttpBody|HttpBody}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/solar.get_geo_tiff.js</caption>
+ * region_tag:solar_v1_generated_Solar_GetGeoTiff_async
+ */
   getGeoTiff(
-    request?: protos.google.maps.solar.v1.IGetGeoTiffRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.api.IHttpBody,
-      protos.google.maps.solar.v1.IGetGeoTiffRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.maps.solar.v1.IGetGeoTiffRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.api.IHttpBody,
+        protos.google.maps.solar.v1.IGetGeoTiffRequest|undefined, {}|undefined
+      ]>;
   getGeoTiff(
-    request: protos.google.maps.solar.v1.IGetGeoTiffRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.api.IHttpBody,
-      protos.google.maps.solar.v1.IGetGeoTiffRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getGeoTiff(
-    request: protos.google.maps.solar.v1.IGetGeoTiffRequest,
-    callback: Callback<
-      protos.google.api.IHttpBody,
-      protos.google.maps.solar.v1.IGetGeoTiffRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getGeoTiff(
-    request?: protos.google.maps.solar.v1.IGetGeoTiffRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.maps.solar.v1.IGetGeoTiffRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.api.IHttpBody,
-          protos.google.maps.solar.v1.IGetGeoTiffRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.api.IHttpBody,
-      protos.google.maps.solar.v1.IGetGeoTiffRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.api.IHttpBody,
-      protos.google.maps.solar.v1.IGetGeoTiffRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.maps.solar.v1.IGetGeoTiffRequest|null|undefined,
+          {}|null|undefined>): void;
+  getGeoTiff(
+      request: protos.google.maps.solar.v1.IGetGeoTiffRequest,
+      callback: Callback<
+          protos.google.api.IHttpBody,
+          protos.google.maps.solar.v1.IGetGeoTiffRequest|null|undefined,
+          {}|null|undefined>): void;
+  getGeoTiff(
+      request?: protos.google.maps.solar.v1.IGetGeoTiffRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.api.IHttpBody,
+          protos.google.maps.solar.v1.IGetGeoTiffRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.api.IHttpBody,
+          protos.google.maps.solar.v1.IGetGeoTiffRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.api.IHttpBody,
+        protos.google.maps.solar.v1.IGetGeoTiffRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('getGeoTiff request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.api.IHttpBody,
-          protos.google.maps.solar.v1.IGetGeoTiffRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.api.IHttpBody,
+        protos.google.maps.solar.v1.IGetGeoTiffRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getGeoTiff response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getGeoTiff(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.api.IHttpBody,
-          protos.google.maps.solar.v1.IGetGeoTiffRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getGeoTiff response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getGeoTiff(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.api.IHttpBody,
+        protos.google.maps.solar.v1.IGetGeoTiffRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getGeoTiff response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
+
 
   /**
    * Terminate the gRPC channel and close the client.

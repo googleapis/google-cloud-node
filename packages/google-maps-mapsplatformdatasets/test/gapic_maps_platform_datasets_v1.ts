@@ -29,1555 +29,1200 @@ import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.MapsPlatformDatasetsClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'mapsplatformdatasets.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient.servicePath;
-        assert.strictEqual(servicePath, 'mapsplatformdatasets.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'mapsplatformdatasets.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          universeDomain: 'example.com',
-        });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'mapsplatformdatasets.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          universe_domain: 'example.com',
-        });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'mapsplatformdatasets.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'mapsplatformdatasets.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'mapsplatformdatasets.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-              universeDomain: 'configured.example.com',
+        it('has universeDomain', () => {
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
+        });
+
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient.servicePath;
+                assert.strictEqual(servicePath, 'mapsplatformdatasets.googleapis.com');
+                assert(stub.called);
+                stub.restore();
             });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'mapsplatformdatasets.configured.example.com'
-          );
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
-        });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port =
-        mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
-
-    it('should create a client with no option', () => {
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          fallback: true,
-        });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      assert.strictEqual(client.mapsPlatformDatasetsStub, undefined);
-      await client.initialize();
-      assert(client.mapsPlatformDatasetsStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.mapsPlatformDatasetsStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      assert.strictEqual(client.mapsPlatformDatasetsStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('createDataset', () => {
-    it('invokes createDataset without error', async () => {
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.mapsplatformdatasets.v1.CreateDatasetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.maps.mapsplatformdatasets.v1.CreateDatasetRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.maps.mapsplatformdatasets.v1.Dataset()
-      );
-      client.innerApiCalls.createDataset = stubSimpleCall(expectedResponse);
-      const [response] = await client.createDataset(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createDataset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createDataset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createDataset without error using callback', async () => {
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.mapsplatformdatasets.v1.CreateDatasetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.maps.mapsplatformdatasets.v1.CreateDatasetRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.maps.mapsplatformdatasets.v1.Dataset()
-      );
-      client.innerApiCalls.createDataset =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createDataset(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.maps.mapsplatformdatasets.v1.IDataset | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createDataset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createDataset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createDataset with error', async () => {
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.mapsplatformdatasets.v1.CreateDatasetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.maps.mapsplatformdatasets.v1.CreateDatasetRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createDataset = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createDataset(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createDataset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createDataset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createDataset with closed client', async () => {
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.mapsplatformdatasets.v1.CreateDatasetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.maps.mapsplatformdatasets.v1.CreateDatasetRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createDataset(request), expectedError);
-    });
-  });
-
-  describe('updateDatasetMetadata', () => {
-    it('invokes updateDatasetMetadata without error', async () => {
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest()
-      );
-      request.dataset ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest',
-        ['dataset', 'name']
-      );
-      request.dataset.name = defaultValue1;
-      const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.maps.mapsplatformdatasets.v1.Dataset()
-      );
-      client.innerApiCalls.updateDatasetMetadata =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.updateDatasetMetadata(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateDatasetMetadata as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateDatasetMetadata as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateDatasetMetadata without error using callback', async () => {
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest()
-      );
-      request.dataset ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest',
-        ['dataset', 'name']
-      );
-      request.dataset.name = defaultValue1;
-      const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.maps.mapsplatformdatasets.v1.Dataset()
-      );
-      client.innerApiCalls.updateDatasetMetadata =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateDatasetMetadata(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.maps.mapsplatformdatasets.v1.IDataset | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateDatasetMetadata as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateDatasetMetadata as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateDatasetMetadata with error', async () => {
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest()
-      );
-      request.dataset ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest',
-        ['dataset', 'name']
-      );
-      request.dataset.name = defaultValue1;
-      const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateDatasetMetadata = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.updateDatasetMetadata(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.updateDatasetMetadata as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateDatasetMetadata as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateDatasetMetadata with closed client', async () => {
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest()
-      );
-      request.dataset ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest',
-        ['dataset', 'name']
-      );
-      request.dataset.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.updateDatasetMetadata(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('getDataset', () => {
-    it('invokes getDataset without error', async () => {
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.mapsplatformdatasets.v1.GetDatasetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.maps.mapsplatformdatasets.v1.GetDatasetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.maps.mapsplatformdatasets.v1.Dataset()
-      );
-      client.innerApiCalls.getDataset = stubSimpleCall(expectedResponse);
-      const [response] = await client.getDataset(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getDataset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getDataset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getDataset without error using callback', async () => {
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.mapsplatformdatasets.v1.GetDatasetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.maps.mapsplatformdatasets.v1.GetDatasetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.maps.mapsplatformdatasets.v1.Dataset()
-      );
-      client.innerApiCalls.getDataset =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getDataset(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.maps.mapsplatformdatasets.v1.IDataset | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getDataset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getDataset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getDataset with error', async () => {
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.mapsplatformdatasets.v1.GetDatasetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.maps.mapsplatformdatasets.v1.GetDatasetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getDataset = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getDataset(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getDataset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getDataset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getDataset with closed client', async () => {
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.mapsplatformdatasets.v1.GetDatasetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.maps.mapsplatformdatasets.v1.GetDatasetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getDataset(request), expectedError);
-    });
-  });
-
-  describe('deleteDataset', () => {
-    it('invokes deleteDataset without error', async () => {
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteDataset = stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteDataset(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteDataset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteDataset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteDataset without error using callback', async () => {
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteDataset =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteDataset(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteDataset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteDataset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteDataset with error', async () => {
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteDataset = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteDataset(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteDataset as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteDataset as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteDataset with closed client', async () => {
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.deleteDataset(request), expectedError);
-    });
-  });
-
-  describe('fetchDatasetErrors', () => {
-    it('invokes fetchDatasetErrors without error', async () => {
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest',
-        ['dataset']
-      );
-      request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.rpc.Status()),
-        generateSampleMessage(new protos.google.rpc.Status()),
-        generateSampleMessage(new protos.google.rpc.Status()),
-      ];
-      client.innerApiCalls.fetchDatasetErrors =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.fetchDatasetErrors(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.fetchDatasetErrors as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.fetchDatasetErrors as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes fetchDatasetErrors without error using callback', async () => {
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest',
-        ['dataset']
-      );
-      request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.rpc.Status()),
-        generateSampleMessage(new protos.google.rpc.Status()),
-        generateSampleMessage(new protos.google.rpc.Status()),
-      ];
-      client.innerApiCalls.fetchDatasetErrors =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.fetchDatasetErrors(
-          request,
-          (err?: Error | null, result?: protos.google.rpc.IStatus[] | null) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.fetchDatasetErrors as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.fetchDatasetErrors as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes fetchDatasetErrors with error', async () => {
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest',
-        ['dataset']
-      );
-      request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.fetchDatasetErrors = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.fetchDatasetErrors(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.fetchDatasetErrors as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.fetchDatasetErrors as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes fetchDatasetErrorsStream without error', async () => {
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest',
-        ['dataset']
-      );
-      request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.rpc.Status()),
-        generateSampleMessage(new protos.google.rpc.Status()),
-        generateSampleMessage(new protos.google.rpc.Status()),
-      ];
-      client.descriptors.page.fetchDatasetErrors.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.fetchDatasetErrorsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.rpc.Status[] = [];
-        stream.on('data', (response: protos.google.rpc.Status) => {
-          responses.push(response);
-        });
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.fetchDatasetErrors.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.fetchDatasetErrors, request)
-      );
-      assert(
-        (client.descriptors.page.fetchDatasetErrors.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes fetchDatasetErrorsStream with error', async () => {
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest',
-        ['dataset']
-      );
-      request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.fetchDatasetErrors.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.fetchDatasetErrorsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.rpc.Status[] = [];
-        stream.on('data', (response: protos.google.rpc.Status) => {
-          responses.push(response);
-        });
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.fetchDatasetErrors.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.fetchDatasetErrors, request)
-      );
-      assert(
-        (client.descriptors.page.fetchDatasetErrors.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with fetchDatasetErrors without error', async () => {
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest',
-        ['dataset']
-      );
-      request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.rpc.Status()),
-        generateSampleMessage(new protos.google.rpc.Status()),
-        generateSampleMessage(new protos.google.rpc.Status()),
-      ];
-      client.descriptors.page.fetchDatasetErrors.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.rpc.IStatus[] = [];
-      const iterable = client.fetchDatasetErrorsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.fetchDatasetErrors.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.fetchDatasetErrors.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with fetchDatasetErrors with error', async () => {
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest',
-        ['dataset']
-      );
-      request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.fetchDatasetErrors.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.fetchDatasetErrorsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.rpc.IStatus[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'mapsplatformdatasets.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.fetchDatasetErrors.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.fetchDatasetErrors.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'mapsplatformdatasets.example.com');
+        });
 
-  describe('listDatasets', () => {
-    it('invokes listDatasets without error', async () => {
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'mapsplatformdatasets.example.com');
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.maps.mapsplatformdatasets.v1.Dataset()
-        ),
-        generateSampleMessage(
-          new protos.google.maps.mapsplatformdatasets.v1.Dataset()
-        ),
-        generateSampleMessage(
-          new protos.google.maps.mapsplatformdatasets.v1.Dataset()
-        ),
-      ];
-      client.innerApiCalls.listDatasets = stubSimpleCall(expectedResponse);
-      const [response] = await client.listDatasets(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listDatasets as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listDatasets as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
 
-    it('invokes listDatasets without error using callback', async () => {
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.maps.mapsplatformdatasets.v1.Dataset()
-        ),
-        generateSampleMessage(
-          new protos.google.maps.mapsplatformdatasets.v1.Dataset()
-        ),
-        generateSampleMessage(
-          new protos.google.maps.mapsplatformdatasets.v1.Dataset()
-        ),
-      ];
-      client.innerApiCalls.listDatasets =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listDatasets(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.maps.mapsplatformdatasets.v1.IDataset[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listDatasets as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listDatasets as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'mapsplatformdatasets.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('invokes listDatasets with error', async () => {
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listDatasets = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listDatasets(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listDatasets as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listDatasets as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listDatasetsStream without error', async () => {
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.maps.mapsplatformdatasets.v1.Dataset()
-        ),
-        generateSampleMessage(
-          new protos.google.maps.mapsplatformdatasets.v1.Dataset()
-        ),
-        generateSampleMessage(
-          new protos.google.maps.mapsplatformdatasets.v1.Dataset()
-        ),
-      ];
-      client.descriptors.page.listDatasets.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listDatasetsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.maps.mapsplatformdatasets.v1.Dataset[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.maps.mapsplatformdatasets.v1.Dataset) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listDatasets.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listDatasets, request)
-      );
-      assert(
-        (client.descriptors.page.listDatasets.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listDatasetsStream with error', async () => {
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listDatasets.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listDatasetsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.maps.mapsplatformdatasets.v1.Dataset[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.maps.mapsplatformdatasets.v1.Dataset) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listDatasets.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listDatasets, request)
-      );
-      assert(
-        (client.descriptors.page.listDatasets.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listDatasets without error', async () => {
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.maps.mapsplatformdatasets.v1.Dataset()
-        ),
-        generateSampleMessage(
-          new protos.google.maps.mapsplatformdatasets.v1.Dataset()
-        ),
-        generateSampleMessage(
-          new protos.google.maps.mapsplatformdatasets.v1.Dataset()
-        ),
-      ];
-      client.descriptors.page.listDatasets.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.maps.mapsplatformdatasets.v1.IDataset[] =
-        [];
-      const iterable = client.listDatasetsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listDatasets.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listDatasets.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listDatasets with error', async () => {
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listDatasets.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listDatasetsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.maps.mapsplatformdatasets.v1.IDataset[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'mapsplatformdatasets.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listDatasets.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listDatasets.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('Path templates', () => {
-    describe('dataset', async () => {
-      const fakePath = '/rendered/path/dataset';
-      const expectedParameters = {
-        project: 'projectValue',
-        dataset: 'datasetValue',
-      };
-      const client =
-        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
         });
-      await client.initialize();
-      client.pathTemplates.datasetPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.datasetPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
 
-      it('datasetPath', () => {
-        const result = client.datasetPath('projectValue', 'datasetValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.datasetPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('has port', () => {
+            const port = mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
 
-      it('matchProjectFromDatasetName', () => {
-        const result = client.matchProjectFromDatasetName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.datasetPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('should create a client with no option', () => {
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient();
+            assert(client);
+        });
 
-      it('matchDatasetFromDatasetName', () => {
-        const result = client.matchDatasetFromDatasetName(fakePath);
-        assert.strictEqual(result, 'datasetValue');
-        assert(
-          (client.pathTemplates.datasetPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('should create a client with gRPC fallback', () => {
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.mapsPlatformDatasetsStub, undefined);
+            await client.initialize();
+            assert(client.mapsPlatformDatasetsStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.mapsPlatformDatasetsStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.mapsPlatformDatasetsStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
-  });
+
+    describe('createDataset', () => {
+        it('invokes createDataset without error', async () => {
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.mapsplatformdatasets.v1.CreateDatasetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.maps.mapsplatformdatasets.v1.CreateDatasetRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.maps.mapsplatformdatasets.v1.Dataset()
+            );
+            client.innerApiCalls.createDataset = stubSimpleCall(expectedResponse);
+            const [response] = await client.createDataset(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createDataset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createDataset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createDataset without error using callback', async () => {
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.mapsplatformdatasets.v1.CreateDatasetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.maps.mapsplatformdatasets.v1.CreateDatasetRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.maps.mapsplatformdatasets.v1.Dataset()
+            );
+            client.innerApiCalls.createDataset = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createDataset(
+                    request,
+                    (err?: Error|null, result?: protos.google.maps.mapsplatformdatasets.v1.IDataset|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createDataset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createDataset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createDataset with error', async () => {
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.mapsplatformdatasets.v1.CreateDatasetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.maps.mapsplatformdatasets.v1.CreateDatasetRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createDataset = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createDataset(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createDataset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createDataset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createDataset with closed client', async () => {
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.mapsplatformdatasets.v1.CreateDatasetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.maps.mapsplatformdatasets.v1.CreateDatasetRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createDataset(request), expectedError);
+        });
+    });
+
+    describe('updateDatasetMetadata', () => {
+        it('invokes updateDatasetMetadata without error', async () => {
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest()
+            );
+            request.dataset ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest', ['dataset', 'name']);
+            request.dataset.name = defaultValue1;
+            const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.maps.mapsplatformdatasets.v1.Dataset()
+            );
+            client.innerApiCalls.updateDatasetMetadata = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateDatasetMetadata(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateDatasetMetadata as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateDatasetMetadata as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateDatasetMetadata without error using callback', async () => {
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest()
+            );
+            request.dataset ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest', ['dataset', 'name']);
+            request.dataset.name = defaultValue1;
+            const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.maps.mapsplatformdatasets.v1.Dataset()
+            );
+            client.innerApiCalls.updateDatasetMetadata = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateDatasetMetadata(
+                    request,
+                    (err?: Error|null, result?: protos.google.maps.mapsplatformdatasets.v1.IDataset|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateDatasetMetadata as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateDatasetMetadata as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateDatasetMetadata with error', async () => {
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest()
+            );
+            request.dataset ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest', ['dataset', 'name']);
+            request.dataset.name = defaultValue1;
+            const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateDatasetMetadata = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateDatasetMetadata(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateDatasetMetadata as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateDatasetMetadata as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateDatasetMetadata with closed client', async () => {
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest()
+            );
+            request.dataset ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest', ['dataset', 'name']);
+            request.dataset.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateDatasetMetadata(request), expectedError);
+        });
+    });
+
+    describe('getDataset', () => {
+        it('invokes getDataset without error', async () => {
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.mapsplatformdatasets.v1.GetDatasetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.maps.mapsplatformdatasets.v1.GetDatasetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.maps.mapsplatformdatasets.v1.Dataset()
+            );
+            client.innerApiCalls.getDataset = stubSimpleCall(expectedResponse);
+            const [response] = await client.getDataset(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getDataset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDataset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDataset without error using callback', async () => {
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.mapsplatformdatasets.v1.GetDatasetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.maps.mapsplatformdatasets.v1.GetDatasetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.maps.mapsplatformdatasets.v1.Dataset()
+            );
+            client.innerApiCalls.getDataset = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getDataset(
+                    request,
+                    (err?: Error|null, result?: protos.google.maps.mapsplatformdatasets.v1.IDataset|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getDataset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDataset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDataset with error', async () => {
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.mapsplatformdatasets.v1.GetDatasetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.maps.mapsplatformdatasets.v1.GetDatasetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getDataset = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getDataset(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getDataset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDataset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDataset with closed client', async () => {
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.mapsplatformdatasets.v1.GetDatasetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.maps.mapsplatformdatasets.v1.GetDatasetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getDataset(request), expectedError);
+        });
+    });
+
+    describe('deleteDataset', () => {
+        it('invokes deleteDataset without error', async () => {
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteDataset = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteDataset(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteDataset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteDataset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteDataset without error using callback', async () => {
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteDataset = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteDataset(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteDataset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteDataset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteDataset with error', async () => {
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteDataset = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteDataset(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteDataset as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteDataset as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteDataset with closed client', async () => {
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteDataset(request), expectedError);
+        });
+    });
+
+    describe('fetchDatasetErrors', () => {
+        it('invokes fetchDatasetErrors without error', async () => {
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest', ['dataset']);
+            request.dataset = defaultValue1;
+            const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.rpc.Status()),
+              generateSampleMessage(new protos.google.rpc.Status()),
+              generateSampleMessage(new protos.google.rpc.Status()),
+            ];
+            client.innerApiCalls.fetchDatasetErrors = stubSimpleCall(expectedResponse);
+            const [response] = await client.fetchDatasetErrors(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.fetchDatasetErrors as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.fetchDatasetErrors as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes fetchDatasetErrors without error using callback', async () => {
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest', ['dataset']);
+            request.dataset = defaultValue1;
+            const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.rpc.Status()),
+              generateSampleMessage(new protos.google.rpc.Status()),
+              generateSampleMessage(new protos.google.rpc.Status()),
+            ];
+            client.innerApiCalls.fetchDatasetErrors = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.fetchDatasetErrors(
+                    request,
+                    (err?: Error|null, result?: protos.google.rpc.IStatus[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.fetchDatasetErrors as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.fetchDatasetErrors as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes fetchDatasetErrors with error', async () => {
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest', ['dataset']);
+            request.dataset = defaultValue1;
+            const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.fetchDatasetErrors = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.fetchDatasetErrors(request), expectedError);
+            const actualRequest = (client.innerApiCalls.fetchDatasetErrors as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.fetchDatasetErrors as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes fetchDatasetErrorsStream without error', async () => {
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest', ['dataset']);
+            request.dataset = defaultValue1;
+            const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.rpc.Status()),
+              generateSampleMessage(new protos.google.rpc.Status()),
+              generateSampleMessage(new protos.google.rpc.Status()),
+            ];
+            client.descriptors.page.fetchDatasetErrors.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.fetchDatasetErrorsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.rpc.Status[] = [];
+                stream.on('data', (response: protos.google.rpc.Status) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.fetchDatasetErrors.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.fetchDatasetErrors, request));
+            assert(
+                (client.descriptors.page.fetchDatasetErrors.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes fetchDatasetErrorsStream with error', async () => {
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest', ['dataset']);
+            request.dataset = defaultValue1;
+            const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.fetchDatasetErrors.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.fetchDatasetErrorsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.rpc.Status[] = [];
+                stream.on('data', (response: protos.google.rpc.Status) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.fetchDatasetErrors.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.fetchDatasetErrors, request));
+            assert(
+                (client.descriptors.page.fetchDatasetErrors.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with fetchDatasetErrors without error', async () => {
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest', ['dataset']);
+            request.dataset = defaultValue1;
+            const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.rpc.Status()),
+              generateSampleMessage(new protos.google.rpc.Status()),
+              generateSampleMessage(new protos.google.rpc.Status()),
+            ];
+            client.descriptors.page.fetchDatasetErrors.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.rpc.IStatus[] = [];
+            const iterable = client.fetchDatasetErrorsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.fetchDatasetErrors.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.fetchDatasetErrors.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with fetchDatasetErrors with error', async () => {
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest', ['dataset']);
+            request.dataset = defaultValue1;
+            const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.fetchDatasetErrors.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.fetchDatasetErrorsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.rpc.IStatus[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.fetchDatasetErrors.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.fetchDatasetErrors.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listDatasets', () => {
+        it('invokes listDatasets without error', async () => {
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.maps.mapsplatformdatasets.v1.Dataset()),
+              generateSampleMessage(new protos.google.maps.mapsplatformdatasets.v1.Dataset()),
+              generateSampleMessage(new protos.google.maps.mapsplatformdatasets.v1.Dataset()),
+            ];
+            client.innerApiCalls.listDatasets = stubSimpleCall(expectedResponse);
+            const [response] = await client.listDatasets(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listDatasets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDatasets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDatasets without error using callback', async () => {
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.maps.mapsplatformdatasets.v1.Dataset()),
+              generateSampleMessage(new protos.google.maps.mapsplatformdatasets.v1.Dataset()),
+              generateSampleMessage(new protos.google.maps.mapsplatformdatasets.v1.Dataset()),
+            ];
+            client.innerApiCalls.listDatasets = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listDatasets(
+                    request,
+                    (err?: Error|null, result?: protos.google.maps.mapsplatformdatasets.v1.IDataset[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listDatasets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDatasets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDatasets with error', async () => {
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listDatasets = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listDatasets(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listDatasets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDatasets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDatasetsStream without error', async () => {
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.maps.mapsplatformdatasets.v1.Dataset()),
+              generateSampleMessage(new protos.google.maps.mapsplatformdatasets.v1.Dataset()),
+              generateSampleMessage(new protos.google.maps.mapsplatformdatasets.v1.Dataset()),
+            ];
+            client.descriptors.page.listDatasets.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listDatasetsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.maps.mapsplatformdatasets.v1.Dataset[] = [];
+                stream.on('data', (response: protos.google.maps.mapsplatformdatasets.v1.Dataset) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listDatasets.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listDatasets, request));
+            assert(
+                (client.descriptors.page.listDatasets.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listDatasetsStream with error', async () => {
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listDatasets.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listDatasetsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.maps.mapsplatformdatasets.v1.Dataset[] = [];
+                stream.on('data', (response: protos.google.maps.mapsplatformdatasets.v1.Dataset) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listDatasets.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listDatasets, request));
+            assert(
+                (client.descriptors.page.listDatasets.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listDatasets without error', async () => {
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.maps.mapsplatformdatasets.v1.Dataset()),
+              generateSampleMessage(new protos.google.maps.mapsplatformdatasets.v1.Dataset()),
+              generateSampleMessage(new protos.google.maps.mapsplatformdatasets.v1.Dataset()),
+            ];
+            client.descriptors.page.listDatasets.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.maps.mapsplatformdatasets.v1.IDataset[] = [];
+            const iterable = client.listDatasetsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listDatasets.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listDatasets.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listDatasets with error', async () => {
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listDatasets.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listDatasetsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.maps.mapsplatformdatasets.v1.IDataset[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listDatasets.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listDatasets.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('Path templates', () => {
+
+        describe('dataset', async () => {
+            const fakePath = "/rendered/path/dataset";
+            const expectedParameters = {
+                project: "projectValue",
+                dataset: "datasetValue",
+            };
+            const client = new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.datasetPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.datasetPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('datasetPath', () => {
+                const result = client.datasetPath("projectValue", "datasetValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.datasetPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDatasetName', () => {
+                const result = client.matchProjectFromDatasetName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.datasetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDatasetFromDatasetName', () => {
+                const result = client.matchDatasetFromDatasetName(fakePath);
+                assert.strictEqual(result, "datasetValue");
+                assert((client.pathTemplates.datasetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+    });
 });

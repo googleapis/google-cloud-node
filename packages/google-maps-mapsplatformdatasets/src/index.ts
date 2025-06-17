@@ -17,12 +17,11 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v1 from './v1';
-import * as v1alpha from './v1alpha';
 
 const MapsPlatformDatasetsClient = v1.MapsPlatformDatasetsClient;
 type MapsPlatformDatasetsClient = v1.MapsPlatformDatasetsClient;
 
-export {v1, v1alpha, MapsPlatformDatasetsClient};
-export default {v1, v1alpha, MapsPlatformDatasetsClient};
+export {v1, MapsPlatformDatasetsClient};
+export default {v1, MapsPlatformDatasetsClient};
 import * as protos from '../protos/protos';
 export {protos};

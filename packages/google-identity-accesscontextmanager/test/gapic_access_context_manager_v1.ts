@@ -29,6196 +29,4633 @@ import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubLongRunningCall<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().rejects(callError)
-    : sinon.stub().resolves([mockOperation]);
+function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
 }
 
-function stubLongRunningCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().callsArgWith(2, callError)
-    : sinon.stub().callsArgWith(2, null, mockOperation);
+function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.AccessContextManagerClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'accesscontextmanager.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          accesscontextmanagerModule.v1.AccessContextManagerClient.servicePath;
-        assert.strictEqual(servicePath, 'accesscontextmanager.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          accesscontextmanagerModule.v1.AccessContextManagerClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'accesscontextmanager.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          universeDomain: 'example.com',
-        });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'accesscontextmanager.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          universe_domain: 'example.com',
-        });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'accesscontextmanager.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new accesscontextmanagerModule.v1.AccessContextManagerClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'accesscontextmanager.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'accesscontextmanager.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new accesscontextmanagerModule.v1.AccessContextManagerClient({
-              universeDomain: 'configured.example.com',
+        it('has universeDomain', () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
+        });
+
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = accesscontextmanagerModule.v1.AccessContextManagerClient.servicePath;
+                assert.strictEqual(servicePath, 'accesscontextmanager.googleapis.com');
+                assert(stub.called);
+                stub.restore();
             });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'accesscontextmanager.configured.example.com'
-          );
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
-        });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port =
-        accesscontextmanagerModule.v1.AccessContextManagerClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
-
-    it('should create a client with no option', () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          fallback: true,
-        });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      assert.strictEqual(client.accessContextManagerStub, undefined);
-      await client.initialize();
-      assert(client.accessContextManagerStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.accessContextManagerStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      assert.strictEqual(client.accessContextManagerStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('getAccessPolicy', () => {
-    it('invokes getAccessPolicy without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.GetAccessPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.GetAccessPolicyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.AccessPolicy()
-      );
-      client.innerApiCalls.getAccessPolicy = stubSimpleCall(expectedResponse);
-      const [response] = await client.getAccessPolicy(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getAccessPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAccessPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAccessPolicy without error using callback', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.GetAccessPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.GetAccessPolicyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.AccessPolicy()
-      );
-      client.innerApiCalls.getAccessPolicy =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getAccessPolicy(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.identity.accesscontextmanager.v1.IAccessPolicy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getAccessPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAccessPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAccessPolicy with error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.GetAccessPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.GetAccessPolicyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getAccessPolicy = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getAccessPolicy(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getAccessPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAccessPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAccessPolicy with closed client', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.GetAccessPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.GetAccessPolicyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getAccessPolicy(request), expectedError);
-    });
-  });
-
-  describe('getAccessLevel', () => {
-    it('invokes getAccessLevel without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.GetAccessLevelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.GetAccessLevelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.AccessLevel()
-      );
-      client.innerApiCalls.getAccessLevel = stubSimpleCall(expectedResponse);
-      const [response] = await client.getAccessLevel(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getAccessLevel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAccessLevel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAccessLevel without error using callback', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.GetAccessLevelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.GetAccessLevelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.AccessLevel()
-      );
-      client.innerApiCalls.getAccessLevel =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getAccessLevel(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.identity.accesscontextmanager.v1.IAccessLevel | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getAccessLevel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAccessLevel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAccessLevel with error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.GetAccessLevelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.GetAccessLevelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getAccessLevel = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getAccessLevel(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getAccessLevel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAccessLevel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAccessLevel with closed client', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.GetAccessLevelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.GetAccessLevelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getAccessLevel(request), expectedError);
-    });
-  });
-
-  describe('getServicePerimeter', () => {
-    it('invokes getServicePerimeter without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.GetServicePerimeterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.GetServicePerimeterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.ServicePerimeter()
-      );
-      client.innerApiCalls.getServicePerimeter =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getServicePerimeter(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getServicePerimeter as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getServicePerimeter as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getServicePerimeter without error using callback', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.GetServicePerimeterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.GetServicePerimeterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.ServicePerimeter()
-      );
-      client.innerApiCalls.getServicePerimeter =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getServicePerimeter(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.identity.accesscontextmanager.v1.IServicePerimeter | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getServicePerimeter as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getServicePerimeter as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getServicePerimeter with error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.GetServicePerimeterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.GetServicePerimeterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getServicePerimeter = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getServicePerimeter(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getServicePerimeter as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getServicePerimeter as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getServicePerimeter with closed client', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.GetServicePerimeterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.GetServicePerimeterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getServicePerimeter(request), expectedError);
-    });
-  });
-
-  describe('getGcpUserAccessBinding', () => {
-    it('invokes getGcpUserAccessBinding without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.GetGcpUserAccessBindingRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.GetGcpUserAccessBindingRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding()
-      );
-      client.innerApiCalls.getGcpUserAccessBinding =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getGcpUserAccessBinding(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getGcpUserAccessBinding as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getGcpUserAccessBinding as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getGcpUserAccessBinding without error using callback', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.GetGcpUserAccessBindingRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.GetGcpUserAccessBindingRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding()
-      );
-      client.innerApiCalls.getGcpUserAccessBinding =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getGcpUserAccessBinding(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getGcpUserAccessBinding as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getGcpUserAccessBinding as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getGcpUserAccessBinding with error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.GetGcpUserAccessBindingRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.GetGcpUserAccessBindingRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getGcpUserAccessBinding = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getGcpUserAccessBinding(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.getGcpUserAccessBinding as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getGcpUserAccessBinding as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getGcpUserAccessBinding with closed client', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.GetGcpUserAccessBindingRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.GetGcpUserAccessBindingRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.getGcpUserAccessBinding(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('setIamPolicy', () => {
-    it('invokes setIamPolicy without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.SetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.SetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.Policy()
-      );
-      client.innerApiCalls.setIamPolicy = stubSimpleCall(expectedResponse);
-      const [response] = await client.setIamPolicy(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setIamPolicy without error using callback', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.SetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.SetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.Policy()
-      );
-      client.innerApiCalls.setIamPolicy =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.setIamPolicy(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.iam.v1.IPolicy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setIamPolicy with error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.SetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.SetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.setIamPolicy = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.setIamPolicy(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setIamPolicy with closed client', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.SetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.SetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.setIamPolicy(request), expectedError);
-    });
-  });
-
-  describe('getIamPolicy', () => {
-    it('invokes getIamPolicy without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.GetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.GetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.Policy()
-      );
-      client.innerApiCalls.getIamPolicy = stubSimpleCall(expectedResponse);
-      const [response] = await client.getIamPolicy(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getIamPolicy without error using callback', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.GetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.GetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.Policy()
-      );
-      client.innerApiCalls.getIamPolicy =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getIamPolicy(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.iam.v1.IPolicy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getIamPolicy with error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.GetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.GetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getIamPolicy = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getIamPolicy(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getIamPolicy with closed client', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.GetIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.GetIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getIamPolicy(request), expectedError);
-    });
-  });
-
-  describe('testIamPermissions', () => {
-    it('invokes testIamPermissions without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.TestIamPermissionsRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsResponse()
-      );
-      client.innerApiCalls.testIamPermissions =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.testIamPermissions(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes testIamPermissions without error using callback', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.TestIamPermissionsRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsResponse()
-      );
-      client.innerApiCalls.testIamPermissions =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.testIamPermissions(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.iam.v1.ITestIamPermissionsResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes testIamPermissions with error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.TestIamPermissionsRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.testIamPermissions = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.testIamPermissions(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.testIamPermissions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes testIamPermissions with closed client', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.iam.v1.TestIamPermissionsRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.testIamPermissions(request), expectedError);
-    });
-  });
-
-  describe('createAccessPolicy', () => {
-    it('invokes createAccessPolicy without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.AccessPolicy()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createAccessPolicy =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createAccessPolicy(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-    });
-
-    it('invokes createAccessPolicy without error using callback', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.AccessPolicy()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createAccessPolicy =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createAccessPolicy(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
-              protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-    });
-
-    it('invokes createAccessPolicy with call error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.AccessPolicy()
-      );
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createAccessPolicy = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createAccessPolicy(request), expectedError);
-    });
-
-    it('invokes createAccessPolicy with LRO error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.AccessPolicy()
-      );
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createAccessPolicy = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createAccessPolicy(request);
-      await assert.rejects(operation.promise(), expectedError);
-    });
-
-    it('invokes checkCreateAccessPolicyProgress without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateAccessPolicyProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateAccessPolicyProgress with error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateAccessPolicyProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateAccessPolicy', () => {
-    it('invokes updateAccessPolicy without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.UpdateAccessPolicyRequest()
-      );
-      request.policy ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.UpdateAccessPolicyRequest',
-        ['policy', 'name']
-      );
-      request.policy.name = defaultValue1;
-      const expectedHeaderRequestParams = `policy.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateAccessPolicy =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateAccessPolicy(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateAccessPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAccessPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateAccessPolicy without error using callback', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.UpdateAccessPolicyRequest()
-      );
-      request.policy ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.UpdateAccessPolicyRequest',
-        ['policy', 'name']
-      );
-      request.policy.name = defaultValue1;
-      const expectedHeaderRequestParams = `policy.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateAccessPolicy =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateAccessPolicy(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
-              protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateAccessPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAccessPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateAccessPolicy with call error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.UpdateAccessPolicyRequest()
-      );
-      request.policy ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.UpdateAccessPolicyRequest',
-        ['policy', 'name']
-      );
-      request.policy.name = defaultValue1;
-      const expectedHeaderRequestParams = `policy.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateAccessPolicy = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateAccessPolicy(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateAccessPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAccessPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateAccessPolicy with LRO error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.UpdateAccessPolicyRequest()
-      );
-      request.policy ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.UpdateAccessPolicyRequest',
-        ['policy', 'name']
-      );
-      request.policy.name = defaultValue1;
-      const expectedHeaderRequestParams = `policy.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateAccessPolicy = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateAccessPolicy(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateAccessPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAccessPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateAccessPolicyProgress without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateAccessPolicyProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateAccessPolicyProgress with error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateAccessPolicyProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteAccessPolicy', () => {
-    it('invokes deleteAccessPolicy without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.DeleteAccessPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.DeleteAccessPolicyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteAccessPolicy =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteAccessPolicy(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteAccessPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAccessPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteAccessPolicy without error using callback', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.DeleteAccessPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.DeleteAccessPolicyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteAccessPolicy =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteAccessPolicy(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteAccessPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAccessPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteAccessPolicy with call error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.DeleteAccessPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.DeleteAccessPolicyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteAccessPolicy = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteAccessPolicy(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteAccessPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAccessPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteAccessPolicy with LRO error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.DeleteAccessPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.DeleteAccessPolicyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteAccessPolicy = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteAccessPolicy(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteAccessPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAccessPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteAccessPolicyProgress without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteAccessPolicyProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteAccessPolicyProgress with error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteAccessPolicyProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createAccessLevel', () => {
-    it('invokes createAccessLevel without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.CreateAccessLevelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.CreateAccessLevelRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createAccessLevel =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createAccessLevel(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createAccessLevel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createAccessLevel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createAccessLevel without error using callback', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.CreateAccessLevelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.CreateAccessLevelRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createAccessLevel =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createAccessLevel(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.identity.accesscontextmanager.v1.IAccessLevel,
-              protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.identity.accesscontextmanager.v1.IAccessLevel,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createAccessLevel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createAccessLevel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createAccessLevel with call error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.CreateAccessLevelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.CreateAccessLevelRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createAccessLevel = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createAccessLevel(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createAccessLevel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createAccessLevel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createAccessLevel with LRO error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.CreateAccessLevelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.CreateAccessLevelRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createAccessLevel = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createAccessLevel(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createAccessLevel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createAccessLevel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateAccessLevelProgress without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateAccessLevelProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateAccessLevelProgress with error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateAccessLevelProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateAccessLevel', () => {
-    it('invokes updateAccessLevel without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.UpdateAccessLevelRequest()
-      );
-      request.accessLevel ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.UpdateAccessLevelRequest',
-        ['accessLevel', 'name']
-      );
-      request.accessLevel.name = defaultValue1;
-      const expectedHeaderRequestParams = `access_level.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateAccessLevel =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateAccessLevel(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateAccessLevel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAccessLevel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateAccessLevel without error using callback', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.UpdateAccessLevelRequest()
-      );
-      request.accessLevel ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.UpdateAccessLevelRequest',
-        ['accessLevel', 'name']
-      );
-      request.accessLevel.name = defaultValue1;
-      const expectedHeaderRequestParams = `access_level.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateAccessLevel =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateAccessLevel(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.identity.accesscontextmanager.v1.IAccessLevel,
-              protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.identity.accesscontextmanager.v1.IAccessLevel,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateAccessLevel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAccessLevel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateAccessLevel with call error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.UpdateAccessLevelRequest()
-      );
-      request.accessLevel ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.UpdateAccessLevelRequest',
-        ['accessLevel', 'name']
-      );
-      request.accessLevel.name = defaultValue1;
-      const expectedHeaderRequestParams = `access_level.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateAccessLevel = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateAccessLevel(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateAccessLevel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAccessLevel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateAccessLevel with LRO error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.UpdateAccessLevelRequest()
-      );
-      request.accessLevel ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.UpdateAccessLevelRequest',
-        ['accessLevel', 'name']
-      );
-      request.accessLevel.name = defaultValue1;
-      const expectedHeaderRequestParams = `access_level.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateAccessLevel = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateAccessLevel(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateAccessLevel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAccessLevel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateAccessLevelProgress without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateAccessLevelProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateAccessLevelProgress with error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateAccessLevelProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteAccessLevel', () => {
-    it('invokes deleteAccessLevel without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.DeleteAccessLevelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.DeleteAccessLevelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteAccessLevel =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteAccessLevel(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteAccessLevel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAccessLevel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteAccessLevel without error using callback', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.DeleteAccessLevelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.DeleteAccessLevelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteAccessLevel =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteAccessLevel(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteAccessLevel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAccessLevel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteAccessLevel with call error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.DeleteAccessLevelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.DeleteAccessLevelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteAccessLevel = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteAccessLevel(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteAccessLevel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAccessLevel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteAccessLevel with LRO error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.DeleteAccessLevelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.DeleteAccessLevelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteAccessLevel = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteAccessLevel(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteAccessLevel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAccessLevel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteAccessLevelProgress without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteAccessLevelProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteAccessLevelProgress with error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteAccessLevelProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('replaceAccessLevels', () => {
-    it('invokes replaceAccessLevels without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.ReplaceAccessLevelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.ReplaceAccessLevelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.replaceAccessLevels =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.replaceAccessLevels(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.replaceAccessLevels as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.replaceAccessLevels as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes replaceAccessLevels without error using callback', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.ReplaceAccessLevelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.ReplaceAccessLevelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.replaceAccessLevels =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.replaceAccessLevels(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.identity.accesscontextmanager.v1.IReplaceAccessLevelsResponse,
-              protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.identity.accesscontextmanager.v1.IReplaceAccessLevelsResponse,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.replaceAccessLevels as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.replaceAccessLevels as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes replaceAccessLevels with call error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.ReplaceAccessLevelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.ReplaceAccessLevelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.replaceAccessLevels = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.replaceAccessLevels(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.replaceAccessLevels as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.replaceAccessLevels as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes replaceAccessLevels with LRO error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.ReplaceAccessLevelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.ReplaceAccessLevelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.replaceAccessLevels = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.replaceAccessLevels(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.replaceAccessLevels as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.replaceAccessLevels as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkReplaceAccessLevelsProgress without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkReplaceAccessLevelsProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkReplaceAccessLevelsProgress with error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkReplaceAccessLevelsProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createServicePerimeter', () => {
-    it('invokes createServicePerimeter without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.CreateServicePerimeterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.CreateServicePerimeterRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createServicePerimeter =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createServicePerimeter(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createServicePerimeter as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createServicePerimeter as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createServicePerimeter without error using callback', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.CreateServicePerimeterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.CreateServicePerimeterRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createServicePerimeter =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createServicePerimeter(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
-              protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createServicePerimeter as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createServicePerimeter as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createServicePerimeter with call error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.CreateServicePerimeterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.CreateServicePerimeterRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createServicePerimeter = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.createServicePerimeter(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.createServicePerimeter as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createServicePerimeter as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createServicePerimeter with LRO error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.CreateServicePerimeterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.CreateServicePerimeterRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createServicePerimeter = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createServicePerimeter(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createServicePerimeter as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createServicePerimeter as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateServicePerimeterProgress without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateServicePerimeterProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateServicePerimeterProgress with error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateServicePerimeterProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateServicePerimeter', () => {
-    it('invokes updateServicePerimeter without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.UpdateServicePerimeterRequest()
-      );
-      request.servicePerimeter ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.UpdateServicePerimeterRequest',
-        ['servicePerimeter', 'name']
-      );
-      request.servicePerimeter.name = defaultValue1;
-      const expectedHeaderRequestParams = `service_perimeter.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateServicePerimeter =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateServicePerimeter(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateServicePerimeter as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateServicePerimeter as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateServicePerimeter without error using callback', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.UpdateServicePerimeterRequest()
-      );
-      request.servicePerimeter ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.UpdateServicePerimeterRequest',
-        ['servicePerimeter', 'name']
-      );
-      request.servicePerimeter.name = defaultValue1;
-      const expectedHeaderRequestParams = `service_perimeter.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateServicePerimeter =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateServicePerimeter(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
-              protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateServicePerimeter as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateServicePerimeter as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateServicePerimeter with call error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.UpdateServicePerimeterRequest()
-      );
-      request.servicePerimeter ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.UpdateServicePerimeterRequest',
-        ['servicePerimeter', 'name']
-      );
-      request.servicePerimeter.name = defaultValue1;
-      const expectedHeaderRequestParams = `service_perimeter.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateServicePerimeter = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.updateServicePerimeter(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.updateServicePerimeter as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateServicePerimeter as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateServicePerimeter with LRO error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.UpdateServicePerimeterRequest()
-      );
-      request.servicePerimeter ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.UpdateServicePerimeterRequest',
-        ['servicePerimeter', 'name']
-      );
-      request.servicePerimeter.name = defaultValue1;
-      const expectedHeaderRequestParams = `service_perimeter.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateServicePerimeter = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateServicePerimeter(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateServicePerimeter as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateServicePerimeter as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateServicePerimeterProgress without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateServicePerimeterProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateServicePerimeterProgress with error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateServicePerimeterProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteServicePerimeter', () => {
-    it('invokes deleteServicePerimeter without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.DeleteServicePerimeterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.DeleteServicePerimeterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteServicePerimeter =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteServicePerimeter(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteServicePerimeter as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteServicePerimeter as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteServicePerimeter without error using callback', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.DeleteServicePerimeterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.DeleteServicePerimeterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteServicePerimeter =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteServicePerimeter(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteServicePerimeter as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteServicePerimeter as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteServicePerimeter with call error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.DeleteServicePerimeterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.DeleteServicePerimeterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteServicePerimeter = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.deleteServicePerimeter(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.deleteServicePerimeter as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteServicePerimeter as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteServicePerimeter with LRO error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.DeleteServicePerimeterRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.DeleteServicePerimeterRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteServicePerimeter = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteServicePerimeter(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteServicePerimeter as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteServicePerimeter as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteServicePerimeterProgress without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteServicePerimeterProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteServicePerimeterProgress with error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteServicePerimeterProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('replaceServicePerimeters', () => {
-    it('invokes replaceServicePerimeters without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.ReplaceServicePerimetersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.ReplaceServicePerimetersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.replaceServicePerimeters =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.replaceServicePerimeters(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.replaceServicePerimeters as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.replaceServicePerimeters as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes replaceServicePerimeters without error using callback', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.ReplaceServicePerimetersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.ReplaceServicePerimetersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.replaceServicePerimeters =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.replaceServicePerimeters(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.identity.accesscontextmanager.v1.IReplaceServicePerimetersResponse,
-              protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.identity.accesscontextmanager.v1.IReplaceServicePerimetersResponse,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.replaceServicePerimeters as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.replaceServicePerimeters as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes replaceServicePerimeters with call error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.ReplaceServicePerimetersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.ReplaceServicePerimetersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.replaceServicePerimeters = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.replaceServicePerimeters(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.replaceServicePerimeters as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.replaceServicePerimeters as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes replaceServicePerimeters with LRO error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.ReplaceServicePerimetersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.ReplaceServicePerimetersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.replaceServicePerimeters = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.replaceServicePerimeters(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.replaceServicePerimeters as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.replaceServicePerimeters as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkReplaceServicePerimetersProgress without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation =
-        await client.checkReplaceServicePerimetersProgress(
-          expectedResponse.name
-        );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkReplaceServicePerimetersProgress with error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkReplaceServicePerimetersProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('commitServicePerimeters', () => {
-    it('invokes commitServicePerimeters without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.CommitServicePerimetersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.CommitServicePerimetersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.commitServicePerimeters =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.commitServicePerimeters(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.commitServicePerimeters as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.commitServicePerimeters as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes commitServicePerimeters without error using callback', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.CommitServicePerimetersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.CommitServicePerimetersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.commitServicePerimeters =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.commitServicePerimeters(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.identity.accesscontextmanager.v1.ICommitServicePerimetersResponse,
-              protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.identity.accesscontextmanager.v1.ICommitServicePerimetersResponse,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.commitServicePerimeters as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.commitServicePerimeters as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes commitServicePerimeters with call error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.CommitServicePerimetersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.CommitServicePerimetersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.commitServicePerimeters = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.commitServicePerimeters(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.commitServicePerimeters as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.commitServicePerimeters as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes commitServicePerimeters with LRO error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.CommitServicePerimetersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.CommitServicePerimetersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.commitServicePerimeters = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.commitServicePerimeters(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.commitServicePerimeters as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.commitServicePerimeters as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCommitServicePerimetersProgress without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation =
-        await client.checkCommitServicePerimetersProgress(
-          expectedResponse.name
-        );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCommitServicePerimetersProgress with error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCommitServicePerimetersProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createGcpUserAccessBinding', () => {
-    it('invokes createGcpUserAccessBinding without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.CreateGcpUserAccessBindingRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.CreateGcpUserAccessBindingRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createGcpUserAccessBinding =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createGcpUserAccessBinding(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createGcpUserAccessBinding as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createGcpUserAccessBinding as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createGcpUserAccessBinding without error using callback', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.CreateGcpUserAccessBindingRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.CreateGcpUserAccessBindingRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createGcpUserAccessBinding =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createGcpUserAccessBinding(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
-              protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
-        protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createGcpUserAccessBinding as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createGcpUserAccessBinding as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createGcpUserAccessBinding with call error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.CreateGcpUserAccessBindingRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.CreateGcpUserAccessBindingRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createGcpUserAccessBinding = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.createGcpUserAccessBinding(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.createGcpUserAccessBinding as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createGcpUserAccessBinding as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createGcpUserAccessBinding with LRO error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.CreateGcpUserAccessBindingRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.CreateGcpUserAccessBindingRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createGcpUserAccessBinding = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createGcpUserAccessBinding(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createGcpUserAccessBinding as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createGcpUserAccessBinding as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateGcpUserAccessBindingProgress without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation =
-        await client.checkCreateGcpUserAccessBindingProgress(
-          expectedResponse.name
-        );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateGcpUserAccessBindingProgress with error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateGcpUserAccessBindingProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateGcpUserAccessBinding', () => {
-    it('invokes updateGcpUserAccessBinding without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.UpdateGcpUserAccessBindingRequest()
-      );
-      request.gcpUserAccessBinding ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.UpdateGcpUserAccessBindingRequest',
-        ['gcpUserAccessBinding', 'name']
-      );
-      request.gcpUserAccessBinding.name = defaultValue1;
-      const expectedHeaderRequestParams = `gcp_user_access_binding.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateGcpUserAccessBinding =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateGcpUserAccessBinding(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateGcpUserAccessBinding as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateGcpUserAccessBinding as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateGcpUserAccessBinding without error using callback', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.UpdateGcpUserAccessBindingRequest()
-      );
-      request.gcpUserAccessBinding ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.UpdateGcpUserAccessBindingRequest',
-        ['gcpUserAccessBinding', 'name']
-      );
-      request.gcpUserAccessBinding.name = defaultValue1;
-      const expectedHeaderRequestParams = `gcp_user_access_binding.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateGcpUserAccessBinding =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateGcpUserAccessBinding(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
-              protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
-        protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateGcpUserAccessBinding as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateGcpUserAccessBinding as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateGcpUserAccessBinding with call error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.UpdateGcpUserAccessBindingRequest()
-      );
-      request.gcpUserAccessBinding ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.UpdateGcpUserAccessBindingRequest',
-        ['gcpUserAccessBinding', 'name']
-      );
-      request.gcpUserAccessBinding.name = defaultValue1;
-      const expectedHeaderRequestParams = `gcp_user_access_binding.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateGcpUserAccessBinding = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.updateGcpUserAccessBinding(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.updateGcpUserAccessBinding as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateGcpUserAccessBinding as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateGcpUserAccessBinding with LRO error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.UpdateGcpUserAccessBindingRequest()
-      );
-      request.gcpUserAccessBinding ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.UpdateGcpUserAccessBindingRequest',
-        ['gcpUserAccessBinding', 'name']
-      );
-      request.gcpUserAccessBinding.name = defaultValue1;
-      const expectedHeaderRequestParams = `gcp_user_access_binding.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateGcpUserAccessBinding = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateGcpUserAccessBinding(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateGcpUserAccessBinding as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateGcpUserAccessBinding as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateGcpUserAccessBindingProgress without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation =
-        await client.checkUpdateGcpUserAccessBindingProgress(
-          expectedResponse.name
-        );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateGcpUserAccessBindingProgress with error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateGcpUserAccessBindingProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteGcpUserAccessBinding', () => {
-    it('invokes deleteGcpUserAccessBinding without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.DeleteGcpUserAccessBindingRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.DeleteGcpUserAccessBindingRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteGcpUserAccessBinding =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteGcpUserAccessBinding(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteGcpUserAccessBinding as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteGcpUserAccessBinding as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteGcpUserAccessBinding without error using callback', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.DeleteGcpUserAccessBindingRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.DeleteGcpUserAccessBindingRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteGcpUserAccessBinding =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteGcpUserAccessBinding(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteGcpUserAccessBinding as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteGcpUserAccessBinding as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteGcpUserAccessBinding with call error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.DeleteGcpUserAccessBindingRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.DeleteGcpUserAccessBindingRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteGcpUserAccessBinding = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.deleteGcpUserAccessBinding(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.deleteGcpUserAccessBinding as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteGcpUserAccessBinding as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteGcpUserAccessBinding with LRO error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.DeleteGcpUserAccessBindingRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.DeleteGcpUserAccessBindingRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteGcpUserAccessBinding = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteGcpUserAccessBinding(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteGcpUserAccessBinding as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteGcpUserAccessBinding as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteGcpUserAccessBindingProgress without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation =
-        await client.checkDeleteGcpUserAccessBindingProgress(
-          expectedResponse.name
-        );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteGcpUserAccessBindingProgress with error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteGcpUserAccessBindingProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('listAccessPolicies', () => {
-    it('invokes listAccessPolicies without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.ListAccessPoliciesRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.AccessPolicy()
-        ),
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.AccessPolicy()
-        ),
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.AccessPolicy()
-        ),
-      ];
-      client.innerApiCalls.listAccessPolicies =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listAccessPolicies(request);
-      assert.deepStrictEqual(response, expectedResponse);
-    });
-
-    it('invokes listAccessPolicies without error using callback', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.ListAccessPoliciesRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.AccessPolicy()
-        ),
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.AccessPolicy()
-        ),
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.AccessPolicy()
-        ),
-      ];
-      client.innerApiCalls.listAccessPolicies =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listAccessPolicies(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.identity.accesscontextmanager.v1.IAccessPolicy[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-    });
-
-    it('invokes listAccessPolicies with error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.ListAccessPoliciesRequest()
-      );
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listAccessPolicies = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listAccessPolicies(request), expectedError);
-    });
-
-    it('invokes listAccessPoliciesStream without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.ListAccessPoliciesRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.AccessPolicy()
-        ),
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.AccessPolicy()
-        ),
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.AccessPolicy()
-        ),
-      ];
-      client.descriptors.page.listAccessPolicies.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listAccessPoliciesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.identity.accesscontextmanager.v1.AccessPolicy[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.identity.accesscontextmanager.v1.AccessPolicy
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listAccessPolicies.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listAccessPolicies, request)
-      );
-    });
-
-    it('invokes listAccessPoliciesStream with error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.ListAccessPoliciesRequest()
-      );
-      const expectedError = new Error('expected');
-      client.descriptors.page.listAccessPolicies.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listAccessPoliciesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.identity.accesscontextmanager.v1.AccessPolicy[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.identity.accesscontextmanager.v1.AccessPolicy
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listAccessPolicies.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listAccessPolicies, request)
-      );
-    });
-
-    it('uses async iteration with listAccessPolicies without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.ListAccessPoliciesRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.AccessPolicy()
-        ),
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.AccessPolicy()
-        ),
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.AccessPolicy()
-        ),
-      ];
-      client.descriptors.page.listAccessPolicies.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.identity.accesscontextmanager.v1.IAccessPolicy[] =
-        [];
-      const iterable = client.listAccessPoliciesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listAccessPolicies.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-
-    it('uses async iteration with listAccessPolicies with error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.ListAccessPoliciesRequest()
-      );
-      const expectedError = new Error('expected');
-      client.descriptors.page.listAccessPolicies.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listAccessPoliciesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.identity.accesscontextmanager.v1.IAccessPolicy[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = accesscontextmanagerModule.v1.AccessContextManagerClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'accesscontextmanager.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listAccessPolicies.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-  });
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'accesscontextmanager.example.com');
+        });
 
-  describe('listAccessLevels', () => {
-    it('invokes listAccessLevels without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'accesscontextmanager.example.com');
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.AccessLevel()
-        ),
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.AccessLevel()
-        ),
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.AccessLevel()
-        ),
-      ];
-      client.innerApiCalls.listAccessLevels = stubSimpleCall(expectedResponse);
-      const [response] = await client.listAccessLevels(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listAccessLevels as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAccessLevels as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
 
-    it('invokes listAccessLevels without error using callback', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.AccessLevel()
-        ),
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.AccessLevel()
-        ),
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.AccessLevel()
-        ),
-      ];
-      client.innerApiCalls.listAccessLevels =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listAccessLevels(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.identity.accesscontextmanager.v1.IAccessLevel[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listAccessLevels as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAccessLevels as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new accesscontextmanagerModule.v1.AccessContextManagerClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'accesscontextmanager.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('invokes listAccessLevels with error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listAccessLevels = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listAccessLevels(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listAccessLevels as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAccessLevels as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAccessLevelsStream without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.AccessLevel()
-        ),
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.AccessLevel()
-        ),
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.AccessLevel()
-        ),
-      ];
-      client.descriptors.page.listAccessLevels.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listAccessLevelsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.identity.accesscontextmanager.v1.AccessLevel[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.identity.accesscontextmanager.v1.AccessLevel
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listAccessLevels.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listAccessLevels, request)
-      );
-      assert(
-        (client.descriptors.page.listAccessLevels.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listAccessLevelsStream with error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listAccessLevels.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listAccessLevelsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.identity.accesscontextmanager.v1.AccessLevel[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.identity.accesscontextmanager.v1.AccessLevel
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listAccessLevels.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listAccessLevels, request)
-      );
-      assert(
-        (client.descriptors.page.listAccessLevels.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listAccessLevels without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.AccessLevel()
-        ),
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.AccessLevel()
-        ),
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.AccessLevel()
-        ),
-      ];
-      client.descriptors.page.listAccessLevels.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.identity.accesscontextmanager.v1.IAccessLevel[] =
-        [];
-      const iterable = client.listAccessLevelsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listAccessLevels.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listAccessLevels.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listAccessLevels with error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listAccessLevels.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listAccessLevelsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.identity.accesscontextmanager.v1.IAccessLevel[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'accesscontextmanager.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listAccessLevels.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listAccessLevels.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('listServicePerimeters', () => {
-    it('invokes listServicePerimeters without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new accesscontextmanagerModule.v1.AccessContextManagerClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.ServicePerimeter()
-        ),
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.ServicePerimeter()
-        ),
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.ServicePerimeter()
-        ),
-      ];
-      client.innerApiCalls.listServicePerimeters =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listServicePerimeters(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listServicePerimeters as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listServicePerimeters as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+
+        it('has port', () => {
+            const port = accesscontextmanagerModule.v1.AccessContextManagerClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.accessContextManagerStub, undefined);
+            await client.initialize();
+            assert(client.accessContextManagerStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.accessContextManagerStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.accessContextManagerStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    it('invokes listServicePerimeters without error using callback', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('getAccessPolicy', () => {
+        it('invokes getAccessPolicy without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.GetAccessPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.GetAccessPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.AccessPolicy()
+            );
+            client.innerApiCalls.getAccessPolicy = stubSimpleCall(expectedResponse);
+            const [response] = await client.getAccessPolicy(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAccessPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAccessPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.ServicePerimeter()
-        ),
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.ServicePerimeter()
-        ),
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.ServicePerimeter()
-        ),
-      ];
-      client.innerApiCalls.listServicePerimeters =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listServicePerimeters(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.identity.accesscontextmanager.v1.IServicePerimeter[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+
+        it('invokes getAccessPolicy without error using callback', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.GetAccessPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.GetAccessPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.AccessPolicy()
+            );
+            client.innerApiCalls.getAccessPolicy = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getAccessPolicy(
+                    request,
+                    (err?: Error|null, result?: protos.google.identity.accesscontextmanager.v1.IAccessPolicy|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAccessPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAccessPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAccessPolicy with error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.GetAccessPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.GetAccessPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getAccessPolicy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getAccessPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getAccessPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAccessPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAccessPolicy with closed client', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.GetAccessPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.GetAccessPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getAccessPolicy(request), expectedError);
+        });
+    });
+
+    describe('getAccessLevel', () => {
+        it('invokes getAccessLevel without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.GetAccessLevelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.GetAccessLevelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.AccessLevel()
+            );
+            client.innerApiCalls.getAccessLevel = stubSimpleCall(expectedResponse);
+            const [response] = await client.getAccessLevel(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAccessLevel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAccessLevel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAccessLevel without error using callback', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.GetAccessLevelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.GetAccessLevelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.AccessLevel()
+            );
+            client.innerApiCalls.getAccessLevel = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getAccessLevel(
+                    request,
+                    (err?: Error|null, result?: protos.google.identity.accesscontextmanager.v1.IAccessLevel|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAccessLevel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAccessLevel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAccessLevel with error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.GetAccessLevelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.GetAccessLevelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getAccessLevel = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getAccessLevel(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getAccessLevel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAccessLevel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAccessLevel with closed client', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.GetAccessLevelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.GetAccessLevelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getAccessLevel(request), expectedError);
+        });
+    });
+
+    describe('getServicePerimeter', () => {
+        it('invokes getServicePerimeter without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.GetServicePerimeterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.GetServicePerimeterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.ServicePerimeter()
+            );
+            client.innerApiCalls.getServicePerimeter = stubSimpleCall(expectedResponse);
+            const [response] = await client.getServicePerimeter(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getServicePerimeter as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getServicePerimeter as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getServicePerimeter without error using callback', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.GetServicePerimeterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.GetServicePerimeterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.ServicePerimeter()
+            );
+            client.innerApiCalls.getServicePerimeter = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getServicePerimeter(
+                    request,
+                    (err?: Error|null, result?: protos.google.identity.accesscontextmanager.v1.IServicePerimeter|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getServicePerimeter as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getServicePerimeter as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getServicePerimeter with error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.GetServicePerimeterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.GetServicePerimeterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getServicePerimeter = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getServicePerimeter(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getServicePerimeter as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getServicePerimeter as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getServicePerimeter with closed client', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.GetServicePerimeterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.GetServicePerimeterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getServicePerimeter(request), expectedError);
+        });
+    });
+
+    describe('getGcpUserAccessBinding', () => {
+        it('invokes getGcpUserAccessBinding without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.GetGcpUserAccessBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.GetGcpUserAccessBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding()
+            );
+            client.innerApiCalls.getGcpUserAccessBinding = stubSimpleCall(expectedResponse);
+            const [response] = await client.getGcpUserAccessBinding(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getGcpUserAccessBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getGcpUserAccessBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getGcpUserAccessBinding without error using callback', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.GetGcpUserAccessBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.GetGcpUserAccessBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding()
+            );
+            client.innerApiCalls.getGcpUserAccessBinding = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getGcpUserAccessBinding(
+                    request,
+                    (err?: Error|null, result?: protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getGcpUserAccessBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getGcpUserAccessBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getGcpUserAccessBinding with error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.GetGcpUserAccessBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.GetGcpUserAccessBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getGcpUserAccessBinding = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getGcpUserAccessBinding(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getGcpUserAccessBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getGcpUserAccessBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getGcpUserAccessBinding with closed client', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.GetGcpUserAccessBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.GetGcpUserAccessBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getGcpUserAccessBinding(request), expectedError);
+        });
+    });
+
+    describe('setIamPolicy', () => {
+        it('invokes setIamPolicy without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.SetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.SetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.Policy()
+            );
+            client.innerApiCalls.setIamPolicy = stubSimpleCall(expectedResponse);
+            const [response] = await client.setIamPolicy(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setIamPolicy without error using callback', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.SetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.SetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.Policy()
+            );
+            client.innerApiCalls.setIamPolicy = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.setIamPolicy(
+                    request,
+                    (err?: Error|null, result?: protos.google.iam.v1.IPolicy|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setIamPolicy with error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.SetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.SetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.setIamPolicy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.setIamPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.setIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes setIamPolicy with closed client', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.SetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.SetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.setIamPolicy(request), expectedError);
+        });
+    });
+
+    describe('getIamPolicy', () => {
+        it('invokes getIamPolicy without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.GetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.GetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.Policy()
+            );
+            client.innerApiCalls.getIamPolicy = stubSimpleCall(expectedResponse);
+            const [response] = await client.getIamPolicy(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getIamPolicy without error using callback', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.GetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.GetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.Policy()
+            );
+            client.innerApiCalls.getIamPolicy = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getIamPolicy(
+                    request,
+                    (err?: Error|null, result?: protos.google.iam.v1.IPolicy|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getIamPolicy with error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.GetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.GetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getIamPolicy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getIamPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getIamPolicy with closed client', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.GetIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.GetIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getIamPolicy(request), expectedError);
+        });
+    });
+
+    describe('testIamPermissions', () => {
+        it('invokes testIamPermissions without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.TestIamPermissionsRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsResponse()
+            );
+            client.innerApiCalls.testIamPermissions = stubSimpleCall(expectedResponse);
+            const [response] = await client.testIamPermissions(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes testIamPermissions without error using callback', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.TestIamPermissionsRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsResponse()
+            );
+            client.innerApiCalls.testIamPermissions = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.testIamPermissions(
+                    request,
+                    (err?: Error|null, result?: protos.google.iam.v1.ITestIamPermissionsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes testIamPermissions with error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.TestIamPermissionsRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.testIamPermissions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.testIamPermissions(request), expectedError);
+            const actualRequest = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.testIamPermissions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes testIamPermissions with closed client', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.iam.v1.TestIamPermissionsRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.testIamPermissions(request), expectedError);
+        });
+    });
+
+    describe('createAccessPolicy', () => {
+        it('invokes createAccessPolicy without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.AccessPolicy()
+            );
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createAccessPolicy = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createAccessPolicy(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+        });
+
+        it('invokes createAccessPolicy without error using callback', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.AccessPolicy()
+            );
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createAccessPolicy = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createAccessPolicy(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.identity.accesscontextmanager.v1.IAccessPolicy, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.identity.accesscontextmanager.v1.IAccessPolicy, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+        });
+
+        it('invokes createAccessPolicy with call error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.AccessPolicy()
+            );
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createAccessPolicy = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createAccessPolicy(request), expectedError);
+        });
+
+        it('invokes createAccessPolicy with LRO error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.AccessPolicy()
+            );
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createAccessPolicy = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createAccessPolicy(request);
+            await assert.rejects(operation.promise(), expectedError);
+        });
+
+        it('invokes checkCreateAccessPolicyProgress without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateAccessPolicyProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateAccessPolicyProgress with error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateAccessPolicyProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateAccessPolicy', () => {
+        it('invokes updateAccessPolicy without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.UpdateAccessPolicyRequest()
+            );
+            request.policy ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.UpdateAccessPolicyRequest', ['policy', 'name']);
+            request.policy.name = defaultValue1;
+            const expectedHeaderRequestParams = `policy.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateAccessPolicy = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateAccessPolicy(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateAccessPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAccessPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAccessPolicy without error using callback', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.UpdateAccessPolicyRequest()
+            );
+            request.policy ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.UpdateAccessPolicyRequest', ['policy', 'name']);
+            request.policy.name = defaultValue1;
+            const expectedHeaderRequestParams = `policy.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateAccessPolicy = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateAccessPolicy(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.identity.accesscontextmanager.v1.IAccessPolicy, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.identity.accesscontextmanager.v1.IAccessPolicy, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateAccessPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAccessPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAccessPolicy with call error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.UpdateAccessPolicyRequest()
+            );
+            request.policy ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.UpdateAccessPolicyRequest', ['policy', 'name']);
+            request.policy.name = defaultValue1;
+            const expectedHeaderRequestParams = `policy.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateAccessPolicy = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateAccessPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateAccessPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAccessPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAccessPolicy with LRO error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.UpdateAccessPolicyRequest()
+            );
+            request.policy ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.UpdateAccessPolicyRequest', ['policy', 'name']);
+            request.policy.name = defaultValue1;
+            const expectedHeaderRequestParams = `policy.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateAccessPolicy = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateAccessPolicy(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateAccessPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAccessPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateAccessPolicyProgress without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateAccessPolicyProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateAccessPolicyProgress with error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateAccessPolicyProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteAccessPolicy', () => {
+        it('invokes deleteAccessPolicy without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.DeleteAccessPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.DeleteAccessPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteAccessPolicy = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteAccessPolicy(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteAccessPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAccessPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAccessPolicy without error using callback', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.DeleteAccessPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.DeleteAccessPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteAccessPolicy = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteAccessPolicy(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteAccessPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAccessPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAccessPolicy with call error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.DeleteAccessPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.DeleteAccessPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteAccessPolicy = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteAccessPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteAccessPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAccessPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAccessPolicy with LRO error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.DeleteAccessPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.DeleteAccessPolicyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteAccessPolicy = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteAccessPolicy(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteAccessPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAccessPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteAccessPolicyProgress without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteAccessPolicyProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteAccessPolicyProgress with error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteAccessPolicyProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createAccessLevel', () => {
+        it('invokes createAccessLevel without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.CreateAccessLevelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.CreateAccessLevelRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createAccessLevel = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createAccessLevel(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createAccessLevel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAccessLevel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createAccessLevel without error using callback', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.CreateAccessLevelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.CreateAccessLevelRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createAccessLevel = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createAccessLevel(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.identity.accesscontextmanager.v1.IAccessLevel, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.identity.accesscontextmanager.v1.IAccessLevel, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createAccessLevel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAccessLevel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createAccessLevel with call error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.CreateAccessLevelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.CreateAccessLevelRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createAccessLevel = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createAccessLevel(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createAccessLevel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAccessLevel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createAccessLevel with LRO error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.CreateAccessLevelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.CreateAccessLevelRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createAccessLevel = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createAccessLevel(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createAccessLevel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAccessLevel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateAccessLevelProgress without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateAccessLevelProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateAccessLevelProgress with error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateAccessLevelProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateAccessLevel', () => {
+        it('invokes updateAccessLevel without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.UpdateAccessLevelRequest()
+            );
+            request.accessLevel ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.UpdateAccessLevelRequest', ['accessLevel', 'name']);
+            request.accessLevel.name = defaultValue1;
+            const expectedHeaderRequestParams = `access_level.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateAccessLevel = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateAccessLevel(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateAccessLevel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAccessLevel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAccessLevel without error using callback', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.UpdateAccessLevelRequest()
+            );
+            request.accessLevel ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.UpdateAccessLevelRequest', ['accessLevel', 'name']);
+            request.accessLevel.name = defaultValue1;
+            const expectedHeaderRequestParams = `access_level.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateAccessLevel = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateAccessLevel(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.identity.accesscontextmanager.v1.IAccessLevel, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.identity.accesscontextmanager.v1.IAccessLevel, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateAccessLevel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAccessLevel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAccessLevel with call error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.UpdateAccessLevelRequest()
+            );
+            request.accessLevel ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.UpdateAccessLevelRequest', ['accessLevel', 'name']);
+            request.accessLevel.name = defaultValue1;
+            const expectedHeaderRequestParams = `access_level.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateAccessLevel = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateAccessLevel(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateAccessLevel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAccessLevel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAccessLevel with LRO error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.UpdateAccessLevelRequest()
+            );
+            request.accessLevel ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.UpdateAccessLevelRequest', ['accessLevel', 'name']);
+            request.accessLevel.name = defaultValue1;
+            const expectedHeaderRequestParams = `access_level.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateAccessLevel = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateAccessLevel(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateAccessLevel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAccessLevel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateAccessLevelProgress without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateAccessLevelProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateAccessLevelProgress with error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateAccessLevelProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteAccessLevel', () => {
+        it('invokes deleteAccessLevel without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.DeleteAccessLevelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.DeleteAccessLevelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteAccessLevel = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteAccessLevel(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteAccessLevel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAccessLevel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAccessLevel without error using callback', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.DeleteAccessLevelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.DeleteAccessLevelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteAccessLevel = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteAccessLevel(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteAccessLevel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAccessLevel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAccessLevel with call error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.DeleteAccessLevelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.DeleteAccessLevelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteAccessLevel = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteAccessLevel(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteAccessLevel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAccessLevel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAccessLevel with LRO error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.DeleteAccessLevelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.DeleteAccessLevelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteAccessLevel = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteAccessLevel(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteAccessLevel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAccessLevel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteAccessLevelProgress without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteAccessLevelProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteAccessLevelProgress with error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteAccessLevelProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('replaceAccessLevels', () => {
+        it('invokes replaceAccessLevels without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.ReplaceAccessLevelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.ReplaceAccessLevelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.replaceAccessLevels = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.replaceAccessLevels(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.replaceAccessLevels as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.replaceAccessLevels as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes replaceAccessLevels without error using callback', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.ReplaceAccessLevelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.ReplaceAccessLevelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.replaceAccessLevels = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.replaceAccessLevels(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.identity.accesscontextmanager.v1.IReplaceAccessLevelsResponse, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.identity.accesscontextmanager.v1.IReplaceAccessLevelsResponse, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.replaceAccessLevels as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.replaceAccessLevels as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes replaceAccessLevels with call error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.ReplaceAccessLevelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.ReplaceAccessLevelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.replaceAccessLevels = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.replaceAccessLevels(request), expectedError);
+            const actualRequest = (client.innerApiCalls.replaceAccessLevels as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.replaceAccessLevels as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes replaceAccessLevels with LRO error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.ReplaceAccessLevelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.ReplaceAccessLevelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.replaceAccessLevels = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.replaceAccessLevels(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.replaceAccessLevels as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.replaceAccessLevels as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkReplaceAccessLevelsProgress without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkReplaceAccessLevelsProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkReplaceAccessLevelsProgress with error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkReplaceAccessLevelsProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createServicePerimeter', () => {
+        it('invokes createServicePerimeter without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.CreateServicePerimeterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.CreateServicePerimeterRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createServicePerimeter = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createServicePerimeter(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createServicePerimeter as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createServicePerimeter as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createServicePerimeter without error using callback', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.CreateServicePerimeterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.CreateServicePerimeterRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createServicePerimeter = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createServicePerimeter(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.identity.accesscontextmanager.v1.IServicePerimeter, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.identity.accesscontextmanager.v1.IServicePerimeter, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createServicePerimeter as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createServicePerimeter as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createServicePerimeter with call error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.CreateServicePerimeterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.CreateServicePerimeterRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createServicePerimeter = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createServicePerimeter(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createServicePerimeter as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createServicePerimeter as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createServicePerimeter with LRO error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.CreateServicePerimeterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.CreateServicePerimeterRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createServicePerimeter = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createServicePerimeter(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createServicePerimeter as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createServicePerimeter as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateServicePerimeterProgress without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateServicePerimeterProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateServicePerimeterProgress with error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateServicePerimeterProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateServicePerimeter', () => {
+        it('invokes updateServicePerimeter without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.UpdateServicePerimeterRequest()
+            );
+            request.servicePerimeter ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.UpdateServicePerimeterRequest', ['servicePerimeter', 'name']);
+            request.servicePerimeter.name = defaultValue1;
+            const expectedHeaderRequestParams = `service_perimeter.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateServicePerimeter = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateServicePerimeter(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateServicePerimeter as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateServicePerimeter as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateServicePerimeter without error using callback', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.UpdateServicePerimeterRequest()
+            );
+            request.servicePerimeter ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.UpdateServicePerimeterRequest', ['servicePerimeter', 'name']);
+            request.servicePerimeter.name = defaultValue1;
+            const expectedHeaderRequestParams = `service_perimeter.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateServicePerimeter = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateServicePerimeter(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.identity.accesscontextmanager.v1.IServicePerimeter, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.identity.accesscontextmanager.v1.IServicePerimeter, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateServicePerimeter as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateServicePerimeter as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateServicePerimeter with call error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.UpdateServicePerimeterRequest()
+            );
+            request.servicePerimeter ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.UpdateServicePerimeterRequest', ['servicePerimeter', 'name']);
+            request.servicePerimeter.name = defaultValue1;
+            const expectedHeaderRequestParams = `service_perimeter.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateServicePerimeter = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateServicePerimeter(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateServicePerimeter as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateServicePerimeter as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateServicePerimeter with LRO error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.UpdateServicePerimeterRequest()
+            );
+            request.servicePerimeter ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.UpdateServicePerimeterRequest', ['servicePerimeter', 'name']);
+            request.servicePerimeter.name = defaultValue1;
+            const expectedHeaderRequestParams = `service_perimeter.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateServicePerimeter = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateServicePerimeter(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateServicePerimeter as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateServicePerimeter as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateServicePerimeterProgress without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateServicePerimeterProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateServicePerimeterProgress with error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateServicePerimeterProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteServicePerimeter', () => {
+        it('invokes deleteServicePerimeter without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.DeleteServicePerimeterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.DeleteServicePerimeterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteServicePerimeter = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteServicePerimeter(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteServicePerimeter as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteServicePerimeter as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteServicePerimeter without error using callback', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.DeleteServicePerimeterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.DeleteServicePerimeterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteServicePerimeter = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteServicePerimeter(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteServicePerimeter as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteServicePerimeter as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteServicePerimeter with call error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.DeleteServicePerimeterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.DeleteServicePerimeterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteServicePerimeter = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteServicePerimeter(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteServicePerimeter as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteServicePerimeter as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteServicePerimeter with LRO error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.DeleteServicePerimeterRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.DeleteServicePerimeterRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteServicePerimeter = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteServicePerimeter(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteServicePerimeter as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteServicePerimeter as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteServicePerimeterProgress without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteServicePerimeterProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteServicePerimeterProgress with error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteServicePerimeterProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('replaceServicePerimeters', () => {
+        it('invokes replaceServicePerimeters without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.ReplaceServicePerimetersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.ReplaceServicePerimetersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.replaceServicePerimeters = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.replaceServicePerimeters(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.replaceServicePerimeters as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.replaceServicePerimeters as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes replaceServicePerimeters without error using callback', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.ReplaceServicePerimetersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.ReplaceServicePerimetersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.replaceServicePerimeters = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.replaceServicePerimeters(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.identity.accesscontextmanager.v1.IReplaceServicePerimetersResponse, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.identity.accesscontextmanager.v1.IReplaceServicePerimetersResponse, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.replaceServicePerimeters as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.replaceServicePerimeters as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes replaceServicePerimeters with call error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.ReplaceServicePerimetersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.ReplaceServicePerimetersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.replaceServicePerimeters = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.replaceServicePerimeters(request), expectedError);
+            const actualRequest = (client.innerApiCalls.replaceServicePerimeters as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.replaceServicePerimeters as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes replaceServicePerimeters with LRO error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.ReplaceServicePerimetersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.ReplaceServicePerimetersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.replaceServicePerimeters = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.replaceServicePerimeters(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.replaceServicePerimeters as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.replaceServicePerimeters as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkReplaceServicePerimetersProgress without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkReplaceServicePerimetersProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkReplaceServicePerimetersProgress with error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkReplaceServicePerimetersProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('commitServicePerimeters', () => {
+        it('invokes commitServicePerimeters without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.CommitServicePerimetersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.CommitServicePerimetersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.commitServicePerimeters = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.commitServicePerimeters(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.commitServicePerimeters as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.commitServicePerimeters as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes commitServicePerimeters without error using callback', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.CommitServicePerimetersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.CommitServicePerimetersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.commitServicePerimeters = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.commitServicePerimeters(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.identity.accesscontextmanager.v1.ICommitServicePerimetersResponse, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.identity.accesscontextmanager.v1.ICommitServicePerimetersResponse, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.commitServicePerimeters as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.commitServicePerimeters as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes commitServicePerimeters with call error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.CommitServicePerimetersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.CommitServicePerimetersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.commitServicePerimeters = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.commitServicePerimeters(request), expectedError);
+            const actualRequest = (client.innerApiCalls.commitServicePerimeters as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.commitServicePerimeters as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes commitServicePerimeters with LRO error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.CommitServicePerimetersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.CommitServicePerimetersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.commitServicePerimeters = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.commitServicePerimeters(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.commitServicePerimeters as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.commitServicePerimeters as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCommitServicePerimetersProgress without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCommitServicePerimetersProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCommitServicePerimetersProgress with error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCommitServicePerimetersProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createGcpUserAccessBinding', () => {
+        it('invokes createGcpUserAccessBinding without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.CreateGcpUserAccessBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.CreateGcpUserAccessBindingRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createGcpUserAccessBinding = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createGcpUserAccessBinding(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createGcpUserAccessBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createGcpUserAccessBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createGcpUserAccessBinding without error using callback', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.CreateGcpUserAccessBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.CreateGcpUserAccessBindingRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createGcpUserAccessBinding = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createGcpUserAccessBinding(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding, protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding, protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createGcpUserAccessBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createGcpUserAccessBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createGcpUserAccessBinding with call error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.CreateGcpUserAccessBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.CreateGcpUserAccessBindingRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createGcpUserAccessBinding = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createGcpUserAccessBinding(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createGcpUserAccessBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createGcpUserAccessBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createGcpUserAccessBinding with LRO error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.CreateGcpUserAccessBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.CreateGcpUserAccessBindingRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createGcpUserAccessBinding = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createGcpUserAccessBinding(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createGcpUserAccessBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createGcpUserAccessBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateGcpUserAccessBindingProgress without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateGcpUserAccessBindingProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateGcpUserAccessBindingProgress with error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateGcpUserAccessBindingProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateGcpUserAccessBinding', () => {
+        it('invokes updateGcpUserAccessBinding without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.UpdateGcpUserAccessBindingRequest()
+            );
+            request.gcpUserAccessBinding ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.UpdateGcpUserAccessBindingRequest', ['gcpUserAccessBinding', 'name']);
+            request.gcpUserAccessBinding.name = defaultValue1;
+            const expectedHeaderRequestParams = `gcp_user_access_binding.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateGcpUserAccessBinding = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateGcpUserAccessBinding(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateGcpUserAccessBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateGcpUserAccessBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateGcpUserAccessBinding without error using callback', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.UpdateGcpUserAccessBindingRequest()
+            );
+            request.gcpUserAccessBinding ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.UpdateGcpUserAccessBindingRequest', ['gcpUserAccessBinding', 'name']);
+            request.gcpUserAccessBinding.name = defaultValue1;
+            const expectedHeaderRequestParams = `gcp_user_access_binding.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateGcpUserAccessBinding = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateGcpUserAccessBinding(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding, protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding, protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateGcpUserAccessBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateGcpUserAccessBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateGcpUserAccessBinding with call error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.UpdateGcpUserAccessBindingRequest()
+            );
+            request.gcpUserAccessBinding ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.UpdateGcpUserAccessBindingRequest', ['gcpUserAccessBinding', 'name']);
+            request.gcpUserAccessBinding.name = defaultValue1;
+            const expectedHeaderRequestParams = `gcp_user_access_binding.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateGcpUserAccessBinding = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateGcpUserAccessBinding(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateGcpUserAccessBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateGcpUserAccessBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateGcpUserAccessBinding with LRO error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.UpdateGcpUserAccessBindingRequest()
+            );
+            request.gcpUserAccessBinding ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.UpdateGcpUserAccessBindingRequest', ['gcpUserAccessBinding', 'name']);
+            request.gcpUserAccessBinding.name = defaultValue1;
+            const expectedHeaderRequestParams = `gcp_user_access_binding.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateGcpUserAccessBinding = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateGcpUserAccessBinding(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateGcpUserAccessBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateGcpUserAccessBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateGcpUserAccessBindingProgress without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateGcpUserAccessBindingProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateGcpUserAccessBindingProgress with error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateGcpUserAccessBindingProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteGcpUserAccessBinding', () => {
+        it('invokes deleteGcpUserAccessBinding without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.DeleteGcpUserAccessBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.DeleteGcpUserAccessBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteGcpUserAccessBinding = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteGcpUserAccessBinding(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteGcpUserAccessBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteGcpUserAccessBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteGcpUserAccessBinding without error using callback', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.DeleteGcpUserAccessBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.DeleteGcpUserAccessBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteGcpUserAccessBinding = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteGcpUserAccessBinding(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteGcpUserAccessBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteGcpUserAccessBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteGcpUserAccessBinding with call error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.DeleteGcpUserAccessBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.DeleteGcpUserAccessBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteGcpUserAccessBinding = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteGcpUserAccessBinding(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteGcpUserAccessBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteGcpUserAccessBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteGcpUserAccessBinding with LRO error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.DeleteGcpUserAccessBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.DeleteGcpUserAccessBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteGcpUserAccessBinding = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteGcpUserAccessBinding(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteGcpUserAccessBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteGcpUserAccessBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteGcpUserAccessBindingProgress without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteGcpUserAccessBindingProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteGcpUserAccessBindingProgress with error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteGcpUserAccessBindingProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('listAccessPolicies', () => {
+        it('invokes listAccessPolicies without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.ListAccessPoliciesRequest()
+            );const expectedResponse = [
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.AccessPolicy()),
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.AccessPolicy()),
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.AccessPolicy()),
+            ];
+            client.innerApiCalls.listAccessPolicies = stubSimpleCall(expectedResponse);
+            const [response] = await client.listAccessPolicies(request);
+            assert.deepStrictEqual(response, expectedResponse);
+        });
+
+        it('invokes listAccessPolicies without error using callback', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.ListAccessPoliciesRequest()
+            );const expectedResponse = [
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.AccessPolicy()),
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.AccessPolicy()),
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.AccessPolicy()),
+            ];
+            client.innerApiCalls.listAccessPolicies = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listAccessPolicies(
+                    request,
+                    (err?: Error|null, result?: protos.google.identity.accesscontextmanager.v1.IAccessPolicy[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+        });
+
+        it('invokes listAccessPolicies with error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.ListAccessPoliciesRequest()
+            );
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listAccessPolicies = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listAccessPolicies(request), expectedError);
+        });
+
+        it('invokes listAccessPoliciesStream without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.ListAccessPoliciesRequest()
+            );
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.AccessPolicy()),
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.AccessPolicy()),
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.AccessPolicy()),
+            ];
+            client.descriptors.page.listAccessPolicies.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listAccessPoliciesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.identity.accesscontextmanager.v1.AccessPolicy[] = [];
+                stream.on('data', (response: protos.google.identity.accesscontextmanager.v1.AccessPolicy) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listAccessPolicies.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAccessPolicies, request));
+        });
+
+        it('invokes listAccessPoliciesStream with error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.ListAccessPoliciesRequest()
+            );
+            const expectedError = new Error('expected');
+            client.descriptors.page.listAccessPolicies.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listAccessPoliciesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.identity.accesscontextmanager.v1.AccessPolicy[] = [];
+                stream.on('data', (response: protos.google.identity.accesscontextmanager.v1.AccessPolicy) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listAccessPolicies.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAccessPolicies, request));
+        });
+
+        it('uses async iteration with listAccessPolicies without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.ListAccessPoliciesRequest()
+            );
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.AccessPolicy()),
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.AccessPolicy()),
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.AccessPolicy()),
+            ];
+            client.descriptors.page.listAccessPolicies.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.identity.accesscontextmanager.v1.IAccessPolicy[] = [];
+            const iterable = client.listAccessPoliciesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listServicePerimeters as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listServicePerimeters as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listAccessPolicies.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+
+        it('uses async iteration with listAccessPolicies with error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.ListAccessPoliciesRequest()
+            );
+            const expectedError = new Error('expected');
+            client.descriptors.page.listAccessPolicies.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listAccessPoliciesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.identity.accesscontextmanager.v1.IAccessPolicy[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listAccessPolicies.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
     });
 
-    it('invokes listServicePerimeters with error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('listAccessLevels', () => {
+        it('invokes listAccessLevels without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.AccessLevel()),
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.AccessLevel()),
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.AccessLevel()),
+            ];
+            client.innerApiCalls.listAccessLevels = stubSimpleCall(expectedResponse);
+            const [response] = await client.listAccessLevels(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listAccessLevels as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAccessLevels as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listServicePerimeters = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.listServicePerimeters(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.listServicePerimeters as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listServicePerimeters as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
 
-    it('invokes listServicePerimetersStream without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listAccessLevels without error using callback', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.AccessLevel()),
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.AccessLevel()),
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.AccessLevel()),
+            ];
+            client.innerApiCalls.listAccessLevels = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listAccessLevels(
+                    request,
+                    (err?: Error|null, result?: protos.google.identity.accesscontextmanager.v1.IAccessLevel[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listAccessLevels as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAccessLevels as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.ServicePerimeter()
-        ),
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.ServicePerimeter()
-        ),
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.ServicePerimeter()
-        ),
-      ];
-      client.descriptors.page.listServicePerimeters.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listServicePerimetersStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.identity.accesscontextmanager.v1.ServicePerimeter[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.identity.accesscontextmanager.v1.ServicePerimeter
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.listServicePerimeters
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listServicePerimeters, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listServicePerimeters
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
 
-    it('invokes listServicePerimetersStream with error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listAccessLevels with error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listAccessLevels = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listAccessLevels(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listAccessLevels as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAccessLevels as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listServicePerimeters.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listServicePerimetersStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.identity.accesscontextmanager.v1.ServicePerimeter[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.identity.accesscontextmanager.v1.ServicePerimeter
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.listServicePerimeters
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listServicePerimeters, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listServicePerimeters
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
 
-    it('uses async iteration with listServicePerimeters without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listAccessLevelsStream without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.AccessLevel()),
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.AccessLevel()),
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.AccessLevel()),
+            ];
+            client.descriptors.page.listAccessLevels.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listAccessLevelsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.identity.accesscontextmanager.v1.AccessLevel[] = [];
+                stream.on('data', (response: protos.google.identity.accesscontextmanager.v1.AccessLevel) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listAccessLevels.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAccessLevels, request));
+            assert(
+                (client.descriptors.page.listAccessLevels.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.ServicePerimeter()
-        ),
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.ServicePerimeter()
-        ),
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.ServicePerimeter()
-        ),
-      ];
-      client.descriptors.page.listServicePerimeters.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.identity.accesscontextmanager.v1.IServicePerimeter[] =
-        [];
-      const iterable = client.listServicePerimetersAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listServicePerimeters
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listServicePerimeters
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
 
-    it('uses async iteration with listServicePerimeters with error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listAccessLevelsStream with error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listAccessLevels.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listAccessLevelsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.identity.accesscontextmanager.v1.AccessLevel[] = [];
+                stream.on('data', (response: protos.google.identity.accesscontextmanager.v1.AccessLevel) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listAccessLevels.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAccessLevels, request));
+            assert(
+                (client.descriptors.page.listAccessLevels.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listServicePerimeters.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listServicePerimetersAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.identity.accesscontextmanager.v1.IServicePerimeter[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listServicePerimeters
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listServicePerimeters
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
 
-  describe('listGcpUserAccessBindings', () => {
-    it('invokes listGcpUserAccessBindings without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding()
-        ),
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding()
-        ),
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding()
-        ),
-      ];
-      client.innerApiCalls.listGcpUserAccessBindings =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listGcpUserAccessBindings(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listGcpUserAccessBindings as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listGcpUserAccessBindings as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listGcpUserAccessBindings without error using callback', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding()
-        ),
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding()
-        ),
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding()
-        ),
-      ];
-      client.innerApiCalls.listGcpUserAccessBindings =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listGcpUserAccessBindings(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listAccessLevels without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.AccessLevel()),
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.AccessLevel()),
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.AccessLevel()),
+            ];
+            client.descriptors.page.listAccessLevels.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.identity.accesscontextmanager.v1.IAccessLevel[] = [];
+            const iterable = client.listAccessLevelsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listGcpUserAccessBindings as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listGcpUserAccessBindings as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listAccessLevels.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listAccessLevels.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listAccessLevels with error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listAccessLevels.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listAccessLevelsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.identity.accesscontextmanager.v1.IAccessLevel[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listAccessLevels.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listAccessLevels.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    it('invokes listGcpUserAccessBindings with error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('listServicePerimeters', () => {
+        it('invokes listServicePerimeters without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.ServicePerimeter()),
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.ServicePerimeter()),
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.ServicePerimeter()),
+            ];
+            client.innerApiCalls.listServicePerimeters = stubSimpleCall(expectedResponse);
+            const [response] = await client.listServicePerimeters(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listServicePerimeters as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listServicePerimeters as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listGcpUserAccessBindings = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.listGcpUserAccessBindings(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.listGcpUserAccessBindings as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listGcpUserAccessBindings as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
 
-    it('invokes listGcpUserAccessBindingsStream without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listServicePerimeters without error using callback', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.ServicePerimeter()),
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.ServicePerimeter()),
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.ServicePerimeter()),
+            ];
+            client.innerApiCalls.listServicePerimeters = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listServicePerimeters(
+                    request,
+                    (err?: Error|null, result?: protos.google.identity.accesscontextmanager.v1.IServicePerimeter[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listServicePerimeters as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listServicePerimeters as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding()
-        ),
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding()
-        ),
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding()
-        ),
-      ];
-      client.descriptors.page.listGcpUserAccessBindings.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listGcpUserAccessBindingsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.listGcpUserAccessBindings
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listGcpUserAccessBindings, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listGcpUserAccessBindings
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
 
-    it('invokes listGcpUserAccessBindingsStream with error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listServicePerimeters with error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listServicePerimeters = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listServicePerimeters(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listServicePerimeters as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listServicePerimeters as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listGcpUserAccessBindings.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listGcpUserAccessBindingsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.listGcpUserAccessBindings
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listGcpUserAccessBindings, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listGcpUserAccessBindings
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
 
-    it('uses async iteration with listGcpUserAccessBindings without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listServicePerimetersStream without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.ServicePerimeter()),
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.ServicePerimeter()),
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.ServicePerimeter()),
+            ];
+            client.descriptors.page.listServicePerimeters.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listServicePerimetersStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.identity.accesscontextmanager.v1.ServicePerimeter[] = [];
+                stream.on('data', (response: protos.google.identity.accesscontextmanager.v1.ServicePerimeter) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listServicePerimeters.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listServicePerimeters, request));
+            assert(
+                (client.descriptors.page.listServicePerimeters.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding()
-        ),
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding()
-        ),
-        generateSampleMessage(
-          new protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding()
-        ),
-      ];
-      client.descriptors.page.listGcpUserAccessBindings.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding[] =
-        [];
-      const iterable = client.listGcpUserAccessBindingsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listGcpUserAccessBindings
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listGcpUserAccessBindings
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
 
-    it('uses async iteration with listGcpUserAccessBindings with error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listServicePerimetersStream with error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listServicePerimeters.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listServicePerimetersStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.identity.accesscontextmanager.v1.ServicePerimeter[] = [];
+                stream.on('data', (response: protos.google.identity.accesscontextmanager.v1.ServicePerimeter) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listServicePerimeters.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listServicePerimeters, request));
+            assert(
+                (client.descriptors.page.listServicePerimeters.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listGcpUserAccessBindings.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listGcpUserAccessBindingsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listGcpUserAccessBindings
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listGcpUserAccessBindings
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
-  describe('getOperation', () => {
-    it('invokes getOperation without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const response = await client.getOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes getOperation without error using callback', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .getOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: operationsProtos.google.longrunning.Operation | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+
+        it('uses async iteration with listServicePerimeters without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.ServicePerimeter()),
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.ServicePerimeter()),
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.ServicePerimeter()),
+            ];
+            client.descriptors.page.listServicePerimeters.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.identity.accesscontextmanager.v1.IServicePerimeter[] = [];
+            const iterable = client.listServicePerimetersAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-    it('invokes getOperation with error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listServicePerimeters.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listServicePerimeters.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.getOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('cancelOperation', () => {
-    it('invokes cancelOperation without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+
+        it('uses async iteration with listServicePerimeters with error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listServicePerimeters.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listServicePerimetersAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.identity.accesscontextmanager.v1.IServicePerimeter[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listServicePerimeters.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listServicePerimeters.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.cancelOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
     });
-    it('invokes cancelOperation without error using callback', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+
+    describe('listGcpUserAccessBindings', () => {
+        it('invokes listGcpUserAccessBindings without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding()),
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding()),
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding()),
+            ];
+            client.innerApiCalls.listGcpUserAccessBindings = stubSimpleCall(expectedResponse);
+            const [response] = await client.listGcpUserAccessBindings(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listGcpUserAccessBindings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listGcpUserAccessBindings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .cancelOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+
+        it('invokes listGcpUserAccessBindings without error using callback', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding()),
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding()),
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding()),
+            ];
+            client.innerApiCalls.listGcpUserAccessBindings = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listGcpUserAccessBindings(
+                    request,
+                    (err?: Error|null, result?: protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listGcpUserAccessBindings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listGcpUserAccessBindings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listGcpUserAccessBindings with error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listGcpUserAccessBindings = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listGcpUserAccessBindings(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listGcpUserAccessBindings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listGcpUserAccessBindings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listGcpUserAccessBindingsStream without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding()),
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding()),
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding()),
+            ];
+            client.descriptors.page.listGcpUserAccessBindings.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listGcpUserAccessBindingsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding[] = [];
+                stream.on('data', (response: protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listGcpUserAccessBindings.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listGcpUserAccessBindings, request));
+            assert(
+                (client.descriptors.page.listGcpUserAccessBindings.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listGcpUserAccessBindingsStream with error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listGcpUserAccessBindings.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listGcpUserAccessBindingsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding[] = [];
+                stream.on('data', (response: protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listGcpUserAccessBindings.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listGcpUserAccessBindings, request));
+            assert(
+                (client.descriptors.page.listGcpUserAccessBindings.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listGcpUserAccessBindings without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding()),
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding()),
+              generateSampleMessage(new protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding()),
+            ];
+            client.descriptors.page.listGcpUserAccessBindings.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding[] = [];
+            const iterable = client.listGcpUserAccessBindingsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
-    });
-    it('invokes cancelOperation with error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listGcpUserAccessBindings.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listGcpUserAccessBindings.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.cancelOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.cancelOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('deleteOperation', () => {
-    it('invokes deleteOperation without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+
+        it('uses async iteration with listGcpUserAccessBindings with error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listGcpUserAccessBindings.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listGcpUserAccessBindingsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listGcpUserAccessBindings.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listGcpUserAccessBindings.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.deleteOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
     });
-    it('invokes deleteOperation without error using callback', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('getOperation', () => {
+        it('invokes getOperation without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const response = await client.getOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
         });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .deleteOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+        it('invokes getOperation without error using callback', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.getOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: operationsProtos.google.longrunning.Operation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getOperation with error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.getOperation(request)}, expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('cancelOperation', () => {
+        it('invokes cancelOperation without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = stubSimpleCall(expectedResponse);
+            const response = await client.cancelOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes cancelOperation without error using callback', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.cancelOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes cancelOperation with error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.cancelOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.cancelOperation(request)}, expectedError);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('deleteOperation', () => {
+        it('invokes deleteOperation without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = stubSimpleCall(expectedResponse);
+            const response = await client.deleteOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes deleteOperation without error using callback', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.deleteOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes deleteOperation with error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.deleteOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.deleteOperation(request)}, expectedError);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('listOperationsAsync', () => {
+        it('uses async iteration with listOperations without error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedResponse = [
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+            ];
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: operationsProtos.google.longrunning.IOperation[] = [];
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
-    });
-    it('invokes deleteOperation with error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
         });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.deleteOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.deleteOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('listOperationsAsync', () => {
-    it('uses async iteration with listOperations without error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('uses async iteration with listOperations with error', async () => {
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: operationsProtos.google.longrunning.IOperation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
         });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-      ];
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.IOperation[] = [];
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
     });
-    it('uses async iteration with listOperations with error', async () => {
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+
+    describe('Path templates', () => {
+
+        describe('accessLevel', async () => {
+            const fakePath = "/rendered/path/accessLevel";
+            const expectedParameters = {
+                access_policy: "accessPolicyValue",
+                access_level: "accessLevelValue",
+            };
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.accessLevelPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.accessLevelPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('accessLevelPath', () => {
+                const result = client.accessLevelPath("accessPolicyValue", "accessLevelValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.accessLevelPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchAccessPolicyFromAccessLevelName', () => {
+                const result = client.matchAccessPolicyFromAccessLevelName(fakePath);
+                assert.strictEqual(result, "accessPolicyValue");
+                assert((client.pathTemplates.accessLevelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAccessLevelFromAccessLevelName', () => {
+                const result = client.matchAccessLevelFromAccessLevelName(fakePath);
+                assert.strictEqual(result, "accessLevelValue");
+                assert((client.pathTemplates.accessLevelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.IOperation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-  });
 
-  describe('Path templates', () => {
-    describe('accessLevel', async () => {
-      const fakePath = '/rendered/path/accessLevel';
-      const expectedParameters = {
-        access_policy: 'accessPolicyValue',
-        access_level: 'accessLevelValue',
-      };
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        describe('accessPolicy', async () => {
+            const fakePath = "/rendered/path/accessPolicy";
+            const expectedParameters = {
+                access_policy: "accessPolicyValue",
+            };
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.accessPolicyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.accessPolicyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('accessPolicyPath', () => {
+                const result = client.accessPolicyPath("accessPolicyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.accessPolicyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchAccessPolicyFromAccessPolicyName', () => {
+                const result = client.matchAccessPolicyFromAccessPolicyName(fakePath);
+                assert.strictEqual(result, "accessPolicyValue");
+                assert((client.pathTemplates.accessPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      await client.initialize();
-      client.pathTemplates.accessLevelPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.accessLevelPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
 
-      it('accessLevelPath', () => {
-        const result = client.accessLevelPath(
-          'accessPolicyValue',
-          'accessLevelValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.accessLevelPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('gcpUserAccessBinding', async () => {
+            const fakePath = "/rendered/path/gcpUserAccessBinding";
+            const expectedParameters = {
+                organization: "organizationValue",
+                gcp_user_access_binding: "gcpUserAccessBindingValue",
+            };
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.gcpUserAccessBindingPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.gcpUserAccessBindingPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchAccessPolicyFromAccessLevelName', () => {
-        const result = client.matchAccessPolicyFromAccessLevelName(fakePath);
-        assert.strictEqual(result, 'accessPolicyValue');
-        assert(
-          (client.pathTemplates.accessLevelPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('gcpUserAccessBindingPath', () => {
+                const result = client.gcpUserAccessBindingPath("organizationValue", "gcpUserAccessBindingValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.gcpUserAccessBindingPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchAccessLevelFromAccessLevelName', () => {
-        const result = client.matchAccessLevelFromAccessLevelName(fakePath);
-        assert.strictEqual(result, 'accessLevelValue');
-        assert(
-          (client.pathTemplates.accessLevelPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
+            it('matchOrganizationFromGcpUserAccessBindingName', () => {
+                const result = client.matchOrganizationFromGcpUserAccessBindingName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.gcpUserAccessBindingPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-    describe('accessPolicy', async () => {
-      const fakePath = '/rendered/path/accessPolicy';
-      const expectedParameters = {
-        access_policy: 'accessPolicyValue',
-      };
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            it('matchGcpUserAccessBindingFromGcpUserAccessBindingName', () => {
+                const result = client.matchGcpUserAccessBindingFromGcpUserAccessBindingName(fakePath);
+                assert.strictEqual(result, "gcpUserAccessBindingValue");
+                assert((client.pathTemplates.gcpUserAccessBindingPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      await client.initialize();
-      client.pathTemplates.accessPolicyPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.accessPolicyPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
 
-      it('accessPolicyPath', () => {
-        const result = client.accessPolicyPath('accessPolicyValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.accessPolicyPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('organization', async () => {
+            const fakePath = "/rendered/path/organization";
+            const expectedParameters = {
+                organization: "organizationValue",
+            };
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchAccessPolicyFromAccessPolicyName', () => {
-        const result = client.matchAccessPolicyFromAccessPolicyName(fakePath);
-        assert.strictEqual(result, 'accessPolicyValue');
-        assert(
-          (client.pathTemplates.accessPolicyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
+            it('organizationPath', () => {
+                const result = client.organizationPath("organizationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-    describe('gcpUserAccessBinding', async () => {
-      const fakePath = '/rendered/path/gcpUserAccessBinding';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        gcp_user_access_binding: 'gcpUserAccessBindingValue',
-      };
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            it('matchOrganizationFromOrganizationName', () => {
+                const result = client.matchOrganizationFromOrganizationName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      await client.initialize();
-      client.pathTemplates.gcpUserAccessBindingPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.gcpUserAccessBindingPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
 
-      it('gcpUserAccessBindingPath', () => {
-        const result = client.gcpUserAccessBindingPath(
-          'organizationValue',
-          'gcpUserAccessBindingValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.gcpUserAccessBindingPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('servicePerimeter', async () => {
+            const fakePath = "/rendered/path/servicePerimeter";
+            const expectedParameters = {
+                access_policy: "accessPolicyValue",
+                service_perimeter: "servicePerimeterValue",
+            };
+            const client = new accesscontextmanagerModule.v1.AccessContextManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.servicePerimeterPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.servicePerimeterPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchOrganizationFromGcpUserAccessBindingName', () => {
-        const result =
-          client.matchOrganizationFromGcpUserAccessBindingName(fakePath);
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates.gcpUserAccessBindingPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('servicePerimeterPath', () => {
+                const result = client.servicePerimeterPath("accessPolicyValue", "servicePerimeterValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.servicePerimeterPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchGcpUserAccessBindingFromGcpUserAccessBindingName', () => {
-        const result =
-          client.matchGcpUserAccessBindingFromGcpUserAccessBindingName(
-            fakePath
-          );
-        assert.strictEqual(result, 'gcpUserAccessBindingValue');
-        assert(
-          (
-            client.pathTemplates.gcpUserAccessBindingPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
+            it('matchAccessPolicyFromServicePerimeterName', () => {
+                const result = client.matchAccessPolicyFromServicePerimeterName(fakePath);
+                assert.strictEqual(result, "accessPolicyValue");
+                assert((client.pathTemplates.servicePerimeterPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-    describe('organization', async () => {
-      const fakePath = '/rendered/path/organization';
-      const expectedParameters = {
-        organization: 'organizationValue',
-      };
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            it('matchServicePerimeterFromServicePerimeterName', () => {
+                const result = client.matchServicePerimeterFromServicePerimeterName(fakePath);
+                assert.strictEqual(result, "servicePerimeterValue");
+                assert((client.pathTemplates.servicePerimeterPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      await client.initialize();
-      client.pathTemplates.organizationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.organizationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('organizationPath', () => {
-        const result = client.organizationPath('organizationValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.organizationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationName', () => {
-        const result = client.matchOrganizationFromOrganizationName(fakePath);
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (client.pathTemplates.organizationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
     });
-
-    describe('servicePerimeter', async () => {
-      const fakePath = '/rendered/path/servicePerimeter';
-      const expectedParameters = {
-        access_policy: 'accessPolicyValue',
-        service_perimeter: 'servicePerimeterValue',
-      };
-      const client =
-        new accesscontextmanagerModule.v1.AccessContextManagerClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      client.pathTemplates.servicePerimeterPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.servicePerimeterPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('servicePerimeterPath', () => {
-        const result = client.servicePerimeterPath(
-          'accessPolicyValue',
-          'servicePerimeterValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.servicePerimeterPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchAccessPolicyFromServicePerimeterName', () => {
-        const result =
-          client.matchAccessPolicyFromServicePerimeterName(fakePath);
-        assert.strictEqual(result, 'accessPolicyValue');
-        assert(
-          (client.pathTemplates.servicePerimeterPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchServicePerimeterFromServicePerimeterName', () => {
-        const result =
-          client.matchServicePerimeterFromServicePerimeterName(fakePath);
-        assert.strictEqual(result, 'servicePerimeterValue');
-        assert(
-          (client.pathTemplates.servicePerimeterPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

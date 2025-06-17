@@ -18,16 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -106,42 +101,20 @@ export class CssProductInputsServiceClient {
    *     const client = new CssProductInputsServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof CssProductInputsServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    const staticMembers = this.constructor as typeof CssProductInputsServiceClient;
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'css.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -167,7 +140,7 @@ export class CssProductInputsServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -181,7 +154,10 @@ export class CssProductInputsServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -221,11 +197,8 @@ export class CssProductInputsServiceClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.shopping.css.v1.CssProductInputsService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.shopping.css.v1.CssProductInputsService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -256,39 +229,31 @@ export class CssProductInputsServiceClient {
     // Put together the "service stub" for
     // google.shopping.css.v1.CssProductInputsService.
     this.cssProductInputsServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.shopping.css.v1.CssProductInputsService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.shopping.css.v1.CssProductInputsService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.shopping.css.v1.CssProductInputsService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const cssProductInputsServiceStubMethods = [
-      'insertCssProductInput',
-      'updateCssProductInput',
-      'deleteCssProductInput',
-    ];
+    const cssProductInputsServiceStubMethods =
+        ['insertCssProductInput', 'updateCssProductInput', 'deleteCssProductInput'];
     for (const methodName of cssProductInputsServiceStubMethods) {
       const callPromise = this.cssProductInputsServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = undefined;
+      const descriptor =
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -308,14 +273,8 @@ export class CssProductInputsServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'css.googleapis.com';
   }
@@ -326,14 +285,8 @@ export class CssProductInputsServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'css.googleapis.com';
   }
@@ -364,7 +317,9 @@ export class CssProductInputsServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/content'];
+    return [
+      'https://www.googleapis.com/auth/content'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -373,9 +328,8 @@ export class CssProductInputsServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -386,417 +340,336 @@ export class CssProductInputsServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Uploads a CssProductInput to your CSS Center account. If an
-   * input with the same contentLanguage, identity, feedLabel and feedId already
-   * exists, this method replaces that entry.
-   *
-   * After inserting, updating, or deleting a CSS Product input, it may
-   * take several minutes before the processed CSS Product can be retrieved.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The account where this CSS Product will be inserted.
-   *   Format: accounts/{account}
-   * @param {google.shopping.css.v1.CssProductInput} request.cssProductInput
-   *   Required. The CSS Product Input to insert.
-   * @param {number} [request.feedId]
-   *   Optional. DEPRECATED. Feed id is not required for CSS Products.
-   *   The primary or supplemental feed id. If CSS Product already exists and
-   *   feed id provided is different, then the CSS Product will be moved to a
-   *   new feed.
-   *   Note: For now, CSSs do not need to provide feed ids as we create
-   *   feeds on the fly.
-   *   We do not have supplemental feed support for CSS Products yet.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.shopping.css.v1.CssProductInput|CssProductInput}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/css_product_inputs_service.insert_css_product_input.js</caption>
-   * region_tag:css_v1_generated_CssProductInputsService_InsertCssProductInput_async
-   */
+/**
+ * Uploads a CssProductInput to your CSS Center account. If an
+ * input with the same contentLanguage, identity, feedLabel and feedId already
+ * exists, this method replaces that entry.
+ *
+ * After inserting, updating, or deleting a CSS Product input, it may
+ * take several minutes before the processed CSS Product can be retrieved.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The account where this CSS Product will be inserted.
+ *   Format: accounts/{account}
+ * @param {google.shopping.css.v1.CssProductInput} request.cssProductInput
+ *   Required. The CSS Product Input to insert.
+ * @param {number} [request.feedId]
+ *   Optional. DEPRECATED. Feed id is not required for CSS Products.
+ *   The primary or supplemental feed id. If CSS Product already exists and
+ *   feed id provided is different, then the CSS Product will be moved to a
+ *   new feed.
+ *   Note: For now, CSSs do not need to provide feed ids as we create
+ *   feeds on the fly.
+ *   We do not have supplemental feed support for CSS Products yet.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.shopping.css.v1.CssProductInput|CssProductInput}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/css_product_inputs_service.insert_css_product_input.js</caption>
+ * region_tag:css_v1_generated_CssProductInputsService_InsertCssProductInput_async
+ */
   insertCssProductInput(
-    request?: protos.google.shopping.css.v1.IInsertCssProductInputRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.shopping.css.v1.ICssProductInput,
-      protos.google.shopping.css.v1.IInsertCssProductInputRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.shopping.css.v1.IInsertCssProductInputRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.shopping.css.v1.ICssProductInput,
+        protos.google.shopping.css.v1.IInsertCssProductInputRequest|undefined, {}|undefined
+      ]>;
   insertCssProductInput(
-    request: protos.google.shopping.css.v1.IInsertCssProductInputRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.shopping.css.v1.ICssProductInput,
-      | protos.google.shopping.css.v1.IInsertCssProductInputRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  insertCssProductInput(
-    request: protos.google.shopping.css.v1.IInsertCssProductInputRequest,
-    callback: Callback<
-      protos.google.shopping.css.v1.ICssProductInput,
-      | protos.google.shopping.css.v1.IInsertCssProductInputRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  insertCssProductInput(
-    request?: protos.google.shopping.css.v1.IInsertCssProductInputRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.shopping.css.v1.IInsertCssProductInputRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.shopping.css.v1.ICssProductInput,
-          | protos.google.shopping.css.v1.IInsertCssProductInputRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.shopping.css.v1.ICssProductInput,
-      | protos.google.shopping.css.v1.IInsertCssProductInputRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.shopping.css.v1.ICssProductInput,
-      protos.google.shopping.css.v1.IInsertCssProductInputRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.shopping.css.v1.IInsertCssProductInputRequest|null|undefined,
+          {}|null|undefined>): void;
+  insertCssProductInput(
+      request: protos.google.shopping.css.v1.IInsertCssProductInputRequest,
+      callback: Callback<
+          protos.google.shopping.css.v1.ICssProductInput,
+          protos.google.shopping.css.v1.IInsertCssProductInputRequest|null|undefined,
+          {}|null|undefined>): void;
+  insertCssProductInput(
+      request?: protos.google.shopping.css.v1.IInsertCssProductInputRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.shopping.css.v1.ICssProductInput,
+          protos.google.shopping.css.v1.IInsertCssProductInputRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.shopping.css.v1.ICssProductInput,
+          protos.google.shopping.css.v1.IInsertCssProductInputRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.shopping.css.v1.ICssProductInput,
+        protos.google.shopping.css.v1.IInsertCssProductInputRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('insertCssProductInput request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.shopping.css.v1.ICssProductInput,
-          | protos.google.shopping.css.v1.IInsertCssProductInputRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.shopping.css.v1.ICssProductInput,
+        protos.google.shopping.css.v1.IInsertCssProductInputRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('insertCssProductInput response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .insertCssProductInput(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.shopping.css.v1.ICssProductInput,
-          (
-            | protos.google.shopping.css.v1.IInsertCssProductInputRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('insertCssProductInput response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.insertCssProductInput(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.shopping.css.v1.ICssProductInput,
+        protos.google.shopping.css.v1.IInsertCssProductInputRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('insertCssProductInput response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates the existing Css Product input in your CSS Center account.
-   *
-   * After inserting, updating, or deleting a CSS Product input, it may take
-   * several minutes before the processed Css Product can be retrieved.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.shopping.css.v1.CssProductInput} request.cssProductInput
-   *   Required. The CSS product input resource to update. Information you submit
-   *   will be applied to the processed CSS product as well.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The list of CSS product attributes to be updated.
-   *
-   *   If the update mask is omitted, then it is treated as implied field mask
-   *   equivalent to all fields that are populated (have a non-empty value).
-   *
-   *   Attributes specified in the update mask without a value specified in the
-   *   body will be deleted from the CSS product.
-   *
-   *   Update mask can only be specified for top level fields in
-   *   attributes and custom attributes.
-   *
-   *   To specify the update mask for custom attributes you need to add the
-   *   `custom_attribute.` prefix.
-   *
-   *   Providing special "*" value for full CSS product replacement is not
-   *   supported.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.shopping.css.v1.CssProductInput|CssProductInput}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/css_product_inputs_service.update_css_product_input.js</caption>
-   * region_tag:css_v1_generated_CssProductInputsService_UpdateCssProductInput_async
-   */
+/**
+ * Updates the existing Css Product input in your CSS Center account.
+ *
+ * After inserting, updating, or deleting a CSS Product input, it may take
+ * several minutes before the processed Css Product can be retrieved.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.shopping.css.v1.CssProductInput} request.cssProductInput
+ *   Required. The CSS product input resource to update. Information you submit
+ *   will be applied to the processed CSS product as well.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   The list of CSS product attributes to be updated.
+ *
+ *   If the update mask is omitted, then it is treated as implied field mask
+ *   equivalent to all fields that are populated (have a non-empty value).
+ *
+ *   Attributes specified in the update mask without a value specified in the
+ *   body will be deleted from the CSS product.
+ *
+ *   Update mask can only be specified for top level fields in
+ *   attributes and custom attributes.
+ *
+ *   To specify the update mask for custom attributes you need to add the
+ *   `custom_attribute.` prefix.
+ *
+ *   Providing special "*" value for full CSS product replacement is not
+ *   supported.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.shopping.css.v1.CssProductInput|CssProductInput}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/css_product_inputs_service.update_css_product_input.js</caption>
+ * region_tag:css_v1_generated_CssProductInputsService_UpdateCssProductInput_async
+ */
   updateCssProductInput(
-    request?: protos.google.shopping.css.v1.IUpdateCssProductInputRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.shopping.css.v1.ICssProductInput,
-      protos.google.shopping.css.v1.IUpdateCssProductInputRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.shopping.css.v1.IUpdateCssProductInputRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.shopping.css.v1.ICssProductInput,
+        protos.google.shopping.css.v1.IUpdateCssProductInputRequest|undefined, {}|undefined
+      ]>;
   updateCssProductInput(
-    request: protos.google.shopping.css.v1.IUpdateCssProductInputRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.shopping.css.v1.ICssProductInput,
-      | protos.google.shopping.css.v1.IUpdateCssProductInputRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateCssProductInput(
-    request: protos.google.shopping.css.v1.IUpdateCssProductInputRequest,
-    callback: Callback<
-      protos.google.shopping.css.v1.ICssProductInput,
-      | protos.google.shopping.css.v1.IUpdateCssProductInputRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateCssProductInput(
-    request?: protos.google.shopping.css.v1.IUpdateCssProductInputRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.shopping.css.v1.IUpdateCssProductInputRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.shopping.css.v1.ICssProductInput,
-          | protos.google.shopping.css.v1.IUpdateCssProductInputRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.shopping.css.v1.ICssProductInput,
-      | protos.google.shopping.css.v1.IUpdateCssProductInputRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.shopping.css.v1.ICssProductInput,
-      protos.google.shopping.css.v1.IUpdateCssProductInputRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.shopping.css.v1.IUpdateCssProductInputRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateCssProductInput(
+      request: protos.google.shopping.css.v1.IUpdateCssProductInputRequest,
+      callback: Callback<
+          protos.google.shopping.css.v1.ICssProductInput,
+          protos.google.shopping.css.v1.IUpdateCssProductInputRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateCssProductInput(
+      request?: protos.google.shopping.css.v1.IUpdateCssProductInputRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.shopping.css.v1.ICssProductInput,
+          protos.google.shopping.css.v1.IUpdateCssProductInputRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.shopping.css.v1.ICssProductInput,
+          protos.google.shopping.css.v1.IUpdateCssProductInputRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.shopping.css.v1.ICssProductInput,
+        protos.google.shopping.css.v1.IUpdateCssProductInputRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'css_product_input.name': request.cssProductInput!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'css_product_input.name': request.cssProductInput!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateCssProductInput request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.shopping.css.v1.ICssProductInput,
-          | protos.google.shopping.css.v1.IUpdateCssProductInputRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.shopping.css.v1.ICssProductInput,
+        protos.google.shopping.css.v1.IUpdateCssProductInputRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateCssProductInput response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateCssProductInput(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.shopping.css.v1.ICssProductInput,
-          (
-            | protos.google.shopping.css.v1.IUpdateCssProductInputRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateCssProductInput response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateCssProductInput(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.shopping.css.v1.ICssProductInput,
+        protos.google.shopping.css.v1.IUpdateCssProductInputRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateCssProductInput response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a CSS Product input from your CSS Center account.
-   *
-   * After a delete it may take several minutes until the input is no longer
-   * available.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the CSS product input resource to delete.
-   *   Format: accounts/{account}/cssProductInputs/{css_product_input}, where the
-   *   last section `css_product_input` consists of 3 parts:
-   *   contentLanguage~feedLabel~offerId. Example:
-   *   accounts/123/cssProductInputs/de~DE~rawProvidedId123
-   * @param {number} request.supplementalFeedId
-   *   The Content API Supplemental Feed ID.
-   *   The field must not be set if the action applies to a primary feed.
-   *   If the field is set, then product action applies to a supplemental feed
-   *   instead of primary Content API feed.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/css_product_inputs_service.delete_css_product_input.js</caption>
-   * region_tag:css_v1_generated_CssProductInputsService_DeleteCssProductInput_async
-   */
+/**
+ * Deletes a CSS Product input from your CSS Center account.
+ *
+ * After a delete it may take several minutes until the input is no longer
+ * available.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the CSS product input resource to delete.
+ *   Format: accounts/{account}/cssProductInputs/{css_product_input}, where the
+ *   last section `css_product_input` consists of 3 parts:
+ *   contentLanguage~feedLabel~offerId. Example:
+ *   accounts/123/cssProductInputs/de~DE~rawProvidedId123
+ * @param {number} request.supplementalFeedId
+ *   The Content API Supplemental Feed ID.
+ *   The field must not be set if the action applies to a primary feed.
+ *   If the field is set, then product action applies to a supplemental feed
+ *   instead of primary Content API feed.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/css_product_inputs_service.delete_css_product_input.js</caption>
+ * region_tag:css_v1_generated_CssProductInputsService_DeleteCssProductInput_async
+ */
   deleteCssProductInput(
-    request?: protos.google.shopping.css.v1.IDeleteCssProductInputRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.shopping.css.v1.IDeleteCssProductInputRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.shopping.css.v1.IDeleteCssProductInputRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.shopping.css.v1.IDeleteCssProductInputRequest|undefined, {}|undefined
+      ]>;
   deleteCssProductInput(
-    request: protos.google.shopping.css.v1.IDeleteCssProductInputRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.shopping.css.v1.IDeleteCssProductInputRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteCssProductInput(
-    request: protos.google.shopping.css.v1.IDeleteCssProductInputRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.shopping.css.v1.IDeleteCssProductInputRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteCssProductInput(
-    request?: protos.google.shopping.css.v1.IDeleteCssProductInputRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.shopping.css.v1.IDeleteCssProductInputRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.shopping.css.v1.IDeleteCssProductInputRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.shopping.css.v1.IDeleteCssProductInputRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.shopping.css.v1.IDeleteCssProductInputRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.shopping.css.v1.IDeleteCssProductInputRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteCssProductInput(
+      request: protos.google.shopping.css.v1.IDeleteCssProductInputRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.shopping.css.v1.IDeleteCssProductInputRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteCssProductInput(
+      request?: protos.google.shopping.css.v1.IDeleteCssProductInputRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.shopping.css.v1.IDeleteCssProductInputRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.shopping.css.v1.IDeleteCssProductInputRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.shopping.css.v1.IDeleteCssProductInputRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteCssProductInput request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.shopping.css.v1.IDeleteCssProductInputRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.shopping.css.v1.IDeleteCssProductInputRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteCssProductInput response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteCssProductInput(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.shopping.css.v1.IDeleteCssProductInputRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteCssProductInput response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteCssProductInput(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.shopping.css.v1.IDeleteCssProductInputRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteCssProductInput response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
   // --------------------
@@ -809,7 +682,7 @@ export class CssProductInputsServiceClient {
    * @param {string} account
    * @returns {string} Resource name string.
    */
-  accountPath(account: string) {
+  accountPath(account:string) {
     return this.pathTemplates.accountPathTemplate.render({
       account: account,
     });
@@ -833,7 +706,7 @@ export class CssProductInputsServiceClient {
    * @param {string} label
    * @returns {string} Resource name string.
    */
-  accountLabelPath(account: string, label: string) {
+  accountLabelPath(account:string,label:string) {
     return this.pathTemplates.accountLabelPathTemplate.render({
       account: account,
       label: label,
@@ -848,8 +721,7 @@ export class CssProductInputsServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromAccountLabelName(accountLabelName: string) {
-    return this.pathTemplates.accountLabelPathTemplate.match(accountLabelName)
-      .account;
+    return this.pathTemplates.accountLabelPathTemplate.match(accountLabelName).account;
   }
 
   /**
@@ -860,8 +732,7 @@ export class CssProductInputsServiceClient {
    * @returns {string} A string representing the label.
    */
   matchLabelFromAccountLabelName(accountLabelName: string) {
-    return this.pathTemplates.accountLabelPathTemplate.match(accountLabelName)
-      .label;
+    return this.pathTemplates.accountLabelPathTemplate.match(accountLabelName).label;
   }
 
   /**
@@ -871,7 +742,7 @@ export class CssProductInputsServiceClient {
    * @param {string} css_product
    * @returns {string} Resource name string.
    */
-  cssProductPath(account: string, cssProduct: string) {
+  cssProductPath(account:string,cssProduct:string) {
     return this.pathTemplates.cssProductPathTemplate.render({
       account: account,
       css_product: cssProduct,
@@ -886,8 +757,7 @@ export class CssProductInputsServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromCssProductName(cssProductName: string) {
-    return this.pathTemplates.cssProductPathTemplate.match(cssProductName)
-      .account;
+    return this.pathTemplates.cssProductPathTemplate.match(cssProductName).account;
   }
 
   /**
@@ -898,8 +768,7 @@ export class CssProductInputsServiceClient {
    * @returns {string} A string representing the css_product.
    */
   matchCssProductFromCssProductName(cssProductName: string) {
-    return this.pathTemplates.cssProductPathTemplate.match(cssProductName)
-      .css_product;
+    return this.pathTemplates.cssProductPathTemplate.match(cssProductName).css_product;
   }
 
   /**
@@ -909,7 +778,7 @@ export class CssProductInputsServiceClient {
    * @param {string} css_product_input
    * @returns {string} Resource name string.
    */
-  cssProductInputPath(account: string, cssProductInput: string) {
+  cssProductInputPath(account:string,cssProductInput:string) {
     return this.pathTemplates.cssProductInputPathTemplate.render({
       account: account,
       css_product_input: cssProductInput,
@@ -924,9 +793,7 @@ export class CssProductInputsServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromCssProductInputName(cssProductInputName: string) {
-    return this.pathTemplates.cssProductInputPathTemplate.match(
-      cssProductInputName
-    ).account;
+    return this.pathTemplates.cssProductInputPathTemplate.match(cssProductInputName).account;
   }
 
   /**
@@ -937,9 +804,7 @@ export class CssProductInputsServiceClient {
    * @returns {string} A string representing the css_product_input.
    */
   matchCssProductInputFromCssProductInputName(cssProductInputName: string) {
-    return this.pathTemplates.cssProductInputPathTemplate.match(
-      cssProductInputName
-    ).css_product_input;
+    return this.pathTemplates.cssProductInputPathTemplate.match(cssProductInputName).css_product_input;
   }
 
   /**
@@ -949,7 +814,7 @@ export class CssProductInputsServiceClient {
    * @param {string} quota_group
    * @returns {string} Resource name string.
    */
-  quotaGroupPath(account: string, quotaGroup: string) {
+  quotaGroupPath(account:string,quotaGroup:string) {
     return this.pathTemplates.quotaGroupPathTemplate.render({
       account: account,
       quota_group: quotaGroup,
@@ -964,8 +829,7 @@ export class CssProductInputsServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromQuotaGroupName(quotaGroupName: string) {
-    return this.pathTemplates.quotaGroupPathTemplate.match(quotaGroupName)
-      .account;
+    return this.pathTemplates.quotaGroupPathTemplate.match(quotaGroupName).account;
   }
 
   /**
@@ -976,8 +840,7 @@ export class CssProductInputsServiceClient {
    * @returns {string} A string representing the quota_group.
    */
   matchQuotaGroupFromQuotaGroupName(quotaGroupName: string) {
-    return this.pathTemplates.quotaGroupPathTemplate.match(quotaGroupName)
-      .quota_group;
+    return this.pathTemplates.quotaGroupPathTemplate.match(quotaGroupName).quota_group;
   }
 
   /**
