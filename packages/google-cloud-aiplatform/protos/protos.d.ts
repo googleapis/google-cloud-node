@@ -20018,6 +20018,497 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a RagManagedDbConfig. */
+                interface IRagManagedDbConfig {
+
+                    /** RagManagedDbConfig scaled */
+                    scaled?: (google.cloud.aiplatform.v1.RagManagedDbConfig.IScaled|null);
+
+                    /** RagManagedDbConfig basic */
+                    basic?: (google.cloud.aiplatform.v1.RagManagedDbConfig.IBasic|null);
+
+                    /** RagManagedDbConfig unprovisioned */
+                    unprovisioned?: (google.cloud.aiplatform.v1.RagManagedDbConfig.IUnprovisioned|null);
+                }
+
+                /** Represents a RagManagedDbConfig. */
+                class RagManagedDbConfig implements IRagManagedDbConfig {
+
+                    /**
+                     * Constructs a new RagManagedDbConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IRagManagedDbConfig);
+
+                    /** RagManagedDbConfig scaled. */
+                    public scaled?: (google.cloud.aiplatform.v1.RagManagedDbConfig.IScaled|null);
+
+                    /** RagManagedDbConfig basic. */
+                    public basic?: (google.cloud.aiplatform.v1.RagManagedDbConfig.IBasic|null);
+
+                    /** RagManagedDbConfig unprovisioned. */
+                    public unprovisioned?: (google.cloud.aiplatform.v1.RagManagedDbConfig.IUnprovisioned|null);
+
+                    /** RagManagedDbConfig tier. */
+                    public tier?: ("scaled"|"basic"|"unprovisioned");
+
+                    /**
+                     * Creates a new RagManagedDbConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RagManagedDbConfig instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IRagManagedDbConfig): google.cloud.aiplatform.v1.RagManagedDbConfig;
+
+                    /**
+                     * Encodes the specified RagManagedDbConfig message. Does not implicitly {@link google.cloud.aiplatform.v1.RagManagedDbConfig.verify|verify} messages.
+                     * @param message RagManagedDbConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IRagManagedDbConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RagManagedDbConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.RagManagedDbConfig.verify|verify} messages.
+                     * @param message RagManagedDbConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IRagManagedDbConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RagManagedDbConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RagManagedDbConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.RagManagedDbConfig;
+
+                    /**
+                     * Decodes a RagManagedDbConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RagManagedDbConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.RagManagedDbConfig;
+
+                    /**
+                     * Verifies a RagManagedDbConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RagManagedDbConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RagManagedDbConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.RagManagedDbConfig;
+
+                    /**
+                     * Creates a plain object from a RagManagedDbConfig message. Also converts values to other types if specified.
+                     * @param message RagManagedDbConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.RagManagedDbConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RagManagedDbConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RagManagedDbConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace RagManagedDbConfig {
+
+                    /** Properties of a Scaled. */
+                    interface IScaled {
+                    }
+
+                    /** Represents a Scaled. */
+                    class Scaled implements IScaled {
+
+                        /**
+                         * Constructs a new Scaled.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1.RagManagedDbConfig.IScaled);
+
+                        /**
+                         * Creates a new Scaled instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Scaled instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1.RagManagedDbConfig.IScaled): google.cloud.aiplatform.v1.RagManagedDbConfig.Scaled;
+
+                        /**
+                         * Encodes the specified Scaled message. Does not implicitly {@link google.cloud.aiplatform.v1.RagManagedDbConfig.Scaled.verify|verify} messages.
+                         * @param message Scaled message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1.RagManagedDbConfig.IScaled, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Scaled message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.RagManagedDbConfig.Scaled.verify|verify} messages.
+                         * @param message Scaled message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1.RagManagedDbConfig.IScaled, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Scaled message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Scaled
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.RagManagedDbConfig.Scaled;
+
+                        /**
+                         * Decodes a Scaled message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Scaled
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.RagManagedDbConfig.Scaled;
+
+                        /**
+                         * Verifies a Scaled message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Scaled message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Scaled
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.RagManagedDbConfig.Scaled;
+
+                        /**
+                         * Creates a plain object from a Scaled message. Also converts values to other types if specified.
+                         * @param message Scaled
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1.RagManagedDbConfig.Scaled, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Scaled to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Scaled
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a Basic. */
+                    interface IBasic {
+                    }
+
+                    /** Represents a Basic. */
+                    class Basic implements IBasic {
+
+                        /**
+                         * Constructs a new Basic.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1.RagManagedDbConfig.IBasic);
+
+                        /**
+                         * Creates a new Basic instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Basic instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1.RagManagedDbConfig.IBasic): google.cloud.aiplatform.v1.RagManagedDbConfig.Basic;
+
+                        /**
+                         * Encodes the specified Basic message. Does not implicitly {@link google.cloud.aiplatform.v1.RagManagedDbConfig.Basic.verify|verify} messages.
+                         * @param message Basic message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1.RagManagedDbConfig.IBasic, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Basic message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.RagManagedDbConfig.Basic.verify|verify} messages.
+                         * @param message Basic message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1.RagManagedDbConfig.IBasic, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Basic message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Basic
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.RagManagedDbConfig.Basic;
+
+                        /**
+                         * Decodes a Basic message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Basic
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.RagManagedDbConfig.Basic;
+
+                        /**
+                         * Verifies a Basic message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Basic message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Basic
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.RagManagedDbConfig.Basic;
+
+                        /**
+                         * Creates a plain object from a Basic message. Also converts values to other types if specified.
+                         * @param message Basic
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1.RagManagedDbConfig.Basic, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Basic to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Basic
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an Unprovisioned. */
+                    interface IUnprovisioned {
+                    }
+
+                    /** Represents an Unprovisioned. */
+                    class Unprovisioned implements IUnprovisioned {
+
+                        /**
+                         * Constructs a new Unprovisioned.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1.RagManagedDbConfig.IUnprovisioned);
+
+                        /**
+                         * Creates a new Unprovisioned instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Unprovisioned instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1.RagManagedDbConfig.IUnprovisioned): google.cloud.aiplatform.v1.RagManagedDbConfig.Unprovisioned;
+
+                        /**
+                         * Encodes the specified Unprovisioned message. Does not implicitly {@link google.cloud.aiplatform.v1.RagManagedDbConfig.Unprovisioned.verify|verify} messages.
+                         * @param message Unprovisioned message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1.RagManagedDbConfig.IUnprovisioned, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Unprovisioned message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.RagManagedDbConfig.Unprovisioned.verify|verify} messages.
+                         * @param message Unprovisioned message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1.RagManagedDbConfig.IUnprovisioned, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an Unprovisioned message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Unprovisioned
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.RagManagedDbConfig.Unprovisioned;
+
+                        /**
+                         * Decodes an Unprovisioned message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Unprovisioned
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.RagManagedDbConfig.Unprovisioned;
+
+                        /**
+                         * Verifies an Unprovisioned message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an Unprovisioned message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Unprovisioned
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.RagManagedDbConfig.Unprovisioned;
+
+                        /**
+                         * Creates a plain object from an Unprovisioned message. Also converts values to other types if specified.
+                         * @param message Unprovisioned
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1.RagManagedDbConfig.Unprovisioned, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Unprovisioned to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Unprovisioned
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a RagEngineConfig. */
+                interface IRagEngineConfig {
+
+                    /** RagEngineConfig name */
+                    name?: (string|null);
+
+                    /** RagEngineConfig ragManagedDbConfig */
+                    ragManagedDbConfig?: (google.cloud.aiplatform.v1.IRagManagedDbConfig|null);
+                }
+
+                /** Represents a RagEngineConfig. */
+                class RagEngineConfig implements IRagEngineConfig {
+
+                    /**
+                     * Constructs a new RagEngineConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IRagEngineConfig);
+
+                    /** RagEngineConfig name. */
+                    public name: string;
+
+                    /** RagEngineConfig ragManagedDbConfig. */
+                    public ragManagedDbConfig?: (google.cloud.aiplatform.v1.IRagManagedDbConfig|null);
+
+                    /**
+                     * Creates a new RagEngineConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RagEngineConfig instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IRagEngineConfig): google.cloud.aiplatform.v1.RagEngineConfig;
+
+                    /**
+                     * Encodes the specified RagEngineConfig message. Does not implicitly {@link google.cloud.aiplatform.v1.RagEngineConfig.verify|verify} messages.
+                     * @param message RagEngineConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IRagEngineConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RagEngineConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.RagEngineConfig.verify|verify} messages.
+                     * @param message RagEngineConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IRagEngineConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RagEngineConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RagEngineConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.RagEngineConfig;
+
+                    /**
+                     * Decodes a RagEngineConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RagEngineConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.RagEngineConfig;
+
+                    /**
+                     * Verifies a RagEngineConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RagEngineConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RagEngineConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.RagEngineConfig;
+
+                    /**
+                     * Creates a plain object from a RagEngineConfig message. Also converts values to other types if specified.
+                     * @param message RagEngineConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.RagEngineConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RagEngineConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RagEngineConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a Context. */
                 interface IContext {
 
@@ -130969,6 +131460,34 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteRagFile(request: google.cloud.aiplatform.v1.IDeleteRagFileRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateRagEngineConfig.
+                     * @param request UpdateRagEngineConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateRagEngineConfig(request: google.cloud.aiplatform.v1.IUpdateRagEngineConfigRequest, callback: google.cloud.aiplatform.v1.VertexRagDataService.UpdateRagEngineConfigCallback): void;
+
+                    /**
+                     * Calls UpdateRagEngineConfig.
+                     * @param request UpdateRagEngineConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateRagEngineConfig(request: google.cloud.aiplatform.v1.IUpdateRagEngineConfigRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetRagEngineConfig.
+                     * @param request GetRagEngineConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RagEngineConfig
+                     */
+                    public getRagEngineConfig(request: google.cloud.aiplatform.v1.IGetRagEngineConfigRequest, callback: google.cloud.aiplatform.v1.VertexRagDataService.GetRagEngineConfigCallback): void;
+
+                    /**
+                     * Calls GetRagEngineConfig.
+                     * @param request GetRagEngineConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getRagEngineConfig(request: google.cloud.aiplatform.v1.IGetRagEngineConfigRequest): Promise<google.cloud.aiplatform.v1.RagEngineConfig>;
                 }
 
                 namespace VertexRagDataService {
@@ -131042,6 +131561,20 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type DeleteRagFileCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.aiplatform.v1.VertexRagDataService|updateRagEngineConfig}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateRagEngineConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.aiplatform.v1.VertexRagDataService|getRagEngineConfig}.
+                     * @param error Error, if any
+                     * @param [response] RagEngineConfig
+                     */
+                    type GetRagEngineConfigCallback = (error: (Error|null), response?: google.cloud.aiplatform.v1.RagEngineConfig) => void;
                 }
 
                 /** Properties of a CreateRagCorpusRequest. */
@@ -132504,6 +133037,103 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a GetRagEngineConfigRequest. */
+                interface IGetRagEngineConfigRequest {
+
+                    /** GetRagEngineConfigRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetRagEngineConfigRequest. */
+                class GetRagEngineConfigRequest implements IGetRagEngineConfigRequest {
+
+                    /**
+                     * Constructs a new GetRagEngineConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IGetRagEngineConfigRequest);
+
+                    /** GetRagEngineConfigRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetRagEngineConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetRagEngineConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IGetRagEngineConfigRequest): google.cloud.aiplatform.v1.GetRagEngineConfigRequest;
+
+                    /**
+                     * Encodes the specified GetRagEngineConfigRequest message. Does not implicitly {@link google.cloud.aiplatform.v1.GetRagEngineConfigRequest.verify|verify} messages.
+                     * @param message GetRagEngineConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IGetRagEngineConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetRagEngineConfigRequest message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.GetRagEngineConfigRequest.verify|verify} messages.
+                     * @param message GetRagEngineConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IGetRagEngineConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetRagEngineConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetRagEngineConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.GetRagEngineConfigRequest;
+
+                    /**
+                     * Decodes a GetRagEngineConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetRagEngineConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.GetRagEngineConfigRequest;
+
+                    /**
+                     * Verifies a GetRagEngineConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetRagEngineConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetRagEngineConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.GetRagEngineConfigRequest;
+
+                    /**
+                     * Creates a plain object from a GetRagEngineConfigRequest message. Also converts values to other types if specified.
+                     * @param message GetRagEngineConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.GetRagEngineConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetRagEngineConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetRagEngineConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an UpdateRagCorpusRequest. */
                 interface IUpdateRagCorpusRequest {
 
@@ -132807,6 +133437,200 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ImportRagFilesOperationMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateRagEngineConfigRequest. */
+                interface IUpdateRagEngineConfigRequest {
+
+                    /** UpdateRagEngineConfigRequest ragEngineConfig */
+                    ragEngineConfig?: (google.cloud.aiplatform.v1.IRagEngineConfig|null);
+                }
+
+                /** Represents an UpdateRagEngineConfigRequest. */
+                class UpdateRagEngineConfigRequest implements IUpdateRagEngineConfigRequest {
+
+                    /**
+                     * Constructs a new UpdateRagEngineConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IUpdateRagEngineConfigRequest);
+
+                    /** UpdateRagEngineConfigRequest ragEngineConfig. */
+                    public ragEngineConfig?: (google.cloud.aiplatform.v1.IRagEngineConfig|null);
+
+                    /**
+                     * Creates a new UpdateRagEngineConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateRagEngineConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IUpdateRagEngineConfigRequest): google.cloud.aiplatform.v1.UpdateRagEngineConfigRequest;
+
+                    /**
+                     * Encodes the specified UpdateRagEngineConfigRequest message. Does not implicitly {@link google.cloud.aiplatform.v1.UpdateRagEngineConfigRequest.verify|verify} messages.
+                     * @param message UpdateRagEngineConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IUpdateRagEngineConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateRagEngineConfigRequest message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.UpdateRagEngineConfigRequest.verify|verify} messages.
+                     * @param message UpdateRagEngineConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IUpdateRagEngineConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateRagEngineConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateRagEngineConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.UpdateRagEngineConfigRequest;
+
+                    /**
+                     * Decodes an UpdateRagEngineConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateRagEngineConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.UpdateRagEngineConfigRequest;
+
+                    /**
+                     * Verifies an UpdateRagEngineConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateRagEngineConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateRagEngineConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.UpdateRagEngineConfigRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateRagEngineConfigRequest message. Also converts values to other types if specified.
+                     * @param message UpdateRagEngineConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.UpdateRagEngineConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateRagEngineConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateRagEngineConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateRagEngineConfigOperationMetadata. */
+                interface IUpdateRagEngineConfigOperationMetadata {
+
+                    /** UpdateRagEngineConfigOperationMetadata genericMetadata */
+                    genericMetadata?: (google.cloud.aiplatform.v1.IGenericOperationMetadata|null);
+                }
+
+                /** Represents an UpdateRagEngineConfigOperationMetadata. */
+                class UpdateRagEngineConfigOperationMetadata implements IUpdateRagEngineConfigOperationMetadata {
+
+                    /**
+                     * Constructs a new UpdateRagEngineConfigOperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IUpdateRagEngineConfigOperationMetadata);
+
+                    /** UpdateRagEngineConfigOperationMetadata genericMetadata. */
+                    public genericMetadata?: (google.cloud.aiplatform.v1.IGenericOperationMetadata|null);
+
+                    /**
+                     * Creates a new UpdateRagEngineConfigOperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateRagEngineConfigOperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IUpdateRagEngineConfigOperationMetadata): google.cloud.aiplatform.v1.UpdateRagEngineConfigOperationMetadata;
+
+                    /**
+                     * Encodes the specified UpdateRagEngineConfigOperationMetadata message. Does not implicitly {@link google.cloud.aiplatform.v1.UpdateRagEngineConfigOperationMetadata.verify|verify} messages.
+                     * @param message UpdateRagEngineConfigOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IUpdateRagEngineConfigOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateRagEngineConfigOperationMetadata message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.UpdateRagEngineConfigOperationMetadata.verify|verify} messages.
+                     * @param message UpdateRagEngineConfigOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IUpdateRagEngineConfigOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateRagEngineConfigOperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateRagEngineConfigOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.UpdateRagEngineConfigOperationMetadata;
+
+                    /**
+                     * Decodes an UpdateRagEngineConfigOperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateRagEngineConfigOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.UpdateRagEngineConfigOperationMetadata;
+
+                    /**
+                     * Verifies an UpdateRagEngineConfigOperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateRagEngineConfigOperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateRagEngineConfigOperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.UpdateRagEngineConfigOperationMetadata;
+
+                    /**
+                     * Creates a plain object from an UpdateRagEngineConfigOperationMetadata message. Also converts values to other types if specified.
+                     * @param message UpdateRagEngineConfigOperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.UpdateRagEngineConfigOperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateRagEngineConfigOperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateRagEngineConfigOperationMetadata
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

@@ -315,11 +315,13 @@
   * [Vertex_rag_data_service.delete_rag_corpus](#vertex_rag_data_service.delete_rag_corpus)
   * [Vertex_rag_data_service.delete_rag_file](#vertex_rag_data_service.delete_rag_file)
   * [Vertex_rag_data_service.get_rag_corpus](#vertex_rag_data_service.get_rag_corpus)
+  * [Vertex_rag_data_service.get_rag_engine_config](#vertex_rag_data_service.get_rag_engine_config)
   * [Vertex_rag_data_service.get_rag_file](#vertex_rag_data_service.get_rag_file)
   * [Vertex_rag_data_service.import_rag_files](#vertex_rag_data_service.import_rag_files)
   * [Vertex_rag_data_service.list_rag_corpora](#vertex_rag_data_service.list_rag_corpora)
   * [Vertex_rag_data_service.list_rag_files](#vertex_rag_data_service.list_rag_files)
   * [Vertex_rag_data_service.update_rag_corpus](#vertex_rag_data_service.update_rag_corpus)
+  * [Vertex_rag_data_service.update_rag_engine_config](#vertex_rag_data_service.update_rag_engine_config)
   * [Vertex_rag_data_service.upload_rag_file](#vertex_rag_data_service.upload_rag_file)
   * [Vertex_rag_service.augment_prompt](#vertex_rag_service.augment_prompt)
   * [Vertex_rag_service.corroborate_content](#vertex_rag_service.corroborate_content)
@@ -5894,6 +5896,23 @@ __Usage:__
 
 
 
+### Vertex_rag_data_service.get_rag_engine_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.get_rag_engine_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.get_rag_engine_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.get_rag_engine_config.js`
+
+
+-----
+
+
+
+
 ### Vertex_rag_data_service.get_rag_file
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.get_rag_file.js).
@@ -5972,6 +5991,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.update_rag_corpus.js`
+
+
+-----
+
+
+
+
+### Vertex_rag_data_service.update_rag_engine_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.update_rag_engine_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.update_rag_engine_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.update_rag_engine_config.js`
 
 
 -----

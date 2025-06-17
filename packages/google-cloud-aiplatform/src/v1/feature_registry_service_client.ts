@@ -317,6 +317,9 @@ export class FeatureRegistryServiceClient {
       ragCorpusPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/ragCorpora/{rag_corpus}'
       ),
+      ragEngineConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/ragEngineConfig'
+      ),
       ragFilePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/ragCorpora/{rag_corpus}/ragFiles/{rag_file}'
       ),
@@ -5038,6 +5041,42 @@ export class FeatureRegistryServiceClient {
    */
   matchRagCorpusFromRagCorpusName(ragCorpusName: string) {
     return this.pathTemplates.ragCorpusPathTemplate.match(ragCorpusName).rag_corpus;
+  }
+
+  /**
+   * Return a fully-qualified ragEngineConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  ragEngineConfigPath(project:string,location:string) {
+    return this.pathTemplates.ragEngineConfigPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from RagEngineConfig resource.
+   *
+   * @param {string} ragEngineConfigName
+   *   A fully-qualified path representing RagEngineConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRagEngineConfigName(ragEngineConfigName: string) {
+    return this.pathTemplates.ragEngineConfigPathTemplate.match(ragEngineConfigName).project;
+  }
+
+  /**
+   * Parse the location from RagEngineConfig resource.
+   *
+   * @param {string} ragEngineConfigName
+   *   A fully-qualified path representing RagEngineConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRagEngineConfigName(ragEngineConfigName: string) {
+    return this.pathTemplates.ragEngineConfigPathTemplate.match(ragEngineConfigName).location;
   }
 
   /**

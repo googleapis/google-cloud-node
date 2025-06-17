@@ -3449,6 +3449,44 @@ describe('v1.MigrationServiceClient', () => {
             });
         });
 
+        describe('ragEngineConfig', async () => {
+            const fakePath = "/rendered/path/ragEngineConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new migrationserviceModule.v1.MigrationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.ragEngineConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.ragEngineConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('ragEngineConfigPath', () => {
+                const result = client.ragEngineConfigPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.ragEngineConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromRagEngineConfigName', () => {
+                const result = client.matchProjectFromRagEngineConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.ragEngineConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromRagEngineConfigName', () => {
+                const result = client.matchLocationFromRagEngineConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.ragEngineConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('ragFile', async () => {
             const fakePath = "/rendered/path/ragFile";
             const expectedParameters = {

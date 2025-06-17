@@ -313,6 +313,9 @@ export class VertexRagDataServiceClient {
       ragCorpusPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/ragCorpora/{rag_corpus}'
       ),
+      ragEngineConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/ragEngineConfig'
+      ),
       ragFilePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/ragCorpora/{rag_corpus}/ragFiles/{rag_file}'
       ),
@@ -407,6 +410,10 @@ export class VertexRagDataServiceClient {
       '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteRagFileMetadata = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1.DeleteOperationMetadata') as gax.protobuf.Type;
+    const updateRagEngineConfigResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.RagEngineConfig') as gax.protobuf.Type;
+    const updateRagEngineConfigMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.UpdateRagEngineConfigOperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createRagCorpus: new this._gaxModule.LongrunningDescriptor(
@@ -428,7 +435,11 @@ export class VertexRagDataServiceClient {
       deleteRagFile: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteRagFileResponse.decode.bind(deleteRagFileResponse),
-        deleteRagFileMetadata.decode.bind(deleteRagFileMetadata))
+        deleteRagFileMetadata.decode.bind(deleteRagFileMetadata)),
+      updateRagEngineConfig: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateRagEngineConfigResponse.decode.bind(updateRagEngineConfigResponse),
+        updateRagEngineConfigMetadata.decode.bind(updateRagEngineConfigMetadata))
     };
 
     // Put together the default options sent with requests.
@@ -474,7 +485,7 @@ export class VertexRagDataServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const vertexRagDataServiceStubMethods =
-        ['createRagCorpus', 'updateRagCorpus', 'getRagCorpus', 'listRagCorpora', 'deleteRagCorpus', 'uploadRagFile', 'importRagFiles', 'getRagFile', 'listRagFiles', 'deleteRagFile'];
+        ['createRagCorpus', 'updateRagCorpus', 'getRagCorpus', 'listRagCorpora', 'deleteRagCorpus', 'uploadRagFile', 'importRagFiles', 'getRagFile', 'listRagFiles', 'deleteRagFile', 'updateRagEngineConfig', 'getRagEngineConfig'];
     for (const methodName of vertexRagDataServiceStubMethods) {
       const callPromise = this.vertexRagDataServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -862,6 +873,102 @@ export class VertexRagDataServiceClient {
         {}|undefined
       ]) => {
         this._log.info('getRagFile response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Gets a RagEngineConfig.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the RagEngineConfig resource.
+ *   Format:
+ *   `projects/{project}/locations/{location}/ragEngineConfig`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.RagEngineConfig|RagEngineConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/vertex_rag_data_service.get_rag_engine_config.js</caption>
+ * region_tag:aiplatform_v1_generated_VertexRagDataService_GetRagEngineConfig_async
+ */
+  getRagEngineConfig(
+      request?: protos.google.cloud.aiplatform.v1.IGetRagEngineConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1.IRagEngineConfig,
+        protos.google.cloud.aiplatform.v1.IGetRagEngineConfigRequest|undefined, {}|undefined
+      ]>;
+  getRagEngineConfig(
+      request: protos.google.cloud.aiplatform.v1.IGetRagEngineConfigRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1.IRagEngineConfig,
+          protos.google.cloud.aiplatform.v1.IGetRagEngineConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getRagEngineConfig(
+      request: protos.google.cloud.aiplatform.v1.IGetRagEngineConfigRequest,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1.IRagEngineConfig,
+          protos.google.cloud.aiplatform.v1.IGetRagEngineConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getRagEngineConfig(
+      request?: protos.google.cloud.aiplatform.v1.IGetRagEngineConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.aiplatform.v1.IRagEngineConfig,
+          protos.google.cloud.aiplatform.v1.IGetRagEngineConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.aiplatform.v1.IRagEngineConfig,
+          protos.google.cloud.aiplatform.v1.IGetRagEngineConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1.IRagEngineConfig,
+        protos.google.cloud.aiplatform.v1.IGetRagEngineConfigRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getRagEngineConfig request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.aiplatform.v1.IRagEngineConfig,
+        protos.google.cloud.aiplatform.v1.IGetRagEngineConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getRagEngineConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getRagEngineConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.aiplatform.v1.IRagEngineConfig,
+        protos.google.cloud.aiplatform.v1.IGetRagEngineConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getRagEngineConfig response %j', response);
         return [response, options, rawResponse];
       }).catch((error: any) => {
         if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
@@ -1423,6 +1530,116 @@ export class VertexRagDataServiceClient {
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteRagFile, this._gaxModule.createDefaultBackoffSettings());
     return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.aiplatform.v1.DeleteOperationMetadata>;
+  }
+/**
+ * Updates a RagEngineConfig.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.aiplatform.v1.RagEngineConfig} request.ragEngineConfig
+ *   Required. The updated RagEngineConfig.
+ *
+ *   NOTE: Downgrading your RagManagedDb's ComputeTier could temporarily
+ *   increase request latencies until the operation is fully complete.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/vertex_rag_data_service.update_rag_engine_config.js</caption>
+ * region_tag:aiplatform_v1_generated_VertexRagDataService_UpdateRagEngineConfig_async
+ */
+  updateRagEngineConfig(
+      request?: protos.google.cloud.aiplatform.v1.IUpdateRagEngineConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.aiplatform.v1.IRagEngineConfig, protos.google.cloud.aiplatform.v1.IUpdateRagEngineConfigOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  updateRagEngineConfig(
+      request: protos.google.cloud.aiplatform.v1.IUpdateRagEngineConfigRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1.IRagEngineConfig, protos.google.cloud.aiplatform.v1.IUpdateRagEngineConfigOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateRagEngineConfig(
+      request: protos.google.cloud.aiplatform.v1.IUpdateRagEngineConfigRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1.IRagEngineConfig, protos.google.cloud.aiplatform.v1.IUpdateRagEngineConfigOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateRagEngineConfig(
+      request?: protos.google.cloud.aiplatform.v1.IUpdateRagEngineConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.aiplatform.v1.IRagEngineConfig, protos.google.cloud.aiplatform.v1.IUpdateRagEngineConfigOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1.IRagEngineConfig, protos.google.cloud.aiplatform.v1.IUpdateRagEngineConfigOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.aiplatform.v1.IRagEngineConfig, protos.google.cloud.aiplatform.v1.IUpdateRagEngineConfigOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'rag_engine_config.name': request.ragEngineConfig!.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1.IRagEngineConfig, protos.google.cloud.aiplatform.v1.IUpdateRagEngineConfigOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateRagEngineConfig response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateRagEngineConfig request %j', request);
+    return this.innerApiCalls.updateRagEngineConfig(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.aiplatform.v1.IRagEngineConfig, protos.google.cloud.aiplatform.v1.IUpdateRagEngineConfigOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateRagEngineConfig response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `updateRagEngineConfig()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/vertex_rag_data_service.update_rag_engine_config.js</caption>
+ * region_tag:aiplatform_v1_generated_VertexRagDataService_UpdateRagEngineConfig_async
+ */
+  async checkUpdateRagEngineConfigProgress(name: string): Promise<LROperation<protos.google.cloud.aiplatform.v1.RagEngineConfig, protos.google.cloud.aiplatform.v1.UpdateRagEngineConfigOperationMetadata>>{
+    this._log.info('updateRagEngineConfig long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateRagEngineConfig, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.aiplatform.v1.RagEngineConfig, protos.google.cloud.aiplatform.v1.UpdateRagEngineConfigOperationMetadata>;
   }
  /**
  * Lists RagCorpora in a Location.
@@ -4579,6 +4796,42 @@ export class VertexRagDataServiceClient {
    */
   matchRagCorpusFromRagCorpusName(ragCorpusName: string) {
     return this.pathTemplates.ragCorpusPathTemplate.match(ragCorpusName).rag_corpus;
+  }
+
+  /**
+   * Return a fully-qualified ragEngineConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  ragEngineConfigPath(project:string,location:string) {
+    return this.pathTemplates.ragEngineConfigPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from RagEngineConfig resource.
+   *
+   * @param {string} ragEngineConfigName
+   *   A fully-qualified path representing RagEngineConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRagEngineConfigName(ragEngineConfigName: string) {
+    return this.pathTemplates.ragEngineConfigPathTemplate.match(ragEngineConfigName).project;
+  }
+
+  /**
+   * Parse the location from RagEngineConfig resource.
+   *
+   * @param {string} ragEngineConfigName
+   *   A fully-qualified path representing RagEngineConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRagEngineConfigName(ragEngineConfigName: string) {
+    return this.pathTemplates.ragEngineConfigPathTemplate.match(ragEngineConfigName).location;
   }
 
   /**

@@ -5281,6 +5281,63 @@
                         }
                       }
                     },
+                    "RagManagedDbConfig": {
+                      "oneofs": {
+                        "tier": {
+                          "oneof": [
+                            "scaled",
+                            "basic",
+                            "unprovisioned"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "scaled": {
+                          "type": "Scaled",
+                          "id": 4
+                        },
+                        "basic": {
+                          "type": "Basic",
+                          "id": 2
+                        },
+                        "unprovisioned": {
+                          "type": "Unprovisioned",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "Scaled": {
+                          "fields": {}
+                        },
+                        "Basic": {
+                          "fields": {}
+                        },
+                        "Unprovisioned": {
+                          "fields": {}
+                        }
+                      }
+                    },
+                    "RagEngineConfig": {
+                      "options": {
+                        "(google.api.resource).type": "aiplatform.googleapis.com/RagEngineConfig",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/ragEngineConfig",
+                        "(google.api.resource).plural": "ragEngineConfigs",
+                        "(google.api.resource).singular": "ragEngineConfig"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "ragManagedDbConfig": {
+                          "type": "RagManagedDbConfig",
+                          "id": 2
+                        }
+                      }
+                    },
                     "Context": {
                       "options": {
                         "(google.api.resource).type": "aiplatform.googleapis.com/Context",
@@ -35251,6 +35308,52 @@
                               }
                             }
                           ]
+                        },
+                        "UpdateRagEngineConfig": {
+                          "requestType": "UpdateRagEngineConfigRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{rag_engine_config.name=projects/*/locations/*/ragEngineConfig}",
+                            "(google.api.http).body": "rag_engine_config",
+                            "(google.api.method_signature)": "rag_engine_config",
+                            "(google.longrunning.operation_info).response_type": "RagEngineConfig",
+                            "(google.longrunning.operation_info).metadata_type": "UpdateRagEngineConfigOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{rag_engine_config.name=projects/*/locations/*/ragEngineConfig}",
+                                "body": "rag_engine_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "rag_engine_config"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "RagEngineConfig",
+                                "metadata_type": "UpdateRagEngineConfigOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GetRagEngineConfig": {
+                          "requestType": "GetRagEngineConfigRequest",
+                          "responseType": "RagEngineConfig",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/ragEngineConfig}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/ragEngineConfig}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         }
                       }
                     },
@@ -35511,6 +35614,18 @@
                         }
                       }
                     },
+                    "GetRagEngineConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/RagEngineConfig"
+                          }
+                        }
+                      }
+                    },
                     "UpdateRagCorpusRequest": {
                       "fields": {
                         "ragCorpus": {
@@ -35550,6 +35665,25 @@
                         "progressPercentage": {
                           "type": "int32",
                           "id": 4
+                        }
+                      }
+                    },
+                    "UpdateRagEngineConfigRequest": {
+                      "fields": {
+                        "ragEngineConfig": {
+                          "type": "RagEngineConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateRagEngineConfigOperationMetadata": {
+                      "fields": {
+                        "genericMetadata": {
+                          "type": "GenericOperationMetadata",
+                          "id": 1
                         }
                       }
                     },

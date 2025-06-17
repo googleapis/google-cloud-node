@@ -599,6 +599,114 @@ describe('v1.VertexRagDataServiceClient', () => {
         });
     });
 
+    describe('getRagEngineConfig', () => {
+        it('invokes getRagEngineConfig without error', async () => {
+            const client = new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.GetRagEngineConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1.GetRagEngineConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.RagEngineConfig()
+            );
+            client.innerApiCalls.getRagEngineConfig = stubSimpleCall(expectedResponse);
+            const [response] = await client.getRagEngineConfig(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getRagEngineConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getRagEngineConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getRagEngineConfig without error using callback', async () => {
+            const client = new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.GetRagEngineConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1.GetRagEngineConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.RagEngineConfig()
+            );
+            client.innerApiCalls.getRagEngineConfig = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getRagEngineConfig(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.aiplatform.v1.IRagEngineConfig|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getRagEngineConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getRagEngineConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getRagEngineConfig with error', async () => {
+            const client = new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.GetRagEngineConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1.GetRagEngineConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getRagEngineConfig = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getRagEngineConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getRagEngineConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getRagEngineConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getRagEngineConfig with closed client', async () => {
+            const client = new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.GetRagEngineConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1.GetRagEngineConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getRagEngineConfig(request), expectedError);
+        });
+    });
+
     describe('createRagCorpus', () => {
         it('invokes createRagCorpus without error', async () => {
             const client = new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
@@ -1368,6 +1476,164 @@ describe('v1.VertexRagDataServiceClient', () => {
 
             client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.checkDeleteRagFileProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateRagEngineConfig', () => {
+        it('invokes updateRagEngineConfig without error', async () => {
+            const client = new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.UpdateRagEngineConfigRequest()
+            );
+            request.ragEngineConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateRagEngineConfigRequest', ['ragEngineConfig', 'name']);
+            request.ragEngineConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `rag_engine_config.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateRagEngineConfig = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateRagEngineConfig(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateRagEngineConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateRagEngineConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateRagEngineConfig without error using callback', async () => {
+            const client = new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.UpdateRagEngineConfigRequest()
+            );
+            request.ragEngineConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateRagEngineConfigRequest', ['ragEngineConfig', 'name']);
+            request.ragEngineConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `rag_engine_config.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateRagEngineConfig = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateRagEngineConfig(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.aiplatform.v1.IRagEngineConfig, protos.google.cloud.aiplatform.v1.IUpdateRagEngineConfigOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.aiplatform.v1.IRagEngineConfig, protos.google.cloud.aiplatform.v1.IUpdateRagEngineConfigOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateRagEngineConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateRagEngineConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateRagEngineConfig with call error', async () => {
+            const client = new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.UpdateRagEngineConfigRequest()
+            );
+            request.ragEngineConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateRagEngineConfigRequest', ['ragEngineConfig', 'name']);
+            request.ragEngineConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `rag_engine_config.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateRagEngineConfig = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateRagEngineConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateRagEngineConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateRagEngineConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateRagEngineConfig with LRO error', async () => {
+            const client = new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.UpdateRagEngineConfigRequest()
+            );
+            request.ragEngineConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateRagEngineConfigRequest', ['ragEngineConfig', 'name']);
+            request.ragEngineConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `rag_engine_config.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateRagEngineConfig = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateRagEngineConfig(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateRagEngineConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateRagEngineConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateRagEngineConfigProgress without error', async () => {
+            const client = new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateRagEngineConfigProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateRagEngineConfigProgress with error', async () => {
+            const client = new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateRagEngineConfigProgress(''), expectedError);
             assert((client.operationsClient.getOperation as SinonStub)
                 .getCall(0));
         });
@@ -4634,6 +4900,44 @@ describe('v1.VertexRagDataServiceClient', () => {
                 const result = client.matchRagCorpusFromRagCorpusName(fakePath);
                 assert.strictEqual(result, "ragCorpusValue");
                 assert((client.pathTemplates.ragCorpusPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('ragEngineConfig', async () => {
+            const fakePath = "/rendered/path/ragEngineConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new vertexragdataserviceModule.v1.VertexRagDataServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.ragEngineConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.ragEngineConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('ragEngineConfigPath', () => {
+                const result = client.ragEngineConfigPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.ragEngineConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromRagEngineConfigName', () => {
+                const result = client.matchProjectFromRagEngineConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.ragEngineConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromRagEngineConfigName', () => {
+                const result = client.matchLocationFromRagEngineConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.ragEngineConfigPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
