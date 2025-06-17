@@ -16,27 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {
-  CmekConfigServiceClient,
-  CompletionServiceClient,
-  ControlServiceClient,
-  ConversationalSearchServiceClient,
-  DataStoreServiceClient,
-  DocumentServiceClient,
-  EngineServiceClient,
-  GroundedGenerationServiceClient,
-  IdentityMappingStoreServiceClient,
-  ProjectServiceClient,
-  RankServiceClient,
-  RecommendationServiceClient,
-  SchemaServiceClient,
-  SearchServiceClient,
-  SearchTuningServiceClient,
-  ServingConfigServiceClient,
-  SiteSearchEngineServiceClient,
-  UserEventServiceClient,
-  UserLicenseServiceClient,
-} from '@google-cloud/discoveryengine';
+import {CmekConfigServiceClient, CompletionServiceClient, ControlServiceClient, ConversationalSearchServiceClient, DataStoreServiceClient, DocumentServiceClient, EngineServiceClient, GroundedGenerationServiceClient, IdentityMappingStoreServiceClient, ProjectServiceClient, RankServiceClient, RecommendationServiceClient, SchemaServiceClient, SearchServiceClient, SearchTuningServiceClient, ServingConfigServiceClient, SiteSearchEngineServiceClient, UserEventServiceClient, UserLicenseServiceClient} from '@google-cloud/discoveryengine';
 
 // check that the client class type name can be used
 function doStuffWithCmekConfigServiceClient(client: CmekConfigServiceClient) {
@@ -48,9 +28,7 @@ function doStuffWithCompletionServiceClient(client: CompletionServiceClient) {
 function doStuffWithControlServiceClient(client: ControlServiceClient) {
   client.close();
 }
-function doStuffWithConversationalSearchServiceClient(
-  client: ConversationalSearchServiceClient
-) {
+function doStuffWithConversationalSearchServiceClient(client: ConversationalSearchServiceClient) {
   client.close();
 }
 function doStuffWithDataStoreServiceClient(client: DataStoreServiceClient) {
@@ -62,14 +40,10 @@ function doStuffWithDocumentServiceClient(client: DocumentServiceClient) {
 function doStuffWithEngineServiceClient(client: EngineServiceClient) {
   client.close();
 }
-function doStuffWithGroundedGenerationServiceClient(
-  client: GroundedGenerationServiceClient
-) {
+function doStuffWithGroundedGenerationServiceClient(client: GroundedGenerationServiceClient) {
   client.close();
 }
-function doStuffWithIdentityMappingStoreServiceClient(
-  client: IdentityMappingStoreServiceClient
-) {
+function doStuffWithIdentityMappingStoreServiceClient(client: IdentityMappingStoreServiceClient) {
   client.close();
 }
 function doStuffWithProjectServiceClient(client: ProjectServiceClient) {
@@ -78,9 +52,7 @@ function doStuffWithProjectServiceClient(client: ProjectServiceClient) {
 function doStuffWithRankServiceClient(client: RankServiceClient) {
   client.close();
 }
-function doStuffWithRecommendationServiceClient(
-  client: RecommendationServiceClient
-) {
+function doStuffWithRecommendationServiceClient(client: RecommendationServiceClient) {
   client.close();
 }
 function doStuffWithSchemaServiceClient(client: SchemaServiceClient) {
@@ -89,19 +61,13 @@ function doStuffWithSchemaServiceClient(client: SchemaServiceClient) {
 function doStuffWithSearchServiceClient(client: SearchServiceClient) {
   client.close();
 }
-function doStuffWithSearchTuningServiceClient(
-  client: SearchTuningServiceClient
-) {
+function doStuffWithSearchTuningServiceClient(client: SearchTuningServiceClient) {
   client.close();
 }
-function doStuffWithServingConfigServiceClient(
-  client: ServingConfigServiceClient
-) {
+function doStuffWithServingConfigServiceClient(client: ServingConfigServiceClient) {
   client.close();
 }
-function doStuffWithSiteSearchEngineServiceClient(
-  client: SiteSearchEngineServiceClient
-) {
+function doStuffWithSiteSearchEngineServiceClient(client: SiteSearchEngineServiceClient) {
   client.close();
 }
 function doStuffWithUserEventServiceClient(client: UserEventServiceClient) {
@@ -122,11 +88,8 @@ function main() {
   const controlServiceClient = new ControlServiceClient();
   doStuffWithControlServiceClient(controlServiceClient);
   // check that the client instance can be created
-  const conversationalSearchServiceClient =
-    new ConversationalSearchServiceClient();
-  doStuffWithConversationalSearchServiceClient(
-    conversationalSearchServiceClient
-  );
+  const conversationalSearchServiceClient = new ConversationalSearchServiceClient();
+  doStuffWithConversationalSearchServiceClient(conversationalSearchServiceClient);
   // check that the client instance can be created
   const dataStoreServiceClient = new DataStoreServiceClient();
   doStuffWithDataStoreServiceClient(dataStoreServiceClient);
@@ -140,11 +103,8 @@ function main() {
   const groundedGenerationServiceClient = new GroundedGenerationServiceClient();
   doStuffWithGroundedGenerationServiceClient(groundedGenerationServiceClient);
   // check that the client instance can be created
-  const identityMappingStoreServiceClient =
-    new IdentityMappingStoreServiceClient();
-  doStuffWithIdentityMappingStoreServiceClient(
-    identityMappingStoreServiceClient
-  );
+  const identityMappingStoreServiceClient = new IdentityMappingStoreServiceClient();
+  doStuffWithIdentityMappingStoreServiceClient(identityMappingStoreServiceClient);
   // check that the client instance can be created
   const projectServiceClient = new ProjectServiceClient();
   doStuffWithProjectServiceClient(projectServiceClient);

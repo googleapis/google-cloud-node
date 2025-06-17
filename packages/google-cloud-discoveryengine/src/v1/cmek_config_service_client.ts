@@ -18,20 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, LocationsClient, LocationProtos} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -111,41 +102,20 @@ export class CmekConfigServiceClient {
    *     const client = new CmekConfigServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof CmekConfigServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'discoveryengine.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -171,7 +141,7 @@ export class CmekConfigServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -187,9 +157,13 @@ export class CmekConfigServiceClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -231,300 +205,150 @@ export class CmekConfigServiceClient {
       projectLocationCmekConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/cmekConfig'
       ),
-      projectLocationCmekConfigPathTemplate: new this._gaxModule.PathTemplate(
+      projectLocationCmekConfigsPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/cmekConfigs/{cmek_config}'
       ),
-      projectLocationCollectionDataStorePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}'
-        ),
-      projectLocationCollectionDataStoreBranchDocumentPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}'
-        ),
-      projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}/chunks/{chunk}'
-        ),
-      projectLocationCollectionDataStoreControlPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/controls/{control}'
-        ),
-      projectLocationCollectionDataStoreConversationPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/conversations/{conversation}'
-        ),
-      projectLocationCollectionDataStoreCustomTuningModelPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/customTuningModels/{custom_tuning_model}'
-        ),
-      projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/documentProcessingConfig'
-        ),
-      projectLocationCollectionDataStoreSchemaPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/schemas/{schema}'
-        ),
-      projectLocationCollectionDataStoreServingConfigPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/servingConfigs/{serving_config}'
-        ),
-      projectLocationCollectionDataStoreSessionPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/sessions/{session}'
-        ),
-      projectLocationCollectionDataStoreSessionAnswerPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/sessions/{session}/answers/{answer}'
-        ),
-      projectLocationCollectionDataStoreSiteSearchEnginePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine'
-        ),
-      projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine/sitemaps/{sitemap}'
-        ),
-      projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine/targetSites/{target_site}'
-        ),
-      projectLocationCollectionEngineControlPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/controls/{control}'
-        ),
-      projectLocationCollectionEngineConversationPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/conversations/{conversation}'
-        ),
-      projectLocationCollectionEngineServingConfigPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/servingConfigs/{serving_config}'
-        ),
-      projectLocationCollectionEngineSessionPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/sessions/{session}'
-        ),
-      projectLocationCollectionEngineSessionAnswerPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/sessions/{session}/answers/{answer}'
-        ),
+      projectLocationCollectionDataStorePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}'
+      ),
+      projectLocationCollectionDataStoreBranchDocumentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}'
+      ),
+      projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}/chunks/{chunk}'
+      ),
+      projectLocationCollectionDataStoreControlPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/controls/{control}'
+      ),
+      projectLocationCollectionDataStoreConversationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/conversations/{conversation}'
+      ),
+      projectLocationCollectionDataStoreCustomTuningModelPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/customTuningModels/{custom_tuning_model}'
+      ),
+      projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/documentProcessingConfig'
+      ),
+      projectLocationCollectionDataStoreSchemaPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/schemas/{schema}'
+      ),
+      projectLocationCollectionDataStoreServingConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/servingConfigs/{serving_config}'
+      ),
+      projectLocationCollectionDataStoreSessionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/sessions/{session}'
+      ),
+      projectLocationCollectionDataStoreSessionAnswerPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/sessions/{session}/answers/{answer}'
+      ),
+      projectLocationCollectionDataStoreSiteSearchEnginePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine'
+      ),
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine/sitemaps/{sitemap}'
+      ),
+      projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine/targetSites/{target_site}'
+      ),
+      projectLocationCollectionEngineControlPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/controls/{control}'
+      ),
+      projectLocationCollectionEngineConversationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/conversations/{conversation}'
+      ),
+      projectLocationCollectionEngineServingConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/servingConfigs/{serving_config}'
+      ),
+      projectLocationCollectionEngineSessionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/sessions/{session}'
+      ),
+      projectLocationCollectionEngineSessionAnswerPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/sessions/{session}/answers/{answer}'
+      ),
       projectLocationDataStorePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dataStores/{data_store}'
       ),
-      projectLocationDataStoreBranchDocumentPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}/documents/{document}'
-        ),
-      projectLocationDataStoreBranchDocumentChunkPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}/documents/{document}/chunks/{chunk}'
-        ),
-      projectLocationDataStoreControlPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/dataStores/{data_store}/controls/{control}'
-        ),
-      projectLocationDataStoreConversationPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/dataStores/{data_store}/conversations/{conversation}'
-        ),
-      projectLocationDataStoreCustomTuningModelPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/dataStores/{data_store}/customTuningModels/{custom_tuning_model}'
-        ),
-      projectLocationDataStoreDocumentProcessingConfigPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/dataStores/{data_store}/documentProcessingConfig'
-        ),
-      projectLocationDataStoreSchemaPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/dataStores/{data_store}/schemas/{schema}'
-        ),
-      projectLocationDataStoreServingConfigPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/dataStores/{data_store}/servingConfigs/{serving_config}'
-        ),
-      projectLocationDataStoreSessionPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/dataStores/{data_store}/sessions/{session}'
-        ),
-      projectLocationDataStoreSessionAnswerPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/dataStores/{data_store}/sessions/{session}/answers/{answer}'
-        ),
-      projectLocationDataStoreSiteSearchEnginePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine'
-        ),
-      projectLocationDataStoreSiteSearchEngineSitemapPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine/sitemaps/{sitemap}'
-        ),
-      projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine/targetSites/{target_site}'
-        ),
+      projectLocationDataStoreBranchDocumentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}/documents/{document}'
+      ),
+      projectLocationDataStoreBranchDocumentChunkPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}/documents/{document}/chunks/{chunk}'
+      ),
+      projectLocationDataStoreControlPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataStores/{data_store}/controls/{control}'
+      ),
+      projectLocationDataStoreConversationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataStores/{data_store}/conversations/{conversation}'
+      ),
+      projectLocationDataStoreCustomTuningModelPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataStores/{data_store}/customTuningModels/{custom_tuning_model}'
+      ),
+      projectLocationDataStoreDocumentProcessingConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataStores/{data_store}/documentProcessingConfig'
+      ),
+      projectLocationDataStoreSchemaPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataStores/{data_store}/schemas/{schema}'
+      ),
+      projectLocationDataStoreServingConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataStores/{data_store}/servingConfigs/{serving_config}'
+      ),
+      projectLocationDataStoreSessionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataStores/{data_store}/sessions/{session}'
+      ),
+      projectLocationDataStoreSessionAnswerPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataStores/{data_store}/sessions/{session}/answers/{answer}'
+      ),
+      projectLocationDataStoreSiteSearchEnginePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine'
+      ),
+      projectLocationDataStoreSiteSearchEngineSitemapPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine/sitemaps/{sitemap}'
+      ),
+      projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine/targetSites/{target_site}'
+      ),
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v1/{name=projects/*/operations/*}:cancel',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/branches/*/operations/*}:cancel',
-              body: '*',
-            },
-            {
-              post: '/v1/{name=projects/*/locations/*/collections/*/engines/*/operations/*}:cancel',
-              body: '*',
-            },
-            {
-              post: '/v1/{name=projects/*/locations/*/dataStores/*/branches/*/operations/*}:cancel',
-              body: '*',
-            },
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=projects/*/operations/*}',
-          additional_bindings: [
-            {
-              get: '/v1/{name=projects/*/locations/*/collections/*/dataConnector/operations/*}',
-            },
-            {
-              get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/branches/*/operations/*}',
-            },
-            {
-              get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/models/*/operations/*}',
-            },
-            {
-              get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/operations/*}',
-            },
-            {
-              get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/schemas/*/operations/*}',
-            },
-            {
-              get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine/operations/*}',
-            },
-            {
-              get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine/targetSites/operations/*}',
-            },
-            {
-              get: '/v1/{name=projects/*/locations/*/collections/*/engines/*/operations/*}',
-            },
-            {
-              get: '/v1/{name=projects/*/locations/*/collections/*/operations/*}',
-            },
-            {
-              get: '/v1/{name=projects/*/locations/*/dataStores/*/branches/*/operations/*}',
-            },
-            {
-              get: '/v1/{name=projects/*/locations/*/dataStores/*/models/*/operations/*}',
-            },
-            {
-              get: '/v1/{name=projects/*/locations/*/dataStores/*/operations/*}',
-            },
-            {
-              get: '/v1/{name=projects/*/locations/*/identityMappingStores/*/operations/*}',
-            },
-            {get: '/v1/{name=projects/*/locations/*/operations/*}'},
-            {get: '/v1/{name=projects/*/operations/*}'},
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1/{name=projects/*}/operations',
-          additional_bindings: [
-            {
-              get: '/v1/{name=projects/*/locations/*/collections/*/dataConnector}/operations',
-            },
-            {
-              get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/branches/*}/operations',
-            },
-            {
-              get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/models/*}/operations',
-            },
-            {
-              get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/schemas/*}/operations',
-            },
-            {
-              get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine/targetSites}/operations',
-            },
-            {
-              get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine}/operations',
-            },
-            {
-              get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*}/operations',
-            },
-            {
-              get: '/v1/{name=projects/*/locations/*/collections/*/engines/*}/operations',
-            },
-            {get: '/v1/{name=projects/*/locations/*/collections/*}/operations'},
-            {
-              get: '/v1/{name=projects/*/locations/*/dataStores/*/branches/*}/operations',
-            },
-            {
-              get: '/v1/{name=projects/*/locations/*/dataStores/*/models/*}/operations',
-            },
-            {get: '/v1/{name=projects/*/locations/*/dataStores/*}/operations'},
-            {
-              get: '/v1/{name=projects/*/locations/*/identityMappingStores/*}/operations',
-            },
-            {get: '/v1/{name=projects/*/locations/*}/operations'},
-            {get: '/v1/{name=projects/*}/operations'},
-          ],
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/operations/*}:cancel',body: '*',additional_bindings: [{post: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/branches/*/operations/*}:cancel',body: '*',},{post: '/v1/{name=projects/*/locations/*/collections/*/engines/*/operations/*}:cancel',body: '*',},{post: '/v1/{name=projects/*/locations/*/dataStores/*/branches/*/operations/*}:cancel',body: '*',}],
+      },{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/operations/*}',additional_bindings: [{get: '/v1/{name=projects/*/locations/*/collections/*/dataConnector/operations/*}',},{get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/branches/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/models/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/schemas/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine/operations/*}',},{get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine/targetSites/operations/*}',},{get: '/v1/{name=projects/*/locations/*/collections/*/engines/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/collections/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/dataStores/*/branches/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/dataStores/*/models/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/dataStores/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/identityMappingStores/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/operations/*}',},{get: '/v1/{name=projects/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*}/operations',additional_bindings: [{get: '/v1/{name=projects/*/locations/*/collections/*/dataConnector}/operations',},{get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/branches/*}/operations',},{get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/models/*}/operations',},{get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/schemas/*}/operations',},{get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine/targetSites}/operations',},{get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine}/operations',},{get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*}/operations',},{get: '/v1/{name=projects/*/locations/*/collections/*/engines/*}/operations',},{get: '/v1/{name=projects/*/locations/*/collections/*}/operations',},{get: '/v1/{name=projects/*/locations/*/dataStores/*/branches/*}/operations',},{get: '/v1/{name=projects/*/locations/*/dataStores/*/models/*}/operations',},{get: '/v1/{name=projects/*/locations/*/dataStores/*}/operations',},{get: '/v1/{name=projects/*/locations/*/identityMappingStores/*}/operations',},{get: '/v1/{name=projects/*/locations/*}/operations',},{get: '/v1/{name=projects/*}/operations',}],
+      }];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const updateCmekConfigResponse = protoFilesRoot.lookup(
-      '.google.cloud.discoveryengine.v1.CmekConfig'
-    ) as gax.protobuf.Type;
+      '.google.cloud.discoveryengine.v1.CmekConfig') as gax.protobuf.Type;
     const updateCmekConfigMetadata = protoFilesRoot.lookup(
-      '.google.cloud.discoveryengine.v1.UpdateCmekConfigMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.discoveryengine.v1.UpdateCmekConfigMetadata') as gax.protobuf.Type;
     const deleteCmekConfigResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteCmekConfigMetadata = protoFilesRoot.lookup(
-      '.google.cloud.discoveryengine.v1.DeleteCmekConfigMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.discoveryengine.v1.DeleteCmekConfigMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       updateCmekConfig: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateCmekConfigResponse.decode.bind(updateCmekConfigResponse),
-        updateCmekConfigMetadata.decode.bind(updateCmekConfigMetadata)
-      ),
+        updateCmekConfigMetadata.decode.bind(updateCmekConfigMetadata)),
       deleteCmekConfig: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteCmekConfigResponse.decode.bind(deleteCmekConfigResponse),
-        deleteCmekConfigMetadata.decode.bind(deleteCmekConfigMetadata)
-      ),
+        deleteCmekConfigMetadata.decode.bind(deleteCmekConfigMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.discoveryengine.v1.CmekConfigService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.discoveryengine.v1.CmekConfigService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -555,41 +379,32 @@ export class CmekConfigServiceClient {
     // Put together the "service stub" for
     // google.cloud.discoveryengine.v1.CmekConfigService.
     this.cmekConfigServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.discoveryengine.v1.CmekConfigService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.discoveryengine.v1
-            .CmekConfigService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.discoveryengine.v1.CmekConfigService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.discoveryengine.v1.CmekConfigService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const cmekConfigServiceStubMethods = [
-      'updateCmekConfig',
-      'getCmekConfig',
-      'listCmekConfigs',
-      'deleteCmekConfig',
-    ];
+    const cmekConfigServiceStubMethods =
+        ['updateCmekConfig', 'getCmekConfig', 'listCmekConfigs', 'deleteCmekConfig'];
     for (const methodName of cmekConfigServiceStubMethods) {
       const callPromise = this.cmekConfigServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.longrunning[methodName] || undefined;
+      const descriptor =
+        this.descriptors.longrunning[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -609,14 +424,8 @@ export class CmekConfigServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'discoveryengine.googleapis.com';
   }
@@ -627,14 +436,8 @@ export class CmekConfigServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'discoveryengine.googleapis.com';
   }
@@ -665,7 +468,9 @@ export class CmekConfigServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -674,9 +479,8 @@ export class CmekConfigServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -687,616 +491,432 @@ export class CmekConfigServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets the {@link protos.google.cloud.discoveryengine.v1.CmekConfig|CmekConfig}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of
-   *   {@link protos.google.cloud.discoveryengine.v1.CmekConfig|CmekConfig}, such as
-   *   `projects/* /locations/* /cmekConfig` or
-   *   `projects/* /locations/* /cmekConfigs/*`.
-   *
-   *   If the caller does not have permission to access the
-   *   {@link protos.google.cloud.discoveryengine.v1.CmekConfig|CmekConfig}, regardless of
-   *   whether or not it exists, a PERMISSION_DENIED error is returned.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1.CmekConfig|CmekConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cmek_config_service.get_cmek_config.js</caption>
-   * region_tag:discoveryengine_v1_generated_CmekConfigService_GetCmekConfig_async
-   */
+/**
+ * Gets the {@link protos.google.cloud.discoveryengine.v1.CmekConfig|CmekConfig}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of
+ *   {@link protos.google.cloud.discoveryengine.v1.CmekConfig|CmekConfig}, such as
+ *   `projects/* /locations/* /cmekConfig` or
+ *   `projects/* /locations/* /cmekConfigs/*`.
+ *
+ *   If the caller does not have permission to access the
+ *   {@link protos.google.cloud.discoveryengine.v1.CmekConfig|CmekConfig}, regardless of
+ *   whether or not it exists, a PERMISSION_DENIED error is returned.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1.CmekConfig|CmekConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cmek_config_service.get_cmek_config.js</caption>
+ * region_tag:discoveryengine_v1_generated_CmekConfigService_GetCmekConfig_async
+ */
   getCmekConfig(
-    request?: protos.google.cloud.discoveryengine.v1.IGetCmekConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.discoveryengine.v1.ICmekConfig,
-      protos.google.cloud.discoveryengine.v1.IGetCmekConfigRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.discoveryengine.v1.IGetCmekConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.discoveryengine.v1.ICmekConfig,
+        protos.google.cloud.discoveryengine.v1.IGetCmekConfigRequest|undefined, {}|undefined
+      ]>;
   getCmekConfig(
-    request: protos.google.cloud.discoveryengine.v1.IGetCmekConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.discoveryengine.v1.ICmekConfig,
-      | protos.google.cloud.discoveryengine.v1.IGetCmekConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCmekConfig(
-    request: protos.google.cloud.discoveryengine.v1.IGetCmekConfigRequest,
-    callback: Callback<
-      protos.google.cloud.discoveryengine.v1.ICmekConfig,
-      | protos.google.cloud.discoveryengine.v1.IGetCmekConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCmekConfig(
-    request?: protos.google.cloud.discoveryengine.v1.IGetCmekConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.discoveryengine.v1.IGetCmekConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.discoveryengine.v1.ICmekConfig,
-          | protos.google.cloud.discoveryengine.v1.IGetCmekConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.discoveryengine.v1.ICmekConfig,
-      | protos.google.cloud.discoveryengine.v1.IGetCmekConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.discoveryengine.v1.ICmekConfig,
-      protos.google.cloud.discoveryengine.v1.IGetCmekConfigRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.discoveryengine.v1.IGetCmekConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCmekConfig(
+      request: protos.google.cloud.discoveryengine.v1.IGetCmekConfigRequest,
+      callback: Callback<
+          protos.google.cloud.discoveryengine.v1.ICmekConfig,
+          protos.google.cloud.discoveryengine.v1.IGetCmekConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCmekConfig(
+      request?: protos.google.cloud.discoveryengine.v1.IGetCmekConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.discoveryengine.v1.ICmekConfig,
+          protos.google.cloud.discoveryengine.v1.IGetCmekConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.discoveryengine.v1.ICmekConfig,
+          protos.google.cloud.discoveryengine.v1.IGetCmekConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.discoveryengine.v1.ICmekConfig,
+        protos.google.cloud.discoveryengine.v1.IGetCmekConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getCmekConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.discoveryengine.v1.ICmekConfig,
-          | protos.google.cloud.discoveryengine.v1.IGetCmekConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.discoveryengine.v1.ICmekConfig,
+        protos.google.cloud.discoveryengine.v1.IGetCmekConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getCmekConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getCmekConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.discoveryengine.v1.ICmekConfig,
-          (
-            | protos.google.cloud.discoveryengine.v1.IGetCmekConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getCmekConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getCmekConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.discoveryengine.v1.ICmekConfig,
+        protos.google.cloud.discoveryengine.v1.IGetCmekConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getCmekConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Lists all the {@link protos.google.cloud.discoveryengine.v1.CmekConfig|CmekConfig}s
-   * with the project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent location resource name, such as
-   *   `projects/{project}/locations/{location}`.
-   *
-   *   If the caller does not have permission to list
-   *   {@link protos.google.cloud.discoveryengine.v1.CmekConfig|CmekConfig}s under this
-   *   location, regardless of whether or not a CmekConfig exists, a
-   *   PERMISSION_DENIED error is returned.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1.ListCmekConfigsResponse|ListCmekConfigsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cmek_config_service.list_cmek_configs.js</caption>
-   * region_tag:discoveryengine_v1_generated_CmekConfigService_ListCmekConfigs_async
-   */
+/**
+ * Lists all the {@link protos.google.cloud.discoveryengine.v1.CmekConfig|CmekConfig}s
+ * with the project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent location resource name, such as
+ *   `projects/{project}/locations/{location}`.
+ *
+ *   If the caller does not have permission to list
+ *   {@link protos.google.cloud.discoveryengine.v1.CmekConfig|CmekConfig}s under this
+ *   location, regardless of whether or not a CmekConfig exists, a
+ *   PERMISSION_DENIED error is returned.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1.ListCmekConfigsResponse|ListCmekConfigsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cmek_config_service.list_cmek_configs.js</caption>
+ * region_tag:discoveryengine_v1_generated_CmekConfigService_ListCmekConfigs_async
+ */
   listCmekConfigs(
-    request?: protos.google.cloud.discoveryengine.v1.IListCmekConfigsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.discoveryengine.v1.IListCmekConfigsResponse,
-      (
-        | protos.google.cloud.discoveryengine.v1.IListCmekConfigsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.discoveryengine.v1.IListCmekConfigsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.discoveryengine.v1.IListCmekConfigsResponse,
+        protos.google.cloud.discoveryengine.v1.IListCmekConfigsRequest|undefined, {}|undefined
+      ]>;
   listCmekConfigs(
-    request: protos.google.cloud.discoveryengine.v1.IListCmekConfigsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.discoveryengine.v1.IListCmekConfigsResponse,
-      | protos.google.cloud.discoveryengine.v1.IListCmekConfigsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listCmekConfigs(
-    request: protos.google.cloud.discoveryengine.v1.IListCmekConfigsRequest,
-    callback: Callback<
-      protos.google.cloud.discoveryengine.v1.IListCmekConfigsResponse,
-      | protos.google.cloud.discoveryengine.v1.IListCmekConfigsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listCmekConfigs(
-    request?: protos.google.cloud.discoveryengine.v1.IListCmekConfigsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.discoveryengine.v1.IListCmekConfigsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.discoveryengine.v1.IListCmekConfigsResponse,
-          | protos.google.cloud.discoveryengine.v1.IListCmekConfigsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.discoveryengine.v1.IListCmekConfigsResponse,
-      | protos.google.cloud.discoveryengine.v1.IListCmekConfigsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.discoveryengine.v1.IListCmekConfigsResponse,
-      (
-        | protos.google.cloud.discoveryengine.v1.IListCmekConfigsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.discoveryengine.v1.IListCmekConfigsRequest|null|undefined,
+          {}|null|undefined>): void;
+  listCmekConfigs(
+      request: protos.google.cloud.discoveryengine.v1.IListCmekConfigsRequest,
+      callback: Callback<
+          protos.google.cloud.discoveryengine.v1.IListCmekConfigsResponse,
+          protos.google.cloud.discoveryengine.v1.IListCmekConfigsRequest|null|undefined,
+          {}|null|undefined>): void;
+  listCmekConfigs(
+      request?: protos.google.cloud.discoveryengine.v1.IListCmekConfigsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.discoveryengine.v1.IListCmekConfigsResponse,
+          protos.google.cloud.discoveryengine.v1.IListCmekConfigsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.discoveryengine.v1.IListCmekConfigsResponse,
+          protos.google.cloud.discoveryengine.v1.IListCmekConfigsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.discoveryengine.v1.IListCmekConfigsResponse,
+        protos.google.cloud.discoveryengine.v1.IListCmekConfigsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('listCmekConfigs request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.discoveryengine.v1.IListCmekConfigsResponse,
-          | protos.google.cloud.discoveryengine.v1.IListCmekConfigsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.discoveryengine.v1.IListCmekConfigsResponse,
+        protos.google.cloud.discoveryengine.v1.IListCmekConfigsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('listCmekConfigs response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .listCmekConfigs(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.discoveryengine.v1.IListCmekConfigsResponse,
-          (
-            | protos.google.cloud.discoveryengine.v1.IListCmekConfigsRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('listCmekConfigs response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.listCmekConfigs(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.discoveryengine.v1.IListCmekConfigsResponse,
+        protos.google.cloud.discoveryengine.v1.IListCmekConfigsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('listCmekConfigs response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Provisions a CMEK key for use in a location of a customer's project.
-   * This method will also conduct location validation on the provided
-   * cmekConfig to make sure the key is valid and can be used in the
-   * selected location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.discoveryengine.v1.CmekConfig} request.config
-   *   Required. The CmekConfig resource.
-   * @param {boolean} request.setDefault
-   *   Set the following CmekConfig as the default to be used for child
-   *   resources if one is not specified.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cmek_config_service.update_cmek_config.js</caption>
-   * region_tag:discoveryengine_v1_generated_CmekConfigService_UpdateCmekConfig_async
-   */
+/**
+ * Provisions a CMEK key for use in a location of a customer's project.
+ * This method will also conduct location validation on the provided
+ * cmekConfig to make sure the key is valid and can be used in the
+ * selected location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.discoveryengine.v1.CmekConfig} request.config
+ *   Required. The CmekConfig resource.
+ * @param {boolean} request.setDefault
+ *   Set the following CmekConfig as the default to be used for child
+ *   resources if one is not specified.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cmek_config_service.update_cmek_config.js</caption>
+ * region_tag:discoveryengine_v1_generated_CmekConfigService_UpdateCmekConfig_async
+ */
   updateCmekConfig(
-    request?: protos.google.cloud.discoveryengine.v1.IUpdateCmekConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.discoveryengine.v1.ICmekConfig,
-        protos.google.cloud.discoveryengine.v1.IUpdateCmekConfigMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.discoveryengine.v1.IUpdateCmekConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.discoveryengine.v1.ICmekConfig, protos.google.cloud.discoveryengine.v1.IUpdateCmekConfigMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateCmekConfig(
-    request: protos.google.cloud.discoveryengine.v1.IUpdateCmekConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.discoveryengine.v1.ICmekConfig,
-        protos.google.cloud.discoveryengine.v1.IUpdateCmekConfigMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.discoveryengine.v1.IUpdateCmekConfigRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.discoveryengine.v1.ICmekConfig, protos.google.cloud.discoveryengine.v1.IUpdateCmekConfigMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateCmekConfig(
-    request: protos.google.cloud.discoveryengine.v1.IUpdateCmekConfigRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.discoveryengine.v1.ICmekConfig,
-        protos.google.cloud.discoveryengine.v1.IUpdateCmekConfigMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.discoveryengine.v1.IUpdateCmekConfigRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.discoveryengine.v1.ICmekConfig, protos.google.cloud.discoveryengine.v1.IUpdateCmekConfigMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateCmekConfig(
-    request?: protos.google.cloud.discoveryengine.v1.IUpdateCmekConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.discoveryengine.v1.ICmekConfig,
-            protos.google.cloud.discoveryengine.v1.IUpdateCmekConfigMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.discoveryengine.v1.ICmekConfig,
-        protos.google.cloud.discoveryengine.v1.IUpdateCmekConfigMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.discoveryengine.v1.ICmekConfig,
-        protos.google.cloud.discoveryengine.v1.IUpdateCmekConfigMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.discoveryengine.v1.IUpdateCmekConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.discoveryengine.v1.ICmekConfig, protos.google.cloud.discoveryengine.v1.IUpdateCmekConfigMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.discoveryengine.v1.ICmekConfig, protos.google.cloud.discoveryengine.v1.IUpdateCmekConfigMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.discoveryengine.v1.ICmekConfig, protos.google.cloud.discoveryengine.v1.IUpdateCmekConfigMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'config.name': request.config!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'config.name': request.config!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.discoveryengine.v1.ICmekConfig,
-            protos.google.cloud.discoveryengine.v1.IUpdateCmekConfigMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.discoveryengine.v1.ICmekConfig, protos.google.cloud.discoveryengine.v1.IUpdateCmekConfigMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateCmekConfig response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateCmekConfig request %j', request);
-    return this.innerApiCalls
-      .updateCmekConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.discoveryengine.v1.ICmekConfig,
-            protos.google.cloud.discoveryengine.v1.IUpdateCmekConfigMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateCmekConfig response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateCmekConfig(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.discoveryengine.v1.ICmekConfig, protos.google.cloud.discoveryengine.v1.IUpdateCmekConfigMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateCmekConfig response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateCmekConfig()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cmek_config_service.update_cmek_config.js</caption>
-   * region_tag:discoveryengine_v1_generated_CmekConfigService_UpdateCmekConfig_async
-   */
-  async checkUpdateCmekConfigProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.discoveryengine.v1.CmekConfig,
-      protos.google.cloud.discoveryengine.v1.UpdateCmekConfigMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateCmekConfig()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cmek_config_service.update_cmek_config.js</caption>
+ * region_tag:discoveryengine_v1_generated_CmekConfigService_UpdateCmekConfig_async
+ */
+  async checkUpdateCmekConfigProgress(name: string): Promise<LROperation<protos.google.cloud.discoveryengine.v1.CmekConfig, protos.google.cloud.discoveryengine.v1.UpdateCmekConfigMetadata>>{
     this._log.info('updateCmekConfig long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateCmekConfig,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.discoveryengine.v1.CmekConfig,
-      protos.google.cloud.discoveryengine.v1.UpdateCmekConfigMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateCmekConfig, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.discoveryengine.v1.CmekConfig, protos.google.cloud.discoveryengine.v1.UpdateCmekConfigMetadata>;
   }
-  /**
-   * De-provisions a CmekConfig.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the
-   *   {@link protos.google.cloud.discoveryengine.v1.CmekConfig|CmekConfig} to delete, such as
-   *   `projects/{project}/locations/{location}/cmekConfigs/{cmek_config}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cmek_config_service.delete_cmek_config.js</caption>
-   * region_tag:discoveryengine_v1_generated_CmekConfigService_DeleteCmekConfig_async
-   */
+/**
+ * De-provisions a CmekConfig.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the
+ *   {@link protos.google.cloud.discoveryengine.v1.CmekConfig|CmekConfig} to delete, such as
+ *   `projects/{project}/locations/{location}/cmekConfigs/{cmek_config}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cmek_config_service.delete_cmek_config.js</caption>
+ * region_tag:discoveryengine_v1_generated_CmekConfigService_DeleteCmekConfig_async
+ */
   deleteCmekConfig(
-    request?: protos.google.cloud.discoveryengine.v1.IDeleteCmekConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.discoveryengine.v1.IDeleteCmekConfigMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.discoveryengine.v1.IDeleteCmekConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.discoveryengine.v1.IDeleteCmekConfigMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteCmekConfig(
-    request: protos.google.cloud.discoveryengine.v1.IDeleteCmekConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.discoveryengine.v1.IDeleteCmekConfigMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.discoveryengine.v1.IDeleteCmekConfigRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.discoveryengine.v1.IDeleteCmekConfigMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteCmekConfig(
-    request: protos.google.cloud.discoveryengine.v1.IDeleteCmekConfigRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.discoveryengine.v1.IDeleteCmekConfigMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.discoveryengine.v1.IDeleteCmekConfigRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.discoveryengine.v1.IDeleteCmekConfigMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteCmekConfig(
-    request?: protos.google.cloud.discoveryengine.v1.IDeleteCmekConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.discoveryengine.v1.IDeleteCmekConfigMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.discoveryengine.v1.IDeleteCmekConfigMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.discoveryengine.v1.IDeleteCmekConfigMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.discoveryengine.v1.IDeleteCmekConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.discoveryengine.v1.IDeleteCmekConfigMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.discoveryengine.v1.IDeleteCmekConfigMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.discoveryengine.v1.IDeleteCmekConfigMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.discoveryengine.v1.IDeleteCmekConfigMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.discoveryengine.v1.IDeleteCmekConfigMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteCmekConfig response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteCmekConfig request %j', request);
-    return this.innerApiCalls
-      .deleteCmekConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.discoveryengine.v1.IDeleteCmekConfigMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteCmekConfig response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteCmekConfig(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.discoveryengine.v1.IDeleteCmekConfigMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteCmekConfig response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteCmekConfig()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/cmek_config_service.delete_cmek_config.js</caption>
-   * region_tag:discoveryengine_v1_generated_CmekConfigService_DeleteCmekConfig_async
-   */
-  async checkDeleteCmekConfigProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.discoveryengine.v1.DeleteCmekConfigMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteCmekConfig()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cmek_config_service.delete_cmek_config.js</caption>
+ * region_tag:discoveryengine_v1_generated_CmekConfigService_DeleteCmekConfig_async
+ */
+  async checkDeleteCmekConfigProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.discoveryengine.v1.DeleteCmekConfigMetadata>>{
     this._log.info('deleteCmekConfig long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteCmekConfig,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.discoveryengine.v1.DeleteCmekConfigMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteCmekConfig, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.discoveryengine.v1.DeleteCmekConfigMetadata>;
   }
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1336,7 +956,7 @@ export class CmekConfigServiceClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1374,7 +994,7 @@ export class CmekConfigServiceClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1419,20 +1039,20 @@ export class CmekConfigServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1469,13 +1089,13 @@ export class CmekConfigServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1509,7 +1129,7 @@ export class CmekConfigServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -1524,20 +1144,20 @@ export class CmekConfigServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1581,20 +1201,20 @@ export class CmekConfigServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -1612,13 +1232,7 @@ export class CmekConfigServiceClient {
    * @param {string} crypto_key_version
    * @returns {string} Resource name string.
    */
-  cryptoKeyVersionsPath(
-    project: string,
-    location: string,
-    keyRing: string,
-    cryptoKey: string,
-    cryptoKeyVersion: string
-  ) {
+  cryptoKeyVersionsPath(project:string,location:string,keyRing:string,cryptoKey:string,cryptoKeyVersion:string) {
     return this.pathTemplates.cryptoKeyVersionsPathTemplate.render({
       project: project,
       location: location,
@@ -1636,9 +1250,7 @@ export class CmekConfigServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCryptoKeyVersionsName(cryptoKeyVersionsName: string) {
-    return this.pathTemplates.cryptoKeyVersionsPathTemplate.match(
-      cryptoKeyVersionsName
-    ).project;
+    return this.pathTemplates.cryptoKeyVersionsPathTemplate.match(cryptoKeyVersionsName).project;
   }
 
   /**
@@ -1649,9 +1261,7 @@ export class CmekConfigServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCryptoKeyVersionsName(cryptoKeyVersionsName: string) {
-    return this.pathTemplates.cryptoKeyVersionsPathTemplate.match(
-      cryptoKeyVersionsName
-    ).location;
+    return this.pathTemplates.cryptoKeyVersionsPathTemplate.match(cryptoKeyVersionsName).location;
   }
 
   /**
@@ -1662,9 +1272,7 @@ export class CmekConfigServiceClient {
    * @returns {string} A string representing the key_ring.
    */
   matchKeyRingFromCryptoKeyVersionsName(cryptoKeyVersionsName: string) {
-    return this.pathTemplates.cryptoKeyVersionsPathTemplate.match(
-      cryptoKeyVersionsName
-    ).key_ring;
+    return this.pathTemplates.cryptoKeyVersionsPathTemplate.match(cryptoKeyVersionsName).key_ring;
   }
 
   /**
@@ -1675,9 +1283,7 @@ export class CmekConfigServiceClient {
    * @returns {string} A string representing the crypto_key.
    */
   matchCryptoKeyFromCryptoKeyVersionsName(cryptoKeyVersionsName: string) {
-    return this.pathTemplates.cryptoKeyVersionsPathTemplate.match(
-      cryptoKeyVersionsName
-    ).crypto_key;
+    return this.pathTemplates.cryptoKeyVersionsPathTemplate.match(cryptoKeyVersionsName).crypto_key;
   }
 
   /**
@@ -1687,12 +1293,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing CryptoKeyVersions resource.
    * @returns {string} A string representing the crypto_key_version.
    */
-  matchCryptoKeyVersionFromCryptoKeyVersionsName(
-    cryptoKeyVersionsName: string
-  ) {
-    return this.pathTemplates.cryptoKeyVersionsPathTemplate.match(
-      cryptoKeyVersionsName
-    ).crypto_key_version;
+  matchCryptoKeyVersionFromCryptoKeyVersionsName(cryptoKeyVersionsName: string) {
+    return this.pathTemplates.cryptoKeyVersionsPathTemplate.match(cryptoKeyVersionsName).crypto_key_version;
   }
 
   /**
@@ -1704,12 +1306,7 @@ export class CmekConfigServiceClient {
    * @param {string} crypto_key
    * @returns {string} Resource name string.
    */
-  cryptoKeysPath(
-    project: string,
-    location: string,
-    keyRing: string,
-    cryptoKey: string
-  ) {
+  cryptoKeysPath(project:string,location:string,keyRing:string,cryptoKey:string) {
     return this.pathTemplates.cryptoKeysPathTemplate.render({
       project: project,
       location: location,
@@ -1726,8 +1323,7 @@ export class CmekConfigServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCryptoKeysName(cryptoKeysName: string) {
-    return this.pathTemplates.cryptoKeysPathTemplate.match(cryptoKeysName)
-      .project;
+    return this.pathTemplates.cryptoKeysPathTemplate.match(cryptoKeysName).project;
   }
 
   /**
@@ -1738,8 +1334,7 @@ export class CmekConfigServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCryptoKeysName(cryptoKeysName: string) {
-    return this.pathTemplates.cryptoKeysPathTemplate.match(cryptoKeysName)
-      .location;
+    return this.pathTemplates.cryptoKeysPathTemplate.match(cryptoKeysName).location;
   }
 
   /**
@@ -1750,8 +1345,7 @@ export class CmekConfigServiceClient {
    * @returns {string} A string representing the key_ring.
    */
   matchKeyRingFromCryptoKeysName(cryptoKeysName: string) {
-    return this.pathTemplates.cryptoKeysPathTemplate.match(cryptoKeysName)
-      .key_ring;
+    return this.pathTemplates.cryptoKeysPathTemplate.match(cryptoKeysName).key_ring;
   }
 
   /**
@@ -1762,8 +1356,7 @@ export class CmekConfigServiceClient {
    * @returns {string} A string representing the crypto_key.
    */
   matchCryptoKeyFromCryptoKeysName(cryptoKeysName: string) {
-    return this.pathTemplates.cryptoKeysPathTemplate.match(cryptoKeysName)
-      .crypto_key;
+    return this.pathTemplates.cryptoKeysPathTemplate.match(cryptoKeysName).crypto_key;
   }
 
   /**
@@ -1775,12 +1368,7 @@ export class CmekConfigServiceClient {
    * @param {string} engine
    * @returns {string} Resource name string.
    */
-  enginePath(
-    project: string,
-    location: string,
-    collection: string,
-    engine: string
-  ) {
+  enginePath(project:string,location:string,collection:string,engine:string) {
     return this.pathTemplates.enginePathTemplate.render({
       project: project,
       location: location,
@@ -1841,11 +1429,7 @@ export class CmekConfigServiceClient {
    * @param {string} identity_mapping_store
    * @returns {string} Resource name string.
    */
-  identityMappingStorePath(
-    project: string,
-    location: string,
-    identityMappingStore: string
-  ) {
+  identityMappingStorePath(project:string,location:string,identityMappingStore:string) {
     return this.pathTemplates.identityMappingStorePathTemplate.render({
       project: project,
       location: location,
@@ -1861,9 +1445,7 @@ export class CmekConfigServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromIdentityMappingStoreName(identityMappingStoreName: string) {
-    return this.pathTemplates.identityMappingStorePathTemplate.match(
-      identityMappingStoreName
-    ).project;
+    return this.pathTemplates.identityMappingStorePathTemplate.match(identityMappingStoreName).project;
   }
 
   /**
@@ -1874,9 +1456,7 @@ export class CmekConfigServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromIdentityMappingStoreName(identityMappingStoreName: string) {
-    return this.pathTemplates.identityMappingStorePathTemplate.match(
-      identityMappingStoreName
-    ).location;
+    return this.pathTemplates.identityMappingStorePathTemplate.match(identityMappingStoreName).location;
   }
 
   /**
@@ -1886,12 +1466,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing IdentityMappingStore resource.
    * @returns {string} A string representing the identity_mapping_store.
    */
-  matchIdentityMappingStoreFromIdentityMappingStoreName(
-    identityMappingStoreName: string
-  ) {
-    return this.pathTemplates.identityMappingStorePathTemplate.match(
-      identityMappingStoreName
-    ).identity_mapping_store;
+  matchIdentityMappingStoreFromIdentityMappingStoreName(identityMappingStoreName: string) {
+    return this.pathTemplates.identityMappingStorePathTemplate.match(identityMappingStoreName).identity_mapping_store;
   }
 
   /**
@@ -1901,7 +1477,7 @@ export class CmekConfigServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -1936,7 +1512,7 @@ export class CmekConfigServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -1960,7 +1536,7 @@ export class CmekConfigServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  projectLocationCmekConfigPath(project: string, location: string) {
+  projectLocationCmekConfigPath(project:string,location:string) {
     return this.pathTemplates.projectLocationCmekConfigPathTemplate.render({
       project: project,
       location: location,
@@ -1974,12 +1550,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_cmekConfig resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCmekConfigName(
-    projectLocationCmekConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationCmekConfigPathTemplate.match(
-      projectLocationCmekConfigName
-    ).project;
+  matchProjectFromProjectLocationCmekConfigName(projectLocationCmekConfigName: string) {
+    return this.pathTemplates.projectLocationCmekConfigPathTemplate.match(projectLocationCmekConfigName).project;
   }
 
   /**
@@ -1989,28 +1561,20 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_cmekConfig resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCmekConfigName(
-    projectLocationCmekConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationCmekConfigPathTemplate.match(
-      projectLocationCmekConfigName
-    ).location;
+  matchLocationFromProjectLocationCmekConfigName(projectLocationCmekConfigName: string) {
+    return this.pathTemplates.projectLocationCmekConfigPathTemplate.match(projectLocationCmekConfigName).location;
   }
 
   /**
-   * Return a fully-qualified projectLocationCmekConfig resource name string.
+   * Return a fully-qualified projectLocationCmekConfigs resource name string.
    *
    * @param {string} project
    * @param {string} location
    * @param {string} cmek_config
    * @returns {string} Resource name string.
    */
-  projectLocationCmekConfigPath(
-    project: string,
-    location: string,
-    cmekConfig: string
-  ) {
-    return this.pathTemplates.projectLocationCmekConfigPathTemplate.render({
+  projectLocationCmekConfigsPath(project:string,location:string,cmekConfig:string) {
+    return this.pathTemplates.projectLocationCmekConfigsPathTemplate.render({
       project: project,
       location: location,
       cmek_config: cmekConfig,
@@ -2018,48 +1582,36 @@ export class CmekConfigServiceClient {
   }
 
   /**
-   * Parse the project from ProjectLocationCmekConfig resource.
+   * Parse the project from ProjectLocationCmekConfigs resource.
    *
-   * @param {string} projectLocationCmekConfigName
-   *   A fully-qualified path representing project_location_cmek_config resource.
+   * @param {string} projectLocationCmekConfigsName
+   *   A fully-qualified path representing project_location_cmekConfigs resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCmekConfigName(
-    projectLocationCmekConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationCmekConfigPathTemplate.match(
-      projectLocationCmekConfigName
-    ).project;
+  matchProjectFromProjectLocationCmekConfigsName(projectLocationCmekConfigsName: string) {
+    return this.pathTemplates.projectLocationCmekConfigsPathTemplate.match(projectLocationCmekConfigsName).project;
   }
 
   /**
-   * Parse the location from ProjectLocationCmekConfig resource.
+   * Parse the location from ProjectLocationCmekConfigs resource.
    *
-   * @param {string} projectLocationCmekConfigName
-   *   A fully-qualified path representing project_location_cmek_config resource.
+   * @param {string} projectLocationCmekConfigsName
+   *   A fully-qualified path representing project_location_cmekConfigs resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCmekConfigName(
-    projectLocationCmekConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationCmekConfigPathTemplate.match(
-      projectLocationCmekConfigName
-    ).location;
+  matchLocationFromProjectLocationCmekConfigsName(projectLocationCmekConfigsName: string) {
+    return this.pathTemplates.projectLocationCmekConfigsPathTemplate.match(projectLocationCmekConfigsName).location;
   }
 
   /**
-   * Parse the cmek_config from ProjectLocationCmekConfig resource.
+   * Parse the cmek_config from ProjectLocationCmekConfigs resource.
    *
-   * @param {string} projectLocationCmekConfigName
-   *   A fully-qualified path representing project_location_cmek_config resource.
+   * @param {string} projectLocationCmekConfigsName
+   *   A fully-qualified path representing project_location_cmekConfigs resource.
    * @returns {string} A string representing the cmek_config.
    */
-  matchCmekConfigFromProjectLocationCmekConfigName(
-    projectLocationCmekConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationCmekConfigPathTemplate.match(
-      projectLocationCmekConfigName
-    ).cmek_config;
+  matchCmekConfigFromProjectLocationCmekConfigsName(projectLocationCmekConfigsName: string) {
+    return this.pathTemplates.projectLocationCmekConfigsPathTemplate.match(projectLocationCmekConfigsName).cmek_config;
   }
 
   /**
@@ -2071,20 +1623,13 @@ export class CmekConfigServiceClient {
    * @param {string} data_store
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionDataStorePath(
-    project: string,
-    location: string,
-    collection: string,
-    dataStore: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        data_store: dataStore,
-      }
-    );
+  projectLocationCollectionDataStorePath(project:string,location:string,collection:string,dataStore:string) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      data_store: dataStore,
+    });
   }
 
   /**
@@ -2094,12 +1639,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionDataStoreName(
-    projectLocationCollectionDataStoreName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(
-      projectLocationCollectionDataStoreName
-    ).project;
+  matchProjectFromProjectLocationCollectionDataStoreName(projectLocationCollectionDataStoreName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(projectLocationCollectionDataStoreName).project;
   }
 
   /**
@@ -2109,12 +1650,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionDataStoreName(
-    projectLocationCollectionDataStoreName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(
-      projectLocationCollectionDataStoreName
-    ).location;
+  matchLocationFromProjectLocationCollectionDataStoreName(projectLocationCollectionDataStoreName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(projectLocationCollectionDataStoreName).location;
   }
 
   /**
@@ -2124,12 +1661,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionDataStoreName(
-    projectLocationCollectionDataStoreName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(
-      projectLocationCollectionDataStoreName
-    ).collection;
+  matchCollectionFromProjectLocationCollectionDataStoreName(projectLocationCollectionDataStoreName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(projectLocationCollectionDataStoreName).collection;
   }
 
   /**
@@ -2139,12 +1672,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationCollectionDataStoreName(
-    projectLocationCollectionDataStoreName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(
-      projectLocationCollectionDataStoreName
-    ).data_store;
+  matchDataStoreFromProjectLocationCollectionDataStoreName(projectLocationCollectionDataStoreName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(projectLocationCollectionDataStoreName).data_store;
   }
 
   /**
@@ -2158,24 +1687,15 @@ export class CmekConfigServiceClient {
    * @param {string} document
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionDataStoreBranchDocumentPath(
-    project: string,
-    location: string,
-    collection: string,
-    dataStore: string,
-    branch: string,
-    document: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        data_store: dataStore,
-        branch: branch,
-        document: document,
-      }
-    );
+  projectLocationCollectionDataStoreBranchDocumentPath(project:string,location:string,collection:string,dataStore:string,branch:string,document:string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      data_store: dataStore,
+      branch: branch,
+      document: document,
+    });
   }
 
   /**
@@ -2185,12 +1705,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_branch_document resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionDataStoreBranchDocumentName(
-    projectLocationCollectionDataStoreBranchDocumentName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(
-      projectLocationCollectionDataStoreBranchDocumentName
-    ).project;
+  matchProjectFromProjectLocationCollectionDataStoreBranchDocumentName(projectLocationCollectionDataStoreBranchDocumentName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(projectLocationCollectionDataStoreBranchDocumentName).project;
   }
 
   /**
@@ -2200,12 +1716,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_branch_document resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionDataStoreBranchDocumentName(
-    projectLocationCollectionDataStoreBranchDocumentName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(
-      projectLocationCollectionDataStoreBranchDocumentName
-    ).location;
+  matchLocationFromProjectLocationCollectionDataStoreBranchDocumentName(projectLocationCollectionDataStoreBranchDocumentName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(projectLocationCollectionDataStoreBranchDocumentName).location;
   }
 
   /**
@@ -2215,12 +1727,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_branch_document resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionDataStoreBranchDocumentName(
-    projectLocationCollectionDataStoreBranchDocumentName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(
-      projectLocationCollectionDataStoreBranchDocumentName
-    ).collection;
+  matchCollectionFromProjectLocationCollectionDataStoreBranchDocumentName(projectLocationCollectionDataStoreBranchDocumentName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(projectLocationCollectionDataStoreBranchDocumentName).collection;
   }
 
   /**
@@ -2230,12 +1738,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_branch_document resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationCollectionDataStoreBranchDocumentName(
-    projectLocationCollectionDataStoreBranchDocumentName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(
-      projectLocationCollectionDataStoreBranchDocumentName
-    ).data_store;
+  matchDataStoreFromProjectLocationCollectionDataStoreBranchDocumentName(projectLocationCollectionDataStoreBranchDocumentName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(projectLocationCollectionDataStoreBranchDocumentName).data_store;
   }
 
   /**
@@ -2245,12 +1749,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_branch_document resource.
    * @returns {string} A string representing the branch.
    */
-  matchBranchFromProjectLocationCollectionDataStoreBranchDocumentName(
-    projectLocationCollectionDataStoreBranchDocumentName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(
-      projectLocationCollectionDataStoreBranchDocumentName
-    ).branch;
+  matchBranchFromProjectLocationCollectionDataStoreBranchDocumentName(projectLocationCollectionDataStoreBranchDocumentName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(projectLocationCollectionDataStoreBranchDocumentName).branch;
   }
 
   /**
@@ -2260,12 +1760,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_branch_document resource.
    * @returns {string} A string representing the document.
    */
-  matchDocumentFromProjectLocationCollectionDataStoreBranchDocumentName(
-    projectLocationCollectionDataStoreBranchDocumentName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(
-      projectLocationCollectionDataStoreBranchDocumentName
-    ).document;
+  matchDocumentFromProjectLocationCollectionDataStoreBranchDocumentName(projectLocationCollectionDataStoreBranchDocumentName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(projectLocationCollectionDataStoreBranchDocumentName).document;
   }
 
   /**
@@ -2280,26 +1776,16 @@ export class CmekConfigServiceClient {
    * @param {string} chunk
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionDataStoreBranchDocumentChunkPath(
-    project: string,
-    location: string,
-    collection: string,
-    dataStore: string,
-    branch: string,
-    document: string,
-    chunk: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        data_store: dataStore,
-        branch: branch,
-        document: document,
-        chunk: chunk,
-      }
-    );
+  projectLocationCollectionDataStoreBranchDocumentChunkPath(project:string,location:string,collection:string,dataStore:string,branch:string,document:string,chunk:string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      data_store: dataStore,
+      branch: branch,
+      document: document,
+      chunk: chunk,
+    });
   }
 
   /**
@@ -2309,12 +1795,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
-    projectLocationCollectionDataStoreBranchDocumentChunkName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
-      projectLocationCollectionDataStoreBranchDocumentChunkName
-    ).project;
+  matchProjectFromProjectLocationCollectionDataStoreBranchDocumentChunkName(projectLocationCollectionDataStoreBranchDocumentChunkName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(projectLocationCollectionDataStoreBranchDocumentChunkName).project;
   }
 
   /**
@@ -2324,12 +1806,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
-    projectLocationCollectionDataStoreBranchDocumentChunkName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
-      projectLocationCollectionDataStoreBranchDocumentChunkName
-    ).location;
+  matchLocationFromProjectLocationCollectionDataStoreBranchDocumentChunkName(projectLocationCollectionDataStoreBranchDocumentChunkName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(projectLocationCollectionDataStoreBranchDocumentChunkName).location;
   }
 
   /**
@@ -2339,12 +1817,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
-    projectLocationCollectionDataStoreBranchDocumentChunkName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
-      projectLocationCollectionDataStoreBranchDocumentChunkName
-    ).collection;
+  matchCollectionFromProjectLocationCollectionDataStoreBranchDocumentChunkName(projectLocationCollectionDataStoreBranchDocumentChunkName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(projectLocationCollectionDataStoreBranchDocumentChunkName).collection;
   }
 
   /**
@@ -2354,12 +1828,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
-    projectLocationCollectionDataStoreBranchDocumentChunkName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
-      projectLocationCollectionDataStoreBranchDocumentChunkName
-    ).data_store;
+  matchDataStoreFromProjectLocationCollectionDataStoreBranchDocumentChunkName(projectLocationCollectionDataStoreBranchDocumentChunkName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(projectLocationCollectionDataStoreBranchDocumentChunkName).data_store;
   }
 
   /**
@@ -2369,12 +1839,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
    * @returns {string} A string representing the branch.
    */
-  matchBranchFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
-    projectLocationCollectionDataStoreBranchDocumentChunkName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
-      projectLocationCollectionDataStoreBranchDocumentChunkName
-    ).branch;
+  matchBranchFromProjectLocationCollectionDataStoreBranchDocumentChunkName(projectLocationCollectionDataStoreBranchDocumentChunkName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(projectLocationCollectionDataStoreBranchDocumentChunkName).branch;
   }
 
   /**
@@ -2384,12 +1850,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
    * @returns {string} A string representing the document.
    */
-  matchDocumentFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
-    projectLocationCollectionDataStoreBranchDocumentChunkName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
-      projectLocationCollectionDataStoreBranchDocumentChunkName
-    ).document;
+  matchDocumentFromProjectLocationCollectionDataStoreBranchDocumentChunkName(projectLocationCollectionDataStoreBranchDocumentChunkName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(projectLocationCollectionDataStoreBranchDocumentChunkName).document;
   }
 
   /**
@@ -2399,12 +1861,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
    * @returns {string} A string representing the chunk.
    */
-  matchChunkFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
-    projectLocationCollectionDataStoreBranchDocumentChunkName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
-      projectLocationCollectionDataStoreBranchDocumentChunkName
-    ).chunk;
+  matchChunkFromProjectLocationCollectionDataStoreBranchDocumentChunkName(projectLocationCollectionDataStoreBranchDocumentChunkName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(projectLocationCollectionDataStoreBranchDocumentChunkName).chunk;
   }
 
   /**
@@ -2417,22 +1875,14 @@ export class CmekConfigServiceClient {
    * @param {string} control
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionDataStoreControlPath(
-    project: string,
-    location: string,
-    collection: string,
-    dataStore: string,
-    control: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        data_store: dataStore,
-        control: control,
-      }
-    );
+  projectLocationCollectionDataStoreControlPath(project:string,location:string,collection:string,dataStore:string,control:string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      data_store: dataStore,
+      control: control,
+    });
   }
 
   /**
@@ -2442,12 +1892,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_control resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionDataStoreControlName(
-    projectLocationCollectionDataStoreControlName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.match(
-      projectLocationCollectionDataStoreControlName
-    ).project;
+  matchProjectFromProjectLocationCollectionDataStoreControlName(projectLocationCollectionDataStoreControlName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.match(projectLocationCollectionDataStoreControlName).project;
   }
 
   /**
@@ -2457,12 +1903,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_control resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionDataStoreControlName(
-    projectLocationCollectionDataStoreControlName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.match(
-      projectLocationCollectionDataStoreControlName
-    ).location;
+  matchLocationFromProjectLocationCollectionDataStoreControlName(projectLocationCollectionDataStoreControlName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.match(projectLocationCollectionDataStoreControlName).location;
   }
 
   /**
@@ -2472,12 +1914,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_control resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionDataStoreControlName(
-    projectLocationCollectionDataStoreControlName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.match(
-      projectLocationCollectionDataStoreControlName
-    ).collection;
+  matchCollectionFromProjectLocationCollectionDataStoreControlName(projectLocationCollectionDataStoreControlName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.match(projectLocationCollectionDataStoreControlName).collection;
   }
 
   /**
@@ -2487,12 +1925,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_control resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationCollectionDataStoreControlName(
-    projectLocationCollectionDataStoreControlName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.match(
-      projectLocationCollectionDataStoreControlName
-    ).data_store;
+  matchDataStoreFromProjectLocationCollectionDataStoreControlName(projectLocationCollectionDataStoreControlName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.match(projectLocationCollectionDataStoreControlName).data_store;
   }
 
   /**
@@ -2502,12 +1936,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_control resource.
    * @returns {string} A string representing the control.
    */
-  matchControlFromProjectLocationCollectionDataStoreControlName(
-    projectLocationCollectionDataStoreControlName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.match(
-      projectLocationCollectionDataStoreControlName
-    ).control;
+  matchControlFromProjectLocationCollectionDataStoreControlName(projectLocationCollectionDataStoreControlName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.match(projectLocationCollectionDataStoreControlName).control;
   }
 
   /**
@@ -2520,22 +1950,14 @@ export class CmekConfigServiceClient {
    * @param {string} conversation
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionDataStoreConversationPath(
-    project: string,
-    location: string,
-    collection: string,
-    dataStore: string,
-    conversation: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        data_store: dataStore,
-        conversation: conversation,
-      }
-    );
+  projectLocationCollectionDataStoreConversationPath(project:string,location:string,collection:string,dataStore:string,conversation:string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      data_store: dataStore,
+      conversation: conversation,
+    });
   }
 
   /**
@@ -2545,12 +1967,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_conversation resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionDataStoreConversationName(
-    projectLocationCollectionDataStoreConversationName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(
-      projectLocationCollectionDataStoreConversationName
-    ).project;
+  matchProjectFromProjectLocationCollectionDataStoreConversationName(projectLocationCollectionDataStoreConversationName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(projectLocationCollectionDataStoreConversationName).project;
   }
 
   /**
@@ -2560,12 +1978,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_conversation resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionDataStoreConversationName(
-    projectLocationCollectionDataStoreConversationName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(
-      projectLocationCollectionDataStoreConversationName
-    ).location;
+  matchLocationFromProjectLocationCollectionDataStoreConversationName(projectLocationCollectionDataStoreConversationName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(projectLocationCollectionDataStoreConversationName).location;
   }
 
   /**
@@ -2575,12 +1989,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_conversation resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionDataStoreConversationName(
-    projectLocationCollectionDataStoreConversationName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(
-      projectLocationCollectionDataStoreConversationName
-    ).collection;
+  matchCollectionFromProjectLocationCollectionDataStoreConversationName(projectLocationCollectionDataStoreConversationName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(projectLocationCollectionDataStoreConversationName).collection;
   }
 
   /**
@@ -2590,12 +2000,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_conversation resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationCollectionDataStoreConversationName(
-    projectLocationCollectionDataStoreConversationName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(
-      projectLocationCollectionDataStoreConversationName
-    ).data_store;
+  matchDataStoreFromProjectLocationCollectionDataStoreConversationName(projectLocationCollectionDataStoreConversationName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(projectLocationCollectionDataStoreConversationName).data_store;
   }
 
   /**
@@ -2605,12 +2011,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_conversation resource.
    * @returns {string} A string representing the conversation.
    */
-  matchConversationFromProjectLocationCollectionDataStoreConversationName(
-    projectLocationCollectionDataStoreConversationName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(
-      projectLocationCollectionDataStoreConversationName
-    ).conversation;
+  matchConversationFromProjectLocationCollectionDataStoreConversationName(projectLocationCollectionDataStoreConversationName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(projectLocationCollectionDataStoreConversationName).conversation;
   }
 
   /**
@@ -2623,22 +2025,14 @@ export class CmekConfigServiceClient {
    * @param {string} custom_tuning_model
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionDataStoreCustomTuningModelPath(
-    project: string,
-    location: string,
-    collection: string,
-    dataStore: string,
-    customTuningModel: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        data_store: dataStore,
-        custom_tuning_model: customTuningModel,
-      }
-    );
+  projectLocationCollectionDataStoreCustomTuningModelPath(project:string,location:string,collection:string,dataStore:string,customTuningModel:string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      data_store: dataStore,
+      custom_tuning_model: customTuningModel,
+    });
   }
 
   /**
@@ -2648,12 +2042,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_custom_tuning_model resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionDataStoreCustomTuningModelName(
-    projectLocationCollectionDataStoreCustomTuningModelName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match(
-      projectLocationCollectionDataStoreCustomTuningModelName
-    ).project;
+  matchProjectFromProjectLocationCollectionDataStoreCustomTuningModelName(projectLocationCollectionDataStoreCustomTuningModelName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match(projectLocationCollectionDataStoreCustomTuningModelName).project;
   }
 
   /**
@@ -2663,12 +2053,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_custom_tuning_model resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionDataStoreCustomTuningModelName(
-    projectLocationCollectionDataStoreCustomTuningModelName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match(
-      projectLocationCollectionDataStoreCustomTuningModelName
-    ).location;
+  matchLocationFromProjectLocationCollectionDataStoreCustomTuningModelName(projectLocationCollectionDataStoreCustomTuningModelName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match(projectLocationCollectionDataStoreCustomTuningModelName).location;
   }
 
   /**
@@ -2678,12 +2064,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_custom_tuning_model resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionDataStoreCustomTuningModelName(
-    projectLocationCollectionDataStoreCustomTuningModelName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match(
-      projectLocationCollectionDataStoreCustomTuningModelName
-    ).collection;
+  matchCollectionFromProjectLocationCollectionDataStoreCustomTuningModelName(projectLocationCollectionDataStoreCustomTuningModelName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match(projectLocationCollectionDataStoreCustomTuningModelName).collection;
   }
 
   /**
@@ -2693,12 +2075,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_custom_tuning_model resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationCollectionDataStoreCustomTuningModelName(
-    projectLocationCollectionDataStoreCustomTuningModelName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match(
-      projectLocationCollectionDataStoreCustomTuningModelName
-    ).data_store;
+  matchDataStoreFromProjectLocationCollectionDataStoreCustomTuningModelName(projectLocationCollectionDataStoreCustomTuningModelName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match(projectLocationCollectionDataStoreCustomTuningModelName).data_store;
   }
 
   /**
@@ -2708,12 +2086,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_custom_tuning_model resource.
    * @returns {string} A string representing the custom_tuning_model.
    */
-  matchCustomTuningModelFromProjectLocationCollectionDataStoreCustomTuningModelName(
-    projectLocationCollectionDataStoreCustomTuningModelName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match(
-      projectLocationCollectionDataStoreCustomTuningModelName
-    ).custom_tuning_model;
+  matchCustomTuningModelFromProjectLocationCollectionDataStoreCustomTuningModelName(projectLocationCollectionDataStoreCustomTuningModelName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match(projectLocationCollectionDataStoreCustomTuningModelName).custom_tuning_model;
   }
 
   /**
@@ -2725,20 +2099,13 @@ export class CmekConfigServiceClient {
    * @param {string} data_store
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionDataStoreDocumentProcessingConfigPath(
-    project: string,
-    location: string,
-    collection: string,
-    dataStore: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        data_store: dataStore,
-      }
-    );
+  projectLocationCollectionDataStoreDocumentProcessingConfigPath(project:string,location:string,collection:string,dataStore:string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      data_store: dataStore,
+    });
   }
 
   /**
@@ -2748,12 +2115,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_documentProcessingConfig resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(
-    projectLocationCollectionDataStoreDocumentProcessingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match(
-      projectLocationCollectionDataStoreDocumentProcessingConfigName
-    ).project;
+  matchProjectFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(projectLocationCollectionDataStoreDocumentProcessingConfigName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match(projectLocationCollectionDataStoreDocumentProcessingConfigName).project;
   }
 
   /**
@@ -2763,12 +2126,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_documentProcessingConfig resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(
-    projectLocationCollectionDataStoreDocumentProcessingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match(
-      projectLocationCollectionDataStoreDocumentProcessingConfigName
-    ).location;
+  matchLocationFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(projectLocationCollectionDataStoreDocumentProcessingConfigName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match(projectLocationCollectionDataStoreDocumentProcessingConfigName).location;
   }
 
   /**
@@ -2778,12 +2137,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_documentProcessingConfig resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(
-    projectLocationCollectionDataStoreDocumentProcessingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match(
-      projectLocationCollectionDataStoreDocumentProcessingConfigName
-    ).collection;
+  matchCollectionFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(projectLocationCollectionDataStoreDocumentProcessingConfigName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match(projectLocationCollectionDataStoreDocumentProcessingConfigName).collection;
   }
 
   /**
@@ -2793,12 +2148,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_documentProcessingConfig resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(
-    projectLocationCollectionDataStoreDocumentProcessingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match(
-      projectLocationCollectionDataStoreDocumentProcessingConfigName
-    ).data_store;
+  matchDataStoreFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(projectLocationCollectionDataStoreDocumentProcessingConfigName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match(projectLocationCollectionDataStoreDocumentProcessingConfigName).data_store;
   }
 
   /**
@@ -2811,22 +2162,14 @@ export class CmekConfigServiceClient {
    * @param {string} schema
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionDataStoreSchemaPath(
-    project: string,
-    location: string,
-    collection: string,
-    dataStore: string,
-    schema: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        data_store: dataStore,
-        schema: schema,
-      }
-    );
+  projectLocationCollectionDataStoreSchemaPath(project:string,location:string,collection:string,dataStore:string,schema:string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      data_store: dataStore,
+      schema: schema,
+    });
   }
 
   /**
@@ -2836,12 +2179,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_schema resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionDataStoreSchemaName(
-    projectLocationCollectionDataStoreSchemaName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(
-      projectLocationCollectionDataStoreSchemaName
-    ).project;
+  matchProjectFromProjectLocationCollectionDataStoreSchemaName(projectLocationCollectionDataStoreSchemaName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(projectLocationCollectionDataStoreSchemaName).project;
   }
 
   /**
@@ -2851,12 +2190,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_schema resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionDataStoreSchemaName(
-    projectLocationCollectionDataStoreSchemaName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(
-      projectLocationCollectionDataStoreSchemaName
-    ).location;
+  matchLocationFromProjectLocationCollectionDataStoreSchemaName(projectLocationCollectionDataStoreSchemaName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(projectLocationCollectionDataStoreSchemaName).location;
   }
 
   /**
@@ -2866,12 +2201,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_schema resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionDataStoreSchemaName(
-    projectLocationCollectionDataStoreSchemaName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(
-      projectLocationCollectionDataStoreSchemaName
-    ).collection;
+  matchCollectionFromProjectLocationCollectionDataStoreSchemaName(projectLocationCollectionDataStoreSchemaName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(projectLocationCollectionDataStoreSchemaName).collection;
   }
 
   /**
@@ -2881,12 +2212,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_schema resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationCollectionDataStoreSchemaName(
-    projectLocationCollectionDataStoreSchemaName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(
-      projectLocationCollectionDataStoreSchemaName
-    ).data_store;
+  matchDataStoreFromProjectLocationCollectionDataStoreSchemaName(projectLocationCollectionDataStoreSchemaName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(projectLocationCollectionDataStoreSchemaName).data_store;
   }
 
   /**
@@ -2896,12 +2223,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_schema resource.
    * @returns {string} A string representing the schema.
    */
-  matchSchemaFromProjectLocationCollectionDataStoreSchemaName(
-    projectLocationCollectionDataStoreSchemaName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(
-      projectLocationCollectionDataStoreSchemaName
-    ).schema;
+  matchSchemaFromProjectLocationCollectionDataStoreSchemaName(projectLocationCollectionDataStoreSchemaName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(projectLocationCollectionDataStoreSchemaName).schema;
   }
 
   /**
@@ -2914,22 +2237,14 @@ export class CmekConfigServiceClient {
    * @param {string} serving_config
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionDataStoreServingConfigPath(
-    project: string,
-    location: string,
-    collection: string,
-    dataStore: string,
-    servingConfig: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        data_store: dataStore,
-        serving_config: servingConfig,
-      }
-    );
+  projectLocationCollectionDataStoreServingConfigPath(project:string,location:string,collection:string,dataStore:string,servingConfig:string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      data_store: dataStore,
+      serving_config: servingConfig,
+    });
   }
 
   /**
@@ -2939,12 +2254,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_serving_config resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionDataStoreServingConfigName(
-    projectLocationCollectionDataStoreServingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match(
-      projectLocationCollectionDataStoreServingConfigName
-    ).project;
+  matchProjectFromProjectLocationCollectionDataStoreServingConfigName(projectLocationCollectionDataStoreServingConfigName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match(projectLocationCollectionDataStoreServingConfigName).project;
   }
 
   /**
@@ -2954,12 +2265,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_serving_config resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionDataStoreServingConfigName(
-    projectLocationCollectionDataStoreServingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match(
-      projectLocationCollectionDataStoreServingConfigName
-    ).location;
+  matchLocationFromProjectLocationCollectionDataStoreServingConfigName(projectLocationCollectionDataStoreServingConfigName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match(projectLocationCollectionDataStoreServingConfigName).location;
   }
 
   /**
@@ -2969,12 +2276,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_serving_config resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionDataStoreServingConfigName(
-    projectLocationCollectionDataStoreServingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match(
-      projectLocationCollectionDataStoreServingConfigName
-    ).collection;
+  matchCollectionFromProjectLocationCollectionDataStoreServingConfigName(projectLocationCollectionDataStoreServingConfigName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match(projectLocationCollectionDataStoreServingConfigName).collection;
   }
 
   /**
@@ -2984,12 +2287,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_serving_config resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationCollectionDataStoreServingConfigName(
-    projectLocationCollectionDataStoreServingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match(
-      projectLocationCollectionDataStoreServingConfigName
-    ).data_store;
+  matchDataStoreFromProjectLocationCollectionDataStoreServingConfigName(projectLocationCollectionDataStoreServingConfigName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match(projectLocationCollectionDataStoreServingConfigName).data_store;
   }
 
   /**
@@ -2999,12 +2298,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_serving_config resource.
    * @returns {string} A string representing the serving_config.
    */
-  matchServingConfigFromProjectLocationCollectionDataStoreServingConfigName(
-    projectLocationCollectionDataStoreServingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match(
-      projectLocationCollectionDataStoreServingConfigName
-    ).serving_config;
+  matchServingConfigFromProjectLocationCollectionDataStoreServingConfigName(projectLocationCollectionDataStoreServingConfigName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match(projectLocationCollectionDataStoreServingConfigName).serving_config;
   }
 
   /**
@@ -3017,22 +2312,14 @@ export class CmekConfigServiceClient {
    * @param {string} session
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionDataStoreSessionPath(
-    project: string,
-    location: string,
-    collection: string,
-    dataStore: string,
-    session: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        data_store: dataStore,
-        session: session,
-      }
-    );
+  projectLocationCollectionDataStoreSessionPath(project:string,location:string,collection:string,dataStore:string,session:string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      data_store: dataStore,
+      session: session,
+    });
   }
 
   /**
@@ -3042,12 +2329,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_session resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionDataStoreSessionName(
-    projectLocationCollectionDataStoreSessionName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match(
-      projectLocationCollectionDataStoreSessionName
-    ).project;
+  matchProjectFromProjectLocationCollectionDataStoreSessionName(projectLocationCollectionDataStoreSessionName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match(projectLocationCollectionDataStoreSessionName).project;
   }
 
   /**
@@ -3057,12 +2340,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_session resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionDataStoreSessionName(
-    projectLocationCollectionDataStoreSessionName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match(
-      projectLocationCollectionDataStoreSessionName
-    ).location;
+  matchLocationFromProjectLocationCollectionDataStoreSessionName(projectLocationCollectionDataStoreSessionName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match(projectLocationCollectionDataStoreSessionName).location;
   }
 
   /**
@@ -3072,12 +2351,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_session resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionDataStoreSessionName(
-    projectLocationCollectionDataStoreSessionName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match(
-      projectLocationCollectionDataStoreSessionName
-    ).collection;
+  matchCollectionFromProjectLocationCollectionDataStoreSessionName(projectLocationCollectionDataStoreSessionName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match(projectLocationCollectionDataStoreSessionName).collection;
   }
 
   /**
@@ -3087,12 +2362,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_session resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationCollectionDataStoreSessionName(
-    projectLocationCollectionDataStoreSessionName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match(
-      projectLocationCollectionDataStoreSessionName
-    ).data_store;
+  matchDataStoreFromProjectLocationCollectionDataStoreSessionName(projectLocationCollectionDataStoreSessionName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match(projectLocationCollectionDataStoreSessionName).data_store;
   }
 
   /**
@@ -3102,12 +2373,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_session resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectLocationCollectionDataStoreSessionName(
-    projectLocationCollectionDataStoreSessionName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match(
-      projectLocationCollectionDataStoreSessionName
-    ).session;
+  matchSessionFromProjectLocationCollectionDataStoreSessionName(projectLocationCollectionDataStoreSessionName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match(projectLocationCollectionDataStoreSessionName).session;
   }
 
   /**
@@ -3121,24 +2388,15 @@ export class CmekConfigServiceClient {
    * @param {string} answer
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionDataStoreSessionAnswerPath(
-    project: string,
-    location: string,
-    collection: string,
-    dataStore: string,
-    session: string,
-    answer: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        data_store: dataStore,
-        session: session,
-        answer: answer,
-      }
-    );
+  projectLocationCollectionDataStoreSessionAnswerPath(project:string,location:string,collection:string,dataStore:string,session:string,answer:string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      data_store: dataStore,
+      session: session,
+      answer: answer,
+    });
   }
 
   /**
@@ -3148,12 +2406,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_session_answer resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionDataStoreSessionAnswerName(
-    projectLocationCollectionDataStoreSessionAnswerName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match(
-      projectLocationCollectionDataStoreSessionAnswerName
-    ).project;
+  matchProjectFromProjectLocationCollectionDataStoreSessionAnswerName(projectLocationCollectionDataStoreSessionAnswerName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match(projectLocationCollectionDataStoreSessionAnswerName).project;
   }
 
   /**
@@ -3163,12 +2417,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_session_answer resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionDataStoreSessionAnswerName(
-    projectLocationCollectionDataStoreSessionAnswerName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match(
-      projectLocationCollectionDataStoreSessionAnswerName
-    ).location;
+  matchLocationFromProjectLocationCollectionDataStoreSessionAnswerName(projectLocationCollectionDataStoreSessionAnswerName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match(projectLocationCollectionDataStoreSessionAnswerName).location;
   }
 
   /**
@@ -3178,12 +2428,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_session_answer resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionDataStoreSessionAnswerName(
-    projectLocationCollectionDataStoreSessionAnswerName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match(
-      projectLocationCollectionDataStoreSessionAnswerName
-    ).collection;
+  matchCollectionFromProjectLocationCollectionDataStoreSessionAnswerName(projectLocationCollectionDataStoreSessionAnswerName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match(projectLocationCollectionDataStoreSessionAnswerName).collection;
   }
 
   /**
@@ -3193,12 +2439,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_session_answer resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationCollectionDataStoreSessionAnswerName(
-    projectLocationCollectionDataStoreSessionAnswerName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match(
-      projectLocationCollectionDataStoreSessionAnswerName
-    ).data_store;
+  matchDataStoreFromProjectLocationCollectionDataStoreSessionAnswerName(projectLocationCollectionDataStoreSessionAnswerName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match(projectLocationCollectionDataStoreSessionAnswerName).data_store;
   }
 
   /**
@@ -3208,12 +2450,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_session_answer resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectLocationCollectionDataStoreSessionAnswerName(
-    projectLocationCollectionDataStoreSessionAnswerName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match(
-      projectLocationCollectionDataStoreSessionAnswerName
-    ).session;
+  matchSessionFromProjectLocationCollectionDataStoreSessionAnswerName(projectLocationCollectionDataStoreSessionAnswerName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match(projectLocationCollectionDataStoreSessionAnswerName).session;
   }
 
   /**
@@ -3223,12 +2461,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_session_answer resource.
    * @returns {string} A string representing the answer.
    */
-  matchAnswerFromProjectLocationCollectionDataStoreSessionAnswerName(
-    projectLocationCollectionDataStoreSessionAnswerName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match(
-      projectLocationCollectionDataStoreSessionAnswerName
-    ).answer;
+  matchAnswerFromProjectLocationCollectionDataStoreSessionAnswerName(projectLocationCollectionDataStoreSessionAnswerName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match(projectLocationCollectionDataStoreSessionAnswerName).answer;
   }
 
   /**
@@ -3240,20 +2474,13 @@ export class CmekConfigServiceClient {
    * @param {string} data_store
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionDataStoreSiteSearchEnginePath(
-    project: string,
-    location: string,
-    collection: string,
-    dataStore: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        data_store: dataStore,
-      }
-    );
+  projectLocationCollectionDataStoreSiteSearchEnginePath(project:string,location:string,collection:string,dataStore:string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      data_store: dataStore,
+    });
   }
 
   /**
@@ -3263,12 +2490,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineName(
-    projectLocationCollectionDataStoreSiteSearchEngineName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match(
-      projectLocationCollectionDataStoreSiteSearchEngineName
-    ).project;
+  matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineName(projectLocationCollectionDataStoreSiteSearchEngineName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match(projectLocationCollectionDataStoreSiteSearchEngineName).project;
   }
 
   /**
@@ -3278,12 +2501,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineName(
-    projectLocationCollectionDataStoreSiteSearchEngineName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match(
-      projectLocationCollectionDataStoreSiteSearchEngineName
-    ).location;
+  matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineName(projectLocationCollectionDataStoreSiteSearchEngineName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match(projectLocationCollectionDataStoreSiteSearchEngineName).location;
   }
 
   /**
@@ -3293,12 +2512,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineName(
-    projectLocationCollectionDataStoreSiteSearchEngineName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match(
-      projectLocationCollectionDataStoreSiteSearchEngineName
-    ).collection;
+  matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineName(projectLocationCollectionDataStoreSiteSearchEngineName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match(projectLocationCollectionDataStoreSiteSearchEngineName).collection;
   }
 
   /**
@@ -3308,12 +2523,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineName(
-    projectLocationCollectionDataStoreSiteSearchEngineName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match(
-      projectLocationCollectionDataStoreSiteSearchEngineName
-    ).data_store;
+  matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineName(projectLocationCollectionDataStoreSiteSearchEngineName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match(projectLocationCollectionDataStoreSiteSearchEngineName).data_store;
   }
 
   /**
@@ -3326,22 +2537,14 @@ export class CmekConfigServiceClient {
    * @param {string} sitemap
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionDataStoreSiteSearchEngineSitemapPath(
-    project: string,
-    location: string,
-    collection: string,
-    dataStore: string,
-    sitemap: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        data_store: dataStore,
-        sitemap: sitemap,
-      }
-    );
+  projectLocationCollectionDataStoreSiteSearchEngineSitemapPath(project:string,location:string,collection:string,dataStore:string,sitemap:string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      data_store: dataStore,
+      sitemap: sitemap,
+    });
   }
 
   /**
@@ -3351,12 +2554,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
-    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
-      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
-    ).project;
+  matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(projectLocationCollectionDataStoreSiteSearchEngineSitemapName).project;
   }
 
   /**
@@ -3366,12 +2565,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
-    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
-      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
-    ).location;
+  matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(projectLocationCollectionDataStoreSiteSearchEngineSitemapName).location;
   }
 
   /**
@@ -3381,12 +2576,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
-    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
-      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
-    ).collection;
+  matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(projectLocationCollectionDataStoreSiteSearchEngineSitemapName).collection;
   }
 
   /**
@@ -3396,12 +2587,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
-    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
-      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
-    ).data_store;
+  matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(projectLocationCollectionDataStoreSiteSearchEngineSitemapName).data_store;
   }
 
   /**
@@ -3411,12 +2598,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
    * @returns {string} A string representing the sitemap.
    */
-  matchSitemapFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
-    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
-      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
-    ).sitemap;
+  matchSitemapFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(projectLocationCollectionDataStoreSiteSearchEngineSitemapName).sitemap;
   }
 
   /**
@@ -3429,22 +2612,14 @@ export class CmekConfigServiceClient {
    * @param {string} target_site
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionDataStoreSiteSearchEngineTargetSitePath(
-    project: string,
-    location: string,
-    collection: string,
-    dataStore: string,
-    targetSite: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        data_store: dataStore,
-        target_site: targetSite,
-      }
-    );
+  projectLocationCollectionDataStoreSiteSearchEngineTargetSitePath(project:string,location:string,collection:string,dataStore:string,targetSite:string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      data_store: dataStore,
+      target_site: targetSite,
+    });
   }
 
   /**
@@ -3454,12 +2629,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_target_site resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(
-    projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match(
-      projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName
-    ).project;
+  matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match(projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName).project;
   }
 
   /**
@@ -3469,12 +2640,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_target_site resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(
-    projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match(
-      projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName
-    ).location;
+  matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match(projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName).location;
   }
 
   /**
@@ -3484,12 +2651,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_target_site resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(
-    projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match(
-      projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName
-    ).collection;
+  matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match(projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName).collection;
   }
 
   /**
@@ -3499,12 +2662,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_target_site resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(
-    projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match(
-      projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName
-    ).data_store;
+  matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match(projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName).data_store;
   }
 
   /**
@@ -3514,12 +2673,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_target_site resource.
    * @returns {string} A string representing the target_site.
    */
-  matchTargetSiteFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(
-    projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match(
-      projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName
-    ).target_site;
+  matchTargetSiteFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match(projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName).target_site;
   }
 
   /**
@@ -3532,22 +2687,14 @@ export class CmekConfigServiceClient {
    * @param {string} control
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionEngineControlPath(
-    project: string,
-    location: string,
-    collection: string,
-    engine: string,
-    control: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineControlPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        engine: engine,
-        control: control,
-      }
-    );
+  projectLocationCollectionEngineControlPath(project:string,location:string,collection:string,engine:string,control:string) {
+    return this.pathTemplates.projectLocationCollectionEngineControlPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      engine: engine,
+      control: control,
+    });
   }
 
   /**
@@ -3557,12 +2704,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_control resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionEngineControlName(
-    projectLocationCollectionEngineControlName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineControlPathTemplate.match(
-      projectLocationCollectionEngineControlName
-    ).project;
+  matchProjectFromProjectLocationCollectionEngineControlName(projectLocationCollectionEngineControlName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineControlPathTemplate.match(projectLocationCollectionEngineControlName).project;
   }
 
   /**
@@ -3572,12 +2715,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_control resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionEngineControlName(
-    projectLocationCollectionEngineControlName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineControlPathTemplate.match(
-      projectLocationCollectionEngineControlName
-    ).location;
+  matchLocationFromProjectLocationCollectionEngineControlName(projectLocationCollectionEngineControlName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineControlPathTemplate.match(projectLocationCollectionEngineControlName).location;
   }
 
   /**
@@ -3587,12 +2726,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_control resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionEngineControlName(
-    projectLocationCollectionEngineControlName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineControlPathTemplate.match(
-      projectLocationCollectionEngineControlName
-    ).collection;
+  matchCollectionFromProjectLocationCollectionEngineControlName(projectLocationCollectionEngineControlName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineControlPathTemplate.match(projectLocationCollectionEngineControlName).collection;
   }
 
   /**
@@ -3602,12 +2737,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_control resource.
    * @returns {string} A string representing the engine.
    */
-  matchEngineFromProjectLocationCollectionEngineControlName(
-    projectLocationCollectionEngineControlName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineControlPathTemplate.match(
-      projectLocationCollectionEngineControlName
-    ).engine;
+  matchEngineFromProjectLocationCollectionEngineControlName(projectLocationCollectionEngineControlName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineControlPathTemplate.match(projectLocationCollectionEngineControlName).engine;
   }
 
   /**
@@ -3617,12 +2748,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_control resource.
    * @returns {string} A string representing the control.
    */
-  matchControlFromProjectLocationCollectionEngineControlName(
-    projectLocationCollectionEngineControlName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineControlPathTemplate.match(
-      projectLocationCollectionEngineControlName
-    ).control;
+  matchControlFromProjectLocationCollectionEngineControlName(projectLocationCollectionEngineControlName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineControlPathTemplate.match(projectLocationCollectionEngineControlName).control;
   }
 
   /**
@@ -3635,22 +2762,14 @@ export class CmekConfigServiceClient {
    * @param {string} conversation
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionEngineConversationPath(
-    project: string,
-    location: string,
-    collection: string,
-    engine: string,
-    conversation: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        engine: engine,
-        conversation: conversation,
-      }
-    );
+  projectLocationCollectionEngineConversationPath(project:string,location:string,collection:string,engine:string,conversation:string) {
+    return this.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      engine: engine,
+      conversation: conversation,
+    });
   }
 
   /**
@@ -3660,12 +2779,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_conversation resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionEngineConversationName(
-    projectLocationCollectionEngineConversationName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match(
-      projectLocationCollectionEngineConversationName
-    ).project;
+  matchProjectFromProjectLocationCollectionEngineConversationName(projectLocationCollectionEngineConversationName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match(projectLocationCollectionEngineConversationName).project;
   }
 
   /**
@@ -3675,12 +2790,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_conversation resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionEngineConversationName(
-    projectLocationCollectionEngineConversationName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match(
-      projectLocationCollectionEngineConversationName
-    ).location;
+  matchLocationFromProjectLocationCollectionEngineConversationName(projectLocationCollectionEngineConversationName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match(projectLocationCollectionEngineConversationName).location;
   }
 
   /**
@@ -3690,12 +2801,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_conversation resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionEngineConversationName(
-    projectLocationCollectionEngineConversationName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match(
-      projectLocationCollectionEngineConversationName
-    ).collection;
+  matchCollectionFromProjectLocationCollectionEngineConversationName(projectLocationCollectionEngineConversationName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match(projectLocationCollectionEngineConversationName).collection;
   }
 
   /**
@@ -3705,12 +2812,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_conversation resource.
    * @returns {string} A string representing the engine.
    */
-  matchEngineFromProjectLocationCollectionEngineConversationName(
-    projectLocationCollectionEngineConversationName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match(
-      projectLocationCollectionEngineConversationName
-    ).engine;
+  matchEngineFromProjectLocationCollectionEngineConversationName(projectLocationCollectionEngineConversationName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match(projectLocationCollectionEngineConversationName).engine;
   }
 
   /**
@@ -3720,12 +2823,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_conversation resource.
    * @returns {string} A string representing the conversation.
    */
-  matchConversationFromProjectLocationCollectionEngineConversationName(
-    projectLocationCollectionEngineConversationName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match(
-      projectLocationCollectionEngineConversationName
-    ).conversation;
+  matchConversationFromProjectLocationCollectionEngineConversationName(projectLocationCollectionEngineConversationName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match(projectLocationCollectionEngineConversationName).conversation;
   }
 
   /**
@@ -3738,22 +2837,14 @@ export class CmekConfigServiceClient {
    * @param {string} serving_config
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionEngineServingConfigPath(
-    project: string,
-    location: string,
-    collection: string,
-    engine: string,
-    servingConfig: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        engine: engine,
-        serving_config: servingConfig,
-      }
-    );
+  projectLocationCollectionEngineServingConfigPath(project:string,location:string,collection:string,engine:string,servingConfig:string) {
+    return this.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      engine: engine,
+      serving_config: servingConfig,
+    });
   }
 
   /**
@@ -3763,12 +2854,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_serving_config resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionEngineServingConfigName(
-    projectLocationCollectionEngineServingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match(
-      projectLocationCollectionEngineServingConfigName
-    ).project;
+  matchProjectFromProjectLocationCollectionEngineServingConfigName(projectLocationCollectionEngineServingConfigName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match(projectLocationCollectionEngineServingConfigName).project;
   }
 
   /**
@@ -3778,12 +2865,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_serving_config resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionEngineServingConfigName(
-    projectLocationCollectionEngineServingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match(
-      projectLocationCollectionEngineServingConfigName
-    ).location;
+  matchLocationFromProjectLocationCollectionEngineServingConfigName(projectLocationCollectionEngineServingConfigName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match(projectLocationCollectionEngineServingConfigName).location;
   }
 
   /**
@@ -3793,12 +2876,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_serving_config resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionEngineServingConfigName(
-    projectLocationCollectionEngineServingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match(
-      projectLocationCollectionEngineServingConfigName
-    ).collection;
+  matchCollectionFromProjectLocationCollectionEngineServingConfigName(projectLocationCollectionEngineServingConfigName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match(projectLocationCollectionEngineServingConfigName).collection;
   }
 
   /**
@@ -3808,12 +2887,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_serving_config resource.
    * @returns {string} A string representing the engine.
    */
-  matchEngineFromProjectLocationCollectionEngineServingConfigName(
-    projectLocationCollectionEngineServingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match(
-      projectLocationCollectionEngineServingConfigName
-    ).engine;
+  matchEngineFromProjectLocationCollectionEngineServingConfigName(projectLocationCollectionEngineServingConfigName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match(projectLocationCollectionEngineServingConfigName).engine;
   }
 
   /**
@@ -3823,12 +2898,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_serving_config resource.
    * @returns {string} A string representing the serving_config.
    */
-  matchServingConfigFromProjectLocationCollectionEngineServingConfigName(
-    projectLocationCollectionEngineServingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match(
-      projectLocationCollectionEngineServingConfigName
-    ).serving_config;
+  matchServingConfigFromProjectLocationCollectionEngineServingConfigName(projectLocationCollectionEngineServingConfigName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match(projectLocationCollectionEngineServingConfigName).serving_config;
   }
 
   /**
@@ -3841,22 +2912,14 @@ export class CmekConfigServiceClient {
    * @param {string} session
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionEngineSessionPath(
-    project: string,
-    location: string,
-    collection: string,
-    engine: string,
-    session: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        engine: engine,
-        session: session,
-      }
-    );
+  projectLocationCollectionEngineSessionPath(project:string,location:string,collection:string,engine:string,session:string) {
+    return this.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      engine: engine,
+      session: session,
+    });
   }
 
   /**
@@ -3866,12 +2929,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_session resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionEngineSessionName(
-    projectLocationCollectionEngineSessionName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match(
-      projectLocationCollectionEngineSessionName
-    ).project;
+  matchProjectFromProjectLocationCollectionEngineSessionName(projectLocationCollectionEngineSessionName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match(projectLocationCollectionEngineSessionName).project;
   }
 
   /**
@@ -3881,12 +2940,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_session resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionEngineSessionName(
-    projectLocationCollectionEngineSessionName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match(
-      projectLocationCollectionEngineSessionName
-    ).location;
+  matchLocationFromProjectLocationCollectionEngineSessionName(projectLocationCollectionEngineSessionName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match(projectLocationCollectionEngineSessionName).location;
   }
 
   /**
@@ -3896,12 +2951,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_session resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionEngineSessionName(
-    projectLocationCollectionEngineSessionName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match(
-      projectLocationCollectionEngineSessionName
-    ).collection;
+  matchCollectionFromProjectLocationCollectionEngineSessionName(projectLocationCollectionEngineSessionName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match(projectLocationCollectionEngineSessionName).collection;
   }
 
   /**
@@ -3911,12 +2962,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_session resource.
    * @returns {string} A string representing the engine.
    */
-  matchEngineFromProjectLocationCollectionEngineSessionName(
-    projectLocationCollectionEngineSessionName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match(
-      projectLocationCollectionEngineSessionName
-    ).engine;
+  matchEngineFromProjectLocationCollectionEngineSessionName(projectLocationCollectionEngineSessionName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match(projectLocationCollectionEngineSessionName).engine;
   }
 
   /**
@@ -3926,12 +2973,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_session resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectLocationCollectionEngineSessionName(
-    projectLocationCollectionEngineSessionName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match(
-      projectLocationCollectionEngineSessionName
-    ).session;
+  matchSessionFromProjectLocationCollectionEngineSessionName(projectLocationCollectionEngineSessionName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match(projectLocationCollectionEngineSessionName).session;
   }
 
   /**
@@ -3945,24 +2988,15 @@ export class CmekConfigServiceClient {
    * @param {string} answer
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionEngineSessionAnswerPath(
-    project: string,
-    location: string,
-    collection: string,
-    engine: string,
-    session: string,
-    answer: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        engine: engine,
-        session: session,
-        answer: answer,
-      }
-    );
+  projectLocationCollectionEngineSessionAnswerPath(project:string,location:string,collection:string,engine:string,session:string,answer:string) {
+    return this.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      engine: engine,
+      session: session,
+      answer: answer,
+    });
   }
 
   /**
@@ -3972,12 +3006,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_session_answer resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionEngineSessionAnswerName(
-    projectLocationCollectionEngineSessionAnswerName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match(
-      projectLocationCollectionEngineSessionAnswerName
-    ).project;
+  matchProjectFromProjectLocationCollectionEngineSessionAnswerName(projectLocationCollectionEngineSessionAnswerName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match(projectLocationCollectionEngineSessionAnswerName).project;
   }
 
   /**
@@ -3987,12 +3017,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_session_answer resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionEngineSessionAnswerName(
-    projectLocationCollectionEngineSessionAnswerName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match(
-      projectLocationCollectionEngineSessionAnswerName
-    ).location;
+  matchLocationFromProjectLocationCollectionEngineSessionAnswerName(projectLocationCollectionEngineSessionAnswerName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match(projectLocationCollectionEngineSessionAnswerName).location;
   }
 
   /**
@@ -4002,12 +3028,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_session_answer resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionEngineSessionAnswerName(
-    projectLocationCollectionEngineSessionAnswerName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match(
-      projectLocationCollectionEngineSessionAnswerName
-    ).collection;
+  matchCollectionFromProjectLocationCollectionEngineSessionAnswerName(projectLocationCollectionEngineSessionAnswerName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match(projectLocationCollectionEngineSessionAnswerName).collection;
   }
 
   /**
@@ -4017,12 +3039,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_session_answer resource.
    * @returns {string} A string representing the engine.
    */
-  matchEngineFromProjectLocationCollectionEngineSessionAnswerName(
-    projectLocationCollectionEngineSessionAnswerName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match(
-      projectLocationCollectionEngineSessionAnswerName
-    ).engine;
+  matchEngineFromProjectLocationCollectionEngineSessionAnswerName(projectLocationCollectionEngineSessionAnswerName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match(projectLocationCollectionEngineSessionAnswerName).engine;
   }
 
   /**
@@ -4032,12 +3050,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_session_answer resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectLocationCollectionEngineSessionAnswerName(
-    projectLocationCollectionEngineSessionAnswerName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match(
-      projectLocationCollectionEngineSessionAnswerName
-    ).session;
+  matchSessionFromProjectLocationCollectionEngineSessionAnswerName(projectLocationCollectionEngineSessionAnswerName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match(projectLocationCollectionEngineSessionAnswerName).session;
   }
 
   /**
@@ -4047,12 +3061,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_collection_engine_session_answer resource.
    * @returns {string} A string representing the answer.
    */
-  matchAnswerFromProjectLocationCollectionEngineSessionAnswerName(
-    projectLocationCollectionEngineSessionAnswerName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match(
-      projectLocationCollectionEngineSessionAnswerName
-    ).answer;
+  matchAnswerFromProjectLocationCollectionEngineSessionAnswerName(projectLocationCollectionEngineSessionAnswerName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match(projectLocationCollectionEngineSessionAnswerName).answer;
   }
 
   /**
@@ -4063,11 +3073,7 @@ export class CmekConfigServiceClient {
    * @param {string} data_store
    * @returns {string} Resource name string.
    */
-  projectLocationDataStorePath(
-    project: string,
-    location: string,
-    dataStore: string
-  ) {
+  projectLocationDataStorePath(project:string,location:string,dataStore:string) {
     return this.pathTemplates.projectLocationDataStorePathTemplate.render({
       project: project,
       location: location,
@@ -4082,12 +3088,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationDataStoreName(
-    projectLocationDataStoreName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStorePathTemplate.match(
-      projectLocationDataStoreName
-    ).project;
+  matchProjectFromProjectLocationDataStoreName(projectLocationDataStoreName: string) {
+    return this.pathTemplates.projectLocationDataStorePathTemplate.match(projectLocationDataStoreName).project;
   }
 
   /**
@@ -4097,12 +3099,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDataStoreName(
-    projectLocationDataStoreName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStorePathTemplate.match(
-      projectLocationDataStoreName
-    ).location;
+  matchLocationFromProjectLocationDataStoreName(projectLocationDataStoreName: string) {
+    return this.pathTemplates.projectLocationDataStorePathTemplate.match(projectLocationDataStoreName).location;
   }
 
   /**
@@ -4112,12 +3110,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationDataStoreName(
-    projectLocationDataStoreName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStorePathTemplate.match(
-      projectLocationDataStoreName
-    ).data_store;
+  matchDataStoreFromProjectLocationDataStoreName(projectLocationDataStoreName: string) {
+    return this.pathTemplates.projectLocationDataStorePathTemplate.match(projectLocationDataStoreName).data_store;
   }
 
   /**
@@ -4130,22 +3124,14 @@ export class CmekConfigServiceClient {
    * @param {string} document
    * @returns {string} Resource name string.
    */
-  projectLocationDataStoreBranchDocumentPath(
-    project: string,
-    location: string,
-    dataStore: string,
-    branch: string,
-    document: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        data_store: dataStore,
-        branch: branch,
-        document: document,
-      }
-    );
+  projectLocationDataStoreBranchDocumentPath(project:string,location:string,dataStore:string,branch:string,document:string) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.render({
+      project: project,
+      location: location,
+      data_store: dataStore,
+      branch: branch,
+      document: document,
+    });
   }
 
   /**
@@ -4155,12 +3141,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_branch_document resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationDataStoreBranchDocumentName(
-    projectLocationDataStoreBranchDocumentName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match(
-      projectLocationDataStoreBranchDocumentName
-    ).project;
+  matchProjectFromProjectLocationDataStoreBranchDocumentName(projectLocationDataStoreBranchDocumentName: string) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match(projectLocationDataStoreBranchDocumentName).project;
   }
 
   /**
@@ -4170,12 +3152,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_branch_document resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDataStoreBranchDocumentName(
-    projectLocationDataStoreBranchDocumentName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match(
-      projectLocationDataStoreBranchDocumentName
-    ).location;
+  matchLocationFromProjectLocationDataStoreBranchDocumentName(projectLocationDataStoreBranchDocumentName: string) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match(projectLocationDataStoreBranchDocumentName).location;
   }
 
   /**
@@ -4185,12 +3163,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_branch_document resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationDataStoreBranchDocumentName(
-    projectLocationDataStoreBranchDocumentName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match(
-      projectLocationDataStoreBranchDocumentName
-    ).data_store;
+  matchDataStoreFromProjectLocationDataStoreBranchDocumentName(projectLocationDataStoreBranchDocumentName: string) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match(projectLocationDataStoreBranchDocumentName).data_store;
   }
 
   /**
@@ -4200,12 +3174,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_branch_document resource.
    * @returns {string} A string representing the branch.
    */
-  matchBranchFromProjectLocationDataStoreBranchDocumentName(
-    projectLocationDataStoreBranchDocumentName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match(
-      projectLocationDataStoreBranchDocumentName
-    ).branch;
+  matchBranchFromProjectLocationDataStoreBranchDocumentName(projectLocationDataStoreBranchDocumentName: string) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match(projectLocationDataStoreBranchDocumentName).branch;
   }
 
   /**
@@ -4215,12 +3185,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_branch_document resource.
    * @returns {string} A string representing the document.
    */
-  matchDocumentFromProjectLocationDataStoreBranchDocumentName(
-    projectLocationDataStoreBranchDocumentName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match(
-      projectLocationDataStoreBranchDocumentName
-    ).document;
+  matchDocumentFromProjectLocationDataStoreBranchDocumentName(projectLocationDataStoreBranchDocumentName: string) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match(projectLocationDataStoreBranchDocumentName).document;
   }
 
   /**
@@ -4234,24 +3200,15 @@ export class CmekConfigServiceClient {
    * @param {string} chunk
    * @returns {string} Resource name string.
    */
-  projectLocationDataStoreBranchDocumentChunkPath(
-    project: string,
-    location: string,
-    dataStore: string,
-    branch: string,
-    document: string,
-    chunk: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        data_store: dataStore,
-        branch: branch,
-        document: document,
-        chunk: chunk,
-      }
-    );
+  projectLocationDataStoreBranchDocumentChunkPath(project:string,location:string,dataStore:string,branch:string,document:string,chunk:string) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.render({
+      project: project,
+      location: location,
+      data_store: dataStore,
+      branch: branch,
+      document: document,
+      chunk: chunk,
+    });
   }
 
   /**
@@ -4261,12 +3218,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_branch_document_chunk resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationDataStoreBranchDocumentChunkName(
-    projectLocationDataStoreBranchDocumentChunkName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(
-      projectLocationDataStoreBranchDocumentChunkName
-    ).project;
+  matchProjectFromProjectLocationDataStoreBranchDocumentChunkName(projectLocationDataStoreBranchDocumentChunkName: string) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(projectLocationDataStoreBranchDocumentChunkName).project;
   }
 
   /**
@@ -4276,12 +3229,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_branch_document_chunk resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDataStoreBranchDocumentChunkName(
-    projectLocationDataStoreBranchDocumentChunkName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(
-      projectLocationDataStoreBranchDocumentChunkName
-    ).location;
+  matchLocationFromProjectLocationDataStoreBranchDocumentChunkName(projectLocationDataStoreBranchDocumentChunkName: string) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(projectLocationDataStoreBranchDocumentChunkName).location;
   }
 
   /**
@@ -4291,12 +3240,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_branch_document_chunk resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationDataStoreBranchDocumentChunkName(
-    projectLocationDataStoreBranchDocumentChunkName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(
-      projectLocationDataStoreBranchDocumentChunkName
-    ).data_store;
+  matchDataStoreFromProjectLocationDataStoreBranchDocumentChunkName(projectLocationDataStoreBranchDocumentChunkName: string) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(projectLocationDataStoreBranchDocumentChunkName).data_store;
   }
 
   /**
@@ -4306,12 +3251,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_branch_document_chunk resource.
    * @returns {string} A string representing the branch.
    */
-  matchBranchFromProjectLocationDataStoreBranchDocumentChunkName(
-    projectLocationDataStoreBranchDocumentChunkName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(
-      projectLocationDataStoreBranchDocumentChunkName
-    ).branch;
+  matchBranchFromProjectLocationDataStoreBranchDocumentChunkName(projectLocationDataStoreBranchDocumentChunkName: string) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(projectLocationDataStoreBranchDocumentChunkName).branch;
   }
 
   /**
@@ -4321,12 +3262,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_branch_document_chunk resource.
    * @returns {string} A string representing the document.
    */
-  matchDocumentFromProjectLocationDataStoreBranchDocumentChunkName(
-    projectLocationDataStoreBranchDocumentChunkName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(
-      projectLocationDataStoreBranchDocumentChunkName
-    ).document;
+  matchDocumentFromProjectLocationDataStoreBranchDocumentChunkName(projectLocationDataStoreBranchDocumentChunkName: string) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(projectLocationDataStoreBranchDocumentChunkName).document;
   }
 
   /**
@@ -4336,12 +3273,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_branch_document_chunk resource.
    * @returns {string} A string representing the chunk.
    */
-  matchChunkFromProjectLocationDataStoreBranchDocumentChunkName(
-    projectLocationDataStoreBranchDocumentChunkName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(
-      projectLocationDataStoreBranchDocumentChunkName
-    ).chunk;
+  matchChunkFromProjectLocationDataStoreBranchDocumentChunkName(projectLocationDataStoreBranchDocumentChunkName: string) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(projectLocationDataStoreBranchDocumentChunkName).chunk;
   }
 
   /**
@@ -4353,20 +3286,13 @@ export class CmekConfigServiceClient {
    * @param {string} control
    * @returns {string} Resource name string.
    */
-  projectLocationDataStoreControlPath(
-    project: string,
-    location: string,
-    dataStore: string,
-    control: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreControlPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        data_store: dataStore,
-        control: control,
-      }
-    );
+  projectLocationDataStoreControlPath(project:string,location:string,dataStore:string,control:string) {
+    return this.pathTemplates.projectLocationDataStoreControlPathTemplate.render({
+      project: project,
+      location: location,
+      data_store: dataStore,
+      control: control,
+    });
   }
 
   /**
@@ -4376,12 +3302,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_control resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationDataStoreControlName(
-    projectLocationDataStoreControlName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreControlPathTemplate.match(
-      projectLocationDataStoreControlName
-    ).project;
+  matchProjectFromProjectLocationDataStoreControlName(projectLocationDataStoreControlName: string) {
+    return this.pathTemplates.projectLocationDataStoreControlPathTemplate.match(projectLocationDataStoreControlName).project;
   }
 
   /**
@@ -4391,12 +3313,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_control resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDataStoreControlName(
-    projectLocationDataStoreControlName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreControlPathTemplate.match(
-      projectLocationDataStoreControlName
-    ).location;
+  matchLocationFromProjectLocationDataStoreControlName(projectLocationDataStoreControlName: string) {
+    return this.pathTemplates.projectLocationDataStoreControlPathTemplate.match(projectLocationDataStoreControlName).location;
   }
 
   /**
@@ -4406,12 +3324,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_control resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationDataStoreControlName(
-    projectLocationDataStoreControlName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreControlPathTemplate.match(
-      projectLocationDataStoreControlName
-    ).data_store;
+  matchDataStoreFromProjectLocationDataStoreControlName(projectLocationDataStoreControlName: string) {
+    return this.pathTemplates.projectLocationDataStoreControlPathTemplate.match(projectLocationDataStoreControlName).data_store;
   }
 
   /**
@@ -4421,12 +3335,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_control resource.
    * @returns {string} A string representing the control.
    */
-  matchControlFromProjectLocationDataStoreControlName(
-    projectLocationDataStoreControlName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreControlPathTemplate.match(
-      projectLocationDataStoreControlName
-    ).control;
+  matchControlFromProjectLocationDataStoreControlName(projectLocationDataStoreControlName: string) {
+    return this.pathTemplates.projectLocationDataStoreControlPathTemplate.match(projectLocationDataStoreControlName).control;
   }
 
   /**
@@ -4438,20 +3348,13 @@ export class CmekConfigServiceClient {
    * @param {string} conversation
    * @returns {string} Resource name string.
    */
-  projectLocationDataStoreConversationPath(
-    project: string,
-    location: string,
-    dataStore: string,
-    conversation: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        data_store: dataStore,
-        conversation: conversation,
-      }
-    );
+  projectLocationDataStoreConversationPath(project:string,location:string,dataStore:string,conversation:string) {
+    return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.render({
+      project: project,
+      location: location,
+      data_store: dataStore,
+      conversation: conversation,
+    });
   }
 
   /**
@@ -4461,12 +3364,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_conversation resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationDataStoreConversationName(
-    projectLocationDataStoreConversationName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.match(
-      projectLocationDataStoreConversationName
-    ).project;
+  matchProjectFromProjectLocationDataStoreConversationName(projectLocationDataStoreConversationName: string) {
+    return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.match(projectLocationDataStoreConversationName).project;
   }
 
   /**
@@ -4476,12 +3375,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_conversation resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDataStoreConversationName(
-    projectLocationDataStoreConversationName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.match(
-      projectLocationDataStoreConversationName
-    ).location;
+  matchLocationFromProjectLocationDataStoreConversationName(projectLocationDataStoreConversationName: string) {
+    return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.match(projectLocationDataStoreConversationName).location;
   }
 
   /**
@@ -4491,12 +3386,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_conversation resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationDataStoreConversationName(
-    projectLocationDataStoreConversationName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.match(
-      projectLocationDataStoreConversationName
-    ).data_store;
+  matchDataStoreFromProjectLocationDataStoreConversationName(projectLocationDataStoreConversationName: string) {
+    return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.match(projectLocationDataStoreConversationName).data_store;
   }
 
   /**
@@ -4506,12 +3397,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_conversation resource.
    * @returns {string} A string representing the conversation.
    */
-  matchConversationFromProjectLocationDataStoreConversationName(
-    projectLocationDataStoreConversationName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.match(
-      projectLocationDataStoreConversationName
-    ).conversation;
+  matchConversationFromProjectLocationDataStoreConversationName(projectLocationDataStoreConversationName: string) {
+    return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.match(projectLocationDataStoreConversationName).conversation;
   }
 
   /**
@@ -4523,20 +3410,13 @@ export class CmekConfigServiceClient {
    * @param {string} custom_tuning_model
    * @returns {string} Resource name string.
    */
-  projectLocationDataStoreCustomTuningModelPath(
-    project: string,
-    location: string,
-    dataStore: string,
-    customTuningModel: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        data_store: dataStore,
-        custom_tuning_model: customTuningModel,
-      }
-    );
+  projectLocationDataStoreCustomTuningModelPath(project:string,location:string,dataStore:string,customTuningModel:string) {
+    return this.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.render({
+      project: project,
+      location: location,
+      data_store: dataStore,
+      custom_tuning_model: customTuningModel,
+    });
   }
 
   /**
@@ -4546,12 +3426,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_custom_tuning_model resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationDataStoreCustomTuningModelName(
-    projectLocationDataStoreCustomTuningModelName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match(
-      projectLocationDataStoreCustomTuningModelName
-    ).project;
+  matchProjectFromProjectLocationDataStoreCustomTuningModelName(projectLocationDataStoreCustomTuningModelName: string) {
+    return this.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match(projectLocationDataStoreCustomTuningModelName).project;
   }
 
   /**
@@ -4561,12 +3437,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_custom_tuning_model resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDataStoreCustomTuningModelName(
-    projectLocationDataStoreCustomTuningModelName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match(
-      projectLocationDataStoreCustomTuningModelName
-    ).location;
+  matchLocationFromProjectLocationDataStoreCustomTuningModelName(projectLocationDataStoreCustomTuningModelName: string) {
+    return this.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match(projectLocationDataStoreCustomTuningModelName).location;
   }
 
   /**
@@ -4576,12 +3448,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_custom_tuning_model resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationDataStoreCustomTuningModelName(
-    projectLocationDataStoreCustomTuningModelName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match(
-      projectLocationDataStoreCustomTuningModelName
-    ).data_store;
+  matchDataStoreFromProjectLocationDataStoreCustomTuningModelName(projectLocationDataStoreCustomTuningModelName: string) {
+    return this.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match(projectLocationDataStoreCustomTuningModelName).data_store;
   }
 
   /**
@@ -4591,12 +3459,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_custom_tuning_model resource.
    * @returns {string} A string representing the custom_tuning_model.
    */
-  matchCustomTuningModelFromProjectLocationDataStoreCustomTuningModelName(
-    projectLocationDataStoreCustomTuningModelName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match(
-      projectLocationDataStoreCustomTuningModelName
-    ).custom_tuning_model;
+  matchCustomTuningModelFromProjectLocationDataStoreCustomTuningModelName(projectLocationDataStoreCustomTuningModelName: string) {
+    return this.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match(projectLocationDataStoreCustomTuningModelName).custom_tuning_model;
   }
 
   /**
@@ -4607,18 +3471,12 @@ export class CmekConfigServiceClient {
    * @param {string} data_store
    * @returns {string} Resource name string.
    */
-  projectLocationDataStoreDocumentProcessingConfigPath(
-    project: string,
-    location: string,
-    dataStore: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        data_store: dataStore,
-      }
-    );
+  projectLocationDataStoreDocumentProcessingConfigPath(project:string,location:string,dataStore:string) {
+    return this.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.render({
+      project: project,
+      location: location,
+      data_store: dataStore,
+    });
   }
 
   /**
@@ -4628,12 +3486,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_documentProcessingConfig resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationDataStoreDocumentProcessingConfigName(
-    projectLocationDataStoreDocumentProcessingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.match(
-      projectLocationDataStoreDocumentProcessingConfigName
-    ).project;
+  matchProjectFromProjectLocationDataStoreDocumentProcessingConfigName(projectLocationDataStoreDocumentProcessingConfigName: string) {
+    return this.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.match(projectLocationDataStoreDocumentProcessingConfigName).project;
   }
 
   /**
@@ -4643,12 +3497,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_documentProcessingConfig resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDataStoreDocumentProcessingConfigName(
-    projectLocationDataStoreDocumentProcessingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.match(
-      projectLocationDataStoreDocumentProcessingConfigName
-    ).location;
+  matchLocationFromProjectLocationDataStoreDocumentProcessingConfigName(projectLocationDataStoreDocumentProcessingConfigName: string) {
+    return this.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.match(projectLocationDataStoreDocumentProcessingConfigName).location;
   }
 
   /**
@@ -4658,12 +3508,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_documentProcessingConfig resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationDataStoreDocumentProcessingConfigName(
-    projectLocationDataStoreDocumentProcessingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.match(
-      projectLocationDataStoreDocumentProcessingConfigName
-    ).data_store;
+  matchDataStoreFromProjectLocationDataStoreDocumentProcessingConfigName(projectLocationDataStoreDocumentProcessingConfigName: string) {
+    return this.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.match(projectLocationDataStoreDocumentProcessingConfigName).data_store;
   }
 
   /**
@@ -4675,20 +3521,13 @@ export class CmekConfigServiceClient {
    * @param {string} schema
    * @returns {string} Resource name string.
    */
-  projectLocationDataStoreSchemaPath(
-    project: string,
-    location: string,
-    dataStore: string,
-    schema: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        data_store: dataStore,
-        schema: schema,
-      }
-    );
+  projectLocationDataStoreSchemaPath(project:string,location:string,dataStore:string,schema:string) {
+    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.render({
+      project: project,
+      location: location,
+      data_store: dataStore,
+      schema: schema,
+    });
   }
 
   /**
@@ -4698,12 +3537,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_schema resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationDataStoreSchemaName(
-    projectLocationDataStoreSchemaName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match(
-      projectLocationDataStoreSchemaName
-    ).project;
+  matchProjectFromProjectLocationDataStoreSchemaName(projectLocationDataStoreSchemaName: string) {
+    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match(projectLocationDataStoreSchemaName).project;
   }
 
   /**
@@ -4713,12 +3548,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_schema resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDataStoreSchemaName(
-    projectLocationDataStoreSchemaName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match(
-      projectLocationDataStoreSchemaName
-    ).location;
+  matchLocationFromProjectLocationDataStoreSchemaName(projectLocationDataStoreSchemaName: string) {
+    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match(projectLocationDataStoreSchemaName).location;
   }
 
   /**
@@ -4728,12 +3559,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_schema resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationDataStoreSchemaName(
-    projectLocationDataStoreSchemaName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match(
-      projectLocationDataStoreSchemaName
-    ).data_store;
+  matchDataStoreFromProjectLocationDataStoreSchemaName(projectLocationDataStoreSchemaName: string) {
+    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match(projectLocationDataStoreSchemaName).data_store;
   }
 
   /**
@@ -4743,12 +3570,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_schema resource.
    * @returns {string} A string representing the schema.
    */
-  matchSchemaFromProjectLocationDataStoreSchemaName(
-    projectLocationDataStoreSchemaName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match(
-      projectLocationDataStoreSchemaName
-    ).schema;
+  matchSchemaFromProjectLocationDataStoreSchemaName(projectLocationDataStoreSchemaName: string) {
+    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match(projectLocationDataStoreSchemaName).schema;
   }
 
   /**
@@ -4760,20 +3583,13 @@ export class CmekConfigServiceClient {
    * @param {string} serving_config
    * @returns {string} Resource name string.
    */
-  projectLocationDataStoreServingConfigPath(
-    project: string,
-    location: string,
-    dataStore: string,
-    servingConfig: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        data_store: dataStore,
-        serving_config: servingConfig,
-      }
-    );
+  projectLocationDataStoreServingConfigPath(project:string,location:string,dataStore:string,servingConfig:string) {
+    return this.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.render({
+      project: project,
+      location: location,
+      data_store: dataStore,
+      serving_config: servingConfig,
+    });
   }
 
   /**
@@ -4783,12 +3599,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_serving_config resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationDataStoreServingConfigName(
-    projectLocationDataStoreServingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match(
-      projectLocationDataStoreServingConfigName
-    ).project;
+  matchProjectFromProjectLocationDataStoreServingConfigName(projectLocationDataStoreServingConfigName: string) {
+    return this.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match(projectLocationDataStoreServingConfigName).project;
   }
 
   /**
@@ -4798,12 +3610,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_serving_config resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDataStoreServingConfigName(
-    projectLocationDataStoreServingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match(
-      projectLocationDataStoreServingConfigName
-    ).location;
+  matchLocationFromProjectLocationDataStoreServingConfigName(projectLocationDataStoreServingConfigName: string) {
+    return this.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match(projectLocationDataStoreServingConfigName).location;
   }
 
   /**
@@ -4813,12 +3621,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_serving_config resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationDataStoreServingConfigName(
-    projectLocationDataStoreServingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match(
-      projectLocationDataStoreServingConfigName
-    ).data_store;
+  matchDataStoreFromProjectLocationDataStoreServingConfigName(projectLocationDataStoreServingConfigName: string) {
+    return this.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match(projectLocationDataStoreServingConfigName).data_store;
   }
 
   /**
@@ -4828,12 +3632,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_serving_config resource.
    * @returns {string} A string representing the serving_config.
    */
-  matchServingConfigFromProjectLocationDataStoreServingConfigName(
-    projectLocationDataStoreServingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match(
-      projectLocationDataStoreServingConfigName
-    ).serving_config;
+  matchServingConfigFromProjectLocationDataStoreServingConfigName(projectLocationDataStoreServingConfigName: string) {
+    return this.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match(projectLocationDataStoreServingConfigName).serving_config;
   }
 
   /**
@@ -4845,20 +3645,13 @@ export class CmekConfigServiceClient {
    * @param {string} session
    * @returns {string} Resource name string.
    */
-  projectLocationDataStoreSessionPath(
-    project: string,
-    location: string,
-    dataStore: string,
-    session: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSessionPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        data_store: dataStore,
-        session: session,
-      }
-    );
+  projectLocationDataStoreSessionPath(project:string,location:string,dataStore:string,session:string) {
+    return this.pathTemplates.projectLocationDataStoreSessionPathTemplate.render({
+      project: project,
+      location: location,
+      data_store: dataStore,
+      session: session,
+    });
   }
 
   /**
@@ -4868,12 +3661,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_session resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationDataStoreSessionName(
-    projectLocationDataStoreSessionName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSessionPathTemplate.match(
-      projectLocationDataStoreSessionName
-    ).project;
+  matchProjectFromProjectLocationDataStoreSessionName(projectLocationDataStoreSessionName: string) {
+    return this.pathTemplates.projectLocationDataStoreSessionPathTemplate.match(projectLocationDataStoreSessionName).project;
   }
 
   /**
@@ -4883,12 +3672,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_session resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDataStoreSessionName(
-    projectLocationDataStoreSessionName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSessionPathTemplate.match(
-      projectLocationDataStoreSessionName
-    ).location;
+  matchLocationFromProjectLocationDataStoreSessionName(projectLocationDataStoreSessionName: string) {
+    return this.pathTemplates.projectLocationDataStoreSessionPathTemplate.match(projectLocationDataStoreSessionName).location;
   }
 
   /**
@@ -4898,12 +3683,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_session resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationDataStoreSessionName(
-    projectLocationDataStoreSessionName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSessionPathTemplate.match(
-      projectLocationDataStoreSessionName
-    ).data_store;
+  matchDataStoreFromProjectLocationDataStoreSessionName(projectLocationDataStoreSessionName: string) {
+    return this.pathTemplates.projectLocationDataStoreSessionPathTemplate.match(projectLocationDataStoreSessionName).data_store;
   }
 
   /**
@@ -4913,12 +3694,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_session resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectLocationDataStoreSessionName(
-    projectLocationDataStoreSessionName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSessionPathTemplate.match(
-      projectLocationDataStoreSessionName
-    ).session;
+  matchSessionFromProjectLocationDataStoreSessionName(projectLocationDataStoreSessionName: string) {
+    return this.pathTemplates.projectLocationDataStoreSessionPathTemplate.match(projectLocationDataStoreSessionName).session;
   }
 
   /**
@@ -4931,22 +3708,14 @@ export class CmekConfigServiceClient {
    * @param {string} answer
    * @returns {string} Resource name string.
    */
-  projectLocationDataStoreSessionAnswerPath(
-    project: string,
-    location: string,
-    dataStore: string,
-    session: string,
-    answer: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        data_store: dataStore,
-        session: session,
-        answer: answer,
-      }
-    );
+  projectLocationDataStoreSessionAnswerPath(project:string,location:string,dataStore:string,session:string,answer:string) {
+    return this.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.render({
+      project: project,
+      location: location,
+      data_store: dataStore,
+      session: session,
+      answer: answer,
+    });
   }
 
   /**
@@ -4956,12 +3725,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_session_answer resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationDataStoreSessionAnswerName(
-    projectLocationDataStoreSessionAnswerName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.match(
-      projectLocationDataStoreSessionAnswerName
-    ).project;
+  matchProjectFromProjectLocationDataStoreSessionAnswerName(projectLocationDataStoreSessionAnswerName: string) {
+    return this.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.match(projectLocationDataStoreSessionAnswerName).project;
   }
 
   /**
@@ -4971,12 +3736,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_session_answer resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDataStoreSessionAnswerName(
-    projectLocationDataStoreSessionAnswerName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.match(
-      projectLocationDataStoreSessionAnswerName
-    ).location;
+  matchLocationFromProjectLocationDataStoreSessionAnswerName(projectLocationDataStoreSessionAnswerName: string) {
+    return this.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.match(projectLocationDataStoreSessionAnswerName).location;
   }
 
   /**
@@ -4986,12 +3747,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_session_answer resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationDataStoreSessionAnswerName(
-    projectLocationDataStoreSessionAnswerName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.match(
-      projectLocationDataStoreSessionAnswerName
-    ).data_store;
+  matchDataStoreFromProjectLocationDataStoreSessionAnswerName(projectLocationDataStoreSessionAnswerName: string) {
+    return this.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.match(projectLocationDataStoreSessionAnswerName).data_store;
   }
 
   /**
@@ -5001,12 +3758,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_session_answer resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectLocationDataStoreSessionAnswerName(
-    projectLocationDataStoreSessionAnswerName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.match(
-      projectLocationDataStoreSessionAnswerName
-    ).session;
+  matchSessionFromProjectLocationDataStoreSessionAnswerName(projectLocationDataStoreSessionAnswerName: string) {
+    return this.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.match(projectLocationDataStoreSessionAnswerName).session;
   }
 
   /**
@@ -5016,12 +3769,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_session_answer resource.
    * @returns {string} A string representing the answer.
    */
-  matchAnswerFromProjectLocationDataStoreSessionAnswerName(
-    projectLocationDataStoreSessionAnswerName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.match(
-      projectLocationDataStoreSessionAnswerName
-    ).answer;
+  matchAnswerFromProjectLocationDataStoreSessionAnswerName(projectLocationDataStoreSessionAnswerName: string) {
+    return this.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.match(projectLocationDataStoreSessionAnswerName).answer;
   }
 
   /**
@@ -5032,18 +3781,12 @@ export class CmekConfigServiceClient {
    * @param {string} data_store
    * @returns {string} Resource name string.
    */
-  projectLocationDataStoreSiteSearchEnginePath(
-    project: string,
-    location: string,
-    dataStore: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.render(
-      {
-        project: project,
-        location: location,
-        data_store: dataStore,
-      }
-    );
+  projectLocationDataStoreSiteSearchEnginePath(project:string,location:string,dataStore:string) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.render({
+      project: project,
+      location: location,
+      data_store: dataStore,
+    });
   }
 
   /**
@@ -5053,12 +3796,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_siteSearchEngine resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationDataStoreSiteSearchEngineName(
-    projectLocationDataStoreSiteSearchEngineName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.match(
-      projectLocationDataStoreSiteSearchEngineName
-    ).project;
+  matchProjectFromProjectLocationDataStoreSiteSearchEngineName(projectLocationDataStoreSiteSearchEngineName: string) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.match(projectLocationDataStoreSiteSearchEngineName).project;
   }
 
   /**
@@ -5068,12 +3807,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_siteSearchEngine resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDataStoreSiteSearchEngineName(
-    projectLocationDataStoreSiteSearchEngineName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.match(
-      projectLocationDataStoreSiteSearchEngineName
-    ).location;
+  matchLocationFromProjectLocationDataStoreSiteSearchEngineName(projectLocationDataStoreSiteSearchEngineName: string) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.match(projectLocationDataStoreSiteSearchEngineName).location;
   }
 
   /**
@@ -5083,12 +3818,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_siteSearchEngine resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationDataStoreSiteSearchEngineName(
-    projectLocationDataStoreSiteSearchEngineName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.match(
-      projectLocationDataStoreSiteSearchEngineName
-    ).data_store;
+  matchDataStoreFromProjectLocationDataStoreSiteSearchEngineName(projectLocationDataStoreSiteSearchEngineName: string) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.match(projectLocationDataStoreSiteSearchEngineName).data_store;
   }
 
   /**
@@ -5100,20 +3831,13 @@ export class CmekConfigServiceClient {
    * @param {string} sitemap
    * @returns {string} Resource name string.
    */
-  projectLocationDataStoreSiteSearchEngineSitemapPath(
-    project: string,
-    location: string,
-    dataStore: string,
-    sitemap: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        data_store: dataStore,
-        sitemap: sitemap,
-      }
-    );
+  projectLocationDataStoreSiteSearchEngineSitemapPath(project:string,location:string,dataStore:string,sitemap:string) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.render({
+      project: project,
+      location: location,
+      data_store: dataStore,
+      sitemap: sitemap,
+    });
   }
 
   /**
@@ -5123,12 +3847,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationDataStoreSiteSearchEngineSitemapName(
-    projectLocationDataStoreSiteSearchEngineSitemapName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
-      projectLocationDataStoreSiteSearchEngineSitemapName
-    ).project;
+  matchProjectFromProjectLocationDataStoreSiteSearchEngineSitemapName(projectLocationDataStoreSiteSearchEngineSitemapName: string) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(projectLocationDataStoreSiteSearchEngineSitemapName).project;
   }
 
   /**
@@ -5138,12 +3858,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDataStoreSiteSearchEngineSitemapName(
-    projectLocationDataStoreSiteSearchEngineSitemapName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
-      projectLocationDataStoreSiteSearchEngineSitemapName
-    ).location;
+  matchLocationFromProjectLocationDataStoreSiteSearchEngineSitemapName(projectLocationDataStoreSiteSearchEngineSitemapName: string) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(projectLocationDataStoreSiteSearchEngineSitemapName).location;
   }
 
   /**
@@ -5153,12 +3869,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationDataStoreSiteSearchEngineSitemapName(
-    projectLocationDataStoreSiteSearchEngineSitemapName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
-      projectLocationDataStoreSiteSearchEngineSitemapName
-    ).data_store;
+  matchDataStoreFromProjectLocationDataStoreSiteSearchEngineSitemapName(projectLocationDataStoreSiteSearchEngineSitemapName: string) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(projectLocationDataStoreSiteSearchEngineSitemapName).data_store;
   }
 
   /**
@@ -5168,12 +3880,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
    * @returns {string} A string representing the sitemap.
    */
-  matchSitemapFromProjectLocationDataStoreSiteSearchEngineSitemapName(
-    projectLocationDataStoreSiteSearchEngineSitemapName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
-      projectLocationDataStoreSiteSearchEngineSitemapName
-    ).sitemap;
+  matchSitemapFromProjectLocationDataStoreSiteSearchEngineSitemapName(projectLocationDataStoreSiteSearchEngineSitemapName: string) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(projectLocationDataStoreSiteSearchEngineSitemapName).sitemap;
   }
 
   /**
@@ -5185,20 +3893,13 @@ export class CmekConfigServiceClient {
    * @param {string} target_site
    * @returns {string} Resource name string.
    */
-  projectLocationDataStoreSiteSearchEngineTargetSitePath(
-    project: string,
-    location: string,
-    dataStore: string,
-    targetSite: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.render(
-      {
-        project: project,
-        location: location,
-        data_store: dataStore,
-        target_site: targetSite,
-      }
-    );
+  projectLocationDataStoreSiteSearchEngineTargetSitePath(project:string,location:string,dataStore:string,targetSite:string) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.render({
+      project: project,
+      location: location,
+      data_store: dataStore,
+      target_site: targetSite,
+    });
   }
 
   /**
@@ -5208,12 +3909,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_siteSearchEngine_target_site resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationDataStoreSiteSearchEngineTargetSiteName(
-    projectLocationDataStoreSiteSearchEngineTargetSiteName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.match(
-      projectLocationDataStoreSiteSearchEngineTargetSiteName
-    ).project;
+  matchProjectFromProjectLocationDataStoreSiteSearchEngineTargetSiteName(projectLocationDataStoreSiteSearchEngineTargetSiteName: string) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.match(projectLocationDataStoreSiteSearchEngineTargetSiteName).project;
   }
 
   /**
@@ -5223,12 +3920,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_siteSearchEngine_target_site resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDataStoreSiteSearchEngineTargetSiteName(
-    projectLocationDataStoreSiteSearchEngineTargetSiteName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.match(
-      projectLocationDataStoreSiteSearchEngineTargetSiteName
-    ).location;
+  matchLocationFromProjectLocationDataStoreSiteSearchEngineTargetSiteName(projectLocationDataStoreSiteSearchEngineTargetSiteName: string) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.match(projectLocationDataStoreSiteSearchEngineTargetSiteName).location;
   }
 
   /**
@@ -5238,12 +3931,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_siteSearchEngine_target_site resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationDataStoreSiteSearchEngineTargetSiteName(
-    projectLocationDataStoreSiteSearchEngineTargetSiteName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.match(
-      projectLocationDataStoreSiteSearchEngineTargetSiteName
-    ).data_store;
+  matchDataStoreFromProjectLocationDataStoreSiteSearchEngineTargetSiteName(projectLocationDataStoreSiteSearchEngineTargetSiteName: string) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.match(projectLocationDataStoreSiteSearchEngineTargetSiteName).data_store;
   }
 
   /**
@@ -5253,12 +3942,8 @@ export class CmekConfigServiceClient {
    *   A fully-qualified path representing project_location_data_store_siteSearchEngine_target_site resource.
    * @returns {string} A string representing the target_site.
    */
-  matchTargetSiteFromProjectLocationDataStoreSiteSearchEngineTargetSiteName(
-    projectLocationDataStoreSiteSearchEngineTargetSiteName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.match(
-      projectLocationDataStoreSiteSearchEngineTargetSiteName
-    ).target_site;
+  matchTargetSiteFromProjectLocationDataStoreSiteSearchEngineTargetSiteName(projectLocationDataStoreSiteSearchEngineTargetSiteName: string) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.match(projectLocationDataStoreSiteSearchEngineTargetSiteName).target_site;
   }
 
   /**
@@ -5273,9 +3958,7 @@ export class CmekConfigServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.locationsClient.close().catch(err => {throw err});
         void this.operationsClient.close();
       });
     }

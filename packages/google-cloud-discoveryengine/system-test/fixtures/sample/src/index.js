@@ -16,6 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const discoveryengine = require('@google-cloud/discoveryengine');
 
@@ -23,30 +24,22 @@ function main() {
   const cmekConfigServiceClient = new discoveryengine.CmekConfigServiceClient();
   const completionServiceClient = new discoveryengine.CompletionServiceClient();
   const controlServiceClient = new discoveryengine.ControlServiceClient();
-  const conversationalSearchServiceClient =
-    new discoveryengine.ConversationalSearchServiceClient();
+  const conversationalSearchServiceClient = new discoveryengine.ConversationalSearchServiceClient();
   const dataStoreServiceClient = new discoveryengine.DataStoreServiceClient();
   const documentServiceClient = new discoveryengine.DocumentServiceClient();
   const engineServiceClient = new discoveryengine.EngineServiceClient();
-  const groundedGenerationServiceClient =
-    new discoveryengine.GroundedGenerationServiceClient();
-  const identityMappingStoreServiceClient =
-    new discoveryengine.IdentityMappingStoreServiceClient();
+  const groundedGenerationServiceClient = new discoveryengine.GroundedGenerationServiceClient();
+  const identityMappingStoreServiceClient = new discoveryengine.IdentityMappingStoreServiceClient();
   const projectServiceClient = new discoveryengine.ProjectServiceClient();
   const rankServiceClient = new discoveryengine.RankServiceClient();
-  const recommendationServiceClient =
-    new discoveryengine.RecommendationServiceClient();
+  const recommendationServiceClient = new discoveryengine.RecommendationServiceClient();
   const schemaServiceClient = new discoveryengine.SchemaServiceClient();
   const searchServiceClient = new discoveryengine.SearchServiceClient();
-  const searchTuningServiceClient =
-    new discoveryengine.SearchTuningServiceClient();
-  const servingConfigServiceClient =
-    new discoveryengine.ServingConfigServiceClient();
-  const siteSearchEngineServiceClient =
-    new discoveryengine.SiteSearchEngineServiceClient();
+  const searchTuningServiceClient = new discoveryengine.SearchTuningServiceClient();
+  const servingConfigServiceClient = new discoveryengine.ServingConfigServiceClient();
+  const siteSearchEngineServiceClient = new discoveryengine.SiteSearchEngineServiceClient();
   const userEventServiceClient = new discoveryengine.UserEventServiceClient();
-  const userLicenseServiceClient =
-    new discoveryengine.UserLicenseServiceClient();
+  const userLicenseServiceClient = new discoveryengine.UserLicenseServiceClient();
 }
 
 main();
