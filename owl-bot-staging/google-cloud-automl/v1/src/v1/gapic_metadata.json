@@ -1,0 +1,249 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.automl.v1",
+  "libraryPackage": "@google-cloud/automl",
+  "services": {
+    "AutoMl": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AutoMlClient",
+          "rpcs": {
+            "GetDataset": {
+              "methods": [
+                "getDataset"
+              ]
+            },
+            "UpdateDataset": {
+              "methods": [
+                "updateDataset"
+              ]
+            },
+            "GetAnnotationSpec": {
+              "methods": [
+                "getAnnotationSpec"
+              ]
+            },
+            "GetModel": {
+              "methods": [
+                "getModel"
+              ]
+            },
+            "UpdateModel": {
+              "methods": [
+                "updateModel"
+              ]
+            },
+            "GetModelEvaluation": {
+              "methods": [
+                "getModelEvaluation"
+              ]
+            },
+            "CreateDataset": {
+              "methods": [
+                "createDataset"
+              ]
+            },
+            "DeleteDataset": {
+              "methods": [
+                "deleteDataset"
+              ]
+            },
+            "ImportData": {
+              "methods": [
+                "importData"
+              ]
+            },
+            "ExportData": {
+              "methods": [
+                "exportData"
+              ]
+            },
+            "CreateModel": {
+              "methods": [
+                "createModel"
+              ]
+            },
+            "DeleteModel": {
+              "methods": [
+                "deleteModel"
+              ]
+            },
+            "DeployModel": {
+              "methods": [
+                "deployModel"
+              ]
+            },
+            "UndeployModel": {
+              "methods": [
+                "undeployModel"
+              ]
+            },
+            "ExportModel": {
+              "methods": [
+                "exportModel"
+              ]
+            },
+            "ListDatasets": {
+              "methods": [
+                "listDatasets",
+                "listDatasetsStream",
+                "listDatasetsAsync"
+              ]
+            },
+            "ListModels": {
+              "methods": [
+                "listModels",
+                "listModelsStream",
+                "listModelsAsync"
+              ]
+            },
+            "ListModelEvaluations": {
+              "methods": [
+                "listModelEvaluations",
+                "listModelEvaluationsStream",
+                "listModelEvaluationsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AutoMlClient",
+          "rpcs": {
+            "GetDataset": {
+              "methods": [
+                "getDataset"
+              ]
+            },
+            "UpdateDataset": {
+              "methods": [
+                "updateDataset"
+              ]
+            },
+            "GetAnnotationSpec": {
+              "methods": [
+                "getAnnotationSpec"
+              ]
+            },
+            "GetModel": {
+              "methods": [
+                "getModel"
+              ]
+            },
+            "UpdateModel": {
+              "methods": [
+                "updateModel"
+              ]
+            },
+            "GetModelEvaluation": {
+              "methods": [
+                "getModelEvaluation"
+              ]
+            },
+            "CreateDataset": {
+              "methods": [
+                "createDataset"
+              ]
+            },
+            "DeleteDataset": {
+              "methods": [
+                "deleteDataset"
+              ]
+            },
+            "ImportData": {
+              "methods": [
+                "importData"
+              ]
+            },
+            "ExportData": {
+              "methods": [
+                "exportData"
+              ]
+            },
+            "CreateModel": {
+              "methods": [
+                "createModel"
+              ]
+            },
+            "DeleteModel": {
+              "methods": [
+                "deleteModel"
+              ]
+            },
+            "DeployModel": {
+              "methods": [
+                "deployModel"
+              ]
+            },
+            "UndeployModel": {
+              "methods": [
+                "undeployModel"
+              ]
+            },
+            "ExportModel": {
+              "methods": [
+                "exportModel"
+              ]
+            },
+            "ListDatasets": {
+              "methods": [
+                "listDatasets",
+                "listDatasetsStream",
+                "listDatasetsAsync"
+              ]
+            },
+            "ListModels": {
+              "methods": [
+                "listModels",
+                "listModelsStream",
+                "listModelsAsync"
+              ]
+            },
+            "ListModelEvaluations": {
+              "methods": [
+                "listModelEvaluations",
+                "listModelEvaluationsStream",
+                "listModelEvaluationsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "PredictionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "PredictionServiceClient",
+          "rpcs": {
+            "Predict": {
+              "methods": [
+                "predict"
+              ]
+            },
+            "BatchPredict": {
+              "methods": [
+                "batchPredict"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "PredictionServiceClient",
+          "rpcs": {
+            "Predict": {
+              "methods": [
+                "predict"
+              ]
+            },
+            "BatchPredict": {
+              "methods": [
+                "batchPredict"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

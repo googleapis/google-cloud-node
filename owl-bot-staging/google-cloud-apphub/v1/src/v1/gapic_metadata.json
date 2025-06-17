@@ -1,0 +1,317 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.apphub.v1",
+  "libraryPackage": "@google-cloud/apphub",
+  "services": {
+    "AppHub": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AppHubClient",
+          "rpcs": {
+            "LookupServiceProjectAttachment": {
+              "methods": [
+                "lookupServiceProjectAttachment"
+              ]
+            },
+            "GetServiceProjectAttachment": {
+              "methods": [
+                "getServiceProjectAttachment"
+              ]
+            },
+            "DetachServiceProjectAttachment": {
+              "methods": [
+                "detachServiceProjectAttachment"
+              ]
+            },
+            "GetDiscoveredService": {
+              "methods": [
+                "getDiscoveredService"
+              ]
+            },
+            "LookupDiscoveredService": {
+              "methods": [
+                "lookupDiscoveredService"
+              ]
+            },
+            "GetService": {
+              "methods": [
+                "getService"
+              ]
+            },
+            "GetDiscoveredWorkload": {
+              "methods": [
+                "getDiscoveredWorkload"
+              ]
+            },
+            "LookupDiscoveredWorkload": {
+              "methods": [
+                "lookupDiscoveredWorkload"
+              ]
+            },
+            "GetWorkload": {
+              "methods": [
+                "getWorkload"
+              ]
+            },
+            "GetApplication": {
+              "methods": [
+                "getApplication"
+              ]
+            },
+            "CreateServiceProjectAttachment": {
+              "methods": [
+                "createServiceProjectAttachment"
+              ]
+            },
+            "DeleteServiceProjectAttachment": {
+              "methods": [
+                "deleteServiceProjectAttachment"
+              ]
+            },
+            "CreateService": {
+              "methods": [
+                "createService"
+              ]
+            },
+            "UpdateService": {
+              "methods": [
+                "updateService"
+              ]
+            },
+            "DeleteService": {
+              "methods": [
+                "deleteService"
+              ]
+            },
+            "CreateWorkload": {
+              "methods": [
+                "createWorkload"
+              ]
+            },
+            "UpdateWorkload": {
+              "methods": [
+                "updateWorkload"
+              ]
+            },
+            "DeleteWorkload": {
+              "methods": [
+                "deleteWorkload"
+              ]
+            },
+            "CreateApplication": {
+              "methods": [
+                "createApplication"
+              ]
+            },
+            "UpdateApplication": {
+              "methods": [
+                "updateApplication"
+              ]
+            },
+            "DeleteApplication": {
+              "methods": [
+                "deleteApplication"
+              ]
+            },
+            "ListServiceProjectAttachments": {
+              "methods": [
+                "listServiceProjectAttachments",
+                "listServiceProjectAttachmentsStream",
+                "listServiceProjectAttachmentsAsync"
+              ]
+            },
+            "ListDiscoveredServices": {
+              "methods": [
+                "listDiscoveredServices",
+                "listDiscoveredServicesStream",
+                "listDiscoveredServicesAsync"
+              ]
+            },
+            "ListServices": {
+              "methods": [
+                "listServices",
+                "listServicesStream",
+                "listServicesAsync"
+              ]
+            },
+            "ListDiscoveredWorkloads": {
+              "methods": [
+                "listDiscoveredWorkloads",
+                "listDiscoveredWorkloadsStream",
+                "listDiscoveredWorkloadsAsync"
+              ]
+            },
+            "ListWorkloads": {
+              "methods": [
+                "listWorkloads",
+                "listWorkloadsStream",
+                "listWorkloadsAsync"
+              ]
+            },
+            "ListApplications": {
+              "methods": [
+                "listApplications",
+                "listApplicationsStream",
+                "listApplicationsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AppHubClient",
+          "rpcs": {
+            "LookupServiceProjectAttachment": {
+              "methods": [
+                "lookupServiceProjectAttachment"
+              ]
+            },
+            "GetServiceProjectAttachment": {
+              "methods": [
+                "getServiceProjectAttachment"
+              ]
+            },
+            "DetachServiceProjectAttachment": {
+              "methods": [
+                "detachServiceProjectAttachment"
+              ]
+            },
+            "GetDiscoveredService": {
+              "methods": [
+                "getDiscoveredService"
+              ]
+            },
+            "LookupDiscoveredService": {
+              "methods": [
+                "lookupDiscoveredService"
+              ]
+            },
+            "GetService": {
+              "methods": [
+                "getService"
+              ]
+            },
+            "GetDiscoveredWorkload": {
+              "methods": [
+                "getDiscoveredWorkload"
+              ]
+            },
+            "LookupDiscoveredWorkload": {
+              "methods": [
+                "lookupDiscoveredWorkload"
+              ]
+            },
+            "GetWorkload": {
+              "methods": [
+                "getWorkload"
+              ]
+            },
+            "GetApplication": {
+              "methods": [
+                "getApplication"
+              ]
+            },
+            "CreateServiceProjectAttachment": {
+              "methods": [
+                "createServiceProjectAttachment"
+              ]
+            },
+            "DeleteServiceProjectAttachment": {
+              "methods": [
+                "deleteServiceProjectAttachment"
+              ]
+            },
+            "CreateService": {
+              "methods": [
+                "createService"
+              ]
+            },
+            "UpdateService": {
+              "methods": [
+                "updateService"
+              ]
+            },
+            "DeleteService": {
+              "methods": [
+                "deleteService"
+              ]
+            },
+            "CreateWorkload": {
+              "methods": [
+                "createWorkload"
+              ]
+            },
+            "UpdateWorkload": {
+              "methods": [
+                "updateWorkload"
+              ]
+            },
+            "DeleteWorkload": {
+              "methods": [
+                "deleteWorkload"
+              ]
+            },
+            "CreateApplication": {
+              "methods": [
+                "createApplication"
+              ]
+            },
+            "UpdateApplication": {
+              "methods": [
+                "updateApplication"
+              ]
+            },
+            "DeleteApplication": {
+              "methods": [
+                "deleteApplication"
+              ]
+            },
+            "ListServiceProjectAttachments": {
+              "methods": [
+                "listServiceProjectAttachments",
+                "listServiceProjectAttachmentsStream",
+                "listServiceProjectAttachmentsAsync"
+              ]
+            },
+            "ListDiscoveredServices": {
+              "methods": [
+                "listDiscoveredServices",
+                "listDiscoveredServicesStream",
+                "listDiscoveredServicesAsync"
+              ]
+            },
+            "ListServices": {
+              "methods": [
+                "listServices",
+                "listServicesStream",
+                "listServicesAsync"
+              ]
+            },
+            "ListDiscoveredWorkloads": {
+              "methods": [
+                "listDiscoveredWorkloads",
+                "listDiscoveredWorkloadsStream",
+                "listDiscoveredWorkloadsAsync"
+              ]
+            },
+            "ListWorkloads": {
+              "methods": [
+                "listWorkloads",
+                "listWorkloadsStream",
+                "listWorkloadsAsync"
+              ]
+            },
+            "ListApplications": {
+              "methods": [
+                "listApplications",
+                "listApplicationsStream",
+                "listApplicationsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

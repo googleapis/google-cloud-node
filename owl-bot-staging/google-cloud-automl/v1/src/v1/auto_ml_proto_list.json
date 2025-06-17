@@ -1,0 +1,21 @@
+[
+  "../../protos/google/cloud/automl/v1/annotation_payload.proto",
+  "../../protos/google/cloud/automl/v1/annotation_spec.proto",
+  "../../protos/google/cloud/automl/v1/classification.proto",
+  "../../protos/google/cloud/automl/v1/data_items.proto",
+  "../../protos/google/cloud/automl/v1/dataset.proto",
+  "../../protos/google/cloud/automl/v1/detection.proto",
+  "../../protos/google/cloud/automl/v1/geometry.proto",
+  "../../protos/google/cloud/automl/v1/image.proto",
+  "../../protos/google/cloud/automl/v1/io.proto",
+  "../../protos/google/cloud/automl/v1/model.proto",
+  "../../protos/google/cloud/automl/v1/model_evaluation.proto",
+  "../../protos/google/cloud/automl/v1/operations.proto",
+  "../../protos/google/cloud/automl/v1/prediction_service.proto",
+  "../../protos/google/cloud/automl/v1/service.proto",
+  "../../protos/google/cloud/automl/v1/text.proto",
+  "../../protos/google/cloud/automl/v1/text_extraction.proto",
+  "../../protos/google/cloud/automl/v1/text_segment.proto",
+  "../../protos/google/cloud/automl/v1/text_sentiment.proto",
+  "../../protos/google/cloud/automl/v1/translation.proto"
+]

@@ -1,0 +1,67 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.beyondcorp.appgateways.v1",
+  "libraryPackage": "@google-cloud/appgateways",
+  "services": {
+    "AppGatewaysService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AppGatewaysServiceClient",
+          "rpcs": {
+            "GetAppGateway": {
+              "methods": [
+                "getAppGateway"
+              ]
+            },
+            "CreateAppGateway": {
+              "methods": [
+                "createAppGateway"
+              ]
+            },
+            "DeleteAppGateway": {
+              "methods": [
+                "deleteAppGateway"
+              ]
+            },
+            "ListAppGateways": {
+              "methods": [
+                "listAppGateways",
+                "listAppGatewaysStream",
+                "listAppGatewaysAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AppGatewaysServiceClient",
+          "rpcs": {
+            "GetAppGateway": {
+              "methods": [
+                "getAppGateway"
+              ]
+            },
+            "CreateAppGateway": {
+              "methods": [
+                "createAppGateway"
+              ]
+            },
+            "DeleteAppGateway": {
+              "methods": [
+                "deleteAppGateway"
+              ]
+            },
+            "ListAppGateways": {
+              "methods": [
+                "listAppGateways",
+                "listAppGatewaysStream",
+                "listAppGatewaysAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

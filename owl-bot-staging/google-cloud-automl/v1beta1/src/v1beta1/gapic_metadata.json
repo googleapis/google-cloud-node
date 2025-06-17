@@ -1,0 +1,317 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.automl.v1beta1",
+  "libraryPackage": "@google-cloud/automl",
+  "services": {
+    "AutoMl": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AutoMlClient",
+          "rpcs": {
+            "CreateDataset": {
+              "methods": [
+                "createDataset"
+              ]
+            },
+            "GetDataset": {
+              "methods": [
+                "getDataset"
+              ]
+            },
+            "UpdateDataset": {
+              "methods": [
+                "updateDataset"
+              ]
+            },
+            "GetAnnotationSpec": {
+              "methods": [
+                "getAnnotationSpec"
+              ]
+            },
+            "GetTableSpec": {
+              "methods": [
+                "getTableSpec"
+              ]
+            },
+            "UpdateTableSpec": {
+              "methods": [
+                "updateTableSpec"
+              ]
+            },
+            "GetColumnSpec": {
+              "methods": [
+                "getColumnSpec"
+              ]
+            },
+            "UpdateColumnSpec": {
+              "methods": [
+                "updateColumnSpec"
+              ]
+            },
+            "GetModel": {
+              "methods": [
+                "getModel"
+              ]
+            },
+            "GetModelEvaluation": {
+              "methods": [
+                "getModelEvaluation"
+              ]
+            },
+            "DeleteDataset": {
+              "methods": [
+                "deleteDataset"
+              ]
+            },
+            "ImportData": {
+              "methods": [
+                "importData"
+              ]
+            },
+            "ExportData": {
+              "methods": [
+                "exportData"
+              ]
+            },
+            "CreateModel": {
+              "methods": [
+                "createModel"
+              ]
+            },
+            "DeleteModel": {
+              "methods": [
+                "deleteModel"
+              ]
+            },
+            "DeployModel": {
+              "methods": [
+                "deployModel"
+              ]
+            },
+            "UndeployModel": {
+              "methods": [
+                "undeployModel"
+              ]
+            },
+            "ExportModel": {
+              "methods": [
+                "exportModel"
+              ]
+            },
+            "ExportEvaluatedExamples": {
+              "methods": [
+                "exportEvaluatedExamples"
+              ]
+            },
+            "ListDatasets": {
+              "methods": [
+                "listDatasets",
+                "listDatasetsStream",
+                "listDatasetsAsync"
+              ]
+            },
+            "ListTableSpecs": {
+              "methods": [
+                "listTableSpecs",
+                "listTableSpecsStream",
+                "listTableSpecsAsync"
+              ]
+            },
+            "ListColumnSpecs": {
+              "methods": [
+                "listColumnSpecs",
+                "listColumnSpecsStream",
+                "listColumnSpecsAsync"
+              ]
+            },
+            "ListModels": {
+              "methods": [
+                "listModels",
+                "listModelsStream",
+                "listModelsAsync"
+              ]
+            },
+            "ListModelEvaluations": {
+              "methods": [
+                "listModelEvaluations",
+                "listModelEvaluationsStream",
+                "listModelEvaluationsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AutoMlClient",
+          "rpcs": {
+            "CreateDataset": {
+              "methods": [
+                "createDataset"
+              ]
+            },
+            "GetDataset": {
+              "methods": [
+                "getDataset"
+              ]
+            },
+            "UpdateDataset": {
+              "methods": [
+                "updateDataset"
+              ]
+            },
+            "GetAnnotationSpec": {
+              "methods": [
+                "getAnnotationSpec"
+              ]
+            },
+            "GetTableSpec": {
+              "methods": [
+                "getTableSpec"
+              ]
+            },
+            "UpdateTableSpec": {
+              "methods": [
+                "updateTableSpec"
+              ]
+            },
+            "GetColumnSpec": {
+              "methods": [
+                "getColumnSpec"
+              ]
+            },
+            "UpdateColumnSpec": {
+              "methods": [
+                "updateColumnSpec"
+              ]
+            },
+            "GetModel": {
+              "methods": [
+                "getModel"
+              ]
+            },
+            "GetModelEvaluation": {
+              "methods": [
+                "getModelEvaluation"
+              ]
+            },
+            "DeleteDataset": {
+              "methods": [
+                "deleteDataset"
+              ]
+            },
+            "ImportData": {
+              "methods": [
+                "importData"
+              ]
+            },
+            "ExportData": {
+              "methods": [
+                "exportData"
+              ]
+            },
+            "CreateModel": {
+              "methods": [
+                "createModel"
+              ]
+            },
+            "DeleteModel": {
+              "methods": [
+                "deleteModel"
+              ]
+            },
+            "DeployModel": {
+              "methods": [
+                "deployModel"
+              ]
+            },
+            "UndeployModel": {
+              "methods": [
+                "undeployModel"
+              ]
+            },
+            "ExportModel": {
+              "methods": [
+                "exportModel"
+              ]
+            },
+            "ExportEvaluatedExamples": {
+              "methods": [
+                "exportEvaluatedExamples"
+              ]
+            },
+            "ListDatasets": {
+              "methods": [
+                "listDatasets",
+                "listDatasetsStream",
+                "listDatasetsAsync"
+              ]
+            },
+            "ListTableSpecs": {
+              "methods": [
+                "listTableSpecs",
+                "listTableSpecsStream",
+                "listTableSpecsAsync"
+              ]
+            },
+            "ListColumnSpecs": {
+              "methods": [
+                "listColumnSpecs",
+                "listColumnSpecsStream",
+                "listColumnSpecsAsync"
+              ]
+            },
+            "ListModels": {
+              "methods": [
+                "listModels",
+                "listModelsStream",
+                "listModelsAsync"
+              ]
+            },
+            "ListModelEvaluations": {
+              "methods": [
+                "listModelEvaluations",
+                "listModelEvaluationsStream",
+                "listModelEvaluationsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "PredictionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "PredictionServiceClient",
+          "rpcs": {
+            "Predict": {
+              "methods": [
+                "predict"
+              ]
+            },
+            "BatchPredict": {
+              "methods": [
+                "batchPredict"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "PredictionServiceClient",
+          "rpcs": {
+            "Predict": {
+              "methods": [
+                "predict"
+              ]
+            },
+            "BatchPredict": {
+              "methods": [
+                "batchPredict"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
