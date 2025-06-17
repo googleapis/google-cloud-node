@@ -308,6 +308,52 @@ function main(placement, visitorId) {
    *  Optional. This field specifies tile navigation related parameters.
    */
   // const tileNavigationSpec = {}
+  /**
+   *  Optional. The BCP-47 language code, such as "en-US" or "sr-Latn"
+   *  list (https://www.unicode.org/cldr/charts/46/summary/root.html). For more
+   *  information, see Standardized codes (https://google.aip.dev/143). This
+   *  field helps to better interpret the query. If a value isn't specified, the
+   *  query language code is automatically detected, which may not be accurate.
+   */
+  // const languageCode = 'abc123'
+  /**
+   *  Optional. The Unicode country/region code (CLDR) of a location, such as
+   *  "US" and "419"
+   *  list (https://www.unicode.org/cldr/charts/46/supplemental/territory_information.html).
+   *  For more information, see Standardized codes (https://google.aip.dev/143).
+   *  If set, then results will be boosted based on the region_code provided.
+   */
+  // const regionCode = 'abc123'
+  /**
+   *  Optional. An id corresponding to a place, such as a store id or region id.
+   *  When specified, we use the price from the local inventory with the matching
+   *  product's
+   *  LocalInventory.place_id google.cloud.retail.v2alpha.LocalInventory.place_id 
+   *  for revenue optimization.
+   */
+  // const placeId = 'abc123'
+  /**
+   *  Optional. The user attributes that could be used for personalization of
+   *  search results.
+   *  * Populate at most 100 key-value pairs per query.
+   *  * Only supports string keys and repeated string values.
+   *  * Duplcate keys are not allowed within a single query.
+   *  Example:
+   *     user_attributes: 
+   *      { key: "pets"
+   *        value {
+   *          values: "dog"
+   *          values: "cat"
+   *        }
+   *      },
+   *      { key: "state"
+   *        value {
+   *          values: "CA"
+   *        }
+   *      }
+   *      
+   */
+  // const userAttributes = [1,2,3,4]
 
   // Imports the Retail library
   const {SearchServiceClient} = require('@google-cloud/retail').v2alpha;

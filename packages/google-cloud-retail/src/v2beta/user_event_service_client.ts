@@ -31,7 +31,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -236,7 +236,7 @@ export class UserEventServiceClient {
       ),
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
@@ -613,11 +613,29 @@ export class UserEventServiceClient {
           this._log.info('writeUserEvent response %j', response);
           return [response, options, rawResponse];
         }
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos
+          );
+        }
+        throw error;
+      });
   }
   /**
-   * Writes a single user event from the browser. This uses a GET request to
-   * due to browser restriction of POST-ing to a 3rd party domain.
+   * Writes a single user event from the browser.
+   *
+   * For larger user event payload over 16 KB, the POST method should be used
+   * instead, otherwise a 400 Bad Request error is returned.
    *
    * This method is used only by the Retail API JavaScript pixel and Google Tag
    * Manager. Users should not call this method directly.
@@ -759,7 +777,23 @@ export class UserEventServiceClient {
           this._log.info('collectUserEvent response %j', response);
           return [response, options, rawResponse];
         }
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos
+          );
+        }
+        throw error;
+      });
   }
 
   /**
@@ -2321,8 +2355,10 @@ export class UserEventServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close();
-        this.operationsClient.close();
+        this.locationsClient.close().catch(err => {
+          throw err;
+        });
+        void this.operationsClient.close();
       });
     }
     return Promise.resolve();

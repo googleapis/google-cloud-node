@@ -690,7 +690,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 129,
+                    "end": 135,
                     "type": "FULL"
                 }
             ],
@@ -1019,6 +1019,78 @@
                     "service": {
                         "shortName": "ControlService",
                         "fullName": "google.cloud.retail.v2alpha.ControlService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "retail_v2alpha_generated_ConversationalSearchService_ConversationalSearch_async",
+            "title": "AnalyticsService conversationalSearch Sample",
+            "origin": "API_DEFINITION",
+            "description": " Performs a conversational search. This feature is only available for users who have Conversational Search enabled.",
+            "canonical": true,
+            "file": "conversational_search_service.conversational_search.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 120,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ConversationalSearch",
+                "fullName": "google.cloud.retail.v2alpha.ConversationalSearchService.ConversationalSearch",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "placement",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "branch",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "query",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_categories",
+                        "type": "TYPE_STRING[]"
+                    },
+                    {
+                        "name": "conversation_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "search_params",
+                        "type": ".google.cloud.retail.v2alpha.ConversationalSearchRequest.SearchParams"
+                    },
+                    {
+                        "name": "visitor_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "user_info",
+                        "type": ".google.cloud.retail.v2alpha.UserInfo"
+                    },
+                    {
+                        "name": "conversational_filtering_spec",
+                        "type": ".google.cloud.retail.v2alpha.ConversationalSearchRequest.ConversationalFilteringSpec"
+                    }
+                ],
+                "resultType": ".google.cloud.retail.v2alpha.ConversationalSearchResponse",
+                "client": {
+                    "shortName": "ConversationalSearchServiceClient",
+                    "fullName": "google.cloud.retail.v2alpha.ConversationalSearchServiceClient"
+                },
+                "method": {
+                    "shortName": "ConversationalSearch",
+                    "fullName": "google.cloud.retail.v2alpha.ConversationalSearchService.ConversationalSearch",
+                    "service": {
+                        "shortName": "ConversationalSearchService",
+                        "fullName": "google.cloud.retail.v2alpha.ConversationalSearchService"
                     }
                 }
             }
@@ -2786,7 +2858,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 332,
+                    "end": 378,
                     "type": "FULL"
                 }
             ],
@@ -2894,6 +2966,22 @@
                     {
                         "name": "tile_navigation_spec",
                         "type": ".google.cloud.retail.v2alpha.SearchRequest.TileNavigationSpec"
+                    },
+                    {
+                        "name": "language_code",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region_code",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "place_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "user_attributes",
+                        "type": "TYPE_MESSAGE[]"
                     }
                 ],
                 "resultType": ".google.cloud.retail.v2alpha.SearchResponse",
@@ -3271,7 +3359,7 @@
             "regionTag": "retail_v2alpha_generated_UserEventService_CollectUserEvent_async",
             "title": "AnalyticsService collectUserEvent Sample",
             "origin": "API_DEFINITION",
-            "description": " Writes a single user event from the browser. This uses a GET request to due to browser restriction of POST-ing to a 3rd party domain. This method is used only by the Retail API JavaScript pixel and Google Tag Manager. Users should not call this method directly.",
+            "description": " Writes a single user event from the browser. For larger user event payload over 16 KB, the POST method should be used instead, otherwise a 400 Bad Request error is returned. This method is used only by the Retail API JavaScript pixel and Google Tag Manager. Users should not call this method directly.",
             "canonical": true,
             "file": "user_event_service.collect_user_event.js",
             "language": "JAVASCRIPT",

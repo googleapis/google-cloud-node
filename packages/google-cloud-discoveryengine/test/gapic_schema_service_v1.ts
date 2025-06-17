@@ -1571,6 +1571,52 @@ describe('v1.SchemaServiceClient', () => {
             });
         });
 
+        describe('identityMappingStore', async () => {
+            const fakePath = "/rendered/path/identityMappingStore";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                identity_mapping_store: "identityMappingStoreValue",
+            };
+            const client = new schemaserviceModule.v1.SchemaServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.identityMappingStorePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.identityMappingStorePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('identityMappingStorePath', () => {
+                const result = client.identityMappingStorePath("projectValue", "locationValue", "identityMappingStoreValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.identityMappingStorePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromIdentityMappingStoreName', () => {
+                const result = client.matchProjectFromIdentityMappingStoreName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.identityMappingStorePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromIdentityMappingStoreName', () => {
+                const result = client.matchLocationFromIdentityMappingStoreName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.identityMappingStorePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchIdentityMappingStoreFromIdentityMappingStoreName', () => {
+                const result = client.matchIdentityMappingStoreFromIdentityMappingStoreName(fakePath);
+                assert.strictEqual(result, "identityMappingStoreValue");
+                assert((client.pathTemplates.identityMappingStorePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('project', async () => {
             const fakePath = "/rendered/path/project";
             const expectedParameters = {
@@ -1597,6 +1643,90 @@ describe('v1.SchemaServiceClient', () => {
                 const result = client.matchProjectFromProjectName(fakePath);
                 assert.strictEqual(result, "projectValue");
                 assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCmekConfig', async () => {
+            const fakePath = "/rendered/path/projectLocationCmekConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new schemaserviceModule.v1.SchemaServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCmekConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCmekConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCmekConfigPath', () => {
+                const result = client.projectLocationCmekConfigPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCmekConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCmekConfigName', () => {
+                const result = client.matchProjectFromProjectLocationCmekConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCmekConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCmekConfigName', () => {
+                const result = client.matchLocationFromProjectLocationCmekConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCmekConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationCmekConfigs', async () => {
+            const fakePath = "/rendered/path/projectLocationCmekConfigs";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                cmek_config: "cmekConfigValue",
+            };
+            const client = new schemaserviceModule.v1.SchemaServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationCmekConfigsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCmekConfigsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCmekConfigsPath', () => {
+                const result = client.projectLocationCmekConfigsPath("projectValue", "locationValue", "cmekConfigValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCmekConfigsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCmekConfigsName', () => {
+                const result = client.matchProjectFromProjectLocationCmekConfigsName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCmekConfigsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCmekConfigsName', () => {
+                const result = client.matchLocationFromProjectLocationCmekConfigsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCmekConfigsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCmekConfigFromProjectLocationCmekConfigsName', () => {
+                const result = client.matchCmekConfigFromProjectLocationCmekConfigsName(fakePath);
+                assert.strictEqual(result, "cmekConfigValue");
+                assert((client.pathTemplates.projectLocationCmekConfigsPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

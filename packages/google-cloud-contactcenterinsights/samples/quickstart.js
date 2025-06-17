@@ -1,3 +1,5 @@
+// Copyright 2025 Google LLC
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -12,6 +14,10 @@
 //
 
 'use strict';
+
+// Service has limited quota, adding max results and page size to keep in the limit.
+const PAGE_SIZE = 5;
+const MAX_RESULTS = 10;
 
 async function main(projectId, location) {
   // [START nodejs_contact_center_insights_quickstart]
@@ -30,7 +36,13 @@ async function main(projectId, location) {
   async function listConversations() {
     const conversations = await client.listConversations({
       parent: `projects/${projectId}/locations/${location}`,
-    });
+        pageSize: PAGE_SIZE,
+      },
+      {
+        autopaginate: false,
+        maxResults: MAX_RESULTS,
+      },
+    );
     console.info(conversations);
   }
   listConversations();

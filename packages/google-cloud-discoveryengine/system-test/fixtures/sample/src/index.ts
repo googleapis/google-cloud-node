@@ -16,9 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {CompletionServiceClient, ControlServiceClient, ConversationalSearchServiceClient, DataStoreServiceClient, DocumentServiceClient, EngineServiceClient, GroundedGenerationServiceClient, ProjectServiceClient, RankServiceClient, RecommendationServiceClient, SchemaServiceClient, SearchServiceClient, SearchTuningServiceClient, ServingConfigServiceClient, SiteSearchEngineServiceClient, UserEventServiceClient} from '@google-cloud/discoveryengine';
+import {CmekConfigServiceClient, CompletionServiceClient, ControlServiceClient, ConversationalSearchServiceClient, DataStoreServiceClient, DocumentServiceClient, EngineServiceClient, GroundedGenerationServiceClient, IdentityMappingStoreServiceClient, ProjectServiceClient, RankServiceClient, RecommendationServiceClient, SchemaServiceClient, SearchServiceClient, SearchTuningServiceClient, ServingConfigServiceClient, SiteSearchEngineServiceClient, UserEventServiceClient, UserLicenseServiceClient} from '@google-cloud/discoveryengine';
 
 // check that the client class type name can be used
+function doStuffWithCmekConfigServiceClient(client: CmekConfigServiceClient) {
+  client.close();
+}
 function doStuffWithCompletionServiceClient(client: CompletionServiceClient) {
   client.close();
 }
@@ -38,6 +41,9 @@ function doStuffWithEngineServiceClient(client: EngineServiceClient) {
   client.close();
 }
 function doStuffWithGroundedGenerationServiceClient(client: GroundedGenerationServiceClient) {
+  client.close();
+}
+function doStuffWithIdentityMappingStoreServiceClient(client: IdentityMappingStoreServiceClient) {
   client.close();
 }
 function doStuffWithProjectServiceClient(client: ProjectServiceClient) {
@@ -67,8 +73,14 @@ function doStuffWithSiteSearchEngineServiceClient(client: SiteSearchEngineServic
 function doStuffWithUserEventServiceClient(client: UserEventServiceClient) {
   client.close();
 }
+function doStuffWithUserLicenseServiceClient(client: UserLicenseServiceClient) {
+  client.close();
+}
 
 function main() {
+  // check that the client instance can be created
+  const cmekConfigServiceClient = new CmekConfigServiceClient();
+  doStuffWithCmekConfigServiceClient(cmekConfigServiceClient);
   // check that the client instance can be created
   const completionServiceClient = new CompletionServiceClient();
   doStuffWithCompletionServiceClient(completionServiceClient);
@@ -90,6 +102,9 @@ function main() {
   // check that the client instance can be created
   const groundedGenerationServiceClient = new GroundedGenerationServiceClient();
   doStuffWithGroundedGenerationServiceClient(groundedGenerationServiceClient);
+  // check that the client instance can be created
+  const identityMappingStoreServiceClient = new IdentityMappingStoreServiceClient();
+  doStuffWithIdentityMappingStoreServiceClient(identityMappingStoreServiceClient);
   // check that the client instance can be created
   const projectServiceClient = new ProjectServiceClient();
   doStuffWithProjectServiceClient(projectServiceClient);
@@ -117,6 +132,9 @@ function main() {
   // check that the client instance can be created
   const userEventServiceClient = new UserEventServiceClient();
   doStuffWithUserEventServiceClient(userEventServiceClient);
+  // check that the client instance can be created
+  const userLicenseServiceClient = new UserLicenseServiceClient();
+  doStuffWithUserLicenseServiceClient(userLicenseServiceClient);
 }
 
 main();

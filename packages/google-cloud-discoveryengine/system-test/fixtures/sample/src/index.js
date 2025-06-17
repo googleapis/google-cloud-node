@@ -21,6 +21,7 @@
 const discoveryengine = require('@google-cloud/discoveryengine');
 
 function main() {
+  const cmekConfigServiceClient = new discoveryengine.CmekConfigServiceClient();
   const completionServiceClient = new discoveryengine.CompletionServiceClient();
   const controlServiceClient = new discoveryengine.ControlServiceClient();
   const conversationalSearchServiceClient = new discoveryengine.ConversationalSearchServiceClient();
@@ -28,6 +29,7 @@ function main() {
   const documentServiceClient = new discoveryengine.DocumentServiceClient();
   const engineServiceClient = new discoveryengine.EngineServiceClient();
   const groundedGenerationServiceClient = new discoveryengine.GroundedGenerationServiceClient();
+  const identityMappingStoreServiceClient = new discoveryengine.IdentityMappingStoreServiceClient();
   const projectServiceClient = new discoveryengine.ProjectServiceClient();
   const rankServiceClient = new discoveryengine.RankServiceClient();
   const recommendationServiceClient = new discoveryengine.RecommendationServiceClient();
@@ -37,6 +39,7 @@ function main() {
   const servingConfigServiceClient = new discoveryengine.ServingConfigServiceClient();
   const siteSearchEngineServiceClient = new discoveryengine.SiteSearchEngineServiceClient();
   const userEventServiceClient = new discoveryengine.UserEventServiceClient();
+  const userLicenseServiceClient = new discoveryengine.UserLicenseServiceClient();
 }
 
 main();
