@@ -43294,25 +43294,47 @@
                         "tier": {
                           "oneof": [
                             "enterprise",
-                            "basic"
+                            "scaled",
+                            "basic",
+                            "unprovisioned"
                           ]
                         }
                       },
                       "fields": {
                         "enterprise": {
                           "type": "Enterprise",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "scaled": {
+                          "type": "Scaled",
+                          "id": 4
                         },
                         "basic": {
                           "type": "Basic",
                           "id": 2
+                        },
+                        "unprovisioned": {
+                          "type": "Unprovisioned",
+                          "id": 3
                         }
                       },
                       "nested": {
                         "Enterprise": {
+                          "options": {
+                            "deprecated": true
+                          },
+                          "fields": {}
+                        },
+                        "Scaled": {
                           "fields": {}
                         },
                         "Basic": {
+                          "fields": {}
+                        },
+                        "Unprovisioned": {
                           "fields": {}
                         }
                       }
