@@ -1,0 +1,108 @@
+{
+  "interfaces": {
+    "google.analytics.data.v1alpha.AlphaAnalyticsData": {
+      "retry_codes": {
+        "non_idempotent": [],
+        "idempotent": [
+          "DEADLINE_EXCEEDED",
+          "UNAVAILABLE"
+        ],
+        "unknown": [
+          "UNKNOWN"
+        ]
+      },
+      "retry_params": {
+        "default": {
+          "initial_retry_delay_millis": 100,
+          "retry_delay_multiplier": 1.3,
+          "max_retry_delay_millis": 60000,
+          "initial_rpc_timeout_millis": 60000,
+          "rpc_timeout_multiplier": 1,
+          "max_rpc_timeout_millis": 60000,
+          "total_timeout_millis": 600000
+        },
+        "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c": {
+          "initial_retry_delay_millis": 1000,
+          "retry_delay_multiplier": 1.3,
+          "max_retry_delay_millis": 60000,
+          "initial_rpc_timeout_millis": 60000,
+          "rpc_timeout_multiplier": 1,
+          "max_rpc_timeout_millis": 60000,
+          "total_timeout_millis": 600000
+        }
+      },
+      "methods": {
+        "RunFunnelReport": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateAudienceList": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "QueryAudienceList": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "SheetExportAudienceList": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "GetAudienceList": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "ListAudienceLists": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "CreateRecurringAudienceList": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "GetRecurringAudienceList": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "ListRecurringAudienceLists": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "GetPropertyQuotasSnapshot": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "CreateReportTask": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "QueryReportTask": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "GetReportTask": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "ListReportTasks": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        }
+      }
+    }
+  }
+}

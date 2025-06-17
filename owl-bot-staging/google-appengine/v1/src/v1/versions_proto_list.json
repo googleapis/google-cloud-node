@@ -1,0 +1,18 @@
+[
+  "../../protos/google/appengine/v1/app_yaml.proto",
+  "../../protos/google/appengine/v1/appengine.proto",
+  "../../protos/google/appengine/v1/application.proto",
+  "../../protos/google/appengine/v1/audit_data.proto",
+  "../../protos/google/appengine/v1/certificate.proto",
+  "../../protos/google/appengine/v1/deploy.proto",
+  "../../protos/google/appengine/v1/deployed_files.proto",
+  "../../protos/google/appengine/v1/domain.proto",
+  "../../protos/google/appengine/v1/domain_mapping.proto",
+  "../../protos/google/appengine/v1/firewall.proto",
+  "../../protos/google/appengine/v1/instance.proto",
+  "../../protos/google/appengine/v1/location.proto",
+  "../../protos/google/appengine/v1/network_settings.proto",
+  "../../protos/google/appengine/v1/operation.proto",
+  "../../protos/google/appengine/v1/service.proto",
+  "../../protos/google/appengine/v1/version.proto"
+]

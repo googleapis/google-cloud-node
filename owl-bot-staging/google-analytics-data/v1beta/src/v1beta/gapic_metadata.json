@@ -1,0 +1,137 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.analytics.data.v1beta",
+  "libraryPackage": "@google-analytics/data",
+  "services": {
+    "BetaAnalyticsData": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "BetaAnalyticsDataClient",
+          "rpcs": {
+            "RunReport": {
+              "methods": [
+                "runReport"
+              ]
+            },
+            "RunPivotReport": {
+              "methods": [
+                "runPivotReport"
+              ]
+            },
+            "BatchRunReports": {
+              "methods": [
+                "batchRunReports"
+              ]
+            },
+            "BatchRunPivotReports": {
+              "methods": [
+                "batchRunPivotReports"
+              ]
+            },
+            "GetMetadata": {
+              "methods": [
+                "getMetadata"
+              ]
+            },
+            "RunRealtimeReport": {
+              "methods": [
+                "runRealtimeReport"
+              ]
+            },
+            "CheckCompatibility": {
+              "methods": [
+                "checkCompatibility"
+              ]
+            },
+            "QueryAudienceExport": {
+              "methods": [
+                "queryAudienceExport"
+              ]
+            },
+            "GetAudienceExport": {
+              "methods": [
+                "getAudienceExport"
+              ]
+            },
+            "CreateAudienceExport": {
+              "methods": [
+                "createAudienceExport"
+              ]
+            },
+            "ListAudienceExports": {
+              "methods": [
+                "listAudienceExports",
+                "listAudienceExportsStream",
+                "listAudienceExportsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "BetaAnalyticsDataClient",
+          "rpcs": {
+            "RunReport": {
+              "methods": [
+                "runReport"
+              ]
+            },
+            "RunPivotReport": {
+              "methods": [
+                "runPivotReport"
+              ]
+            },
+            "BatchRunReports": {
+              "methods": [
+                "batchRunReports"
+              ]
+            },
+            "BatchRunPivotReports": {
+              "methods": [
+                "batchRunPivotReports"
+              ]
+            },
+            "GetMetadata": {
+              "methods": [
+                "getMetadata"
+              ]
+            },
+            "RunRealtimeReport": {
+              "methods": [
+                "runRealtimeReport"
+              ]
+            },
+            "CheckCompatibility": {
+              "methods": [
+                "checkCompatibility"
+              ]
+            },
+            "QueryAudienceExport": {
+              "methods": [
+                "queryAudienceExport"
+              ]
+            },
+            "GetAudienceExport": {
+              "methods": [
+                "getAudienceExport"
+              ]
+            },
+            "CreateAudienceExport": {
+              "methods": [
+                "createAudienceExport"
+              ]
+            },
+            "ListAudienceExports": {
+              "methods": [
+                "listAudienceExports",
+                "listAudienceExportsStream",
+                "listAudienceExportsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

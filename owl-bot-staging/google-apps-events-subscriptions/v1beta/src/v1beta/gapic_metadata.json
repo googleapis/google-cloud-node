@@ -1,0 +1,87 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.apps.events.subscriptions.v1beta",
+  "libraryPackage": "@google-cloud/subscriptions",
+  "services": {
+    "SubscriptionsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SubscriptionsServiceClient",
+          "rpcs": {
+            "GetSubscription": {
+              "methods": [
+                "getSubscription"
+              ]
+            },
+            "CreateSubscription": {
+              "methods": [
+                "createSubscription"
+              ]
+            },
+            "DeleteSubscription": {
+              "methods": [
+                "deleteSubscription"
+              ]
+            },
+            "UpdateSubscription": {
+              "methods": [
+                "updateSubscription"
+              ]
+            },
+            "ReactivateSubscription": {
+              "methods": [
+                "reactivateSubscription"
+              ]
+            },
+            "ListSubscriptions": {
+              "methods": [
+                "listSubscriptions",
+                "listSubscriptionsStream",
+                "listSubscriptionsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SubscriptionsServiceClient",
+          "rpcs": {
+            "GetSubscription": {
+              "methods": [
+                "getSubscription"
+              ]
+            },
+            "CreateSubscription": {
+              "methods": [
+                "createSubscription"
+              ]
+            },
+            "DeleteSubscription": {
+              "methods": [
+                "deleteSubscription"
+              ]
+            },
+            "UpdateSubscription": {
+              "methods": [
+                "updateSubscription"
+              ]
+            },
+            "ReactivateSubscription": {
+              "methods": [
+                "reactivateSubscription"
+              ]
+            },
+            "ListSubscriptions": {
+              "methods": [
+                "listSubscriptions",
+                "listSubscriptionsStream",
+                "listSubscriptionsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.api.cloudquotas.v1",
+  "libraryPackage": "@google-cloud/cloudquotas",
+  "services": {
+    "CloudQuotas": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "CloudQuotasClient",
+          "rpcs": {
+            "GetQuotaInfo": {
+              "methods": [
+                "getQuotaInfo"
+              ]
+            },
+            "GetQuotaPreference": {
+              "methods": [
+                "getQuotaPreference"
+              ]
+            },
+            "CreateQuotaPreference": {
+              "methods": [
+                "createQuotaPreference"
+              ]
+            },
+            "UpdateQuotaPreference": {
+              "methods": [
+                "updateQuotaPreference"
+              ]
+            },
+            "ListQuotaInfos": {
+              "methods": [
+                "listQuotaInfos",
+                "listQuotaInfosStream",
+                "listQuotaInfosAsync"
+              ]
+            },
+            "ListQuotaPreferences": {
+              "methods": [
+                "listQuotaPreferences",
+                "listQuotaPreferencesStream",
+                "listQuotaPreferencesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "CloudQuotasClient",
+          "rpcs": {
+            "GetQuotaInfo": {
+              "methods": [
+                "getQuotaInfo"
+              ]
+            },
+            "GetQuotaPreference": {
+              "methods": [
+                "getQuotaPreference"
+              ]
+            },
+            "CreateQuotaPreference": {
+              "methods": [
+                "createQuotaPreference"
+              ]
+            },
+            "UpdateQuotaPreference": {
+              "methods": [
+                "updateQuotaPreference"
+              ]
+            },
+            "ListQuotaInfos": {
+              "methods": [
+                "listQuotaInfos",
+                "listQuotaInfosStream",
+                "listQuotaInfosAsync"
+              ]
+            },
+            "ListQuotaPreferences": {
+              "methods": [
+                "listQuotaPreferences",
+                "listQuotaPreferencesStream",
+                "listQuotaPreferencesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
