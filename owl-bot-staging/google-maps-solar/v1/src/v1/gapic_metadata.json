@@ -1,0 +1,53 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.maps.solar.v1",
+  "libraryPackage": "@googlemaps/solar",
+  "services": {
+    "Solar": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SolarClient",
+          "rpcs": {
+            "FindClosestBuildingInsights": {
+              "methods": [
+                "findClosestBuildingInsights"
+              ]
+            },
+            "GetDataLayers": {
+              "methods": [
+                "getDataLayers"
+              ]
+            },
+            "GetGeoTiff": {
+              "methods": [
+                "getGeoTiff"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SolarClient",
+          "rpcs": {
+            "FindClosestBuildingInsights": {
+              "methods": [
+                "findClosestBuildingInsights"
+              ]
+            },
+            "GetDataLayers": {
+              "methods": [
+                "getDataLayers"
+              ]
+            },
+            "GetGeoTiff": {
+              "methods": [
+                "getGeoTiff"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+[
+  "../../protos/google/identity/accesscontextmanager/type/device_resources.proto",
+  "../../protos/google/identity/accesscontextmanager/v1/access_context_manager.proto",
+  "../../protos/google/identity/accesscontextmanager/v1/access_level.proto",
+  "../../protos/google/identity/accesscontextmanager/v1/access_policy.proto",
+  "../../protos/google/identity/accesscontextmanager/v1/gcp_user_access_binding.proto",
+  "../../protos/google/identity/accesscontextmanager/v1/service_perimeter.proto"
+]

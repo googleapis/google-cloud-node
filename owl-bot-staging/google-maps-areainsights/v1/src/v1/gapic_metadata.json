@@ -1,0 +1,33 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.maps.areainsights.v1",
+  "libraryPackage": "@googlemaps/areainsights",
+  "services": {
+    "AreaInsights": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AreaInsightsClient",
+          "rpcs": {
+            "ComputeInsights": {
+              "methods": [
+                "computeInsights"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AreaInsightsClient",
+          "rpcs": {
+            "ComputeInsights": {
+              "methods": [
+                "computeInsights"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
