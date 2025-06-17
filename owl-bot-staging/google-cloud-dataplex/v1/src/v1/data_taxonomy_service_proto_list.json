@@ -1,0 +1,18 @@
+[
+  "../../protos/google/cloud/dataplex/v1/analyze.proto",
+  "../../protos/google/cloud/dataplex/v1/catalog.proto",
+  "../../protos/google/cloud/dataplex/v1/cmek.proto",
+  "../../protos/google/cloud/dataplex/v1/content.proto",
+  "../../protos/google/cloud/dataplex/v1/data_discovery.proto",
+  "../../protos/google/cloud/dataplex/v1/data_profile.proto",
+  "../../protos/google/cloud/dataplex/v1/data_quality.proto",
+  "../../protos/google/cloud/dataplex/v1/data_taxonomy.proto",
+  "../../protos/google/cloud/dataplex/v1/datascans.proto",
+  "../../protos/google/cloud/dataplex/v1/logs.proto",
+  "../../protos/google/cloud/dataplex/v1/metadata.proto",
+  "../../protos/google/cloud/dataplex/v1/processing.proto",
+  "../../protos/google/cloud/dataplex/v1/resources.proto",
+  "../../protos/google/cloud/dataplex/v1/security.proto",
+  "../../protos/google/cloud/dataplex/v1/service.proto",
+  "../../protos/google/cloud/dataplex/v1/tasks.proto"
+]

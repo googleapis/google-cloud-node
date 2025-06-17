@@ -1,0 +1,217 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.connectors.v1",
+  "libraryPackage": "@google-cloud/connectors",
+  "services": {
+    "Connectors": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ConnectorsClient",
+          "rpcs": {
+            "GetConnection": {
+              "methods": [
+                "getConnection"
+              ]
+            },
+            "GetProvider": {
+              "methods": [
+                "getProvider"
+              ]
+            },
+            "GetConnector": {
+              "methods": [
+                "getConnector"
+              ]
+            },
+            "GetConnectorVersion": {
+              "methods": [
+                "getConnectorVersion"
+              ]
+            },
+            "GetConnectionSchemaMetadata": {
+              "methods": [
+                "getConnectionSchemaMetadata"
+              ]
+            },
+            "GetRuntimeConfig": {
+              "methods": [
+                "getRuntimeConfig"
+              ]
+            },
+            "GetGlobalSettings": {
+              "methods": [
+                "getGlobalSettings"
+              ]
+            },
+            "CreateConnection": {
+              "methods": [
+                "createConnection"
+              ]
+            },
+            "UpdateConnection": {
+              "methods": [
+                "updateConnection"
+              ]
+            },
+            "DeleteConnection": {
+              "methods": [
+                "deleteConnection"
+              ]
+            },
+            "RefreshConnectionSchemaMetadata": {
+              "methods": [
+                "refreshConnectionSchemaMetadata"
+              ]
+            },
+            "ListConnections": {
+              "methods": [
+                "listConnections",
+                "listConnectionsStream",
+                "listConnectionsAsync"
+              ]
+            },
+            "ListProviders": {
+              "methods": [
+                "listProviders",
+                "listProvidersStream",
+                "listProvidersAsync"
+              ]
+            },
+            "ListConnectors": {
+              "methods": [
+                "listConnectors",
+                "listConnectorsStream",
+                "listConnectorsAsync"
+              ]
+            },
+            "ListConnectorVersions": {
+              "methods": [
+                "listConnectorVersions",
+                "listConnectorVersionsStream",
+                "listConnectorVersionsAsync"
+              ]
+            },
+            "ListRuntimeEntitySchemas": {
+              "methods": [
+                "listRuntimeEntitySchemas",
+                "listRuntimeEntitySchemasStream",
+                "listRuntimeEntitySchemasAsync"
+              ]
+            },
+            "ListRuntimeActionSchemas": {
+              "methods": [
+                "listRuntimeActionSchemas",
+                "listRuntimeActionSchemasStream",
+                "listRuntimeActionSchemasAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ConnectorsClient",
+          "rpcs": {
+            "GetConnection": {
+              "methods": [
+                "getConnection"
+              ]
+            },
+            "GetProvider": {
+              "methods": [
+                "getProvider"
+              ]
+            },
+            "GetConnector": {
+              "methods": [
+                "getConnector"
+              ]
+            },
+            "GetConnectorVersion": {
+              "methods": [
+                "getConnectorVersion"
+              ]
+            },
+            "GetConnectionSchemaMetadata": {
+              "methods": [
+                "getConnectionSchemaMetadata"
+              ]
+            },
+            "GetRuntimeConfig": {
+              "methods": [
+                "getRuntimeConfig"
+              ]
+            },
+            "GetGlobalSettings": {
+              "methods": [
+                "getGlobalSettings"
+              ]
+            },
+            "CreateConnection": {
+              "methods": [
+                "createConnection"
+              ]
+            },
+            "UpdateConnection": {
+              "methods": [
+                "updateConnection"
+              ]
+            },
+            "DeleteConnection": {
+              "methods": [
+                "deleteConnection"
+              ]
+            },
+            "RefreshConnectionSchemaMetadata": {
+              "methods": [
+                "refreshConnectionSchemaMetadata"
+              ]
+            },
+            "ListConnections": {
+              "methods": [
+                "listConnections",
+                "listConnectionsStream",
+                "listConnectionsAsync"
+              ]
+            },
+            "ListProviders": {
+              "methods": [
+                "listProviders",
+                "listProvidersStream",
+                "listProvidersAsync"
+              ]
+            },
+            "ListConnectors": {
+              "methods": [
+                "listConnectors",
+                "listConnectorsStream",
+                "listConnectorsAsync"
+              ]
+            },
+            "ListConnectorVersions": {
+              "methods": [
+                "listConnectorVersions",
+                "listConnectorVersionsStream",
+                "listConnectorVersionsAsync"
+              ]
+            },
+            "ListRuntimeEntitySchemas": {
+              "methods": [
+                "listRuntimeEntitySchemas",
+                "listRuntimeEntitySchemasStream",
+                "listRuntimeEntitySchemasAsync"
+              ]
+            },
+            "ListRuntimeActionSchemas": {
+              "methods": [
+                "listRuntimeActionSchemas",
+                "listRuntimeActionSchemasStream",
+                "listRuntimeActionSchemasAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
