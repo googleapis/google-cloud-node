@@ -84,10 +84,7 @@ async function listAssets() {
   };
 
   // Call cloud.assets.v1.ListAssets API.
-  const result = await client.listAssets(request, {
-    autopaginate: false,
-    maxResults: MAX_RESULTS,
-  });
+  const result = await client.listAssets(request);
   // Handle the response.
   console.log(util.inspect(result, {depth: null}));
 }
