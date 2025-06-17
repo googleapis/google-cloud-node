@@ -19,9 +19,7 @@
 import {DirectAccessServiceClient} from '@google-cloud/devicestreaming';
 
 // check that the client class type name can be used
-function doStuffWithDirectAccessServiceClient(
-  client: DirectAccessServiceClient
-) {
+function doStuffWithDirectAccessServiceClient(client: DirectAccessServiceClient) {
   client.close();
 }
 

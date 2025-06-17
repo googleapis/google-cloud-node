@@ -18,20 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -110,41 +101,20 @@ export class DatastreamClient {
    *     const client = new DatastreamClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof DatastreamClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'datastream.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -170,7 +140,7 @@ export class DatastreamClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -184,7 +154,10 @@ export class DatastreamClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -229,226 +202,127 @@ export class DatastreamClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listConnectionProfiles: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'connectionProfiles'
-      ),
-      listStreams: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'streams'
-      ),
-      fetchStaticIps: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'staticIps'
-      ),
-      listPrivateConnections: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'privateConnections'
-      ),
-      listRoutes: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'routes'
-      ),
+      listConnectionProfiles:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'connectionProfiles'),
+      listStreams:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'streams'),
+      fetchStaticIps:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'staticIps'),
+      listPrivateConnections:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'privateConnections'),
+      listRoutes:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'routes')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v1alpha1/{name=projects/*/locations/*}',
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v1alpha1/{name=projects/*}/locations',
-        },
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v1alpha1/{name=projects/*/locations/*/operations/*}:cancel',
-          body: '*',
-        },
-        {
-          selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1alpha1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1alpha1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1alpha1/{name=projects/*/locations/*}/operations',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1alpha1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1alpha1/{name=projects/*}/locations',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1alpha1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1alpha1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1alpha1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1alpha1/{name=projects/*/locations/*}/operations',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createConnectionProfileResponse = protoFilesRoot.lookup(
-      '.google.cloud.datastream.v1alpha1.ConnectionProfile'
-    ) as gax.protobuf.Type;
+      '.google.cloud.datastream.v1alpha1.ConnectionProfile') as gax.protobuf.Type;
     const createConnectionProfileMetadata = protoFilesRoot.lookup(
-      '.google.cloud.datastream.v1alpha1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.datastream.v1alpha1.OperationMetadata') as gax.protobuf.Type;
     const updateConnectionProfileResponse = protoFilesRoot.lookup(
-      '.google.cloud.datastream.v1alpha1.ConnectionProfile'
-    ) as gax.protobuf.Type;
+      '.google.cloud.datastream.v1alpha1.ConnectionProfile') as gax.protobuf.Type;
     const updateConnectionProfileMetadata = protoFilesRoot.lookup(
-      '.google.cloud.datastream.v1alpha1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.datastream.v1alpha1.OperationMetadata') as gax.protobuf.Type;
     const deleteConnectionProfileResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteConnectionProfileMetadata = protoFilesRoot.lookup(
-      '.google.cloud.datastream.v1alpha1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.datastream.v1alpha1.OperationMetadata') as gax.protobuf.Type;
     const createStreamResponse = protoFilesRoot.lookup(
-      '.google.cloud.datastream.v1alpha1.Stream'
-    ) as gax.protobuf.Type;
+      '.google.cloud.datastream.v1alpha1.Stream') as gax.protobuf.Type;
     const createStreamMetadata = protoFilesRoot.lookup(
-      '.google.cloud.datastream.v1alpha1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.datastream.v1alpha1.OperationMetadata') as gax.protobuf.Type;
     const updateStreamResponse = protoFilesRoot.lookup(
-      '.google.cloud.datastream.v1alpha1.Stream'
-    ) as gax.protobuf.Type;
+      '.google.cloud.datastream.v1alpha1.Stream') as gax.protobuf.Type;
     const updateStreamMetadata = protoFilesRoot.lookup(
-      '.google.cloud.datastream.v1alpha1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.datastream.v1alpha1.OperationMetadata') as gax.protobuf.Type;
     const deleteStreamResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteStreamMetadata = protoFilesRoot.lookup(
-      '.google.cloud.datastream.v1alpha1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.datastream.v1alpha1.OperationMetadata') as gax.protobuf.Type;
     const fetchErrorsResponse = protoFilesRoot.lookup(
-      '.google.cloud.datastream.v1alpha1.FetchErrorsResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.datastream.v1alpha1.FetchErrorsResponse') as gax.protobuf.Type;
     const fetchErrorsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.datastream.v1alpha1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.datastream.v1alpha1.OperationMetadata') as gax.protobuf.Type;
     const createPrivateConnectionResponse = protoFilesRoot.lookup(
-      '.google.cloud.datastream.v1alpha1.PrivateConnection'
-    ) as gax.protobuf.Type;
+      '.google.cloud.datastream.v1alpha1.PrivateConnection') as gax.protobuf.Type;
     const createPrivateConnectionMetadata = protoFilesRoot.lookup(
-      '.google.cloud.datastream.v1alpha1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.datastream.v1alpha1.OperationMetadata') as gax.protobuf.Type;
     const deletePrivateConnectionResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deletePrivateConnectionMetadata = protoFilesRoot.lookup(
-      '.google.cloud.datastream.v1alpha1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.datastream.v1alpha1.OperationMetadata') as gax.protobuf.Type;
     const createRouteResponse = protoFilesRoot.lookup(
-      '.google.cloud.datastream.v1alpha1.Route'
-    ) as gax.protobuf.Type;
+      '.google.cloud.datastream.v1alpha1.Route') as gax.protobuf.Type;
     const createRouteMetadata = protoFilesRoot.lookup(
-      '.google.cloud.datastream.v1alpha1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.datastream.v1alpha1.OperationMetadata') as gax.protobuf.Type;
     const deleteRouteResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteRouteMetadata = protoFilesRoot.lookup(
-      '.google.cloud.datastream.v1alpha1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.datastream.v1alpha1.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createConnectionProfile: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createConnectionProfileResponse.decode.bind(
-          createConnectionProfileResponse
-        ),
-        createConnectionProfileMetadata.decode.bind(
-          createConnectionProfileMetadata
-        )
-      ),
+        createConnectionProfileResponse.decode.bind(createConnectionProfileResponse),
+        createConnectionProfileMetadata.decode.bind(createConnectionProfileMetadata)),
       updateConnectionProfile: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        updateConnectionProfileResponse.decode.bind(
-          updateConnectionProfileResponse
-        ),
-        updateConnectionProfileMetadata.decode.bind(
-          updateConnectionProfileMetadata
-        )
-      ),
+        updateConnectionProfileResponse.decode.bind(updateConnectionProfileResponse),
+        updateConnectionProfileMetadata.decode.bind(updateConnectionProfileMetadata)),
       deleteConnectionProfile: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deleteConnectionProfileResponse.decode.bind(
-          deleteConnectionProfileResponse
-        ),
-        deleteConnectionProfileMetadata.decode.bind(
-          deleteConnectionProfileMetadata
-        )
-      ),
+        deleteConnectionProfileResponse.decode.bind(deleteConnectionProfileResponse),
+        deleteConnectionProfileMetadata.decode.bind(deleteConnectionProfileMetadata)),
       createStream: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createStreamResponse.decode.bind(createStreamResponse),
-        createStreamMetadata.decode.bind(createStreamMetadata)
-      ),
+        createStreamMetadata.decode.bind(createStreamMetadata)),
       updateStream: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateStreamResponse.decode.bind(updateStreamResponse),
-        updateStreamMetadata.decode.bind(updateStreamMetadata)
-      ),
+        updateStreamMetadata.decode.bind(updateStreamMetadata)),
       deleteStream: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteStreamResponse.decode.bind(deleteStreamResponse),
-        deleteStreamMetadata.decode.bind(deleteStreamMetadata)
-      ),
+        deleteStreamMetadata.decode.bind(deleteStreamMetadata)),
       fetchErrors: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         fetchErrorsResponse.decode.bind(fetchErrorsResponse),
-        fetchErrorsMetadata.decode.bind(fetchErrorsMetadata)
-      ),
+        fetchErrorsMetadata.decode.bind(fetchErrorsMetadata)),
       createPrivateConnection: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createPrivateConnectionResponse.decode.bind(
-          createPrivateConnectionResponse
-        ),
-        createPrivateConnectionMetadata.decode.bind(
-          createPrivateConnectionMetadata
-        )
-      ),
+        createPrivateConnectionResponse.decode.bind(createPrivateConnectionResponse),
+        createPrivateConnectionMetadata.decode.bind(createPrivateConnectionMetadata)),
       deletePrivateConnection: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deletePrivateConnectionResponse.decode.bind(
-          deletePrivateConnectionResponse
-        ),
-        deletePrivateConnectionMetadata.decode.bind(
-          deletePrivateConnectionMetadata
-        )
-      ),
+        deletePrivateConnectionResponse.decode.bind(deletePrivateConnectionResponse),
+        deletePrivateConnectionMetadata.decode.bind(deletePrivateConnectionMetadata)),
       createRoute: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createRouteResponse.decode.bind(createRouteResponse),
-        createRouteMetadata.decode.bind(createRouteMetadata)
-      ),
+        createRouteMetadata.decode.bind(createRouteMetadata)),
       deleteRoute: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteRouteResponse.decode.bind(deleteRouteResponse),
-        deleteRouteMetadata.decode.bind(deleteRouteMetadata)
-      ),
+        deleteRouteMetadata.decode.bind(deleteRouteMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.datastream.v1alpha1.Datastream',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.datastream.v1alpha1.Datastream', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -479,55 +353,28 @@ export class DatastreamClient {
     // Put together the "service stub" for
     // google.cloud.datastream.v1alpha1.Datastream.
     this.datastreamStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.datastream.v1alpha1.Datastream'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.datastream.v1alpha1.Datastream') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.datastream.v1alpha1.Datastream,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const datastreamStubMethods = [
-      'listConnectionProfiles',
-      'getConnectionProfile',
-      'createConnectionProfile',
-      'updateConnectionProfile',
-      'deleteConnectionProfile',
-      'discoverConnectionProfile',
-      'listStreams',
-      'getStream',
-      'createStream',
-      'updateStream',
-      'deleteStream',
-      'fetchErrors',
-      'fetchStaticIps',
-      'createPrivateConnection',
-      'getPrivateConnection',
-      'listPrivateConnections',
-      'deletePrivateConnection',
-      'createRoute',
-      'getRoute',
-      'listRoutes',
-      'deleteRoute',
-    ];
+    const datastreamStubMethods =
+        ['listConnectionProfiles', 'getConnectionProfile', 'createConnectionProfile', 'updateConnectionProfile', 'deleteConnectionProfile', 'discoverConnectionProfile', 'listStreams', 'getStream', 'createStream', 'updateStream', 'deleteStream', 'fetchErrors', 'fetchStaticIps', 'createPrivateConnection', 'getPrivateConnection', 'listPrivateConnections', 'deletePrivateConnection', 'createRoute', 'getRoute', 'listRoutes', 'deleteRoute'];
     for (const methodName of datastreamStubMethods) {
       const callPromise = this.datastreamStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -552,14 +399,8 @@ export class DatastreamClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'datastream.googleapis.com';
   }
@@ -570,14 +411,8 @@ export class DatastreamClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'datastream.googleapis.com';
   }
@@ -608,7 +443,9 @@ export class DatastreamClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -617,9 +454,8 @@ export class DatastreamClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -630,2799 +466,1945 @@ export class DatastreamClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Use this method to get details about a connection profile.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the connection profile resource to get.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.datastream.v1alpha1.ConnectionProfile|ConnectionProfile}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/datastream.get_connection_profile.js</caption>
-   * region_tag:datastream_v1alpha1_generated_Datastream_GetConnectionProfile_async
-   */
+/**
+ * Use this method to get details about a connection profile.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the connection profile resource to get.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.datastream.v1alpha1.ConnectionProfile|ConnectionProfile}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/datastream.get_connection_profile.js</caption>
+ * region_tag:datastream_v1alpha1_generated_Datastream_GetConnectionProfile_async
+ */
   getConnectionProfile(
-    request?: protos.google.cloud.datastream.v1alpha1.IGetConnectionProfileRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
-      (
-        | protos.google.cloud.datastream.v1alpha1.IGetConnectionProfileRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datastream.v1alpha1.IGetConnectionProfileRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
+        protos.google.cloud.datastream.v1alpha1.IGetConnectionProfileRequest|undefined, {}|undefined
+      ]>;
   getConnectionProfile(
-    request: protos.google.cloud.datastream.v1alpha1.IGetConnectionProfileRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
-      | protos.google.cloud.datastream.v1alpha1.IGetConnectionProfileRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getConnectionProfile(
-    request: protos.google.cloud.datastream.v1alpha1.IGetConnectionProfileRequest,
-    callback: Callback<
-      protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
-      | protos.google.cloud.datastream.v1alpha1.IGetConnectionProfileRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getConnectionProfile(
-    request?: protos.google.cloud.datastream.v1alpha1.IGetConnectionProfileRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.datastream.v1alpha1.IGetConnectionProfileRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
-          | protos.google.cloud.datastream.v1alpha1.IGetConnectionProfileRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
-      | protos.google.cloud.datastream.v1alpha1.IGetConnectionProfileRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
-      (
-        | protos.google.cloud.datastream.v1alpha1.IGetConnectionProfileRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.datastream.v1alpha1.IGetConnectionProfileRequest|null|undefined,
+          {}|null|undefined>): void;
+  getConnectionProfile(
+      request: protos.google.cloud.datastream.v1alpha1.IGetConnectionProfileRequest,
+      callback: Callback<
+          protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
+          protos.google.cloud.datastream.v1alpha1.IGetConnectionProfileRequest|null|undefined,
+          {}|null|undefined>): void;
+  getConnectionProfile(
+      request?: protos.google.cloud.datastream.v1alpha1.IGetConnectionProfileRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
+          protos.google.cloud.datastream.v1alpha1.IGetConnectionProfileRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
+          protos.google.cloud.datastream.v1alpha1.IGetConnectionProfileRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
+        protos.google.cloud.datastream.v1alpha1.IGetConnectionProfileRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getConnectionProfile request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
-          | protos.google.cloud.datastream.v1alpha1.IGetConnectionProfileRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
+        protos.google.cloud.datastream.v1alpha1.IGetConnectionProfileRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getConnectionProfile response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getConnectionProfile(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
-          (
-            | protos.google.cloud.datastream.v1alpha1.IGetConnectionProfileRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getConnectionProfile response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getConnectionProfile(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
+        protos.google.cloud.datastream.v1alpha1.IGetConnectionProfileRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getConnectionProfile response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Use this method to discover a connection profile.
-   * The discover API call exposes the data objects and metadata belonging to
-   * the profile. Typically, a request returns children data objects under a
-   * parent data object that's optionally supplied in the request.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource of the ConnectionProfile type. Must be in the
-   *   format `projects/* /locations/*`.
-   * @param {google.cloud.datastream.v1alpha1.ConnectionProfile} request.connectionProfile
-   *   An ad-hoc ConnectionProfile configuration.
-   * @param {string} request.connectionProfileName
-   *   A reference to an existing ConnectionProfile.
-   * @param {boolean} request.recursive
-   *   Whether to retrieve the full hierarchy of data objects (TRUE) or only the
-   *   current level (FALSE).
-   * @param {number} request.recursionDepth
-   *   The number of hierarchy levels below the current level to be retrieved.
-   * @param {google.cloud.datastream.v1alpha1.OracleRdbms} request.oracleRdbms
-   *   Oracle RDBMS to enrich with child data objects and metadata.
-   * @param {google.cloud.datastream.v1alpha1.MysqlRdbms} request.mysqlRdbms
-   *   MySQL RDBMS to enrich with child data objects and metadata.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.datastream.v1alpha1.DiscoverConnectionProfileResponse|DiscoverConnectionProfileResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/datastream.discover_connection_profile.js</caption>
-   * region_tag:datastream_v1alpha1_generated_Datastream_DiscoverConnectionProfile_async
-   */
+/**
+ * Use this method to discover a connection profile.
+ * The discover API call exposes the data objects and metadata belonging to
+ * the profile. Typically, a request returns children data objects under a
+ * parent data object that's optionally supplied in the request.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource of the ConnectionProfile type. Must be in the
+ *   format `projects/* /locations/*`.
+ * @param {google.cloud.datastream.v1alpha1.ConnectionProfile} request.connectionProfile
+ *   An ad-hoc ConnectionProfile configuration.
+ * @param {string} request.connectionProfileName
+ *   A reference to an existing ConnectionProfile.
+ * @param {boolean} request.recursive
+ *   Whether to retrieve the full hierarchy of data objects (TRUE) or only the
+ *   current level (FALSE).
+ * @param {number} request.recursionDepth
+ *   The number of hierarchy levels below the current level to be retrieved.
+ * @param {google.cloud.datastream.v1alpha1.OracleRdbms} request.oracleRdbms
+ *   Oracle RDBMS to enrich with child data objects and metadata.
+ * @param {google.cloud.datastream.v1alpha1.MysqlRdbms} request.mysqlRdbms
+ *   MySQL RDBMS to enrich with child data objects and metadata.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.datastream.v1alpha1.DiscoverConnectionProfileResponse|DiscoverConnectionProfileResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/datastream.discover_connection_profile.js</caption>
+ * region_tag:datastream_v1alpha1_generated_Datastream_DiscoverConnectionProfile_async
+ */
   discoverConnectionProfile(
-    request?: protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileResponse,
-      (
-        | protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileResponse,
+        protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileRequest|undefined, {}|undefined
+      ]>;
   discoverConnectionProfile(
-    request: protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileResponse,
-      | protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  discoverConnectionProfile(
-    request: protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileRequest,
-    callback: Callback<
-      protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileResponse,
-      | protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  discoverConnectionProfile(
-    request?: protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileResponse,
-          | protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileResponse,
-      | protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileResponse,
-      (
-        | protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileRequest|null|undefined,
+          {}|null|undefined>): void;
+  discoverConnectionProfile(
+      request: protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileRequest,
+      callback: Callback<
+          protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileResponse,
+          protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileRequest|null|undefined,
+          {}|null|undefined>): void;
+  discoverConnectionProfile(
+      request?: protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileResponse,
+          protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileResponse,
+          protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileResponse,
+        protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('discoverConnectionProfile request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileResponse,
-          | protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileResponse,
+        protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('discoverConnectionProfile response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .discoverConnectionProfile(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileResponse,
-          (
-            | protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('discoverConnectionProfile response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.discoverConnectionProfile(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileResponse,
+        protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('discoverConnectionProfile response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Use this method to get details about a stream.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the stream resource to get.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.datastream.v1alpha1.Stream|Stream}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/datastream.get_stream.js</caption>
-   * region_tag:datastream_v1alpha1_generated_Datastream_GetStream_async
-   */
+/**
+ * Use this method to get details about a stream.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the stream resource to get.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.datastream.v1alpha1.Stream|Stream}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/datastream.get_stream.js</caption>
+ * region_tag:datastream_v1alpha1_generated_Datastream_GetStream_async
+ */
   getStream(
-    request?: protos.google.cloud.datastream.v1alpha1.IGetStreamRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.datastream.v1alpha1.IStream,
-      protos.google.cloud.datastream.v1alpha1.IGetStreamRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datastream.v1alpha1.IGetStreamRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.datastream.v1alpha1.IStream,
+        protos.google.cloud.datastream.v1alpha1.IGetStreamRequest|undefined, {}|undefined
+      ]>;
   getStream(
-    request: protos.google.cloud.datastream.v1alpha1.IGetStreamRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.datastream.v1alpha1.IStream,
-      | protos.google.cloud.datastream.v1alpha1.IGetStreamRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getStream(
-    request: protos.google.cloud.datastream.v1alpha1.IGetStreamRequest,
-    callback: Callback<
-      protos.google.cloud.datastream.v1alpha1.IStream,
-      | protos.google.cloud.datastream.v1alpha1.IGetStreamRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getStream(
-    request?: protos.google.cloud.datastream.v1alpha1.IGetStreamRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.datastream.v1alpha1.IGetStreamRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.datastream.v1alpha1.IStream,
-          | protos.google.cloud.datastream.v1alpha1.IGetStreamRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.datastream.v1alpha1.IStream,
-      | protos.google.cloud.datastream.v1alpha1.IGetStreamRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.datastream.v1alpha1.IStream,
-      protos.google.cloud.datastream.v1alpha1.IGetStreamRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.datastream.v1alpha1.IGetStreamRequest|null|undefined,
+          {}|null|undefined>): void;
+  getStream(
+      request: protos.google.cloud.datastream.v1alpha1.IGetStreamRequest,
+      callback: Callback<
+          protos.google.cloud.datastream.v1alpha1.IStream,
+          protos.google.cloud.datastream.v1alpha1.IGetStreamRequest|null|undefined,
+          {}|null|undefined>): void;
+  getStream(
+      request?: protos.google.cloud.datastream.v1alpha1.IGetStreamRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.datastream.v1alpha1.IStream,
+          protos.google.cloud.datastream.v1alpha1.IGetStreamRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.datastream.v1alpha1.IStream,
+          protos.google.cloud.datastream.v1alpha1.IGetStreamRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.datastream.v1alpha1.IStream,
+        protos.google.cloud.datastream.v1alpha1.IGetStreamRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getStream request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.datastream.v1alpha1.IStream,
-          | protos.google.cloud.datastream.v1alpha1.IGetStreamRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.datastream.v1alpha1.IStream,
+        protos.google.cloud.datastream.v1alpha1.IGetStreamRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getStream response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getStream(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.datastream.v1alpha1.IStream,
-          protos.google.cloud.datastream.v1alpha1.IGetStreamRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getStream response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getStream(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.datastream.v1alpha1.IStream,
+        protos.google.cloud.datastream.v1alpha1.IGetStreamRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getStream response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Use this method to get details about a private connectivity configuration.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the  private connectivity configuration to get.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.datastream.v1alpha1.PrivateConnection|PrivateConnection}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/datastream.get_private_connection.js</caption>
-   * region_tag:datastream_v1alpha1_generated_Datastream_GetPrivateConnection_async
-   */
+/**
+ * Use this method to get details about a private connectivity configuration.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the  private connectivity configuration to get.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.datastream.v1alpha1.PrivateConnection|PrivateConnection}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/datastream.get_private_connection.js</caption>
+ * region_tag:datastream_v1alpha1_generated_Datastream_GetPrivateConnection_async
+ */
   getPrivateConnection(
-    request?: protos.google.cloud.datastream.v1alpha1.IGetPrivateConnectionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.datastream.v1alpha1.IPrivateConnection,
-      (
-        | protos.google.cloud.datastream.v1alpha1.IGetPrivateConnectionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datastream.v1alpha1.IGetPrivateConnectionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.datastream.v1alpha1.IPrivateConnection,
+        protos.google.cloud.datastream.v1alpha1.IGetPrivateConnectionRequest|undefined, {}|undefined
+      ]>;
   getPrivateConnection(
-    request: protos.google.cloud.datastream.v1alpha1.IGetPrivateConnectionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.datastream.v1alpha1.IPrivateConnection,
-      | protos.google.cloud.datastream.v1alpha1.IGetPrivateConnectionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPrivateConnection(
-    request: protos.google.cloud.datastream.v1alpha1.IGetPrivateConnectionRequest,
-    callback: Callback<
-      protos.google.cloud.datastream.v1alpha1.IPrivateConnection,
-      | protos.google.cloud.datastream.v1alpha1.IGetPrivateConnectionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPrivateConnection(
-    request?: protos.google.cloud.datastream.v1alpha1.IGetPrivateConnectionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.datastream.v1alpha1.IGetPrivateConnectionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.datastream.v1alpha1.IPrivateConnection,
-          | protos.google.cloud.datastream.v1alpha1.IGetPrivateConnectionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.datastream.v1alpha1.IPrivateConnection,
-      | protos.google.cloud.datastream.v1alpha1.IGetPrivateConnectionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.datastream.v1alpha1.IPrivateConnection,
-      (
-        | protos.google.cloud.datastream.v1alpha1.IGetPrivateConnectionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.datastream.v1alpha1.IGetPrivateConnectionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getPrivateConnection(
+      request: protos.google.cloud.datastream.v1alpha1.IGetPrivateConnectionRequest,
+      callback: Callback<
+          protos.google.cloud.datastream.v1alpha1.IPrivateConnection,
+          protos.google.cloud.datastream.v1alpha1.IGetPrivateConnectionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getPrivateConnection(
+      request?: protos.google.cloud.datastream.v1alpha1.IGetPrivateConnectionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.datastream.v1alpha1.IPrivateConnection,
+          protos.google.cloud.datastream.v1alpha1.IGetPrivateConnectionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.datastream.v1alpha1.IPrivateConnection,
+          protos.google.cloud.datastream.v1alpha1.IGetPrivateConnectionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.datastream.v1alpha1.IPrivateConnection,
+        protos.google.cloud.datastream.v1alpha1.IGetPrivateConnectionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getPrivateConnection request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.datastream.v1alpha1.IPrivateConnection,
-          | protos.google.cloud.datastream.v1alpha1.IGetPrivateConnectionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.datastream.v1alpha1.IPrivateConnection,
+        protos.google.cloud.datastream.v1alpha1.IGetPrivateConnectionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getPrivateConnection response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getPrivateConnection(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.datastream.v1alpha1.IPrivateConnection,
-          (
-            | protos.google.cloud.datastream.v1alpha1.IGetPrivateConnectionRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getPrivateConnection response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getPrivateConnection(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.datastream.v1alpha1.IPrivateConnection,
+        protos.google.cloud.datastream.v1alpha1.IGetPrivateConnectionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getPrivateConnection response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Use this method to get details about a route.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the Route resource to get.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.datastream.v1alpha1.Route|Route}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/datastream.get_route.js</caption>
-   * region_tag:datastream_v1alpha1_generated_Datastream_GetRoute_async
-   */
+/**
+ * Use this method to get details about a route.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the Route resource to get.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.datastream.v1alpha1.Route|Route}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/datastream.get_route.js</caption>
+ * region_tag:datastream_v1alpha1_generated_Datastream_GetRoute_async
+ */
   getRoute(
-    request?: protos.google.cloud.datastream.v1alpha1.IGetRouteRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.datastream.v1alpha1.IRoute,
-      protos.google.cloud.datastream.v1alpha1.IGetRouteRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datastream.v1alpha1.IGetRouteRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.datastream.v1alpha1.IRoute,
+        protos.google.cloud.datastream.v1alpha1.IGetRouteRequest|undefined, {}|undefined
+      ]>;
   getRoute(
-    request: protos.google.cloud.datastream.v1alpha1.IGetRouteRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.datastream.v1alpha1.IRoute,
-      | protos.google.cloud.datastream.v1alpha1.IGetRouteRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getRoute(
-    request: protos.google.cloud.datastream.v1alpha1.IGetRouteRequest,
-    callback: Callback<
-      protos.google.cloud.datastream.v1alpha1.IRoute,
-      | protos.google.cloud.datastream.v1alpha1.IGetRouteRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getRoute(
-    request?: protos.google.cloud.datastream.v1alpha1.IGetRouteRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.datastream.v1alpha1.IGetRouteRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.datastream.v1alpha1.IRoute,
-          | protos.google.cloud.datastream.v1alpha1.IGetRouteRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.datastream.v1alpha1.IRoute,
-      | protos.google.cloud.datastream.v1alpha1.IGetRouteRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.datastream.v1alpha1.IRoute,
-      protos.google.cloud.datastream.v1alpha1.IGetRouteRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.datastream.v1alpha1.IGetRouteRequest|null|undefined,
+          {}|null|undefined>): void;
+  getRoute(
+      request: protos.google.cloud.datastream.v1alpha1.IGetRouteRequest,
+      callback: Callback<
+          protos.google.cloud.datastream.v1alpha1.IRoute,
+          protos.google.cloud.datastream.v1alpha1.IGetRouteRequest|null|undefined,
+          {}|null|undefined>): void;
+  getRoute(
+      request?: protos.google.cloud.datastream.v1alpha1.IGetRouteRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.datastream.v1alpha1.IRoute,
+          protos.google.cloud.datastream.v1alpha1.IGetRouteRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.datastream.v1alpha1.IRoute,
+          protos.google.cloud.datastream.v1alpha1.IGetRouteRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.datastream.v1alpha1.IRoute,
+        protos.google.cloud.datastream.v1alpha1.IGetRouteRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getRoute request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.datastream.v1alpha1.IRoute,
-          | protos.google.cloud.datastream.v1alpha1.IGetRouteRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.datastream.v1alpha1.IRoute,
+        protos.google.cloud.datastream.v1alpha1.IGetRouteRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getRoute response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getRoute(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.datastream.v1alpha1.IRoute,
-          protos.google.cloud.datastream.v1alpha1.IGetRouteRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getRoute response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getRoute(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.datastream.v1alpha1.IRoute,
+        protos.google.cloud.datastream.v1alpha1.IGetRouteRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getRoute response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Use this method to create a connection profile in a project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent that owns the collection of ConnectionProfiles.
-   * @param {string} request.connectionProfileId
-   *   Required. The connection profile identifier.
-   * @param {google.cloud.datastream.v1alpha1.ConnectionProfile} request.connectionProfile
-   *   Required. The connection profile resource to create.
-   * @param {string} [request.requestId]
-   *   Optional. A request ID to identify requests. Specify a unique request ID
-   *   so that if you must retry your request, the server will know to ignore
-   *   the request if it has already been completed. The server will guarantee
-   *   that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request ID,
-   *   the server can check if original operation with the same request ID was
-   *   received, and if so, will ignore the second request. This prevents clients
-   *   from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/datastream.create_connection_profile.js</caption>
-   * region_tag:datastream_v1alpha1_generated_Datastream_CreateConnectionProfile_async
-   */
+/**
+ * Use this method to create a connection profile in a project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent that owns the collection of ConnectionProfiles.
+ * @param {string} request.connectionProfileId
+ *   Required. The connection profile identifier.
+ * @param {google.cloud.datastream.v1alpha1.ConnectionProfile} request.connectionProfile
+ *   Required. The connection profile resource to create.
+ * @param {string} [request.requestId]
+ *   Optional. A request ID to identify requests. Specify a unique request ID
+ *   so that if you must retry your request, the server will know to ignore
+ *   the request if it has already been completed. The server will guarantee
+ *   that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request ID,
+ *   the server can check if original operation with the same request ID was
+ *   received, and if so, will ignore the second request. This prevents clients
+ *   from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/datastream.create_connection_profile.js</caption>
+ * region_tag:datastream_v1alpha1_generated_Datastream_CreateConnectionProfile_async
+ */
   createConnectionProfile(
-    request?: protos.google.cloud.datastream.v1alpha1.ICreateConnectionProfileRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datastream.v1alpha1.ICreateConnectionProfileRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.datastream.v1alpha1.IConnectionProfile, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createConnectionProfile(
-    request: protos.google.cloud.datastream.v1alpha1.ICreateConnectionProfileRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.datastream.v1alpha1.ICreateConnectionProfileRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.datastream.v1alpha1.IConnectionProfile, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createConnectionProfile(
-    request: protos.google.cloud.datastream.v1alpha1.ICreateConnectionProfileRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.datastream.v1alpha1.ICreateConnectionProfileRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.datastream.v1alpha1.IConnectionProfile, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createConnectionProfile(
-    request?: protos.google.cloud.datastream.v1alpha1.ICreateConnectionProfileRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
-            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.datastream.v1alpha1.ICreateConnectionProfileRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.datastream.v1alpha1.IConnectionProfile, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.datastream.v1alpha1.IConnectionProfile, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.datastream.v1alpha1.IConnectionProfile, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
-            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.datastream.v1alpha1.IConnectionProfile, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createConnectionProfile response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createConnectionProfile request %j', request);
-    return this.innerApiCalls
-      .createConnectionProfile(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
-            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createConnectionProfile response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createConnectionProfile(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.datastream.v1alpha1.IConnectionProfile, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createConnectionProfile response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createConnectionProfile()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/datastream.create_connection_profile.js</caption>
-   * region_tag:datastream_v1alpha1_generated_Datastream_CreateConnectionProfile_async
-   */
-  async checkCreateConnectionProfileProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.datastream.v1alpha1.ConnectionProfile,
-      protos.google.cloud.datastream.v1alpha1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createConnectionProfile()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/datastream.create_connection_profile.js</caption>
+ * region_tag:datastream_v1alpha1_generated_Datastream_CreateConnectionProfile_async
+ */
+  async checkCreateConnectionProfileProgress(name: string): Promise<LROperation<protos.google.cloud.datastream.v1alpha1.ConnectionProfile, protos.google.cloud.datastream.v1alpha1.OperationMetadata>>{
     this._log.info('createConnectionProfile long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createConnectionProfile,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.datastream.v1alpha1.ConnectionProfile,
-      protos.google.cloud.datastream.v1alpha1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createConnectionProfile, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.datastream.v1alpha1.ConnectionProfile, protos.google.cloud.datastream.v1alpha1.OperationMetadata>;
   }
-  /**
-   * Use this method to update the parameters of a connection profile.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. Field mask is used to specify the fields to be overwritten in the
-   *   ConnectionProfile resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request. A field will be overwritten if it is in the mask. If the
-   *   user does not provide a mask then all fields will be overwritten.
-   * @param {google.cloud.datastream.v1alpha1.ConnectionProfile} request.connectionProfile
-   *   Required. The ConnectionProfile to update.
-   * @param {string} [request.requestId]
-   *   Optional. A request ID to identify requests. Specify a unique request ID
-   *   so that if you must retry your request, the server will know to ignore
-   *   the request if it has already been completed. The server will guarantee
-   *   that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request ID,
-   *   the server can check if original operation with the same request ID was
-   *   received, and if so, will ignore the second request. This prevents clients
-   *   from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/datastream.update_connection_profile.js</caption>
-   * region_tag:datastream_v1alpha1_generated_Datastream_UpdateConnectionProfile_async
-   */
+/**
+ * Use this method to update the parameters of a connection profile.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Field mask is used to specify the fields to be overwritten in the
+ *   ConnectionProfile resource by the update.
+ *   The fields specified in the update_mask are relative to the resource, not
+ *   the full request. A field will be overwritten if it is in the mask. If the
+ *   user does not provide a mask then all fields will be overwritten.
+ * @param {google.cloud.datastream.v1alpha1.ConnectionProfile} request.connectionProfile
+ *   Required. The ConnectionProfile to update.
+ * @param {string} [request.requestId]
+ *   Optional. A request ID to identify requests. Specify a unique request ID
+ *   so that if you must retry your request, the server will know to ignore
+ *   the request if it has already been completed. The server will guarantee
+ *   that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request ID,
+ *   the server can check if original operation with the same request ID was
+ *   received, and if so, will ignore the second request. This prevents clients
+ *   from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/datastream.update_connection_profile.js</caption>
+ * region_tag:datastream_v1alpha1_generated_Datastream_UpdateConnectionProfile_async
+ */
   updateConnectionProfile(
-    request?: protos.google.cloud.datastream.v1alpha1.IUpdateConnectionProfileRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datastream.v1alpha1.IUpdateConnectionProfileRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.datastream.v1alpha1.IConnectionProfile, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateConnectionProfile(
-    request: protos.google.cloud.datastream.v1alpha1.IUpdateConnectionProfileRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.datastream.v1alpha1.IUpdateConnectionProfileRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.datastream.v1alpha1.IConnectionProfile, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateConnectionProfile(
-    request: protos.google.cloud.datastream.v1alpha1.IUpdateConnectionProfileRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.datastream.v1alpha1.IUpdateConnectionProfileRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.datastream.v1alpha1.IConnectionProfile, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateConnectionProfile(
-    request?: protos.google.cloud.datastream.v1alpha1.IUpdateConnectionProfileRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
-            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.datastream.v1alpha1.IUpdateConnectionProfileRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.datastream.v1alpha1.IConnectionProfile, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.datastream.v1alpha1.IConnectionProfile, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.datastream.v1alpha1.IConnectionProfile, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'connection_profile.name': request.connectionProfile!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'connection_profile.name': request.connectionProfile!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
-            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.datastream.v1alpha1.IConnectionProfile, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateConnectionProfile response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateConnectionProfile request %j', request);
-    return this.innerApiCalls
-      .updateConnectionProfile(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
-            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateConnectionProfile response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateConnectionProfile(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.datastream.v1alpha1.IConnectionProfile, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateConnectionProfile response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateConnectionProfile()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/datastream.update_connection_profile.js</caption>
-   * region_tag:datastream_v1alpha1_generated_Datastream_UpdateConnectionProfile_async
-   */
-  async checkUpdateConnectionProfileProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.datastream.v1alpha1.ConnectionProfile,
-      protos.google.cloud.datastream.v1alpha1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateConnectionProfile()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/datastream.update_connection_profile.js</caption>
+ * region_tag:datastream_v1alpha1_generated_Datastream_UpdateConnectionProfile_async
+ */
+  async checkUpdateConnectionProfileProgress(name: string): Promise<LROperation<protos.google.cloud.datastream.v1alpha1.ConnectionProfile, protos.google.cloud.datastream.v1alpha1.OperationMetadata>>{
     this._log.info('updateConnectionProfile long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateConnectionProfile,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.datastream.v1alpha1.ConnectionProfile,
-      protos.google.cloud.datastream.v1alpha1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateConnectionProfile, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.datastream.v1alpha1.ConnectionProfile, protos.google.cloud.datastream.v1alpha1.OperationMetadata>;
   }
-  /**
-   * Use this method to delete a connection profile..
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the connection profile resource to delete.
-   * @param {string} [request.requestId]
-   *   Optional. A request ID to identify requests. Specify a unique request ID
-   *   so that if you must retry your request, the server will know to ignore
-   *   the request if it has already been completed. The server will guarantee
-   *   that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request ID,
-   *   the server can check if original operation with the same request ID was
-   *   received, and if so, will ignore the second request. This prevents clients
-   *   from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/datastream.delete_connection_profile.js</caption>
-   * region_tag:datastream_v1alpha1_generated_Datastream_DeleteConnectionProfile_async
-   */
+/**
+ * Use this method to delete a connection profile..
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the connection profile resource to delete.
+ * @param {string} [request.requestId]
+ *   Optional. A request ID to identify requests. Specify a unique request ID
+ *   so that if you must retry your request, the server will know to ignore
+ *   the request if it has already been completed. The server will guarantee
+ *   that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request ID,
+ *   the server can check if original operation with the same request ID was
+ *   received, and if so, will ignore the second request. This prevents clients
+ *   from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/datastream.delete_connection_profile.js</caption>
+ * region_tag:datastream_v1alpha1_generated_Datastream_DeleteConnectionProfile_async
+ */
   deleteConnectionProfile(
-    request?: protos.google.cloud.datastream.v1alpha1.IDeleteConnectionProfileRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datastream.v1alpha1.IDeleteConnectionProfileRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteConnectionProfile(
-    request: protos.google.cloud.datastream.v1alpha1.IDeleteConnectionProfileRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.datastream.v1alpha1.IDeleteConnectionProfileRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteConnectionProfile(
-    request: protos.google.cloud.datastream.v1alpha1.IDeleteConnectionProfileRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.datastream.v1alpha1.IDeleteConnectionProfileRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteConnectionProfile(
-    request?: protos.google.cloud.datastream.v1alpha1.IDeleteConnectionProfileRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.datastream.v1alpha1.IDeleteConnectionProfileRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteConnectionProfile response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteConnectionProfile request %j', request);
-    return this.innerApiCalls
-      .deleteConnectionProfile(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteConnectionProfile response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteConnectionProfile(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteConnectionProfile response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteConnectionProfile()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/datastream.delete_connection_profile.js</caption>
-   * region_tag:datastream_v1alpha1_generated_Datastream_DeleteConnectionProfile_async
-   */
-  async checkDeleteConnectionProfileProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.datastream.v1alpha1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteConnectionProfile()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/datastream.delete_connection_profile.js</caption>
+ * region_tag:datastream_v1alpha1_generated_Datastream_DeleteConnectionProfile_async
+ */
+  async checkDeleteConnectionProfileProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.datastream.v1alpha1.OperationMetadata>>{
     this._log.info('deleteConnectionProfile long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteConnectionProfile,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.datastream.v1alpha1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteConnectionProfile, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.datastream.v1alpha1.OperationMetadata>;
   }
-  /**
-   * Use this method to create a stream.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent that owns the collection of streams.
-   * @param {string} request.streamId
-   *   Required. The stream identifier.
-   * @param {google.cloud.datastream.v1alpha1.Stream} request.stream
-   *   Required. The stream resource to create.
-   * @param {string} [request.requestId]
-   *   Optional. A request ID to identify requests. Specify a unique request ID
-   *   so that if you must retry your request, the server will know to ignore
-   *   the request if it has already been completed. The server will guarantee
-   *   that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request ID,
-   *   the server can check if original operation with the same request ID was
-   *   received, and if so, will ignore the second request. This prevents clients
-   *   from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {boolean} [request.validateOnly]
-   *   Optional. Only validate the stream, but do not create any resources.
-   *   The default is false.
-   * @param {boolean} [request.force]
-   *   Optional. Create the stream without validating it.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/datastream.create_stream.js</caption>
-   * region_tag:datastream_v1alpha1_generated_Datastream_CreateStream_async
-   */
+/**
+ * Use this method to create a stream.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent that owns the collection of streams.
+ * @param {string} request.streamId
+ *   Required. The stream identifier.
+ * @param {google.cloud.datastream.v1alpha1.Stream} request.stream
+ *   Required. The stream resource to create.
+ * @param {string} [request.requestId]
+ *   Optional. A request ID to identify requests. Specify a unique request ID
+ *   so that if you must retry your request, the server will know to ignore
+ *   the request if it has already been completed. The server will guarantee
+ *   that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request ID,
+ *   the server can check if original operation with the same request ID was
+ *   received, and if so, will ignore the second request. This prevents clients
+ *   from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {boolean} [request.validateOnly]
+ *   Optional. Only validate the stream, but do not create any resources.
+ *   The default is false.
+ * @param {boolean} [request.force]
+ *   Optional. Create the stream without validating it.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/datastream.create_stream.js</caption>
+ * region_tag:datastream_v1alpha1_generated_Datastream_CreateStream_async
+ */
   createStream(
-    request?: protos.google.cloud.datastream.v1alpha1.ICreateStreamRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IStream,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datastream.v1alpha1.ICreateStreamRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.datastream.v1alpha1.IStream, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createStream(
-    request: protos.google.cloud.datastream.v1alpha1.ICreateStreamRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IStream,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.datastream.v1alpha1.ICreateStreamRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.datastream.v1alpha1.IStream, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createStream(
-    request: protos.google.cloud.datastream.v1alpha1.ICreateStreamRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IStream,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.datastream.v1alpha1.ICreateStreamRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.datastream.v1alpha1.IStream, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createStream(
-    request?: protos.google.cloud.datastream.v1alpha1.ICreateStreamRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.datastream.v1alpha1.IStream,
-            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IStream,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IStream,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.datastream.v1alpha1.ICreateStreamRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.datastream.v1alpha1.IStream, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.datastream.v1alpha1.IStream, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.datastream.v1alpha1.IStream, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.datastream.v1alpha1.IStream,
-            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.datastream.v1alpha1.IStream, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createStream response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createStream request %j', request);
-    return this.innerApiCalls
-      .createStream(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.datastream.v1alpha1.IStream,
-            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createStream response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createStream(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.datastream.v1alpha1.IStream, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createStream response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createStream()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/datastream.create_stream.js</caption>
-   * region_tag:datastream_v1alpha1_generated_Datastream_CreateStream_async
-   */
-  async checkCreateStreamProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.datastream.v1alpha1.Stream,
-      protos.google.cloud.datastream.v1alpha1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createStream()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/datastream.create_stream.js</caption>
+ * region_tag:datastream_v1alpha1_generated_Datastream_CreateStream_async
+ */
+  async checkCreateStreamProgress(name: string): Promise<LROperation<protos.google.cloud.datastream.v1alpha1.Stream, protos.google.cloud.datastream.v1alpha1.OperationMetadata>>{
     this._log.info('createStream long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createStream,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.datastream.v1alpha1.Stream,
-      protos.google.cloud.datastream.v1alpha1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createStream, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.datastream.v1alpha1.Stream, protos.google.cloud.datastream.v1alpha1.OperationMetadata>;
   }
-  /**
-   * Use this method to update the configuration of a stream.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. Field mask is used to specify the fields to be overwritten in the
-   *   stream resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request. A field will be overwritten if it is in the mask. If the
-   *   user does not provide a mask then all fields will be overwritten.
-   * @param {google.cloud.datastream.v1alpha1.Stream} request.stream
-   *   Required. The stream resource to update.
-   * @param {string} [request.requestId]
-   *   Optional. A request ID to identify requests. Specify a unique request ID
-   *   so that if you must retry your request, the server will know to ignore
-   *   the request if it has already been completed. The server will guarantee
-   *   that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request ID,
-   *   the server can check if original operation with the same request ID was
-   *   received, and if so, will ignore the second request. This prevents clients
-   *   from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {boolean} [request.validateOnly]
-   *   Optional. Only validate the stream with the changes, without actually updating it.
-   *   The default is false.
-   * @param {boolean} [request.force]
-   *   Optional. Execute the update without validating it.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/datastream.update_stream.js</caption>
-   * region_tag:datastream_v1alpha1_generated_Datastream_UpdateStream_async
-   */
+/**
+ * Use this method to update the configuration of a stream.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Field mask is used to specify the fields to be overwritten in the
+ *   stream resource by the update.
+ *   The fields specified in the update_mask are relative to the resource, not
+ *   the full request. A field will be overwritten if it is in the mask. If the
+ *   user does not provide a mask then all fields will be overwritten.
+ * @param {google.cloud.datastream.v1alpha1.Stream} request.stream
+ *   Required. The stream resource to update.
+ * @param {string} [request.requestId]
+ *   Optional. A request ID to identify requests. Specify a unique request ID
+ *   so that if you must retry your request, the server will know to ignore
+ *   the request if it has already been completed. The server will guarantee
+ *   that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request ID,
+ *   the server can check if original operation with the same request ID was
+ *   received, and if so, will ignore the second request. This prevents clients
+ *   from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {boolean} [request.validateOnly]
+ *   Optional. Only validate the stream with the changes, without actually updating it.
+ *   The default is false.
+ * @param {boolean} [request.force]
+ *   Optional. Execute the update without validating it.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/datastream.update_stream.js</caption>
+ * region_tag:datastream_v1alpha1_generated_Datastream_UpdateStream_async
+ */
   updateStream(
-    request?: protos.google.cloud.datastream.v1alpha1.IUpdateStreamRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IStream,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datastream.v1alpha1.IUpdateStreamRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.datastream.v1alpha1.IStream, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateStream(
-    request: protos.google.cloud.datastream.v1alpha1.IUpdateStreamRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IStream,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.datastream.v1alpha1.IUpdateStreamRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.datastream.v1alpha1.IStream, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateStream(
-    request: protos.google.cloud.datastream.v1alpha1.IUpdateStreamRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IStream,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.datastream.v1alpha1.IUpdateStreamRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.datastream.v1alpha1.IStream, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateStream(
-    request?: protos.google.cloud.datastream.v1alpha1.IUpdateStreamRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.datastream.v1alpha1.IStream,
-            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IStream,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IStream,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.datastream.v1alpha1.IUpdateStreamRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.datastream.v1alpha1.IStream, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.datastream.v1alpha1.IStream, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.datastream.v1alpha1.IStream, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'stream.name': request.stream!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'stream.name': request.stream!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.datastream.v1alpha1.IStream,
-            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.datastream.v1alpha1.IStream, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateStream response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateStream request %j', request);
-    return this.innerApiCalls
-      .updateStream(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.datastream.v1alpha1.IStream,
-            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateStream response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateStream(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.datastream.v1alpha1.IStream, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateStream response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateStream()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/datastream.update_stream.js</caption>
-   * region_tag:datastream_v1alpha1_generated_Datastream_UpdateStream_async
-   */
-  async checkUpdateStreamProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.datastream.v1alpha1.Stream,
-      protos.google.cloud.datastream.v1alpha1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateStream()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/datastream.update_stream.js</caption>
+ * region_tag:datastream_v1alpha1_generated_Datastream_UpdateStream_async
+ */
+  async checkUpdateStreamProgress(name: string): Promise<LROperation<protos.google.cloud.datastream.v1alpha1.Stream, protos.google.cloud.datastream.v1alpha1.OperationMetadata>>{
     this._log.info('updateStream long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateStream,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.datastream.v1alpha1.Stream,
-      protos.google.cloud.datastream.v1alpha1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateStream, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.datastream.v1alpha1.Stream, protos.google.cloud.datastream.v1alpha1.OperationMetadata>;
   }
-  /**
-   * Use this method to delete a stream.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the stream resource to delete.
-   * @param {string} [request.requestId]
-   *   Optional. A request ID to identify requests. Specify a unique request ID
-   *   so that if you must retry your request, the server will know to ignore
-   *   the request if it has already been completed. The server will guarantee
-   *   that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request ID,
-   *   the server can check if original operation with the same request ID was
-   *   received, and if so, will ignore the second request. This prevents clients
-   *   from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/datastream.delete_stream.js</caption>
-   * region_tag:datastream_v1alpha1_generated_Datastream_DeleteStream_async
-   */
+/**
+ * Use this method to delete a stream.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the stream resource to delete.
+ * @param {string} [request.requestId]
+ *   Optional. A request ID to identify requests. Specify a unique request ID
+ *   so that if you must retry your request, the server will know to ignore
+ *   the request if it has already been completed. The server will guarantee
+ *   that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request ID,
+ *   the server can check if original operation with the same request ID was
+ *   received, and if so, will ignore the second request. This prevents clients
+ *   from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/datastream.delete_stream.js</caption>
+ * region_tag:datastream_v1alpha1_generated_Datastream_DeleteStream_async
+ */
   deleteStream(
-    request?: protos.google.cloud.datastream.v1alpha1.IDeleteStreamRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datastream.v1alpha1.IDeleteStreamRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteStream(
-    request: protos.google.cloud.datastream.v1alpha1.IDeleteStreamRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.datastream.v1alpha1.IDeleteStreamRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteStream(
-    request: protos.google.cloud.datastream.v1alpha1.IDeleteStreamRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.datastream.v1alpha1.IDeleteStreamRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteStream(
-    request?: protos.google.cloud.datastream.v1alpha1.IDeleteStreamRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.datastream.v1alpha1.IDeleteStreamRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteStream response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteStream request %j', request);
-    return this.innerApiCalls
-      .deleteStream(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteStream response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteStream(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteStream response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteStream()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/datastream.delete_stream.js</caption>
-   * region_tag:datastream_v1alpha1_generated_Datastream_DeleteStream_async
-   */
-  async checkDeleteStreamProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.datastream.v1alpha1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteStream()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/datastream.delete_stream.js</caption>
+ * region_tag:datastream_v1alpha1_generated_Datastream_DeleteStream_async
+ */
+  async checkDeleteStreamProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.datastream.v1alpha1.OperationMetadata>>{
     this._log.info('deleteStream long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteStream,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.datastream.v1alpha1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteStream, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.datastream.v1alpha1.OperationMetadata>;
   }
-  /**
-   * Use this method to fetch any errors associated with a stream.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.stream
-   *   Name of the Stream resource for which to fetch any errors.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/datastream.fetch_errors.js</caption>
-   * region_tag:datastream_v1alpha1_generated_Datastream_FetchErrors_async
-   */
+/**
+ * Use this method to fetch any errors associated with a stream.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.stream
+ *   Name of the Stream resource for which to fetch any errors.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/datastream.fetch_errors.js</caption>
+ * region_tag:datastream_v1alpha1_generated_Datastream_FetchErrors_async
+ */
   fetchErrors(
-    request?: protos.google.cloud.datastream.v1alpha1.IFetchErrorsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IFetchErrorsResponse,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datastream.v1alpha1.IFetchErrorsRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.datastream.v1alpha1.IFetchErrorsResponse, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   fetchErrors(
-    request: protos.google.cloud.datastream.v1alpha1.IFetchErrorsRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IFetchErrorsResponse,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.datastream.v1alpha1.IFetchErrorsRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.datastream.v1alpha1.IFetchErrorsResponse, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   fetchErrors(
-    request: protos.google.cloud.datastream.v1alpha1.IFetchErrorsRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IFetchErrorsResponse,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.datastream.v1alpha1.IFetchErrorsRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.datastream.v1alpha1.IFetchErrorsResponse, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   fetchErrors(
-    request?: protos.google.cloud.datastream.v1alpha1.IFetchErrorsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.datastream.v1alpha1.IFetchErrorsResponse,
-            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IFetchErrorsResponse,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IFetchErrorsResponse,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.datastream.v1alpha1.IFetchErrorsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.datastream.v1alpha1.IFetchErrorsResponse, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.datastream.v1alpha1.IFetchErrorsResponse, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.datastream.v1alpha1.IFetchErrorsResponse, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        stream: request.stream ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'stream': request.stream ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.datastream.v1alpha1.IFetchErrorsResponse,
-            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.datastream.v1alpha1.IFetchErrorsResponse, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('fetchErrors response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('fetchErrors request %j', request);
-    return this.innerApiCalls
-      .fetchErrors(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.datastream.v1alpha1.IFetchErrorsResponse,
-            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('fetchErrors response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.fetchErrors(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.datastream.v1alpha1.IFetchErrorsResponse, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('fetchErrors response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `fetchErrors()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/datastream.fetch_errors.js</caption>
-   * region_tag:datastream_v1alpha1_generated_Datastream_FetchErrors_async
-   */
-  async checkFetchErrorsProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.datastream.v1alpha1.FetchErrorsResponse,
-      protos.google.cloud.datastream.v1alpha1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `fetchErrors()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/datastream.fetch_errors.js</caption>
+ * region_tag:datastream_v1alpha1_generated_Datastream_FetchErrors_async
+ */
+  async checkFetchErrorsProgress(name: string): Promise<LROperation<protos.google.cloud.datastream.v1alpha1.FetchErrorsResponse, protos.google.cloud.datastream.v1alpha1.OperationMetadata>>{
     this._log.info('fetchErrors long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.fetchErrors,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.datastream.v1alpha1.FetchErrorsResponse,
-      protos.google.cloud.datastream.v1alpha1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.fetchErrors, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.datastream.v1alpha1.FetchErrorsResponse, protos.google.cloud.datastream.v1alpha1.OperationMetadata>;
   }
-  /**
-   * Use this method to create a private connectivity configuration.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent that owns the collection of PrivateConnections.
-   * @param {string} request.privateConnectionId
-   *   Required. The private connectivity identifier.
-   * @param {google.cloud.datastream.v1alpha1.PrivateConnection} request.privateConnection
-   *   Required. The Private Connectivity resource to create.
-   * @param {string} [request.requestId]
-   *   Optional. A request ID to identify requests. Specify a unique request ID
-   *   so that if you must retry your request, the server will know to ignore
-   *   the request if it has already been completed. The server will guarantee
-   *   that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request ID,
-   *   the server can check if original operation with the same request ID was
-   *   received, and if so, will ignore the second request. This prevents clients
-   *   from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/datastream.create_private_connection.js</caption>
-   * region_tag:datastream_v1alpha1_generated_Datastream_CreatePrivateConnection_async
-   */
+/**
+ * Use this method to create a private connectivity configuration.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent that owns the collection of PrivateConnections.
+ * @param {string} request.privateConnectionId
+ *   Required. The private connectivity identifier.
+ * @param {google.cloud.datastream.v1alpha1.PrivateConnection} request.privateConnection
+ *   Required. The Private Connectivity resource to create.
+ * @param {string} [request.requestId]
+ *   Optional. A request ID to identify requests. Specify a unique request ID
+ *   so that if you must retry your request, the server will know to ignore
+ *   the request if it has already been completed. The server will guarantee
+ *   that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request ID,
+ *   the server can check if original operation with the same request ID was
+ *   received, and if so, will ignore the second request. This prevents clients
+ *   from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/datastream.create_private_connection.js</caption>
+ * region_tag:datastream_v1alpha1_generated_Datastream_CreatePrivateConnection_async
+ */
   createPrivateConnection(
-    request?: protos.google.cloud.datastream.v1alpha1.ICreatePrivateConnectionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IPrivateConnection,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datastream.v1alpha1.ICreatePrivateConnectionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.datastream.v1alpha1.IPrivateConnection, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createPrivateConnection(
-    request: protos.google.cloud.datastream.v1alpha1.ICreatePrivateConnectionRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IPrivateConnection,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.datastream.v1alpha1.ICreatePrivateConnectionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.datastream.v1alpha1.IPrivateConnection, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createPrivateConnection(
-    request: protos.google.cloud.datastream.v1alpha1.ICreatePrivateConnectionRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IPrivateConnection,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.datastream.v1alpha1.ICreatePrivateConnectionRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.datastream.v1alpha1.IPrivateConnection, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createPrivateConnection(
-    request?: protos.google.cloud.datastream.v1alpha1.ICreatePrivateConnectionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.datastream.v1alpha1.IPrivateConnection,
-            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IPrivateConnection,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IPrivateConnection,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.datastream.v1alpha1.ICreatePrivateConnectionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.datastream.v1alpha1.IPrivateConnection, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.datastream.v1alpha1.IPrivateConnection, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.datastream.v1alpha1.IPrivateConnection, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.datastream.v1alpha1.IPrivateConnection,
-            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.datastream.v1alpha1.IPrivateConnection, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createPrivateConnection response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createPrivateConnection request %j', request);
-    return this.innerApiCalls
-      .createPrivateConnection(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.datastream.v1alpha1.IPrivateConnection,
-            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createPrivateConnection response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createPrivateConnection(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.datastream.v1alpha1.IPrivateConnection, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createPrivateConnection response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createPrivateConnection()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/datastream.create_private_connection.js</caption>
-   * region_tag:datastream_v1alpha1_generated_Datastream_CreatePrivateConnection_async
-   */
-  async checkCreatePrivateConnectionProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.datastream.v1alpha1.PrivateConnection,
-      protos.google.cloud.datastream.v1alpha1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createPrivateConnection()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/datastream.create_private_connection.js</caption>
+ * region_tag:datastream_v1alpha1_generated_Datastream_CreatePrivateConnection_async
+ */
+  async checkCreatePrivateConnectionProgress(name: string): Promise<LROperation<protos.google.cloud.datastream.v1alpha1.PrivateConnection, protos.google.cloud.datastream.v1alpha1.OperationMetadata>>{
     this._log.info('createPrivateConnection long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createPrivateConnection,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.datastream.v1alpha1.PrivateConnection,
-      protos.google.cloud.datastream.v1alpha1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createPrivateConnection, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.datastream.v1alpha1.PrivateConnection, protos.google.cloud.datastream.v1alpha1.OperationMetadata>;
   }
-  /**
-   * Use this method to delete a private connectivity configuration.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the private connectivity configuration to delete.
-   * @param {string} [request.requestId]
-   *   Optional. A request ID to identify requests. Specify a unique request ID
-   *   so that if you must retry your request, the server will know to ignore
-   *   the request if it has already been completed. The server will guarantee
-   *   that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request ID,
-   *   the server can check if original operation with the same request ID was
-   *   received, and if so, will ignore the second request. This prevents clients
-   *   from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {boolean} [request.force]
-   *   Optional. If set to true, any child routes that belong to this PrivateConnection will
-   *   also be deleted.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/datastream.delete_private_connection.js</caption>
-   * region_tag:datastream_v1alpha1_generated_Datastream_DeletePrivateConnection_async
-   */
+/**
+ * Use this method to delete a private connectivity configuration.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the private connectivity configuration to delete.
+ * @param {string} [request.requestId]
+ *   Optional. A request ID to identify requests. Specify a unique request ID
+ *   so that if you must retry your request, the server will know to ignore
+ *   the request if it has already been completed. The server will guarantee
+ *   that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request ID,
+ *   the server can check if original operation with the same request ID was
+ *   received, and if so, will ignore the second request. This prevents clients
+ *   from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {boolean} [request.force]
+ *   Optional. If set to true, any child routes that belong to this PrivateConnection will
+ *   also be deleted.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/datastream.delete_private_connection.js</caption>
+ * region_tag:datastream_v1alpha1_generated_Datastream_DeletePrivateConnection_async
+ */
   deletePrivateConnection(
-    request?: protos.google.cloud.datastream.v1alpha1.IDeletePrivateConnectionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datastream.v1alpha1.IDeletePrivateConnectionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deletePrivateConnection(
-    request: protos.google.cloud.datastream.v1alpha1.IDeletePrivateConnectionRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.datastream.v1alpha1.IDeletePrivateConnectionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deletePrivateConnection(
-    request: protos.google.cloud.datastream.v1alpha1.IDeletePrivateConnectionRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.datastream.v1alpha1.IDeletePrivateConnectionRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deletePrivateConnection(
-    request?: protos.google.cloud.datastream.v1alpha1.IDeletePrivateConnectionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.datastream.v1alpha1.IDeletePrivateConnectionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deletePrivateConnection response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deletePrivateConnection request %j', request);
-    return this.innerApiCalls
-      .deletePrivateConnection(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deletePrivateConnection response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deletePrivateConnection(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deletePrivateConnection response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deletePrivateConnection()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/datastream.delete_private_connection.js</caption>
-   * region_tag:datastream_v1alpha1_generated_Datastream_DeletePrivateConnection_async
-   */
-  async checkDeletePrivateConnectionProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.datastream.v1alpha1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deletePrivateConnection()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/datastream.delete_private_connection.js</caption>
+ * region_tag:datastream_v1alpha1_generated_Datastream_DeletePrivateConnection_async
+ */
+  async checkDeletePrivateConnectionProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.datastream.v1alpha1.OperationMetadata>>{
     this._log.info('deletePrivateConnection long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deletePrivateConnection,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.datastream.v1alpha1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deletePrivateConnection, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.datastream.v1alpha1.OperationMetadata>;
   }
-  /**
-   * Use this method to create a route for a private connectivity in a project
-   * and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent that owns the collection of Routes.
-   * @param {string} request.routeId
-   *   Required. The Route identifier.
-   * @param {google.cloud.datastream.v1alpha1.Route} request.route
-   *   Required. The Route resource to create.
-   * @param {string} [request.requestId]
-   *   Optional. A request ID to identify requests. Specify a unique request ID
-   *   so that if you must retry your request, the server will know to ignore
-   *   the request if it has already been completed. The server will guarantee
-   *   that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request ID,
-   *   the server can check if original operation with the same request ID was
-   *   received, and if so, will ignore the second request. This prevents clients
-   *   from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/datastream.create_route.js</caption>
-   * region_tag:datastream_v1alpha1_generated_Datastream_CreateRoute_async
-   */
+/**
+ * Use this method to create a route for a private connectivity in a project
+ * and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent that owns the collection of Routes.
+ * @param {string} request.routeId
+ *   Required. The Route identifier.
+ * @param {google.cloud.datastream.v1alpha1.Route} request.route
+ *   Required. The Route resource to create.
+ * @param {string} [request.requestId]
+ *   Optional. A request ID to identify requests. Specify a unique request ID
+ *   so that if you must retry your request, the server will know to ignore
+ *   the request if it has already been completed. The server will guarantee
+ *   that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request ID,
+ *   the server can check if original operation with the same request ID was
+ *   received, and if so, will ignore the second request. This prevents clients
+ *   from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/datastream.create_route.js</caption>
+ * region_tag:datastream_v1alpha1_generated_Datastream_CreateRoute_async
+ */
   createRoute(
-    request?: protos.google.cloud.datastream.v1alpha1.ICreateRouteRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IRoute,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datastream.v1alpha1.ICreateRouteRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.datastream.v1alpha1.IRoute, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createRoute(
-    request: protos.google.cloud.datastream.v1alpha1.ICreateRouteRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IRoute,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.datastream.v1alpha1.ICreateRouteRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.datastream.v1alpha1.IRoute, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createRoute(
-    request: protos.google.cloud.datastream.v1alpha1.ICreateRouteRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IRoute,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.datastream.v1alpha1.ICreateRouteRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.datastream.v1alpha1.IRoute, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createRoute(
-    request?: protos.google.cloud.datastream.v1alpha1.ICreateRouteRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.datastream.v1alpha1.IRoute,
-            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IRoute,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IRoute,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.datastream.v1alpha1.ICreateRouteRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.datastream.v1alpha1.IRoute, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.datastream.v1alpha1.IRoute, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.datastream.v1alpha1.IRoute, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.datastream.v1alpha1.IRoute,
-            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.datastream.v1alpha1.IRoute, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createRoute response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createRoute request %j', request);
-    return this.innerApiCalls
-      .createRoute(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.datastream.v1alpha1.IRoute,
-            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createRoute response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createRoute(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.datastream.v1alpha1.IRoute, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createRoute response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createRoute()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/datastream.create_route.js</caption>
-   * region_tag:datastream_v1alpha1_generated_Datastream_CreateRoute_async
-   */
-  async checkCreateRouteProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.datastream.v1alpha1.Route,
-      protos.google.cloud.datastream.v1alpha1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createRoute()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/datastream.create_route.js</caption>
+ * region_tag:datastream_v1alpha1_generated_Datastream_CreateRoute_async
+ */
+  async checkCreateRouteProgress(name: string): Promise<LROperation<protos.google.cloud.datastream.v1alpha1.Route, protos.google.cloud.datastream.v1alpha1.OperationMetadata>>{
     this._log.info('createRoute long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createRoute,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.datastream.v1alpha1.Route,
-      protos.google.cloud.datastream.v1alpha1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createRoute, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.datastream.v1alpha1.Route, protos.google.cloud.datastream.v1alpha1.OperationMetadata>;
   }
-  /**
-   * Use this method to delete a route.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the Route resource to delete.
-   * @param {string} [request.requestId]
-   *   Optional. A request ID to identify requests. Specify a unique request ID
-   *   so that if you must retry your request, the server will know to ignore
-   *   the request if it has already been completed. The server will guarantee
-   *   that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request ID,
-   *   the server can check if original operation with the same request ID was
-   *   received, and if so, will ignore the second request. This prevents clients
-   *   from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/datastream.delete_route.js</caption>
-   * region_tag:datastream_v1alpha1_generated_Datastream_DeleteRoute_async
-   */
+/**
+ * Use this method to delete a route.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the Route resource to delete.
+ * @param {string} [request.requestId]
+ *   Optional. A request ID to identify requests. Specify a unique request ID
+ *   so that if you must retry your request, the server will know to ignore
+ *   the request if it has already been completed. The server will guarantee
+ *   that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request ID,
+ *   the server can check if original operation with the same request ID was
+ *   received, and if so, will ignore the second request. This prevents clients
+ *   from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/datastream.delete_route.js</caption>
+ * region_tag:datastream_v1alpha1_generated_Datastream_DeleteRoute_async
+ */
   deleteRoute(
-    request?: protos.google.cloud.datastream.v1alpha1.IDeleteRouteRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datastream.v1alpha1.IDeleteRouteRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteRoute(
-    request: protos.google.cloud.datastream.v1alpha1.IDeleteRouteRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.datastream.v1alpha1.IDeleteRouteRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteRoute(
-    request: protos.google.cloud.datastream.v1alpha1.IDeleteRouteRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.datastream.v1alpha1.IDeleteRouteRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteRoute(
-    request?: protos.google.cloud.datastream.v1alpha1.IDeleteRouteRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.datastream.v1alpha1.IDeleteRouteRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteRoute response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteRoute request %j', request);
-    return this.innerApiCalls
-      .deleteRoute(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteRoute response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteRoute(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datastream.v1alpha1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteRoute response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteRoute()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/datastream.delete_route.js</caption>
-   * region_tag:datastream_v1alpha1_generated_Datastream_DeleteRoute_async
-   */
-  async checkDeleteRouteProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.datastream.v1alpha1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteRoute()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/datastream.delete_route.js</caption>
+ * region_tag:datastream_v1alpha1_generated_Datastream_DeleteRoute_async
+ */
+  async checkDeleteRouteProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.datastream.v1alpha1.OperationMetadata>>{
     this._log.info('deleteRoute long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteRoute,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.datastream.v1alpha1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteRoute, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.datastream.v1alpha1.OperationMetadata>;
   }
-  /**
-   * Use this method to list connection profiles created in a project and
-   * location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent that owns the collection of connection profiles.
-   * @param {number} request.pageSize
-   *   Maximum number of connection profiles to return.
-   *   If unspecified, at most 50 connection profiles will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   Page token received from a previous `ListConnectionProfiles` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListConnectionProfiles`
-   *   must match the call that provided the page token.
-   * @param {string} request.filter
-   *   Filter request.
-   * @param {string} request.orderBy
-   *   Order by fields for the result.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.datastream.v1alpha1.ConnectionProfile|ConnectionProfile}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listConnectionProfilesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Use this method to list connection profiles created in a project and
+ * location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent that owns the collection of connection profiles.
+ * @param {number} request.pageSize
+ *   Maximum number of connection profiles to return.
+ *   If unspecified, at most 50 connection profiles will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} request.pageToken
+ *   Page token received from a previous `ListConnectionProfiles` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListConnectionProfiles`
+ *   must match the call that provided the page token.
+ * @param {string} request.filter
+ *   Filter request.
+ * @param {string} request.orderBy
+ *   Order by fields for the result.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.datastream.v1alpha1.ConnectionProfile|ConnectionProfile}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listConnectionProfilesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listConnectionProfiles(
-    request?: protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.datastream.v1alpha1.IConnectionProfile[],
-      protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest | null,
-      protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.datastream.v1alpha1.IConnectionProfile[],
+        protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest|null,
+        protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesResponse
+      ]>;
   listConnectionProfiles(
-    request: protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest,
-      | protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesResponse
-      | null
-      | undefined,
-      protos.google.cloud.datastream.v1alpha1.IConnectionProfile
-    >
-  ): void;
-  listConnectionProfiles(
-    request: protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest,
-      | protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesResponse
-      | null
-      | undefined,
-      protos.google.cloud.datastream.v1alpha1.IConnectionProfile
-    >
-  ): void;
-  listConnectionProfiles(
-    request?: protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest,
-          | protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesResponse
-          | null
-          | undefined,
-          protos.google.cloud.datastream.v1alpha1.IConnectionProfile
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest,
-      | protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesResponse
-      | null
-      | undefined,
-      protos.google.cloud.datastream.v1alpha1.IConnectionProfile
-    >
-  ): Promise<
-    [
-      protos.google.cloud.datastream.v1alpha1.IConnectionProfile[],
-      protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest | null,
-      protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesResponse,
-    ]
-  > | void {
+          protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesResponse|null|undefined,
+          protos.google.cloud.datastream.v1alpha1.IConnectionProfile>): void;
+  listConnectionProfiles(
+      request: protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest,
+          protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesResponse|null|undefined,
+          protos.google.cloud.datastream.v1alpha1.IConnectionProfile>): void;
+  listConnectionProfiles(
+      request?: protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest,
+          protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesResponse|null|undefined,
+          protos.google.cloud.datastream.v1alpha1.IConnectionProfile>,
+      callback?: PaginationCallback<
+          protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest,
+          protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesResponse|null|undefined,
+          protos.google.cloud.datastream.v1alpha1.IConnectionProfile>):
+      Promise<[
+        protos.google.cloud.datastream.v1alpha1.IConnectionProfile[],
+        protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest|null,
+        protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest,
-          | protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesResponse
-          | null
-          | undefined,
-          protos.google.cloud.datastream.v1alpha1.IConnectionProfile
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest,
+      protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesResponse|null|undefined,
+      protos.google.cloud.datastream.v1alpha1.IConnectionProfile>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listConnectionProfiles values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3431,66 +2413,63 @@ export class DatastreamClient {
     this._log.info('listConnectionProfiles request %j', request);
     return this.innerApiCalls
       .listConnectionProfiles(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.datastream.v1alpha1.IConnectionProfile[],
-          protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest | null,
-          protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesResponse,
-        ]) => {
-          this._log.info('listConnectionProfiles values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.datastream.v1alpha1.IConnectionProfile[],
+        protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest|null,
+        protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesResponse
+      ]) => {
+        this._log.info('listConnectionProfiles values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listConnectionProfiles`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent that owns the collection of connection profiles.
-   * @param {number} request.pageSize
-   *   Maximum number of connection profiles to return.
-   *   If unspecified, at most 50 connection profiles will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   Page token received from a previous `ListConnectionProfiles` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListConnectionProfiles`
-   *   must match the call that provided the page token.
-   * @param {string} request.filter
-   *   Filter request.
-   * @param {string} request.orderBy
-   *   Order by fields for the result.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.datastream.v1alpha1.ConnectionProfile|ConnectionProfile} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listConnectionProfilesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listConnectionProfiles`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent that owns the collection of connection profiles.
+ * @param {number} request.pageSize
+ *   Maximum number of connection profiles to return.
+ *   If unspecified, at most 50 connection profiles will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} request.pageToken
+ *   Page token received from a previous `ListConnectionProfiles` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListConnectionProfiles`
+ *   must match the call that provided the page token.
+ * @param {string} request.filter
+ *   Filter request.
+ * @param {string} request.orderBy
+ *   Order by fields for the result.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.datastream.v1alpha1.ConnectionProfile|ConnectionProfile} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listConnectionProfilesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listConnectionProfilesStream(
-    request?: protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listConnectionProfiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listConnectionProfiles stream %j', request);
     return this.descriptors.page.listConnectionProfiles.createStream(
       this.innerApiCalls.listConnectionProfiles as GaxCall,
@@ -3499,57 +2478,56 @@ export class DatastreamClient {
     );
   }
 
-  /**
-   * Equivalent to `listConnectionProfiles`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent that owns the collection of connection profiles.
-   * @param {number} request.pageSize
-   *   Maximum number of connection profiles to return.
-   *   If unspecified, at most 50 connection profiles will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   Page token received from a previous `ListConnectionProfiles` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListConnectionProfiles`
-   *   must match the call that provided the page token.
-   * @param {string} request.filter
-   *   Filter request.
-   * @param {string} request.orderBy
-   *   Order by fields for the result.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.datastream.v1alpha1.ConnectionProfile|ConnectionProfile}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/datastream.list_connection_profiles.js</caption>
-   * region_tag:datastream_v1alpha1_generated_Datastream_ListConnectionProfiles_async
-   */
+/**
+ * Equivalent to `listConnectionProfiles`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent that owns the collection of connection profiles.
+ * @param {number} request.pageSize
+ *   Maximum number of connection profiles to return.
+ *   If unspecified, at most 50 connection profiles will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} request.pageToken
+ *   Page token received from a previous `ListConnectionProfiles` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListConnectionProfiles`
+ *   must match the call that provided the page token.
+ * @param {string} request.filter
+ *   Filter request.
+ * @param {string} request.orderBy
+ *   Order by fields for the result.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.datastream.v1alpha1.ConnectionProfile|ConnectionProfile}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/datastream.list_connection_profiles.js</caption>
+ * region_tag:datastream_v1alpha1_generated_Datastream_ListConnectionProfiles_async
+ */
   listConnectionProfilesAsync(
-    request?: protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.datastream.v1alpha1.IConnectionProfile> {
+      request?: protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.datastream.v1alpha1.IConnectionProfile>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listConnectionProfiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listConnectionProfiles iterate %j', request);
     return this.descriptors.page.listConnectionProfiles.asyncIterate(
       this.innerApiCalls['listConnectionProfiles'] as GaxCall,
@@ -3557,122 +2535,97 @@ export class DatastreamClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.datastream.v1alpha1.IConnectionProfile>;
   }
-  /**
-   * Use this method to list streams in a project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent that owns the collection of streams.
-   * @param {number} request.pageSize
-   *   Maximum number of streams to return.
-   *   If unspecified, at most 50 streams will  be returned. The maximum
-   *   value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   Page token received from a previous `ListStreams` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListStreams`
-   *   must match the call that provided the page token.
-   * @param {string} request.filter
-   *   Filter request.
-   * @param {string} request.orderBy
-   *   Order by fields for the result.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.datastream.v1alpha1.Stream|Stream}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listStreamsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Use this method to list streams in a project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent that owns the collection of streams.
+ * @param {number} request.pageSize
+ *   Maximum number of streams to return.
+ *   If unspecified, at most 50 streams will  be returned. The maximum
+ *   value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} request.pageToken
+ *   Page token received from a previous `ListStreams` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListStreams`
+ *   must match the call that provided the page token.
+ * @param {string} request.filter
+ *   Filter request.
+ * @param {string} request.orderBy
+ *   Order by fields for the result.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.datastream.v1alpha1.Stream|Stream}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listStreamsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listStreams(
-    request?: protos.google.cloud.datastream.v1alpha1.IListStreamsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.datastream.v1alpha1.IStream[],
-      protos.google.cloud.datastream.v1alpha1.IListStreamsRequest | null,
-      protos.google.cloud.datastream.v1alpha1.IListStreamsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.datastream.v1alpha1.IListStreamsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.datastream.v1alpha1.IStream[],
+        protos.google.cloud.datastream.v1alpha1.IListStreamsRequest|null,
+        protos.google.cloud.datastream.v1alpha1.IListStreamsResponse
+      ]>;
   listStreams(
-    request: protos.google.cloud.datastream.v1alpha1.IListStreamsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.datastream.v1alpha1.IListStreamsRequest,
-      | protos.google.cloud.datastream.v1alpha1.IListStreamsResponse
-      | null
-      | undefined,
-      protos.google.cloud.datastream.v1alpha1.IStream
-    >
-  ): void;
-  listStreams(
-    request: protos.google.cloud.datastream.v1alpha1.IListStreamsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.datastream.v1alpha1.IListStreamsRequest,
-      | protos.google.cloud.datastream.v1alpha1.IListStreamsResponse
-      | null
-      | undefined,
-      protos.google.cloud.datastream.v1alpha1.IStream
-    >
-  ): void;
-  listStreams(
-    request?: protos.google.cloud.datastream.v1alpha1.IListStreamsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.datastream.v1alpha1.IListStreamsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.datastream.v1alpha1.IListStreamsRequest,
-          | protos.google.cloud.datastream.v1alpha1.IListStreamsResponse
-          | null
-          | undefined,
-          protos.google.cloud.datastream.v1alpha1.IStream
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.datastream.v1alpha1.IListStreamsRequest,
-      | protos.google.cloud.datastream.v1alpha1.IListStreamsResponse
-      | null
-      | undefined,
-      protos.google.cloud.datastream.v1alpha1.IStream
-    >
-  ): Promise<
-    [
-      protos.google.cloud.datastream.v1alpha1.IStream[],
-      protos.google.cloud.datastream.v1alpha1.IListStreamsRequest | null,
-      protos.google.cloud.datastream.v1alpha1.IListStreamsResponse,
-    ]
-  > | void {
+          protos.google.cloud.datastream.v1alpha1.IListStreamsResponse|null|undefined,
+          protos.google.cloud.datastream.v1alpha1.IStream>): void;
+  listStreams(
+      request: protos.google.cloud.datastream.v1alpha1.IListStreamsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.datastream.v1alpha1.IListStreamsRequest,
+          protos.google.cloud.datastream.v1alpha1.IListStreamsResponse|null|undefined,
+          protos.google.cloud.datastream.v1alpha1.IStream>): void;
+  listStreams(
+      request?: protos.google.cloud.datastream.v1alpha1.IListStreamsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.datastream.v1alpha1.IListStreamsRequest,
+          protos.google.cloud.datastream.v1alpha1.IListStreamsResponse|null|undefined,
+          protos.google.cloud.datastream.v1alpha1.IStream>,
+      callback?: PaginationCallback<
+          protos.google.cloud.datastream.v1alpha1.IListStreamsRequest,
+          protos.google.cloud.datastream.v1alpha1.IListStreamsResponse|null|undefined,
+          protos.google.cloud.datastream.v1alpha1.IStream>):
+      Promise<[
+        protos.google.cloud.datastream.v1alpha1.IStream[],
+        protos.google.cloud.datastream.v1alpha1.IListStreamsRequest|null,
+        protos.google.cloud.datastream.v1alpha1.IListStreamsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.datastream.v1alpha1.IListStreamsRequest,
-          | protos.google.cloud.datastream.v1alpha1.IListStreamsResponse
-          | null
-          | undefined,
-          protos.google.cloud.datastream.v1alpha1.IStream
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.datastream.v1alpha1.IListStreamsRequest,
+      protos.google.cloud.datastream.v1alpha1.IListStreamsResponse|null|undefined,
+      protos.google.cloud.datastream.v1alpha1.IStream>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listStreams values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3681,66 +2634,63 @@ export class DatastreamClient {
     this._log.info('listStreams request %j', request);
     return this.innerApiCalls
       .listStreams(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.datastream.v1alpha1.IStream[],
-          protos.google.cloud.datastream.v1alpha1.IListStreamsRequest | null,
-          protos.google.cloud.datastream.v1alpha1.IListStreamsResponse,
-        ]) => {
-          this._log.info('listStreams values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.datastream.v1alpha1.IStream[],
+        protos.google.cloud.datastream.v1alpha1.IListStreamsRequest|null,
+        protos.google.cloud.datastream.v1alpha1.IListStreamsResponse
+      ]) => {
+        this._log.info('listStreams values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listStreams`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent that owns the collection of streams.
-   * @param {number} request.pageSize
-   *   Maximum number of streams to return.
-   *   If unspecified, at most 50 streams will  be returned. The maximum
-   *   value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   Page token received from a previous `ListStreams` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListStreams`
-   *   must match the call that provided the page token.
-   * @param {string} request.filter
-   *   Filter request.
-   * @param {string} request.orderBy
-   *   Order by fields for the result.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.datastream.v1alpha1.Stream|Stream} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listStreamsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listStreams`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent that owns the collection of streams.
+ * @param {number} request.pageSize
+ *   Maximum number of streams to return.
+ *   If unspecified, at most 50 streams will  be returned. The maximum
+ *   value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} request.pageToken
+ *   Page token received from a previous `ListStreams` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListStreams`
+ *   must match the call that provided the page token.
+ * @param {string} request.filter
+ *   Filter request.
+ * @param {string} request.orderBy
+ *   Order by fields for the result.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.datastream.v1alpha1.Stream|Stream} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listStreamsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listStreamsStream(
-    request?: protos.google.cloud.datastream.v1alpha1.IListStreamsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.datastream.v1alpha1.IListStreamsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listStreams'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listStreams stream %j', request);
     return this.descriptors.page.listStreams.createStream(
       this.innerApiCalls.listStreams as GaxCall,
@@ -3749,57 +2699,56 @@ export class DatastreamClient {
     );
   }
 
-  /**
-   * Equivalent to `listStreams`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent that owns the collection of streams.
-   * @param {number} request.pageSize
-   *   Maximum number of streams to return.
-   *   If unspecified, at most 50 streams will  be returned. The maximum
-   *   value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   Page token received from a previous `ListStreams` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListStreams`
-   *   must match the call that provided the page token.
-   * @param {string} request.filter
-   *   Filter request.
-   * @param {string} request.orderBy
-   *   Order by fields for the result.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.datastream.v1alpha1.Stream|Stream}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/datastream.list_streams.js</caption>
-   * region_tag:datastream_v1alpha1_generated_Datastream_ListStreams_async
-   */
+/**
+ * Equivalent to `listStreams`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent that owns the collection of streams.
+ * @param {number} request.pageSize
+ *   Maximum number of streams to return.
+ *   If unspecified, at most 50 streams will  be returned. The maximum
+ *   value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} request.pageToken
+ *   Page token received from a previous `ListStreams` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListStreams`
+ *   must match the call that provided the page token.
+ * @param {string} request.filter
+ *   Filter request.
+ * @param {string} request.orderBy
+ *   Order by fields for the result.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.datastream.v1alpha1.Stream|Stream}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/datastream.list_streams.js</caption>
+ * region_tag:datastream_v1alpha1_generated_Datastream_ListStreams_async
+ */
   listStreamsAsync(
-    request?: protos.google.cloud.datastream.v1alpha1.IListStreamsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.datastream.v1alpha1.IStream> {
+      request?: protos.google.cloud.datastream.v1alpha1.IListStreamsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.datastream.v1alpha1.IStream>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listStreams'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listStreams iterate %j', request);
     return this.descriptors.page.listStreams.asyncIterate(
       this.innerApiCalls['listStreams'] as GaxCall,
@@ -3807,116 +2756,91 @@ export class DatastreamClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.datastream.v1alpha1.IStream>;
   }
-  /**
-   * The FetchStaticIps API call exposes the static ips used by Datastream.
-   * Typically, a request returns children data objects under
-   * a parent data object that's optionally supplied in the request.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name resource of the Response type. Must be in the
-   *   format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of Ips to return, will likely not be specified.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListStaticIps` call.
-   *   will likely not be specified.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of string.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `fetchStaticIpsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * The FetchStaticIps API call exposes the static ips used by Datastream.
+ * Typically, a request returns children data objects under
+ * a parent data object that's optionally supplied in the request.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name resource of the Response type. Must be in the
+ *   format `projects/* /locations/*`.
+ * @param {number} request.pageSize
+ *   Maximum number of Ips to return, will likely not be specified.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListStaticIps` call.
+ *   will likely not be specified.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of string.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `fetchStaticIpsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   fetchStaticIps(
-    request?: protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      string[],
-      protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsRequest | null,
-      protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsRequest,
+      options?: CallOptions):
+      Promise<[
+        string[],
+        protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsRequest|null,
+        protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsResponse
+      ]>;
   fetchStaticIps(
-    request: protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsRequest,
-      | protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsResponse
-      | null
-      | undefined,
-      string
-    >
-  ): void;
-  fetchStaticIps(
-    request: protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsRequest,
-      | protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsResponse
-      | null
-      | undefined,
-      string
-    >
-  ): void;
-  fetchStaticIps(
-    request?: protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsRequest,
-          | protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsResponse
-          | null
-          | undefined,
-          string
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsRequest,
-      | protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsResponse
-      | null
-      | undefined,
-      string
-    >
-  ): Promise<
-    [
-      string[],
-      protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsRequest | null,
-      protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsResponse,
-    ]
-  > | void {
+          protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsResponse|null|undefined,
+          string>): void;
+  fetchStaticIps(
+      request: protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsRequest,
+          protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsResponse|null|undefined,
+          string>): void;
+  fetchStaticIps(
+      request?: protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsRequest,
+          protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsResponse|null|undefined,
+          string>,
+      callback?: PaginationCallback<
+          protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsRequest,
+          protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsResponse|null|undefined,
+          string>):
+      Promise<[
+        string[],
+        protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsRequest|null,
+        protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsRequest,
-          | protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsResponse
-          | null
-          | undefined,
-          string
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsRequest,
+      protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsResponse|null|undefined,
+      string>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('fetchStaticIps values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3925,58 +2849,55 @@ export class DatastreamClient {
     this._log.info('fetchStaticIps request %j', request);
     return this.innerApiCalls
       .fetchStaticIps(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          string[],
-          protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsRequest | null,
-          protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsResponse,
-        ]) => {
-          this._log.info('fetchStaticIps values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        string[],
+        protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsRequest|null,
+        protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsResponse
+      ]) => {
+        this._log.info('fetchStaticIps values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `fetchStaticIps`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name resource of the Response type. Must be in the
-   *   format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of Ips to return, will likely not be specified.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListStaticIps` call.
-   *   will likely not be specified.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing string on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `fetchStaticIpsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `fetchStaticIps`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name resource of the Response type. Must be in the
+ *   format `projects/* /locations/*`.
+ * @param {number} request.pageSize
+ *   Maximum number of Ips to return, will likely not be specified.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListStaticIps` call.
+ *   will likely not be specified.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing string on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `fetchStaticIpsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   fetchStaticIpsStream(
-    request?: protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
     const defaultCallSettings = this._defaults['fetchStaticIps'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('fetchStaticIps stream %j', request);
     return this.descriptors.page.fetchStaticIps.createStream(
       this.innerApiCalls.fetchStaticIps as GaxCall,
@@ -3985,49 +2906,48 @@ export class DatastreamClient {
     );
   }
 
-  /**
-   * Equivalent to `fetchStaticIps`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name resource of the Response type. Must be in the
-   *   format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of Ips to return, will likely not be specified.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListStaticIps` call.
-   *   will likely not be specified.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   string. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/datastream.fetch_static_ips.js</caption>
-   * region_tag:datastream_v1alpha1_generated_Datastream_FetchStaticIps_async
-   */
+/**
+ * Equivalent to `fetchStaticIps`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name resource of the Response type. Must be in the
+ *   format `projects/* /locations/*`.
+ * @param {number} request.pageSize
+ *   Maximum number of Ips to return, will likely not be specified.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListStaticIps` call.
+ *   will likely not be specified.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   string. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/datastream.fetch_static_ips.js</caption>
+ * region_tag:datastream_v1alpha1_generated_Datastream_FetchStaticIps_async
+ */
   fetchStaticIpsAsync(
-    request?: protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsRequest,
-    options?: CallOptions
-  ): AsyncIterable<string> {
+      request?: protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsRequest,
+      options?: CallOptions):
+    AsyncIterable<string>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
     const defaultCallSettings = this._defaults['fetchStaticIps'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('fetchStaticIps iterate %j', request);
     return this.descriptors.page.fetchStaticIps.asyncIterate(
       this.innerApiCalls['fetchStaticIps'] as GaxCall,
@@ -4035,125 +2955,100 @@ export class DatastreamClient {
       callSettings
     ) as AsyncIterable<string>;
   }
-  /**
-   * Use this method to list private connectivity configurations in a project
-   * and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent that owns the collection of private connectivity configurations.
-   * @param {number} request.pageSize
-   *   Maximum number of private connectivity configurations to return.
-   *   If unspecified, at most 50 private connectivity configurations that will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
-   * @param {string} request.pageToken
-   *   Page token received from a previous `ListPrivateConnections` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `ListPrivateConnections` must match the call that provided the page
-   *   token.
-   * @param {string} request.filter
-   *   Filter request.
-   * @param {string} request.orderBy
-   *   Order by fields for the result.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.datastream.v1alpha1.PrivateConnection|PrivateConnection}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listPrivateConnectionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Use this method to list private connectivity configurations in a project
+ * and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent that owns the collection of private connectivity configurations.
+ * @param {number} request.pageSize
+ *   Maximum number of private connectivity configurations to return.
+ *   If unspecified, at most 50 private connectivity configurations that will be
+ *   returned. The maximum value is 1000; values above 1000 will be coerced to
+ *   1000.
+ * @param {string} request.pageToken
+ *   Page token received from a previous `ListPrivateConnections` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `ListPrivateConnections` must match the call that provided the page
+ *   token.
+ * @param {string} request.filter
+ *   Filter request.
+ * @param {string} request.orderBy
+ *   Order by fields for the result.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.datastream.v1alpha1.PrivateConnection|PrivateConnection}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listPrivateConnectionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listPrivateConnections(
-    request?: protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.datastream.v1alpha1.IPrivateConnection[],
-      protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest | null,
-      protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.datastream.v1alpha1.IPrivateConnection[],
+        protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest|null,
+        protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsResponse
+      ]>;
   listPrivateConnections(
-    request: protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest,
-      | protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.datastream.v1alpha1.IPrivateConnection
-    >
-  ): void;
-  listPrivateConnections(
-    request: protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest,
-      | protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.datastream.v1alpha1.IPrivateConnection
-    >
-  ): void;
-  listPrivateConnections(
-    request?: protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest,
-          | protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.datastream.v1alpha1.IPrivateConnection
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest,
-      | protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.datastream.v1alpha1.IPrivateConnection
-    >
-  ): Promise<
-    [
-      protos.google.cloud.datastream.v1alpha1.IPrivateConnection[],
-      protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest | null,
-      protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsResponse,
-    ]
-  > | void {
+          protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsResponse|null|undefined,
+          protos.google.cloud.datastream.v1alpha1.IPrivateConnection>): void;
+  listPrivateConnections(
+      request: protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest,
+          protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsResponse|null|undefined,
+          protos.google.cloud.datastream.v1alpha1.IPrivateConnection>): void;
+  listPrivateConnections(
+      request?: protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest,
+          protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsResponse|null|undefined,
+          protos.google.cloud.datastream.v1alpha1.IPrivateConnection>,
+      callback?: PaginationCallback<
+          protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest,
+          protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsResponse|null|undefined,
+          protos.google.cloud.datastream.v1alpha1.IPrivateConnection>):
+      Promise<[
+        protos.google.cloud.datastream.v1alpha1.IPrivateConnection[],
+        protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest|null,
+        protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest,
-          | protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.datastream.v1alpha1.IPrivateConnection
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest,
+      protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsResponse|null|undefined,
+      protos.google.cloud.datastream.v1alpha1.IPrivateConnection>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listPrivateConnections values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4162,68 +3057,65 @@ export class DatastreamClient {
     this._log.info('listPrivateConnections request %j', request);
     return this.innerApiCalls
       .listPrivateConnections(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.datastream.v1alpha1.IPrivateConnection[],
-          protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest | null,
-          protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsResponse,
-        ]) => {
-          this._log.info('listPrivateConnections values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.datastream.v1alpha1.IPrivateConnection[],
+        protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest|null,
+        protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsResponse
+      ]) => {
+        this._log.info('listPrivateConnections values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listPrivateConnections`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent that owns the collection of private connectivity configurations.
-   * @param {number} request.pageSize
-   *   Maximum number of private connectivity configurations to return.
-   *   If unspecified, at most 50 private connectivity configurations that will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
-   * @param {string} request.pageToken
-   *   Page token received from a previous `ListPrivateConnections` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `ListPrivateConnections` must match the call that provided the page
-   *   token.
-   * @param {string} request.filter
-   *   Filter request.
-   * @param {string} request.orderBy
-   *   Order by fields for the result.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.datastream.v1alpha1.PrivateConnection|PrivateConnection} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listPrivateConnectionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listPrivateConnections`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent that owns the collection of private connectivity configurations.
+ * @param {number} request.pageSize
+ *   Maximum number of private connectivity configurations to return.
+ *   If unspecified, at most 50 private connectivity configurations that will be
+ *   returned. The maximum value is 1000; values above 1000 will be coerced to
+ *   1000.
+ * @param {string} request.pageToken
+ *   Page token received from a previous `ListPrivateConnections` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `ListPrivateConnections` must match the call that provided the page
+ *   token.
+ * @param {string} request.filter
+ *   Filter request.
+ * @param {string} request.orderBy
+ *   Order by fields for the result.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.datastream.v1alpha1.PrivateConnection|PrivateConnection} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listPrivateConnectionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listPrivateConnectionsStream(
-    request?: protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listPrivateConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listPrivateConnections stream %j', request);
     return this.descriptors.page.listPrivateConnections.createStream(
       this.innerApiCalls.listPrivateConnections as GaxCall,
@@ -4232,59 +3124,58 @@ export class DatastreamClient {
     );
   }
 
-  /**
-   * Equivalent to `listPrivateConnections`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent that owns the collection of private connectivity configurations.
-   * @param {number} request.pageSize
-   *   Maximum number of private connectivity configurations to return.
-   *   If unspecified, at most 50 private connectivity configurations that will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
-   * @param {string} request.pageToken
-   *   Page token received from a previous `ListPrivateConnections` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `ListPrivateConnections` must match the call that provided the page
-   *   token.
-   * @param {string} request.filter
-   *   Filter request.
-   * @param {string} request.orderBy
-   *   Order by fields for the result.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.datastream.v1alpha1.PrivateConnection|PrivateConnection}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/datastream.list_private_connections.js</caption>
-   * region_tag:datastream_v1alpha1_generated_Datastream_ListPrivateConnections_async
-   */
+/**
+ * Equivalent to `listPrivateConnections`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent that owns the collection of private connectivity configurations.
+ * @param {number} request.pageSize
+ *   Maximum number of private connectivity configurations to return.
+ *   If unspecified, at most 50 private connectivity configurations that will be
+ *   returned. The maximum value is 1000; values above 1000 will be coerced to
+ *   1000.
+ * @param {string} request.pageToken
+ *   Page token received from a previous `ListPrivateConnections` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `ListPrivateConnections` must match the call that provided the page
+ *   token.
+ * @param {string} request.filter
+ *   Filter request.
+ * @param {string} request.orderBy
+ *   Order by fields for the result.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.datastream.v1alpha1.PrivateConnection|PrivateConnection}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/datastream.list_private_connections.js</caption>
+ * region_tag:datastream_v1alpha1_generated_Datastream_ListPrivateConnections_async
+ */
   listPrivateConnectionsAsync(
-    request?: protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.datastream.v1alpha1.IPrivateConnection> {
+      request?: protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.datastream.v1alpha1.IPrivateConnection>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listPrivateConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listPrivateConnections iterate %j', request);
     return this.descriptors.page.listPrivateConnections.asyncIterate(
       this.innerApiCalls['listPrivateConnections'] as GaxCall,
@@ -4292,125 +3183,100 @@ export class DatastreamClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.datastream.v1alpha1.IPrivateConnection>;
   }
-  /**
-   * Use this method to list routes created for a private connectivity in a
-   * project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent that owns the collection of Routess.
-   * @param {number} request.pageSize
-   *   Maximum number of Routes to return. The service may return
-   *   fewer than this value. If unspecified, at most 50 Routes
-   *   will be returned. The maximum value is 1000; values above 1000 will be
-   *   coerced to 1000.
-   * @param {string} request.pageToken
-   *   Page token received from a previous `ListRoutes` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `ListRoutes` must match the call that provided the page
-   *   token.
-   * @param {string} request.filter
-   *   Filter request.
-   * @param {string} request.orderBy
-   *   Order by fields for the result.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.datastream.v1alpha1.Route|Route}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listRoutesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Use this method to list routes created for a private connectivity in a
+ * project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent that owns the collection of Routess.
+ * @param {number} request.pageSize
+ *   Maximum number of Routes to return. The service may return
+ *   fewer than this value. If unspecified, at most 50 Routes
+ *   will be returned. The maximum value is 1000; values above 1000 will be
+ *   coerced to 1000.
+ * @param {string} request.pageToken
+ *   Page token received from a previous `ListRoutes` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `ListRoutes` must match the call that provided the page
+ *   token.
+ * @param {string} request.filter
+ *   Filter request.
+ * @param {string} request.orderBy
+ *   Order by fields for the result.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.datastream.v1alpha1.Route|Route}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listRoutesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listRoutes(
-    request?: protos.google.cloud.datastream.v1alpha1.IListRoutesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.datastream.v1alpha1.IRoute[],
-      protos.google.cloud.datastream.v1alpha1.IListRoutesRequest | null,
-      protos.google.cloud.datastream.v1alpha1.IListRoutesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.datastream.v1alpha1.IListRoutesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.datastream.v1alpha1.IRoute[],
+        protos.google.cloud.datastream.v1alpha1.IListRoutesRequest|null,
+        protos.google.cloud.datastream.v1alpha1.IListRoutesResponse
+      ]>;
   listRoutes(
-    request: protos.google.cloud.datastream.v1alpha1.IListRoutesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.datastream.v1alpha1.IListRoutesRequest,
-      | protos.google.cloud.datastream.v1alpha1.IListRoutesResponse
-      | null
-      | undefined,
-      protos.google.cloud.datastream.v1alpha1.IRoute
-    >
-  ): void;
-  listRoutes(
-    request: protos.google.cloud.datastream.v1alpha1.IListRoutesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.datastream.v1alpha1.IListRoutesRequest,
-      | protos.google.cloud.datastream.v1alpha1.IListRoutesResponse
-      | null
-      | undefined,
-      protos.google.cloud.datastream.v1alpha1.IRoute
-    >
-  ): void;
-  listRoutes(
-    request?: protos.google.cloud.datastream.v1alpha1.IListRoutesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.datastream.v1alpha1.IListRoutesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.datastream.v1alpha1.IListRoutesRequest,
-          | protos.google.cloud.datastream.v1alpha1.IListRoutesResponse
-          | null
-          | undefined,
-          protos.google.cloud.datastream.v1alpha1.IRoute
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.datastream.v1alpha1.IListRoutesRequest,
-      | protos.google.cloud.datastream.v1alpha1.IListRoutesResponse
-      | null
-      | undefined,
-      protos.google.cloud.datastream.v1alpha1.IRoute
-    >
-  ): Promise<
-    [
-      protos.google.cloud.datastream.v1alpha1.IRoute[],
-      protos.google.cloud.datastream.v1alpha1.IListRoutesRequest | null,
-      protos.google.cloud.datastream.v1alpha1.IListRoutesResponse,
-    ]
-  > | void {
+          protos.google.cloud.datastream.v1alpha1.IListRoutesResponse|null|undefined,
+          protos.google.cloud.datastream.v1alpha1.IRoute>): void;
+  listRoutes(
+      request: protos.google.cloud.datastream.v1alpha1.IListRoutesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.datastream.v1alpha1.IListRoutesRequest,
+          protos.google.cloud.datastream.v1alpha1.IListRoutesResponse|null|undefined,
+          protos.google.cloud.datastream.v1alpha1.IRoute>): void;
+  listRoutes(
+      request?: protos.google.cloud.datastream.v1alpha1.IListRoutesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.datastream.v1alpha1.IListRoutesRequest,
+          protos.google.cloud.datastream.v1alpha1.IListRoutesResponse|null|undefined,
+          protos.google.cloud.datastream.v1alpha1.IRoute>,
+      callback?: PaginationCallback<
+          protos.google.cloud.datastream.v1alpha1.IListRoutesRequest,
+          protos.google.cloud.datastream.v1alpha1.IListRoutesResponse|null|undefined,
+          protos.google.cloud.datastream.v1alpha1.IRoute>):
+      Promise<[
+        protos.google.cloud.datastream.v1alpha1.IRoute[],
+        protos.google.cloud.datastream.v1alpha1.IListRoutesRequest|null,
+        protos.google.cloud.datastream.v1alpha1.IListRoutesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.datastream.v1alpha1.IListRoutesRequest,
-          | protos.google.cloud.datastream.v1alpha1.IListRoutesResponse
-          | null
-          | undefined,
-          protos.google.cloud.datastream.v1alpha1.IRoute
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.datastream.v1alpha1.IListRoutesRequest,
+      protos.google.cloud.datastream.v1alpha1.IListRoutesResponse|null|undefined,
+      protos.google.cloud.datastream.v1alpha1.IRoute>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listRoutes values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4419,68 +3285,65 @@ export class DatastreamClient {
     this._log.info('listRoutes request %j', request);
     return this.innerApiCalls
       .listRoutes(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.datastream.v1alpha1.IRoute[],
-          protos.google.cloud.datastream.v1alpha1.IListRoutesRequest | null,
-          protos.google.cloud.datastream.v1alpha1.IListRoutesResponse,
-        ]) => {
-          this._log.info('listRoutes values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.datastream.v1alpha1.IRoute[],
+        protos.google.cloud.datastream.v1alpha1.IListRoutesRequest|null,
+        protos.google.cloud.datastream.v1alpha1.IListRoutesResponse
+      ]) => {
+        this._log.info('listRoutes values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listRoutes`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent that owns the collection of Routess.
-   * @param {number} request.pageSize
-   *   Maximum number of Routes to return. The service may return
-   *   fewer than this value. If unspecified, at most 50 Routes
-   *   will be returned. The maximum value is 1000; values above 1000 will be
-   *   coerced to 1000.
-   * @param {string} request.pageToken
-   *   Page token received from a previous `ListRoutes` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `ListRoutes` must match the call that provided the page
-   *   token.
-   * @param {string} request.filter
-   *   Filter request.
-   * @param {string} request.orderBy
-   *   Order by fields for the result.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.datastream.v1alpha1.Route|Route} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listRoutesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listRoutes`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent that owns the collection of Routess.
+ * @param {number} request.pageSize
+ *   Maximum number of Routes to return. The service may return
+ *   fewer than this value. If unspecified, at most 50 Routes
+ *   will be returned. The maximum value is 1000; values above 1000 will be
+ *   coerced to 1000.
+ * @param {string} request.pageToken
+ *   Page token received from a previous `ListRoutes` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `ListRoutes` must match the call that provided the page
+ *   token.
+ * @param {string} request.filter
+ *   Filter request.
+ * @param {string} request.orderBy
+ *   Order by fields for the result.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.datastream.v1alpha1.Route|Route} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listRoutesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listRoutesStream(
-    request?: protos.google.cloud.datastream.v1alpha1.IListRoutesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.datastream.v1alpha1.IListRoutesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listRoutes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listRoutes stream %j', request);
     return this.descriptors.page.listRoutes.createStream(
       this.innerApiCalls.listRoutes as GaxCall,
@@ -4489,59 +3352,58 @@ export class DatastreamClient {
     );
   }
 
-  /**
-   * Equivalent to `listRoutes`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent that owns the collection of Routess.
-   * @param {number} request.pageSize
-   *   Maximum number of Routes to return. The service may return
-   *   fewer than this value. If unspecified, at most 50 Routes
-   *   will be returned. The maximum value is 1000; values above 1000 will be
-   *   coerced to 1000.
-   * @param {string} request.pageToken
-   *   Page token received from a previous `ListRoutes` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `ListRoutes` must match the call that provided the page
-   *   token.
-   * @param {string} request.filter
-   *   Filter request.
-   * @param {string} request.orderBy
-   *   Order by fields for the result.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.datastream.v1alpha1.Route|Route}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha1/datastream.list_routes.js</caption>
-   * region_tag:datastream_v1alpha1_generated_Datastream_ListRoutes_async
-   */
+/**
+ * Equivalent to `listRoutes`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent that owns the collection of Routess.
+ * @param {number} request.pageSize
+ *   Maximum number of Routes to return. The service may return
+ *   fewer than this value. If unspecified, at most 50 Routes
+ *   will be returned. The maximum value is 1000; values above 1000 will be
+ *   coerced to 1000.
+ * @param {string} request.pageToken
+ *   Page token received from a previous `ListRoutes` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `ListRoutes` must match the call that provided the page
+ *   token.
+ * @param {string} request.filter
+ *   Filter request.
+ * @param {string} request.orderBy
+ *   Order by fields for the result.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.datastream.v1alpha1.Route|Route}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha1/datastream.list_routes.js</caption>
+ * region_tag:datastream_v1alpha1_generated_Datastream_ListRoutes_async
+ */
   listRoutesAsync(
-    request?: protos.google.cloud.datastream.v1alpha1.IListRoutesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.datastream.v1alpha1.IRoute> {
+      request?: protos.google.cloud.datastream.v1alpha1.IListRoutesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.datastream.v1alpha1.IRoute>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listRoutes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listRoutes iterate %j', request);
     return this.descriptors.page.listRoutes.asyncIterate(
       this.innerApiCalls['listRoutes'] as GaxCall,
@@ -4561,11 +3423,7 @@ export class DatastreamClient {
    * @param {string} connection_profile
    * @returns {string} Resource name string.
    */
-  connectionProfilePath(
-    project: string,
-    location: string,
-    connectionProfile: string
-  ) {
+  connectionProfilePath(project:string,location:string,connectionProfile:string) {
     return this.pathTemplates.connectionProfilePathTemplate.render({
       project: project,
       location: location,
@@ -4581,9 +3439,7 @@ export class DatastreamClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromConnectionProfileName(connectionProfileName: string) {
-    return this.pathTemplates.connectionProfilePathTemplate.match(
-      connectionProfileName
-    ).project;
+    return this.pathTemplates.connectionProfilePathTemplate.match(connectionProfileName).project;
   }
 
   /**
@@ -4594,9 +3450,7 @@ export class DatastreamClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromConnectionProfileName(connectionProfileName: string) {
-    return this.pathTemplates.connectionProfilePathTemplate.match(
-      connectionProfileName
-    ).location;
+    return this.pathTemplates.connectionProfilePathTemplate.match(connectionProfileName).location;
   }
 
   /**
@@ -4606,12 +3460,8 @@ export class DatastreamClient {
    *   A fully-qualified path representing ConnectionProfile resource.
    * @returns {string} A string representing the connection_profile.
    */
-  matchConnectionProfileFromConnectionProfileName(
-    connectionProfileName: string
-  ) {
-    return this.pathTemplates.connectionProfilePathTemplate.match(
-      connectionProfileName
-    ).connection_profile;
+  matchConnectionProfileFromConnectionProfileName(connectionProfileName: string) {
+    return this.pathTemplates.connectionProfilePathTemplate.match(connectionProfileName).connection_profile;
   }
 
   /**
@@ -4621,7 +3471,7 @@ export class DatastreamClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -4658,11 +3508,7 @@ export class DatastreamClient {
    * @param {string} private_connection
    * @returns {string} Resource name string.
    */
-  privateConnectionPath(
-    project: string,
-    location: string,
-    privateConnection: string
-  ) {
+  privateConnectionPath(project:string,location:string,privateConnection:string) {
     return this.pathTemplates.privateConnectionPathTemplate.render({
       project: project,
       location: location,
@@ -4678,9 +3524,7 @@ export class DatastreamClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromPrivateConnectionName(privateConnectionName: string) {
-    return this.pathTemplates.privateConnectionPathTemplate.match(
-      privateConnectionName
-    ).project;
+    return this.pathTemplates.privateConnectionPathTemplate.match(privateConnectionName).project;
   }
 
   /**
@@ -4691,9 +3535,7 @@ export class DatastreamClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromPrivateConnectionName(privateConnectionName: string) {
-    return this.pathTemplates.privateConnectionPathTemplate.match(
-      privateConnectionName
-    ).location;
+    return this.pathTemplates.privateConnectionPathTemplate.match(privateConnectionName).location;
   }
 
   /**
@@ -4703,12 +3545,8 @@ export class DatastreamClient {
    *   A fully-qualified path representing PrivateConnection resource.
    * @returns {string} A string representing the private_connection.
    */
-  matchPrivateConnectionFromPrivateConnectionName(
-    privateConnectionName: string
-  ) {
-    return this.pathTemplates.privateConnectionPathTemplate.match(
-      privateConnectionName
-    ).private_connection;
+  matchPrivateConnectionFromPrivateConnectionName(privateConnectionName: string) {
+    return this.pathTemplates.privateConnectionPathTemplate.match(privateConnectionName).private_connection;
   }
 
   /**
@@ -4717,7 +3555,7 @@ export class DatastreamClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -4743,12 +3581,7 @@ export class DatastreamClient {
    * @param {string} route
    * @returns {string} Resource name string.
    */
-  routePath(
-    project: string,
-    location: string,
-    privateConnection: string,
-    route: string
-  ) {
+  routePath(project:string,location:string,privateConnection:string,route:string) {
     return this.pathTemplates.routePathTemplate.render({
       project: project,
       location: location,
@@ -4787,8 +3620,7 @@ export class DatastreamClient {
    * @returns {string} A string representing the private_connection.
    */
   matchPrivateConnectionFromRouteName(routeName: string) {
-    return this.pathTemplates.routePathTemplate.match(routeName)
-      .private_connection;
+    return this.pathTemplates.routePathTemplate.match(routeName).private_connection;
   }
 
   /**
@@ -4810,7 +3642,7 @@ export class DatastreamClient {
    * @param {string} stream
    * @returns {string} Resource name string.
    */
-  streamPath(project: string, location: string, stream: string) {
+  streamPath(project:string,location:string,stream:string) {
     return this.pathTemplates.streamPathTemplate.render({
       project: project,
       location: location,
@@ -4863,7 +3695,7 @@ export class DatastreamClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.operationsClient.close();
+        void this.operationsClient.close();
       });
     }
     return Promise.resolve();

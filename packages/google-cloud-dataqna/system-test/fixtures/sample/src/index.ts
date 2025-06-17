@@ -16,15 +16,10 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {
-  AutoSuggestionServiceClient,
-  QuestionServiceClient,
-} from '@google-cloud/data-qna';
+import {AutoSuggestionServiceClient, QuestionServiceClient} from '@google-cloud/data-qna';
 
 // check that the client class type name can be used
-function doStuffWithAutoSuggestionServiceClient(
-  client: AutoSuggestionServiceClient
-) {
+function doStuffWithAutoSuggestionServiceClient(client: AutoSuggestionServiceClient) {
   client.close();
 }
 function doStuffWithQuestionServiceClient(client: QuestionServiceClient) {

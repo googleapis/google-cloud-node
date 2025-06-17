@@ -142,7 +142,7 @@ export namespace google {
                     uri?: (string|null);
 
                     /** Document content */
-                    content?: (Uint8Array|string|null);
+                    content?: (Uint8Array|Buffer|string|null);
 
                     /** Document docid */
                     docid?: (string|null);
@@ -197,7 +197,7 @@ export namespace google {
                     public uri?: (string|null);
 
                     /** Document content. */
-                    public content?: (Uint8Array|string|null);
+                    public content?: (Uint8Array|Buffer|string|null);
 
                     /** Document docid. */
                     public docid: string;
@@ -983,7 +983,7 @@ export namespace google {
                         interface IImage {
 
                             /** Image content */
-                            content?: (Uint8Array|string|null);
+                            content?: (Uint8Array|Buffer|string|null);
 
                             /** Image mimeType */
                             mimeType?: (string|null);
@@ -1005,7 +1005,7 @@ export namespace google {
                             constructor(properties?: google.cloud.documentai.v1.Document.Page.IImage);
 
                             /** Image content. */
-                            public content: (Uint8Array|string);
+                            public content: (Uint8Array|Buffer|string);
 
                             /** Image mimeType. */
                             public mimeType: string;
@@ -1107,7 +1107,7 @@ export namespace google {
                             type?: (number|null);
 
                             /** Matrix data */
-                            data?: (Uint8Array|string|null);
+                            data?: (Uint8Array|Buffer|string|null);
                         }
 
                         /** Represents a Matrix. */
@@ -1129,7 +1129,7 @@ export namespace google {
                             public type: number;
 
                             /** Matrix data. */
-                            public data: (Uint8Array|string);
+                            public data: (Uint8Array|Buffer|string);
 
                             /**
                              * Creates a new Matrix instance using the specified properties.
@@ -6438,7 +6438,7 @@ export namespace google {
                 interface IRawDocument {
 
                     /** RawDocument content */
-                    content?: (Uint8Array|string|null);
+                    content?: (Uint8Array|Buffer|string|null);
 
                     /** RawDocument mimeType */
                     mimeType?: (string|null);
@@ -6457,7 +6457,7 @@ export namespace google {
                     constructor(properties?: google.cloud.documentai.v1.IRawDocument);
 
                     /** RawDocument content. */
-                    public content: (Uint8Array|string);
+                    public content: (Uint8Array|Buffer|string);
 
                     /** RawDocument mimeType. */
                     public mimeType: string;
@@ -16794,7 +16794,7 @@ export namespace google {
                     uri?: (string|null);
 
                     /** Document content */
-                    content?: (Uint8Array|string|null);
+                    content?: (Uint8Array|Buffer|string|null);
 
                     /** Document mimeType */
                     mimeType?: (string|null);
@@ -16834,7 +16834,7 @@ export namespace google {
                     public uri?: (string|null);
 
                     /** Document content. */
-                    public content?: (Uint8Array|string|null);
+                    public content?: (Uint8Array|Buffer|string|null);
 
                     /** Document mimeType. */
                     public mimeType: string;
@@ -21376,7 +21376,7 @@ export namespace google {
                     uri?: (string|null);
 
                     /** Document content */
-                    content?: (Uint8Array|string|null);
+                    content?: (Uint8Array|Buffer|string|null);
 
                     /** Document mimeType */
                     mimeType?: (string|null);
@@ -21425,7 +21425,7 @@ export namespace google {
                     public uri?: (string|null);
 
                     /** Document content. */
-                    public content?: (Uint8Array|string|null);
+                    public content?: (Uint8Array|Buffer|string|null);
 
                     /** Document mimeType. */
                     public mimeType: string;
@@ -22317,7 +22317,7 @@ export namespace google {
                         interface IImage {
 
                             /** Image content */
-                            content?: (Uint8Array|string|null);
+                            content?: (Uint8Array|Buffer|string|null);
 
                             /** Image mimeType */
                             mimeType?: (string|null);
@@ -22339,7 +22339,7 @@ export namespace google {
                             constructor(properties?: google.cloud.documentai.v1beta2.Document.Page.IImage);
 
                             /** Image content. */
-                            public content: (Uint8Array|string);
+                            public content: (Uint8Array|Buffer|string);
 
                             /** Image mimeType. */
                             public mimeType: string;
@@ -22441,7 +22441,7 @@ export namespace google {
                             type?: (number|null);
 
                             /** Matrix data */
-                            data?: (Uint8Array|string|null);
+                            data?: (Uint8Array|Buffer|string|null);
                         }
 
                         /** Represents a Matrix. */
@@ -22463,7 +22463,7 @@ export namespace google {
                             public type: number;
 
                             /** Matrix data. */
-                            public data: (Uint8Array|string);
+                            public data: (Uint8Array|Buffer|string);
 
                             /**
                              * Creates a new Matrix instance using the specified properties.
@@ -27517,7 +27517,7 @@ export namespace google {
                     gcsSource?: (google.cloud.documentai.v1beta2.IGcsSource|null);
 
                     /** InputConfig contents */
-                    contents?: (Uint8Array|string|null);
+                    contents?: (Uint8Array|Buffer|string|null);
 
                     /** InputConfig mimeType */
                     mimeType?: (string|null);
@@ -27536,7 +27536,7 @@ export namespace google {
                     public gcsSource?: (google.cloud.documentai.v1beta2.IGcsSource|null);
 
                     /** InputConfig contents. */
-                    public contents?: (Uint8Array|string|null);
+                    public contents?: (Uint8Array|Buffer|string|null);
 
                     /** InputConfig mimeType. */
                     public mimeType: string;
@@ -29345,7 +29345,7 @@ export namespace google {
                     uri?: (string|null);
 
                     /** Document content */
-                    content?: (Uint8Array|string|null);
+                    content?: (Uint8Array|Buffer|string|null);
 
                     /** Document docid */
                     docid?: (string|null);
@@ -29403,7 +29403,7 @@ export namespace google {
                     public uri?: (string|null);
 
                     /** Document content. */
-                    public content?: (Uint8Array|string|null);
+                    public content?: (Uint8Array|Buffer|string|null);
 
                     /** Document docid. */
                     public docid: string;
@@ -30192,7 +30192,7 @@ export namespace google {
                         interface IImage {
 
                             /** Image content */
-                            content?: (Uint8Array|string|null);
+                            content?: (Uint8Array|Buffer|string|null);
 
                             /** Image mimeType */
                             mimeType?: (string|null);
@@ -30214,7 +30214,7 @@ export namespace google {
                             constructor(properties?: google.cloud.documentai.v1beta3.Document.Page.IImage);
 
                             /** Image content. */
-                            public content: (Uint8Array|string);
+                            public content: (Uint8Array|Buffer|string);
 
                             /** Image mimeType. */
                             public mimeType: string;
@@ -30316,7 +30316,7 @@ export namespace google {
                             type?: (number|null);
 
                             /** Matrix data */
-                            data?: (Uint8Array|string|null);
+                            data?: (Uint8Array|Buffer|string|null);
                         }
 
                         /** Represents a Matrix. */
@@ -30338,7 +30338,7 @@ export namespace google {
                             public type: number;
 
                             /** Matrix data. */
-                            public data: (Uint8Array|string);
+                            public data: (Uint8Array|Buffer|string);
 
                             /**
                              * Creates a new Matrix instance using the specified properties.
@@ -35900,7 +35900,7 @@ export namespace google {
                         assetId?: (string|null);
 
                         /** BlobAsset content */
-                        content?: (Uint8Array|string|null);
+                        content?: (Uint8Array|Buffer|string|null);
 
                         /** BlobAsset mimeType */
                         mimeType?: (string|null);
@@ -35919,7 +35919,7 @@ export namespace google {
                         public assetId: string;
 
                         /** BlobAsset content. */
-                        public content: (Uint8Array|string);
+                        public content: (Uint8Array|Buffer|string);
 
                         /** BlobAsset mimeType. */
                         public mimeType: string;
@@ -36439,7 +36439,7 @@ export namespace google {
                 interface IRawDocument {
 
                     /** RawDocument content */
-                    content?: (Uint8Array|string|null);
+                    content?: (Uint8Array|Buffer|string|null);
 
                     /** RawDocument mimeType */
                     mimeType?: (string|null);
@@ -36458,7 +36458,7 @@ export namespace google {
                     constructor(properties?: google.cloud.documentai.v1beta3.IRawDocument);
 
                     /** RawDocument content. */
-                    public content: (Uint8Array|string);
+                    public content: (Uint8Array|Buffer|string);
 
                     /** RawDocument mimeType. */
                     public mimeType: string;
@@ -51061,6 +51061,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -51101,6 +51104,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -55306,6 +55312,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -55557,7 +55566,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -55588,7 +55597,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -56727,7 +56736,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -56743,7 +56752,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.
@@ -57603,7 +57612,7 @@ export namespace google {
         interface IBytesValue {
 
             /** BytesValue value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents a BytesValue. */
@@ -57616,7 +57625,7 @@ export namespace google {
             constructor(properties?: google.protobuf.IBytesValue);
 
             /** BytesValue value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new BytesValue instance using the specified properties.

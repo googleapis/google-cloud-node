@@ -6187,12 +6187,6 @@ export namespace google {
                     /** PrivateConnection vpcPeeringConfig. */
                     public vpcPeeringConfig?: (google.cloud.datastream.v1.IVpcPeeringConfig|null);
 
-                    /** PrivateConnection _satisfiesPzs. */
-                    public _satisfiesPzs?: "satisfiesPzs";
-
-                    /** PrivateConnection _satisfiesPzi. */
-                    public _satisfiesPzi?: "satisfiesPzi";
-
                     /**
                      * Creates a new PrivateConnection instance using the specified properties.
                      * @param [properties] Properties to set
@@ -7173,12 +7167,6 @@ export namespace google {
 
                     /** ConnectionProfile privateConnectivity. */
                     public privateConnectivity?: (google.cloud.datastream.v1.IPrivateConnectivity|null);
-
-                    /** ConnectionProfile _satisfiesPzs. */
-                    public _satisfiesPzs?: "satisfiesPzs";
-
-                    /** ConnectionProfile _satisfiesPzi. */
-                    public _satisfiesPzi?: "satisfiesPzi";
 
                     /** ConnectionProfile profile. */
                     public profile?: ("oracleProfile"|"gcsProfile"|"mysqlProfile"|"bigqueryProfile"|"postgresqlProfile"|"sqlServerProfile"|"salesforceProfile");
@@ -12377,15 +12365,6 @@ export namespace google {
                     /** Stream backfillStrategy. */
                     public backfillStrategy?: ("backfillAll"|"backfillNone");
 
-                    /** Stream _customerManagedEncryptionKey. */
-                    public _customerManagedEncryptionKey?: "customerManagedEncryptionKey";
-
-                    /** Stream _satisfiesPzs. */
-                    public _satisfiesPzs?: "satisfiesPzs";
-
-                    /** Stream _satisfiesPzi. */
-                    public _satisfiesPzi?: "satisfiesPzi";
-
                     /**
                      * Creates a new Stream instance using the specified properties.
                      * @param [properties] Properties to set
@@ -14710,9 +14689,6 @@ export namespace google {
 
                     /** MysqlLogPosition logPosition. */
                     public logPosition?: (number|null);
-
-                    /** MysqlLogPosition _logPosition. */
-                    public _logPosition?: "logPosition";
 
                     /**
                      * Creates a new MysqlLogPosition instance using the specified properties.
@@ -23170,6 +23146,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -23210,6 +23189,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -27428,6 +27410,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -27679,7 +27664,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -27710,7 +27695,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -28952,7 +28937,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -28968,7 +28953,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.

@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform, PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -116,41 +109,20 @@ export class DirectAccessServiceClient {
    *     const client = new DirectAccessServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof DirectAccessServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'devicestreaming.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -176,7 +148,7 @@ export class DirectAccessServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -190,7 +162,10 @@ export class DirectAccessServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -223,30 +198,20 @@ export class DirectAccessServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listDeviceSessions: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'deviceSessions'
-      ),
+      listDeviceSessions:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'deviceSessions')
     };
 
     // Some of the methods on this service provide streaming responses.
     // Provide descriptors for these.
     this.descriptors.stream = {
-      adbConnect: new this._gaxModule.StreamDescriptor(
-        this._gaxModule.StreamType.BIDI_STREAMING,
-        !!opts.fallback,
-        !!opts.gaxServerStreamingRetries
-      ),
+      adbConnect: new this._gaxModule.StreamDescriptor(this._gaxModule.StreamType.BIDI_STREAMING, !!opts.fallback, !!opts.gaxServerStreamingRetries)
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.devicestreaming.v1.DirectAccessService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.devicestreaming.v1.DirectAccessService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -277,53 +242,35 @@ export class DirectAccessServiceClient {
     // Put together the "service stub" for
     // google.cloud.devicestreaming.v1.DirectAccessService.
     this.directAccessServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.devicestreaming.v1.DirectAccessService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.devicestreaming.v1
-            .DirectAccessService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.devicestreaming.v1.DirectAccessService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.devicestreaming.v1.DirectAccessService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const directAccessServiceStubMethods = [
-      'createDeviceSession',
-      'listDeviceSessions',
-      'getDeviceSession',
-      'cancelDeviceSession',
-      'updateDeviceSession',
-      'adbConnect',
-    ];
+    const directAccessServiceStubMethods =
+        ['createDeviceSession', 'listDeviceSessions', 'getDeviceSession', 'cancelDeviceSession', 'updateDeviceSession', 'adbConnect'];
     for (const methodName of directAccessServiceStubMethods) {
       const callPromise = this.directAccessServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              if (methodName in this.descriptors.stream) {
-                const stream = new PassThrough({objectMode: true});
-                setImmediate(() => {
-                  stream.emit(
-                    'error',
-                    new this._gaxModule.GoogleError(
-                      'The client has already been closed.'
-                    )
-                  );
-                });
-                return stream;
-              }
-              return Promise.reject('The client has already been closed.');
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            if (methodName in this.descriptors.stream) {
+              const stream = new PassThrough({objectMode: true});
+              setImmediate(() => {
+                stream.emit('error', new this._gaxModule.GoogleError('The client has already been closed.'));
+              });
+              return stream;
             }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -348,14 +295,8 @@ export class DirectAccessServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'devicestreaming.googleapis.com';
   }
@@ -366,14 +307,8 @@ export class DirectAccessServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'devicestreaming.googleapis.com';
   }
@@ -404,7 +339,9 @@ export class DirectAccessServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -413,9 +350,8 @@ export class DirectAccessServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -426,671 +362,514 @@ export class DirectAccessServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Creates a DeviceSession.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The Compute Engine project under which this device will be
-   *   allocated. "projects/{project_id}"
-   * @param {google.cloud.devicestreaming.v1.DeviceSession} request.deviceSession
-   *   Required. A DeviceSession to create.
-   * @param {string} [request.deviceSessionId]
-   *   Optional. The ID to use for the DeviceSession, which will become the final
-   *   component of the DeviceSession's resource name.
-   *
-   *   This value should be 4-63 characters, and valid characters
-   *   are /{@link protos.0-9|a-z}-/.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.devicestreaming.v1.DeviceSession|DeviceSession}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/direct_access_service.create_device_session.js</caption>
-   * region_tag:devicestreaming_v1_generated_DirectAccessService_CreateDeviceSession_async
-   */
+/**
+ * Creates a DeviceSession.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The Compute Engine project under which this device will be
+ *   allocated. "projects/{project_id}"
+ * @param {google.cloud.devicestreaming.v1.DeviceSession} request.deviceSession
+ *   Required. A DeviceSession to create.
+ * @param {string} [request.deviceSessionId]
+ *   Optional. The ID to use for the DeviceSession, which will become the final
+ *   component of the DeviceSession's resource name.
+ *
+ *   This value should be 4-63 characters, and valid characters
+ *   are /{@link protos.0-9|a-z}-/.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.devicestreaming.v1.DeviceSession|DeviceSession}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/direct_access_service.create_device_session.js</caption>
+ * region_tag:devicestreaming_v1_generated_DirectAccessService_CreateDeviceSession_async
+ */
   createDeviceSession(
-    request?: protos.google.cloud.devicestreaming.v1.ICreateDeviceSessionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.devicestreaming.v1.IDeviceSession,
-      (
-        | protos.google.cloud.devicestreaming.v1.ICreateDeviceSessionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.devicestreaming.v1.ICreateDeviceSessionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.devicestreaming.v1.IDeviceSession,
+        protos.google.cloud.devicestreaming.v1.ICreateDeviceSessionRequest|undefined, {}|undefined
+      ]>;
   createDeviceSession(
-    request: protos.google.cloud.devicestreaming.v1.ICreateDeviceSessionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.devicestreaming.v1.IDeviceSession,
-      | protos.google.cloud.devicestreaming.v1.ICreateDeviceSessionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createDeviceSession(
-    request: protos.google.cloud.devicestreaming.v1.ICreateDeviceSessionRequest,
-    callback: Callback<
-      protos.google.cloud.devicestreaming.v1.IDeviceSession,
-      | protos.google.cloud.devicestreaming.v1.ICreateDeviceSessionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createDeviceSession(
-    request?: protos.google.cloud.devicestreaming.v1.ICreateDeviceSessionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.devicestreaming.v1.ICreateDeviceSessionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.devicestreaming.v1.IDeviceSession,
-          | protos.google.cloud.devicestreaming.v1.ICreateDeviceSessionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.devicestreaming.v1.IDeviceSession,
-      | protos.google.cloud.devicestreaming.v1.ICreateDeviceSessionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.devicestreaming.v1.IDeviceSession,
-      (
-        | protos.google.cloud.devicestreaming.v1.ICreateDeviceSessionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.devicestreaming.v1.ICreateDeviceSessionRequest|null|undefined,
+          {}|null|undefined>): void;
+  createDeviceSession(
+      request: protos.google.cloud.devicestreaming.v1.ICreateDeviceSessionRequest,
+      callback: Callback<
+          protos.google.cloud.devicestreaming.v1.IDeviceSession,
+          protos.google.cloud.devicestreaming.v1.ICreateDeviceSessionRequest|null|undefined,
+          {}|null|undefined>): void;
+  createDeviceSession(
+      request?: protos.google.cloud.devicestreaming.v1.ICreateDeviceSessionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.devicestreaming.v1.IDeviceSession,
+          protos.google.cloud.devicestreaming.v1.ICreateDeviceSessionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.devicestreaming.v1.IDeviceSession,
+          protos.google.cloud.devicestreaming.v1.ICreateDeviceSessionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.devicestreaming.v1.IDeviceSession,
+        protos.google.cloud.devicestreaming.v1.ICreateDeviceSessionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createDeviceSession request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.devicestreaming.v1.IDeviceSession,
-          | protos.google.cloud.devicestreaming.v1.ICreateDeviceSessionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.devicestreaming.v1.IDeviceSession,
+        protos.google.cloud.devicestreaming.v1.ICreateDeviceSessionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createDeviceSession response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createDeviceSession(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.devicestreaming.v1.IDeviceSession,
-          (
-            | protos.google.cloud.devicestreaming.v1.ICreateDeviceSessionRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createDeviceSession response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createDeviceSession(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.devicestreaming.v1.IDeviceSession,
+        protos.google.cloud.devicestreaming.v1.ICreateDeviceSessionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createDeviceSession response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a DeviceSession, which documents the allocation status and
-   * whether the device is allocated. Clients making requests from this API
-   * must poll GetDeviceSession.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the DeviceSession, e.g.
-   *   "projects/{project_id}/deviceSessions/{session_id}"
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.devicestreaming.v1.DeviceSession|DeviceSession}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/direct_access_service.get_device_session.js</caption>
-   * region_tag:devicestreaming_v1_generated_DirectAccessService_GetDeviceSession_async
-   */
+/**
+ * Gets a DeviceSession, which documents the allocation status and
+ * whether the device is allocated. Clients making requests from this API
+ * must poll GetDeviceSession.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the DeviceSession, e.g.
+ *   "projects/{project_id}/deviceSessions/{session_id}"
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.devicestreaming.v1.DeviceSession|DeviceSession}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/direct_access_service.get_device_session.js</caption>
+ * region_tag:devicestreaming_v1_generated_DirectAccessService_GetDeviceSession_async
+ */
   getDeviceSession(
-    request?: protos.google.cloud.devicestreaming.v1.IGetDeviceSessionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.devicestreaming.v1.IDeviceSession,
-      (
-        | protos.google.cloud.devicestreaming.v1.IGetDeviceSessionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.devicestreaming.v1.IGetDeviceSessionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.devicestreaming.v1.IDeviceSession,
+        protos.google.cloud.devicestreaming.v1.IGetDeviceSessionRequest|undefined, {}|undefined
+      ]>;
   getDeviceSession(
-    request: protos.google.cloud.devicestreaming.v1.IGetDeviceSessionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.devicestreaming.v1.IDeviceSession,
-      | protos.google.cloud.devicestreaming.v1.IGetDeviceSessionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDeviceSession(
-    request: protos.google.cloud.devicestreaming.v1.IGetDeviceSessionRequest,
-    callback: Callback<
-      protos.google.cloud.devicestreaming.v1.IDeviceSession,
-      | protos.google.cloud.devicestreaming.v1.IGetDeviceSessionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDeviceSession(
-    request?: protos.google.cloud.devicestreaming.v1.IGetDeviceSessionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.devicestreaming.v1.IGetDeviceSessionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.devicestreaming.v1.IDeviceSession,
-          | protos.google.cloud.devicestreaming.v1.IGetDeviceSessionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.devicestreaming.v1.IDeviceSession,
-      | protos.google.cloud.devicestreaming.v1.IGetDeviceSessionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.devicestreaming.v1.IDeviceSession,
-      (
-        | protos.google.cloud.devicestreaming.v1.IGetDeviceSessionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.devicestreaming.v1.IGetDeviceSessionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDeviceSession(
+      request: protos.google.cloud.devicestreaming.v1.IGetDeviceSessionRequest,
+      callback: Callback<
+          protos.google.cloud.devicestreaming.v1.IDeviceSession,
+          protos.google.cloud.devicestreaming.v1.IGetDeviceSessionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDeviceSession(
+      request?: protos.google.cloud.devicestreaming.v1.IGetDeviceSessionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.devicestreaming.v1.IDeviceSession,
+          protos.google.cloud.devicestreaming.v1.IGetDeviceSessionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.devicestreaming.v1.IDeviceSession,
+          protos.google.cloud.devicestreaming.v1.IGetDeviceSessionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.devicestreaming.v1.IDeviceSession,
+        protos.google.cloud.devicestreaming.v1.IGetDeviceSessionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getDeviceSession request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.devicestreaming.v1.IDeviceSession,
-          | protos.google.cloud.devicestreaming.v1.IGetDeviceSessionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.devicestreaming.v1.IDeviceSession,
+        protos.google.cloud.devicestreaming.v1.IGetDeviceSessionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDeviceSession response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getDeviceSession(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.devicestreaming.v1.IDeviceSession,
-          (
-            | protos.google.cloud.devicestreaming.v1.IGetDeviceSessionRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getDeviceSession response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getDeviceSession(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.devicestreaming.v1.IDeviceSession,
+        protos.google.cloud.devicestreaming.v1.IGetDeviceSessionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getDeviceSession response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Cancel a DeviceSession.
-   * This RPC changes the DeviceSession to state FINISHED and terminates all
-   * connections.
-   * Canceled sessions are not deleted and can be retrieved or
-   * listed by the user until they expire based on the 28 day deletion policy.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the DeviceSession, e.g.
-   *   "projects/{project_id}/deviceSessions/{session_id}"
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/direct_access_service.cancel_device_session.js</caption>
-   * region_tag:devicestreaming_v1_generated_DirectAccessService_CancelDeviceSession_async
-   */
+/**
+ * Cancel a DeviceSession.
+ * This RPC changes the DeviceSession to state FINISHED and terminates all
+ * connections.
+ * Canceled sessions are not deleted and can be retrieved or
+ * listed by the user until they expire based on the 28 day deletion policy.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the DeviceSession, e.g.
+ *   "projects/{project_id}/deviceSessions/{session_id}"
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/direct_access_service.cancel_device_session.js</caption>
+ * region_tag:devicestreaming_v1_generated_DirectAccessService_CancelDeviceSession_async
+ */
   cancelDeviceSession(
-    request?: protos.google.cloud.devicestreaming.v1.ICancelDeviceSessionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.devicestreaming.v1.ICancelDeviceSessionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.devicestreaming.v1.ICancelDeviceSessionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.devicestreaming.v1.ICancelDeviceSessionRequest|undefined, {}|undefined
+      ]>;
   cancelDeviceSession(
-    request: protos.google.cloud.devicestreaming.v1.ICancelDeviceSessionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.devicestreaming.v1.ICancelDeviceSessionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  cancelDeviceSession(
-    request: protos.google.cloud.devicestreaming.v1.ICancelDeviceSessionRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.devicestreaming.v1.ICancelDeviceSessionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  cancelDeviceSession(
-    request?: protos.google.cloud.devicestreaming.v1.ICancelDeviceSessionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.devicestreaming.v1.ICancelDeviceSessionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.devicestreaming.v1.ICancelDeviceSessionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.devicestreaming.v1.ICancelDeviceSessionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.devicestreaming.v1.ICancelDeviceSessionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.devicestreaming.v1.ICancelDeviceSessionRequest|null|undefined,
+          {}|null|undefined>): void;
+  cancelDeviceSession(
+      request: protos.google.cloud.devicestreaming.v1.ICancelDeviceSessionRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.devicestreaming.v1.ICancelDeviceSessionRequest|null|undefined,
+          {}|null|undefined>): void;
+  cancelDeviceSession(
+      request?: protos.google.cloud.devicestreaming.v1.ICancelDeviceSessionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.devicestreaming.v1.ICancelDeviceSessionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.devicestreaming.v1.ICancelDeviceSessionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.devicestreaming.v1.ICancelDeviceSessionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('cancelDeviceSession request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.devicestreaming.v1.ICancelDeviceSessionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.devicestreaming.v1.ICancelDeviceSessionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('cancelDeviceSession response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .cancelDeviceSession(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.devicestreaming.v1.ICancelDeviceSessionRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('cancelDeviceSession response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.cancelDeviceSession(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.devicestreaming.v1.ICancelDeviceSessionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('cancelDeviceSession response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates the current DeviceSession to the fields described by the
-   * update_mask.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.devicestreaming.v1.DeviceSession} request.deviceSession
-   *   Required. DeviceSession to update.
-   *   The DeviceSession's `name` field is used to identify the session to update
-   *   "projects/{project_id}/deviceSessions/{session_id}"
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. The list of fields to update.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.devicestreaming.v1.DeviceSession|DeviceSession}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/direct_access_service.update_device_session.js</caption>
-   * region_tag:devicestreaming_v1_generated_DirectAccessService_UpdateDeviceSession_async
-   */
+/**
+ * Updates the current DeviceSession to the fields described by the
+ * update_mask.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.devicestreaming.v1.DeviceSession} request.deviceSession
+ *   Required. DeviceSession to update.
+ *   The DeviceSession's `name` field is used to identify the session to update
+ *   "projects/{project_id}/deviceSessions/{session_id}"
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. The list of fields to update.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.devicestreaming.v1.DeviceSession|DeviceSession}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/direct_access_service.update_device_session.js</caption>
+ * region_tag:devicestreaming_v1_generated_DirectAccessService_UpdateDeviceSession_async
+ */
   updateDeviceSession(
-    request?: protos.google.cloud.devicestreaming.v1.IUpdateDeviceSessionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.devicestreaming.v1.IDeviceSession,
-      (
-        | protos.google.cloud.devicestreaming.v1.IUpdateDeviceSessionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.devicestreaming.v1.IUpdateDeviceSessionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.devicestreaming.v1.IDeviceSession,
+        protos.google.cloud.devicestreaming.v1.IUpdateDeviceSessionRequest|undefined, {}|undefined
+      ]>;
   updateDeviceSession(
-    request: protos.google.cloud.devicestreaming.v1.IUpdateDeviceSessionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.devicestreaming.v1.IDeviceSession,
-      | protos.google.cloud.devicestreaming.v1.IUpdateDeviceSessionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateDeviceSession(
-    request: protos.google.cloud.devicestreaming.v1.IUpdateDeviceSessionRequest,
-    callback: Callback<
-      protos.google.cloud.devicestreaming.v1.IDeviceSession,
-      | protos.google.cloud.devicestreaming.v1.IUpdateDeviceSessionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateDeviceSession(
-    request?: protos.google.cloud.devicestreaming.v1.IUpdateDeviceSessionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.devicestreaming.v1.IUpdateDeviceSessionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.devicestreaming.v1.IDeviceSession,
-          | protos.google.cloud.devicestreaming.v1.IUpdateDeviceSessionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.devicestreaming.v1.IDeviceSession,
-      | protos.google.cloud.devicestreaming.v1.IUpdateDeviceSessionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.devicestreaming.v1.IDeviceSession,
-      (
-        | protos.google.cloud.devicestreaming.v1.IUpdateDeviceSessionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.devicestreaming.v1.IUpdateDeviceSessionRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateDeviceSession(
+      request: protos.google.cloud.devicestreaming.v1.IUpdateDeviceSessionRequest,
+      callback: Callback<
+          protos.google.cloud.devicestreaming.v1.IDeviceSession,
+          protos.google.cloud.devicestreaming.v1.IUpdateDeviceSessionRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateDeviceSession(
+      request?: protos.google.cloud.devicestreaming.v1.IUpdateDeviceSessionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.devicestreaming.v1.IDeviceSession,
+          protos.google.cloud.devicestreaming.v1.IUpdateDeviceSessionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.devicestreaming.v1.IDeviceSession,
+          protos.google.cloud.devicestreaming.v1.IUpdateDeviceSessionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.devicestreaming.v1.IDeviceSession,
+        protos.google.cloud.devicestreaming.v1.IUpdateDeviceSessionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'device_session.name': request.deviceSession!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'device_session.name': request.deviceSession!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateDeviceSession request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.devicestreaming.v1.IDeviceSession,
-          | protos.google.cloud.devicestreaming.v1.IUpdateDeviceSessionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.devicestreaming.v1.IDeviceSession,
+        protos.google.cloud.devicestreaming.v1.IUpdateDeviceSessionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateDeviceSession response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateDeviceSession(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.devicestreaming.v1.IDeviceSession,
-          (
-            | protos.google.cloud.devicestreaming.v1.IUpdateDeviceSessionRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateDeviceSession response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateDeviceSession(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.devicestreaming.v1.IDeviceSession,
+        protos.google.cloud.devicestreaming.v1.IUpdateDeviceSessionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateDeviceSession response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Exposes an ADB connection if the device supports ADB.
-   * gRPC headers are used to authenticate the Connect RPC, as well as
-   * associate to a particular DeviceSession.
-   * In particular, the user must specify the "X-Omnilab-Session-Name" header.
-   *
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which is both readable and writable. It accepts objects
-   *   representing {@link protos.google.cloud.devicestreaming.v1.AdbMessage|AdbMessage} for write() method, and
-   *   will emit objects representing {@link protos.google.cloud.devicestreaming.v1.DeviceMessage|DeviceMessage} on 'data' event asynchronously.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/direct_access_service.adb_connect.js</caption>
-   * region_tag:devicestreaming_v1_generated_DirectAccessService_AdbConnect_async
-   */
-  adbConnect(options?: CallOptions): gax.CancellableStream {
-    this.initialize().catch(err => {
-      throw err;
-    });
+/**
+ * Exposes an ADB connection if the device supports ADB.
+ * gRPC headers are used to authenticate the Connect RPC, as well as
+ * associate to a particular DeviceSession.
+ * In particular, the user must specify the "X-Omnilab-Session-Name" header.
+ *
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which is both readable and writable. It accepts objects
+ *   representing {@link protos.google.cloud.devicestreaming.v1.AdbMessage|AdbMessage} for write() method, and
+ *   will emit objects representing {@link protos.google.cloud.devicestreaming.v1.DeviceMessage|DeviceMessage} on 'data' event asynchronously.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/direct_access_service.adb_connect.js</caption>
+ * region_tag:devicestreaming_v1_generated_DirectAccessService_AdbConnect_async
+ */
+  adbConnect(
+      options?: CallOptions):
+    gax.CancellableStream {
+    this.initialize().catch(err => {throw err});
     this._log.info('adbConnect stream %j', options);
     return this.innerApiCalls.adbConnect(null, options);
   }
 
-  /**
-   * Lists DeviceSessions owned by the project user.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent to request, e.g. "projects/{project_id}"
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of DeviceSessions to return.
-   * @param {string} [request.pageToken]
-   *   Optional. A continuation token for paging.
-   * @param {string} [request.filter]
-   *   Optional. If specified, responses will be filtered by the given filter.
-   *   Allowed fields are: session_state.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.devicestreaming.v1.DeviceSession|DeviceSession}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listDeviceSessionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists DeviceSessions owned by the project user.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent to request, e.g. "projects/{project_id}"
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of DeviceSessions to return.
+ * @param {string} [request.pageToken]
+ *   Optional. A continuation token for paging.
+ * @param {string} [request.filter]
+ *   Optional. If specified, responses will be filtered by the given filter.
+ *   Allowed fields are: session_state.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.devicestreaming.v1.DeviceSession|DeviceSession}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listDeviceSessionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDeviceSessions(
-    request?: protos.google.cloud.devicestreaming.v1.IListDeviceSessionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.devicestreaming.v1.IDeviceSession[],
-      protos.google.cloud.devicestreaming.v1.IListDeviceSessionsRequest | null,
-      protos.google.cloud.devicestreaming.v1.IListDeviceSessionsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.devicestreaming.v1.IListDeviceSessionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.devicestreaming.v1.IDeviceSession[],
+        protos.google.cloud.devicestreaming.v1.IListDeviceSessionsRequest|null,
+        protos.google.cloud.devicestreaming.v1.IListDeviceSessionsResponse
+      ]>;
   listDeviceSessions(
-    request: protos.google.cloud.devicestreaming.v1.IListDeviceSessionsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.devicestreaming.v1.IListDeviceSessionsRequest,
-      | protos.google.cloud.devicestreaming.v1.IListDeviceSessionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.devicestreaming.v1.IDeviceSession
-    >
-  ): void;
-  listDeviceSessions(
-    request: protos.google.cloud.devicestreaming.v1.IListDeviceSessionsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.devicestreaming.v1.IListDeviceSessionsRequest,
-      | protos.google.cloud.devicestreaming.v1.IListDeviceSessionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.devicestreaming.v1.IDeviceSession
-    >
-  ): void;
-  listDeviceSessions(
-    request?: protos.google.cloud.devicestreaming.v1.IListDeviceSessionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.devicestreaming.v1.IListDeviceSessionsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.devicestreaming.v1.IListDeviceSessionsRequest,
-          | protos.google.cloud.devicestreaming.v1.IListDeviceSessionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.devicestreaming.v1.IDeviceSession
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.devicestreaming.v1.IListDeviceSessionsRequest,
-      | protos.google.cloud.devicestreaming.v1.IListDeviceSessionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.devicestreaming.v1.IDeviceSession
-    >
-  ): Promise<
-    [
-      protos.google.cloud.devicestreaming.v1.IDeviceSession[],
-      protos.google.cloud.devicestreaming.v1.IListDeviceSessionsRequest | null,
-      protos.google.cloud.devicestreaming.v1.IListDeviceSessionsResponse,
-    ]
-  > | void {
+          protos.google.cloud.devicestreaming.v1.IListDeviceSessionsResponse|null|undefined,
+          protos.google.cloud.devicestreaming.v1.IDeviceSession>): void;
+  listDeviceSessions(
+      request: protos.google.cloud.devicestreaming.v1.IListDeviceSessionsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.devicestreaming.v1.IListDeviceSessionsRequest,
+          protos.google.cloud.devicestreaming.v1.IListDeviceSessionsResponse|null|undefined,
+          protos.google.cloud.devicestreaming.v1.IDeviceSession>): void;
+  listDeviceSessions(
+      request?: protos.google.cloud.devicestreaming.v1.IListDeviceSessionsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.devicestreaming.v1.IListDeviceSessionsRequest,
+          protos.google.cloud.devicestreaming.v1.IListDeviceSessionsResponse|null|undefined,
+          protos.google.cloud.devicestreaming.v1.IDeviceSession>,
+      callback?: PaginationCallback<
+          protos.google.cloud.devicestreaming.v1.IListDeviceSessionsRequest,
+          protos.google.cloud.devicestreaming.v1.IListDeviceSessionsResponse|null|undefined,
+          protos.google.cloud.devicestreaming.v1.IDeviceSession>):
+      Promise<[
+        protos.google.cloud.devicestreaming.v1.IDeviceSession[],
+        protos.google.cloud.devicestreaming.v1.IListDeviceSessionsRequest|null,
+        protos.google.cloud.devicestreaming.v1.IListDeviceSessionsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.devicestreaming.v1.IListDeviceSessionsRequest,
-          | protos.google.cloud.devicestreaming.v1.IListDeviceSessionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.devicestreaming.v1.IDeviceSession
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.devicestreaming.v1.IListDeviceSessionsRequest,
+      protos.google.cloud.devicestreaming.v1.IListDeviceSessionsResponse|null|undefined,
+      protos.google.cloud.devicestreaming.v1.IDeviceSession>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDeviceSessions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1099,59 +878,56 @@ export class DirectAccessServiceClient {
     this._log.info('listDeviceSessions request %j', request);
     return this.innerApiCalls
       .listDeviceSessions(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.devicestreaming.v1.IDeviceSession[],
-          protos.google.cloud.devicestreaming.v1.IListDeviceSessionsRequest | null,
-          protos.google.cloud.devicestreaming.v1.IListDeviceSessionsResponse,
-        ]) => {
-          this._log.info('listDeviceSessions values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.devicestreaming.v1.IDeviceSession[],
+        protos.google.cloud.devicestreaming.v1.IListDeviceSessionsRequest|null,
+        protos.google.cloud.devicestreaming.v1.IListDeviceSessionsResponse
+      ]) => {
+        this._log.info('listDeviceSessions values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listDeviceSessions`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent to request, e.g. "projects/{project_id}"
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of DeviceSessions to return.
-   * @param {string} [request.pageToken]
-   *   Optional. A continuation token for paging.
-   * @param {string} [request.filter]
-   *   Optional. If specified, responses will be filtered by the given filter.
-   *   Allowed fields are: session_state.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.devicestreaming.v1.DeviceSession|DeviceSession} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listDeviceSessionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listDeviceSessions`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent to request, e.g. "projects/{project_id}"
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of DeviceSessions to return.
+ * @param {string} [request.pageToken]
+ *   Optional. A continuation token for paging.
+ * @param {string} [request.filter]
+ *   Optional. If specified, responses will be filtered by the given filter.
+ *   Allowed fields are: session_state.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.devicestreaming.v1.DeviceSession|DeviceSession} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listDeviceSessionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDeviceSessionsStream(
-    request?: protos.google.cloud.devicestreaming.v1.IListDeviceSessionsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.devicestreaming.v1.IListDeviceSessionsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDeviceSessions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDeviceSessions stream %j', request);
     return this.descriptors.page.listDeviceSessions.createStream(
       this.innerApiCalls.listDeviceSessions as GaxCall,
@@ -1160,50 +936,49 @@ export class DirectAccessServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listDeviceSessions`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent to request, e.g. "projects/{project_id}"
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of DeviceSessions to return.
-   * @param {string} [request.pageToken]
-   *   Optional. A continuation token for paging.
-   * @param {string} [request.filter]
-   *   Optional. If specified, responses will be filtered by the given filter.
-   *   Allowed fields are: session_state.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.devicestreaming.v1.DeviceSession|DeviceSession}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/direct_access_service.list_device_sessions.js</caption>
-   * region_tag:devicestreaming_v1_generated_DirectAccessService_ListDeviceSessions_async
-   */
+/**
+ * Equivalent to `listDeviceSessions`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent to request, e.g. "projects/{project_id}"
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of DeviceSessions to return.
+ * @param {string} [request.pageToken]
+ *   Optional. A continuation token for paging.
+ * @param {string} [request.filter]
+ *   Optional. If specified, responses will be filtered by the given filter.
+ *   Allowed fields are: session_state.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.devicestreaming.v1.DeviceSession|DeviceSession}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/direct_access_service.list_device_sessions.js</caption>
+ * region_tag:devicestreaming_v1_generated_DirectAccessService_ListDeviceSessions_async
+ */
   listDeviceSessionsAsync(
-    request?: protos.google.cloud.devicestreaming.v1.IListDeviceSessionsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.devicestreaming.v1.IDeviceSession> {
+      request?: protos.google.cloud.devicestreaming.v1.IListDeviceSessionsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.devicestreaming.v1.IDeviceSession>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDeviceSessions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDeviceSessions iterate %j', request);
     return this.descriptors.page.listDeviceSessions.asyncIterate(
       this.innerApiCalls['listDeviceSessions'] as GaxCall,
@@ -1222,7 +997,7 @@ export class DirectAccessServiceClient {
    * @param {string} device_session
    * @returns {string} Resource name string.
    */
-  deviceSessionPath(project: string, deviceSession: string) {
+  deviceSessionPath(project:string,deviceSession:string) {
     return this.pathTemplates.deviceSessionPathTemplate.render({
       project: project,
       device_session: deviceSession,
@@ -1237,8 +1012,7 @@ export class DirectAccessServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDeviceSessionName(deviceSessionName: string) {
-    return this.pathTemplates.deviceSessionPathTemplate.match(deviceSessionName)
-      .project;
+    return this.pathTemplates.deviceSessionPathTemplate.match(deviceSessionName).project;
   }
 
   /**
@@ -1249,8 +1023,7 @@ export class DirectAccessServiceClient {
    * @returns {string} A string representing the device_session.
    */
   matchDeviceSessionFromDeviceSessionName(deviceSessionName: string) {
-    return this.pathTemplates.deviceSessionPathTemplate.match(deviceSessionName)
-      .device_session;
+    return this.pathTemplates.deviceSessionPathTemplate.match(deviceSessionName).device_session;
   }
 
   /**
@@ -1259,7 +1032,7 @@ export class DirectAccessServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });

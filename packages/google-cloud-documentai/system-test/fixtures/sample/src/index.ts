@@ -19,9 +19,7 @@
 import {DocumentProcessorServiceClient} from '@google-cloud/documentai';
 
 // check that the client class type name can be used
-function doStuffWithDocumentProcessorServiceClient(
-  client: DocumentProcessorServiceClient
-) {
+function doStuffWithDocumentProcessorServiceClient(client: DocumentProcessorServiceClient) {
   client.close();
 }
 

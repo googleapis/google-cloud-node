@@ -22,7 +22,7 @@ import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallba
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -228,9 +228,6 @@ export class VersionsClient {
       projectAnswerRecordPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/answerRecords/{answer_record}'
       ),
-      projectConversationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/conversations/{conversation}'
-      ),
       projectConversationMessagePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/conversations/{conversation}/messages/{message}'
       ),
@@ -245,6 +242,9 @@ export class VersionsClient {
       ),
       projectConversationProfilePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/conversationProfiles/{conversation_profile}'
+      ),
+      projectConversationsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/conversations/{conversation}'
       ),
       projectKnowledgeBasePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/knowledgeBases/{knowledge_base}'
@@ -285,9 +285,6 @@ export class VersionsClient {
       projectLocationAnswerRecordPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/answerRecords/{answer_record}'
       ),
-      projectLocationConversationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/conversations/{conversation}'
-      ),
       projectLocationConversationMessagePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/conversations/{conversation}/messages/{message}'
       ),
@@ -302,6 +299,9 @@ export class VersionsClient {
       ),
       projectLocationConversationProfilePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/conversationProfiles/{conversation_profile}'
+      ),
+      projectLocationConversationsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/conversations/{conversation}'
       ),
       projectLocationKnowledgeBasePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/knowledgeBases/{knowledge_base}'
@@ -557,6 +557,12 @@ export class VersionsClient {
       ]) => {
         this._log.info('getVersion response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -653,6 +659,12 @@ export class VersionsClient {
       ]) => {
         this._log.info('createVersion response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -752,6 +764,12 @@ export class VersionsClient {
       ]) => {
         this._log.info('updateVersion response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -845,6 +863,12 @@ export class VersionsClient {
       ]) => {
         this._log.info('deleteVersion response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 
@@ -1768,42 +1792,6 @@ export class VersionsClient {
   }
 
   /**
-   * Return a fully-qualified projectConversation resource name string.
-   *
-   * @param {string} project
-   * @param {string} conversation
-   * @returns {string} Resource name string.
-   */
-  projectConversationPath(project:string,conversation:string) {
-    return this.pathTemplates.projectConversationPathTemplate.render({
-      project: project,
-      conversation: conversation,
-    });
-  }
-
-  /**
-   * Parse the project from ProjectConversation resource.
-   *
-   * @param {string} projectConversationName
-   *   A fully-qualified path representing project_conversation resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromProjectConversationName(projectConversationName: string) {
-    return this.pathTemplates.projectConversationPathTemplate.match(projectConversationName).project;
-  }
-
-  /**
-   * Parse the conversation from ProjectConversation resource.
-   *
-   * @param {string} projectConversationName
-   *   A fully-qualified path representing project_conversation resource.
-   * @returns {string} A string representing the conversation.
-   */
-  matchConversationFromProjectConversationName(projectConversationName: string) {
-    return this.pathTemplates.projectConversationPathTemplate.match(projectConversationName).conversation;
-  }
-
-  /**
    * Return a fully-qualified projectConversationMessage resource name string.
    *
    * @param {string} project
@@ -2020,6 +2008,42 @@ export class VersionsClient {
    */
   matchConversationProfileFromProjectConversationProfileName(projectConversationProfileName: string) {
     return this.pathTemplates.projectConversationProfilePathTemplate.match(projectConversationProfileName).conversation_profile;
+  }
+
+  /**
+   * Return a fully-qualified projectConversations resource name string.
+   *
+   * @param {string} project
+   * @param {string} conversation
+   * @returns {string} Resource name string.
+   */
+  projectConversationsPath(project:string,conversation:string) {
+    return this.pathTemplates.projectConversationsPathTemplate.render({
+      project: project,
+      conversation: conversation,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectConversations resource.
+   *
+   * @param {string} projectConversationsName
+   *   A fully-qualified path representing project_conversations resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectConversationsName(projectConversationsName: string) {
+    return this.pathTemplates.projectConversationsPathTemplate.match(projectConversationsName).project;
+  }
+
+  /**
+   * Parse the conversation from ProjectConversations resource.
+   *
+   * @param {string} projectConversationsName
+   *   A fully-qualified path representing project_conversations resource.
+   * @returns {string} A string representing the conversation.
+   */
+  matchConversationFromProjectConversationsName(projectConversationsName: string) {
+    return this.pathTemplates.projectConversationsPathTemplate.match(projectConversationsName).conversation;
   }
 
   /**
@@ -2725,55 +2749,6 @@ export class VersionsClient {
   }
 
   /**
-   * Return a fully-qualified projectLocationConversation resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} conversation
-   * @returns {string} Resource name string.
-   */
-  projectLocationConversationPath(project:string,location:string,conversation:string) {
-    return this.pathTemplates.projectLocationConversationPathTemplate.render({
-      project: project,
-      location: location,
-      conversation: conversation,
-    });
-  }
-
-  /**
-   * Parse the project from ProjectLocationConversation resource.
-   *
-   * @param {string} projectLocationConversationName
-   *   A fully-qualified path representing project_location_conversation resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromProjectLocationConversationName(projectLocationConversationName: string) {
-    return this.pathTemplates.projectLocationConversationPathTemplate.match(projectLocationConversationName).project;
-  }
-
-  /**
-   * Parse the location from ProjectLocationConversation resource.
-   *
-   * @param {string} projectLocationConversationName
-   *   A fully-qualified path representing project_location_conversation resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromProjectLocationConversationName(projectLocationConversationName: string) {
-    return this.pathTemplates.projectLocationConversationPathTemplate.match(projectLocationConversationName).location;
-  }
-
-  /**
-   * Parse the conversation from ProjectLocationConversation resource.
-   *
-   * @param {string} projectLocationConversationName
-   *   A fully-qualified path representing project_location_conversation resource.
-   * @returns {string} A string representing the conversation.
-   */
-  matchConversationFromProjectLocationConversationName(projectLocationConversationName: string) {
-    return this.pathTemplates.projectLocationConversationPathTemplate.match(projectLocationConversationName).conversation;
-  }
-
-  /**
    * Return a fully-qualified projectLocationConversationMessage resource name string.
    *
    * @param {string} project
@@ -3055,6 +3030,55 @@ export class VersionsClient {
    */
   matchConversationProfileFromProjectLocationConversationProfileName(projectLocationConversationProfileName: string) {
     return this.pathTemplates.projectLocationConversationProfilePathTemplate.match(projectLocationConversationProfileName).conversation_profile;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationConversations resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} conversation
+   * @returns {string} Resource name string.
+   */
+  projectLocationConversationsPath(project:string,location:string,conversation:string) {
+    return this.pathTemplates.projectLocationConversationsPathTemplate.render({
+      project: project,
+      location: location,
+      conversation: conversation,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationConversations resource.
+   *
+   * @param {string} projectLocationConversationsName
+   *   A fully-qualified path representing project_location_conversations resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationConversationsName(projectLocationConversationsName: string) {
+    return this.pathTemplates.projectLocationConversationsPathTemplate.match(projectLocationConversationsName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationConversations resource.
+   *
+   * @param {string} projectLocationConversationsName
+   *   A fully-qualified path representing project_location_conversations resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationConversationsName(projectLocationConversationsName: string) {
+    return this.pathTemplates.projectLocationConversationsPathTemplate.match(projectLocationConversationsName).location;
+  }
+
+  /**
+   * Parse the conversation from ProjectLocationConversations resource.
+   *
+   * @param {string} projectLocationConversationsName
+   *   A fully-qualified path representing project_location_conversations resource.
+   * @returns {string} A string representing the conversation.
+   */
+  matchConversationFromProjectLocationConversationsName(projectLocationConversationsName: string) {
+    return this.pathTemplates.projectLocationConversationsPathTemplate.match(projectLocationConversationsName).conversation;
   }
 
   /**
