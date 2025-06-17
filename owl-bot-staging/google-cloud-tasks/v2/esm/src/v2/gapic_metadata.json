@@ -1,0 +1,191 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.tasks.v2",
+  "libraryPackage": "@google-cloud/tasks",
+  "services": {
+    "CloudTasks": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "CloudTasksClient",
+          "rpcs": {
+            "GetQueue": {
+              "methods": [
+                "getQueue"
+              ]
+            },
+            "CreateQueue": {
+              "methods": [
+                "createQueue"
+              ]
+            },
+            "UpdateQueue": {
+              "methods": [
+                "updateQueue"
+              ]
+            },
+            "DeleteQueue": {
+              "methods": [
+                "deleteQueue"
+              ]
+            },
+            "PurgeQueue": {
+              "methods": [
+                "purgeQueue"
+              ]
+            },
+            "PauseQueue": {
+              "methods": [
+                "pauseQueue"
+              ]
+            },
+            "ResumeQueue": {
+              "methods": [
+                "resumeQueue"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "GetTask": {
+              "methods": [
+                "getTask"
+              ]
+            },
+            "CreateTask": {
+              "methods": [
+                "createTask"
+              ]
+            },
+            "DeleteTask": {
+              "methods": [
+                "deleteTask"
+              ]
+            },
+            "RunTask": {
+              "methods": [
+                "runTask"
+              ]
+            },
+            "ListQueues": {
+              "methods": [
+                "listQueues",
+                "listQueuesStream",
+                "listQueuesAsync"
+              ]
+            },
+            "ListTasks": {
+              "methods": [
+                "listTasks",
+                "listTasksStream",
+                "listTasksAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "CloudTasksClient",
+          "rpcs": {
+            "GetQueue": {
+              "methods": [
+                "getQueue"
+              ]
+            },
+            "CreateQueue": {
+              "methods": [
+                "createQueue"
+              ]
+            },
+            "UpdateQueue": {
+              "methods": [
+                "updateQueue"
+              ]
+            },
+            "DeleteQueue": {
+              "methods": [
+                "deleteQueue"
+              ]
+            },
+            "PurgeQueue": {
+              "methods": [
+                "purgeQueue"
+              ]
+            },
+            "PauseQueue": {
+              "methods": [
+                "pauseQueue"
+              ]
+            },
+            "ResumeQueue": {
+              "methods": [
+                "resumeQueue"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "GetTask": {
+              "methods": [
+                "getTask"
+              ]
+            },
+            "CreateTask": {
+              "methods": [
+                "createTask"
+              ]
+            },
+            "DeleteTask": {
+              "methods": [
+                "deleteTask"
+              ]
+            },
+            "RunTask": {
+              "methods": [
+                "runTask"
+              ]
+            },
+            "ListQueues": {
+              "methods": [
+                "listQueues",
+                "listQueuesStream",
+                "listQueuesAsync"
+              ]
+            },
+            "ListTasks": {
+              "methods": [
+                "listTasks",
+                "listTasksStream",
+                "listTasksAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

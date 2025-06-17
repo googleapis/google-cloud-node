@@ -1,0 +1,8 @@
+[
+  "../../protos/google/cloud/vision/v1p3beta1/geometry.proto",
+  "../../protos/google/cloud/vision/v1p3beta1/image_annotator.proto",
+  "../../protos/google/cloud/vision/v1p3beta1/product_search.proto",
+  "../../protos/google/cloud/vision/v1p3beta1/product_search_service.proto",
+  "../../protos/google/cloud/vision/v1p3beta1/text_annotation.proto",
+  "../../protos/google/cloud/vision/v1p3beta1/web_detection.proto"
+]

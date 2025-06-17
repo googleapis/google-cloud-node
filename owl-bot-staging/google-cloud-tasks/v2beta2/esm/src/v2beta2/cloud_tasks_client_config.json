@@ -1,0 +1,140 @@
+{
+  "interfaces": {
+    "google.cloud.tasks.v2beta2.CloudTasks": {
+      "retry_codes": {
+        "non_idempotent": [],
+        "idempotent": [
+          "DEADLINE_EXCEEDED",
+          "UNAVAILABLE"
+        ]
+      },
+      "retry_params": {
+        "default": {
+          "initial_retry_delay_millis": 100,
+          "retry_delay_multiplier": 1.3,
+          "max_retry_delay_millis": 60000,
+          "initial_rpc_timeout_millis": 60000,
+          "rpc_timeout_multiplier": 1,
+          "max_rpc_timeout_millis": 60000,
+          "total_timeout_millis": 600000
+        },
+        "2607cc7256ff9acb2ee9b232c5722dbbaab18846": {
+          "initial_retry_delay_millis": 100,
+          "retry_delay_multiplier": 1.3,
+          "max_retry_delay_millis": 10000,
+          "initial_rpc_timeout_millis": 60000,
+          "rpc_timeout_multiplier": 1,
+          "max_rpc_timeout_millis": 60000,
+          "total_timeout_millis": 600000
+        }
+      },
+      "methods": {
+        "ListQueues": {
+          "timeout_millis": 20000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "2607cc7256ff9acb2ee9b232c5722dbbaab18846"
+        },
+        "GetQueue": {
+          "timeout_millis": 20000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "2607cc7256ff9acb2ee9b232c5722dbbaab18846"
+        },
+        "CreateQueue": {
+          "timeout_millis": 20000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateQueue": {
+          "timeout_millis": 20000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteQueue": {
+          "timeout_millis": 20000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "2607cc7256ff9acb2ee9b232c5722dbbaab18846"
+        },
+        "PurgeQueue": {
+          "timeout_millis": 20000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "PauseQueue": {
+          "timeout_millis": 20000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ResumeQueue": {
+          "timeout_millis": 20000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UploadQueueYaml": {
+          "timeout_millis": 20000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetIamPolicy": {
+          "timeout_millis": 20000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "2607cc7256ff9acb2ee9b232c5722dbbaab18846"
+        },
+        "SetIamPolicy": {
+          "timeout_millis": 20000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "TestIamPermissions": {
+          "timeout_millis": 20000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "2607cc7256ff9acb2ee9b232c5722dbbaab18846"
+        },
+        "ListTasks": {
+          "timeout_millis": 20000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "2607cc7256ff9acb2ee9b232c5722dbbaab18846"
+        },
+        "GetTask": {
+          "timeout_millis": 20000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "2607cc7256ff9acb2ee9b232c5722dbbaab18846"
+        },
+        "CreateTask": {
+          "timeout_millis": 20000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteTask": {
+          "timeout_millis": 20000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "2607cc7256ff9acb2ee9b232c5722dbbaab18846"
+        },
+        "LeaseTasks": {
+          "timeout_millis": 20000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "AcknowledgeTask": {
+          "timeout_millis": 20000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "RenewLease": {
+          "timeout_millis": 20000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CancelLease": {
+          "timeout_millis": 20000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "RunTask": {
+          "timeout_millis": 20000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        }
+      }
+    }
+  }
+}
