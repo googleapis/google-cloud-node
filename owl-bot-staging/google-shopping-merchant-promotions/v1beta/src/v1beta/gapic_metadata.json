@@ -1,0 +1,57 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.shopping.merchant.promotions.v1beta",
+  "libraryPackage": "@google-shopping/promotions",
+  "services": {
+    "PromotionsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "PromotionsServiceClient",
+          "rpcs": {
+            "InsertPromotion": {
+              "methods": [
+                "insertPromotion"
+              ]
+            },
+            "GetPromotion": {
+              "methods": [
+                "getPromotion"
+              ]
+            },
+            "ListPromotions": {
+              "methods": [
+                "listPromotions",
+                "listPromotionsStream",
+                "listPromotionsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "PromotionsServiceClient",
+          "rpcs": {
+            "InsertPromotion": {
+              "methods": [
+                "insertPromotion"
+              ]
+            },
+            "GetPromotion": {
+              "methods": [
+                "getPromotion"
+              ]
+            },
+            "ListPromotions": {
+              "methods": [
+                "listPromotions",
+                "listPromotionsStream",
+                "listPromotionsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

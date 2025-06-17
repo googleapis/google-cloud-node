@@ -1,0 +1,33 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.shopping.merchant.ordertracking.v1beta",
+  "libraryPackage": "@google-shopping/ordertracking",
+  "services": {
+    "OrderTrackingSignalsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "OrderTrackingSignalsServiceClient",
+          "rpcs": {
+            "CreateOrderTrackingSignal": {
+              "methods": [
+                "createOrderTrackingSignal"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "OrderTrackingSignalsServiceClient",
+          "rpcs": {
+            "CreateOrderTrackingSignal": {
+              "methods": [
+                "createOrderTrackingSignal"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

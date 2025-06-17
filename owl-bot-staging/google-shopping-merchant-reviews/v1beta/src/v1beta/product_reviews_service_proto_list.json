@@ -1,0 +1,7 @@
+[
+  "../../protos/google/shopping/merchant/reviews/v1beta/merchantreviews.proto",
+  "../../protos/google/shopping/merchant/reviews/v1beta/merchantreviews_common.proto",
+  "../../protos/google/shopping/merchant/reviews/v1beta/productreviews.proto",
+  "../../protos/google/shopping/merchant/reviews/v1beta/productreviews_common.proto",
+  "../../protos/google/shopping/type/types.proto"
+]

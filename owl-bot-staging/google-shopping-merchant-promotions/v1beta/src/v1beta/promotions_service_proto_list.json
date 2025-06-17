@@ -1,0 +1,5 @@
+[
+  "../../protos/google/shopping/merchant/promotions/v1beta/promotions.proto",
+  "../../protos/google/shopping/merchant/promotions/v1beta/promotions_common.proto",
+  "../../protos/google/shopping/type/types.proto"
+]

@@ -1,0 +1,5 @@
+[
+  "../../protos/google/shopping/merchant/inventories/v1beta/localinventory.proto",
+  "../../protos/google/shopping/merchant/inventories/v1beta/regionalinventory.proto",
+  "../../protos/google/shopping/type/types.proto"
+]

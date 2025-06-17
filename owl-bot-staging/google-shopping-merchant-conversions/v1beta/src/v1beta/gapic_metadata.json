@@ -1,0 +1,87 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.shopping.merchant.conversions.v1beta",
+  "libraryPackage": "@google-shopping/conversions",
+  "services": {
+    "ConversionSourcesService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ConversionSourcesServiceClient",
+          "rpcs": {
+            "CreateConversionSource": {
+              "methods": [
+                "createConversionSource"
+              ]
+            },
+            "UpdateConversionSource": {
+              "methods": [
+                "updateConversionSource"
+              ]
+            },
+            "DeleteConversionSource": {
+              "methods": [
+                "deleteConversionSource"
+              ]
+            },
+            "UndeleteConversionSource": {
+              "methods": [
+                "undeleteConversionSource"
+              ]
+            },
+            "GetConversionSource": {
+              "methods": [
+                "getConversionSource"
+              ]
+            },
+            "ListConversionSources": {
+              "methods": [
+                "listConversionSources",
+                "listConversionSourcesStream",
+                "listConversionSourcesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ConversionSourcesServiceClient",
+          "rpcs": {
+            "CreateConversionSource": {
+              "methods": [
+                "createConversionSource"
+              ]
+            },
+            "UpdateConversionSource": {
+              "methods": [
+                "updateConversionSource"
+              ]
+            },
+            "DeleteConversionSource": {
+              "methods": [
+                "deleteConversionSource"
+              ]
+            },
+            "UndeleteConversionSource": {
+              "methods": [
+                "undeleteConversionSource"
+              ]
+            },
+            "GetConversionSource": {
+              "methods": [
+                "getConversionSource"
+              ]
+            },
+            "ListConversionSources": {
+              "methods": [
+                "listConversionSources",
+                "listConversionSourcesStream",
+                "listConversionSourcesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

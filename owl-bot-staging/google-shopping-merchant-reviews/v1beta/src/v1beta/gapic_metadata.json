@@ -1,0 +1,125 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.shopping.merchant.reviews.v1beta",
+  "libraryPackage": "@google-shopping/reviews",
+  "services": {
+    "MerchantReviewsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "MerchantReviewsServiceClient",
+          "rpcs": {
+            "GetMerchantReview": {
+              "methods": [
+                "getMerchantReview"
+              ]
+            },
+            "InsertMerchantReview": {
+              "methods": [
+                "insertMerchantReview"
+              ]
+            },
+            "DeleteMerchantReview": {
+              "methods": [
+                "deleteMerchantReview"
+              ]
+            },
+            "ListMerchantReviews": {
+              "methods": [
+                "listMerchantReviews",
+                "listMerchantReviewsStream",
+                "listMerchantReviewsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "MerchantReviewsServiceClient",
+          "rpcs": {
+            "GetMerchantReview": {
+              "methods": [
+                "getMerchantReview"
+              ]
+            },
+            "InsertMerchantReview": {
+              "methods": [
+                "insertMerchantReview"
+              ]
+            },
+            "DeleteMerchantReview": {
+              "methods": [
+                "deleteMerchantReview"
+              ]
+            },
+            "ListMerchantReviews": {
+              "methods": [
+                "listMerchantReviews",
+                "listMerchantReviewsStream",
+                "listMerchantReviewsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ProductReviewsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ProductReviewsServiceClient",
+          "rpcs": {
+            "GetProductReview": {
+              "methods": [
+                "getProductReview"
+              ]
+            },
+            "InsertProductReview": {
+              "methods": [
+                "insertProductReview"
+              ]
+            },
+            "DeleteProductReview": {
+              "methods": [
+                "deleteProductReview"
+              ]
+            },
+            "ListProductReviews": {
+              "methods": [
+                "listProductReviews",
+                "listProductReviewsStream",
+                "listProductReviewsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ProductReviewsServiceClient",
+          "rpcs": {
+            "GetProductReview": {
+              "methods": [
+                "getProductReview"
+              ]
+            },
+            "InsertProductReview": {
+              "methods": [
+                "insertProductReview"
+              ]
+            },
+            "DeleteProductReview": {
+              "methods": [
+                "deleteProductReview"
+              ]
+            },
+            "ListProductReviews": {
+              "methods": [
+                "listProductReviews",
+                "listProductReviewsStream",
+                "listProductReviewsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
