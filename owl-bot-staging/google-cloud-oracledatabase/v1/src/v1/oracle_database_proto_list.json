@@ -1,0 +1,16 @@
+[
+  "../../protos/google/cloud/oracledatabase/v1/autonomous_database.proto",
+  "../../protos/google/cloud/oracledatabase/v1/autonomous_database_character_set.proto",
+  "../../protos/google/cloud/oracledatabase/v1/autonomous_db_backup.proto",
+  "../../protos/google/cloud/oracledatabase/v1/autonomous_db_version.proto",
+  "../../protos/google/cloud/oracledatabase/v1/common.proto",
+  "../../protos/google/cloud/oracledatabase/v1/db_node.proto",
+  "../../protos/google/cloud/oracledatabase/v1/db_server.proto",
+  "../../protos/google/cloud/oracledatabase/v1/db_system_shape.proto",
+  "../../protos/google/cloud/oracledatabase/v1/entitlement.proto",
+  "../../protos/google/cloud/oracledatabase/v1/exadata_infra.proto",
+  "../../protos/google/cloud/oracledatabase/v1/gi_version.proto",
+  "../../protos/google/cloud/oracledatabase/v1/location_metadata.proto",
+  "../../protos/google/cloud/oracledatabase/v1/oracledatabase.proto",
+  "../../protos/google/cloud/oracledatabase/v1/vm_cluster.proto"
+]

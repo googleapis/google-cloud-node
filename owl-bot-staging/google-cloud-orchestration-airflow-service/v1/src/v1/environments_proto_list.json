@@ -1,0 +1,5 @@
+[
+  "../../protos/google/cloud/orchestration/airflow/service/v1/environments.proto",
+  "../../protos/google/cloud/orchestration/airflow/service/v1/image_versions.proto",
+  "../../protos/google/cloud/orchestration/airflow/service/v1/operations.proto"
+]

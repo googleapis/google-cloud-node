@@ -1,0 +1,147 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.notebooks.v2",
+  "libraryPackage": "@google-cloud/notebooks",
+  "services": {
+    "NotebookService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "NotebookServiceClient",
+          "rpcs": {
+            "GetInstance": {
+              "methods": [
+                "getInstance"
+              ]
+            },
+            "CheckInstanceUpgradability": {
+              "methods": [
+                "checkInstanceUpgradability"
+              ]
+            },
+            "CreateInstance": {
+              "methods": [
+                "createInstance"
+              ]
+            },
+            "UpdateInstance": {
+              "methods": [
+                "updateInstance"
+              ]
+            },
+            "DeleteInstance": {
+              "methods": [
+                "deleteInstance"
+              ]
+            },
+            "StartInstance": {
+              "methods": [
+                "startInstance"
+              ]
+            },
+            "StopInstance": {
+              "methods": [
+                "stopInstance"
+              ]
+            },
+            "ResetInstance": {
+              "methods": [
+                "resetInstance"
+              ]
+            },
+            "UpgradeInstance": {
+              "methods": [
+                "upgradeInstance"
+              ]
+            },
+            "RollbackInstance": {
+              "methods": [
+                "rollbackInstance"
+              ]
+            },
+            "DiagnoseInstance": {
+              "methods": [
+                "diagnoseInstance"
+              ]
+            },
+            "ListInstances": {
+              "methods": [
+                "listInstances",
+                "listInstancesStream",
+                "listInstancesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "NotebookServiceClient",
+          "rpcs": {
+            "GetInstance": {
+              "methods": [
+                "getInstance"
+              ]
+            },
+            "CheckInstanceUpgradability": {
+              "methods": [
+                "checkInstanceUpgradability"
+              ]
+            },
+            "CreateInstance": {
+              "methods": [
+                "createInstance"
+              ]
+            },
+            "UpdateInstance": {
+              "methods": [
+                "updateInstance"
+              ]
+            },
+            "DeleteInstance": {
+              "methods": [
+                "deleteInstance"
+              ]
+            },
+            "StartInstance": {
+              "methods": [
+                "startInstance"
+              ]
+            },
+            "StopInstance": {
+              "methods": [
+                "stopInstance"
+              ]
+            },
+            "ResetInstance": {
+              "methods": [
+                "resetInstance"
+              ]
+            },
+            "UpgradeInstance": {
+              "methods": [
+                "upgradeInstance"
+              ]
+            },
+            "RollbackInstance": {
+              "methods": [
+                "rollbackInstance"
+              ]
+            },
+            "DiagnoseInstance": {
+              "methods": [
+                "diagnoseInstance"
+              ]
+            },
+            "ListInstances": {
+              "methods": [
+                "listInstances",
+                "listInstancesStream",
+                "listInstancesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
