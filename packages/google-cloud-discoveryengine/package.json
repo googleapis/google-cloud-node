@@ -46,7 +46,7 @@
     "test": "NODE_OPTIONS=--max-old-space-size=16384 c8 mocha build/test"
   },
   "dependencies": {
-    "google-gax": "^5.1.1-rc.1"
+    "google-gax": "^5.0.0"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
