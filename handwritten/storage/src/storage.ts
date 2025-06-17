@@ -31,7 +31,7 @@ import {
 } from './crc32c.js';
 import {DEFAULT_UNIVERSE} from 'google-auth-library';
 import {StorageQueryParameters, StorageTransport} from './storage-transport.js';
-import {GaxiosError, GaxiosInterceptor, GaxiosOptions} from 'gaxios';
+import {GaxiosError, GaxiosInterceptor, GaxiosOptionsPrepared} from 'gaxios';
 
 export interface GetServiceAccountOptions {
   userProject?: string;
@@ -533,7 +533,7 @@ export class Storage {
   projectId?: string;
   apiEndpoint: string;
   storageTransport: StorageTransport;
-  interceptors: GaxiosInterceptor<GaxiosOptions>[];
+  interceptors: GaxiosInterceptor<GaxiosOptionsPrepared>[];
   universeDomain: string;
   customEndpoint = false;
   name = '';
@@ -909,7 +909,7 @@ export class Storage {
    *     For more information, see {@link https://cloud.google.com/storage/docs/locations| Bucket Locations}.
    * @property {boolean} [dra=false] Specify the storage class as Durable Reduced
    *     Availability.
-   * @property {boolean} [enableObjectRetention=false] Specifiy whether or not object retention should be enabled on this bucket.
+   * @property {boolean} [enableObjectRetention=false] Specify whether or not object retention should be enabled on this bucket.
    * @property {object} [hierarchicalNamespace.enabled=false] Specify whether or not to enable hierarchical namespace on this bucket.
    * @property {string} [location] Specify the bucket's location. If specifying
    *     a dual-region, the `customPlacementConfig` property should be set in conjunction.

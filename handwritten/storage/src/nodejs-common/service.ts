@@ -15,7 +15,7 @@
  */
 import {AuthClient, GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
 import {PackageJson} from './util.js';
-import {GaxiosInterceptor, GaxiosOptions} from 'gaxios';
+import {GaxiosInterceptor, GaxiosOptionsPrepared} from 'gaxios';
 
 export const DEFAULT_PROJECT_ID_TOKEN = '{{projectId}}';
 
@@ -52,7 +52,7 @@ export interface ServiceConfig {
 
 export interface ServiceOptions extends Omit<GoogleAuthOptions, 'authClient'> {
   authClient?: AuthClient | GoogleAuth;
-  interceptors_?: GaxiosInterceptor<GaxiosOptions>[];
+  interceptors_?: GaxiosInterceptor<GaxiosOptionsPrepared>[];
   email?: string;
   token?: string;
   timeout?: number; // http.request.options.timeout

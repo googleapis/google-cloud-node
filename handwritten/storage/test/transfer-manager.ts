@@ -658,17 +658,19 @@ describe('Transfer Manager', () => {
           return {token: '', res: undefined};
         }
 
-        async getRequestHeaders() {
-          return {};
+        async getRequestHeaders(): Promise<Headers> {
+          return new Headers({});
         }
 
         async request(opts: GaxiosOptions) {
           called = true;
-
-          assert(opts.headers);
-          assert('x-goog-api-client' in opts.headers);
+          const headers = Object.fromEntries(
+            (opts.headers as Headers).entries(),
+          );
+          assert(headers);
+          assert('x-goog-api-client' in headers);
           assert.match(
-            opts.headers['x-goog-api-client'],
+            headers['x-goog-api-client'],
             /gccl-gcs-cmd\/tm.upload_sharded/,
           );
 
@@ -700,16 +702,18 @@ describe('Transfer Manager', () => {
           return {token: '', res: undefined};
         }
 
-        async getRequestHeaders() {
-          return {};
+        async getRequestHeaders(): Promise<Headers> {
+          return new Headers({});
         }
 
         async request(opts: GaxiosOptions) {
           called = true;
-
-          assert(opts.headers);
-          assert('User-Agent' in opts.headers);
-          assert.match(opts.headers['User-Agent'], /gcloud-node/);
+          const headers = Object.fromEntries(
+            (opts.headers as Headers).entries(),
+          );
+          assert(headers);
+          assert('user-agent' in headers);
+          assert.match(headers['user-agent'], /gcloud-node/);
 
           return {
             data: Buffer.from(

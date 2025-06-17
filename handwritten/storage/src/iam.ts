@@ -360,11 +360,13 @@ class Iam {
           method: 'PUT',
           url: '/iam',
           maxRetries,
-          body: Object.assign(
-            {
-              resourceId: this.resourceId_,
-            },
-            policy,
+          body: JSON.stringify(
+            Object.assign(
+              {
+                resourceId: this.resourceId_,
+              },
+              policy,
+            ),
           ),
           queryParameters: options as unknown as StorageQueryParameters,
         },

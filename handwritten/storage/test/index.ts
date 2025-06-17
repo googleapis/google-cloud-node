@@ -23,6 +23,7 @@ import {
   CRC32C_DEFAULT_VALIDATOR_GENERATOR,
   CRC32CValidator,
   GaxiosError,
+  GaxiosOptionsPrepared,
 } from '../src/index.js';
 import * as sinon from 'sinon';
 import {HmacKeyOptions} from '../src/hmacKey.js';
@@ -186,7 +187,7 @@ describe('Storage', () => {
       const storage = new Storage({
         projectId: PROJECT_ID,
       });
-      const error = new GaxiosError('502 Error', {});
+      const error = new GaxiosError('502 Error', {} as GaxiosOptionsPrepared);
       error.status = 502;
       assert.strictEqual(storage.retryOptions.retryableErrorFn!(error), true);
     });
@@ -195,7 +196,7 @@ describe('Storage', () => {
       const storage = new Storage({
         projectId: PROJECT_ID,
       });
-      const error = new GaxiosError('', {});
+      const error = new GaxiosError('', {} as GaxiosOptionsPrepared);
       assert.strictEqual(storage.retryOptions.retryableErrorFn!(error), false);
     });
 
@@ -203,7 +204,10 @@ describe('Storage', () => {
       const storage = new Storage({
         projectId: PROJECT_ID,
       });
-      const error = new GaxiosError('Connection Reset By Peer error', {});
+      const error = new GaxiosError(
+        'Connection Reset By Peer error',
+        {} as GaxiosOptionsPrepared,
+      );
       error.code = 'ECONNRESET';
       assert.strictEqual(storage.retryOptions.retryableErrorFn!(error), true);
     });
@@ -212,7 +216,7 @@ describe('Storage', () => {
       const storage = new Storage({
         projectId: PROJECT_ID,
       });
-      const error = new GaxiosError('Broken pipe', {});
+      const error = new GaxiosError('Broken pipe', {} as GaxiosOptionsPrepared);
       error.code = 'EPIPE';
       assert.strictEqual(storage.retryOptions.retryableErrorFn!(error), true);
     });
@@ -221,7 +225,7 @@ describe('Storage', () => {
       const storage = new Storage({
         projectId: PROJECT_ID,
       });
-      const error = new GaxiosError('Broken pipe', {});
+      const error = new GaxiosError('Broken pipe', {} as GaxiosOptionsPrepared);
       error.code = 'Socket connection timeout';
       assert.strictEqual(storage.retryOptions.retryableErrorFn!(error), true);
     });
@@ -230,7 +234,7 @@ describe('Storage', () => {
       const storage = new Storage({
         projectId: PROJECT_ID,
       });
-      const error = new GaxiosError('999 Error', {});
+      const error = new GaxiosError('999 Error', {} as GaxiosOptionsPrepared);
       error.status = 999;
       assert.strictEqual(storage.retryOptions.retryableErrorFn!(error), false);
     });
@@ -239,7 +243,10 @@ describe('Storage', () => {
       const storage = new Storage({
         projectId: PROJECT_ID,
       });
-      const error = new GaxiosError('error without a code', {});
+      const error = new GaxiosError(
+        'error without a code',
+        {} as GaxiosOptionsPrepared,
+      );
       error.code = 'some error message';
 
       assert.strictEqual(storage.retryOptions.retryableErrorFn!(error), false);
@@ -258,7 +265,7 @@ describe('Storage', () => {
         projectId: PROJECT_ID,
         retryOptions: {retryableErrorFn: customRetryFunc},
       });
-      const error = new GaxiosError('999 Error', {});
+      const error = new GaxiosError('999 Error', {} as GaxiosOptionsPrepared);
       error.status = 999;
       assert.strictEqual(storage.retryOptions.retryableErrorFn!(error), true);
     });

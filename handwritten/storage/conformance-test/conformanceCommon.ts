@@ -19,6 +19,7 @@ import {
   Bucket,
   File,
   GaxiosOptions,
+  GaxiosOptionsPrepared,
   HmacKey,
   Notification,
   Storage,
@@ -159,12 +160,15 @@ export function executeScenario(testCase: RetryTestCase) {
             );
 
             storage.interceptors.push({
-              resolved: requestConfig => {
-                requestConfig.headers = requestConfig.headers || {};
-                Object.assign(requestConfig.headers, {
+              resolved: (
+                requestConfig: GaxiosOptionsPrepared,
+              ): Promise<GaxiosOptionsPrepared> => {
+                const config = requestConfig as GaxiosOptions;
+                config.headers = config.headers || {};
+                Object.assign(config.headers, {
                   'x-retry-test-id': creationResult.id,
                 });
-                return Promise.resolve(requestConfig as GaxiosOptions);
+                return Promise.resolve(config as GaxiosOptionsPrepared);
               },
               rejected: error => {
                 return Promise.reject(error);

@@ -17,7 +17,7 @@
 import assert from 'assert';
 import {describe, it} from 'mocha';
 import {util} from '../../src/nodejs-common/util';
-import {GaxiosError} from 'gaxios';
+import {GaxiosError, GaxiosOptionsPrepared} from 'gaxios';
 
 describe('common/util', () => {
   describe('shouldRetryRequest', () => {
@@ -26,42 +26,45 @@ describe('common/util', () => {
     });
 
     it('should return false from generic error', () => {
-      const error = new GaxiosError('Generic error with no code', {});
+      const error = new GaxiosError(
+        'Generic error with no code',
+        {} as GaxiosOptionsPrepared,
+      );
       assert.strictEqual(util.shouldRetryRequest(error), false);
     });
 
     it('should return true with error code 408', () => {
-      const error = new GaxiosError('408', {});
+      const error = new GaxiosError('408', {} as GaxiosOptionsPrepared);
       error.status = 408;
       assert.strictEqual(util.shouldRetryRequest(error), true);
     });
 
     it('should return true with error code 429', () => {
-      const error = new GaxiosError('429', {});
+      const error = new GaxiosError('429', {} as GaxiosOptionsPrepared);
       error.status = 429;
       assert.strictEqual(util.shouldRetryRequest(error), true);
     });
 
     it('should return true with error code 500', () => {
-      const error = new GaxiosError('500', {});
+      const error = new GaxiosError('500', {} as GaxiosOptionsPrepared);
       error.status = 500;
       assert.strictEqual(util.shouldRetryRequest(error), true);
     });
 
     it('should return true with error code 502', () => {
-      const error = new GaxiosError('502', {});
+      const error = new GaxiosError('502', {} as GaxiosOptionsPrepared);
       error.status = 502;
       assert.strictEqual(util.shouldRetryRequest(error), true);
     });
 
     it('should return true with error code 503', () => {
-      const error = new GaxiosError('503', {});
+      const error = new GaxiosError('503', {} as GaxiosOptionsPrepared);
       error.status = 503;
       assert.strictEqual(util.shouldRetryRequest(error), true);
     });
 
     it('should return true with error code 504', () => {
-      const error = new GaxiosError('504', {});
+      const error = new GaxiosError('504', {} as GaxiosOptionsPrepared);
       error.status = 504;
       assert.strictEqual(util.shouldRetryRequest(error), true);
     });
@@ -69,7 +72,7 @@ describe('common/util', () => {
     it('should detect rateLimitExceeded reason', () => {
       const rateLimitError = new GaxiosError(
         'Rate limit error without code.',
-        {},
+        {} as GaxiosOptionsPrepared,
       );
       rateLimitError.code = 'rateLimitExceeded';
       assert.strictEqual(util.shouldRetryRequest(rateLimitError), true);
@@ -78,14 +81,17 @@ describe('common/util', () => {
     it('should detect userRateLimitExceeded reason', () => {
       const rateLimitError = new GaxiosError(
         'Rate limit error without code.',
-        {},
+        {} as GaxiosOptionsPrepared,
       );
       rateLimitError.code = 'userRateLimitExceeded';
       assert.strictEqual(util.shouldRetryRequest(rateLimitError), true);
     });
 
     it('should retry on EAI_AGAIN error code', () => {
-      const eaiAgainError = new GaxiosError('EAI_AGAIN', {});
+      const eaiAgainError = new GaxiosError(
+        'EAI_AGAIN',
+        {} as GaxiosOptionsPrepared,
+      );
       eaiAgainError.code = 'getaddrinfo EAI_AGAIN pubsub.googleapis.com';
       assert.strictEqual(util.shouldRetryRequest(eaiAgainError), true);
     });

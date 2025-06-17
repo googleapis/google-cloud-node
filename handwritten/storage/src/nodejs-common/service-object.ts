@@ -21,7 +21,7 @@ import {StorageRequestOptions, StorageTransport} from '../storage-transport.js';
 import {
   GaxiosError,
   GaxiosInterceptor,
-  GaxiosOptions,
+  GaxiosOptionsPrepared,
   GaxiosResponse,
 } from 'gaxios';
 
@@ -159,7 +159,7 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
   name?: string;
   private createMethod?: Function;
   protected methods: Methods;
-  interceptors: GaxiosInterceptor<GaxiosOptions>[];
+  interceptors: GaxiosInterceptor<GaxiosOptionsPrepared>[];
   projectId?: string;
 
   /*
@@ -294,28 +294,31 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
 
     let url = `${this.baseUrl}/${this.id}`;
     if (this.parent instanceof Bucket) {
-      url = `${this.parent.baseUrl}/${this.parent.id}/${url}`;
+      url = `${this.parent.baseUrl}/${this.parent.id}${url}`;
     }
 
     this.storageTransport
-      .makeRequest({
-        method: 'DELETE',
-        responseType: 'json',
-        url,
-        ...methodConfig.reqOpts,
-        queryParameters: {
-          ...methodConfig.reqOpts?.queryParameters,
-          ...options,
+      .makeRequest(
+        {
+          method: 'DELETE',
+          responseType: 'json',
+          url,
+          ...methodConfig.reqOpts,
+          queryParameters: {
+            ...methodConfig.reqOpts?.queryParameters,
+            ...options,
+          },
         },
-      })
-      .catch(({err, resp}) => {
-        if (err) {
-          if (err.status === 404 && ignoreNotFound) {
-            err = null;
+        (err, data, resp) => {
+          if (err) {
+            if (err.status === 404 && ignoreNotFound) {
+              err = null;
+            }
           }
-        }
-        callback(err, resp);
-      });
+          callback(err, resp);
+        },
+      )
+      .catch(err => callback!(err));
   }
 
   /**
@@ -438,7 +441,7 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
 
     let url = `${this.baseUrl}/${this.id}`;
     if (this.parent instanceof Bucket) {
-      url = `${this.parent.baseUrl}/${this.parent.id}/${url}`;
+      url = `${this.parent.baseUrl}/${this.parent.id}${url}`;
     }
 
     this.storageTransport
@@ -496,8 +499,10 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
 
     let url = `${this.baseUrl}/${this.name}`;
     if (this.parent instanceof Bucket) {
-      url = `${this.parent.baseUrl}/${this.parent.name}/${url}`;
+      url = `${this.parent.baseUrl}/${this.parent.name}${url}`;
     }
+
+    const body = Object.assign({}, methodConfig.reqOpts?.body, metadata);
 
     this.storageTransport
       .makeRequest<K>(
@@ -506,10 +511,7 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
           responseType: 'json',
           url,
           ...methodConfig.reqOpts,
-          body: JSON.stringify({
-            ...methodConfig.reqOpts?.body,
-            ...metadata,
-          }),
+          body: JSON.stringify(body),
           queryParameters: {
             ...methodConfig.reqOpts?.queryParameters,
             ...options,

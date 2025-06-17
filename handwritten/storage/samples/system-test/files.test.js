@@ -618,11 +618,11 @@ describe('file', () => {
       const file = hnsBucket.file(fileName);
       await file.save(fileName);
       const output = execSync(
-        `node moveFileAtomic.js ${hnsBucketName} ${fileName} ${movedFileName} ${doesNotExistPrecondition}`
+        `node moveFileAtomic.js ${hnsBucketName} ${fileName} ${movedFileName} ${doesNotExistPrecondition}`,
       );
       assert.include(
         output,
-        `gs://${hnsBucketName}/${fileName} moved to gs://${hnsBucketName}/${movedFileName}`
+        `gs://${hnsBucketName}/${fileName} moved to gs://${hnsBucketName}/${movedFileName}`,
       );
       const [exists] = await hnsBucket.file(movedFileName).exists();
       assert.strictEqual(exists, true);

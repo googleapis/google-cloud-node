@@ -18,7 +18,7 @@ import {describe, it} from 'mocha';
 import * as sinon from 'sinon';
 import {StorageTransport} from '../src/storage-transport.js';
 import {Storage} from '../src/storage.js';
-import {GaxiosResponse} from 'gaxios';
+import {GaxiosOptionsPrepared, GaxiosResponse} from 'gaxios';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import {getPackageJSON} from '../src/package-json-helper.cjs';
@@ -37,14 +37,23 @@ describe('headers', () => {
     storage = new Storage();
     authClient = sandbox.createStubInstance(GoogleAuth);
     gaxiosResponse = {
-      config: {},
+      config: {} as GaxiosOptionsPrepared,
       data: {},
       status: 200,
       statusText: 'OK',
-      headers: [],
-      request: {
-        responseURL: '',
-      },
+      headers: [] as unknown as Headers,
+      ok: true,
+      type: 'default',
+      url: 'your-api-url',
+      redirected: false,
+      body: null,
+      bodyUsed: false,
+      arrayBuffer: async () => new ArrayBuffer(0),
+      text: async () => '',
+      json: async () => ({}),
+      clone: () => gaxiosResponse,
+      blob: async () => new Blob([]),
+      formData: async () => new FormData(),
     };
     storageTransport = new StorageTransport({
       authClient,
@@ -69,7 +78,7 @@ describe('headers', () => {
     authClient.request = opts => {
       assert.ok(
         /^gl-node\/(?<nodeVersion>[^W]+) gccl\/(?<gccl>[^W]+) gccl-invocation-id\/(?<gcclInvocationId>[^W]+)$/.test(
-          opts.headers!['x-goog-api-client'],
+          (opts.headers as Headers).get('x-goog-api-client')!,
         ),
       );
       return Promise.resolve(gaxiosResponse);
@@ -87,7 +96,7 @@ describe('headers', () => {
     authClient.request = opts => {
       assert.ok(
         /^gl-deno\/0.00.0 gccl\/(?<gccl>[^W]+) gccl-invocation-id\/(?<gcclInvocationId>[^W]+)$/.test(
-          opts.headers!['x-goog-api-client'],
+          (opts.headers as Headers).get('x-goog-api-client')!,
         ),
       );
       return Promise.resolve(gaxiosResponse);

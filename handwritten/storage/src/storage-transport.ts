@@ -13,18 +13,14 @@
 // limitations under the License.
 
 import {
+  Gaxios,
   GaxiosError,
   GaxiosInterceptor,
   GaxiosOptions,
+  GaxiosOptionsPrepared,
   GaxiosResponse,
-  Headers,
 } from 'gaxios';
-import {
-  AuthClient,
-  DefaultTransporter,
-  GoogleAuth,
-  GoogleAuthOptions,
-} from 'google-auth-library';
+import {AuthClient, GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
 import {
   getModuleFormat,
   getRuntimeTrackingString,
@@ -53,7 +49,7 @@ export interface StorageQueryParameters extends StandardStorageQueryParams {
 
 export interface StorageRequestOptions extends GaxiosOptions {
   [GCCL_GCS_CMD_KEY]?: string;
-  interceptors?: GaxiosInterceptor<GaxiosOptions>[];
+  interceptors?: GaxiosInterceptor<GaxiosOptionsPrepared>[];
   autoPaginate?: boolean;
   autoPaginateVal?: boolean;
   maxRetries?: number;
@@ -76,6 +72,7 @@ interface TransportParameters extends Omit<GoogleAuthOptions, 'authClient'> {
   token?: string;
   useAuthWithCustomEndpoint?: boolean;
   userAgent?: string;
+  gaxiosInstance?: Gaxios;
 }
 
 interface PackageJson {
@@ -90,6 +87,7 @@ export interface StorageTransportCallback<T> {
     fullResponse?: GaxiosResponse,
   ): void;
 }
+let projectId: string;
 
 export class StorageTransport {
   authClient: GoogleAuth<AuthClient>;
@@ -98,9 +96,12 @@ export class StorageTransport {
   private retryOptions: RetryOptions;
   private baseUrl: string;
   private timeout?: number;
+  private projectId?: string;
   private useAuthWithCustomEndpoint?: boolean;
+  private gaxiosInstance: Gaxios;
 
   constructor(options: TransportParameters) {
+    this.gaxiosInstance = options.gaxiosInstance || new Gaxios();
     if (options.authClient instanceof GoogleAuth) {
       this.authClient = options.authClient;
     } else {
@@ -115,48 +116,74 @@ export class StorageTransport {
     this.retryOptions = options.retryOptions;
     this.baseUrl = options.baseUrl;
     this.timeout = options.timeout;
+    this.projectId = options.projectId;
     this.useAuthWithCustomEndpoint = options.useAuthWithCustomEndpoint;
   }
 
-  makeRequest<T>(
+  async makeRequest<T>(
     reqOpts: StorageRequestOptions,
     callback?: StorageTransportCallback<T>,
-  ): Promise<T> | Promise<void> {
+  ): Promise<void | T> {
     const headers = this.#buildRequestHeaders(reqOpts.headers);
     if (reqOpts[GCCL_GCS_CMD_KEY]) {
-      headers['x-goog-api-client'] +=
-        ` gccl-gcs-cmd/${reqOpts[GCCL_GCS_CMD_KEY]}`;
+      headers.set(
+        'x-goog-api-client',
+        `${headers.get('x-goog-api-client')} gccl-gcs-cmd/${reqOpts[GCCL_GCS_CMD_KEY]}`,
+      );
     }
     if (reqOpts.interceptors) {
-      const transport = this.authClient.transporter as DefaultTransporter;
-      transport.instance.interceptors.request.clear();
+      this.gaxiosInstance.interceptors.request.clear();
       for (const inter of reqOpts.interceptors) {
-        transport.instance.interceptors.request.add(inter);
+        this.gaxiosInstance.interceptors.request.add(inter);
       }
     }
-    const requestPromise = this.authClient.request<T>({
-      retryConfig: {
-        retry: this.retryOptions.maxRetries,
-        noResponseRetries: this.retryOptions.maxRetries,
-        maxRetryDelay: this.retryOptions.maxRetryDelay,
-        retryDelayMultiplier: this.retryOptions.retryDelayMultiplier,
-        shouldRetry: this.retryOptions.retryableErrorFn,
-        totalTimeout: this.retryOptions.totalTimeout,
-      },
-      ...reqOpts,
-      headers,
-      url: this.#buildUrl(reqOpts.url?.toString(), reqOpts.queryParameters),
-      timeout: this.timeout,
-    });
 
-    return callback
-      ? requestPromise
-          .then(resp => callback(null, resp.data, resp))
-          .catch(err => callback(err, null, err.response))
-      : (requestPromise.then(resp => resp.data) as Promise<T>);
+    try {
+      const getProjectId = async () => {
+        if (reqOpts.projectId) return reqOpts.projectId;
+        projectId = await this.authClient.getProjectId();
+        return projectId;
+      };
+      const _projectId = await getProjectId();
+      if (_projectId) {
+        projectId = _projectId;
+        this.projectId = projectId;
+      }
+
+      const requestPromise = this.authClient.request<T>({
+        retryConfig: {
+          retry: this.retryOptions.maxRetries,
+          noResponseRetries: this.retryOptions.maxRetries,
+          maxRetryDelay: this.retryOptions.maxRetryDelay,
+          retryDelayMultiplier: this.retryOptions.retryDelayMultiplier,
+          shouldRetry: this.retryOptions.retryableErrorFn,
+          totalTimeout: this.retryOptions.totalTimeout,
+        },
+        ...reqOpts,
+        headers,
+        url: this.#buildUrl(reqOpts.url?.toString(), reqOpts.queryParameters),
+        timeout: this.timeout,
+      });
+
+      return callback
+        ? requestPromise
+            .then(resp => callback(null, resp.data, resp))
+            .catch(err => callback(err, null, err.response))
+        : (requestPromise.then(resp => resp.data) as Promise<T>);
+    } catch (e) {
+      if (callback) return callback(e as GaxiosError);
+      throw e;
+    }
   }
 
   #buildUrl(pathUri = '', queryParameters: StorageQueryParameters = {}): URL {
+    if (
+      'project' in queryParameters &&
+      (queryParameters.project !== this.projectId ||
+        queryParameters.project !== projectId)
+    ) {
+      queryParameters.project = this.projectId;
+    }
     const qp = this.#buildRequestQueryParams(queryParameters);
     let url: URL;
     if (this.#isValidUrl(pathUri)) {
@@ -177,14 +204,14 @@ export class StorageTransport {
     }
   }
 
-  #buildRequestHeaders(requestHeaders: Headers = {}) {
-    const headers = {
-      ...requestHeaders,
-      'User-Agent': this.#getUserAgentString(),
-      'x-goog-api-client': `${getRuntimeTrackingString()} gccl/${
-        this.packageJson.version
-      }-${getModuleFormat()} gccl-invocation-id/${randomUUID()}`,
-    };
+  #buildRequestHeaders(requestHeaders = {}) {
+    const headers = new Headers(requestHeaders);
+
+    headers.set('User-Agent', this.#getUserAgentString());
+    headers.set(
+      'x-goog-api-client',
+      `${getRuntimeTrackingString()} gccl/${this.packageJson.version}-${getModuleFormat()} gccl-invocation-id/${randomUUID()}`,
+    );
 
     return headers;
   }

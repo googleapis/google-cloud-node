@@ -21,7 +21,7 @@ import * as SO from '../../src/nodejs-common/service-object.js';
 import {util} from '../../src/nodejs-common/util.js';
 import {ServiceObject} from '../../src/nodejs-common/service-object.js';
 import {StorageTransport} from '../../src/storage-transport.js';
-import {GaxiosError} from 'gaxios';
+import {GaxiosError, GaxiosOptionsPrepared} from 'gaxios';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type FakeServiceObject = any;
@@ -232,9 +232,9 @@ describe('ServiceObject', () => {
       serviceObject.delete(options, assert.ifError);
     });
 
-    it('should respect ignoreNotFound opion', done => {
+    it('should respect ignoreNotFound option', () => {
       const options = {ignoreNotFound: true};
-      const error = new GaxiosError('404', {});
+      const error = new GaxiosError('404', {} as GaxiosOptionsPrepared);
       error.status = 404;
       serviceObject.storageTransport.makeRequest = sandbox
         .stub()
@@ -242,13 +242,12 @@ describe('ServiceObject', () => {
       serviceObject.delete(options, (err, apiResponse_) => {
         assert.ifError(err);
         assert.strictEqual(apiResponse_, undefined);
-        done();
       });
     });
 
     it('should propagate other then 404 error', () => {
       const options = {ignoreNotFound: true};
-      const error = new GaxiosError('406', {});
+      const error = new GaxiosError('406', {} as GaxiosOptionsPrepared);
       error.status = 406;
       serviceObject.storageTransport.makeRequest = sandbox
         .stub()
@@ -313,7 +312,7 @@ describe('ServiceObject', () => {
     });
 
     it('should execute callback with false if 404', async done => {
-      const error = new GaxiosError('404', {});
+      const error = new GaxiosError('404', {} as GaxiosOptionsPrepared);
       error.status = 404;
       sandbox.stub(serviceObject, 'get').callsArgWith(1, error);
       await serviceObject.exists((err: Error, exists: boolean) => {
@@ -324,7 +323,7 @@ describe('ServiceObject', () => {
     });
 
     it('should execute callback with error if not 404', async done => {
-      const error = new GaxiosError('500', {});
+      const error = new GaxiosError('500', {} as GaxiosOptionsPrepared);
       error.status = 500;
       sandbox.stub(serviceObject, 'get').callsArgWith(1, error);
       await serviceObject.exists((err: Error, exists: boolean) => {
@@ -370,7 +369,7 @@ describe('ServiceObject', () => {
     });
 
     it('should execute callback with error & metadata', done => {
-      const error = new GaxiosError('Error.', {});
+      const error = new GaxiosError('Error.', {} as GaxiosOptionsPrepared);
       const metadata = {} as SO.BaseMetadata;
       sandbox
         .stub<any, any>(serviceObject, 'getMetadata')
@@ -405,7 +404,7 @@ describe('ServiceObject', () => {
     describe('autoCreate', () => {
       let AUTO_CREATE_CONFIG: {};
 
-      const ERROR = new GaxiosError('bad', {});
+      const ERROR = new GaxiosError('bad', {} as GaxiosOptionsPrepared);
       ERROR.status = 404;
       const METADATA = {} as SO.BaseMetadata;
 
@@ -478,7 +477,7 @@ describe('ServiceObject', () => {
         });
 
         it('should refresh the metadata after a 409', done => {
-          const error = new GaxiosError('errrr', {});
+          const error = new GaxiosError('errrr', {} as GaxiosOptionsPrepared);
           error.status = 409;
           sandbox.stub(serviceObject, 'create').callsFake(callback => {
             sandbox.stub(serviceObject, 'get').callsFake((cfgOrCb, cb) => {
@@ -526,7 +525,7 @@ describe('ServiceObject', () => {
     });
 
     it('should execute callback with error & apiResponse', async () => {
-      const error = new GaxiosError('ಠ_ಠ', {});
+      const error = new GaxiosError('ಠ_ಠ', {} as GaxiosOptionsPrepared);
       serviceObject.storageTransport.makeRequest = sandbox
         .stub()
         .callsFake((reqOpts, callback) => {

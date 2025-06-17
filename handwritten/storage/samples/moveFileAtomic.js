@@ -24,7 +24,7 @@ function main(
   bucketName = 'my-bucket',
   srcFileName = 'test.txt',
   destFileName = 'test2.txt',
-  destinationGenerationMatchPrecondition = 0
+  destinationGenerationMatchPrecondition = 0,
 ) {
   // [START storage_move_object]
   /**
@@ -66,7 +66,7 @@ function main(
       .moveFileAtomic(destFileName, moveOptions);
 
     console.log(
-      `gs://${bucketName}/${srcFileName} moved to gs://${bucketName}/${destFileName}`
+      `gs://${bucketName}/${srcFileName} moved to gs://${bucketName}/${destFileName}`,
     );
   }
 

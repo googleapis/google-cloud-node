@@ -19,7 +19,7 @@ import {AccessControlObject, Acl, AclRoleAccessorMethods} from '../src/acl.js';
 import {StorageTransport} from '../src/storage-transport.js';
 import * as sinon from 'sinon';
 import {Bucket} from '../src/bucket.js';
-import {GaxiosError, GaxiosResponse} from 'gaxios';
+import {GaxiosError, GaxiosOptionsPrepared, GaxiosResponse} from 'gaxios';
 
 describe('storage/acl', () => {
   let acl: Acl;
@@ -63,7 +63,10 @@ describe('storage/acl', () => {
       acl.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.url, '/bucket/acl');
-        assert.deepStrictEqual(reqOpts.body, {entity: ENTITY, role: ROLE});
+        assert.deepStrictEqual(JSON.parse(reqOpts.body), {
+          entity: ENTITY,
+          role: ROLE,
+        });
         return Promise.resolve();
       });
 
@@ -369,14 +372,23 @@ describe('storage/acl', () => {
     it('should execute the callback with apiResponse', () => {
       const resp = {success: true};
       const gaxiosResponse: GaxiosResponse = {
-        config: {},
+        config: {} as GaxiosOptionsPrepared,
         data: resp,
         status: 0,
         statusText: '',
-        headers: [],
-        request: {
-          responseURL: '',
-        },
+        headers: [] as unknown as Headers,
+        ok: true,
+        type: 'default',
+        url: 'your-api-url',
+        redirected: false,
+        body: null,
+        bodyUsed: false,
+        arrayBuffer: async () => new ArrayBuffer(0),
+        text: async () => '',
+        json: async () => ({}),
+        clone: () => gaxiosResponse,
+        blob: async () => new Blob([]),
+        formData: async () => new FormData(),
       };
 
       acl.storageTransport.makeRequest = sandbox
@@ -397,7 +409,7 @@ describe('storage/acl', () => {
       acl.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
         assert.strictEqual(reqOpts.method, 'PUT');
         assert.strictEqual(reqOpts.url, `/bucket/acl/${ENTITY}`);
-        assert.deepStrictEqual(reqOpts.body, {role: ROLE});
+        assert.deepStrictEqual(JSON.parse(reqOpts.body), {role: ROLE});
         return Promise.resolve();
       });
 

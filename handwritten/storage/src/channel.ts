@@ -88,7 +88,7 @@ class Channel extends ServiceObject<Channel, BaseMetadata> {
         {
           method: 'POST',
           url: `${this.baseUrl}/stop`,
-          body: this.metadata,
+          body: JSON.stringify(this.metadata),
           responseType: 'json',
         },
         (err, data, resp) => {

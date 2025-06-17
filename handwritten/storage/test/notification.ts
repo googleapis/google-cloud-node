@@ -14,7 +14,12 @@
 
 import assert from 'assert';
 import {describe, it, before, beforeEach} from 'mocha';
-import {Bucket, GaxiosError, GaxiosResponse} from '../src/index.js';
+import {
+  Bucket,
+  GaxiosError,
+  GaxiosOptionsPrepared,
+  GaxiosResponse,
+} from '../src/index.js';
 import {Notification, Storage} from '../src/index.js';
 import * as sinon from 'sinon';
 import {StorageTransport} from '../src/storage-transport.js';
@@ -101,7 +106,7 @@ describe('Notification', () => {
     });
 
     it('should execute callback with error & metadata', done => {
-      const error = new GaxiosError('Error.', {});
+      const error = new GaxiosError('Error.', {} as GaxiosOptionsPrepared);
       const metadata = {};
 
       notification.getMetadata = sandbox
@@ -140,7 +145,7 @@ describe('Notification', () => {
     describe('autoCreate', () => {
       let AUTO_CREATE_CONFIG: {};
 
-      const ERROR = new GaxiosError('404', {});
+      const ERROR = new GaxiosError('404', {} as GaxiosOptionsPrepared);
       ERROR.status = 404;
       const METADATA = {};
 
@@ -172,7 +177,7 @@ describe('Notification', () => {
 
       describe('error', () => {
         it('should execute callback with error & APT response', done => {
-          const error = new GaxiosError('Error.', {});
+          const error = new GaxiosError('Error.', {} as GaxiosOptionsPrepared);
           const apiResponse = {};
           sandbox.stub(notification, 'get').callsFake((config, callback) => {
             callback(error, null, apiResponse as GaxiosResponse);
@@ -225,7 +230,7 @@ describe('Notification', () => {
     });
 
     it('should return any error to the callback', async () => {
-      const error = new GaxiosError('err', {});
+      const error = new GaxiosError('err', {} as GaxiosOptionsPrepared);
 
       BUCKET.storageTransport.makeRequest = sandbox
         .stub()

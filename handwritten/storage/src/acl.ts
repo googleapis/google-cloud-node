@@ -541,10 +541,10 @@ class Acl extends AclRoleAccessorMethods {
           url,
           queryParameters: query as unknown as StorageQueryParameters,
           retry: false,
-          body: {
+          body: JSON.stringify({
             entity: options.entity,
             role: options.role.toUpperCase(),
-          },
+          }),
         },
         (err, data, resp) => {
           if (err) {
@@ -904,9 +904,9 @@ class Acl extends AclRoleAccessorMethods {
           method: 'PUT',
           url,
           queryParameters: query as unknown as StorageQueryParameters,
-          body: {
+          body: JSON.stringify({
             role: options.role.toUpperCase(),
-          },
+          }),
         },
         (err, data, resp) => {
           if (err) {
